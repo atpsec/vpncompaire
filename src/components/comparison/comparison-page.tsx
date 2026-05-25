@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
@@ -82,13 +83,16 @@ export function ComparisonPage({
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           <Card className="p-6">
-            <div className="flex items-center justify-between gap-2">
-              <h2 className="text-xl font-bold text-ink-strong">{a.brand}</h2>
-              <span className="text-2xl font-bold text-brand-700">
+            <div className="flex items-center gap-4">
+              <VPNLogo slug={a.slug} size={52} />
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl font-bold text-ink-strong">{a.brand}</h2>
+                <p className="text-sm text-ink-muted">{a.positioning}</p>
+              </div>
+              <span className="text-2xl font-bold text-brand-700 tabular-nums">
                 {a.score}
               </span>
             </div>
-            <p className="mt-1 text-sm text-ink-muted">{a.positioning}</p>
             <p className="mt-4 text-sm text-ink leading-relaxed">{a.summary}</p>
             <Button asChild variant="primary" className="mt-4 w-full">
               <a href={affiliatePath(a.slug)} rel="sponsored nofollow">
@@ -98,13 +102,16 @@ export function ComparisonPage({
           </Card>
 
           <Card className="p-6">
-            <div className="flex items-center justify-between gap-2">
-              <h2 className="text-xl font-bold text-ink-strong">{b.brand}</h2>
-              <span className="text-2xl font-bold text-brand-700">
+            <div className="flex items-center gap-4">
+              <VPNLogo slug={b.slug} size={52} />
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl font-bold text-ink-strong">{b.brand}</h2>
+                <p className="text-sm text-ink-muted">{b.positioning}</p>
+              </div>
+              <span className="text-2xl font-bold text-brand-700 tabular-nums">
                 {b.score}
               </span>
             </div>
-            <p className="mt-1 text-sm text-ink-muted">{b.positioning}</p>
             <p className="mt-4 text-sm text-ink leading-relaxed">{b.summary}</p>
             <Button
               asChild

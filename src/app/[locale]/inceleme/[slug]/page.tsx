@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -97,12 +98,15 @@ export default async function Page({ params }: Props) {
           › <span className="text-ink-strong">{product.brand}</span>
         </p>
 
-        <header className="mt-6">
-          <Badge variant="brand">{product.positioning}</Badge>
-          <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            {product.brand} İncelemesi (2026)
-          </h1>
-          <p className="mt-4 text-lg text-ink-muted">{product.summary}</p>
+        <header className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start">
+          <VPNLogo slug={product.slug} size={72} className="sm:mt-2" />
+          <div className="flex-1">
+            <Badge variant="brand">{product.positioning}</Badge>
+            <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+              {product.brand} İncelemesi (2026)
+            </h1>
+            <p className="mt-4 text-lg text-ink-muted">{product.summary}</p>
+          </div>
         </header>
 
         <Card className="mt-8 p-6">

@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
@@ -94,11 +95,12 @@ export function UseCasePage({
               return (
                 <Card key={pick.slug} className="p-6">
                   <div className="flex flex-wrap items-start gap-4">
-                    <div className="flex items-center justify-center size-12 rounded-full bg-brand-600 text-white font-bold text-lg shrink-0">
-                      #{idx + 1}
-                    </div>
+                    <VPNLogo slug={product.slug} size={56} />
                     <div className="flex-1 min-w-[200px]">
                       <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center justify-center rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-bold text-brand-700">
+                          #{idx + 1}
+                        </span>
                         <h3 className="text-xl font-semibold text-ink-strong">
                           {product.brand}
                         </h3>

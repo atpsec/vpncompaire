@@ -1,15 +1,12 @@
 import { useTranslations } from "next-intl";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Info } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
-
-const siteLinks = [
-  { href: "/en-iyi-vpn", labelKey: "site" as const, key: "reviews" },
-] as const;
 
 export function SiteFooter() {
   const t = useTranslations("footer");
   const tNav = useTranslations("nav");
+  const tDisclosure = useTranslations("disclosure");
   const year = new Date().getFullYear();
 
   return (
@@ -118,19 +115,33 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-border pt-6 text-xs text-ink-subtle sm:flex-row sm:justify-between">
+        {/* Disclosure — moved here from top banner: visible but not in the way */}
+        <div className="mt-10 rounded-lg border border-border/70 bg-background/60 p-4">
+          <div className="flex items-start gap-3 text-xs leading-relaxed text-ink-muted">
+            <Info
+              className="mt-0.5 size-4 shrink-0 text-accent-600"
+              aria-hidden="true"
+            />
+            <p>
+              <span className="font-semibold text-ink">
+                {t("disclosureTitle")}
+              </span>{" "}
+              {tDisclosure("banner")}{" "}
+              <Link
+                href="/reklam-aciklamasi"
+                className="font-medium text-brand-700 hover:underline whitespace-nowrap"
+              >
+                {tDisclosure("learnMore")} →
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3 border-t border-border pt-6 text-xs text-ink-subtle sm:flex-row sm:justify-between">
           <p>
             © {year} {siteConfig.name}. {t("copyright")}
           </p>
-          <p>
-            Affiliate açıklaması:{" "}
-            <Link
-              href="/reklam-aciklamasi"
-              className="underline hover:text-ink"
-            >
-              {t("links.disclosure")}
-            </Link>
-          </p>
+          <p>{t("madeWith")}</p>
         </div>
       </div>
     </footer>

@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { DisclosureBanner } from "@/components/layout/disclosure-banner";
 import { SkipToContent } from "@/components/layout/skip-to-content";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
 import type { Locale } from "@/lib/site";
@@ -33,7 +32,6 @@ export default async function LocaleLayout({ children, params }: Props) {
       <PlausibleAnalytics />
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <DisclosureBanner />
         <main id="main-content" className="flex-1">
           {children}
         </main>
