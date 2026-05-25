@@ -11,8 +11,8 @@ const navItems = [
   { href: "/en-iyi-vpn", labelKey: "reviews" },
   { href: "/karsilastir", labelKey: "compare" },
   { href: "/en-iyi", labelKey: "bestFor" },
+  { href: "/cihazlar", labelKey: "devices" },
   { href: "/rehber", labelKey: "guides" },
-  { href: "/metodoloji", labelKey: "methodology" },
 ] as const;
 
 export function SiteHeader() {

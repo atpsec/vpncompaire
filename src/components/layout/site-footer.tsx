@@ -49,6 +49,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/cihazlar"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {tNav("devices")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/rehber"
                   className="text-ink-muted hover:text-ink"
                 >

@@ -40,6 +40,13 @@ ${list
 - [Türkiye için en iyi VPN](${siteConfig.url}/en-iyi/turkiye)
 - [Yurt dışındaki Türkler için VPN](${siteConfig.url}/en-iyi/yurt-disindaki-turkler)
 
+## Cihaza Göre
+
+- [Android için VPN](${siteConfig.url}/cihazlar/android) — Play Store uygulamaları, kill switch, split tunneling
+- [iPhone için VPN](${siteConfig.url}/cihazlar/iphone) — App Store, iCloud Private Relay, IKEv2 manuel
+- [iPad için VPN](${siteConfig.url}/cihazlar/ipad) — Stage Manager uyumluluğu, streaming, router seçenekleri
+- [Smart TV için VPN](${siteConfig.url}/cihazlar/smart-tv) — Samsung Tizen, LG webOS, Android TV, Apple TV (tvOS 17+), router VPN, Smart DNS
+
 ## Rehberler
 
 - [VPN nedir? 5 dakikalık başlangıç rehberi](${siteConfig.url}/rehber/vpn-nedir)

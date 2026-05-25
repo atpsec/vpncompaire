@@ -1,0 +1,241 @@
+import {
+  ArrowRight,
+  AlertTriangle,
+  CheckCircle2,
+  Shield,
+  Wrench,
+} from "lucide-react";
+import { Link } from "@/i18n/routing";
+import { Container } from "@/components/ui/container";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { VPNLogo } from "@/components/brand/vpn-logo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { getProduct } from "@/data/products";
+import { affiliatePath } from "@/lib/affiliate";
+import type { DeviceContent } from "@/data/devices";
+import { cn } from "@/lib/utils";
+
+const DIFFICULTY_TONE = {
+  Kolay: "bg-success-50 text-success-700 border-success-100",
+  Orta: "bg-accent-50 text-accent-600 border-accent-100",
+  "İleri düzey": "bg-surface-strong/40 text-ink-strong border-border",
+} as const;
+
+export function DevicePage({ device }: { device: DeviceContent }) {
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Ana sayfa", path: "/" },
+          { name: "Cihazlar", path: "/cihazlar" },
+          { name: device.shortName, path: `/cihazlar/${device.slug}` },
+        ])}
+      />
+      <JsonLd data={faqSchema([...device.faqs])} />
+
+      <Container size="md" className="py-12 sm:py-16">
+        <p className="text-sm text-ink-muted">
+          <Link href="/" className="hover:text-ink">
+            Ana sayfa
+          </Link>{" "}
+          ›{" "}
+          <Link href="/cihazlar" className="hover:text-ink">
+            Cihazlar
+          </Link>{" "}
+          › <span className="text-ink-strong">{device.shortName}</span>
+        </p>
+
+        <header className="mt-6">
+          <Badge variant="brand">{device.device}</Badge>
+          <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+            {device.shortName} için en iyi VPN
+          </h1>
+          <p className="mt-4 text-lg text-ink-muted">{device.tagline}</p>
+        </header>
+
+        <Card className="mt-8 p-6 bg-brand-50/40 border-brand-100">
+          <h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2">
+            <Shield className="size-5 text-brand-600" /> Neden{" "}
+            {device.shortName} için VPN?
+          </h2>
+          <p className="mt-3 text-ink leading-relaxed">{device.summary}</p>
+          <ul className="mt-4 space-y-2.5 text-[15px] text-ink">
+            {device.whyMatters.map((w, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-brand-600" />
+                <span>{w}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <section className="mt-12">
+          <div className="flex items-center gap-2">
+            <Wrench className="size-5 text-ink-muted" />
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
+              Kurulum yöntemleri
+            </h2>
+          </div>
+          <p className="mt-2 text-ink-muted">
+            Cihazına ve teknik konforuna uygun olanı seç.
+          </p>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {device.setupMethods.map((m) => (
+              <Card key={m.name} className="p-5 flex flex-col">
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-base font-semibold text-ink-strong">
+                    {m.name}
+                  </h3>
+                  <span
+                    className={cn(
+                      "shrink-0 rounded-full border px-2 py-0.5 text-[11px] font-medium",
+                      DIFFICULTY_TONE[m.difficulty],
+                    )}
+                  >
+                    {m.difficulty}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm text-ink-muted leading-relaxed">
+                  {m.description}
+                </p>
+                <p className="mt-3 text-xs text-ink-strong">
+                  <span className="font-semibold">Ne zaman: </span>
+                  {m.whenToUse}
+                </p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-16">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
+            {device.shortName} için ilk {device.picks.length} seçim
+          </h2>
+          <p className="mt-2 text-ink-muted">
+            Hangi VPN'in bu cihazda neden iyi olduğunu kısaca açıklayalım.
+          </p>
+          <div className="mt-6 space-y-4">
+            {device.picks.map((pick, idx) => {
+              const product = getProduct(pick.slug);
+              if (!product) return null;
+              return (
+                <Card key={pick.slug} className="p-5 sm:p-6">
+                  <div className="flex flex-wrap items-start gap-4">
+                    <VPNLogo slug={product.slug} size={56} />
+                    <div className="flex-1 min-w-[220px]">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center justify-center rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-bold text-brand-700">
+                          #{idx + 1}
+                        </span>
+                        <h3 className="text-xl font-semibold text-ink-strong">
+                          {product.brand}
+                        </h3>
+                        <Badge variant="brand">{pick.bestFor}</Badge>
+                      </div>
+                      <p className="mt-3 text-ink leading-relaxed text-[15px]">
+                        {pick.why}
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-3">
+                        <Button
+                          asChild
+                          variant={
+                            product.hasAffiliate ? "primary" : "secondary"
+                          }
+                          size="sm"
+                        >
+                          <a
+                            href={
+                              product.hasAffiliate
+                                ? affiliatePath(product.slug)
+                                : product.pricingUrl
+                            }
+                            rel={
+                              product.hasAffiliate
+                                ? "sponsored nofollow"
+                                : "noopener"
+                            }
+                          >
+                            {product.brand}{" "}
+                            {product.hasAffiliate
+                              ? "fırsatına git"
+                              : "sitesine git"}
+                            <ArrowRight className="size-4" />
+                          </a>
+                        </Button>
+                        <Button asChild variant="ghost" size="sm">
+                          <Link href={`/inceleme/${product.slug}`}>
+                            Tam incelemeyi oku →
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xs text-ink-subtle">Puan</div>
+                      <div className="text-2xl font-bold text-brand-700">
+                        {product.score.toFixed(1)}
+                        <span className="text-xs text-ink-subtle font-normal">
+                          /10
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+
+        {device.pitfalls.length > 0 && (
+          <section className="mt-16">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className="size-5 text-accent-600" />
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
+                Dikkat edilmesi gerekenler
+              </h2>
+            </div>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {device.pitfalls.map((p) => (
+                <Card key={p.title} className="p-5 border-accent-100 bg-accent-50/30">
+                  <h3 className="text-base font-semibold text-ink-strong">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-ink leading-relaxed">
+                    {p.body}
+                  </p>
+                </Card>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="mt-16 prose prose-stone max-w-none">
+          <h2>Sıkça sorulan sorular</h2>
+          {device.faqs.map((f) => (
+            <div key={f.q}>
+              <h3>{f.q}</h3>
+              <p>{f.a}</p>
+            </div>
+          ))}
+        </section>
+
+        <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
+          <p className="text-sm text-ink-muted">İlgili sayfalar</p>
+          <div className="mt-3 flex flex-wrap gap-2 justify-center">
+            {device.relatedLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+      </Container>
+    </>
+  );
+}

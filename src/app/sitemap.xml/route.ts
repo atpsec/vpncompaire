@@ -18,6 +18,8 @@ const useCaseSlugs = [
   "yurt-disindaki-turkler",
 ];
 
+const deviceSlugs = ["android", "iphone", "ipad", "smart-tv"];
+
 const guideSlugs = [
   "vpn-nedir",
   "ucretsiz-vs-ucretli-vpn",
@@ -35,6 +37,7 @@ export function GET() {
     { path: "/en-iyi-vpn", priority: 0.95, changefreq: "weekly" },
     { path: "/en-iyi", priority: 0.8, changefreq: "weekly" },
     { path: "/karsilastir", priority: 0.85, changefreq: "weekly" },
+    { path: "/cihazlar", priority: 0.8, changefreq: "weekly" },
     { path: "/rehber", priority: 0.8, changefreq: "weekly" },
     { path: "/metodoloji", priority: 0.8, changefreq: "monthly" },
     { path: "/hakkimizda", priority: 0.5, changefreq: "monthly" },
@@ -62,6 +65,12 @@ export function GET() {
     changefreq: "weekly",
   }));
 
+  const devicePaths: Entry[] = deviceSlugs.map((slug) => ({
+    path: `/cihazlar/${slug}`,
+    priority: 0.8,
+    changefreq: "monthly",
+  }));
+
   const guidePaths: Entry[] = guideSlugs.map((slug) => ({
     path: `/rehber/${slug}`,
     priority: 0.75,
@@ -73,6 +82,7 @@ export function GET() {
     ...reviewPaths,
     ...comparisonPaths,
     ...useCasePaths,
+    ...devicePaths,
     ...guidePaths,
   ];
 
