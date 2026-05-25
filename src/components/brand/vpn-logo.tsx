@@ -1,22 +1,30 @@
+import {
+  siNordvpn,
+  siSurfshark,
+  siExpressvpn,
+  siProtonvpn,
+  siPrivateinternetaccess,
+  siMullvad,
+} from "simple-icons";
 import { cn } from "@/lib/utils";
 
-type Mark = {
-  bg: string;
-  fg: string;
-  text: string;
-  weight?: number;
-  size?: number;
+type IconData = { title: string; hex: string; path: string };
+
+// Brand mark colors used for the tile background. We keep the official
+// brand hex but render the mark itself in white for a uniform comparison-card
+// look (matches how editorial sites like PCMag/Tom's Guide present logos).
+const BRANDS: Record<string, { icon: IconData; tile: string }> = {
+  nordvpn: { icon: siNordvpn, tile: "#4687FF" },
+  surfshark: { icon: siSurfshark, tile: "#1EBFBF" },
+  expressvpn: { icon: siExpressvpn, tile: "#DA3940" },
+  "proton-vpn": { icon: siProtonvpn, tile: "#6D4AFF" },
+  pia: { icon: siPrivateinternetaccess, tile: "#1E811F" },
+  mullvad: { icon: siMullvad, tile: "#FFCD46" },
 };
 
-const MARKS: Record<string, Mark> = {
-  nordvpn: { bg: "#4687FF", fg: "#ffffff", text: "N", weight: 800 },
-  surfshark: { bg: "#0FD0C4", fg: "#0a1f3a", text: "S", weight: 800 },
-  expressvpn: { bg: "#DA3940", fg: "#ffffff", text: "E", weight: 800 },
-  "proton-vpn": { bg: "#6D4AFF", fg: "#ffffff", text: "P", weight: 800 },
-  pia: { bg: "#5DD466", fg: "#0c2b14", text: "P", weight: 800 },
-  cyberghost: { bg: "#FFE100", fg: "#1a1a00", text: "C", weight: 800 },
-  mullvad: { bg: "#FF5722", fg: "#ffffff", text: "M", weight: 800 },
-};
+// CyberGhost is not in simple-icons; rendered as a small ghost mark.
+const CYBERGHOST_PATH =
+  "M12 3c-3.866 0-7 3.134-7 7v9.5c0 .55.45.95.97.78l2.03-.67 1.96.65a.5.5 0 0 0 .32 0l1.97-.66 1.97.66a.5.5 0 0 0 .32 0l1.96-.66 2.03.66c.52.17.97-.23.97-.78V10c0-3.866-3.134-7-7-7zm-2 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm4 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z";
 
 type Props = {
   slug: string;
@@ -25,28 +33,29 @@ type Props = {
 };
 
 export function VPNLogo({ slug, size = 48, className }: Props) {
-  const mark = MARKS[slug];
-  if (!mark) return null;
+  if (slug === "cyberghost") {
+    return (
+      <CyberGhostMark size={size} className={className} />
+    );
+  }
 
-  const fontSize = Math.round(size * 0.55);
+  const brand = BRANDS[slug];
+  if (!brand) return null;
+
   const radius = Math.round(size * 0.22);
+  const padding = Math.round(size * 0.22);
+  const iconSize = size - padding * 2;
 
   return (
     <svg
-      viewBox={`0 0 ${size} ${size}`}
       width={size}
       height={size}
+      viewBox={`0 0 ${size} ${size}`}
       role="img"
-      aria-label={`${slug} logo`}
+      aria-label={`${brand.icon.title} logosu`}
       className={cn("shrink-0", className)}
       style={{ display: "block" }}
     >
-      <defs>
-        <linearGradient id={`g-${slug}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={mark.bg} stopOpacity="1" />
-          <stop offset="100%" stopColor={mark.bg} stopOpacity="0.82" />
-        </linearGradient>
-      </defs>
       <rect
         x="0"
         y="0"
@@ -54,7 +63,7 @@ export function VPNLogo({ slug, size = 48, className }: Props) {
         height={size}
         rx={radius}
         ry={radius}
-        fill={`url(#g-${slug})`}
+        fill={brand.tile}
       />
       <rect
         x="0.5"
@@ -67,19 +76,42 @@ export function VPNLogo({ slug, size = 48, className }: Props) {
         stroke="rgba(255,255,255,0.18)"
         strokeWidth="1"
       />
-      <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="system-ui, -apple-system, sans-serif"
-        fontSize={fontSize}
-        fontWeight={mark.weight ?? 800}
-        fill={mark.fg}
-        letterSpacing="-0.04em"
-      >
-        {mark.text}
-      </text>
+      <g transform={`translate(${padding}, ${padding}) scale(${iconSize / 24})`}>
+        <path d={brand.icon.path} fill="#ffffff" />
+      </g>
+    </svg>
+  );
+}
+
+function CyberGhostMark({ size, className }: { size: number; className?: string }) {
+  const radius = Math.round(size * 0.22);
+  const padding = Math.round(size * 0.18);
+  const iconSize = size - padding * 2;
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      role="img"
+      aria-label="CyberGhost VPN logosu"
+      className={cn("shrink-0", className)}
+      style={{ display: "block" }}
+    >
+      <rect x="0" y="0" width={size} height={size} rx={radius} ry={radius} fill="#FFE100" />
+      <rect
+        x="0.5"
+        y="0.5"
+        width={size - 1}
+        height={size - 1}
+        rx={radius - 0.5}
+        ry={radius - 0.5}
+        fill="none"
+        stroke="rgba(0,0,0,0.08)"
+        strokeWidth="1"
+      />
+      <g transform={`translate(${padding}, ${padding}) scale(${iconSize / 24})`}>
+        <path d={CYBERGHOST_PATH} fill="#1a1a00" />
+      </g>
     </svg>
   );
 }

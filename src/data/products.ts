@@ -7,6 +7,16 @@ export type ProductHighlights = {
   moneyBackDays?: number;
 };
 
+export type PricingPlan = {
+  name: string;
+  durationMonths: number;
+  monthlyPriceUsd: number;
+  totalPriceUsd: number;
+  savingsPercent?: number;
+  campaign?: string;
+  isBestValue?: boolean;
+};
+
 export type Product = {
   slug: string;
   brand: string;
@@ -19,7 +29,12 @@ export type Product = {
   cons: string[];
   highlights: ProductHighlights;
   hasAffiliate: boolean;
+  pricingUrl: string;
+  pricingVerifiedAt: string;
+  plans: PricingPlan[];
 };
+
+const VERIFIED = "2026-05-25";
 
 export const products: Product[] = [
   {
@@ -50,6 +65,25 @@ export const products: Product[] = [
       moneyBackDays: 30,
     },
     hasAffiliate: true,
+    pricingUrl: "https://nordvpn.com/tr/pricing/",
+    pricingVerifiedAt: VERIFIED,
+    plans: [
+      {
+        name: "2 yıllık + 3 ay bedava",
+        durationMonths: 27,
+        monthlyPriceUsd: 3.39,
+        totalPriceUsd: 91.53,
+        savingsPercent: 74,
+        campaign: "+3 ay bedava",
+        isBestValue: true,
+      },
+      {
+        name: "Aylık",
+        durationMonths: 1,
+        monthlyPriceUsd: 12.99,
+        totalPriceUsd: 12.99,
+      },
+    ],
   },
   {
     slug: "surfshark",
@@ -79,6 +113,25 @@ export const products: Product[] = [
       moneyBackDays: 30,
     },
     hasAffiliate: true,
+    pricingUrl: "https://surfshark.com/pricing",
+    pricingVerifiedAt: VERIFIED,
+    plans: [
+      {
+        name: "2 yıllık + 3 ay bedava",
+        durationMonths: 27,
+        monthlyPriceUsd: 1.99,
+        totalPriceUsd: 53.73,
+        savingsPercent: 87,
+        campaign: "Starter paketi, +3 ay bedava",
+        isBestValue: true,
+      },
+      {
+        name: "Aylık",
+        durationMonths: 1,
+        monthlyPriceUsd: 15.45,
+        totalPriceUsd: 15.45,
+      },
+    ],
   },
   {
     slug: "expressvpn",
@@ -87,7 +140,7 @@ export const products: Product[] = [
     summary:
       "Sade arayüz, kararlı hız ve TrustedServer (RAM-only) mimarisi ile teknik bilgisi olmayan kullanıcılar için en akıcı premium deneyim.",
     score: 9.1,
-    priceFromUsd: 4.99,
+    priceFromUsd: 6.67,
     rank: 3,
     pros: [
       "Lightway protokolü ile yüksek hız",
@@ -108,6 +161,25 @@ export const products: Product[] = [
       moneyBackDays: 30,
     },
     hasAffiliate: true,
+    pricingUrl: "https://www.expressvpn.com/order",
+    pricingVerifiedAt: VERIFIED,
+    plans: [
+      {
+        name: "15 ay (12 + 3 bedava)",
+        durationMonths: 15,
+        monthlyPriceUsd: 6.67,
+        totalPriceUsd: 99.95,
+        savingsPercent: 49,
+        campaign: "+3 ay bedava",
+        isBestValue: true,
+      },
+      {
+        name: "Aylık",
+        durationMonths: 1,
+        monthlyPriceUsd: 12.95,
+        totalPriceUsd: 12.95,
+      },
+    ],
   },
   {
     slug: "proton-vpn",
@@ -116,7 +188,7 @@ export const products: Product[] = [
     summary:
       "İsviçre yasal yetki alanı, açık kaynak istemciler ve yıllık no-logs denetimleri ile gizlilik konusunda kanıtlanmış güven sağlar.",
     score: 9.0,
-    priceFromUsd: 4.49,
+    priceFromUsd: 3.59,
     rank: 4,
     pros: [
       "Tüm istemciler açık kaynak ve denetlenebilir",
@@ -138,6 +210,24 @@ export const products: Product[] = [
       moneyBackDays: 30,
     },
     hasAffiliate: true,
+    pricingUrl: "https://protonvpn.com/pricing",
+    pricingVerifiedAt: VERIFIED,
+    plans: [
+      {
+        name: "2 yıllık (VPN Plus)",
+        durationMonths: 24,
+        monthlyPriceUsd: 3.59,
+        totalPriceUsd: 86.16,
+        savingsPercent: 64,
+        isBestValue: true,
+      },
+      {
+        name: "Aylık",
+        durationMonths: 1,
+        monthlyPriceUsd: 9.99,
+        totalPriceUsd: 9.99,
+      },
+    ],
   },
   {
     slug: "pia",
@@ -168,6 +258,25 @@ export const products: Product[] = [
       moneyBackDays: 30,
     },
     hasAffiliate: true,
+    pricingUrl: "https://www.privateinternetaccess.com/buy-vpn-online",
+    pricingVerifiedAt: VERIFIED,
+    plans: [
+      {
+        name: "3 yıllık + 3 ay bedava",
+        durationMonths: 39,
+        monthlyPriceUsd: 2.03,
+        totalPriceUsd: 79.0,
+        savingsPercent: 83,
+        campaign: "+3 ay bedava",
+        isBestValue: true,
+      },
+      {
+        name: "Aylık",
+        durationMonths: 1,
+        monthlyPriceUsd: 11.95,
+        totalPriceUsd: 11.95,
+      },
+    ],
   },
   {
     slug: "cyberghost",
@@ -176,7 +285,7 @@ export const products: Product[] = [
     summary:
       "Amaca özel optimize sunucular ve 45 günlük iade garantisi ile VPN'e yeni başlayanlar için en kolay giriş seçimi.",
     score: 8.5,
-    priceFromUsd: 2.19,
+    priceFromUsd: 2.03,
     rank: 6,
     pros: [
       "Streaming ve oyun için özel optimize sunucular",
@@ -196,6 +305,25 @@ export const products: Product[] = [
       moneyBackDays: 45,
     },
     hasAffiliate: true,
+    pricingUrl: "https://www.cyberghostvpn.com/en_US/plans",
+    pricingVerifiedAt: VERIFIED,
+    plans: [
+      {
+        name: "2 yıllık + 4 ay bedava",
+        durationMonths: 28,
+        monthlyPriceUsd: 2.03,
+        totalPriceUsd: 56.94,
+        savingsPercent: 84,
+        campaign: "+4 ay bedava",
+        isBestValue: true,
+      },
+      {
+        name: "Aylık",
+        durationMonths: 1,
+        monthlyPriceUsd: 12.99,
+        totalPriceUsd: 12.99,
+      },
+    ],
   },
   {
     slug: "mullvad",
@@ -226,6 +354,24 @@ export const products: Product[] = [
       moneyBackDays: 30,
     },
     hasAffiliate: false,
+    pricingUrl: "https://mullvad.net/en/account/create",
+    pricingVerifiedAt: VERIFIED,
+    plans: [
+      {
+        name: "Aylık (sabit)",
+        durationMonths: 1,
+        monthlyPriceUsd: 5.0,
+        totalPriceUsd: 5.0,
+        campaign: "İlke gereği indirim yok",
+        isBestValue: true,
+      },
+      {
+        name: "Yıllık",
+        durationMonths: 12,
+        monthlyPriceUsd: 5.0,
+        totalPriceUsd: 60.0,
+      },
+    ],
   },
 ];
 

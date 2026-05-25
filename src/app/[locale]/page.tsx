@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/home/hero";
 import { TopVPNList } from "@/components/home/top-vpn-list";
+import { ComparePicker } from "@/components/home/compare-picker";
 import { UseCaseGrid } from "@/components/home/use-case-grid";
 import { ComparisonBlock } from "@/components/home/comparison-block";
 import { MethodologyBlock } from "@/components/home/methodology-block";
@@ -31,6 +32,7 @@ export default async function HomePage({ params }: Props) {
       <JsonLd data={faqSchema(homeFaqs)} />
       <Hero />
       <TopVPNList />
+      <ComparePicker />
       <UseCaseGrid />
       <ComparisonBlock />
       <MethodologyBlock />

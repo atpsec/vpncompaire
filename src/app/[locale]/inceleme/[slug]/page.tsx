@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
+import { PricingPlans } from "@/components/product/pricing-plans";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -110,45 +111,59 @@ export default async function Page({ params }: Props) {
         </header>
 
         <Card className="mt-8 p-6">
-          <div className="grid sm:grid-cols-[1fr_auto] gap-6 items-center">
-            <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
-              <Stat label="Puan" value={`${product.score}/10`} highlight />
-              <Stat
-                label="Başlangıç fiyatı"
-                value={`$${product.priceFromUsd.toFixed(2)}/ay`}
+          <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+            <Stat label="Puan" value={`${product.score}/10`} highlight />
+            <Stat
+              label="En düşük fiyat"
+              value={`$${product.priceFromUsd.toFixed(2)}/ay`}
+            />
+            <Stat
+              label="Yargı yetkisi"
+              value={product.highlights.jurisdiction ?? "—"}
+            />
+            <Stat
+              label="Para iade"
+              value={
+                product.highlights.moneyBackDays
+                  ? `${product.highlights.moneyBackDays} gün`
+                  : "—"
+              }
+            />
+          </dl>
+
+          <div className="mt-6 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold text-ink-strong">
+              Fiyatlandırma
+            </h2>
+            <p className="mt-1 text-sm text-ink-muted">
+              {product.brand} planları ve güncel kampanyalar:
+            </p>
+            <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
+              <PricingPlans
+                plans={product.plans}
+                verifiedAt={product.pricingVerifiedAt}
               />
-              <Stat
-                label="Yargı yetkisi"
-                value={product.highlights.jurisdiction ?? "—"}
-              />
-              <Stat
-                label="Para iade"
-                value={
-                  product.highlights.moneyBackDays
-                    ? `${product.highlights.moneyBackDays} gün`
-                    : "—"
-                }
-              />
-            </dl>
-            <div className="flex flex-col gap-2 sm:w-48">
-              <Button
-                asChild
-                variant={product.hasAffiliate ? "primary" : "secondary"}
-              >
-                <a
-                  href={
-                    product.hasAffiliate
-                      ? affiliatePath(product.slug)
-                      : "#"
-                  }
-                  rel={
-                    product.hasAffiliate ? "sponsored nofollow" : "noopener"
-                  }
+              <div className="flex flex-col gap-2 sm:w-48">
+                <Button
+                  asChild
+                  variant={product.hasAffiliate ? "primary" : "secondary"}
                 >
-                  {product.hasAffiliate ? "Fırsata Git" : "Resmi Siteye Git"}
-                  <ExternalLink className="size-4" />
-                </a>
-              </Button>
+                  <a
+                    href={
+                      product.hasAffiliate
+                        ? affiliatePath(product.slug)
+                        : product.pricingUrl
+                    }
+                    rel={
+                      product.hasAffiliate ? "sponsored nofollow" : "noopener"
+                    }
+                    target={product.hasAffiliate ? "_self" : "_blank"}
+                  >
+                    {product.hasAffiliate ? "Fırsata Git" : "Resmi Siteye Git"}
+                    <ExternalLink className="size-4" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </Card>

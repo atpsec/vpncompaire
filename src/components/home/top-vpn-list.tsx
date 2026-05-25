@@ -13,6 +13,7 @@ import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
+import { PricingPlans } from "@/components/product/pricing-plans";
 import { rankedProducts, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 
@@ -127,14 +128,11 @@ function WinnerCard({
           </dl>
         </div>
 
-        <div className="flex flex-col gap-3 lg:w-56 lg:justify-center lg:border-l lg:border-border lg:pl-7">
-          <div className="text-center lg:text-right">
-            <div className="text-xs text-ink-subtle">{tCommon("from")}</div>
-            <div className="text-3xl font-bold text-ink-strong tabular-nums">
-              ${product.priceFromUsd.toFixed(2)}
-            </div>
-            <div className="text-xs text-ink-subtle">/{tCommon("perMonth")}</div>
-          </div>
+        <div className="flex flex-col gap-3 lg:w-72 lg:justify-center lg:border-l lg:border-border lg:pl-7">
+          <PricingPlans
+            plans={product.plans}
+            verifiedAt={product.pricingVerifiedAt}
+          />
           <Button asChild variant="primary" size="md">
             <a
               href={affiliatePath(product.slug)}
@@ -226,14 +224,12 @@ function FeaturedRow({
           </dl>
         </div>
 
-        <div className="flex flex-col gap-3 lg:w-48 lg:justify-center lg:border-l lg:border-border lg:pl-6">
-          <div className="text-center lg:text-right">
-            <div className="text-xs text-ink-subtle">{tCommon("from")}</div>
-            <div className="text-2xl font-bold text-ink-strong tabular-nums">
-              ${product.priceFromUsd.toFixed(2)}
-            </div>
-            <div className="text-xs text-ink-subtle">/{tCommon("perMonth")}</div>
-          </div>
+        <div className="flex flex-col gap-3 lg:w-64 lg:justify-center lg:border-l lg:border-border lg:pl-6">
+          <PricingPlans
+            plans={product.plans}
+            verifiedAt={product.pricingVerifiedAt}
+            variant="compact"
+          />
           <Button
             asChild
             variant={product.hasAffiliate ? "primary" : "secondary"}

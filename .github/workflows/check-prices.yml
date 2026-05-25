@@ -1,0 +1,46 @@
+name: Weekly pricing audit
+
+on:
+  schedule:
+    # Mondays 08:17 UTC — off-peak, off the :00 mark
+    - cron: "17 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run pricing audit
+        id: audit
+        run: node scripts/check-prices.mjs
+        continue-on-error: true
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricing-report
+          path: .pricing-report.md
+          retention-days: 30
+
+      - name: Open issue on drift
+        if: steps.audit.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISO=$(date -u +%Y-%m-%d)
+          gh issue create \
+            --title "Pricing drift — ${ISO}" \
+            --label "pricing,audit" \
+            --body-file .pricing-report.md \
+            || echo "Issue creation skipped (label may be missing or duplicate exists)"
