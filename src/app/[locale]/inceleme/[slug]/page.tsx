@@ -27,6 +27,9 @@ const reviewBodies = {
   pia: () => import("@/content/reviews/pia.mdx"),
   cyberghost: () => import("@/content/reviews/cyberghost.mdx"),
   mullvad: () => import("@/content/reviews/mullvad.mdx"),
+  ipvanish: () => import("@/content/reviews/ipvanish.mdx"),
+  windscribe: () => import("@/content/reviews/windscribe.mdx"),
+  tunnelbear: () => import("@/content/reviews/tunnelbear.mdx"),
 } as const;
 
 export function generateStaticParams() {
@@ -251,7 +254,7 @@ export default async function Page({ params }: Props) {
             href="/en-iyi-vpn"
             className="mt-2 inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline"
           >
-            En İyi 7 VPN sıralamasına dön <ArrowRight className="size-4" />
+            En İyi 10 VPN sıralamasına dön <ArrowRight className="size-4" />
           </Link>
         </section>
       </Container>

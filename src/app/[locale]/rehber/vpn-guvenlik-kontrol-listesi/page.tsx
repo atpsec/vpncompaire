@@ -167,7 +167,7 @@ export default async function Page({ params }: Props) {
             İncelemelerimiz zaten bu kriterleri kullanıyor — kendi sıralamamızı
             görmek için{" "}
             <Link href="/en-iyi-vpn" className="text-brand-700 underline">
-              en iyi 7 VPN
+              en iyi 10 VPN
             </Link>{" "}
             sayfasını ziyaret edebilirsin.
           </p>

@@ -18,6 +18,9 @@ export const allowedRedirectHosts: ReadonlySet<string> = new Set([
   "www.privateinternetaccess.com",
   "www.cyberghostvpn.com",
   "mullvad.net",
+  "www.ipvanish.com",
+  "windscribe.com",
+  "www.tunnelbear.com",
 ]);
 
 export const affiliateLinks: Record<string, AffiliateLink> = {
@@ -62,6 +65,24 @@ export const affiliateLinks: Record<string, AffiliateLink> = {
     brand: "Mullvad",
     url: "https://mullvad.net/",
     hasProgram: false,
+  },
+  ipvanish: {
+    slug: "ipvanish",
+    brand: "IPVanish",
+    url: "https://www.ipvanish.com/",
+    hasProgram: true,
+  },
+  windscribe: {
+    slug: "windscribe",
+    brand: "Windscribe",
+    url: "https://windscribe.com/",
+    hasProgram: true,
+  },
+  tunnelbear: {
+    slug: "tunnelbear",
+    brand: "TunnelBear",
+    url: "https://www.tunnelbear.com/",
+    hasProgram: true,
   },
 };
 

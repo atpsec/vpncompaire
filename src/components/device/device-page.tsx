@@ -11,6 +11,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
+import { DeviceIcon } from "@/components/device/device-icon";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
@@ -48,12 +49,19 @@ export function DevicePage({ device }: { device: DeviceContent }) {
           › <span className="text-ink-strong">{device.shortName}</span>
         </p>
 
-        <header className="mt-6">
-          <Badge variant="brand">{device.device}</Badge>
-          <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            {device.shortName} için en iyi VPN
-          </h1>
-          <p className="mt-4 text-lg text-ink-muted">{device.tagline}</p>
+        <header className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start">
+          <DeviceIcon
+            type={device.slug as "android" | "iphone" | "ipad" | "smart-tv"}
+            size={88}
+            className="sm:mt-2"
+          />
+          <div className="flex-1">
+            <Badge variant="brand">{device.device}</Badge>
+            <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+              {device.shortName} için en iyi VPN
+            </h1>
+            <p className="mt-4 text-lg text-ink-muted">{device.tagline}</p>
+          </div>
         </header>
 
         <Card className="mt-8 p-6 bg-brand-50/40 border-brand-100">

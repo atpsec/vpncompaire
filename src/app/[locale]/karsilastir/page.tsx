@@ -184,7 +184,7 @@ export default async function Page({ params }: Props) {
             href="/en-iyi-vpn"
             className="mt-2 inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline"
           >
-            En İyi 7 VPN sıralamasına git <ArrowRight className="size-4" />
+            En İyi 10 VPN sıralamasına git <ArrowRight className="size-4" />
           </Link>
         </section>
       </Container>

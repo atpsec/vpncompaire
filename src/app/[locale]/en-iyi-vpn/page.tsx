@@ -7,7 +7,7 @@ import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
 import { rankedProducts } from "@/data/products";
 
 export const metadata: Metadata = {
-  title: "2026'nın En İyi VPN'leri — Karşılaştırma ve Sıralama",
+  title: "2026'nın En İyi 10 VPN'i — Karşılaştırma ve Sıralama",
   description:
     "Bağımsız denetim, gerçek hız testi ve şeffaf fiyat analizi ile 2026'nın en iyi VPN'leri. Genel en iyi, en uygun bütçe, premium ve gizlilik seçimleri.",
 };
@@ -34,10 +34,10 @@ export default async function Page({ params }: Props) {
             Ana sayfa › En İyi VPN&apos;ler
           </p>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            2026&apos;nın En İyi VPN&apos;leri
+            2026&apos;nın En İyi 10 VPN&apos;i
           </h1>
           <p className="mt-5 text-lg text-ink-muted">
-            Yedi VPN&apos;i altı kritere göre tek tek test ettik. İşte sonuçlar
+            On VPN&apos;i altı kritere göre tek tek test ettik. İşte sonuçlar
             — bağımsız denetim kanıtı, gerçek hız ölçümleri ve fiyat
             şeffaflığı dahil.
           </p>

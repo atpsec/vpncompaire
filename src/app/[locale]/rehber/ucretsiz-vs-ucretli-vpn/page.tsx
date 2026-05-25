@@ -315,7 +315,7 @@ export default async function Page({ params }: Props) {
               href="/en-iyi-vpn"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
             >
-              En iyi 7 VPN
+              En iyi 10 VPN
             </Link>
           </div>
         </section>

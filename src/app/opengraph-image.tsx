@@ -94,7 +94,7 @@ export default function OGImage() {
             }}
           >
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ✓ 7 VPN test edildi
+              ✓ 10 VPN test edildi
             </span>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
               ✓ Bağımsız denetimler

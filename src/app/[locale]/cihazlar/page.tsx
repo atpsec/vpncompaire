@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { ArrowRight, Smartphone, Tablet, Tv } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { DeviceIcon } from "@/components/device/device-icon";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { devices } from "@/data/devices";
@@ -12,13 +13,6 @@ export const metadata: Metadata = {
   title: "Cihazlara Göre VPN Rehberi — Android, iPhone, iPad, Smart TV",
   description:
     "Android, iPhone, iPad ve Smart TV'lerde VPN kurulumu, neden gerekli olduğu ve cihaza özel en iyi seçimler.",
-};
-
-const ICONS: Record<string, typeof Smartphone> = {
-  android: Smartphone,
-  iphone: Smartphone,
-  ipad: Tablet,
-  "smart-tv": Tv,
 };
 
 type Props = { params: Promise<{ locale: string }> };
@@ -56,39 +50,31 @@ export default async function Page({ params }: Props) {
           </p>
         </header>
 
-        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-2 gap-4">
-          {devices.map((d) => {
-            const Icon = ICONS[d.slug] ?? Smartphone;
-            return (
-              <Link
-                key={d.slug}
-                href={`/cihazlar/${d.slug}`}
-                className="group"
-              >
-                <Card className="p-6 hover:border-brand-300 hover:shadow-md transition-all h-full">
-                  <div className="flex items-start gap-4">
-                    <div className="inline-flex items-center justify-center size-12 rounded-lg bg-brand-50 text-brand-600 shrink-0">
-                      <Icon className="size-6" aria-hidden="true" />
-                    </div>
-                    <div className="min-w-0">
-                      <h2 className="text-lg font-semibold text-ink-strong group-hover:text-brand-700">
-                        {d.shortName} için VPN
-                      </h2>
-                      <p className="mt-1 text-sm text-ink-muted">
-                        {d.device}
-                      </p>
-                    </div>
+        <div className="mt-10 grid sm:grid-cols-2 gap-4">
+          {devices.map((d) => (
+            <Link key={d.slug} href={`/cihazlar/${d.slug}`} className="group">
+              <Card className="p-6 hover:border-brand-300 hover:shadow-md transition-all h-full">
+                <div className="flex items-start gap-4">
+                  <DeviceIcon
+                    type={d.slug as "android" | "iphone" | "ipad" | "smart-tv"}
+                    size={56}
+                  />
+                  <div className="min-w-0">
+                    <h2 className="text-lg font-semibold text-ink-strong group-hover:text-brand-700">
+                      {d.shortName} için VPN
+                    </h2>
+                    <p className="mt-1 text-sm text-ink-muted">{d.device}</p>
                   </div>
-                  <p className="mt-4 text-sm text-ink leading-relaxed">
-                    {d.tagline}
-                  </p>
-                  <div className="mt-4 inline-flex items-center text-xs font-medium text-brand-700">
-                    Rehberi oku <ArrowRight className="ml-1 size-3" />
-                  </div>
-                </Card>
-              </Link>
-            );
-          })}
+                </div>
+                <p className="mt-4 text-sm text-ink leading-relaxed">
+                  {d.tagline}
+                </p>
+                <div className="mt-4 inline-flex items-center text-xs font-medium text-brand-700">
+                  Rehberi oku <ArrowRight className="ml-1 size-3" />
+                </div>
+              </Card>
+            </Link>
+          ))}
         </div>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6">

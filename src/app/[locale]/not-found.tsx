@@ -35,7 +35,7 @@ export default function NotFoundPage() {
         <Card className="p-5">
           <h2 className="font-semibold text-ink-strong">İncelemeler</h2>
           <p className="mt-1 text-sm text-ink-muted">
-            7 VPN&apos;in detaylı incelemeleri.
+            10 VPN&apos;in detaylı incelemeleri.
           </p>
           <Link
             href="/en-iyi-vpn"
