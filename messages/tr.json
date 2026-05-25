@@ -1,0 +1,104 @@
+{
+  "metadata": {
+    "siteName": "vpncompaire",
+    "defaultTitle": "vpncompaire — Dürüst VPN Karşılaştırmaları (2026)",
+    "defaultDescription": "Bağımsız test metodolojisine dayalı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik için doğru VPN'i bul."
+  },
+  "nav": {
+    "home": "Ana sayfa",
+    "reviews": "İncelemeler",
+    "compare": "Karşılaştırma",
+    "bestFor": "Kullanım Alanları",
+    "guides": "Rehberler",
+    "methodology": "Test Metodolojimiz",
+    "about": "Hakkımızda",
+    "search": "Ara",
+    "menu": "Menü",
+    "closeMenu": "Menüyü kapat"
+  },
+  "common": {
+    "readReview": "İncelemeyi oku",
+    "getDeal": "Fırsata git",
+    "tryNow": "Hemen dene",
+    "visitSite": "Siteyi ziyaret et",
+    "viewAll": "Tümünü gör",
+    "lastUpdated": "Son güncelleme",
+    "score": "Puan",
+    "from": "şuradan başlıyor",
+    "perMonth": "ay",
+    "pros": "Artıları",
+    "cons": "Eksileri",
+    "verifiedAudit": "Bağımsız denetim",
+    "noAffiliate": "Affiliate yok — tarafsız seçim"
+  },
+  "disclosure": {
+    "banner": "Reklam açıklaması: Bu sayfadaki bağlantılardan satın aldığında komisyon kazanabiliriz. Bu durum ödediğin fiyatı değiştirmez. Önerilerimiz; araştırma, özellik analizi, gizlilik politikaları, denetimler, fiyatlandırma ve kullanım kolaylığına dayanır.",
+    "short": "İçerikte affiliate bağlantıları var.",
+    "learnMore": "Detaylı bilgi"
+  },
+  "home": {
+    "hero": {
+      "h1": "2026 için dürüst VPN karşılaştırmaları",
+      "subtitle": "Gizlilik, streaming, seyahat ve günlük güvenlik için bağımsız metodolojiyle test edilmiş VPN'ler.",
+      "ctaPrimary": "En İyi 7 VPN'i Gör",
+      "ctaSecondary": "Nasıl Test Ediyoruz",
+      "trust": {
+        "tested": "VPN test edildi",
+        "audits": "bağımsız denetim incelendi",
+        "updated": "Son güncelleme"
+      }
+    },
+    "topVPNs": {
+      "title": "2026'nın En İyi 7 VPN'i",
+      "subtitle": "Bağımsız denetimler, gerçek hız testleri ve şeffaf fiyat analizi ile sıralanmış."
+    },
+    "useCase": {
+      "title": "Kullanım amacına göre VPN bul",
+      "subtitle": "İhtiyacına en uygun VPN'i seç.",
+      "privacy": "Gizlilik",
+      "streaming": "Streaming",
+      "gaming": "Oyun",
+      "travel": "Seyahat",
+      "turkey": "Türkiye için",
+      "expats": "Yurt dışındaki Türkler"
+    },
+    "comparisons": {
+      "title": "Kafa Kafaya Karşılaştırmalar"
+    },
+    "methodology": {
+      "title": "Nasıl Test Ediyoruz",
+      "body": "Sitedeki her VPN aynı 6 kritere göre değerlendirilir: gizlilik politikası ve hukuki yetki alanı, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı ve kullanım kolaylığı. Affiliate komisyonu sıralamayı etkilemez.",
+      "cta": "Tam metodolojiyi oku"
+    },
+    "guides": {
+      "title": "Son Rehberler",
+      "subtitle": "VPN hakkında bilmen gerekenler."
+    },
+    "faq": {
+      "title": "Sık Sorulan Sorular"
+    }
+  },
+  "footer": {
+    "tagline": "Bağımsız VPN karşılaştırmaları, dürüst incelemeler.",
+    "sections": {
+      "site": "Site",
+      "legal": "Yasal",
+      "follow": "Takip et"
+    },
+    "links": {
+      "about": "Hakkımızda",
+      "methodology": "Metodoloji",
+      "contact": "İletişim",
+      "disclosure": "Reklam Açıklaması",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Şartları",
+      "sitemap": "Site haritası"
+    },
+    "copyright": "Tüm hakları saklıdır."
+  },
+  "cookies": {
+    "title": "Çerez tercihi",
+    "body": "Bu site yalnızca gizlilik dostu, çerezsiz analitik (Plausible) kullanır. Kişisel veri toplamayız.",
+    "accept": "Tamam"
+  }
+}
