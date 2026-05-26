@@ -116,6 +116,7 @@ export default async function Page({ params }: Props) {
   return (
     <ComparisonPage
       slug="expressvpn-vs-nordvpn"
+      locale={locale}
       productSlugA="expressvpn"
       productSlugB="nordvpn"
       tagline="İki premium devin yan yana karşılaştırması — sürtünmesiz deneyim ile altı kez denetlenmiş istikrarın karşılaşması."

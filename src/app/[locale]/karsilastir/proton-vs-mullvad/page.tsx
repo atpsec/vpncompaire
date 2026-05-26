@@ -116,6 +116,7 @@ export default async function Page({ params }: Props) {
   return (
     <ComparisonPage
       slug="proton-vs-mullvad"
+      locale={locale}
       productSlugA="proton-vpn"
       productSlugB="mullvad"
       tagline="İki gizlilik öncülü — açık kaynak, denetimli ve felsefe olarak gizliliğe adanmış. Hangisi sana uygun?"

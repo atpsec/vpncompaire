@@ -20,5 +20,5 @@ export default async function Page({ params }: Props) {
   setRequestLocale(locale);
   const device = getDevice("smart-tv");
   if (!device) notFound();
-  return <DevicePage device={device} />;
+  return <DevicePage device={device} locale={locale} />;
 }

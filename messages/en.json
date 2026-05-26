@@ -579,5 +579,160 @@
     "ogDescription": "Cancellation and refund steps for 10 VPNs, all on one page.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Cancellation & refund"
+  },
+  "comparison": {
+    "breadcrumbHome": "Home",
+    "breadcrumbHub": "Compare",
+    "badge": "Side-by-side comparison",
+    "titleTemplate": "{title}: 2026 Comparison",
+    "ctaAffiliate": "Get {brand} deal",
+    "ctaOfficial": "Visit {brand}",
+    "categoriesH2": "Category-by-category highlights",
+    "categoriesIntro": "Each row indicates how a provider is positioned for that criterion — it does not crown a categorical \"winner\".",
+    "reasonLabel": "Why:",
+    "winnerTie": "Both are strong",
+    "winnerLeads": "{brand} leads on this criterion",
+    "reviewLink": "Read the {brand} review",
+    "faqH2": "Frequently asked questions",
+    "relatedTitle": "Other pages"
+  },
+  "device": {
+    "breadcrumbHome": "Home",
+    "breadcrumbHub": "Devices",
+    "h1": "The best VPN for {name}",
+    "whyTitle": "Why a VPN for {name}?",
+    "setup": {
+      "h2": "Setup methods",
+      "intro": "Pick the option that fits your device and your comfort level.",
+      "whenLabel": "When:"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "advanced": "Advanced"
+    },
+    "picks": {
+      "h2": "Top {count} picks for {name}",
+      "intro": "Here's why each VPN is a good fit on this device.",
+      "ctaAffiliate": "Get {brand} deal",
+      "ctaOfficial": "Visit {brand}",
+      "readReview": "Read the full review →",
+      "scoreLabel": "Score"
+    },
+    "pitfallsH2": "Watch out for",
+    "faqH2": "Frequently asked questions",
+    "relatedTitle": "Related pages"
+  },
+  "filter": {
+    "panelLabel": "Feature filters",
+    "resetWithCount": "Reset filters ({count} active)",
+    "matchCount": "<strong>{count}</strong> VPNs matched",
+    "activeCount": "Active filters: {count}",
+    "allShown": "Showing all 10 VPNs",
+    "readReview": "Read review",
+    "getDeal": "Get deal",
+    "emptyTitle": "No matching VPNs",
+    "emptyBody": "No VPN meets all the criteria you selected. Try removing a filter.",
+    "emptyCta": "Reset filters"
+  },
+  "audience": {
+    "rank1": "Top pick",
+    "rank2": "Runner-up",
+    "rank3": "Honourable mention",
+    "reasonLabel": "Why:",
+    "fallbackAudit": "Independent test",
+    "fallbackDevices": "Multiple devices",
+    "moneyBack": "{days}-day money-back",
+    "monthlyLabel": "Monthly",
+    "ctaDeal": "See the {brand} deal",
+    "readReview": "Read review"
+  },
+  "homeBlocks": {
+    "comparisons": {
+      "allLink": "All comparisons",
+      "readLink": "Read comparison",
+      "items": {
+        "nordvpn-vs-surfshark": "Power meets budget.",
+        "expressvpn-vs-nordvpn": "Two premium heavyweights side by side.",
+        "proton-vs-mullvad": "A clean comparison for privacy purists.",
+        "ucretsiz-vs-ucretli-vpn": "How safe are free options, really?"
+      },
+      "freeVsPaidTitle": "Free vs paid VPN"
+    },
+    "methodology": {
+      "badge": "Transparent methodology",
+      "criteria": {
+        "privacy": "Privacy policy and jurisdiction",
+        "audits": "Independent audits",
+        "speed": "Speed (real-world tests)",
+        "streaming": "Streaming compatibility",
+        "pricing": "Pricing transparency",
+        "usability": "Ease of use"
+      }
+    },
+    "comparePicker": {
+      "kicker": "Compare tool",
+      "h2": "Build your own comparison",
+      "intro": "Pick at least 2 and up to 4 VPNs — features, pricing and audits land side by side.",
+      "selectedLabel": "Selected:",
+      "ofMax": "/ {max}",
+      "reset": "Reset",
+      "needAtLeast": "Pick at least {min} VPNs to compare.",
+      "rows": {
+        "audit": "Independent audit",
+        "servers": "Servers",
+        "devices": "Devices",
+        "jurisdiction": "Jurisdiction",
+        "moneyBack": "Money-back",
+        "affiliate": "Affiliate",
+        "yes": "Yes",
+        "no": "No (neutral)",
+        "days": "days"
+      },
+      "bestValueLabel": "Best value",
+      "perMonth": "/mo",
+      "monthlyLabel": "Monthly:",
+      "ctaDeal": "Get deal",
+      "ctaOfficial": "Visit official site",
+      "readReview": "Read review"
+    },
+    "useCaseGrid": {
+      "review": "Review"
+    }
+  },
+  "pricingPlans": {
+    "verifiedAt": "Prices verified on {date}.",
+    "bestValue": "Best value",
+    "perMonth": "/mo",
+    "discount": "{percent}% off",
+    "totalLabel": "Total",
+    "monthsSuffix": "mo"
+  },
+  "legalNotices": {
+    "affiliate": {
+      "prefix": "Advertising content: this link may be an affiliate link. Commission does not change the price you pay.",
+      "detail": "Details"
+    },
+    "dataDisclaimer": {
+      "body": "Pricing, features, audit reports and privacy policies may be changed by the provider without notice. Before buying, please verify current details on the VPN provider's official site. For details, see the <legal>legal notice</legal> and <disclosure>advertising disclosure</disclosure>.",
+      "lastChecked": "Last checked:"
+    }
+  },
+  "social": {
+    "listLabel": "Our social media accounts",
+    "soonSuffix": "(coming soon)",
+    "titleSoonSuffix": "— coming soon"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "langGroup": "Language"
+  },
+  "og": {
+    "alt": "vpncompaire — Independent VPN comparisons",
+    "h1": "Independent VPN comparisons",
+    "subtitle": "Volunteer review project · Transparent methodology · Independent assessments.",
+    "trust1": "10 VPNs tested",
+    "trust2": "Independent audits",
+    "trust3": "Transparent methodology"
   }
 }

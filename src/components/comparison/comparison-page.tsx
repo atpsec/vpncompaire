@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Check, Trophy } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -24,6 +26,7 @@ export type ComparisonFAQ = { q: string; a: string };
 
 export type ComparisonPageProps = {
   slug: string;
+  locale: string;
   productSlugA: string;
   productSlugB: string;
   tagline: string;
@@ -34,8 +37,9 @@ export type ComparisonPageProps = {
   relatedLinks: readonly { label: string; href: string }[];
 };
 
-export function ComparisonPage({
+export async function ComparisonPage({
   slug,
+  locale,
   productSlugA,
   productSlugB,
   tagline,
@@ -48,6 +52,7 @@ export function ComparisonPage({
   const a = getProduct(productSlugA);
   const b = getProduct(productSlugB);
   if (!a || !b) return null;
+  const t = await getTranslations({ locale, namespace: "comparison" });
 
   const title = `${a.brand} vs ${b.brand}`;
 
@@ -55,8 +60,8 @@ export function ComparisonPage({
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Karşılaştırma", path: "/karsilastir" },
+          { name: t("breadcrumbHome"), path: "/" },
+          { name: t("breadcrumbHub"), path: "/karsilastir" },
           { name: title, path: `/karsilastir/${slug}` },
         ])}
       />
@@ -65,19 +70,19 @@ export function ComparisonPage({
       <Container size="lg" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {t("breadcrumbHome")}
           </Link>{" "}
           ›{" "}
           <Link href="/karsilastir" className="hover:text-ink">
-            Karşılaştırma
+            {t("breadcrumbHub")}
           </Link>{" "}
           › <span className="text-ink-strong">{title}</span>
         </p>
 
         <header className="mt-6">
-          <Badge variant="brand">Yan yana karşılaştırma</Badge>
+          <Badge variant="brand">{t("badge")}</Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            {title}: 2026 Karşılaştırması
+            {t("titleTemplate", { title })}
           </h1>
           <p className="mt-4 text-lg text-ink-muted">{tagline}</p>
         </header>
@@ -99,7 +104,8 @@ export function ComparisonPage({
             <p className="mt-4 text-sm text-ink leading-relaxed">{a.summary}</p>
             <Button asChild variant="primary" className="mt-4 w-full">
               <a href={affiliatePath(a.slug)} rel="sponsored nofollow">
-                {a.brand} fırsatı <ArrowRight className="size-4" />
+                {t("ctaAffiliate", { brand: a.brand })}{" "}
+                <ArrowRight className="size-4" />
               </a>
             </Button>
           </Card>
@@ -125,8 +131,9 @@ export function ComparisonPage({
                 href={affiliatePath(b.slug)}
                 rel={b.hasAffiliate ? "sponsored nofollow" : "noopener"}
               >
-                {b.brand}{" "}
-                {b.hasAffiliate ? "fırsatı" : "sitesini ziyaret et"}
+                {b.hasAffiliate
+                  ? t("ctaAffiliate", { brand: b.brand })
+                  : t("ctaOfficial", { brand: b.brand })}
                 <ArrowRight className="size-4" />
               </a>
             </Button>
@@ -135,11 +142,10 @@ export function ComparisonPage({
 
         <section className="mt-12">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            Kategori bazında öne çıkan özellikler
+            {t("categoriesH2")}
           </h2>
           <p className="mt-2 text-sm text-ink-muted">
-            Her satırdaki etiket, sağlayıcının o kriterde nasıl konumlandığını
-            gösterir — kategorik bir &quot;kazanan&quot; ilan etmez.
+            {t("categoriesIntro")}
           </p>
           <div className="mt-6 space-y-4">
             {categories.map((cat) => (
@@ -189,7 +195,9 @@ export function ComparisonPage({
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-ink leading-relaxed">
-                  <span className="font-medium text-ink-strong">Neden: </span>
+                  <span className="font-medium text-ink-strong">
+                    {t("reasonLabel")}{" "}
+                  </span>
                   {cat.reasoning}
                 </p>
               </Card>
@@ -210,7 +218,7 @@ export function ComparisonPage({
             </ul>
             <Button asChild variant="primary" className="mt-5 w-full">
               <Link href={`/inceleme/${a.slug}`}>
-                {a.brand}&apos;i incele
+                {t("reviewLink", { brand: a.brand })}
               </Link>
             </Button>
           </Card>
@@ -227,14 +235,14 @@ export function ComparisonPage({
             </ul>
             <Button asChild variant="primary" className="mt-5 w-full">
               <Link href={`/inceleme/${b.slug}`}>
-                {b.brand}&apos;ı incele
+                {t("reviewLink", { brand: b.brand })}
               </Link>
             </Button>
           </Card>
         </section>
 
         <section className="mt-16 prose prose-stone max-w-none">
-          <h2>Sıkça sorulan sorular</h2>
+          <h2>{t("faqH2")}</h2>
           {faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
@@ -244,7 +252,7 @@ export function ComparisonPage({
         </section>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">Diğer sayfalar</p>
+          <p className="text-sm text-ink-muted">{t("relatedTitle")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             {relatedLinks.map((l) => (
               <Link
@@ -271,13 +279,14 @@ function WinnerBadge({
   aBrand: string;
   bBrand: string;
 }) {
+  const t = useTranslations("comparison");
   if (winner === "tie") {
-    return <Badge variant="neutral">İkisi de güçlü</Badge>;
+    return <Badge variant="neutral">{t("winnerTie")}</Badge>;
   }
   return (
     <Badge variant="brand">
-      <Trophy className="size-3" /> {winner === "a" ? aBrand : bBrand} bu
-      kriterde öne çıkıyor
+      <Trophy className="size-3" />{" "}
+      {t("winnerLeads", { brand: winner === "a" ? aBrand : bBrand })}
     </Badge>
   );
 }

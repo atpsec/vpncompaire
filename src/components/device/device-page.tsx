@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import {
   ArrowRight,
   AlertTriangle,
@@ -25,13 +26,21 @@ const DIFFICULTY_TONE = {
   "İleri düzey": "bg-surface-strong/40 text-ink-strong border-border",
 } as const;
 
-export function DevicePage({ device }: { device: DeviceContent }) {
+export async function DevicePage({
+  device,
+  locale,
+}: {
+  device: DeviceContent;
+  locale: string;
+}) {
+  const t = await getTranslations({ locale, namespace: "device" });
+
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Cihazlar", path: "/cihazlar" },
+          { name: t("breadcrumbHome"), path: "/" },
+          { name: t("breadcrumbHub"), path: "/cihazlar" },
           { name: device.shortName, path: `/cihazlar/${device.slug}` },
         ])}
       />
@@ -40,11 +49,11 @@ export function DevicePage({ device }: { device: DeviceContent }) {
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {t("breadcrumbHome")}
           </Link>{" "}
           ›{" "}
           <Link href="/cihazlar" className="hover:text-ink">
-            Cihazlar
+            {t("breadcrumbHub")}
           </Link>{" "}
           › <span className="text-ink-strong">{device.shortName}</span>
         </p>
@@ -58,7 +67,7 @@ export function DevicePage({ device }: { device: DeviceContent }) {
           <div className="flex-1">
             <Badge variant="brand">{device.device}</Badge>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-              {device.shortName} için en iyi VPN
+              {t("h1", { name: device.shortName })}
             </h1>
             <p className="mt-4 text-lg text-ink-muted">{device.tagline}</p>
           </div>
@@ -66,8 +75,8 @@ export function DevicePage({ device }: { device: DeviceContent }) {
 
         <Card className="mt-8 p-6 bg-brand-50/40 border-brand-100">
           <h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2">
-            <Shield className="size-5 text-brand-600" /> Neden{" "}
-            {device.shortName} için VPN?
+            <Shield className="size-5 text-brand-600" />{" "}
+            {t("whyTitle", { name: device.shortName })}
           </h2>
           <p className="mt-3 text-ink leading-relaxed">{device.summary}</p>
           <ul className="mt-4 space-y-2.5 text-[15px] text-ink">
@@ -84,12 +93,10 @@ export function DevicePage({ device }: { device: DeviceContent }) {
           <div className="flex items-center gap-2">
             <Wrench className="size-5 text-ink-muted" />
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-              Kurulum yöntemleri
+              {t("setup.h2")}
             </h2>
           </div>
-          <p className="mt-2 text-ink-muted">
-            Cihazına ve teknik konforuna uygun olanı seç.
-          </p>
+          <p className="mt-2 text-ink-muted">{t("setup.intro")}</p>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {device.setupMethods.map((m) => (
               <Card key={m.name} className="p-5 flex flex-col">
@@ -110,7 +117,7 @@ export function DevicePage({ device }: { device: DeviceContent }) {
                   {m.description}
                 </p>
                 <p className="mt-3 text-xs text-ink-strong">
-                  <span className="font-semibold">Ne zaman: </span>
+                  <span className="font-semibold">{t("setup.whenLabel")} </span>
                   {m.whenToUse}
                 </p>
               </Card>
@@ -120,11 +127,12 @@ export function DevicePage({ device }: { device: DeviceContent }) {
 
         <section className="mt-16">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            {device.shortName} için ilk {device.picks.length} seçim
+            {t("picks.h2", {
+              name: device.shortName,
+              count: device.picks.length,
+            })}
           </h2>
-          <p className="mt-2 text-ink-muted">
-            Hangi VPN'in bu cihazda neden iyi olduğunu kısaca açıklayalım.
-          </p>
+          <p className="mt-2 text-ink-muted">{t("picks.intro")}</p>
           <div className="mt-6 space-y-4">
             {device.picks.map((pick, idx) => {
               const product = getProduct(pick.slug);
@@ -166,22 +174,23 @@ export function DevicePage({ device }: { device: DeviceContent }) {
                                 : "noopener"
                             }
                           >
-                            {product.brand}{" "}
                             {product.hasAffiliate
-                              ? "fırsatına git"
-                              : "sitesine git"}
+                              ? t("picks.ctaAffiliate", { brand: product.brand })
+                              : t("picks.ctaOfficial", { brand: product.brand })}
                             <ArrowRight className="size-4" />
                           </a>
                         </Button>
                         <Button asChild variant="ghost" size="sm">
                           <Link href={`/inceleme/${product.slug}`}>
-                            Tam incelemeyi oku →
+                            {t("picks.readReview")}
                           </Link>
                         </Button>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-xs text-ink-subtle">Puan</div>
+                      <div className="text-xs text-ink-subtle">
+                        {t("picks.scoreLabel")}
+                      </div>
                       <div className="text-2xl font-bold text-brand-700">
                         {product.score.toFixed(1)}
                         <span className="text-xs text-ink-subtle font-normal">
@@ -201,12 +210,15 @@ export function DevicePage({ device }: { device: DeviceContent }) {
             <div className="flex items-center gap-2">
               <AlertTriangle className="size-5 text-accent-600" />
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-                Dikkat edilmesi gerekenler
+                {t("pitfallsH2")}
               </h2>
             </div>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               {device.pitfalls.map((p) => (
-                <Card key={p.title} className="p-5 border-accent-100 bg-accent-50/30">
+                <Card
+                  key={p.title}
+                  className="p-5 border-accent-100 bg-accent-50/30"
+                >
                   <h3 className="text-base font-semibold text-ink-strong">
                     {p.title}
                   </h3>
@@ -220,7 +232,7 @@ export function DevicePage({ device }: { device: DeviceContent }) {
         )}
 
         <section className="mt-16 prose prose-stone max-w-none">
-          <h2>Sıkça sorulan sorular</h2>
+          <h2>{t("faqH2")}</h2>
           {device.faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
@@ -230,7 +242,7 @@ export function DevicePage({ device }: { device: DeviceContent }) {
         </section>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">İlgili sayfalar</p>
+          <p className="text-sm text-ink-muted">{t("relatedTitle")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             {device.relatedLinks.map((l) => (
               <Link

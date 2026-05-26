@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "vpncompaire — Bağımsız VPN Karşılaştırmaları";
+export const alt = "vpncompaire — Independent VPN comparisons";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -68,7 +68,7 @@ export default function OGImage() {
               maxWidth: 900,
             }}
           >
-            Bağımsız VPN Karşılaştırmaları
+            Independent VPN comparisons
           </div>
           <div
             style={{
@@ -78,8 +78,8 @@ export default function OGImage() {
               maxWidth: 900,
             }}
           >
-            Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız
-            değerlendirmeler.
+            Volunteer review project · Transparent methodology · Independent
+            assessments.
           </div>
 
           {/* Trust signals */}
@@ -94,13 +94,13 @@ export default function OGImage() {
             }}
           >
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ✓ 10 VPN test edildi
+              ✓ 10 VPNs tested
             </span>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ✓ Bağımsız denetimler
+              ✓ Independent audits
             </span>
             <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ✓ Şeffaf metodoloji
+              ✓ Transparent methodology
             </span>
           </div>
         </div>

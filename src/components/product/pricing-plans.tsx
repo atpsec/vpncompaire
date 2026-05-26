@@ -1,3 +1,6 @@
+"use client";
+
+import { useLocale, useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import type { PricingPlan } from "@/data/products";
 import { cn } from "@/lib/utils";
@@ -9,19 +12,20 @@ type Props = {
   className?: string;
 };
 
-const TR_DATE = new Intl.DateTimeFormat("tr-TR", {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
-
 export function PricingPlans({
   plans,
   verifiedAt,
   variant = "default",
   className,
 }: Props) {
-  const verifiedDate = TR_DATE.format(new Date(verifiedAt));
+  const locale = useLocale();
+  const t = useTranslations("pricingPlans");
+  const formatter = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const verifiedDate = formatter.format(new Date(verifiedAt));
 
   return (
     <div className={cn("space-y-2", className)}>
@@ -37,7 +41,7 @@ export function PricingPlans({
       </div>
       <p className="text-[11px] text-ink-faint flex items-center gap-1">
         <Check className="size-3 text-success-600" />
-        Fiyatlar {verifiedDate} tarihinde doğrulandı.
+        {t("verifiedAt", { date: verifiedDate })}
       </p>
     </div>
   );
@@ -50,6 +54,7 @@ function PlanCard({
   plan: PricingPlan;
   variant: "compact" | "default";
 }) {
+  const t = useTranslations("pricingPlans");
   const isBest = plan.isBestValue;
   return (
     <div
@@ -63,7 +68,7 @@ function PlanCard({
     >
       {isBest && (
         <span className="absolute -top-2 left-3 rounded-full bg-brand-600 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
-          En iyi değer
+          {t("bestValue")}
         </span>
       )}
       <div className="text-[11px] font-medium text-ink-subtle leading-tight">
@@ -78,11 +83,11 @@ function PlanCard({
         >
           ${plan.monthlyPriceUsd.toFixed(2)}
         </span>
-        <span className="text-[11px] text-ink-subtle">/ay</span>
+        <span className="text-[11px] text-ink-subtle">{t("perMonth")}</span>
       </div>
       {plan.savingsPercent && plan.savingsPercent > 0 ? (
         <div className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-success-50 px-1.5 py-0.5 text-[10px] font-semibold text-success-700">
-          %{plan.savingsPercent} indirim
+          {t("discount", { percent: plan.savingsPercent })}
         </div>
       ) : null}
       {plan.campaign && !plan.savingsPercent ? (
@@ -91,8 +96,10 @@ function PlanCard({
         </div>
       ) : null}
       <div className="mt-1 text-[10px] text-ink-faint tabular-nums">
-        Toplam ${plan.totalPriceUsd.toFixed(2)}
-        {plan.durationMonths > 1 ? ` · ${plan.durationMonths} ay` : ""}
+        {t("totalLabel")} ${plan.totalPriceUsd.toFixed(2)}
+        {plan.durationMonths > 1
+          ? ` · ${plan.durationMonths} ${t("monthsSuffix")}`
+          : ""}
       </div>
     </div>
   );

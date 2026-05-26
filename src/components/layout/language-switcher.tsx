@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Globe } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -18,10 +18,10 @@ export function LanguageSwitcher({ className }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("a11y");
 
   function switchTo(target: string) {
     if (target === locale) return;
-    // next-intl router handles the locale prefix automatically
     router.replace(pathname, { locale: target });
   }
 
@@ -32,7 +32,7 @@ export function LanguageSwitcher({ className }: Props) {
         className,
       )}
       role="group"
-      aria-label="Dil / Language"
+      aria-label={t("langGroup")}
     >
       <Globe
         className="size-3.5 text-ink-muted ml-1.5 mr-0.5"

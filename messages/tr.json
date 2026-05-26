@@ -579,5 +579,160 @@
     "ogDescription": "10 VPN için iptal ve iade adımları, tek sayfada.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "İptal ve İade"
+  },
+  "comparison": {
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHub": "Karşılaştırma",
+    "badge": "Yan yana karşılaştırma",
+    "titleTemplate": "{title}: 2026 Karşılaştırması",
+    "ctaAffiliate": "{brand} fırsatı",
+    "ctaOfficial": "{brand} sitesini ziyaret et",
+    "categoriesH2": "Kategori bazında öne çıkan özellikler",
+    "categoriesIntro": "Her satırdaki etiket, sağlayıcının o kriterde nasıl konumlandığını gösterir — kategorik bir \"kazanan\" ilan etmez.",
+    "reasonLabel": "Neden:",
+    "winnerTie": "İkisi de güçlü",
+    "winnerLeads": "{brand} bu kriterde öne çıkıyor",
+    "reviewLink": "{brand}'i incele",
+    "faqH2": "Sıkça sorulan sorular",
+    "relatedTitle": "Diğer sayfalar"
+  },
+  "device": {
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHub": "Cihazlar",
+    "h1": "{name} için en iyi VPN",
+    "whyTitle": "Neden {name} için VPN?",
+    "setup": {
+      "h2": "Kurulum yöntemleri",
+      "intro": "Cihazına ve teknik konforuna uygun olanı seç.",
+      "whenLabel": "Ne zaman:"
+    },
+    "difficulty": {
+      "easy": "Kolay",
+      "medium": "Orta",
+      "advanced": "İleri düzey"
+    },
+    "picks": {
+      "h2": "{name} için ilk {count} seçim",
+      "intro": "Hangi VPN'in bu cihazda neden iyi olduğunu kısaca açıklayalım.",
+      "ctaAffiliate": "{brand} fırsatına git",
+      "ctaOfficial": "{brand} sitesine git",
+      "readReview": "Tam incelemeyi oku →",
+      "scoreLabel": "Puan"
+    },
+    "pitfallsH2": "Dikkat edilmesi gerekenler",
+    "faqH2": "Sıkça sorulan sorular",
+    "relatedTitle": "İlgili sayfalar"
+  },
+  "filter": {
+    "panelLabel": "Özellik filtreleri",
+    "resetWithCount": "Filtreleri sıfırla ({count} aktif)",
+    "matchCount": "<strong>{count}</strong> VPN eşleşti",
+    "activeCount": "Filtreler: {count}",
+    "allShown": "Tüm 10 VPN gösteriliyor",
+    "readReview": "İncelemeyi oku",
+    "getDeal": "Fırsata git",
+    "emptyTitle": "Eşleşen VPN yok",
+    "emptyBody": "Seçtiğin tüm kriterleri karşılayan bir VPN bulamadık. Filtreleri azaltmayı dene.",
+    "emptyCta": "Filtreleri sıfırla"
+  },
+  "audience": {
+    "rank1": "1. Tercih",
+    "rank2": "2. Tercih",
+    "rank3": "3. Tercih",
+    "reasonLabel": "Neden:",
+    "fallbackAudit": "Bağımsız test",
+    "fallbackDevices": "Çoklu cihaz",
+    "moneyBack": "{days} gün para iade",
+    "monthlyLabel": "Aylık",
+    "ctaDeal": "{brand} fırsatını gör",
+    "readReview": "İncelemeyi oku"
+  },
+  "homeBlocks": {
+    "comparisons": {
+      "allLink": "Tüm karşılaştırmalar",
+      "readLink": "Karşılaştırmayı oku",
+      "items": {
+        "nordvpn-vs-surfshark": "Güç ile bütçenin karşılaşması.",
+        "expressvpn-vs-nordvpn": "İki premium devin yan yana analizi.",
+        "proton-vs-mullvad": "Gizlilik puristleri için saf karşılaştırma.",
+        "ucretsiz-vs-ucretli-vpn": "Ücretsiz seçenekler ne kadar güvenli?"
+      },
+      "freeVsPaidTitle": "Ücretsiz vs Ücretli VPN"
+    },
+    "methodology": {
+      "badge": "Şeffaf metodoloji",
+      "criteria": {
+        "privacy": "Gizlilik politikası ve yargı yetkisi",
+        "audits": "Bağımsız denetimler",
+        "speed": "Hız (gerçek dünya testleri)",
+        "streaming": "Streaming uyumluluğu",
+        "pricing": "Fiyat şeffaflığı",
+        "usability": "Kullanım kolaylığı"
+      }
+    },
+    "comparePicker": {
+      "kicker": "Karşılaştırma aracı",
+      "h2": "Kendi karşılaştırmanı yap",
+      "intro": "En az 2, en fazla 4 VPN seç — özellikler, fiyatlar ve denetimler yan yana çıksın.",
+      "selectedLabel": "Seçili:",
+      "ofMax": "/ {max}",
+      "reset": "Sıfırla",
+      "needAtLeast": "Karşılaştırma için en az {min} VPN seç.",
+      "rows": {
+        "audit": "Bağımsız denetim",
+        "servers": "Sunucular",
+        "devices": "Cihaz",
+        "jurisdiction": "Yargı yetkisi",
+        "moneyBack": "Para iade",
+        "affiliate": "Affiliate",
+        "yes": "Var",
+        "no": "Yok (tarafsız)",
+        "days": "gün"
+      },
+      "bestValueLabel": "En iyi değer",
+      "perMonth": "/ay",
+      "monthlyLabel": "Aylık:",
+      "ctaDeal": "Fırsata git",
+      "ctaOfficial": "Resmi siteye git",
+      "readReview": "İncelemeyi oku"
+    },
+    "useCaseGrid": {
+      "review": "İncele"
+    }
+  },
+  "pricingPlans": {
+    "verifiedAt": "Fiyatlar {date} tarihinde doğrulandı.",
+    "bestValue": "En iyi değer",
+    "perMonth": "/ay",
+    "discount": "%{percent} indirim",
+    "totalLabel": "Toplam",
+    "monthsSuffix": "ay"
+  },
+  "legalNotices": {
+    "affiliate": {
+      "prefix": "Reklam içeriği: bu bağlantı affiliate olabilir. Komisyon ödediğin fiyatı değiştirmez.",
+      "detail": "Detay"
+    },
+    "dataDisclaimer": {
+      "body": "Fiyatlar, özellikler, denetim raporları ve gizlilik politikaları sağlayıcı tarafından haber verilmeksizin değiştirilebilir. Satın almadan önce ilgili VPN sağlayıcısının resmi sitesinden güncel bilgileri doğrulamanı öneririz. Detaylar için <legal>yasal uyarı</legal> ve <disclosure>reklam açıklaması</disclosure>.",
+      "lastChecked": "Son kontrol:"
+    }
+  },
+  "social": {
+    "listLabel": "Sosyal medya hesaplarımız",
+    "soonSuffix": "(yakında)",
+    "titleSoonSuffix": "— yakında"
+  },
+  "a11y": {
+    "skipToContent": "Ana içeriğe geç",
+    "langGroup": "Dil / Language"
+  },
+  "og": {
+    "alt": "vpncompaire — Bağımsız VPN Karşılaştırmaları",
+    "h1": "Bağımsız VPN Karşılaştırmaları",
+    "subtitle": "Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız değerlendirmeler.",
+    "trust1": "10 VPN test edildi",
+    "trust2": "Bağımsız denetimler",
+    "trust3": "Şeffaf metodoloji"
   }
 }

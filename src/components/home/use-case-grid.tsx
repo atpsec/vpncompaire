@@ -17,11 +17,17 @@ const useCases = [
   { slug: "oyun", key: "gaming", Icon: Gamepad2, tone: "brand" },
   { slug: "seyahat", key: "travel", Icon: Plane, tone: "accent" },
   { slug: "turkiye", key: "turkey", Icon: Flag, tone: "brand" },
-  { slug: "yurt-disindaki-turkler", key: "expats", Icon: Globe2, tone: "accent" },
+  {
+    slug: "yurt-disindaki-turkler",
+    key: "expats",
+    Icon: Globe2,
+    tone: "accent",
+  },
 ] as const;
 
 export function UseCaseGrid() {
   const t = useTranslations("home.useCase");
+  const blockT = useTranslations("homeBlocks.useCaseGrid");
 
   return (
     <section className="py-16 sm:py-20 bg-surface-subtle/40 border-y border-border">
@@ -54,7 +60,7 @@ export function UseCaseGrid() {
                 {t(key)}
               </div>
               <div className="mt-1 flex items-center text-xs text-ink-muted group-hover:text-brand-700">
-                İncele <ArrowRight className="ml-1 size-3" />
+                {blockT("review")} <ArrowRight className="ml-1 size-3" />
               </div>
             </Link>
           ))}

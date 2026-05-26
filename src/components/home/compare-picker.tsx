@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   ArrowRight,
   Award,
@@ -15,7 +16,6 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
@@ -25,6 +25,7 @@ const MIN = 2;
 const MAX = 4;
 
 export function ComparePicker() {
+  const t = useTranslations("homeBlocks.comparePicker");
   const all = rankedProducts();
   const [selected, setSelected] = useState<string[]>(() =>
     all.slice(0, 2).map((p) => p.slug),
@@ -44,7 +45,10 @@ export function ComparePicker() {
   const clear = () => setSelected(all.slice(0, 2).map((p) => p.slug));
 
   const compared = useMemo(
-    () => selected.map((slug) => all.find((p) => p.slug === slug)).filter((p): p is Product => Boolean(p)),
+    () =>
+      selected
+        .map((slug) => all.find((p) => p.slug === slug))
+        .filter((p): p is Product => Boolean(p)),
     [selected, all],
   );
 
@@ -53,25 +57,21 @@ export function ComparePicker() {
       <Container>
         <div className="mb-8 max-w-2xl">
           <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-700">
-            Karşılaştırma aracı
+            {t("kicker")}
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-ink-strong">
-            Kendi karşılaştırmanı yap
+            {t("h2")}
           </h2>
-          <p className="mt-3 text-ink-muted">
-            En az 2, en fazla 4 VPN seç — özellikler, fiyatlar ve denetimler
-            yan yana çıksın.
-          </p>
+          <p className="mt-3 text-ink-muted">{t("intro")}</p>
         </div>
 
-        {/* Picker grid */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
           <p className="text-sm text-ink-muted">
-            Seçili:{" "}
+            {t("selectedLabel")}{" "}
             <span className="font-semibold text-ink-strong tabular-nums">
               {selected.length}
             </span>
-            <span className="text-ink-faint"> / {MAX}</span>
+            <span className="text-ink-faint"> {t("ofMax", { max: MAX })}</span>
           </p>
           {selected.length > MIN && (
             <button
@@ -79,7 +79,7 @@ export function ComparePicker() {
               onClick={clear}
               className="text-xs text-ink-muted hover:text-ink underline-offset-2 hover:underline"
             >
-              Sıfırla
+              {t("reset")}
             </button>
           )}
         </div>
@@ -100,7 +100,8 @@ export function ComparePicker() {
                     isSelected
                       ? "border-brand-500 ring-2 ring-brand-200 shadow-sm"
                       : "border-border hover:border-brand-300",
-                    isDisabled && "opacity-40 cursor-not-allowed hover:border-border",
+                    isDisabled &&
+                      "opacity-40 cursor-not-allowed hover:border-border",
                   )}
                 >
                   <span className="relative">
@@ -120,7 +121,6 @@ export function ComparePicker() {
           })}
         </ul>
 
-        {/* Side-by-side comparison */}
         <CompareTable products={compared} />
       </Container>
     </section>
@@ -128,10 +128,11 @@ export function ComparePicker() {
 }
 
 function CompareTable({ products }: { products: Product[] }) {
+  const t = useTranslations("homeBlocks.comparePicker");
   if (products.length < MIN) {
     return (
       <Card className="p-6 text-center text-sm text-ink-muted">
-        Karşılaştırma için en az {MIN} VPN seç.
+        {t("needAtLeast", { min: MIN })}
       </Card>
     );
   }
@@ -153,6 +154,7 @@ function CompareTable({ products }: { products: Product[] }) {
 }
 
 function ProductColumn({ product }: { product: Product }) {
+  const t = useTranslations("homeBlocks.comparePicker");
   const bestPlan =
     product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
   const monthlyPlan = product.plans.find((pl) => pl.durationMonths === 1);
@@ -182,44 +184,44 @@ function ProductColumn({ product }: { product: Product }) {
       <dl className="p-4 space-y-3 text-xs flex-1">
         <Row
           icon={<Award className="size-3.5" />}
-          label="Bağımsız denetim"
+          label={t("rows.audit")}
           value={product.highlights.audits ?? "—"}
           missing={!product.highlights.audits}
         />
         <Row
           icon={<Server className="size-3.5" />}
-          label="Sunucular"
+          label={t("rows.servers")}
           value={product.highlights.servers ?? "—"}
         />
         <Row
           icon={<Smartphone className="size-3.5" />}
-          label="Cihaz"
+          label={t("rows.devices")}
           value={product.highlights.devices ?? "—"}
         />
         <Row
           icon={<MapPin className="size-3.5" />}
-          label="Yargı yetkisi"
+          label={t("rows.jurisdiction")}
           value={product.highlights.jurisdiction ?? "—"}
         />
         <Row
           icon={<Check className="size-3.5" />}
-          label="Para iade"
+          label={t("rows.moneyBack")}
           value={
             product.highlights.moneyBackDays
-              ? `${product.highlights.moneyBackDays} gün`
+              ? `${product.highlights.moneyBackDays} ${t("rows.days")}`
               : "—"
           }
         />
         <Row
           icon={<Check className="size-3.5" />}
-          label="Affiliate"
-          value={product.hasAffiliate ? "Var" : "Yok (tarafsız)"}
+          label={t("rows.affiliate")}
+          value={product.hasAffiliate ? t("rows.yes") : t("rows.no")}
         />
       </dl>
 
       <div className="p-4 border-t border-border bg-surface-subtle/30 rounded-b-xl">
         <div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">
-          En iyi değer
+          {t("bestValueLabel")}
         </div>
         <div className="mt-1 text-sm font-medium text-ink-strong line-clamp-1">
           {bestPlan.name}
@@ -228,11 +230,11 @@ function ProductColumn({ product }: { product: Product }) {
           <span className="text-xl font-bold text-ink-strong tabular-nums">
             ${bestPlan.monthlyPriceUsd.toFixed(2)}
           </span>
-          <span className="text-xs text-ink-subtle">/ay</span>
+          <span className="text-xs text-ink-subtle">{t("perMonth")}</span>
         </div>
         {monthlyPlan && monthlyPlan !== bestPlan && (
           <div className="mt-1 text-[11px] text-ink-faint">
-            Aylık: ${monthlyPlan.monthlyPriceUsd.toFixed(2)}
+            {t("monthlyLabel")} ${monthlyPlan.monthlyPriceUsd.toFixed(2)}
           </div>
         )}
         <div className="mt-3 flex flex-col gap-1.5">
@@ -250,7 +252,7 @@ function ProductColumn({ product }: { product: Product }) {
               rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
               target={product.hasAffiliate ? "_self" : "_blank"}
             >
-              {product.hasAffiliate ? "Fırsata git" : "Resmi siteye git"}
+              {product.hasAffiliate ? t("ctaDeal") : t("ctaOfficial")}
               {product.hasAffiliate ? (
                 <ArrowRight className="size-3.5" />
               ) : (
@@ -259,7 +261,7 @@ function ProductColumn({ product }: { product: Product }) {
             </a>
           </Button>
           <Button asChild variant="ghost" size="sm">
-            <Link href={`/inceleme/${product.slug}`}>İncelemeyi oku</Link>
+            <Link href={`/inceleme/${product.slug}`}>{t("readReview")}</Link>
           </Button>
         </div>
       </div>

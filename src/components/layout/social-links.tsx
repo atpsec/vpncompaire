@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import {
   siX,
   siFacebook,
@@ -107,17 +108,18 @@ const VARIANT_STYLES: Record<
 
 export function SocialLinks({ variant = "footer", className }: Props) {
   const style = VARIANT_STYLES[variant];
+  const t = useTranslations("social");
 
   return (
-    <ul className={cn(style.wrapper, className)} aria-label="Sosyal medya hesaplarımız">
+    <ul className={cn(style.wrapper, className)} aria-label={t("listLabel")}>
       {SOCIALS.filter((s) => s.url).map((s) => (
         <li key={s.name}>
           <a
             href={s.url}
             target="_blank"
             rel="noopener noreferrer me"
-            aria-label={`${s.name} (yakında)`}
-            title={`${s.name} — yakında`}
+            aria-label={`${s.name} ${t("soonSuffix")}`}
+            title={`${s.name} ${t("titleSoonSuffix")}`}
             className={cn(
               "group inline-flex items-center justify-center transition-colors",
               style.item,

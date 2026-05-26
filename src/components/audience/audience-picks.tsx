@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { ArrowRight, Check, Crown, Medal, Trophy } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
@@ -7,9 +8,7 @@ import { getProduct } from "@/data/products";
 
 type Pick = {
   slug: string;
-  /** Why this VPN is the right pick for *this* audience */
   reason: string;
-  /** Optional override for the headline label, e.g. "En İyi Genel" */
   label?: string;
 };
 
@@ -20,12 +19,13 @@ type Props = {
 };
 
 const RANK_META = [
-  { icon: Crown, label: "1. Tercih", color: "text-accent-600" },
-  { icon: Trophy, label: "2. Tercih", color: "text-brand-600" },
-  { icon: Medal, label: "3. Tercih", color: "text-ink-muted" },
+  { icon: Crown, labelKey: "rank1" as const, color: "text-accent-600" },
+  { icon: Trophy, labelKey: "rank2" as const, color: "text-brand-600" },
+  { icon: Medal, labelKey: "rank3" as const, color: "text-ink-muted" },
 ];
 
 export function AudiencePicks({ picks, heading, subheading }: Props) {
+  const t = useTranslations("audience");
   return (
     <section className="mt-12">
       {heading ? (
@@ -59,7 +59,7 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
 
               <div className="flex items-center gap-2 text-xs font-medium">
                 <RankIcon className={`size-4 ${Rank.color}`} />
-                <span className={Rank.color}>{Rank.label}</span>
+                <span className={Rank.color}>{t(Rank.labelKey)}</span>
               </div>
 
               <div className="mt-3 flex items-center gap-3">
@@ -75,29 +75,39 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
               </div>
 
               <p className="mt-4 text-sm text-ink leading-relaxed">
-                <span className="font-medium text-ink-strong">Neden:</span>{" "}
+                <span className="font-medium text-ink-strong">
+                  {t("reasonLabel")}
+                </span>{" "}
                 {pick.reason}
               </p>
 
               <ul className="mt-4 space-y-1.5 text-xs text-ink-muted">
                 <li className="flex items-start gap-1.5">
                   <Check className="size-3.5 text-success-600 shrink-0 mt-0.5" />
-                  <span>{product.highlights.audits ?? "Bağımsız test"}</span>
-                </li>
-                <li className="flex items-start gap-1.5">
-                  <Check className="size-3.5 text-success-600 shrink-0 mt-0.5" />
-                  <span>{product.highlights.devices ?? "Çoklu cihaz"}</span>
+                  <span>
+                    {product.highlights.audits ?? t("fallbackAudit")}
+                  </span>
                 </li>
                 <li className="flex items-start gap-1.5">
                   <Check className="size-3.5 text-success-600 shrink-0 mt-0.5" />
                   <span>
-                    {product.highlights.moneyBackDays ?? 30} gün para iade
+                    {product.highlights.devices ?? t("fallbackDevices")}
+                  </span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <Check className="size-3.5 text-success-600 shrink-0 mt-0.5" />
+                  <span>
+                    {t("moneyBack", {
+                      days: product.highlights.moneyBackDays ?? 30,
+                    })}
                   </span>
                 </li>
               </ul>
 
               <div className="mt-5 flex items-baseline gap-1.5 text-ink-strong">
-                <span className="text-xs text-ink-muted">Aylık</span>
+                <span className="text-xs text-ink-muted">
+                  {t("monthlyLabel")}
+                </span>
                 <span className="text-lg font-bold">
                   ${bestPlan.monthlyPriceUsd.toFixed(2)}
                 </span>
@@ -109,13 +119,13 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
               <div className="mt-auto pt-5 flex flex-col gap-2">
                 <Button asChild variant="primary" size="sm">
                   <Link href={`/go/${product.slug}`}>
-                    {product.brand} fırsatını gör
+                    {t("ctaDeal", { brand: product.brand })}
                     <ArrowRight className="size-3.5" />
                   </Link>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
                   <Link href={`/inceleme/${product.slug}`}>
-                    İncelemeyi oku
+                    {t("readReview")}
                   </Link>
                 </Button>
               </div>

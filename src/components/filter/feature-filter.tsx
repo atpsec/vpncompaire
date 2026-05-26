@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Check, Filter, RotateCcw, X } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
@@ -17,6 +18,7 @@ import {
 const FILTER_KEYS = Object.keys(FILTER_LABELS) as FilterKey[];
 
 export function FeatureFilter() {
+  const t = useTranslations("filter");
   const [active, setActive] = useState<Set<FilterKey>>(new Set());
 
   function toggle(key: FilterKey) {
@@ -48,7 +50,7 @@ export function FeatureFilter() {
     <div className="mt-8">
       <Card className="p-6">
         <div className="flex items-center gap-2 text-sm font-medium text-brand-700">
-          <Filter className="size-4" /> Özellik filtreleri
+          <Filter className="size-4" /> {t("panelLabel")}
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
           {FILTER_KEYS.map((key) => {
@@ -81,21 +83,25 @@ export function FeatureFilter() {
             onClick={reset}
             className="mt-4 inline-flex items-center gap-1 text-xs text-ink-muted hover:text-ink"
           >
-            <RotateCcw className="size-3" /> Filtreleri sıfırla (
-            {active.size} aktif)
+            <RotateCcw className="size-3" />{" "}
+            {t("resetWithCount", { count: active.size })}
           </button>
         ) : null}
       </Card>
 
       <div className="mt-6 flex items-center justify-between text-sm text-ink-muted">
         <p>
-          <strong className="text-ink-strong">{matches.length}</strong> VPN
-          eşleşti
+          {t.rich("matchCount", {
+            count: matches.length,
+            strong: (chunks) => (
+              <strong className="text-ink-strong">{chunks}</strong>
+            ),
+          })}
         </p>
         {active.size > 0 ? (
-          <p>Filtreler: {active.size}</p>
+          <p>{t("activeCount", { count: active.size })}</p>
         ) : (
-          <p>Tüm 10 VPN gösteriliyor</p>
+          <p>{t("allShown")}</p>
         )}
       </div>
 
@@ -140,11 +146,11 @@ export function FeatureFilter() {
               <div className="mt-auto pt-4 flex flex-col gap-2">
                 <Button asChild variant="primary" size="sm">
                   <Link href={`/inceleme/${product.slug}`}>
-                    İncelemeyi oku
+                    {t("readReview")}
                   </Link>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
-                  <Link href={`/go/${product.slug}`}>Fırsata git</Link>
+                  <Link href={`/go/${product.slug}`}>{t("getDeal")}</Link>
                 </Button>
               </div>
             </Card>
@@ -155,13 +161,15 @@ export function FeatureFilter() {
       {matches.length === 0 ? (
         <Card className="mt-6 p-8 text-center">
           <X className="mx-auto size-8 text-ink-muted" />
-          <p className="mt-3 font-medium text-ink-strong">Eşleşen VPN yok</p>
-          <p className="mt-1 text-sm text-ink-muted">
-            Seçtiğin tüm kriterleri karşılayan bir VPN bulamadık. Filtreleri
-            azaltmayı dene.
-          </p>
-          <Button variant="secondary" size="sm" onClick={reset} className="mt-4">
-            <RotateCcw className="size-3.5" /> Filtreleri sıfırla
+          <p className="mt-3 font-medium text-ink-strong">{t("emptyTitle")}</p>
+          <p className="mt-1 text-sm text-ink-muted">{t("emptyBody")}</p>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={reset}
+            className="mt-4"
+          >
+            <RotateCcw className="size-3.5" /> {t("emptyCta")}
           </Button>
         </Card>
       ) : null}
