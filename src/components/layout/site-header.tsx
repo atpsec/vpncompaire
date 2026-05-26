@@ -7,6 +7,7 @@ import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SocialLinks } from "@/components/layout/social-links";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 const navItems = [
   { href: "/en-iyi-vpn", labelKey: "reviews" },
@@ -49,6 +50,7 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
+            <LanguageSwitcher />
             <SocialLinks variant="header" />
             <span aria-hidden="true" className="h-5 w-px bg-border" />
             <Button asChild variant="primary" size="sm">
@@ -90,6 +92,12 @@ export function SiteHeader() {
                   En İyi VPN'leri Gör
                 </Link>
               </Button>
+              <div className="px-3 mt-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
+                  Dil / Language
+                </p>
+                <LanguageSwitcher className="mt-2" />
+              </div>
               <div className="px-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
                   Bizi takip et

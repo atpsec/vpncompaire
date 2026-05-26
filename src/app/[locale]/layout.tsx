@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipToContent } from "@/components/layout/skip-to-content";
 import { PlausibleAnalytics } from "@/components/analytics/plausible";
+import { TranslationPendingBanner } from "@/components/layout/translation-pending-banner";
 import type { Locale } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -32,6 +33,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <PlausibleAnalytics />
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
+        <TranslationPendingBanner />
         <main id="main-content" className="flex-1">
           {children}
         </main>

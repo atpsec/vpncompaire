@@ -103,17 +103,39 @@ export function GET() {
     ...toolPaths,
   ];
 
+  // Build hreflang alternates per URL. TR is default (no prefix); EN at /en
+  function altLinks(path: string): string {
+    const trUrl = `${siteConfig.url}${path}`;
+    const enUrl = `${siteConfig.url}/en${path === "/" ? "" : path}`;
+    return `    <xhtml:link rel="alternate" hreflang="tr" href="${trUrl}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${trUrl}"/>`;
+  }
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${all
-  .map(
-    (u) => `  <url>
-    <loc>${siteConfig.url}${u.path}</loc>
+  .flatMap((u) => {
+    const trUrl = `${siteConfig.url}${u.path}`;
+    const enUrl = `${siteConfig.url}/en${u.path === "/" ? "" : u.path}`;
+    return [
+      `  <url>
+    <loc>${trUrl}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority.toFixed(2)}</priority>
+${altLinks(u.path)}
   </url>`,
-  )
+      `  <url>
+    <loc>${enUrl}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${(u.priority * 0.9).toFixed(2)}</priority>
+${altLinks(u.path)}
+  </url>`,
+    ];
+  })
   .join("\n")}
 </urlset>`;
 

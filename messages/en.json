@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "siteName": "vpncompaire",
+    "defaultTitle": "vpncompaire — Independent VPN Comparisons (2026)",
+    "defaultDescription": "Independent, methodology-driven VPN reviews and comparisons. Find the right VPN for privacy, streaming, travel and everyday security."
+  },
+  "nav": {
+    "home": "Home",
+    "reviews": "Reviews",
+    "compare": "Compare",
+    "bestFor": "Best for",
+    "quiz": "Quiz",
+    "calculator": "Calculator",
+    "glossary": "Glossary",
+    "filter": "Feature filter",
+    "devices": "Devices",
+    "guides": "Guides",
+    "methodology": "Methodology",
+    "about": "About",
+    "search": "Search",
+    "menu": "Menu",
+    "closeMenu": "Close menu"
+  },
+  "common": {
+    "readReview": "Read review",
+    "getDeal": "Get deal",
+    "tryNow": "Try now",
+    "visitSite": "Visit site",
+    "viewAll": "View all",
+    "lastUpdated": "Last updated",
+    "score": "Score",
+    "from": "from",
+    "perMonth": "month",
+    "pros": "Pros",
+    "cons": "Cons",
+    "verifiedAudit": "Independent audit",
+    "noAffiliate": "No affiliate — neutral pick"
+  },
+  "disclosure": {
+    "banner": "Affiliate disclosure: We may earn a commission when you purchase through links on this page. This does not change the price you pay. Our recommendations are based on research, feature analysis, privacy policies, audits, pricing and usability.",
+    "short": "Some links on this page are affiliate links.",
+    "learnMore": "Learn more"
+  },
+  "home": {
+    "hero": {
+      "h1": "Volunteer, independent VPN comparisons",
+      "subtitle": "VPNs evaluated with an independent methodology for privacy, streaming, travel and everyday security.",
+      "ctaPrimary": "See the top 10 VPNs",
+      "ctaSecondary": "How we test",
+      "trust": {
+        "tested": "VPNs tested",
+        "audits": "independent audits reviewed",
+        "updated": "Last updated"
+      }
+    },
+    "topVPNs": {
+      "title": "The top 10 VPNs of 2026",
+      "subtitle": "Ranked by independent audits, real-world speed tests and transparent pricing analysis."
+    },
+    "useCase": {
+      "title": "Find a VPN by use case",
+      "subtitle": "Pick the VPN that fits your needs.",
+      "privacy": "Privacy",
+      "streaming": "Streaming",
+      "gaming": "Gaming",
+      "travel": "Travel",
+      "turkey": "For Turkey",
+      "expats": "Expats from Turkey"
+    },
+    "comparisons": {
+      "title": "Head-to-head comparisons"
+    },
+    "methodology": {
+      "title": "How we test",
+      "body": "Every VPN on this site is evaluated against the same six criteria: privacy policy and jurisdiction, independent audits, speed, streaming compatibility, pricing transparency and ease of use. Affiliate commissions do not influence the ranking.",
+      "cta": "Read the full methodology"
+    },
+    "guides": {
+      "title": "Latest guides",
+      "subtitle": "What you need to know about VPNs."
+    },
+    "faq": {
+      "title": "Frequently asked questions"
+    }
+  },
+  "footer": {
+    "tagline": "A volunteer VPN review project. Transparent methodology, independent assessments.",
+    "sections": {
+      "site": "Site",
+      "tools": "Tools",
+      "legal": "Legal",
+      "follow": "Follow"
+    },
+    "links": {
+      "about": "About",
+      "methodology": "Methodology",
+      "contact": "Contact",
+      "disclosure": "Advertising disclosure",
+      "privacy": "Privacy policy",
+      "terms": "Terms of use",
+      "sitemap": "Sitemap"
+    },
+    "copyright": "All rights reserved.",
+    "disclosureTitle": "Affiliate disclosure.",
+    "madeWith": "Volunteer review project · Not an official entity"
+  },
+  "cookies": {
+    "title": "Cookie preference",
+    "body": "This site uses only a privacy-friendly, cookieless analytics tool (Plausible). We do not collect personal data.",
+    "accept": "OK"
+  }
+}
