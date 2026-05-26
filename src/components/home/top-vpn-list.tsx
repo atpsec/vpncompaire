@@ -46,10 +46,7 @@ function PremiumRow({
 }) {
   return (
     <li className="group transition-colors hover:bg-surface-muted/40">
-      <Link
-        href={`/inceleme/${product.slug}`}
-        className="block px-5 sm:px-7 py-6"
-      >
+      <div className="px-5 sm:px-7 py-6">
         <div className="grid grid-cols-[auto_1fr_auto] gap-4 sm:gap-6 items-center">
           <div className="flex items-center gap-4">
             <span className="text-xs uppercase tracking-[0.22em] text-ink-muted tabular-nums w-8">
@@ -60,9 +57,12 @@ function PremiumRow({
 
           <div className="min-w-0">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h3 className="text-xl font-medium text-ink-strong tracking-tight group-hover:text-brand-300 transition-colors">
+              <Link
+                href={`/inceleme/${product.slug}`}
+                className="text-xl font-medium text-ink-strong tracking-tight hover:text-brand-300 transition-colors"
+              >
                 {product.brand}
-              </h3>
+              </Link>
               <span className="text-xs text-ink-muted">
                 {product.positioning}
               </span>
@@ -108,16 +108,21 @@ function PremiumRow({
               }
               rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
               target={product.hasAffiliate ? "_self" : "_blank"}
-              onClick={(e) => e.stopPropagation()}
               className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-ink-strong px-4 py-2 text-xs font-medium text-surface-base hover:bg-brand-300 transition-colors"
             >
               {product.hasAffiliate ? tCommon("getDeal") : tCommon("visitSite")}
               <ArrowUpRight className="size-3" />
             </a>
-            <ChevronRight className="size-4 text-ink-muted group-hover:text-brand-300 transition-colors" />
+            <Link
+              href={`/inceleme/${product.slug}`}
+              aria-label={`Open ${product.brand} review`}
+              className="text-ink-muted hover:text-brand-300 transition-colors"
+            >
+              <ChevronRight className="size-4" />
+            </Link>
           </div>
         </div>
-      </Link>
+      </div>
     </li>
   );
 }
