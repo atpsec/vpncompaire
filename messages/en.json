@@ -403,5 +403,181 @@
       "checklist": "Security checklist",
       "methodology": "Our methodology"
     }
+  },
+  "errors": {
+    "notFound": {
+      "code": "404",
+      "h1": "We couldn't find that page",
+      "lede": "The page you were looking for may have moved, been removed, or never existed. The links below might help.",
+      "ctaHome": "Home",
+      "ctaReviews": "See the top VPNs",
+      "cards": {
+        "reviews": {
+          "title": "Reviews",
+          "desc": "Detailed reviews of 10 VPNs.",
+          "link": "Go to reviews →"
+        },
+        "compare": {
+          "title": "Compare",
+          "desc": "Compare VPNs side by side.",
+          "link": "Go to comparisons →"
+        },
+        "guides": {
+          "title": "Guides",
+          "desc": "What a VPN is, how to choose one, when to use it.",
+          "link": "Go to guides →"
+        }
+      }
+    },
+    "globalNotFound": {
+      "code": "404",
+      "h1": "Page not found",
+      "lede": "The page you were looking for may have moved or been removed.",
+      "cta": "Back to home"
+    },
+    "runtime": {
+      "h1": "Something went wrong",
+      "lede": "We hit a problem loading this page. You can retry, or head back to the homepage.",
+      "digest": "Error code:",
+      "retry": "Retry",
+      "home": "Back to home"
+    },
+    "global": {
+      "kicker": "ERROR",
+      "h1": "Something went wrong",
+      "lede": "You can retry the page or go back to the homepage.",
+      "digest": "Error code:",
+      "retry": "Retry",
+      "home": "Home"
+    }
+  },
+  "incelemeRedirect": {
+    "metaTitle": "Reviews"
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Get in touch with vpncompaire — editorial feedback, corrections, partnerships and legal queries.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Contact",
+    "badge": "Contact",
+    "h1": "Get in touch",
+    "lede": "For feedback, corrections and other questions, please use the address below that best fits your topic. We typically reply within 1-3 business days.",
+    "channels": {
+      "editorial": {
+        "title": "Editorial feedback",
+        "desc": "Errors in content, missing information or update suggestions."
+      },
+      "partnership": {
+        "title": "Partnership & press",
+        "desc": "Partnership requests, press queries, demo requests."
+      },
+      "legal": {
+        "title": "Legal & complaints",
+        "desc": "DMCA notices, copyright matters, legal queries."
+      }
+    },
+    "quickLinksTitle": "Quick links",
+    "quickLinks": {
+      "aboutSuffix": "— who we are and how we work",
+      "methodologySuffix": "— how we evaluate VPNs",
+      "disclosureSuffix": "— our affiliate relationships",
+      "privacySuffix": "— our personal-data practices"
+    },
+    "footer": "{site} editorial team"
+  },
+  "about": {
+    "metaTitle": "About",
+    "metaDescription": "What vpncompaire is, why it exists and how it works. A volunteer review project with editorial independence and a transparent methodology.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "About",
+    "badge": "About",
+    "h1": "What is {site}?",
+    "lede": "The VPN world is confusing: hundreds of providers, contradicting reviews, aggressive marketing. {site} started as a personal response to that mess — <strong>a volunteer review project</strong>.",
+    "explainer": {
+      "title": "What is this?",
+      "body": "{site} is not a company or institution; it has no registered legal entity. It is a public version of the notes that built up while we were comparing VPN providers for our own use. Affiliate commissions cover infrastructure costs; they do not influence the recommendations. See <disclosure>Advertising disclosure</disclosure> and <legal>Legal notice</legal> for details."
+    },
+    "approach": {
+      "h2": "Our approach",
+      "body": "We try to make it easier to find clear, independent, methodology-driven information when choosing a VPN. Our assessments come from independent audit reports, public sources and our own test observations — not marketing copy. No recommendation is a hard guarantee; the final decision is always yours."
+    },
+    "principlesH2": "Our three core principles",
+    "principles": {
+      "transparent": {
+        "title": "Transparent methodology",
+        "body": "Every VPN is scored against the same six criteria. The criteria and their weights are public."
+      },
+      "independence": {
+        "title": "Editorial independence",
+        "body": "Affiliate commissions do not influence the ranking or the assessment. We also list providers without an affiliate programme."
+      },
+      "evidence": {
+        "title": "Evidence first",
+        "body": "Saying \"good VPN\" isn't enough — independent audits, court rulings or audit reports are required."
+      }
+    },
+    "howWeTest": {
+      "h2": "How do we test?",
+      "body": "Every VPN on the site is evaluated against the same six objective criteria: privacy policy and jurisdiction, independent audits, speed, streaming compatibility, pricing transparency and ease of use. See our <methodology>methodology page</methodology> for the details."
+    },
+    "revenue": {
+      "h2": "Our revenue model",
+      "body1": "We finance this site through affiliate commissions. When you buy a VPN through a link on this page we earn a commission — the price you pay doesn't change. We explain this in detail on the <disclosure>Advertising disclosure</disclosure> page.",
+      "body2": "<strong>Important:</strong> Differences in commission do not influence the ranking. We include providers that don't run an affiliate programme (e.g. Mullvad); we don't put the highest-commission product at the top."
+    },
+    "authors": {
+      "h2": "Who writes this?",
+      "body": "{site} started as a personal project. Content is produced through volunteer contributions; there is no professional newsroom or editorial staff. The primary sources are providers' own audit reports, publicly available court documents, open-source repositories and our own observations. If you find anything wrong or missing, please let us know — we take corrections seriously."
+    },
+    "why": {
+      "h2": "Why does this site exist?",
+      "body": "Commercial VPN reviews are mostly sales-driven; \"best\" claims get repeated without sources. {site} is a reference project that started as a hobby and grew more systematic over time, written into that gap. The goal is not to give a single \"correct answer\" — it's to provide structured information so the reader can make their own call."
+    },
+    "contactSection": {
+      "h2": "Contact",
+      "body": "For feedback, correction requests or questions, visit our <contact>contact page</contact>."
+    },
+    "errorCard": {
+      "title": "Found a mistake? Missing information?",
+      "body": "We take editorial corrections seriously. Just get in touch.",
+      "cta": "Go to the contact page →"
+    },
+    "footerLinks": {
+      "methodology": "Methodology",
+      "disclosure": "Advertising disclosure",
+      "privacy": "Privacy policy"
+    }
+  },
+  "privacy": {
+    "metaTitle": "Privacy policy",
+    "metaDescription": "How vpncompaire handles your personal data — GDPR-aligned, cookieless, minimum-data principle.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Privacy policy"
+  },
+  "terms": {
+    "metaTitle": "Terms of use",
+    "metaDescription": "vpncompaire terms of use, liability limits and legal framework.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Terms of use"
+  },
+  "legalNotice": {
+    "metaTitle": "Legal Notice (Disclaimer) — Information Only",
+    "metaDescription": "vpncompaire content is informational; it provides no legal, financial or cybersecurity guarantee. Final decisions rest with the reader.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Legal notice"
+  },
+  "disclosurePage": {
+    "metaTitle": "Advertising Disclosure (Affiliate Disclosure)",
+    "metaDescription": "Transparent statement of vpncompaire's affiliate relationships, revenue model and editorial independence. FTC-aligned.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Advertising disclosure"
+  },
+  "refundPage": {
+    "metaTitle": "VPN Cancellation & Refund Guide (2026) — Step-by-Step for 10 VPNs",
+    "metaDescription": "How to cancel and request a refund from NordVPN, ExpressVPN, Surfshark and other VPN providers. Refund window, common pitfalls and step-by-step instructions.",
+    "ogTitle": "VPN Cancellation & Refund Guide",
+    "ogDescription": "Cancellation and refund steps for 10 VPNs, all on one page.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Cancellation & refund"
   }
 }

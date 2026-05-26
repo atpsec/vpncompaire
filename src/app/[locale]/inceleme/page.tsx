@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-
-export const metadata: Metadata = {
-  title: "İncelemeler",
-};
+import { getTranslations } from "next-intl/server";
+import { redirect } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string }> };
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "incelemeRedirect" });
+  return { title: t("metaTitle") };
+}
+
 export default async function Page({ params }: Props) {
-  // /inceleme → /en-iyi-vpn (tüm incelemeler tek hub'da)
-  await params;
-  redirect("/en-iyi-vpn");
+  const { locale } = await params;
+  redirect({ href: "/en-iyi-vpn", locale });
 }

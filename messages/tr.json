@@ -403,5 +403,181 @@
       "checklist": "Güvenlik kontrol listesi",
       "methodology": "Test metodolojimiz"
     }
+  },
+  "errors": {
+    "notFound": {
+      "code": "404",
+      "h1": "Aradığını bulamadık",
+      "lede": "Aradığın sayfa taşınmış, kaldırılmış veya hiç var olmamış olabilir. Aşağıdaki bağlantılar yardımcı olabilir.",
+      "ctaHome": "Ana sayfa",
+      "ctaReviews": "En iyi VPN'leri gör",
+      "cards": {
+        "reviews": {
+          "title": "İncelemeler",
+          "desc": "10 VPN'in detaylı incelemeleri.",
+          "link": "İncelemelere git →"
+        },
+        "compare": {
+          "title": "Karşılaştırma",
+          "desc": "VPN'leri yan yana karşılaştır.",
+          "link": "Karşılaştırmaya git →"
+        },
+        "guides": {
+          "title": "Rehberler",
+          "desc": "VPN nedir, nasıl seçilir, hangi durumlarda kullanılır.",
+          "link": "Rehberlere git →"
+        }
+      }
+    },
+    "globalNotFound": {
+      "code": "404",
+      "h1": "Sayfa bulunamadı",
+      "lede": "Aradığın sayfa taşınmış veya kaldırılmış olabilir.",
+      "cta": "Ana sayfaya dön"
+    },
+    "runtime": {
+      "h1": "Beklenmedik bir hata oluştu",
+      "lede": "Bu sayfayı yüklemeye çalışırken bir sorun çıktı. Sayfayı yenileyebilir veya ana sayfaya dönebilirsin.",
+      "digest": "Hata kodu:",
+      "retry": "Sayfayı yenile",
+      "home": "Ana sayfaya dön"
+    },
+    "global": {
+      "kicker": "HATA",
+      "h1": "Beklenmedik bir hata oluştu",
+      "lede": "Sayfayı yenileyebilir veya ana sayfaya dönebilirsin.",
+      "digest": "Hata kodu:",
+      "retry": "Sayfayı yenile",
+      "home": "Ana sayfa"
+    }
+  },
+  "incelemeRedirect": {
+    "metaTitle": "İncelemeler"
+  },
+  "contact": {
+    "metaTitle": "İletişim",
+    "metaDescription": "vpncompaire ile iletişime geç — editoryal geri bildirim, düzeltme talepleri, iş birlikleri ve yasal başvurular.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "İletişim",
+    "badge": "İletişim",
+    "h1": "Bize ulaş",
+    "lede": "Geri bildirim, düzeltme talepleri ve sorularınız için aşağıdaki ilgili adresleri kullanın. Genelde 1-3 iş günü içinde yanıt veriyoruz.",
+    "channels": {
+      "editorial": {
+        "title": "Editoryal geri bildirim",
+        "desc": "İçerikte hata, eksik bilgi veya güncelleme önerisi."
+      },
+      "partnership": {
+        "title": "İş birliği & basın",
+        "desc": "Partnership talepleri, basın soruları, demo talepleri."
+      },
+      "legal": {
+        "title": "Yasal & şikayet",
+        "desc": "DMCA talepleri, telif hakkı, hukuki başvurular."
+      }
+    },
+    "quickLinksTitle": "Hızlı bağlantılar",
+    "quickLinks": {
+      "aboutSuffix": "— biz kimiz, nasıl çalışıyoruz",
+      "methodologySuffix": "— VPN'leri nasıl değerlendiriyoruz",
+      "disclosureSuffix": "— affiliate ilişkilerimiz",
+      "privacySuffix": "— kişisel veri uygulamamız"
+    },
+    "footer": "{site} editör ekibi"
+  },
+  "about": {
+    "metaTitle": "Hakkımızda",
+    "metaDescription": "vpncompaire nedir, neden var, nasıl çalışır. Gönüllü inceleme projesi olarak editoryal bağımsızlık, metodoloji ve değerlendirme yaklaşımı.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Hakkımızda",
+    "badge": "Hakkımızda",
+    "h1": "{site} nedir?",
+    "lede": "VPN dünyası kafa karıştırıcı: yüzlerce sağlayıcı, çelişkili incelemeler, agresif pazarlama. {site}, bu karmaşaya karşı kişisel bir cevap olarak başlamış <strong>gönüllü bir inceleme projesidir</strong>.",
+    "explainer": {
+      "title": "Bu nedir?",
+      "body": "{site} bir şirket veya kurum değildir; ticari kayıtlı bir tüzel kişiliği yoktur. VPN sağlayıcılarını kendi ihtiyacımız için karşılaştırırken oluşan notların kamuya açılmış halidir. Affiliate komisyonu altyapı maliyetini karşılar; öneriler bunun etkisinde değildir. Detaylar için <disclosure>reklam açıklaması</disclosure> ve <legal>yasal uyarı</legal> sayfalarımıza bakabilirsin."
+    },
+    "approach": {
+      "h2": "Yaklaşımımız",
+      "body": "VPN seçerken net, bağımsız ve metodolojik bilgiye ulaşmayı kolaylaştırmaya çalışıyoruz. Pazarlama söyleminden değil, bağımsız denetim raporları, kamuya açık kaynaklar ve kendi test gözlemlerimizden beslenen değerlendirmeler yayınlıyoruz. Hiçbir öneri kesin bir garanti taşımaz; nihai karar her zaman kullanıcıya aittir."
+    },
+    "principlesH2": "Üç temel ilkemiz",
+    "principles": {
+      "transparent": {
+        "title": "Şeffaf metodoloji",
+        "body": "Her VPN aynı altı kritere göre puanlanır. Kriterler ve ağırlıklar kamuya açık."
+      },
+      "independence": {
+        "title": "Editoryal bağımsızlık",
+        "body": "Affiliate komisyonu sıralamayı veya değerlendirmeyi etkilemez. Affiliate olmayan seçenekleri de listeleriz."
+      },
+      "evidence": {
+        "title": "Kanıt önceliği",
+        "body": "\"İyi VPN\" demek yetmez — bağımsız denetim, mahkeme kararı, audit raporu gibi kanıtlar şart."
+      }
+    },
+    "howWeTest": {
+      "h2": "Nasıl test ediyoruz?",
+      "body": "Sitedeki her VPN aynı altı objektif kritere göre değerlendirilir: gizlilik politikası ve yargı yetkisi, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı ve kullanım kolaylığı. Detaylar için <methodology>metodoloji sayfamızı</methodology> oku."
+    },
+    "revenue": {
+      "h2": "Gelir modelimiz",
+      "body1": "Bu siteyi affiliate (ortaklık) komisyonlarıyla finanse ediyoruz. Sayfadaki bağlantıdan VPN aldığında biz komisyon kazanırız — ödediğin fiyat değişmez. Detayları <disclosure>Reklam Açıklaması</disclosure> sayfasında ayrıntılı açıklıyoruz.",
+      "body2": "<strong>Önemli:</strong> Komisyon farkı sıralamayı etkilemez. Affiliate programı olmayan sağlayıcıları (örn. Mullvad) sıralamaya ekleriz; en yüksek komisyon veren ürünü en üste koymak gibi bir taktik kullanmayız."
+    },
+    "authors": {
+      "h2": "Kim yazıyor?",
+      "body": "{site} kişisel bir proje olarak başlamıştır. İçerikler gönüllü katkılarla hazırlanır; profesyonel bir yayın ekibi veya editöryel kadro yapısı yoktur. Birincil kaynak olarak sağlayıcıların kendi denetim raporları, kamuya açık dava belgeleri, açık kaynak depoları ve kendi gözlemlerimiz kullanılır. Yanlış veya eksik bulduğun bir şey olursa lütfen bildir — düzeltmeleri ciddiye alıyoruz."
+    },
+    "why": {
+      "h2": "Bu site neden var?",
+      "body": "Ticari VPN incelemeleri çoğunlukla satış odaklı yazılır; \"en iyi\" iddiaları kaynak olmadan tekrarlanır. {site} bu boşluğa karşı, hobbiyim olarak başlamış ve zamanla daha sistematik hale gelmiş bir referans projedir. Amacı tek bir \"doğru cevap\" vermek değil — kullanıcının kendi kararını verebileceği yapılandırılmış bilgi sunmaktır."
+    },
+    "contactSection": {
+      "h2": "İletişim",
+      "body": "Geri bildirim, düzeltme talebi veya sorularınız için <contact>iletişim sayfamızı</contact> ziyaret edin."
+    },
+    "errorCard": {
+      "title": "Bir hata mı buldun? Eksik bilgi var mı?",
+      "body": "Editoryal düzeltmeleri ciddiye alıyoruz. Bize ulaşman yeterli.",
+      "cta": "İletişim sayfasına git →"
+    },
+    "footerLinks": {
+      "methodology": "Metodoloji",
+      "disclosure": "Reklam Açıklaması",
+      "privacy": "Gizlilik Politikası"
+    }
+  },
+  "privacy": {
+    "metaTitle": "Gizlilik Politikası",
+    "metaDescription": "vpncompaire kişisel verilerinizi nasıl işliyor — KVKK uyumlu, çerezsiz, minimum veri prensibi.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Gizlilik Politikası"
+  },
+  "terms": {
+    "metaTitle": "Kullanım Şartları",
+    "metaDescription": "vpncompaire sitesinin kullanım şartları, sorumluluk sınırları ve yasal çerçeve.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Kullanım Şartları"
+  },
+  "legalNotice": {
+    "metaTitle": "Yasal Uyarı (Disclaimer) — Bilgi Amaçlı İçerik",
+    "metaDescription": "vpncompaire içeriği bilgi amaçlıdır; hukuki, finansal veya siber güvenlik garantisi vermez. Kullanıcılar nihai kararı kendileri verir.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Yasal Uyarı"
+  },
+  "disclosurePage": {
+    "metaTitle": "Reklam Açıklaması (Affiliate Disclosure)",
+    "metaDescription": "vpncompaire affiliate (ortaklık) ilişkileri, gelir modelimiz ve editoryal bağımsızlığımız hakkında şeffaf açıklama. FTC ve Türkiye Reklam Kurulu uyumlu.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Reklam Açıklaması"
+  },
+  "refundPage": {
+    "metaTitle": "VPN İptal ve İade Rehberi (2026) — 10 VPN için Adım Adım Talimatlar",
+    "metaDescription": "NordVPN, ExpressVPN, Surfshark ve diğer VPN sağlayıcılarında abonelik iptali ve para iade süreci. İade penceresi, yaygın tuzaklar ve adım adım talimatlar.",
+    "ogTitle": "VPN İptal ve İade Rehberi",
+    "ogDescription": "10 VPN için iptal ve iade adımları, tek sayfada.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "İptal ve İade"
   }
 }

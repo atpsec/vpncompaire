@@ -16,7 +16,7 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <html lang="tr">
+    <html lang="en">
       <body
         style={{
           margin: 0,
@@ -32,7 +32,7 @@ export default function GlobalError({
       >
         <main style={{ textAlign: "center", padding: "2rem", maxWidth: 480 }}>
           <p style={{ fontSize: 14, color: "#dc2626", letterSpacing: 2 }}>
-            HATA
+            ERROR
           </p>
           <h1
             style={{
@@ -42,10 +42,10 @@ export default function GlobalError({
               marginBottom: 12,
             }}
           >
-            Beklenmedik bir hata oluştu
+            Something went wrong
           </h1>
           <p style={{ color: "#57534e", lineHeight: 1.6 }}>
-            Sayfayı yenileyebilir veya ana sayfaya dönebilirsin.
+            You can retry the page or go back to the homepage.
           </p>
           {error.digest && (
             <p
@@ -56,7 +56,7 @@ export default function GlobalError({
                 marginTop: 8,
               }}
             >
-              Hata kodu: {error.digest}
+              Error code: {error.digest}
             </p>
           )}
           <div
@@ -79,7 +79,7 @@ export default function GlobalError({
                 cursor: "pointer",
               }}
             >
-              Sayfayı yenile
+              Retry
             </button>
             <a
               href="/"
@@ -93,7 +93,7 @@ export default function GlobalError({
                 textDecoration: "none",
               }}
             >
-              Ana sayfa
+              Home
             </a>
           </div>
         </main>
