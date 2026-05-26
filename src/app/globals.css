@@ -2,77 +2,80 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Trust blue — primary brand (samimi + profesyonel) */
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
-  --color-brand-800: #1e40af;
-  --color-brand-900: #1e3a8a;
-  --color-brand-950: #172554;
+  /* === V1 EDITORIAL: muted, paper-feel, single deep accent === */
 
-  /* Warm amber accent — friendly, used sparingly */
-  --color-accent-50: #fffbeb;
-  --color-accent-100: #fef3c7;
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
+  /* Deep editorial accent — used very sparingly */
+  --color-brand-50: #f7f3ee;
+  --color-brand-100: #eee7dc;
+  --color-brand-200: #ddd1bd;
+  --color-brand-300: #c4b094;
+  --color-brand-400: #a3886a;
+  --color-brand-500: #7a5c3f;
+  --color-brand-600: #5d4225;
+  --color-brand-700: #4a3219;
+  --color-brand-800: #3a2613;
+  --color-brand-900: #2a1c0e;
+  --color-brand-950: #1a1108;
 
-  /* Success — verified / audited badges */
-  --color-success-50: #ecfdf5;
-  --color-success-100: #d1fae5;
-  --color-success-500: #10b981;
-  --color-success-600: #059669;
-  --color-success-700: #047857;
+  /* Accent — muted ochre, rarely used */
+  --color-accent-50: #faf6ed;
+  --color-accent-100: #f3ead0;
+  --color-accent-300: #d9b85e;
+  --color-accent-400: #bf9e3c;
+  --color-accent-500: #9c7f26;
+  --color-accent-600: #7a631c;
 
-  /* Danger */
-  --color-danger-500: #ef4444;
-  --color-danger-600: #dc2626;
+  /* Success — muted forest */
+  --color-success-50: #f0f3ee;
+  --color-success-100: #dde5d3;
+  --color-success-500: #4a6c39;
+  --color-success-600: #3a5527;
+  --color-success-700: #2c411d;
 
-  /* Warm neutral surfaces */
-  --color-surface-base: #fafaf9;
-  --color-surface-subtle: #f5f5f4;
-  --color-surface-muted: #e7e5e4;
-  --color-surface-strong: #d6d3d1;
+  /* Danger — muted iron-red */
+  --color-danger-500: #a83232;
+  --color-danger-600: #8a2828;
 
-  /* Warm ink (foreground) */
-  --color-ink-strong: #0c0a09;
-  --color-ink: #1c1917;
-  --color-ink-muted: #57534e;
-  --color-ink-subtle: #78716c;
-  --color-ink-faint: #a8a29e;
+  /* Paper-feel surfaces */
+  --color-surface-base: #faf7f1;
+  --color-surface-subtle: #f3eee4;
+  --color-surface-muted: #e9e1d0;
+  --color-surface-strong: #d9ceb6;
+
+  /* Deep ink */
+  --color-ink-strong: #14110d;
+  --color-ink: #2a241c;
+  --color-ink-muted: #5a5246;
+  --color-ink-subtle: #837a6a;
+  --color-ink-faint: #a89f8c;
 
   /* Semantic */
   --color-background: var(--color-surface-base);
   --color-foreground: var(--color-ink);
   --color-border: var(--color-surface-muted);
 
-  /* Typography */
+  /* Typography — editorial uses serif for display, sans for UI */
   --font-sans:
     var(--font-geist-sans), "Inter", system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif:
+    var(--font-newsreader), "Newsreader", "Times New Roman", Georgia, serif;
 
-  /* Radii — soft but not rounded */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Radii — editorial is restrained, near-square */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
 
   /* Layout */
-  --container-content: 72rem; /* 1152px — readable max */
+  --container-content: 64rem; /* narrower for editorial */
 }
 
-/* Dark mode (auto, via prefers-color-scheme) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #0c0a09;
-    --color-foreground: #fafaf9;
-    --color-border: #292524;
+    --color-background: #14110d;
+    --color-foreground: #faf7f1;
+    --color-border: #2a241c;
   }
 }
 
@@ -89,7 +92,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "cv11", "ss01", "ss03";
 }
 
 ::selection {
@@ -98,12 +100,17 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-brand-500);
+  outline: 2px solid var(--color-brand-600);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
-/* Customize prose typography for brand */
+/* Editorial display utility */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Customize prose typography — editorial */
 .prose {
   --tw-prose-body: var(--color-ink);
   --tw-prose-headings: var(--color-ink-strong);
@@ -123,6 +130,13 @@ body {
   --tw-prose-td-borders: var(--color-border);
 }
 
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
 .prose h2 {
   scroll-margin-top: 5rem;
 }
@@ -133,7 +147,7 @@ body {
 
 .prose a {
   font-weight: 500;
-  text-decoration-color: var(--color-brand-300);
+  text-decoration-color: var(--color-brand-400);
   text-underline-offset: 3px;
 }
 
@@ -141,7 +155,6 @@ body {
   text-decoration-color: var(--color-brand-600);
 }
 
-/* Reduce motion — accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
