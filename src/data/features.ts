@@ -141,45 +141,101 @@ export type FeatureFlags = {
 
 export type FilterKey = keyof FeatureFlags;
 
-export const FILTER_LABELS: Record<FilterKey, { label: string; help?: string }> = {
+import type { Locale, Localized } from "@/i18n/pick";
+
+type FilterLabel = { label: Localized<string>; help?: Localized<string> };
+
+const RAW_FILTER_LABELS: Record<FilterKey, FilterLabel> = {
   turkeyServer: {
-    label: "Türkiye sunucusu",
-    help: "BluTV, Exxen, Türk bankacılığı için.",
+    label: { tr: "Türkiye sunucusu", en: "Turkey server" },
+    help: {
+      tr: "BluTV, Exxen, Türk bankacılığı için.",
+      en: "For BluTV, Exxen and Turkish banking.",
+    },
   },
   unlimitedDevices: {
-    label: "Sınırsız cihaz",
-    help: "Tüm aile veya çok cihaz.",
+    label: { tr: "Sınırsız cihaz", en: "Unlimited devices" },
+    help: {
+      tr: "Tüm aile veya çok cihaz.",
+      en: "For the whole household or many devices.",
+    },
   },
   openSource: {
-    label: "Açık kaynak istemci",
-    help: "Bağımsız olarak denetlenebilir kod.",
+    label: { tr: "Açık kaynak istemci", en: "Open-source client" },
+    help: {
+      tr: "Bağımsız olarak denetlenebilir kod.",
+      en: "Code that can be independently audited.",
+    },
   },
   audited: {
-    label: "Bağımsız denetim",
-    help: "Deloitte, Cure53 vb. üçüncü taraf doğrulama.",
+    label: { tr: "Bağımsız denetim", en: "Independent audit" },
+    help: {
+      tr: "Deloitte, Cure53 vb. üçüncü taraf doğrulama.",
+      en: "Third-party verification (Deloitte, Cure53, etc.).",
+    },
   },
   portForwarding: {
-    label: "Port forwarding",
-    help: "P2P, oyun sunucusu, BitTorrent seeding.",
+    label: { tr: "Port forwarding", en: "Port forwarding" },
+    help: {
+      tr: "P2P, oyun sunucusu, BitTorrent seeding.",
+      en: "P2P, game-server hosting, BitTorrent seeding.",
+    },
   },
   multiHop: {
-    label: "Multi-hop",
-    help: "İki sunucudan ardışık geçiş — maks. gizlilik.",
+    label: { tr: "Multi-hop", en: "Multi-hop" },
+    help: {
+      tr: "İki sunucudan ardışık geçiş — maks. gizlilik.",
+      en: "Two hops in sequence — maximum privacy.",
+    },
   },
   obfuscation: {
-    label: "Obfuscation",
-    help: "Çin, BAE gibi kısıtlayıcı ülkelerde VPN gizleme.",
+    label: { tr: "Obfuscation", en: "Obfuscation" },
+    help: {
+      tr: "Çin, BAE gibi kısıtlayıcı ülkelerde VPN gizleme.",
+      en: "Hides VPN traffic in restrictive countries like China and UAE.",
+    },
   },
   freeTier: {
-    label: "Ücretsiz plan",
-    help: "Para vermeden sınırlı kullanım.",
+    label: { tr: "Ücretsiz plan", en: "Free plan" },
+    help: {
+      tr: "Para vermeden sınırlı kullanım.",
+      en: "Limited use without paying.",
+    },
   },
   fiveEyesFree: {
-    label: "5/9/14 Eyes dışı",
-    help: "İstihbarat ittifakı dışı yargı yetkisi.",
+    label: { tr: "5/9/14 Eyes dışı", en: "Outside 5/9/14 Eyes" },
+    help: {
+      tr: "İstihbarat ittifakı dışı yargı yetkisi.",
+      en: "Jurisdiction outside the intelligence alliances.",
+    },
   },
   p2p: {
-    label: "P2P / Torrent",
-    help: "BitTorrent ve P2P trafiğine izin verilir.",
+    label: { tr: "P2P / Torrent", en: "P2P / Torrent" },
+    help: {
+      tr: "BitTorrent ve P2P trafiğine izin verilir.",
+      en: "BitTorrent and P2P traffic is allowed.",
+    },
   },
 };
+
+function pick(field: Localized<string>, locale: Locale): string {
+  return field[locale] ?? field.tr;
+}
+
+export function getFilterLabels(
+  locale: Locale = "tr",
+): Record<FilterKey, { label: string; help?: string }> {
+  const out = {} as Record<FilterKey, { label: string; help?: string }>;
+  for (const key of Object.keys(RAW_FILTER_LABELS) as FilterKey[]) {
+    const raw = RAW_FILTER_LABELS[key];
+    out[key] = {
+      label: pick(raw.label, locale),
+      help: raw.help ? pick(raw.help, locale) : undefined,
+    };
+  }
+  return out;
+}
+
+// Backward-compat (TR)
+export const FILTER_LABELS: Record<FilterKey, { label: string; help?: string }> =
+  getFilterLabels("tr");

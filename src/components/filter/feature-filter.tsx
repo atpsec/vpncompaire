@@ -1,24 +1,26 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Check, Filter, RotateCcw, X } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
-import { products } from "@/data/products";
+import { rankedProducts } from "@/data/products";
 import {
   featureMatrix,
-  FILTER_LABELS,
+  getFilterLabels,
   type FilterKey,
 } from "@/data/features";
 
-const FILTER_KEYS = Object.keys(FILTER_LABELS) as FilterKey[];
-
 export function FeatureFilter() {
   const t = useTranslations("filter");
+  const locale = useLocale() as "tr" | "en";
+  const FILTER_LABELS = getFilterLabels(locale);
+  const FILTER_KEYS = Object.keys(FILTER_LABELS) as FilterKey[];
+  const products = rankedProducts(locale);
   const [active, setActive] = useState<Set<FilterKey>>(new Set());
 
   function toggle(key: FilterKey) {
@@ -35,8 +37,7 @@ export function FeatureFilter() {
   }
 
   const matches = useMemo(() => {
-    const ranked = [...products].sort((a, b) => a.rank - b.rank);
-    return ranked.filter((product) => {
+    return products.filter((product) => {
       const flags = featureMatrix[product.slug];
       if (!flags) return false;
       for (const key of active) {
@@ -44,7 +45,7 @@ export function FeatureFilter() {
       }
       return true;
     });
-  }, [active]);
+  }, [active, products]);
 
   return (
     <div className="mt-8">

@@ -2,12 +2,14 @@
 
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { homeFaqs } from "@/data/home-faqs";
 
 export function FAQSection() {
   const t = useTranslations("home.faq");
+  const locale = useLocale() as "tr" | "en";
+  const faqs = homeFaqs(locale);
 
   return (
     <section className="py-16 sm:py-20">
@@ -21,7 +23,7 @@ export function FAQSection() {
           collapsible
           className="mt-10 divide-y divide-border rounded-xl border border-border bg-white dark:bg-surface-subtle"
         >
-          {homeFaqs.map((f, i) => (
+          {faqs.map((f, i) => (
             <Accordion.Item key={i} value={`item-${i}`}>
               <Accordion.Header>
                 <Accordion.Trigger className="group flex w-full items-center justify-between gap-4 p-5 text-left font-medium text-ink-strong hover:bg-surface-subtle transition">

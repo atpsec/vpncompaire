@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
-import { glossary, categories } from "@/data/glossary";
+import { getGlossary, getCategories } from "@/data/glossary";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -41,6 +41,9 @@ function GlossaryPageView() {
   const t = useTranslations("glossary");
   const tNav = useTranslations("nav");
   const locale = useLocale();
+  const localeKey = locale as "tr" | "en";
+  const glossary = getGlossary(localeKey);
+  const categories = getCategories(localeKey);
 
   const definedTermSet = {
     "@context": "https://schema.org",
