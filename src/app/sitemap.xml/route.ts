@@ -38,6 +38,8 @@ const toolPaths = [
   { path: "/hesaplayici", priority: 0.85, changefreq: "weekly" },
   { path: "/sunucu-haritasi", priority: 0.8, changefreq: "weekly" },
   { path: "/sozluk", priority: 0.7, changefreq: "monthly" },
+  { path: "/iptal-ve-iade", priority: 0.8, changefreq: "monthly" },
+  { path: "/guvenlik-araclari", priority: 0.75, changefreq: "monthly" },
 ];
 
 export function GET() {

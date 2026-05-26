@@ -4,6 +4,7 @@ import {
   siInstagram,
   siYoutube,
   siTiktok,
+  siReddit,
 } from "simple-icons";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -64,6 +65,12 @@ const SOCIALS: SocialLink[] = [
     url: "https://tiktok.com/",
     icon: siTiktok,
     brandHex: "#000000",
+  },
+  {
+    name: "Reddit",
+    url: "https://reddit.com/",
+    icon: siReddit,
+    brandHex: "#FF4500",
   },
 ];
 

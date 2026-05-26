@@ -132,6 +132,22 @@ export function SiteFooter() {
                   {tNav("glossary")}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/iptal-ve-iade"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  İptal & İade
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guvenlik-araclari"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  Güvenlik araçları
+                </Link>
+              </li>
             </ul>
           </div>
 
