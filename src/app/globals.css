@@ -2,77 +2,74 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Trust blue — primary brand (samimi + profesyonel) */
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
-  --color-brand-800: #1e40af;
-  --color-brand-900: #1e3a8a;
-  --color-brand-950: #172554;
+  /* === V3 FRIENDLY: Notion/Duolingo — pastel, rounded, soft === */
 
-  /* Warm amber accent — friendly, used sparingly */
-  --color-accent-50: #fffbeb;
-  --color-accent-100: #fef3c7;
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
+  /* Brand — sky/teal pastel */
+  --color-brand-50: #ecfeff;
+  --color-brand-100: #d1f5fd;
+  --color-brand-200: #a5edfb;
+  --color-brand-300: #67dff5;
+  --color-brand-400: #2bc6ea;
+  --color-brand-500: #14a8cf;
+  --color-brand-600: #1488a8;
+  --color-brand-700: #176d88;
+  --color-brand-800: #1a596f;
+  --color-brand-900: #1c485c;
+  --color-brand-950: #0e2d3d;
 
-  /* Success — verified / audited badges */
+  /* Accent — playful pink */
+  --color-accent-50: #fdf2f8;
+  --color-accent-100: #fce7f3;
+  --color-accent-300: #f9a8d4;
+  --color-accent-400: #f472b6;
+  --color-accent-500: #ec4899;
+  --color-accent-600: #db2777;
+
+  /* Success — friendly mint */
   --color-success-50: #ecfdf5;
   --color-success-100: #d1fae5;
   --color-success-500: #10b981;
   --color-success-600: #059669;
   --color-success-700: #047857;
 
-  /* Danger */
-  --color-danger-500: #ef4444;
-  --color-danger-600: #dc2626;
+  --color-danger-500: #f87171;
+  --color-danger-600: #ef4444;
 
-  /* Warm neutral surfaces */
-  --color-surface-base: #fafaf9;
-  --color-surface-subtle: #f5f5f4;
-  --color-surface-muted: #e7e5e4;
-  --color-surface-strong: #d6d3d1;
+  /* Soft, slightly warm surfaces */
+  --color-surface-base: #fffdfa;
+  --color-surface-subtle: #fef6f3;
+  --color-surface-muted: #f4ebe8;
+  --color-surface-strong: #e6dcd8;
 
-  /* Warm ink (foreground) */
-  --color-ink-strong: #0c0a09;
-  --color-ink: #1c1917;
-  --color-ink-muted: #57534e;
-  --color-ink-subtle: #78716c;
-  --color-ink-faint: #a8a29e;
+  /* Soft ink */
+  --color-ink-strong: #1a1814;
+  --color-ink: #2e2a26;
+  --color-ink-muted: #6b6259;
+  --color-ink-subtle: #95897d;
+  --color-ink-faint: #c1b6ad;
 
-  /* Semantic */
   --color-background: var(--color-surface-base);
   --color-foreground: var(--color-ink);
   --color-border: var(--color-surface-muted);
 
-  /* Typography */
   --font-sans:
-    var(--font-geist-sans), "Inter", system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+    var(--font-nunito), "Nunito", var(--font-geist-sans), system-ui,
+    -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  /* Radii — soft but not rounded */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Big rounded — friendly */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
 
-  /* Layout */
-  --container-content: 72rem; /* 1152px — readable max */
+  --container-content: 72rem;
 }
 
-/* Dark mode (auto, via prefers-color-scheme) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #0c0a09;
-    --color-foreground: #fafaf9;
-    --color-border: #292524;
+    --color-background: #1a1814;
+    --color-foreground: #fffdfa;
+    --color-border: #2e2a26;
   }
 }
 
@@ -89,21 +86,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "cv11", "ss01", "ss03";
+  background-image:
+    radial-gradient(ellipse 800px 500px at 0% 0%, rgb(209 245 253 / 0.4), transparent 50%),
+    radial-gradient(ellipse 700px 500px at 100% 30%, rgb(252 231 243 / 0.35), transparent 55%);
+  background-attachment: fixed;
 }
 
 ::selection {
-  background: var(--color-brand-100);
-  color: var(--color-brand-900);
+  background: var(--color-accent-100);
+  color: var(--color-accent-600);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-brand-500);
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 3px solid var(--color-brand-300);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
 }
 
-/* Customize prose typography for brand */
 .prose {
   --tw-prose-body: var(--color-ink);
   --tw-prose-headings: var(--color-ink-strong);
@@ -111,10 +110,10 @@ body {
   --tw-prose-links: var(--color-brand-700);
   --tw-prose-bold: var(--color-ink-strong);
   --tw-prose-counters: var(--color-ink-muted);
-  --tw-prose-bullets: var(--color-brand-500);
+  --tw-prose-bullets: var(--color-accent-500);
   --tw-prose-hr: var(--color-border);
   --tw-prose-quotes: var(--color-ink);
-  --tw-prose-quote-borders: var(--color-brand-300);
+  --tw-prose-quote-borders: var(--color-accent-300);
   --tw-prose-captions: var(--color-ink-subtle);
   --tw-prose-code: var(--color-ink-strong);
   --tw-prose-pre-code: var(--color-surface-base);
@@ -123,25 +122,6 @@ body {
   --tw-prose-td-borders: var(--color-border);
 }
 
-.prose h2 {
-  scroll-margin-top: 5rem;
-}
-
-.prose h3 {
-  scroll-margin-top: 5rem;
-}
-
-.prose a {
-  font-weight: 500;
-  text-decoration-color: var(--color-brand-300);
-  text-underline-offset: 3px;
-}
-
-.prose a:hover {
-  text-decoration-color: var(--color-brand-600);
-}
-
-/* Reduce motion — accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

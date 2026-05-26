@@ -1,32 +1,41 @@
-import { ArrowRight, Crown, Trophy, Medal } from "lucide-react";
+import { ArrowRight, Sparkles, Star } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
 
+const TONES = ["brand", "accent", "brand"] as const;
+const EMOJIS = ["🥇", "🥈", "🥉"];
+
 export function TopThreePodium() {
   const top = rankedProducts().slice(0, 3);
   return (
     <section
-      aria-label="İlk üç seçim"
-      className="relative -mt-2 sm:-mt-4 pb-8 sm:pb-12"
+      aria-label="Our favourite three"
+      className="relative"
     >
       <Container>
-        <div
-          className="-mx-4 px-4 overflow-x-auto sm:mx-0 sm:px-0 sm:overflow-visible snap-x snap-mandatory scroll-pl-4"
-          style={{ scrollbarWidth: "none" }}
-        >
-          <ul className="flex gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
+        <div className="py-10 sm:py-14">
+          <div className="text-center mb-8">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700">
+              <Sparkles className="size-3.5" /> Our favourites
+            </span>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight text-ink-strong">
+              The three we love most
+            </h2>
+          </div>
+
+          <ul className="grid gap-4 sm:grid-cols-3 sm:gap-5">
             {top.map((p, i) => (
-              <li
+              <PodiumBubble
                 key={p.slug}
-                className="snap-start shrink-0 w-[78%] min-w-[280px] sm:w-auto sm:min-w-0"
-              >
-                <PodiumCard product={p} rank={i + 1} />
-              </li>
+                product={p}
+                rank={i + 1}
+                tone={TONES[i]}
+                emoji={EMOJIS[i]}
+              />
             ))}
           </ul>
         </div>
@@ -35,119 +44,82 @@ export function TopThreePodium() {
   );
 }
 
-function PodiumCard({ product, rank }: { product: Product; rank: number }) {
+function PodiumBubble({
+  product,
+  rank,
+  tone,
+  emoji,
+}: {
+  product: Product;
+  rank: number;
+  tone: "brand" | "accent";
+  emoji: string;
+}) {
   const isWinner = rank === 1;
   const bestPlan =
     product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
 
   return (
-    <article
+    <li
       className={cn(
-        "relative h-full overflow-hidden rounded-2xl border bg-white shadow-sm",
+        "rounded-3xl border-2 p-5 sm:p-6 transition-all hover:-translate-y-1",
         isWinner
-          ? "border-brand-300 shadow-md ring-1 ring-brand-200/50"
-          : "border-border",
+          ? "bg-gradient-to-br from-brand-100 to-accent-50 border-brand-200 shadow-[0_8px_0_var(--color-brand-200)] hover:shadow-[0_4px_0_var(--color-brand-200)]"
+          : tone === "accent"
+            ? "bg-accent-50/60 border-accent-100 shadow-[0_8px_0_var(--color-accent-100)] hover:shadow-[0_4px_0_var(--color-accent-100)]"
+            : "bg-brand-50/60 border-brand-100 shadow-[0_8px_0_var(--color-brand-100)] hover:shadow-[0_4px_0_var(--color-brand-100)]",
       )}
     >
-      {isWinner && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-accent-500"
-        />
-      )}
-      <div
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl",
-          isWinner ? "bg-brand-100/50" : "bg-surface-subtle",
-        )}
-      />
-
-      <div className="relative p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <RankBadge rank={rank} />
-          <div className="text-right">
-            <div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">
-              Puan
-            </div>
-            <div className="text-2xl font-bold text-ink-strong tabular-nums">
-              {product.score.toFixed(1)}
-            </div>
-          </div>
-        </div>
-
-        {/* BIG logo — main visual anchor */}
-        <div className="mt-4 flex justify-center">
-          <VPNLogo
-            slug={product.slug}
-            size={96}
-            className="drop-shadow-md"
-          />
-        </div>
-
-        <div className="mt-4 text-center">
-          <h3 className="text-xl font-bold text-ink-strong tracking-tight">
-            {product.brand}
-          </h3>
-          <p className="mt-1 text-xs text-ink-subtle">{product.positioning}</p>
-        </div>
-
-        <div className="mt-4 flex items-baseline justify-center gap-1">
-          <span className="text-2xl font-bold text-ink-strong tabular-nums">
-            ${bestPlan.monthlyPriceUsd.toFixed(2)}
-          </span>
-          <span className="text-xs text-ink-subtle">/ay başlangıç</span>
-        </div>
-
-        <div className="mt-5 flex flex-col gap-2">
-          <Button
-            asChild
-            variant={product.hasAffiliate ? "primary" : "secondary"}
-            size="md"
-            className="w-full"
-          >
-            <a
-              href={
-                product.hasAffiliate
-                  ? affiliatePath(product.slug)
-                  : product.pricingUrl
-              }
-              rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
-              target={product.hasAffiliate ? "_self" : "_blank"}
-            >
-              {product.hasAffiliate ? "Fırsata git" : "Resmi siteye git"}
-              <ArrowRight className="size-4" />
-            </a>
-          </Button>
-          <Button asChild variant="ghost" size="sm" className="w-full">
-            <Link href={`/inceleme/${product.slug}`}>
-              İncelemeyi oku
-            </Link>
-          </Button>
+      <div className="flex items-start justify-between">
+        <span className="text-3xl">{emoji}</span>
+        <div className="flex items-center gap-1 rounded-full bg-background px-2.5 py-1 text-xs font-bold text-ink-strong">
+          <Star className="size-3 fill-accent-500 text-accent-500" />
+          <span className="tabular-nums">{product.score.toFixed(1)}</span>
         </div>
       </div>
-    </article>
-  );
-}
 
-function RankBadge({ rank }: { rank: number }) {
-  if (rank === 1) {
-    return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow">
-        <Crown className="size-3" /> #1 Editör seçimi
-      </span>
-    );
-  }
-  if (rank === 2) {
-    return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-strong/40 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-ink-strong">
-        <Trophy className="size-3" /> #2
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-subtle px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-ink-strong">
-      <Medal className="size-3" /> #3
-    </span>
+      <div className="mt-4 flex items-center gap-3">
+        <VPNLogo slug={product.slug} size={56} />
+        <div>
+          <h3 className="text-xl font-extrabold text-ink-strong">
+            {product.brand}
+          </h3>
+          <p className="text-sm text-ink-muted">{product.positioning}</p>
+        </div>
+      </div>
+
+      <p className="mt-4 text-[15px] text-ink leading-relaxed line-clamp-3">
+        {product.summary}
+      </p>
+
+      <div className="mt-5 flex items-baseline gap-1">
+        <span className="text-2xl font-extrabold text-ink-strong tabular-nums">
+          ${bestPlan.monthlyPriceUsd.toFixed(2)}
+        </span>
+        <span className="text-sm text-ink-subtle">/month</span>
+      </div>
+
+      <div className="mt-4 flex flex-col gap-2">
+        <a
+          href={
+            product.hasAffiliate
+              ? affiliatePath(product.slug)
+              : product.pricingUrl
+          }
+          rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
+          target={product.hasAffiliate ? "_self" : "_blank"}
+          className="inline-flex items-center justify-center gap-2 rounded-2xl bg-ink-strong px-5 py-3 text-sm font-bold text-surface-base hover:bg-ink"
+        >
+          {product.hasAffiliate ? "Grab the deal" : "Visit site"}
+          <ArrowRight className="size-4" />
+        </a>
+        <Link
+          href={`/inceleme/${product.slug}`}
+          className="inline-flex items-center justify-center gap-1 rounded-xl bg-background px-4 py-2 text-sm font-semibold text-ink-muted hover:text-ink-strong"
+        >
+          Read full review →
+        </Link>
+      </div>
+    </li>
   );
 }
