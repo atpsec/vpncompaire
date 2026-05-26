@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Activity } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { products } from "@/data/products";
 
@@ -10,57 +9,52 @@ export function Hero() {
   const auditCount = products.filter((p) => p.highlights.audits).length;
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Soft, layered background — radial spotlights + subtle grid */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 1100px 480px at 50% -10%, rgb(219 234 254 / 0.65), transparent 60%), radial-gradient(ellipse 600px 400px at 85% 20%, rgb(254 243 199 / 0.5), transparent 65%), linear-gradient(180deg, var(--color-surface-base) 0%, var(--color-background) 100%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgb(0 0 0) 1px, transparent 1px), linear-gradient(90deg, rgb(0 0 0) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
+    <section className="border-b border-border bg-surface-subtle/50">
       <Container>
-        <div className="mx-auto max-w-4xl pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
-            <Sparkles className="size-3.5 text-accent-500" /> 2026 Mayıs · Bağımsız test metodolojisi
-          </span>
+        <div className="grid lg:grid-cols-[1fr_auto] gap-8 py-10 sm:py-14 items-end">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[11px] text-ink-muted">
+              <Activity className="size-3 text-success-500" />
+              <span>
+                <span className="text-success-600">●</span>{" "}
+                <span className="text-ink-strong font-semibold">data:</span>{" "}
+                verified May 2026
+              </span>
+            </div>
 
-          <h1 className="mt-5 text-[2rem] sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-strong text-balance leading-[1.08]">
-            {t("h1")}
-          </h1>
+            <h1 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-ink-strong leading-[1.1] text-balance">
+              {t("h1")}
+            </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-ink-muted text-balance leading-relaxed">
-            {t("subtitle")}
-          </p>
+            <p className="mt-4 text-base sm:text-lg text-ink-muted leading-relaxed max-w-xl">
+              {t("subtitle")}
+            </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild variant="primary" size="md">
-              <Link href="/en-iyi-vpn">
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/en-iyi-vpn"
+                className="inline-flex items-center gap-2 rounded-md bg-ink-strong px-4 py-2 text-sm font-medium text-surface-base hover:bg-ink"
+              >
                 {t("ctaPrimary")}
-                <ArrowRight className="size-4" />
+                <ArrowRight className="size-3.5" />
               </Link>
-            </Button>
-            <Button asChild variant="secondary" size="md">
-              <Link href="/metodoloji">{t("ctaSecondary")}</Link>
-            </Button>
+              <Link
+                href="/metodoloji"
+                className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-4 py-2 text-sm font-medium text-ink-strong hover:border-ink-faint"
+              >
+                {t("ctaSecondary")}
+              </Link>
+            </div>
           </div>
 
-          {/* Stat strip — compact, editorial */}
-          <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-white/60 backdrop-blur shadow-sm">
-            <Stat value={products.length} label={t("trust.tested")} />
+          <dl className="grid grid-cols-3 lg:grid-cols-1 gap-px rounded-md overflow-hidden border border-border bg-border min-w-[260px]">
+            <Stat
+              value={products.length}
+              label={t("trust.tested")}
+              accent="brand"
+            />
             <Stat value={auditCount} label={t("trust.audits")} />
-            <Stat value="312" label="saat test" />
+            <Stat value="312h" label="testing time" />
           </dl>
         </div>
       </Container>
@@ -68,13 +62,28 @@ export function Hero() {
   );
 }
 
-function Stat({ value, label }: { value: string | number; label: string }) {
+function Stat({
+  value,
+  label,
+  accent,
+}: {
+  value: string | number;
+  label: string;
+  accent?: "brand";
+}) {
   return (
-    <div className="px-3 py-3 text-center">
-      <dd className="text-xl sm:text-2xl font-bold tracking-tight text-ink-strong tabular-nums">
+    <div className="bg-background px-4 py-3">
+      <dd
+        className={
+          "font-mono text-2xl font-semibold tabular-nums " +
+          (accent === "brand" ? "text-brand-600" : "text-ink-strong")
+        }
+      >
         {value}
       </dd>
-      <dt className="mt-0.5 text-[11px] text-ink-subtle">{label}</dt>
+      <dt className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-ink-subtle">
+        {label}
+      </dt>
     </div>
   );
 }

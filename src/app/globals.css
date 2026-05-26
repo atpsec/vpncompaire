@@ -2,77 +2,76 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Trust blue — primary brand (samimi + profesyonel) */
-  --color-brand-50: #eff6ff;
-  --color-brand-100: #dbeafe;
-  --color-brand-200: #bfdbfe;
-  --color-brand-300: #93c5fd;
-  --color-brand-400: #60a5fa;
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
-  --color-brand-800: #1e40af;
-  --color-brand-900: #1e3a8a;
-  --color-brand-950: #172554;
+  /* === V2 DASHBOARD: Linear/Vercel docs — light, dense, mono accents === */
 
-  /* Warm amber accent — friendly, used sparingly */
-  --color-accent-50: #fffbeb;
-  --color-accent-100: #fef3c7;
-  --color-accent-300: #fcd34d;
-  --color-accent-400: #fbbf24;
-  --color-accent-500: #f59e0b;
-  --color-accent-600: #d97706;
+  /* Brand — clean blue/violet pivot */
+  --color-brand-50: #f0f4ff;
+  --color-brand-100: #dee5ff;
+  --color-brand-200: #c2cfff;
+  --color-brand-300: #98aafd;
+  --color-brand-400: #6c81fa;
+  --color-brand-500: #5b66f6;
+  --color-brand-600: #4b51e3;
+  --color-brand-700: #3e3fbf;
+  --color-brand-800: #33369a;
+  --color-brand-900: #1f1e5e;
+  --color-brand-950: #131333;
 
-  /* Success — verified / audited badges */
+  /* Accent — cyan for status pings */
+  --color-accent-50: #ecfeff;
+  --color-accent-100: #cffafe;
+  --color-accent-300: #67e8f9;
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-accent-600: #0891b2;
+
   --color-success-50: #ecfdf5;
   --color-success-100: #d1fae5;
   --color-success-500: #10b981;
   --color-success-600: #059669;
   --color-success-700: #047857;
 
-  /* Danger */
   --color-danger-500: #ef4444;
   --color-danger-600: #dc2626;
 
-  /* Warm neutral surfaces */
-  --color-surface-base: #fafaf9;
-  --color-surface-subtle: #f5f5f4;
-  --color-surface-muted: #e7e5e4;
-  --color-surface-strong: #d6d3d1;
+  /* Cool neutral surfaces */
+  --color-surface-base: #ffffff;
+  --color-surface-subtle: #fafafa;
+  --color-surface-muted: #f4f4f5;
+  --color-surface-strong: #e4e4e7;
 
-  /* Warm ink (foreground) */
-  --color-ink-strong: #0c0a09;
-  --color-ink: #1c1917;
-  --color-ink-muted: #57534e;
-  --color-ink-subtle: #78716c;
-  --color-ink-faint: #a8a29e;
+  /* Cool ink */
+  --color-ink-strong: #09090b;
+  --color-ink: #18181b;
+  --color-ink-muted: #52525b;
+  --color-ink-subtle: #71717a;
+  --color-ink-faint: #a1a1aa;
 
-  /* Semantic */
   --color-background: var(--color-surface-base);
   --color-foreground: var(--color-ink);
-  --color-border: var(--color-surface-muted);
+  --color-border: var(--color-surface-strong);
 
-  /* Typography */
   --font-sans:
     var(--font-geist-sans), "Inter", system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    var(--font-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* Radii — soft but not rounded */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Tighter radii — dashboard precision */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
 
-  /* Layout */
-  --container-content: 72rem; /* 1152px — readable max */
+  --container-content: 80rem;
 }
 
-/* Dark mode (auto, via prefers-color-scheme) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #0c0a09;
-    --color-foreground: #fafaf9;
-    --color-border: #292524;
+    --color-background: #09090b;
+    --color-foreground: #fafafa;
+    --color-border: #27272a;
   }
 }
 
@@ -89,7 +88,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "cv11", "ss01", "ss03";
+  font-feature-settings: "cv11";
 }
 
 ::selection {
@@ -103,7 +102,10 @@ body {
   border-radius: 4px;
 }
 
-/* Customize prose typography for brand */
+.font-mono {
+  font-family: var(--font-mono);
+}
+
 .prose {
   --tw-prose-body: var(--color-ink);
   --tw-prose-headings: var(--color-ink-strong);
@@ -123,25 +125,10 @@ body {
   --tw-prose-td-borders: var(--color-border);
 }
 
-.prose h2 {
-  scroll-margin-top: 5rem;
+.prose code {
+  font-family: var(--font-mono);
 }
 
-.prose h3 {
-  scroll-margin-top: 5rem;
-}
-
-.prose a {
-  font-weight: 500;
-  text-decoration-color: var(--color-brand-300);
-  text-underline-offset: 3px;
-}
-
-.prose a:hover {
-  text-decoration-color: var(--color-brand-600);
-}
-
-/* Reduce motion — accessibility */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
