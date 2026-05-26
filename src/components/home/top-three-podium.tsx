@@ -1,7 +1,6 @@
-import { ArrowRight, Crown, Trophy, Medal } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
@@ -11,22 +10,25 @@ export function TopThreePodium() {
   const top = rankedProducts().slice(0, 3);
   return (
     <section
-      aria-label="İlk üç seçim"
-      className="relative -mt-2 sm:-mt-4 pb-8 sm:pb-12"
+      aria-label="Top 3"
+      className="border-b-[3px] border-ink-strong bg-surface-subtle"
     >
       <Container>
-        <div
-          className="-mx-4 px-4 overflow-x-auto sm:mx-0 sm:px-0 sm:overflow-visible snap-x snap-mandatory scroll-pl-4"
-          style={{ scrollbarWidth: "none" }}
-        >
-          <ul className="flex gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
+        <div className="py-10 sm:py-14">
+          <div className="flex items-end justify-between mb-6 sm:mb-8">
+            <div>
+              <div className="inline-block font-mono text-[11px] uppercase tracking-widest font-bold border-[2px] border-ink-strong px-2 py-0.5">
+                01 / 03 — top picks
+              </div>
+              <h2 className="mt-3 text-4xl sm:text-5xl font-bold uppercase tracking-tighter text-ink-strong">
+                The big three
+              </h2>
+            </div>
+          </div>
+
+          <ul className="grid sm:grid-cols-3 border-[3px] border-ink-strong divide-y-[3px] sm:divide-y-0 sm:divide-x-[3px] divide-ink-strong">
             {top.map((p, i) => (
-              <li
-                key={p.slug}
-                className="snap-start shrink-0 w-[78%] min-w-[280px] sm:w-auto sm:min-w-0"
-              >
-                <PodiumCard product={p} rank={i + 1} />
-              </li>
+              <BrutalistTile key={p.slug} product={p} rank={i + 1} />
             ))}
           </ul>
         </div>
@@ -35,119 +37,89 @@ export function TopThreePodium() {
   );
 }
 
-function PodiumCard({ product, rank }: { product: Product; rank: number }) {
-  const isWinner = rank === 1;
+function BrutalistTile({
+  product,
+  rank,
+}: {
+  product: Product;
+  rank: number;
+}) {
+  const isFirst = rank === 1;
   const bestPlan =
     product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
 
   return (
-    <article
+    <li
       className={cn(
-        "relative h-full overflow-hidden rounded-2xl border bg-white shadow-sm",
-        isWinner
-          ? "border-brand-300 shadow-md ring-1 ring-brand-200/50"
-          : "border-border",
+        "p-6 sm:p-7 flex flex-col",
+        isFirst ? "bg-accent-400" : "bg-surface-base",
       )}
     >
-      {isWinner && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-accent-500"
-        />
-      )}
-      <div
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl",
-          isWinner ? "bg-brand-100/50" : "bg-surface-subtle",
+      <div className="flex items-start justify-between">
+        <span className="text-7xl sm:text-8xl font-bold tabular-nums leading-none text-ink-strong">
+          {String(rank).padStart(2, "0")}
+        </span>
+        {isFirst && (
+          <span className="font-mono text-[10px] uppercase tracking-widest font-bold bg-ink-strong text-accent-400 px-2 py-1">
+            ★ pick
+          </span>
         )}
-      />
+      </div>
 
-      <div className="relative p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <RankBadge rank={rank} />
-          <div className="text-right">
-            <div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">
-              Puan
-            </div>
-            <div className="text-2xl font-bold text-ink-strong tabular-nums">
-              {product.score.toFixed(1)}
-            </div>
-          </div>
+      <div className="mt-6 flex items-center gap-3">
+        <div className="border-[2px] border-ink-strong bg-surface-base p-1">
+          <VPNLogo slug={product.slug} size={48} />
         </div>
-
-        {/* BIG logo — main visual anchor */}
-        <div className="mt-4 flex justify-center">
-          <VPNLogo
-            slug={product.slug}
-            size={96}
-            className="drop-shadow-md"
-          />
-        </div>
-
-        <div className="mt-4 text-center">
-          <h3 className="text-xl font-bold text-ink-strong tracking-tight">
+        <div>
+          <h3 className="text-2xl font-bold uppercase tracking-tight text-ink-strong">
             {product.brand}
           </h3>
-          <p className="mt-1 text-xs text-ink-subtle">{product.positioning}</p>
-        </div>
-
-        <div className="mt-4 flex items-baseline justify-center gap-1">
-          <span className="text-2xl font-bold text-ink-strong tabular-nums">
-            ${bestPlan.monthlyPriceUsd.toFixed(2)}
-          </span>
-          <span className="text-xs text-ink-subtle">/ay başlangıç</span>
-        </div>
-
-        <div className="mt-5 flex flex-col gap-2">
-          <Button
-            asChild
-            variant={product.hasAffiliate ? "primary" : "secondary"}
-            size="md"
-            className="w-full"
-          >
-            <a
-              href={
-                product.hasAffiliate
-                  ? affiliatePath(product.slug)
-                  : product.pricingUrl
-              }
-              rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
-              target={product.hasAffiliate ? "_self" : "_blank"}
-            >
-              {product.hasAffiliate ? "Fırsata git" : "Resmi siteye git"}
-              <ArrowRight className="size-4" />
-            </a>
-          </Button>
-          <Button asChild variant="ghost" size="sm" className="w-full">
-            <Link href={`/inceleme/${product.slug}`}>
-              İncelemeyi oku
-            </Link>
-          </Button>
+          <p className="font-mono text-[11px] text-ink uppercase tracking-wider">
+            {product.positioning}
+          </p>
         </div>
       </div>
-    </article>
-  );
-}
 
-function RankBadge({ rank }: { rank: number }) {
-  if (rank === 1) {
-    return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow">
-        <Crown className="size-3" /> #1 Editör seçimi
-      </span>
-    );
-  }
-  if (rank === 2) {
-    return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-strong/40 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-ink-strong">
-        <Trophy className="size-3" /> #2
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-subtle px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-ink-strong">
-      <Medal className="size-3" /> #3
-    </span>
+      <dl className="mt-6 grid grid-cols-2 gap-4 border-t-[2px] border-ink-strong pt-4">
+        <div>
+          <dt className="font-mono text-[10px] uppercase tracking-widest font-bold text-ink-strong">
+            score
+          </dt>
+          <dd className="mt-1 text-2xl font-bold text-ink-strong tabular-nums">
+            {product.score.toFixed(1)}/10
+          </dd>
+        </div>
+        <div>
+          <dt className="font-mono text-[10px] uppercase tracking-widest font-bold text-ink-strong">
+            price
+          </dt>
+          <dd className="mt-1 text-2xl font-bold text-ink-strong tabular-nums">
+            ${bestPlan.monthlyPriceUsd.toFixed(2)}
+          </dd>
+        </div>
+      </dl>
+
+      <div className="mt-6 flex flex-col gap-0">
+        <a
+          href={
+            product.hasAffiliate
+              ? affiliatePath(product.slug)
+              : product.pricingUrl
+          }
+          rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
+          target={product.hasAffiliate ? "_self" : "_blank"}
+          className="inline-flex items-center justify-center gap-2 bg-ink-strong text-surface-base px-4 py-3 text-sm font-bold uppercase tracking-wider border-[3px] border-ink-strong hover:bg-surface-base hover:text-ink-strong"
+        >
+          {product.hasAffiliate ? "Get deal" : "Visit"}
+          <ArrowRight className="size-4" />
+        </a>
+        <Link
+          href={`/inceleme/${product.slug}`}
+          className="text-center mt-2 font-mono text-xs uppercase tracking-widest text-ink hover:text-ink-strong"
+        >
+          [ Read review ]
+        </Link>
+      </div>
+    </li>
   );
 }

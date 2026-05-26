@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { products } from "@/data/products";
 
@@ -10,57 +9,47 @@ export function Hero() {
   const auditCount = products.filter((p) => p.highlights.audits).length;
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Soft, layered background — radial spotlights + subtle grid */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 1100px 480px at 50% -10%, rgb(219 234 254 / 0.65), transparent 60%), radial-gradient(ellipse 600px 400px at 85% 20%, rgb(254 243 199 / 0.5), transparent 65%), linear-gradient(180deg, var(--color-surface-base) 0%, var(--color-background) 100%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgb(0 0 0) 1px, transparent 1px), linear-gradient(90deg, rgb(0 0 0) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
+    <section className="border-b-[3px] border-ink-strong">
       <Container>
-        <div className="mx-auto max-w-4xl pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
-            <Sparkles className="size-3.5 text-accent-500" /> 2026 Mayıs · Bağımsız test metodolojisi
-          </span>
+        <div className="grid lg:grid-cols-[1fr_auto] gap-8 py-12 sm:py-20 items-end">
+          <div>
+            <div className="inline-block bg-accent-400 text-ink-strong font-mono text-xs uppercase tracking-widest font-bold px-2 py-1">
+              ★ vol.05 — may 2026 — independent
+            </div>
 
-          <h1 className="mt-5 text-[2rem] sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-strong text-balance leading-[1.08]">
-            {t("h1")}
-          </h1>
+            <h1 className="mt-6 font-bold tracking-tighter text-ink-strong text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[6rem] leading-[0.95] uppercase">
+              {t("h1")}
+            </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-ink-muted text-balance leading-relaxed">
-            {t("subtitle")}
-          </p>
+            <p className="mt-6 max-w-2xl text-lg sm:text-xl text-ink leading-snug font-medium">
+              {t("subtitle")}
+            </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild variant="primary" size="md">
-              <Link href="/en-iyi-vpn">
+            <div className="mt-8 flex flex-wrap gap-0">
+              <Link
+                href="/en-iyi-vpn"
+                className="inline-flex items-center gap-2 bg-ink-strong text-surface-base px-6 py-3.5 text-sm font-bold uppercase tracking-wider border-[3px] border-ink-strong hover:bg-accent-400 hover:text-ink-strong"
+              >
                 {t("ctaPrimary")}
                 <ArrowRight className="size-4" />
               </Link>
-            </Button>
-            <Button asChild variant="secondary" size="md">
-              <Link href="/metodoloji">{t("ctaSecondary")}</Link>
-            </Button>
+              <Link
+                href="/metodoloji"
+                className="inline-flex items-center gap-2 bg-surface-base text-ink-strong px-6 py-3.5 text-sm font-bold uppercase tracking-wider border-[3px] border-ink-strong border-l-0 hover:bg-accent-400"
+              >
+                {t("ctaSecondary")}
+              </Link>
+            </div>
           </div>
 
-          {/* Stat strip — compact, editorial */}
-          <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-white/60 backdrop-blur shadow-sm">
-            <Stat value={products.length} label={t("trust.tested")} />
+          <dl className="grid grid-cols-3 lg:grid-cols-1 gap-0 border-[3px] border-ink-strong">
+            <Stat
+              value={products.length}
+              label={t("trust.tested")}
+              accent
+            />
             <Stat value={auditCount} label={t("trust.audits")} />
-            <Stat value="312" label="saat test" />
+            <Stat value="312" label="hours of testing" />
           </dl>
         </div>
       </Container>
@@ -68,13 +57,28 @@ export function Hero() {
   );
 }
 
-function Stat({ value, label }: { value: string | number; label: string }) {
+function Stat({
+  value,
+  label,
+  accent = false,
+}: {
+  value: string | number;
+  label: string;
+  accent?: boolean;
+}) {
   return (
-    <div className="px-3 py-3 text-center">
-      <dd className="text-xl sm:text-2xl font-bold tracking-tight text-ink-strong tabular-nums">
+    <div
+      className={
+        "px-5 py-4 border-r-[3px] last:border-r-0 lg:border-r-0 lg:border-b-[3px] lg:last:border-b-0 border-ink-strong " +
+        (accent ? "bg-accent-400" : "bg-surface-base")
+      }
+    >
+      <dd className="text-3xl sm:text-4xl font-bold text-ink-strong tabular-nums leading-none">
         {value}
       </dd>
-      <dt className="mt-0.5 text-[11px] text-ink-subtle">{label}</dt>
+      <dt className="mt-2 font-mono text-[10px] uppercase tracking-widest text-ink-strong font-bold">
+        {label}
+      </dt>
     </div>
   );
 }
