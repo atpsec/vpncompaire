@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Newsreader } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -8,6 +8,13 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
+});
+
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
 });
 
 type SupportedLocale = "tr" | "en";
@@ -101,7 +108,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} antialiased`}
+      className={`${geistSans.variable} ${newsreader.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground font-sans">
