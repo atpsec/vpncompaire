@@ -13,7 +13,7 @@ import { PricingPlans } from "@/components/product/pricing-plans";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
-import { products, getProduct, type Product } from "@/data/products";
+import { rawProducts, getProduct, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
@@ -36,14 +36,14 @@ const reviewBodies = {
 } as const;
 
 export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return rawProducts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const product = getProduct(slug);
+  const product = getProduct(slug, locale as "tr" | "en");
   if (!product) return {};
 
   const t = await getTranslations({ locale, namespace: "review" });
@@ -61,7 +61,7 @@ export async function generateMetadata({
 export default async function Page({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  const product = getProduct(slug);
+  const product = getProduct(slug, locale as "tr" | "en");
   if (!product) notFound();
 
   const importer = reviewBodies[slug as keyof typeof reviewBodies];

@@ -135,7 +135,7 @@ export async function DevicePage({
           <p className="mt-2 text-ink-muted">{t("picks.intro")}</p>
           <div className="mt-6 space-y-4">
             {device.picks.map((pick, idx) => {
-              const product = getProduct(pick.slug);
+              const product = getProduct(pick.slug, locale as "tr" | "en");
               if (!product) return null;
               return (
                 <Card key={pick.slug} className="p-5 sm:p-6">

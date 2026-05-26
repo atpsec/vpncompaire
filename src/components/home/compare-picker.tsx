@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   ArrowRight,
   Award,
@@ -26,7 +26,8 @@ const MAX = 4;
 
 export function ComparePicker() {
   const t = useTranslations("homeBlocks.comparePicker");
-  const all = rankedProducts();
+  const locale = useLocale() as "tr" | "en";
+  const all = rankedProducts(locale);
   const [selected, setSelected] = useState<string[]>(() =>
     all.slice(0, 2).map((p) => p.slug),
   );

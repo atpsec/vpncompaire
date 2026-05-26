@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   ArrowRight,
   Award,
@@ -20,7 +20,9 @@ import { affiliatePath } from "@/lib/affiliate";
 export function TopVPNList() {
   const t = useTranslations("home.topVPNs");
   const tCommon = useTranslations("common");
-  const list = rankedProducts();
+  const tBlock = useTranslations("homeBlocks.topVPNs");
+  const locale = useLocale() as "tr" | "en";
+  const list = rankedProducts(locale);
   const winner = list[0];
   const podium = list.slice(1, 3);
   const rest = list.slice(3);
@@ -30,7 +32,7 @@ export function TopVPNList() {
       <Container>
         <div className="mb-10 max-w-2xl">
           <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-700">
-            Sıralama
+            {tBlock("kicker")}
           </span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-ink-strong">
             {t("title")}
@@ -38,7 +40,13 @@ export function TopVPNList() {
           <p className="mt-3 text-ink-muted">{t("subtitle")}</p>
         </div>
 
-        {winner && <WinnerCard product={winner} tCommon={tCommon} />}
+        {winner && (
+          <WinnerCard
+            product={winner}
+            tCommon={tCommon}
+            editorsPickLabel={tBlock("editorsPick")}
+          />
+        )}
 
         <ul className="mt-6 space-y-4">
           {podium.map((p) => (
@@ -56,9 +64,11 @@ export function TopVPNList() {
 function WinnerCard({
   product,
   tCommon,
+  editorsPickLabel,
 }: {
   product: Product;
   tCommon: ReturnType<typeof useTranslations>;
+  editorsPickLabel: string;
 }) {
   return (
     <Card className="relative overflow-hidden border-brand-200 shadow-md">
@@ -76,7 +86,7 @@ function WinnerCard({
           <VPNLogo slug={product.slug} size={64} />
           <div className="lg:mt-1">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-accent-600">
-              <Crown className="size-3" /> Editör&apos;ün tercihi
+              <Crown className="size-3" /> {editorsPickLabel}
             </div>
             <div className="mt-3 flex items-baseline gap-1">
               <span className="text-3xl font-bold text-ink-strong tabular-nums">

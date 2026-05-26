@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, RotateCcw, Sparkles, Check } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
@@ -85,6 +85,7 @@ const QUESTIONS: ReadonlyArray<QuestionData> = [
 
 export function VPNQuiz() {
   const t = useTranslations("quiz");
+  const locale = useLocale() as "tr" | "en";
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [showResult, setShowResult] = useState(false);
 
@@ -116,7 +117,7 @@ export function VPNQuiz() {
 
   if (showResult && ranked.length > 0) {
     const top = ranked[0];
-    const product = getProduct(top[0]);
+    const product = getProduct(top[0], locale);
     if (!product) return null;
     const bestPlan =
       product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
@@ -185,7 +186,7 @@ export function VPNQuiz() {
             </h3>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
               {ranked.slice(1).map(([slug, score]) => {
-                const alt = getProduct(slug);
+                const alt = getProduct(slug, locale);
                 if (!alt) return null;
                 return (
                   <Card key={slug} className="p-4 flex items-center gap-3">

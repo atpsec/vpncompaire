@@ -698,6 +698,19 @@
     },
     "useCaseGrid": {
       "review": "Review"
+    },
+    "topVPNs": {
+      "kicker": "Ranking",
+      "editorsPick": "Editor's pick"
+    },
+    "podium": {
+      "ariaLabel": "Top three picks",
+      "scoreKicker": "Score",
+      "perMonthStart": "/mo starting",
+      "ctaAffiliate": "Get deal",
+      "ctaOfficial": "Visit official site",
+      "readReview": "Read review",
+      "rank1": "#1 Editor's pick"
     }
   },
   "pricingPlans": {

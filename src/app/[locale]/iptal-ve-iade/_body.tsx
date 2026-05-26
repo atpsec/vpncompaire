@@ -327,7 +327,7 @@ export function getRefundContent(locale: string) {
 }
 
 export function RefundBody({ locale }: { locale: string }) {
-  const products = rankedProducts();
+  const products = rankedProducts(locale as "tr" | "en");
   const { strings, cancelInfo, faqs } = getRefundContent(locale);
 
   return (

@@ -1,6 +1,6 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
@@ -46,6 +46,7 @@ export function UseCasePage({
   relatedLinks,
 }: UseCasePageProps) {
   const t = useTranslations("useCase");
+  const locale = useLocale() as "tr" | "en";
 
   return (
     <>
@@ -93,7 +94,7 @@ export function UseCasePage({
           </h2>
           <div className="mt-6 space-y-4">
             {picks.map((pick, idx) => {
-              const product = getProduct(pick.slug);
+              const product = getProduct(pick.slug, locale);
               if (!product) return null;
               return (
                 <Card key={pick.slug} className="p-6">

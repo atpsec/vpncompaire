@@ -1,10 +1,24 @@
+import type { Locale, Localized } from "@/i18n/pick";
+
+type LocText = Localized<string>;
+
 export type ProductHighlights = {
-  audits?: string;
-  servers?: string;
-  devices?: string;
-  jurisdiction?: string;
+  audits?: LocText;
+  servers?: LocText;
+  devices?: LocText;
+  jurisdiction?: LocText;
   openSource?: boolean;
   moneyBackDays?: number;
+};
+
+type RawPricingPlan = {
+  name: LocText;
+  durationMonths: number;
+  monthlyPriceUsd: number;
+  totalPriceUsd: number;
+  savingsPercent?: number;
+  campaign?: LocText;
+  isBestValue?: boolean;
 };
 
 export type PricingPlan = {
@@ -17,6 +31,23 @@ export type PricingPlan = {
   isBestValue?: boolean;
 };
 
+type RawProduct = {
+  slug: string;
+  brand: string;
+  positioning: LocText;
+  summary: LocText;
+  score: number;
+  priceFromUsd: number;
+  rank: number;
+  pros: LocText[];
+  cons: LocText[];
+  highlights: ProductHighlights;
+  hasAffiliate: boolean;
+  pricingUrl: string;
+  pricingVerifiedAt: string;
+  plans: RawPricingPlan[];
+};
+
 export type Product = {
   slug: string;
   brand: string;
@@ -27,7 +58,14 @@ export type Product = {
   rank: number;
   pros: string[];
   cons: string[];
-  highlights: ProductHighlights;
+  highlights: {
+    audits?: string;
+    servers?: string;
+    devices?: string;
+    jurisdiction?: string;
+    openSource?: boolean;
+    moneyBackDays?: number;
+  };
   hasAffiliate: boolean;
   pricingUrl: string;
   pricingVerifiedAt: string;
@@ -36,32 +74,60 @@ export type Product = {
 
 const VERIFIED = "2026-05-25";
 
-export const products: Product[] = [
+const L = (tr: string, en: string): LocText => ({ tr, en });
+
+export const rawProducts: RawProduct[] = [
   {
     slug: "nordvpn",
     brand: "NordVPN",
-    positioning: "Genel kullanım için dengeli seçenek",
-    summary:
+    positioning: L(
+      "Genel kullanım için dengeli seçenek",
+      "A balanced choice for general use",
+    ),
+    summary: L(
       "Geniş sunucu ağı, tekrarlanan bağımsız denetim geçmişi ve testlerimizde tutarlı streaming uyumluluğu ile genel kullanım için sıkça önerilen seçeneklerden biri.",
+      "A wide server network, a repeated track record of independent audits and consistent streaming compatibility in our tests make this one of the most commonly recommended general-purpose picks.",
+    ),
     score: 9.6,
     priceFromUsd: 3.39,
     rank: 1,
     pros: [
-      "Sağlayıcı raporlarına göre 2025'te altıncı kez Deloitte tarafından no-logs denetimi yapıldı",
-      "Sağlayıcı verisine göre 6,400+ sunucu, 110+ ülke",
-      "Testlerimizde başlıca streaming platformlarında uyumlu çalıştığı gözlendi",
-      "Threat Protection özelliği reklam/zararlı yazılım engelleme sunar",
+      L(
+        "Sağlayıcı raporlarına göre 2025'te altıncı kez Deloitte tarafından no-logs denetimi yapıldı",
+        "Per provider reports, audited by Deloitte for no-logs for the sixth time in 2025",
+      ),
+      L(
+        "Sağlayıcı verisine göre 6,400+ sunucu, 110+ ülke",
+        "Per provider data, 6,400+ servers across 110+ countries",
+      ),
+      L(
+        "Testlerimizde başlıca streaming platformlarında uyumlu çalıştığı gözlendi",
+        "Worked reliably on major streaming platforms in our tests",
+      ),
+      L(
+        "Threat Protection özelliği reklam/zararlı yazılım engelleme sunar",
+        "Threat Protection offers ad/malware blocking",
+      ),
     ],
     cons: [
-      "Yenileme dönemi fiyatı belirgin biçimde yükseliyor",
-      "Aynı anda 10 cihaz sınırı",
-      "Mobil uygulamada gelişmiş ayarlar sınırlı",
+      L(
+        "Yenileme dönemi fiyatı belirgin biçimde yükseliyor",
+        "Renewal-period pricing climbs noticeably",
+      ),
+      L("Aynı anda 10 cihaz sınırı", "Simultaneous-device cap of 10"),
+      L(
+        "Mobil uygulamada gelişmiş ayarlar sınırlı",
+        "Advanced settings are limited in the mobile app",
+      ),
     ],
     highlights: {
-      audits: "Deloitte no-logs (6 kez, son: 2025)",
-      servers: "6,400+ sunucu · 110+ ülke",
-      devices: "10 cihaz",
-      jurisdiction: "Panama",
+      audits: L(
+        "Deloitte no-logs (6 kez, son: 2025)",
+        "Deloitte no-logs (6 times, latest: 2025)",
+      ),
+      servers: L("6,400+ sunucu · 110+ ülke", "6,400+ servers · 110+ countries"),
+      devices: L("10 cihaz", "10 devices"),
+      jurisdiction: L("Panama", "Panama"),
       moneyBackDays: 30,
     },
     hasAffiliate: true,
@@ -69,16 +135,16 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "2 yıllık + 3 ay bedava",
+        name: L("2 yıllık + 3 ay bedava", "2-year + 3 months free"),
         durationMonths: 27,
         monthlyPriceUsd: 3.39,
         totalPriceUsd: 91.53,
         savingsPercent: 74,
-        campaign: "+3 ay bedava",
+        campaign: L("+3 ay bedava", "+3 months free"),
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 12.99,
         totalPriceUsd: 12.99,
@@ -88,28 +154,54 @@ export const products: Product[] = [
   {
     slug: "surfshark",
     brand: "Surfshark",
-    positioning: "Bütçe ve çoklu cihaz odaklı seçenek",
-    summary:
+    positioning: L(
+      "Bütçe ve çoklu cihaz odaklı seçenek",
+      "Budget-friendly, multi-device focused",
+    ),
+    summary: L(
       "Sınırsız eşzamanlı cihaz desteği ve uygun fiyatlandırma ile bütçeye dikkat eden ve çok cihaz korumak isteyen kullanıcılar için değerlendirilebilecek bir seçenek.",
+      "Unlimited simultaneous devices and accessible pricing make this a sensible option for budget-conscious users who want to cover many devices.",
+    ),
     score: 9.3,
     priceFromUsd: 2.19,
     rank: 2,
     pros: [
-      "Sağlayıcının açıkladığına göre sınırsız eşzamanlı cihaz kullanımı",
-      "Sağlayıcı verisine göre Türkiye dahil 100+ ülkede sunucu",
-      "CleanWeb özelliği reklam/izleyici engelleme sunar",
-      "Cure53 ve Deloitte tarafından bağımsız denetim raporları yayınlandı",
+      L(
+        "Sağlayıcının açıkladığına göre sınırsız eşzamanlı cihaz kullanımı",
+        "Per provider, unlimited simultaneous devices",
+      ),
+      L(
+        "Sağlayıcı verisine göre Türkiye dahil 100+ ülkede sunucu",
+        "Per provider, servers in 100+ countries including Türkiye",
+      ),
+      L(
+        "CleanWeb özelliği reklam/izleyici engelleme sunar",
+        "CleanWeb offers ad/tracker blocking",
+      ),
+      L(
+        "Cure53 ve Deloitte tarafından bağımsız denetim raporları yayınlandı",
+        "Independent audit reports published by Cure53 and Deloitte",
+      ),
     ],
     cons: [
-      "Hız üst seviye rakiplere göre biraz daha düşük",
-      "Yoğun saatlerde bazı sunucularda gecikme",
-      "Mart 2022'de Nord Security ile birleşti",
+      L(
+        "Hız üst seviye rakiplere göre biraz daha düşük",
+        "Speed is slightly behind top-tier rivals",
+      ),
+      L(
+        "Yoğun saatlerde bazı sunucularda gecikme",
+        "Latency on some servers during peak hours",
+      ),
+      L(
+        "Mart 2022'de Nord Security ile birleşti",
+        "Merged with Nord Security in March 2022",
+      ),
     ],
     highlights: {
-      audits: "Cure53 + Deloitte denetimleri",
-      servers: "3,200+ sunucu · 100+ ülke",
-      devices: "Sınırsız",
-      jurisdiction: "Hollanda",
+      audits: L("Cure53 + Deloitte denetimleri", "Cure53 + Deloitte audits"),
+      servers: L("3,200+ sunucu · 100+ ülke", "3,200+ servers · 100+ countries"),
+      devices: L("Sınırsız", "Unlimited"),
+      jurisdiction: L("Hollanda", "Netherlands"),
       moneyBackDays: 30,
     },
     hasAffiliate: true,
@@ -117,16 +209,19 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "2 yıllık + 3 ay bedava",
+        name: L("2 yıllık + 3 ay bedava", "2-year + 3 months free"),
         durationMonths: 27,
         monthlyPriceUsd: 1.99,
         totalPriceUsd: 53.73,
         savingsPercent: 87,
-        campaign: "Starter paketi, +3 ay bedava",
+        campaign: L(
+          "Starter paketi, +3 ay bedava",
+          "Starter bundle, +3 months free",
+        ),
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 15.45,
         totalPriceUsd: 15.45,
@@ -136,28 +231,51 @@ export const products: Product[] = [
   {
     slug: "expressvpn",
     brand: "ExpressVPN",
-    positioning: "Premium kullanım ve sade arayüz odaklı",
-    summary:
+    positioning: L(
+      "Premium kullanım ve sade arayüz odaklı",
+      "Premium focus with a polished interface",
+    ),
+    summary: L(
       "Sade arayüz, testlerimizde kararlı hız ve sağlayıcının açıkladığı TrustedServer (RAM-only) mimarisi ile premium fiyat seviyesinde değerlendirilebilecek bir seçenek.",
+      "A clean interface, steady speed in our tests and the provider's TrustedServer (RAM-only) architecture make this worth considering at premium price points.",
+    ),
     score: 9.1,
     priceFromUsd: 6.67,
     rank: 3,
     pros: [
-      "Lightway protokolü testlerimizde hızlı bağlantı kurulumu sağladı",
-      "Sağlayıcının açıkladığına göre TrustedServer (RAM-only) altyapısı",
-      "Sağlayıcı verisine göre 105 ülkede sunucu",
-      "Kolay kurulum ve sade arayüz",
+      L(
+        "Lightway protokolü testlerimizde hızlı bağlantı kurulumu sağladı",
+        "The Lightway protocol delivered fast connection setup in our tests",
+      ),
+      L(
+        "Sağlayıcının açıkladığına göre TrustedServer (RAM-only) altyapısı",
+        "Per provider, TrustedServer (RAM-only) infrastructure",
+      ),
+      L(
+        "Sağlayıcı verisine göre 105 ülkede sunucu",
+        "Per provider, servers in 105 countries",
+      ),
+      L("Kolay kurulum ve sade arayüz", "Easy setup and a clean interface"),
     ],
     cons: [
-      "Premium VPN segmentinde fiyatı yüksek",
-      "Yalnızca 8 cihaz eşzamanlı bağlantı",
-      "Gelişmiş kullanıcılar için özelleştirme sınırlı",
+      L(
+        "Premium VPN segmentinde fiyatı yüksek",
+        "Priced high within the premium VPN segment",
+      ),
+      L(
+        "Yalnızca 8 cihaz eşzamanlı bağlantı",
+        "Only 8 simultaneous device connections",
+      ),
+      L(
+        "Gelişmiş kullanıcılar için özelleştirme sınırlı",
+        "Limited customisation for advanced users",
+      ),
     ],
     highlights: {
-      audits: "KPMG + Cure53 denetimleri",
-      servers: "3,000+ sunucu · 105 ülke",
-      devices: "8 cihaz",
-      jurisdiction: "İngiliz Virjin Adaları",
+      audits: L("KPMG + Cure53 denetimleri", "KPMG + Cure53 audits"),
+      servers: L("3,000+ sunucu · 105 ülke", "3,000+ servers · 105 countries"),
+      devices: L("8 cihaz", "8 devices"),
+      jurisdiction: L("İngiliz Virjin Adaları", "British Virgin Islands"),
       moneyBackDays: 30,
     },
     hasAffiliate: true,
@@ -165,16 +283,16 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "15 ay (12 + 3 bedava)",
+        name: L("15 ay (12 + 3 bedava)", "15 months (12 + 3 free)"),
         durationMonths: 15,
         monthlyPriceUsd: 6.67,
         totalPriceUsd: 99.95,
         savingsPercent: 49,
-        campaign: "+3 ay bedava",
+        campaign: L("+3 ay bedava", "+3 months free"),
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 12.95,
         totalPriceUsd: 12.95,
@@ -184,28 +302,57 @@ export const products: Product[] = [
   {
     slug: "proton-vpn",
     brand: "Proton VPN",
-    positioning: "Gizlilik odaklı kullanıcılar için",
-    summary:
+    positioning: L(
+      "Gizlilik odaklı kullanıcılar için",
+      "For privacy-focused users",
+    ),
+    summary: L(
       "İsviçre yargı yetkisi, açık kaynak istemciler ve sağlayıcı tarafından her yıl yayınlanan bağımsız no-logs denetimleri ile gizliliği önceliklendirenler için değerlendirilebilecek seçeneklerden biri.",
+      "Swiss jurisdiction, open-source clients and annual independent no-logs audits published by the provider make this a strong option for privacy-first users.",
+    ),
     score: 9.0,
     priceFromUsd: 3.59,
     rank: 4,
     pros: [
-      "Sağlayıcı verisine göre tüm istemciler açık kaynak ve GitHub'da denetlenebilir",
-      "Sağlayıcı raporlarına göre her yıl bağımsız no-logs denetimi yapılıyor",
-      "İsviçre yargı yetkisinde — yerel veri koruma yasaları görece sıkı",
-      "Sağlayıcının açıkladığına göre sınırsız bant genişliğine sahip ücretsiz plan",
+      L(
+        "Sağlayıcı verisine göre tüm istemciler açık kaynak ve GitHub'da denetlenebilir",
+        "Per provider, all clients are open source and inspectable on GitHub",
+      ),
+      L(
+        "Sağlayıcı raporlarına göre her yıl bağımsız no-logs denetimi yapılıyor",
+        "Per provider reports, an independent no-logs audit is performed annually",
+      ),
+      L(
+        "İsviçre yargı yetkisinde — yerel veri koruma yasaları görece sıkı",
+        "Swiss jurisdiction — local data-protection laws are relatively strict",
+      ),
+      L(
+        "Sağlayıcının açıkladığına göre sınırsız bant genişliğine sahip ücretsiz plan",
+        "Per provider, a free plan with unlimited bandwidth",
+      ),
     ],
     cons: [
-      "Sunucu ağı en büyük rakiplere göre küçük",
-      "Streaming uyumluluğu bazen sınırlı",
-      "Yenileme fiyatı belirgin biçimde yükseliyor",
+      L(
+        "Sunucu ağı en büyük rakiplere göre küçük",
+        "Server network is smaller than the biggest rivals",
+      ),
+      L(
+        "Streaming uyumluluğu bazen sınırlı",
+        "Streaming compatibility is occasionally limited",
+      ),
+      L(
+        "Yenileme fiyatı belirgin biçimde yükseliyor",
+        "Renewal price climbs noticeably",
+      ),
     ],
     highlights: {
-      audits: "Yıllık Securitum no-logs denetimi",
-      servers: "5,400+ sunucu · 110+ ülke",
-      devices: "10 cihaz",
-      jurisdiction: "İsviçre",
+      audits: L(
+        "Yıllık Securitum no-logs denetimi",
+        "Annual Securitum no-logs audit",
+      ),
+      servers: L("5,400+ sunucu · 110+ ülke", "5,400+ servers · 110+ countries"),
+      devices: L("10 cihaz", "10 devices"),
+      jurisdiction: L("İsviçre", "Switzerland"),
       openSource: true,
       moneyBackDays: 30,
     },
@@ -214,7 +361,7 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "2 yıllık (VPN Plus)",
+        name: L("2 yıllık (VPN Plus)", "2-year (VPN Plus)"),
         durationMonths: 24,
         monthlyPriceUsd: 3.59,
         totalPriceUsd: 86.16,
@@ -222,7 +369,7 @@ export const products: Product[] = [
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 9.99,
         totalPriceUsd: 9.99,
@@ -232,28 +379,51 @@ export const products: Product[] = [
   {
     slug: "pia",
     brand: "Private Internet Access",
-    positioning: "Teknik kontrol ve geniş sunucu ağı arayanlar için",
-    summary:
+    positioning: L(
+      "Teknik kontrol ve geniş sunucu ağı arayanlar için",
+      "For those who want technical control and a large server network",
+    ),
+    summary: L(
       "Geçmiş federal davalarda no-logs politikasının veri ifşa edemediği raporlanan, ileri düzey ayar seçenekleri ve geniş sunucu ağı sunan bir seçenek. Yargı yetkisi ABD'dir.",
+      "An option with a very large server network and advanced settings, with court documents reporting that the provider was unable to produce user data in past US federal cases. Jurisdiction is the US.",
+    ),
     score: 8.7,
     priceFromUsd: 2.03,
     rank: 5,
     pros: [
-      "Geçmiş federal davalarda (2016, 2018) sağlayıcının veri ifşa edemediği kamuya açık dava belgelerinde raporlandı",
-      "Sağlayıcı verisine göre 35,000+ sunucu",
-      "Sağlayıcının açıkladığına göre tüm istemciler açık kaynak",
-      "Detaylı protokol ve ayar seçenekleri sunulmaktadır",
+      L(
+        "Geçmiş federal davalarda (2016, 2018) sağlayıcının veri ifşa edemediği kamuya açık dava belgelerinde raporlandı",
+        "Public court documents from past US federal cases (2016, 2018) reported that the provider could not produce user data",
+      ),
+      L(
+        "Sağlayıcı verisine göre 35,000+ sunucu",
+        "Per provider, 35,000+ servers",
+      ),
+      L(
+        "Sağlayıcının açıkladığına göre tüm istemciler açık kaynak",
+        "Per provider, all clients are open source",
+      ),
+      L(
+        "Detaylı protokol ve ayar seçenekleri sunulmaktadır",
+        "Granular protocol and configuration options",
+      ),
     ],
     cons: [
-      "ABD yargı yetkisi (5 Eyes ittifakı)",
-      "Arayüz yeni başlayanlar için karmaşık",
-      "Bazı bölgelerde streaming bypass'ı sorunlu",
+      L("ABD yargı yetkisi (5 Eyes ittifakı)", "US jurisdiction (5 Eyes)"),
+      L("Arayüz yeni başlayanlar için karmaşık", "UI is dense for beginners"),
+      L(
+        "Bazı bölgelerde streaming bypass'ı sorunlu",
+        "Streaming bypass is unreliable in some regions",
+      ),
     ],
     highlights: {
-      audits: "Federal davalarda no-logs uygulaması raporlandı",
-      servers: "35,000+ sunucu · 91 ülke",
-      devices: "Sınırsız",
-      jurisdiction: "ABD",
+      audits: L(
+        "Federal davalarda no-logs uygulaması raporlandı",
+        "No-logs enforcement reported in federal cases",
+      ),
+      servers: L("35,000+ sunucu · 91 ülke", "35,000+ servers · 91 countries"),
+      devices: L("Sınırsız", "Unlimited"),
+      jurisdiction: L("ABD", "United States"),
       openSource: true,
       moneyBackDays: 30,
     },
@@ -262,16 +432,16 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "3 yıllık + 3 ay bedava",
+        name: L("3 yıllık + 3 ay bedava", "3-year + 3 months free"),
         durationMonths: 39,
         monthlyPriceUsd: 2.03,
         totalPriceUsd: 79.0,
         savingsPercent: 83,
-        campaign: "+3 ay bedava",
+        campaign: L("+3 ay bedava", "+3 months free"),
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 11.95,
         totalPriceUsd: 11.95,
@@ -281,27 +451,50 @@ export const products: Product[] = [
   {
     slug: "cyberghost",
     brand: "CyberGhost",
-    positioning: "Yeni başlayan kullanıcılar için sade arayüz",
-    summary:
+    positioning: L(
+      "Yeni başlayan kullanıcılar için sade arayüz",
+      "Beginner-friendly with a simple interface",
+    ),
+    summary: L(
       "Amaca özel optimize sunucular ve 45 günlük iade süresi ile VPN'e yeni başlayanlar için değerlendirilebilecek seçeneklerden biri. Sağlayıcı raporlarındaki bilgilere göre.",
+      "Use-case optimised servers and a 45-day refund window make this a reasonable option for newcomers, per the provider's reports.",
+    ),
     score: 8.5,
     priceFromUsd: 2.03,
     rank: 6,
     pros: [
-      "Sağlayıcının açıkladığına göre streaming ve oyun için optimize sunucular sunuluyor",
-      "Sağlayıcı politikasına göre 45 günlük para iade süresi (sektör standardı 30 gün)",
-      "Romanya yargı yetkisi (5/9/14 Eyes ittifakları dışında)",
-      "Sağlayıcı verisine göre geniş sunucu ağı",
+      L(
+        "Sağlayıcının açıkladığına göre streaming ve oyun için optimize sunucular sunuluyor",
+        "Per provider, dedicated streaming and gaming servers",
+      ),
+      L(
+        "Sağlayıcı politikasına göre 45 günlük para iade süresi (sektör standardı 30 gün)",
+        "Per provider policy, a 45-day money-back window (industry standard is 30 days)",
+      ),
+      L(
+        "Romanya yargı yetkisi (5/9/14 Eyes ittifakları dışında)",
+        "Romanian jurisdiction (outside 5/9/14 Eyes)",
+      ),
+      L("Sağlayıcı verisine göre geniş sunucu ağı", "Per provider, a large server network"),
     ],
     cons: [
-      "Şeffaflık raporları daha az sıklıkta yayınlanıyor",
-      "Bazı sunucularda performans dalgalanması",
-      "Gelişmiş güvenlik özellikleri sınırlı",
+      L(
+        "Şeffaflık raporları daha az sıklıkta yayınlanıyor",
+        "Transparency reports are published less frequently",
+      ),
+      L(
+        "Bazı sunucularda performans dalgalanması",
+        "Inconsistent performance on some servers",
+      ),
+      L(
+        "Gelişmiş güvenlik özellikleri sınırlı",
+        "Limited advanced-security features",
+      ),
     ],
     highlights: {
-      servers: "11,500+ sunucu · 100 ülke",
-      devices: "7 cihaz",
-      jurisdiction: "Romanya",
+      servers: L("11,500+ sunucu · 100 ülke", "11,500+ servers · 100 countries"),
+      devices: L("7 cihaz", "7 devices"),
+      jurisdiction: L("Romanya", "Romania"),
       moneyBackDays: 45,
     },
     hasAffiliate: true,
@@ -309,16 +502,16 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "2 yıllık + 4 ay bedava",
+        name: L("2 yıllık + 4 ay bedava", "2-year + 4 months free"),
         durationMonths: 28,
         monthlyPriceUsd: 2.03,
         totalPriceUsd: 56.94,
         savingsPercent: 84,
-        campaign: "+4 ay bedava",
+        campaign: L("+4 ay bedava", "+4 months free"),
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 12.99,
         totalPriceUsd: 12.99,
@@ -328,29 +521,61 @@ export const products: Product[] = [
   {
     slug: "ipvanish",
     brand: "IPVanish",
-    positioning: "ABD merkezli, kendi sunucu donanımını kullandığını belirten sağlayıcı",
-    summary:
+    positioning: L(
+      "ABD merkezli, kendi sunucu donanımını kullandığını belirten sağlayıcı",
+      "US-based, claims to operate its own server hardware",
+    ),
+    summary: L(
       "Sağlayıcının açıklamasına göre kendi sunucu donanımını işleten, sınırsız cihaz desteği sunan ve uzun dönem planlarında indirimli giriş fiyatı sunan ABD merkezli bir seçenek. ABD yargı yetkisi gizliliği önceliklendirenler için değerlendirme gerektirebilir.",
+      "A US-based option that, per provider, operates its own server hardware, supports unlimited devices and offers discounted entry pricing on long-term plans. Privacy-focused users should weigh the US jurisdiction.",
+    ),
     score: 8.1,
     priceFromUsd: 2.19,
     rank: 8,
     pros: [
-      "Sağlayıcı açıklamasına göre sunucu donanımına doğrudan sahip — üçüncü taraf veri merkezi bağımlılığı azaltılıyor",
-      "Sağlayıcının açıkladığına göre sınırsız eşzamanlı cihaz bağlantısı",
-      "Sağlayıcı raporlarına göre ilk bağımsız no-logs denetimi 2022'de Schellman tarafından yapıldı",
-      "Uzun dönem planlarda indirimli giriş fiyatı sunuluyor",
+      L(
+        "Sağlayıcı açıklamasına göre sunucu donanımına doğrudan sahip — üçüncü taraf veri merkezi bağımlılığı azaltılıyor",
+        "Per provider, directly owns server hardware — reducing third-party data-centre dependence",
+      ),
+      L(
+        "Sağlayıcının açıkladığına göre sınırsız eşzamanlı cihaz bağlantısı",
+        "Per provider, unlimited simultaneous device connections",
+      ),
+      L(
+        "Sağlayıcı raporlarına göre ilk bağımsız no-logs denetimi 2022'de Schellman tarafından yapıldı",
+        "Per provider reports, first independent no-logs audit by Schellman in 2022",
+      ),
+      L(
+        "Uzun dönem planlarda indirimli giriş fiyatı sunuluyor",
+        "Discounted entry pricing on long-term plans",
+      ),
     ],
     cons: [
-      "ABD yargı yetkisi (5 Eyes ittifakı) — adli süreçte veri talebi alabilir",
-      "Yenileme fiyatı belirgin biçimde yükseliyor",
-      "Streaming uyumluluğu rakiplerinin gerisinde",
-      "Denetim sıklığı yılda bir değil, ad-hoc",
+      L(
+        "ABD yargı yetkisi (5 Eyes ittifakı) — adli süreçte veri talebi alabilir",
+        "US jurisdiction (5 Eyes) — may receive judicial data requests",
+      ),
+      L(
+        "Yenileme fiyatı belirgin biçimde yükseliyor",
+        "Renewal price climbs noticeably",
+      ),
+      L(
+        "Streaming uyumluluğu rakiplerinin gerisinde",
+        "Streaming compatibility lags behind rivals",
+      ),
+      L(
+        "Denetim sıklığı yılda bir değil, ad-hoc",
+        "Audit cadence is ad-hoc rather than annual",
+      ),
     ],
     highlights: {
-      audits: "Schellman bağımsız denetimi (2022)",
-      servers: "2,400+ sunucu · 75+ ülke",
-      devices: "Sınırsız",
-      jurisdiction: "ABD",
+      audits: L(
+        "Schellman bağımsız denetimi (2022)",
+        "Schellman independent audit (2022)",
+      ),
+      servers: L("2,400+ sunucu · 75+ ülke", "2,400+ servers · 75+ countries"),
+      devices: L("Sınırsız", "Unlimited"),
+      jurisdiction: L("ABD", "United States"),
       moneyBackDays: 30,
     },
     hasAffiliate: true,
@@ -358,7 +583,7 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "2 yıllık",
+        name: L("2 yıllık", "2-year"),
         durationMonths: 24,
         monthlyPriceUsd: 2.19,
         totalPriceUsd: 52.56,
@@ -366,7 +591,7 @@ export const products: Product[] = [
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 11.99,
         totalPriceUsd: 11.99,
@@ -376,28 +601,51 @@ export const products: Product[] = [
   {
     slug: "windscribe",
     brand: "Windscribe",
-    positioning: "Ücretsiz plan ve esnek fiyatlandırma sunan seçenek",
-    summary:
+    positioning: L(
+      "Ücretsiz plan ve esnek fiyatlandırma sunan seçenek",
+      "Offers a free plan and flexible pricing",
+    ),
+    summary: L(
       "Sağlayıcı politikasına göre aylık 10 GB ücretsiz plan, build-a-plan ile özel ülke seçimi ve R.O.B.E.R.T. ile reklam/izleyici engelleme sunulmaktadır. Kanada yargı yetkisi 5 Eyes ittifakına dahildir.",
+      "Per provider policy, a 10 GB/month free plan, custom country picking via Build-a-Plan and ad/tracker blocking via R.O.B.E.R.T. Canadian jurisdiction is inside the 5 Eyes alliance.",
+    ),
     score: 7.9,
     priceFromUsd: 5.75,
     rank: 9,
     pros: [
-      "Sağlayıcı politikasına göre 10 GB/ay ücretsiz plan",
-      "Sağlayıcının sunduğu build-a-plan ile tek tek ülke seçilebilir (aylık $1'dan başlayan)",
-      "R.O.B.E.R.T. özelliği sunucu seviyesinde reklam/izleyici engelleme sağlar",
-      "Sağlayıcı verisine göre istemciler açık kaynak (Windows, macOS, Linux, mobil)",
+      L(
+        "Sağlayıcı politikasına göre 10 GB/ay ücretsiz plan",
+        "Per provider policy, a 10 GB/month free plan",
+      ),
+      L(
+        "Sağlayıcının sunduğu build-a-plan ile tek tek ülke seçilebilir (aylık $1'dan başlayan)",
+        "Build-a-Plan lets you pick individual countries (from $1/month)",
+      ),
+      L(
+        "R.O.B.E.R.T. özelliği sunucu seviyesinde reklam/izleyici engelleme sağlar",
+        "R.O.B.E.R.T. provides server-side ad/tracker blocking",
+      ),
+      L(
+        "Sağlayıcı verisine göre istemciler açık kaynak (Windows, macOS, Linux, mobil)",
+        "Per provider, clients are open source (Windows, macOS, Linux, mobile)",
+      ),
     ],
     cons: [
-      "Bağımsız no-logs denetimi yok",
-      "Kanada yargı yetkisi (5 Eyes)",
-      "Sunucu sayısı en büyük rakiplerin gerisinde",
-      "Para iade süresi sadece 3 gün (sektör standardı 30)",
+      L("Bağımsız no-logs denetimi yok", "No independent no-logs audit"),
+      L("Kanada yargı yetkisi (5 Eyes)", "Canadian jurisdiction (5 Eyes)"),
+      L(
+        "Sunucu sayısı en büyük rakiplerin gerisinde",
+        "Server count lags behind the biggest rivals",
+      ),
+      L(
+        "Para iade süresi sadece 3 gün (sektör standardı 30)",
+        "Money-back window is only 3 days (industry standard is 30)",
+      ),
     ],
     highlights: {
-      servers: "480+ sunucu · 69 ülke",
-      devices: "Sınırsız",
-      jurisdiction: "Kanada",
+      servers: L("480+ sunucu · 69 ülke", "480+ servers · 69 countries"),
+      devices: L("Sınırsız", "Unlimited"),
+      jurisdiction: L("Kanada", "Canada"),
       openSource: true,
       moneyBackDays: 3,
     },
@@ -406,16 +654,19 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "Yıllık (Pro)",
+        name: L("Yıllık (Pro)", "Annual (Pro)"),
         durationMonths: 12,
         monthlyPriceUsd: 5.75,
         totalPriceUsd: 69.0,
         savingsPercent: 36,
-        campaign: "Ücretsiz plan: 10 GB/ay (kart gerekmez)",
+        campaign: L(
+          "Ücretsiz plan: 10 GB/ay (kart gerekmez)",
+          "Free plan: 10 GB/month (no card needed)",
+        ),
         isBestValue: true,
       },
       {
-        name: "Aylık",
+        name: L("Aylık", "Monthly"),
         durationMonths: 1,
         monthlyPriceUsd: 9.0,
         totalPriceUsd: 9.0,
@@ -425,29 +676,61 @@ export const products: Product[] = [
   {
     slug: "tunnelbear",
     brand: "TunnelBear",
-    positioning: "Yeni başlayanlar için sade arayüz odaklı",
-    summary:
+    positioning: L(
+      "Yeni başlayanlar için sade arayüz odaklı",
+      "A simple interface aimed at beginners",
+    ),
+    summary: L(
       "Sağlayıcı raporlarına göre Cure53 tarafından yıllık olarak denetlenen, basit arayüzlü Kanada merkezli bir seçenek. 2018'den beri McAfee bünyesinde — kullanıcılar bu sahiplik yapısının gizlilik tercihleriyle uyumunu kendileri değerlendirmelidir.",
+      "A Canadian-based option with a simple interface that, per provider reports, is audited annually by Cure53. Owned by McAfee since 2018 — users should weigh whether that ownership structure suits their privacy preferences.",
+    ),
     score: 7.7,
     priceFromUsd: 3.33,
     rank: 10,
     pros: [
-      "Sağlayıcı raporlarına göre 2017'den beri her yıl Cure53 tarafından kamuya açık denetim",
-      "Sade ve kullanıcı dostu arayüz",
-      "Sağlayıcı politikasına göre 2 GB/ay ücretsiz plan (kart bilgisi istemez)",
-      "Sağlayıcının açıkladığı 2024 güncellemesiyle sınırsız eşzamanlı cihaz",
+      L(
+        "Sağlayıcı raporlarına göre 2017'den beri her yıl Cure53 tarafından kamuya açık denetim",
+        "Per provider reports, audited publicly by Cure53 every year since 2017",
+      ),
+      L("Sade ve kullanıcı dostu arayüz", "Clean, user-friendly interface"),
+      L(
+        "Sağlayıcı politikasına göre 2 GB/ay ücretsiz plan (kart bilgisi istemez)",
+        "Per provider policy, a 2 GB/month free plan (no card required)",
+      ),
+      L(
+        "Sağlayıcının açıkladığı 2024 güncellemesiyle sınırsız eşzamanlı cihaz",
+        "Unlimited simultaneous devices per the provider's 2024 update",
+      ),
     ],
     cons: [
-      "2018'den beri McAfee bünyesinde — ABD ana şirket = 5 Eyes endişesi",
-      "Sunucu özellikleri (sayı, ülke detayı) şeffaf yayınlanmıyor",
-      "Streaming için optimize değil",
-      "Para iade garantisi yok — sadece ücretsiz plan deneme görevi görür",
+      L(
+        "2018'den beri McAfee bünyesinde — ABD ana şirket = 5 Eyes endişesi",
+        "Owned by McAfee since 2018 — US parent = 5 Eyes concern",
+      ),
+      L(
+        "Sunucu özellikleri (sayı, ülke detayı) şeffaf yayınlanmıyor",
+        "Server details (count, per-country specifics) aren't transparently published",
+      ),
+      L("Streaming için optimize değil", "Not optimised for streaming"),
+      L(
+        "Para iade garantisi yok — sadece ücretsiz plan deneme görevi görür",
+        "No money-back guarantee — the free plan serves as the trial",
+      ),
     ],
     highlights: {
-      audits: "Yıllık Cure53 denetimi (2017'den beri)",
-      servers: "5,000+ sunucu · 50+ ülke (resmi rakam)",
-      devices: "Sınırsız",
-      jurisdiction: "Kanada (McAfee ABD bağlı)",
+      audits: L(
+        "Yıllık Cure53 denetimi (2017'den beri)",
+        "Annual Cure53 audit (since 2017)",
+      ),
+      servers: L(
+        "5,000+ sunucu · 50+ ülke (resmi rakam)",
+        "5,000+ servers · 50+ countries (official figure)",
+      ),
+      devices: L("Sınırsız", "Unlimited"),
+      jurisdiction: L(
+        "Kanada (McAfee ABD bağlı)",
+        "Canada (McAfee, US-affiliated)",
+      ),
       moneyBackDays: 0,
     },
     hasAffiliate: true,
@@ -455,7 +738,7 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "3 yıllık (Unlimited)",
+        name: L("3 yıllık (Unlimited)", "3-year (Unlimited)"),
         durationMonths: 36,
         monthlyPriceUsd: 3.33,
         totalPriceUsd: 120.0,
@@ -463,39 +746,68 @@ export const products: Product[] = [
         isBestValue: true,
       },
       {
-        name: "Yıllık (Unlimited)",
+        name: L("Yıllık (Unlimited)", "Annual (Unlimited)"),
         durationMonths: 12,
         monthlyPriceUsd: 4.99,
         totalPriceUsd: 59.88,
-        campaign: "2 GB/ay ücretsiz plan ayrıca mevcut",
+        campaign: L(
+          "2 GB/ay ücretsiz plan ayrıca mevcut",
+          "A 2 GB/month free plan is also available",
+        ),
       },
     ],
   },
   {
     slug: "mullvad",
     brand: "Mullvad",
-    positioning: "Affiliate ilişkisi olmayan, gizlilik odaklı seçenek",
-    summary:
+    positioning: L(
+      "Affiliate ilişkisi olmayan, gizlilik odaklı seçenek",
+      "Privacy-first option with no affiliate relationship",
+    ),
+    summary: L(
       "Sağlayıcı politikasına göre anonim hesap sistemi, sabit fiyatlandırma ve affiliate programı sunmama prensibi ile gizliliği önceliklendirenler için değerlendirilebilecek bir seçenek. Bu siteyle finansal bağı yok — sıralamada bilgi vermek için yer alır.",
+      "An option for privacy-first users — per provider policy, an anonymous account system, flat pricing and no affiliate programme. No financial link with this site; included in the ranking purely for transparency.",
+    ),
     score: 8.3,
     priceFromUsd: 5.0,
     rank: 7,
     pros: [
-      "Sağlayıcı politikasına göre kullanıcı adı veya e-posta istemez — yalnızca hesap numarası",
-      "Sağlayıcının açıkladığına göre postayla nakit ödeme kabul edilir",
-      "Sağlayıcı verisine göre istemciler açık kaynak ve GitHub'da denetlenebilir",
-      "Sağlayıcı politikası gereği sabit €5/ay fiyatlandırma (indirim/promosyon yok)",
+      L(
+        "Sağlayıcı politikasına göre kullanıcı adı veya e-posta istemez — yalnızca hesap numarası",
+        "Per provider policy, no username or email required — only an account number",
+      ),
+      L(
+        "Sağlayıcının açıkladığına göre postayla nakit ödeme kabul edilir",
+        "Per provider, accepts cash payment by mail",
+      ),
+      L(
+        "Sağlayıcı verisine göre istemciler açık kaynak ve GitHub'da denetlenebilir",
+        "Per provider, clients are open source and inspectable on GitHub",
+      ),
+      L(
+        "Sağlayıcı politikası gereği sabit €5/ay fiyatlandırma (indirim/promosyon yok)",
+        "Per provider policy, a flat €5/month price (no discounts/promotions)",
+      ),
     ],
     cons: [
-      "Sunucu sayısı diğerlerine göre az",
-      "Streaming için optimize değil",
-      "Müşteri desteği yalnızca e-posta üzerinden",
+      L(
+        "Sunucu sayısı diğerlerine göre az",
+        "Lower server count than rivals",
+      ),
+      L("Streaming için optimize değil", "Not optimised for streaming"),
+      L(
+        "Müşteri desteği yalnızca e-posta üzerinden",
+        "Customer support is email-only",
+      ),
     ],
     highlights: {
-      audits: "Assured AB bağımsız denetimleri",
-      servers: "700+ sunucu · 49 ülke",
-      devices: "5 cihaz",
-      jurisdiction: "İsveç",
+      audits: L(
+        "Assured AB bağımsız denetimleri",
+        "Assured AB independent audits",
+      ),
+      servers: L("700+ sunucu · 49 ülke", "700+ servers · 49 countries"),
+      devices: L("5 cihaz", "5 devices"),
+      jurisdiction: L("İsveç", "Sweden"),
       openSource: true,
       moneyBackDays: 30,
     },
@@ -504,15 +816,15 @@ export const products: Product[] = [
     pricingVerifiedAt: VERIFIED,
     plans: [
       {
-        name: "Aylık (sabit)",
+        name: L("Aylık (sabit)", "Monthly (flat)"),
         durationMonths: 1,
         monthlyPriceUsd: 5.0,
         totalPriceUsd: 5.0,
-        campaign: "İlke gereği indirim yok",
+        campaign: L("İlke gereği indirim yok", "No discounts by policy"),
         isBestValue: true,
       },
       {
-        name: "Yıllık",
+        name: L("Yıllık", "Annual"),
         durationMonths: 12,
         monthlyPriceUsd: 5.0,
         totalPriceUsd: 60.0,
@@ -521,10 +833,54 @@ export const products: Product[] = [
   },
 ];
 
-export function getProduct(slug: string): Product | undefined {
-  return products.find((p) => p.slug === slug);
+function pick<T>(field: Localized<T> | undefined, locale: Locale): T | undefined {
+  if (!field) return undefined;
+  return field[locale] ?? field.tr;
 }
 
-export function rankedProducts(): Product[] {
-  return [...products].sort((a, b) => a.rank - b.rank);
+function resolveProduct(p: RawProduct, locale: Locale): Product {
+  return {
+    slug: p.slug,
+    brand: p.brand,
+    positioning: pick(p.positioning, locale) as string,
+    summary: pick(p.summary, locale) as string,
+    score: p.score,
+    priceFromUsd: p.priceFromUsd,
+    rank: p.rank,
+    pros: p.pros.map((t) => pick(t, locale) as string),
+    cons: p.cons.map((t) => pick(t, locale) as string),
+    highlights: {
+      audits: pick(p.highlights.audits, locale),
+      servers: pick(p.highlights.servers, locale),
+      devices: pick(p.highlights.devices, locale),
+      jurisdiction: pick(p.highlights.jurisdiction, locale),
+      openSource: p.highlights.openSource,
+      moneyBackDays: p.highlights.moneyBackDays,
+    },
+    hasAffiliate: p.hasAffiliate,
+    pricingUrl: p.pricingUrl,
+    pricingVerifiedAt: p.pricingVerifiedAt,
+    plans: p.plans.map((plan) => ({
+      name: pick(plan.name, locale) as string,
+      durationMonths: plan.durationMonths,
+      monthlyPriceUsd: plan.monthlyPriceUsd,
+      totalPriceUsd: plan.totalPriceUsd,
+      savingsPercent: plan.savingsPercent,
+      campaign: pick(plan.campaign, locale),
+      isBestValue: plan.isBestValue,
+    })),
+  };
 }
+
+export function getProduct(slug: string, locale: Locale = "tr"): Product | undefined {
+  const raw = rawProducts.find((p) => p.slug === slug);
+  return raw ? resolveProduct(raw, locale) : undefined;
+}
+
+export function rankedProducts(locale: Locale = "tr"): Product[] {
+  return [...rawProducts]
+    .sort((a, b) => a.rank - b.rank)
+    .map((p) => resolveProduct(p, locale));
+}
+
+export const products: Product[] = rankedProducts("tr");

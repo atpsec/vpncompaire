@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, Check, Crown, Medal, Trophy } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
@@ -26,6 +26,7 @@ const RANK_META = [
 
 export function AudiencePicks({ picks, heading, subheading }: Props) {
   const t = useTranslations("audience");
+  const locale = useLocale() as "tr" | "en";
   return (
     <section className="mt-12">
       {heading ? (
@@ -41,7 +42,7 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
 
       <div className="grid gap-4 sm:grid-cols-3">
         {picks.map((pick, idx) => {
-          const product = getProduct(pick.slug);
+          const product = getProduct(pick.slug, locale);
           if (!product) return null;
           const Rank = RANK_META[idx];
           const RankIcon = Rank.icon;

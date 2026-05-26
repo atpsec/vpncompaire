@@ -49,8 +49,8 @@ export async function ComparisonPage({
   faqs,
   relatedLinks,
 }: ComparisonPageProps) {
-  const a = getProduct(productSlugA);
-  const b = getProduct(productSlugB);
+  const a = getProduct(productSlugA, locale as "tr" | "en");
+  const b = getProduct(productSlugB, locale as "tr" | "en");
   if (!a || !b) return null;
   const t = await getTranslations({ locale, namespace: "comparison" });
 

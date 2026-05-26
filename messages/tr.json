@@ -698,6 +698,19 @@
     },
     "useCaseGrid": {
       "review": "İncele"
+    },
+    "topVPNs": {
+      "kicker": "Sıralama",
+      "editorsPick": "Editör'ün tercihi"
+    },
+    "podium": {
+      "ariaLabel": "İlk üç seçim",
+      "scoreKicker": "Puan",
+      "perMonthStart": "/ay başlangıç",
+      "ctaAffiliate": "Fırsata git",
+      "ctaOfficial": "Resmi siteye git",
+      "readReview": "İncelemeyi oku",
+      "rank1": "#1 Editör seçimi"
     }
   },
   "pricingPlans": {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { TopVPNList } from "@/components/home/top-vpn-list";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -31,10 +31,11 @@ export default async function Page({ params }: Props) {
 function ReviewsHubView() {
   const t = useTranslations("reviewsHub");
   const tNav = useTranslations("nav");
+  const locale = useLocale() as "tr" | "en";
 
   return (
     <>
-      <JsonLd data={itemListSchema(rankedProducts())} />
+      <JsonLd data={itemListSchema(rankedProducts(locale))} />
       <JsonLd
         data={breadcrumbSchema([
           { name: tNav("home"), path: "/" },
