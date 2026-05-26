@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -10,20 +10,20 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 
-export const metadata: Metadata = {
-  title: "VPN Karşılaştırmaları (2026)",
-  description:
-    "VPN'leri kafa kafaya karşılaştır: NordVPN vs Surfshark, ExpressVPN vs NordVPN, Proton vs Mullvad, ücretsiz vs ücretli.",
-};
-
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "compareHub" });
+  return { title: t("metaTitle"), description: t("metaDescription") };
+}
 
 type Comparison = {
   slug: string;
-  title: string;
-  desc: string;
+  title?: string;
+  titleKey?: string;
   available: boolean;
-  tags: readonly string[];
+  tagKey: "popular" | "highVolume" | "privacyFocused" | "comingSoon";
   pair?: readonly [string, string];
 };
 
@@ -31,71 +31,70 @@ const comparisons: readonly Comparison[] = [
   {
     slug: "nordvpn-vs-surfshark",
     title: "NordVPN vs Surfshark",
-    desc: "Aynı şemsiye altında iki dev — güç ile bütçenin karşılaşması.",
     available: true,
-    tags: ["Popüler"],
+    tagKey: "popular",
     pair: ["nordvpn", "surfshark"],
   },
   {
     slug: "expressvpn-vs-nordvpn",
     title: "ExpressVPN vs NordVPN",
-    desc: "İki premium devin yan yana analizi.",
     available: true,
-    tags: ["Yüksek hacim"],
+    tagKey: "highVolume",
     pair: ["expressvpn", "nordvpn"],
   },
   {
     slug: "proton-vs-mullvad",
     title: "Proton VPN vs Mullvad",
-    desc: "Gizlilik puristleri için saf karşılaştırma.",
     available: true,
-    tags: ["Gizlilik odaklı"],
+    tagKey: "privacyFocused",
     pair: ["proton-vpn", "mullvad"],
   },
   {
     slug: "ucretsiz-vs-ucretli-vpn",
-    title: "Ücretsiz vs Ücretli VPN",
-    desc: "Ücretsiz seçenekler ne kadar güvenli? Karar matrisi.",
+    titleKey: "ucretsiz-vs-ucretli-vpn-title",
     available: false,
-    tags: ["Yakında"],
+    tagKey: "comingSoon",
   },
 ] as const;
 
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const localeKey = locale as "tr" | "en";
+  const t = await getTranslations({ locale, namespace: "compareHub" });
 
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Karşılaştırma", path: "/karsilastir" },
+          { name: t("breadcrumbHome"), path: "/" },
+          { name: t("breadcrumbHere"), path: "/karsilastir" },
         ])}
       />
 
       <Container size="lg" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {t("breadcrumbHome")}
           </Link>{" "}
-          › <span className="text-ink-strong">Karşılaştırma</span>
+          › <span className="text-ink-strong">{t("breadcrumbHere")}</span>
         </p>
 
         <header className="mt-6 max-w-3xl">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            VPN Karşılaştırmaları
+            {t("h1")}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            VPN&apos;leri yan yana, kategori bazlı puanlama ve net &quot;hangisi
-            sana uygun&quot; karar matrisleri ile karşılaştır.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{t("lede")}</p>
         </header>
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           {comparisons.map((c) => {
-            const a = c.pair ? getProduct(c.pair[0]) : null;
-            const b = c.pair ? getProduct(c.pair[1]) : null;
+            const a = c.pair ? getProduct(c.pair[0], localeKey) : null;
+            const b = c.pair ? getProduct(c.pair[1], localeKey) : null;
+            const title = c.titleKey
+              ? t(`items.${c.titleKey}`)
+              : (c.title as string);
+            const desc = t(`items.${c.slug}`);
 
             const inner = (
               <Card
@@ -131,21 +130,16 @@ export default async function Page({ params }: Props) {
                             : "text-ink-strong")
                         }
                       >
-                        {c.title}
+                        {title}
                       </h2>
-                      {c.tags.map((t) => (
-                        <Badge
-                          key={t}
-                          variant={c.available ? "brand" : "neutral"}
-                        >
-                          {t}
-                        </Badge>
-                      ))}
+                      <Badge variant={c.available ? "brand" : "neutral"}>
+                        {t(`tags.${c.tagKey}`)}
+                      </Badge>
                     </div>
                   </div>
                 </div>
 
-                <p className="mt-3 text-sm text-ink-muted">{c.desc}</p>
+                <p className="mt-3 text-sm text-ink-muted">{desc}</p>
 
                 {a && b ? (
                   <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
@@ -156,7 +150,7 @@ export default async function Page({ params }: Props) {
 
                 {c.available && (
                   <div className="mt-4 inline-flex items-center text-xs font-medium text-brand-700">
-                    Karşılaştırmayı oku <ArrowRight className="ml-1 size-3" />
+                    {t("readComparison")} <ArrowRight className="ml-1 size-3" />
                   </div>
                 )}
               </Card>
@@ -177,14 +171,12 @@ export default async function Page({ params }: Props) {
         </div>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">
-            Karşılaştırmadan önce, tüm VPN&apos;lerin tek tek incelemesi
-          </p>
+          <p className="text-sm text-ink-muted">{t("footerKicker")}</p>
           <Link
             href="/en-iyi-vpn"
             className="mt-2 inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline"
           >
-            En İyi 10 VPN sıralamasına git <ArrowRight className="size-4" />
+            {t("footerLink")} <ArrowRight className="size-4" />
           </Link>
         </section>
       </Container>

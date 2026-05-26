@@ -572,6 +572,42 @@
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Advertising disclosure"
   },
+  "compareHub": {
+    "metaTitle": "VPN Comparisons (2026)",
+    "metaDescription": "Head-to-head VPN comparisons: NordVPN vs Surfshark, ExpressVPN vs NordVPN, Proton vs Mullvad, free vs paid.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Compare",
+    "h1": "VPN Comparisons",
+    "lede": "Compare VPNs side by side with category-level scoring and clear \"which fits you\" decision matrices.",
+    "items": {
+      "nordvpn-vs-surfshark": "Two giants under one umbrella — power meets budget.",
+      "expressvpn-vs-nordvpn": "Two premium heavyweights, side by side.",
+      "proton-vs-mullvad": "A clean comparison for privacy purists.",
+      "ucretsiz-vs-ucretli-vpn": "How safe are free options? A decision matrix.",
+      "ucretsiz-vs-ucretli-vpn-title": "Free vs paid VPN"
+    },
+    "tags": {
+      "popular": "Popular",
+      "highVolume": "High traffic",
+      "privacyFocused": "Privacy-focused",
+      "comingSoon": "Coming soon"
+    },
+    "readComparison": "Read comparison",
+    "footerKicker": "Before comparing, see each VPN's full review",
+    "footerLink": "Go to the Top 10 VPN ranking"
+  },
+  "deviceHub": {
+    "metaTitle": "VPN Guides by Device — Android, iPhone, iPad, Smart TV",
+    "metaDescription": "VPN setup on Android, iPhone, iPad and Smart TVs — why it matters and the best picks for each device.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Devices",
+    "h1": "VPN guides by device",
+    "lede": "VPN setup isn't the same everywhere. An app on Android, split-screen behaviour on iPad, router-level for Smart TVs. We explain which approach fits which device.",
+    "cardTitle": "VPN for {name}",
+    "cardCta": "Read the guide",
+    "notListedTitle": "My device isn't here — what now?",
+    "notListedBody": "Windows and macOS have native desktop apps from every provider; one-click install. On Linux, WireGuard-based setups are the most common. For game consoles (PS5, Xbox) and smart-home devices, router-level VPN is the only practical path — the router section of the Smart TV guide applies to them too."
+  },
   "refundPage": {
     "metaTitle": "VPN Cancellation & Refund Guide (2026) — Step-by-Step for 10 VPNs",
     "metaDescription": "How to cancel and request a refund from NordVPN, ExpressVPN, Surfshark and other VPN providers. Refund window, common pitfalls and step-by-step instructions.",

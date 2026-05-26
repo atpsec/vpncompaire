@@ -18,7 +18,7 @@ type Props = { params: Promise<{ locale: string }> };
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const device = getDevice("smart-tv");
+  const device = getDevice("smart-tv", locale as "tr" | "en");
   if (!device) notFound();
   return <DevicePage device={device} locale={locale} />;
 }

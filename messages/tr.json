@@ -572,6 +572,42 @@
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Reklam Açıklaması"
   },
+  "compareHub": {
+    "metaTitle": "VPN Karşılaştırmaları (2026)",
+    "metaDescription": "VPN'leri kafa kafaya karşılaştır: NordVPN vs Surfshark, ExpressVPN vs NordVPN, Proton vs Mullvad, ücretsiz vs ücretli.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Karşılaştırma",
+    "h1": "VPN Karşılaştırmaları",
+    "lede": "VPN'leri yan yana, kategori bazlı puanlama ve net \"hangisi sana uygun\" karar matrisleri ile karşılaştır.",
+    "items": {
+      "nordvpn-vs-surfshark": "Aynı şemsiye altında iki dev — güç ile bütçenin karşılaşması.",
+      "expressvpn-vs-nordvpn": "İki premium devin yan yana analizi.",
+      "proton-vs-mullvad": "Gizlilik puristleri için saf karşılaştırma.",
+      "ucretsiz-vs-ucretli-vpn": "Ücretsiz seçenekler ne kadar güvenli? Karar matrisi.",
+      "ucretsiz-vs-ucretli-vpn-title": "Ücretsiz vs Ücretli VPN"
+    },
+    "tags": {
+      "popular": "Popüler",
+      "highVolume": "Yüksek hacim",
+      "privacyFocused": "Gizlilik odaklı",
+      "comingSoon": "Yakında"
+    },
+    "readComparison": "Karşılaştırmayı oku",
+    "footerKicker": "Karşılaştırmadan önce, tüm VPN'lerin tek tek incelemesi",
+    "footerLink": "En İyi 10 VPN sıralamasına git"
+  },
+  "deviceHub": {
+    "metaTitle": "Cihazlara Göre VPN Rehberi — Android, iPhone, iPad, Smart TV",
+    "metaDescription": "Android, iPhone, iPad ve Smart TV'lerde VPN kurulumu, neden gerekli olduğu ve cihaza özel en iyi seçimler.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Cihazlar",
+    "h1": "Cihazına göre VPN rehberi",
+    "lede": "VPN kurmak her cihazda aynı değil. Android'de uygulama, iPad'de split-screen davranışı, Smart TV'de router'a inmek gerekiyor. Hangi yöntemin senin için doğru olduğunu cihazına özel açıklıyoruz.",
+    "cardTitle": "{name} için VPN",
+    "cardCta": "Rehberi oku",
+    "notListedTitle": "Cihazımın listede yok — ne yapmalıyım?",
+    "notListedBody": "Windows ve macOS için her sağlayıcının doğrudan masaüstü uygulaması var; tek tıkla kurulum yeterli. Linux'ta WireGuard tabanlı bağlantı en yaygın olanı. Oyun konsolları (PS5, Xbox) ve akıllı ev cihazları için tek pratik yol router seviyesinde VPN — Smart TV rehberindeki router bölümü onlar için de geçerli."
+  },
   "refundPage": {
     "metaTitle": "VPN İptal ve İade Rehberi (2026) — 10 VPN için Adım Adım Talimatlar",
     "metaDescription": "NordVPN, ExpressVPN, Surfshark ve diğer VPN sağlayıcılarında abonelik iptali ve para iade süreci. İade penceresi, yaygın tuzaklar ve adım adım talimatlar.",

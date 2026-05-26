@@ -458,6 +458,13 @@ export const devices: DeviceContent[] = [
   },
 ];
 
-export function getDevice(slug: string): DeviceContent | undefined {
-  return devices.find((d) => d.slug === slug);
+import type { Locale } from "@/i18n/pick";
+import { devicesEn } from "./devices.en";
+
+export function getDevice(
+  slug: string,
+  locale: Locale = "tr",
+): DeviceContent | undefined {
+  const list = locale === "en" ? devicesEn : devices;
+  return list.find((d) => d.slug === slug);
 }
