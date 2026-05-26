@@ -26,6 +26,25 @@ const envSchema = z.object({
     .min(1)
     .optional()
     .or(z.literal("")),
+
+  // Affiliate tracking URLs — server-side only (not NEXT_PUBLIC_*).
+  // Each one holds the FULL personal tracking URL provided by the
+  // affiliate dashboard (e.g. https://go.nordvpn.net/aff_c?offer_id=...&aff_id=YOURID).
+  // /go/[slug] redirects here when set; otherwise falls back to the
+  // brand's public URL with utm_* parameters appended.
+  //
+  // To enable for a provider, set the env var in Vercel project settings
+  // (or .env.local for local dev). Leave empty/unset to disable affiliate
+  // for that provider.
+  AFFILIATE_NORDVPN_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_SURFSHARK_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_EXPRESSVPN_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_PROTON_VPN_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_PIA_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_CYBERGHOST_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_IPVANISH_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_WINDSCRIBE_URL: z.string().url().optional().or(z.literal("")),
+  AFFILIATE_TUNNELBEAR_URL: z.string().url().optional().or(z.literal("")),
 });
 
 const parsed = envSchema.safeParse({
@@ -33,6 +52,15 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_SITE_BRAND: process.env.NEXT_PUBLIC_SITE_BRAND,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_PLAUSIBLE_DOMAIN: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN,
+  AFFILIATE_NORDVPN_URL: process.env.AFFILIATE_NORDVPN_URL,
+  AFFILIATE_SURFSHARK_URL: process.env.AFFILIATE_SURFSHARK_URL,
+  AFFILIATE_EXPRESSVPN_URL: process.env.AFFILIATE_EXPRESSVPN_URL,
+  AFFILIATE_PROTON_VPN_URL: process.env.AFFILIATE_PROTON_VPN_URL,
+  AFFILIATE_PIA_URL: process.env.AFFILIATE_PIA_URL,
+  AFFILIATE_CYBERGHOST_URL: process.env.AFFILIATE_CYBERGHOST_URL,
+  AFFILIATE_IPVANISH_URL: process.env.AFFILIATE_IPVANISH_URL,
+  AFFILIATE_WINDSCRIBE_URL: process.env.AFFILIATE_WINDSCRIBE_URL,
+  AFFILIATE_TUNNELBEAR_URL: process.env.AFFILIATE_TUNNELBEAR_URL,
 });
 
 if (!parsed.success) {
