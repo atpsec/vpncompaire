@@ -1,7 +1,6 @@
-import { ArrowRight, Crown, Trophy, Medal } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
@@ -11,22 +10,23 @@ export function TopThreePodium() {
   const top = rankedProducts().slice(0, 3);
   return (
     <section
-      aria-label="İlk üç seçim"
-      className="relative -mt-2 sm:-mt-4 pb-8 sm:pb-12"
+      aria-label="Featured"
+      className="relative"
     >
       <Container>
-        <div
-          className="-mx-4 px-4 overflow-x-auto sm:mx-0 sm:px-0 sm:overflow-visible snap-x snap-mandatory scroll-pl-4"
-          style={{ scrollbarWidth: "none" }}
-        >
-          <ul className="flex gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
+        <div className="py-12 sm:py-16">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs uppercase tracking-[0.22em] text-brand-300">
+              Featured
+            </span>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-medium tracking-[-0.02em] text-ink-strong">
+              The <span className="font-display italic text-brand-300 font-normal">finest</span> three
+            </h2>
+          </div>
+
+          <ul className="grid gap-5 sm:grid-cols-3">
             {top.map((p, i) => (
-              <li
-                key={p.slug}
-                className="snap-start shrink-0 w-[78%] min-w-[280px] sm:w-auto sm:min-w-0"
-              >
-                <PodiumCard product={p} rank={i + 1} />
-              </li>
+              <PremiumCard key={p.slug} product={p} rank={i + 1} />
             ))}
           </ul>
         </div>
@@ -35,119 +35,102 @@ export function TopThreePodium() {
   );
 }
 
-function PodiumCard({ product, rank }: { product: Product; rank: number }) {
-  const isWinner = rank === 1;
+function PremiumCard({
+  product,
+  rank,
+}: {
+  product: Product;
+  rank: number;
+}) {
+  const isFirst = rank === 1;
   const bestPlan =
     product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
 
   return (
-    <article
+    <li
       className={cn(
-        "relative h-full overflow-hidden rounded-2xl border bg-white shadow-sm",
-        isWinner
-          ? "border-brand-300 shadow-md ring-1 ring-brand-200/50"
-          : "border-border",
+        "group relative overflow-hidden rounded-2xl border border-border p-6 sm:p-7 transition-all duration-300 hover:border-brand-400/30",
+        isFirst
+          ? "bg-gradient-to-br from-brand-950/40 via-surface-subtle to-surface-subtle ring-1 ring-brand-400/20"
+          : "bg-surface-subtle/60 backdrop-blur",
       )}
     >
-      {isWinner && (
+      {isFirst && (
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-accent-500"
+          className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-brand-400/10 blur-3xl"
         />
       )}
-      <div
-        aria-hidden="true"
-        className={cn(
-          "pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl",
-          isWinner ? "bg-brand-100/50" : "bg-surface-subtle",
-        )}
-      />
 
-      <div className="relative p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <RankBadge rank={rank} />
-          <div className="text-right">
-            <div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">
-              Puan
-            </div>
-            <div className="text-2xl font-bold text-ink-strong tabular-nums">
-              {product.score.toFixed(1)}
-            </div>
+      <div className="relative">
+        <div className="flex items-start justify-between">
+          <span className="text-xs uppercase tracking-[0.22em] text-ink-muted">
+            № {String(rank).padStart(2, "0")}
+          </span>
+          {isFirst && (
+            <span className="rounded-full border border-brand-400/40 bg-brand-400/10 px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-brand-300">
+              Editor's pick
+            </span>
+          )}
+        </div>
+
+        <div className="mt-6 flex items-center gap-3">
+          <VPNLogo slug={product.slug} size={48} />
+          <div>
+            <h3 className="text-xl font-medium text-ink-strong tracking-tight">
+              {product.brand}
+            </h3>
+            <p className="text-xs text-ink-muted">{product.positioning}</p>
           </div>
         </div>
 
-        {/* BIG logo — main visual anchor */}
-        <div className="mt-4 flex justify-center">
-          <VPNLogo
-            slug={product.slug}
-            size={96}
-            className="drop-shadow-md"
-          />
-        </div>
+        <p className="mt-5 text-sm text-ink-muted leading-relaxed line-clamp-3">
+          {product.summary}
+        </p>
 
-        <div className="mt-4 text-center">
-          <h3 className="text-xl font-bold text-ink-strong tracking-tight">
-            {product.brand}
-          </h3>
-          <p className="mt-1 text-xs text-ink-subtle">{product.positioning}</p>
-        </div>
+        <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-5">
+          <div>
+            <dt className="text-[11px] uppercase tracking-wider text-ink-muted">
+              Score
+            </dt>
+            <dd className="mt-1 text-2xl font-light text-ink-strong tabular-nums">
+              {product.score.toFixed(1)}
+              <span className="text-sm text-ink-subtle font-normal">/10</span>
+            </dd>
+          </div>
+          <div>
+            <dt className="text-[11px] uppercase tracking-wider text-ink-muted">
+              From
+            </dt>
+            <dd className="mt-1 text-2xl font-light text-ink-strong tabular-nums">
+              ${bestPlan.monthlyPriceUsd.toFixed(2)}
+              <span className="text-sm text-ink-subtle font-normal">/mo</span>
+            </dd>
+          </div>
+        </dl>
 
-        <div className="mt-4 flex items-baseline justify-center gap-1">
-          <span className="text-2xl font-bold text-ink-strong tabular-nums">
-            ${bestPlan.monthlyPriceUsd.toFixed(2)}
-          </span>
-          <span className="text-xs text-ink-subtle">/ay başlangıç</span>
-        </div>
-
-        <div className="mt-5 flex flex-col gap-2">
-          <Button
-            asChild
-            variant={product.hasAffiliate ? "primary" : "secondary"}
-            size="md"
-            className="w-full"
+        <div className="mt-6 flex flex-col gap-2">
+          <a
+            href={
+              product.hasAffiliate
+                ? affiliatePath(product.slug)
+                : product.pricingUrl
+            }
+            rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
+            target={product.hasAffiliate ? "_self" : "_blank"}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-ink-strong px-5 py-2.5 text-sm font-medium text-surface-base hover:bg-brand-300 transition-colors"
           >
-            <a
-              href={
-                product.hasAffiliate
-                  ? affiliatePath(product.slug)
-                  : product.pricingUrl
-              }
-              rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
-              target={product.hasAffiliate ? "_self" : "_blank"}
-            >
-              {product.hasAffiliate ? "Fırsata git" : "Resmi siteye git"}
-              <ArrowRight className="size-4" />
-            </a>
-          </Button>
-          <Button asChild variant="ghost" size="sm" className="w-full">
-            <Link href={`/inceleme/${product.slug}`}>
-              İncelemeyi oku
-            </Link>
-          </Button>
+            {product.hasAffiliate ? "View offer" : "Visit site"}
+            <ArrowUpRight className="size-3.5" />
+          </a>
+          <Link
+            href={`/inceleme/${product.slug}`}
+            className="text-center text-xs text-ink-muted hover:text-brand-300"
+          >
+            Read review →
+          </Link>
         </div>
       </div>
-    </article>
-  );
-}
-
-function RankBadge({ rank }: { rank: number }) {
-  if (rank === 1) {
-    return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow">
-        <Crown className="size-3" /> #1 Editör seçimi
-      </span>
-    );
-  }
-  if (rank === 2) {
-    return (
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-strong/40 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-ink-strong">
-        <Trophy className="size-3" /> #2
-      </span>
-    );
-  }
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-subtle px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-ink-strong">
-      <Medal className="size-3" /> #3
-    </span>
+    </li>
   );
 }
