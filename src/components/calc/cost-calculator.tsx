@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Calculator, Info, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
@@ -8,17 +9,8 @@ import { products } from "@/data/products";
 
 type Horizon = 1 | 2 | 3;
 
-const HORIZONS: { value: Horizon; label: string }[] = [
-  { value: 1, label: "1 yıl" },
-  { value: 2, label: "2 yıl" },
-  { value: 3, label: "3 yıl" },
-];
+const HORIZONS: ReadonlyArray<Horizon> = [1, 2, 3];
 
-/**
- * Estimate total cost over the horizon (in months). The initial discounted
- * plan covers up to its durationMonths; after that we assume renewal at the
- * monthly plan rate (the typical "renewal trap" pricing).
- */
 function estimateTotal(
   initialMonthlyUsd: number,
   initialDurationMonths: number,
@@ -33,6 +25,7 @@ function estimateTotal(
 }
 
 export function CostCalculator() {
+  const t = useTranslations("calculator.tool");
   const [horizon, setHorizon] = useState<Horizon>(3);
 
   const horizonMonths = horizon * 12;
@@ -68,40 +61,36 @@ export function CostCalculator() {
     <div className="mt-8">
       <Card className="p-6">
         <div className="flex items-center gap-2 text-sm font-medium text-brand-700">
-          <Calculator className="size-4" /> Süre seç
+          <Calculator className="size-4" /> {t("horizonHeading")}
         </div>
         <div className="mt-3 flex flex-wrap gap-2">
-          {HORIZONS.map((h) => (
+          {HORIZONS.map((value) => (
             <button
-              key={h.value}
+              key={value}
               type="button"
-              onClick={() => setHorizon(h.value)}
+              onClick={() => setHorizon(value)}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                horizon === h.value
+                horizon === value
                   ? "bg-brand-600 text-white"
                   : "border border-border bg-white hover:border-brand-300"
               }`}
             >
-              {h.label}
+              {t(`horizon${value}`)}
             </button>
           ))}
         </div>
 
         <div className="mt-4 flex items-start gap-2 rounded-md bg-accent-50/60 border border-accent-200 p-3 text-xs text-ink leading-relaxed">
           <Info className="size-4 text-accent-600 mt-0.5 shrink-0" />
-          <p>
-            Hesaplama mantığı: ilk dönem indirimli fiyat, sonra aylık plan
-            yenileme fiyatı. Çoğu sağlayıcı &quot;yenileme tuzağı&quot; kullanır —
-            ilk dönem ucuz, sonra 2-3 katı. Otomatik yenilemeyi kapatmak ve
-            yeni indirim almak için elle yenilemek tasarruf sağlar.
-          </p>
+          <p>{t("explanation")}</p>
         </div>
       </Card>
 
       {cheapest ? (
         <Card className="mt-6 p-6 border-success-300 bg-gradient-to-br from-success-50/40 to-brand-50/30">
           <div className="flex items-center gap-2 text-sm font-medium text-success-700">
-            <TrendingUp className="size-4" /> {horizon} yıl için en uygun
+            <TrendingUp className="size-4" />{" "}
+            {t("cheapestKicker", { years: horizon })}
           </div>
           <div className="mt-3 flex items-center gap-4">
             <VPNLogo slug={cheapest.product.slug} size={64} />
@@ -110,8 +99,10 @@ export function CostCalculator() {
                 {cheapest.product.brand}
               </h3>
               <p className="text-sm text-ink-muted">
-                Toplam ${cheapest.total.toFixed(2)} — etkin aylık $
-                {cheapest.effectiveMonthly.toFixed(2)}
+                {t("cheapestSummary", {
+                  total: cheapest.total.toFixed(2),
+                  monthly: cheapest.effectiveMonthly.toFixed(2),
+                })}
               </p>
             </div>
           </div>
@@ -122,13 +113,19 @@ export function CostCalculator() {
         <table className="w-full border-collapse text-sm">
           <thead>
             <tr className="border-b border-border bg-surface-subtle/50">
-              <th className="text-left p-3 font-semibold">VPN</th>
-              <th className="text-right p-3 font-semibold">İlk dönem</th>
-              <th className="text-right p-3 font-semibold">Yenileme</th>
+              <th className="text-left p-3 font-semibold">{t("table.vpn")}</th>
               <th className="text-right p-3 font-semibold">
-                Toplam ({horizon} yıl)
+                {t("table.initial")}
               </th>
-              <th className="text-right p-3 font-semibold">Etkin aylık</th>
+              <th className="text-right p-3 font-semibold">
+                {t("table.renewal")}
+              </th>
+              <th className="text-right p-3 font-semibold">
+                {t("table.totalYears", { years: horizon })}
+              </th>
+              <th className="text-right p-3 font-semibold">
+                {t("table.effectiveMonthly")}
+              </th>
             </tr>
           </thead>
           <tbody>

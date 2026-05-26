@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
+import { useTranslations, useLocale } from "next-intl";
 import { BookA } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -10,43 +11,47 @@ import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 import { glossary, categories } from "@/data/glossary";
 
-export const metadata: Metadata = {
-  title: "VPN Sözlüğü (2026) — No-logs, Kill Switch, WireGuard ve Daha Fazlası",
-  description:
-    "VPN terimleri sözlüğü: no-logs, kill switch, WireGuard, jurisdiction, RAM-only, port forwarding, multi-hop. 20+ terimin Türkçe açıklaması.",
-  alternates: { canonical: absoluteUrl("/sozluk") },
-  openGraph: {
-    title: "VPN Sözlüğü",
-    description: "Tüm VPN terimlerinin Türkçe açıklamalı sözlüğü.",
-    url: absoluteUrl("/sozluk"),
-    type: "website",
-  },
-  keywords: [
-    "vpn sözlüğü",
-    "vpn terimleri",
-    "no-logs nedir",
-    "kill switch nedir",
-    "wireguard nedir",
-    "vpn jurisdiction",
-  ],
-};
-
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "glossary" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: absoluteUrl("/sozluk") },
+    openGraph: {
+      title: t("ogTitle"),
+      description: t("ogDescription"),
+      url: absoluteUrl("/sozluk"),
+      type: "website",
+    },
+  };
+}
 
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  return <GlossaryPageView />;
+}
+
+function GlossaryPageView() {
+  const t = useTranslations("glossary");
+  const tNav = useTranslations("nav");
+  const locale = useLocale();
 
   const definedTermSet = {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
-    name: "vpncompaire VPN Sözlüğü",
-    inLanguage: "tr-TR",
-    hasDefinedTerm: glossary.map((t) => ({
+    name: t("schemaName"),
+    inLanguage: locale === "en" ? "en" : "tr-TR",
+    hasDefinedTerm: glossary.map((term) => ({
       "@type": "DefinedTerm",
-      "@id": absoluteUrl(`/sozluk#${t.id}`),
-      name: t.term,
-      description: t.long,
+      "@id": absoluteUrl(`/sozluk#${term.id}`),
+      name: term.term,
+      description: term.long,
       inDefinedTermSet: absoluteUrl("/sozluk"),
     })),
   };
@@ -55,8 +60,8 @@ export default async function Page({ params }: Props) {
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "VPN sözlüğü", path: "/sozluk" },
+          { name: tNav("home"), path: "/" },
+          { name: t("breadcrumb"), path: "/sozluk" },
         ])}
       />
       <JsonLd data={definedTermSet} />
@@ -64,25 +69,22 @@ export default async function Page({ params }: Props) {
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {tNav("home")}
           </Link>{" "}
-          › <span className="text-ink-strong">VPN sözlüğü</span>
+          › <span className="text-ink-strong">{t("breadcrumb")}</span>
         </p>
 
         <header className="mt-6">
           <Badge variant="brand">
-            <BookA className="size-3" /> Sözlük
+            <BookA className="size-3" /> {t("badgeLabel")}
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            VPN sözlüğü
+            {t("h1")}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            VPN dünyasının yaygın terimleri ve net Türkçe açıklamaları.
-            Bilmediğin bir terim için Ctrl+F (veya Cmd+F) ile arayabilirsin.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{t("intro")}</p>
         </header>
 
-        <nav aria-label="Kategoriler" className="mt-8 flex flex-wrap gap-2">
+        <nav aria-label={t("categoriesAria")} className="mt-8 flex flex-wrap gap-2">
           {categories.map((cat) => (
             <a
               key={cat}
@@ -95,36 +97,36 @@ export default async function Page({ params }: Props) {
         </nav>
 
         {categories.map((cat) => {
-          const terms = glossary.filter((t) => t.category === cat);
+          const terms = glossary.filter((term) => term.category === cat);
           if (terms.length === 0) return null;
           return (
             <section key={cat} id={`cat-${cat}`} className="mt-12 scroll-mt-20">
               <h2 className="text-2xl font-bold text-ink-strong">{cat}</h2>
               <div className="mt-4 grid gap-3">
-                {terms.map((t) => (
+                {terms.map((term) => (
                   <Card
-                    key={t.id}
-                    id={t.id}
+                    key={term.id}
+                    id={term.id}
                     className="p-5 scroll-mt-20 hover:border-brand-300 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-3 flex-wrap">
                       <div className="min-w-0">
                         <h3 className="font-semibold text-ink-strong">
-                          {t.term}
+                          {term.term}
                         </h3>
                         <p className="mt-1 text-sm text-ink-muted">
-                          {t.short}
+                          {term.short}
                         </p>
                       </div>
-                      <Badge variant="outline">{t.category}</Badge>
+                      <Badge variant="outline">{term.category}</Badge>
                     </div>
                     <p className="mt-3 text-sm text-ink leading-relaxed">
-                      {t.long}
+                      {term.long}
                     </p>
-                    {t.related && t.related.length > 0 ? (
+                    {term.related && term.related.length > 0 ? (
                       <p className="mt-3 text-xs text-ink-muted">
-                        İlgili:{" "}
-                        {t.related.map((rid, i) => {
+                        {t("relatedLabel")}
+                        {term.related.map((rid, i) => {
                           const r = glossary.find((g) => g.id === rid);
                           if (!r) return null;
                           return (
@@ -135,7 +137,7 @@ export default async function Page({ params }: Props) {
                               >
                                 {r.term}
                               </a>
-                              {i < (t.related!.length - 1) ? ", " : ""}
+                              {i < (term.related!.length - 1) ? ", " : ""}
                             </span>
                           );
                         })}
@@ -149,25 +151,25 @@ export default async function Page({ params }: Props) {
         })}
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">İlgili sayfalar</p>
+          <p className="text-sm text-ink-muted">{t("relatedPagesHeading")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/rehber/vpn-nedir"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
             >
-              VPN nedir?
+              {t("relatedLinks.whatIsVpn")}
             </Link>
             <Link
               href="/rehber/vpn-guvenlik-kontrol-listesi"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
             >
-              Güvenlik kontrol listesi
+              {t("relatedLinks.checklist")}
             </Link>
             <Link
               href="/metodoloji"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
             >
-              Test metodolojimiz
+              {t("relatedLinks.methodology")}
             </Link>
           </div>
         </section>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import {
   Lock,
   Tv,
@@ -8,6 +9,7 @@ import {
   Flag,
   Globe2,
   ArrowRight,
+  type LucideIcon,
 } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -15,92 +17,68 @@ import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Kullanım Amacına Göre En İyi VPN'ler",
-  description:
-    "Gizlilik, streaming, oyun, seyahat, Türkiye için en uygun VPN'leri amaca göre seç.",
-};
-
 type Props = { params: Promise<{ locale: string }> };
 
-const useCases = [
-  {
-    slug: "gizlilik",
-    title: "Gizlilik için en iyi VPN",
-    desc: "İSP gözetiminden, halka açık Wi-Fi risklerinden ve veri toplayan üçüncü taraflardan korunma.",
-    Icon: Lock,
-    tone: "brand",
-  },
-  {
-    slug: "streaming",
-    title: "Streaming için en iyi VPN",
-    desc: "Netflix, Disney+, BBC iPlayer, HBO Max ve bölgesel kütüphane erişimi.",
-    Icon: Tv,
-    tone: "accent",
-  },
-  {
-    slug: "oyun",
-    title: "Oyun için en iyi VPN",
-    desc: "Düşük gecikme, DDoS koruması, bölgesel sunucu erişimi.",
-    Icon: Gamepad2,
-    tone: "brand",
-  },
-  {
-    slug: "seyahat",
-    title: "Seyahat için en iyi VPN",
-    desc: "Halka açık Wi-Fi güvenliği, kısıtlı ağlar, ülke bypass.",
-    Icon: Plane,
-    tone: "accent",
-  },
-  {
-    slug: "turkiye",
-    title: "Türkiye için en iyi VPN",
-    desc: "TR sunucusu, DPI bypass, yasal kullanım rehberi.",
-    Icon: Flag,
-    tone: "brand",
-  },
-  {
-    slug: "yurt-disindaki-turkler",
-    title: "Yurt dışı Türkler için VPN",
-    desc: "BluTV, Exxen, Netflix TR, e-Devlet, Türk bankacılık erişimi.",
-    Icon: Globe2,
-    tone: "accent",
-  },
-] as const;
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "useCaseHub" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  };
+}
+
+const USE_CASES: ReadonlyArray<{
+  slug: string;
+  Icon: LucideIcon;
+  tone: "brand" | "accent";
+}> = [
+  { slug: "gizlilik", Icon: Lock, tone: "brand" },
+  { slug: "streaming", Icon: Tv, tone: "accent" },
+  { slug: "oyun", Icon: Gamepad2, tone: "brand" },
+  { slug: "seyahat", Icon: Plane, tone: "accent" },
+  { slug: "turkiye", Icon: Flag, tone: "brand" },
+  { slug: "yurt-disindaki-turkler", Icon: Globe2, tone: "accent" },
+];
 
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  return <UseCaseHubView />;
+}
+
+function UseCaseHubView() {
+  const t = useTranslations("useCaseHub");
+  const tNav = useTranslations("nav");
 
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Kullanım Alanları", path: "/en-iyi" },
+          { name: tNav("home"), path: "/" },
+          { name: t("breadcrumb"), path: "/en-iyi" },
         ])}
       />
 
       <Container size="lg" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {tNav("home")}
           </Link>{" "}
-          › <span className="text-ink-strong">Kullanım Alanları</span>
+          › <span className="text-ink-strong">{t("breadcrumb")}</span>
         </p>
 
         <header className="mt-6 max-w-3xl">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            Amaca göre en iyi VPN
+            {t("h1")}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            Tek bir &quot;en iyi VPN&quot; yok — kullanım amacına göre değişir.
-            İhtiyacına en uygun listesi seç.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{t("intro")}</p>
         </header>
 
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {useCases.map(({ slug, title, desc, Icon, tone }) => (
+          {USE_CASES.map(({ slug, Icon, tone }) => (
             <Link key={slug} href={`/en-iyi/${slug}`} className="group">
               <Card className="p-5 hover:border-brand-300 hover:shadow-md transition-all h-full">
                 <div
@@ -114,11 +92,13 @@ export default async function Page({ params }: Props) {
                   <Icon className="size-6" aria-hidden="true" />
                 </div>
                 <h2 className="mt-4 font-semibold text-ink-strong group-hover:text-brand-700">
-                  {title}
+                  {t(`cards.${slug}.title`)}
                 </h2>
-                <p className="mt-1 text-sm text-ink-muted">{desc}</p>
+                <p className="mt-1 text-sm text-ink-muted">
+                  {t(`cards.${slug}.desc`)}
+                </p>
                 <div className="mt-3 inline-flex items-center text-xs font-medium text-brand-700">
-                  İncele <ArrowRight className="ml-1 size-3" />
+                  {t("cardCta")} <ArrowRight className="ml-1 size-3" />
                 </div>
               </Card>
             </Link>

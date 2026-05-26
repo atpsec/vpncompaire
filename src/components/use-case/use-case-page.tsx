@@ -1,5 +1,6 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
@@ -44,12 +45,14 @@ export function UseCasePage({
   considerations,
   relatedLinks,
 }: UseCasePageProps) {
+  const t = useTranslations("useCase");
+
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Kullanım Alanları", path: "/en-iyi" },
+          { name: t("breadcrumb.home"), path: "/" },
+          { name: t("breadcrumb.hub"), path: "/en-iyi" },
           { name: title, path: `/en-iyi/${slug}` },
         ])}
       />
@@ -58,11 +61,11 @@ export function UseCasePage({
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {t("breadcrumb.home")}
           </Link>{" "}
           ›{" "}
           <Link href="/en-iyi" className="hover:text-ink">
-            Kullanım Alanları
+            {t("breadcrumb.hub")}
           </Link>{" "}
           › <span className="text-ink-strong">{badgeLabel}</span>
         </p>
@@ -79,14 +82,14 @@ export function UseCasePage({
 
         <Card className="mt-8 p-6 bg-brand-50/40">
           <h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2">
-            <ShieldCheck className="size-5 text-brand-600" /> Hızlı özet
+            <ShieldCheck className="size-5 text-brand-600" /> {t("summaryTitle")}
           </h2>
           <p className="mt-3 text-ink leading-relaxed">{summary}</p>
         </Card>
 
         <section className="mt-12">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            İlk {picks.length} seçim
+            {t("picksHeading", { count: picks.length })}
           </h2>
           <div className="mt-6 space-y-4">
             {picks.map((pick, idx) => {
@@ -121,20 +124,23 @@ export function UseCasePage({
                             href={affiliatePath(product.slug)}
                             rel="sponsored nofollow"
                           >
-                            {product.brand}{" "}
-                            {product.hasAffiliate ? "fırsatına git" : "sitesine git"}
+                            {product.hasAffiliate
+                              ? t("ctaAffiliate", { brand: product.brand })
+                              : t("ctaOfficial", { brand: product.brand })}
                             <ArrowRight className="size-4" />
                           </a>
                         </Button>
                         <Button asChild variant="ghost" size="sm">
                           <Link href={`/inceleme/${product.slug}`}>
-                            Tam incelemeyi oku →
+                            {t("readReview")}
                           </Link>
                         </Button>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-xs text-ink-subtle">Puan</div>
+                      <div className="text-xs text-ink-subtle">
+                        {t("scoreLabel")}
+                      </div>
                       <div className="text-2xl font-bold text-brand-700">
                         {product.score.toFixed(1)}
                         <span className="text-xs text-ink-subtle font-normal">
@@ -151,7 +157,7 @@ export function UseCasePage({
 
         {considerations.length > 0 && (
           <section className="mt-16 prose prose-stone max-w-none">
-            <h2>Neye dikkat etmeli?</h2>
+            <h2>{t("considerationsHeading")}</h2>
             {considerations.map((c) => (
               <div key={c.title}>
                 <h3>{c.title}</h3>
@@ -162,7 +168,7 @@ export function UseCasePage({
         )}
 
         <section className="mt-16 prose prose-stone max-w-none">
-          <h2>Sıkça sorulan sorular</h2>
+          <h2>{t("faqHeading")}</h2>
           {faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
@@ -172,7 +178,7 @@ export function UseCasePage({
         </section>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">İlgili sayfalar</p>
+          <p className="text-sm text-ink-muted">{t("relatedHeading")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             {relatedLinks.map((l) => (
               <Link
@@ -189,3 +195,4 @@ export function UseCasePage({
     </>
   );
 }
+

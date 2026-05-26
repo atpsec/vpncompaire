@@ -34,7 +34,7 @@ export function SiteFooter() {
                 <SocialLinks />
               </div>
               <p className="mt-2 text-[11px] text-ink-subtle">
-                Sosyal medya hesapları yakında.
+                {t("socialSoon")}
               </p>
             </div>
           </div>
@@ -137,7 +137,7 @@ export function SiteFooter() {
                   href="/iptal-ve-iade"
                   className="text-ink-muted hover:text-ink"
                 >
-                  İptal & İade
+                  {t("links.cancel")}
                 </Link>
               </li>
               <li>
@@ -145,7 +145,7 @@ export function SiteFooter() {
                   href="/guvenlik-araclari"
                   className="text-ink-muted hover:text-ink"
                 >
-                  Güvenlik araçları
+                  {t("links.security")}
                 </Link>
               </li>
             </ul>
@@ -169,7 +169,7 @@ export function SiteFooter() {
                   href="/yasal-uyari"
                   className="text-ink-muted hover:text-ink"
                 >
-                  Yasal Uyarı
+                  {t("links.legalNotice")}
                 </Link>
               </li>
               <li>

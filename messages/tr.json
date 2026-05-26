@@ -98,8 +98,12 @@
       "disclosure": "Reklam Açıklaması",
       "privacy": "Gizlilik Politikası",
       "terms": "Kullanım Şartları",
-      "sitemap": "Site haritası"
+      "sitemap": "Site haritası",
+      "cancel": "İptal & İade",
+      "security": "Güvenlik araçları",
+      "legalNotice": "Yasal Uyarı"
     },
+    "socialSoon": "Sosyal medya hesapları yakında.",
     "copyright": "Tüm hakları saklıdır.",
     "disclosureTitle": "Reklam açıklaması.",
     "madeWith": "Gönüllü inceleme projesi · Resmi bir kuruluş değildir"
@@ -108,5 +112,296 @@
     "title": "Çerez tercihi",
     "body": "Bu site yalnızca gizlilik dostu, çerezsiz analitik (Plausible) kullanır. Kişisel veri toplamayız.",
     "accept": "Tamam"
+  },
+  "methodology": {
+    "metaTitle": "Test Metodolojimiz",
+    "metaDescription": "vpncompaire, her VPN'i altı objektif kritere göre değerlendirir: gizlilik, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı ve kullanım kolaylığı.",
+    "badge": "Şeffaf metodoloji",
+    "h1": "Test Metodolojimiz",
+    "intro": "Sitedeki her VPN aynı altı objektif kritere göre değerlendirilir. Affiliate komisyonu, sıralamayı veya puanlamayı etkilemez. Aşağıda her kriterin nasıl ölçüldüğünü açıklıyoruz — şeffaflık, güvenin ön koşuludur.",
+    "criteria": {
+      "privacy": {
+        "title": "Gizlilik politikası ve yargı yetkisi",
+        "body": "VPN sağlayıcının kayıt politikasını, ana ofisinin hangi ülkede olduğunu (5/9/14 Eyes ittifakları, veri saklama yasaları) ve hukuki taleplere nasıl yanıt verdiğini değerlendiriyoruz. Yargı yetkisi, no-logs (kayıt tutmama) iddialarının ne kadar güçlü bir korumayla desteklendiğini belirler."
+      },
+      "audits": {
+        "title": "Bağımsız denetimler",
+        "body": "Üçüncü taraf denetim (Deloitte, KPMG, Cure53, Securitum, Assured AB vb.) raporlarının varlığı, tekrarlanma sıklığı ve kapsamı bu kriterin ağırlığını belirler. Mahkemede kanıtlanmış no-logs (örn. PIA) en yüksek puanı alır."
+      },
+      "speed": {
+        "title": "Hız",
+        "body": "Aynı baz hat üzerinden farklı sunucu mesafelerinde (yakın, orta, uzak) gerçek hız testleri yapıyoruz. WireGuard ve özel protokoller (Lightway, NordLynx) ayrı ayrı değerlendirilir. Pik saat performansı da kontrol edilir."
+      },
+      "streaming": {
+        "title": "Streaming uyumluluğu",
+        "body": "Netflix US/UK/TR, Disney+, BBC iPlayer, BluTV, Exxen gibi platformlarda farklı sunucularla erişim testleri. Sürekli engellenen sağlayıcılar düşük puan alır."
+      },
+      "pricing": {
+        "title": "Fiyat şeffaflığı",
+        "body": "Yenileme fiyatı (renewal price) ile ilk satın alma fiyatı arasındaki fark, gizli ek ücretler, gerçek para iade politikası ve uzun dönem planlardaki gerçek aylık maliyet incelenir."
+      },
+      "usability": {
+        "title": "Kullanım kolaylığı",
+        "body": "Uygulama arayüzü, ilk kurulum süresi, sunucu seçimi kolaylığı, otomatik bağlantı kuralları ve müşteri desteği erişilebilirliği (canlı sohbet, yanıt süresi) değerlendirilir."
+      }
+    },
+    "editorial": {
+      "title": "Editoryal bağımsızlık",
+      "body": "Affiliate gelirini şeffaf biçimde açıklarız (bkz. <link>Reklam Açıklaması</link>). Affiliate programı bulunmayan VPN sağlayıcıları da sıralamamıza dahil edilir; bu, tarafsızlığımızın doğrudan göstergesidir."
+    }
+  },
+  "reviewsHub": {
+    "metaTitle": "2026'da En İyi 10 VPN — Karşılaştırma ve Editör Sıralaması",
+    "metaDescription": "Bağımsız denetim raporları, kendi hız testlerimiz ve fiyat şeffaflığı kriterleri ile 2026 için editör sıralamamız. Sıralama bilgi amaçlıdır; kullanıcı kendi önceliklerine göre değerlendirmelidir.",
+    "breadcrumb": "Ana sayfa › En İyi VPN'ler",
+    "h1": "2026'da En İyi 10 VPN — Editör Sıralaması",
+    "intro": "On VPN'i altı kritere göre değerlendirdik. Aşağıdaki sıralama bağımsız denetim raporları, hız testlerimiz ve fiyat şeffaflığına dayalı editör değerlendirmesidir. Kullanıcılar kendi önceliklerine göre değerlendirme yapmalıdır."
+  },
+  "useCaseHub": {
+    "metaTitle": "Kullanım Amacına Göre En İyi VPN'ler",
+    "metaDescription": "Gizlilik, streaming, oyun, seyahat, Türkiye için en uygun VPN'leri amaca göre seç.",
+    "breadcrumb": "Kullanım Alanları",
+    "h1": "Amaca göre en iyi VPN",
+    "intro": "Tek bir \"en iyi VPN\" yok — kullanım amacına göre değişir. İhtiyacına en uygun listesi seç.",
+    "cardCta": "İncele",
+    "cards": {
+      "gizlilik": {
+        "title": "Gizlilik için en iyi VPN",
+        "desc": "İSP gözetiminden, halka açık Wi-Fi risklerinden ve veri toplayan üçüncü taraflardan korunma."
+      },
+      "streaming": {
+        "title": "Streaming için en iyi VPN",
+        "desc": "Netflix, Disney+, BBC iPlayer, HBO Max ve bölgesel kütüphane erişimi."
+      },
+      "oyun": {
+        "title": "Oyun için en iyi VPN",
+        "desc": "Düşük gecikme, DDoS koruması, bölgesel sunucu erişimi."
+      },
+      "seyahat": {
+        "title": "Seyahat için en iyi VPN",
+        "desc": "Halka açık Wi-Fi güvenliği, kısıtlı ağlar, ülke bypass."
+      },
+      "turkiye": {
+        "title": "Türkiye için en iyi VPN",
+        "desc": "TR sunucusu, DPI bypass, yasal kullanım rehberi."
+      },
+      "yurt-disindaki-turkler": {
+        "title": "Yurt dışı Türkler için VPN",
+        "desc": "BluTV, Exxen, Netflix TR, e-Devlet, Türk bankacılık erişimi."
+      }
+    }
+  },
+  "useCase": {
+    "breadcrumb": {
+      "home": "Ana sayfa",
+      "hub": "Kullanım Alanları"
+    },
+    "summaryTitle": "Hızlı özet",
+    "picksHeading": "İlk {count} seçim",
+    "considerationsHeading": "Neye dikkat etmeli?",
+    "faqHeading": "Sıkça sorulan sorular",
+    "relatedHeading": "İlgili sayfalar",
+    "scoreLabel": "Puan",
+    "ctaAffiliate": "{brand} fırsatına git",
+    "ctaOfficial": "{brand} sitesine git",
+    "readReview": "Tam incelemeyi oku →"
+  },
+  "review": {
+    "metaTitle": "{brand} İncelemesi (2026) — {positioning}",
+    "breadcrumb": {
+      "home": "Ana sayfa",
+      "reviews": "İncelemeler"
+    },
+    "h1": "{brand} İncelemesi (2026)",
+    "stats": {
+      "score": "Puan",
+      "priceFrom": "En düşük fiyat",
+      "perMonth": "ay",
+      "jurisdiction": "Yargı yetkisi",
+      "moneyBack": "Para iade",
+      "days": "gün"
+    },
+    "pricingTitle": "Fiyatlandırma",
+    "pricingIntro": "{brand} planları ve güncel kampanyalar:",
+    "ctaAffiliate": "Fırsata Git",
+    "ctaOfficial": "Resmi Siteye Git",
+    "pros": "Artıları",
+    "cons": "Eksileri",
+    "detailsTitle": "Detaylar",
+    "details": {
+      "audits": "Bağımsız denetimler",
+      "servers": "Sunucular",
+      "devices": "Eşzamanlı cihaz",
+      "jurisdiction": "Yargı yetkisi",
+      "openSource": "Açık kaynak istemciler",
+      "moneyBackGuarantee": "Para iade garantisi",
+      "yes": "Evet",
+      "no": "Hayır",
+      "days": "gün"
+    },
+    "footerCta": {
+      "kicker": "Tüm karşılaştırmaları gör",
+      "link": "En İyi 10 VPN sıralamasına dön"
+    }
+  },
+  "quiz": {
+    "metaTitle": "Sana Uygun VPN Quiz'i — 6 Soruda Kişisel Öneri (2026)",
+    "metaDescription": "6 soruyla sana en uygun VPN'i bul. Bütçen, cihaz sayın, kullanım amacın ve teknik seviyene göre kişiselleştirilmiş öneri.",
+    "ogTitle": "Sana Uygun VPN Quiz'i",
+    "ogDescription": "6 soruda kişisel VPN önerisi al.",
+    "breadcrumb": "Sana uygun VPN",
+    "badge": "Kişisel öneri",
+    "h1": "Sana uygun VPN'i bulalım",
+    "intro": "6 soruyla bütçen, cihaz sayın, kullanım senaryona ve teknik seviyene göre kişiselleştirilmiş VPN önerisi. 30 saniye sürer.",
+    "questions": {
+      "priority": {
+        "prompt": "1. Önceliğin nedir?",
+        "helper": "VPN'i çoğunlukla ne için kullanacaksın?",
+        "options": {
+          "0": "Streaming (Netflix, BluTV, Disney+)",
+          "1": "Gizlilik / anonimlik",
+          "2": "Günlük güvenlik (halka açık Wi-Fi)",
+          "3": "Oyun + DDoS koruması"
+        }
+      },
+      "budget": {
+        "prompt": "2. Bütçen ne kadar?",
+        "helper": "",
+        "options": {
+          "0": "Ücretsiz tercih ederim",
+          "1": "Aylık 100 TL altı (ucuz)",
+          "2": "Aylık 100-200 TL arası (orta)",
+          "3": "Önemli değil, en iyisi olsun"
+        }
+      },
+      "devices": {
+        "prompt": "3. Kaç cihazda kullanacaksın?",
+        "helper": "",
+        "options": {
+          "0": "1-2 cihaz",
+          "1": "3-5 cihaz",
+          "2": "5-10 cihaz",
+          "3": "Sınırsız (tüm aile)"
+        }
+      },
+      "location": {
+        "prompt": "4. Türkiye sunucusu gerekli mi?",
+        "helper": "Yurt dışındaysan veya BluTV/Exxen kullanıyorsan evet.",
+        "options": {
+          "0": "Evet, şart",
+          "1": "Hayır, gerek yok",
+          "2": "Bilmiyorum"
+        }
+      },
+      "trust": {
+        "prompt": "5. Güven seviyesi: en çok hangisi önemli?",
+        "helper": "",
+        "options": {
+          "0": "Bağımsız denetim geçmişi",
+          "1": "Açık kaynak istemci",
+          "2": "Mahkemede test edilmiş no-logs",
+          "3": "Marka tanınırlığı yeterli"
+        }
+      },
+      "ease": {
+        "prompt": "6. Teknik beceri seviyen?",
+        "helper": "",
+        "options": {
+          "0": "Başlangıç — basit olsun",
+          "1": "Orta — bazı ayarları severim",
+          "2": "İleri — port forwarding, multi-hop önemli"
+        }
+      }
+    },
+    "result": {
+      "kicker": "Cevaplarına göre öne çıkan öneri",
+      "scoreBadge": "Puan: {score}/30",
+      "disclaimer": "Bu quiz puanlama tabanlı bir yardımcıdır; kişisel bir tavsiye veya garanti değildir. Satın alma kararı vermeden önce sağlayıcının resmi sitesinden güncel fiyat ve özellikleri doğrulamanı öneririz.",
+      "monthlyLabel": "Aylık",
+      "ctaDeal": "{brand} fırsatını gör",
+      "ctaReview": "İncelemeyi oku",
+      "ctaReset": "Yeniden başla",
+      "altsHeading": "Alternatif önerilerimiz",
+      "altScore": "{positioning} · Puan: {score}",
+      "altLink": "İncele →"
+    },
+    "progress": "Soru {current}/{total}",
+    "showResult": "Sonucu göster",
+    "reset": "Sıfırla",
+    "altDirectHeading": "Quiz yerine direkt seçim",
+    "altLinks": {
+      "top": "En iyi 10 VPN sıralaması",
+      "compare": "İki VPN'i karşılaştır",
+      "calculator": "Maliyet hesaplayıcı"
+    }
+  },
+  "calculator": {
+    "metaTitle": "VPN Toplam Maliyet Hesaplayıcı (2026) — Yenileme Dahil Gerçek Fiyat",
+    "metaDescription": "1, 2 veya 3 yıl için 10 VPN'in toplam maliyetini karşılaştır. İlk dönem indirimi + yenileme fiyatı dahil. Etkin aylık fiyat ve tasarruf hesabı.",
+    "ogTitle": "VPN Maliyet Hesaplayıcı",
+    "ogDescription": "Yenileme dahil gerçek 3 yıllık VPN maliyetini hesapla.",
+    "breadcrumb": "Maliyet hesaplayıcı",
+    "badgeLabel": "Araç",
+    "h1": "VPN toplam maliyet hesaplayıcı",
+    "intro": "Çoğu VPN ilk dönemde ucuz, yenilemede pahalı. Burada gerçek 1-2-3 yıllık toplam maliyeti görürsün — \"etkin aylık\" fiyatla adil karşılaştırma yap.",
+    "tool": {
+      "horizonHeading": "Süre seç",
+      "horizon1": "1 yıl",
+      "horizon2": "2 yıl",
+      "horizon3": "3 yıl",
+      "explanation": "Hesaplama mantığı: ilk dönem indirimli fiyat, sonra aylık plan yenileme fiyatı. Çoğu sağlayıcı \"yenileme tuzağı\" kullanır — ilk dönem ucuz, sonra 2-3 katı. Otomatik yenilemeyi kapatmak ve yeni indirim almak için elle yenilemek tasarruf sağlar.",
+      "cheapestKicker": "{years} yıl için en uygun",
+      "cheapestSummary": "Toplam ${total} — etkin aylık ${monthly}",
+      "table": {
+        "vpn": "VPN",
+        "initial": "İlk dönem",
+        "renewal": "Yenileme",
+        "totalYears": "Toplam ({years} yıl)",
+        "effectiveMonthly": "Etkin aylık"
+      }
+    },
+    "howSection": {
+      "calcTitle": "Hesaplama nasıl çalışıyor?",
+      "calcBody": "Her VPN için \"en iyi değer\" planı (genelde 2-3 yıllık) referans alınır. Plan süresi boyunca indirimli fiyat geçerli, plan bittikten sonra aylık plan fiyatına yenileme yapıldığı varsayılır. Bu, Trustpilot şikayetlerinin büyük çoğunluğunun nedeni — kullanıcılar \"ilk yıl $30 ödedim, ikinci yıl $120 kesildi\" diyor.",
+      "trapTitle": "Yenileme tuzağından nasıl kaçınılır?",
+      "trap1Bold": "Otomatik yenilemeyi kapat",
+      "trap1Body": " — VPN hesabına gir, ödeme ayarlarından otomatik yenilemeyi devre dışı bırak.",
+      "trap2Bold": "Süre bitmeden 1-2 hafta önce",
+      "trap2Body": " aynı sağlayıcı veya başka sağlayıcıdan yeni bir indirimli plan al.",
+      "trap3Bold": "Mullvad istisnasına dikkat",
+      "trap3Body": " — Sabit €5/ay, indirim/yenileme tuzağı yok. Uzun dönemde tasarruf etmek yerine tutarlılık istiyorsan ideal.",
+      "termsTitle": "Hangi süre en mantıklı?",
+      "term1Bold": "1 yıl:",
+      "term1Body": " Çoğu kullanıcı için ideal denge — indirim makul, taahhüt katlanılabilir.",
+      "term2Bold": "2-3 yıl:",
+      "term2Body": " En düşük etkin aylık fiyat ama 3 yıl boyunca aynı sağlayıcıda kalma taahhüdü. VPN sektörü hızlı değişiyor — ucuz olsa bile risk.",
+      "term3Bold": "Aylık:",
+      "term3Body": " Esneklik için ama 2-3x daha pahalı. Sadece kısa süreli ihtiyaç için."
+    },
+    "altDirectHeading": "Diğer araçlar",
+    "altLinks": {
+      "quiz": "Quiz: Sana uygun VPN",
+      "compare": "İki VPN'i karşılaştır",
+      "filter": "Özellik filtresi"
+    }
+  },
+  "glossary": {
+    "metaTitle": "VPN Sözlüğü (2026) — No-logs, Kill Switch, WireGuard ve Daha Fazlası",
+    "metaDescription": "VPN terimleri sözlüğü: no-logs, kill switch, WireGuard, jurisdiction, RAM-only, port forwarding, multi-hop. 20+ terimin Türkçe açıklaması.",
+    "ogTitle": "VPN Sözlüğü",
+    "ogDescription": "Tüm VPN terimlerinin Türkçe açıklamalı sözlüğü.",
+    "schemaName": "vpncompaire VPN Sözlüğü",
+    "breadcrumb": "VPN sözlüğü",
+    "badgeLabel": "Sözlük",
+    "h1": "VPN sözlüğü",
+    "intro": "VPN dünyasının yaygın terimleri ve net Türkçe açıklamaları. Bilmediğin bir terim için Ctrl+F (veya Cmd+F) ile arayabilirsin.",
+    "categoriesAria": "Kategoriler",
+    "relatedLabel": "İlgili: ",
+    "relatedPagesHeading": "İlgili sayfalar",
+    "relatedLinks": {
+      "whatIsVpn": "VPN nedir?",
+      "checklist": "Güvenlik kontrol listesi",
+      "methodology": "Test metodolojimiz"
+    }
   }
 }

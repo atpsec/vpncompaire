@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import { Check, X, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -12,7 +13,7 @@ import { PricingPlans } from "@/components/product/pricing-plans";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
-import { products, getProduct } from "@/data/products";
+import { products, getProduct, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
@@ -41,12 +42,17 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const product = getProduct(slug);
   if (!product) return {};
 
+  const t = await getTranslations({ locale, namespace: "review" });
+
   return {
-    title: `${product.brand} İncelemesi (2026) — ${product.positioning}`,
+    title: t("metaTitle", {
+      brand: product.brand,
+      positioning: product.positioning,
+    }),
     description: product.summary,
     alternates: { canonical: absoluteUrl(`/inceleme/${product.slug}`) },
   };
@@ -76,18 +82,36 @@ export default async function Page({ params }: Props) {
       ratingValue: product.score,
       bestRating: 10,
     },
-    name: `${product.brand} İncelemesi (2026)`,
+    name: `${product.brand} Review (2026)`,
     reviewBody: product.summary,
     datePublished: "2026-05-01",
   };
+
+  return (
+    <ReviewView product={product} reviewSchema={reviewSchema}>
+      {ReviewBody && <ReviewBody />}
+    </ReviewView>
+  );
+}
+
+function ReviewView({
+  product,
+  reviewSchema,
+  children,
+}: {
+  product: Product;
+  reviewSchema: Record<string, unknown>;
+  children: React.ReactNode;
+}) {
+  const t = useTranslations("review");
 
   return (
     <>
       <JsonLd data={reviewSchema} />
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "İncelemeler", path: "/en-iyi-vpn" },
+          { name: t("breadcrumb.home"), path: "/" },
+          { name: t("breadcrumb.reviews"), path: "/en-iyi-vpn" },
           { name: product.brand, path: `/inceleme/${product.slug}` },
         ])}
       />
@@ -95,11 +119,11 @@ export default async function Page({ params }: Props) {
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {t("breadcrumb.home")}
           </Link>{" "}
           ›{" "}
           <Link href="/en-iyi-vpn" className="hover:text-ink">
-            İncelemeler
+            {t("breadcrumb.reviews")}
           </Link>{" "}
           › <span className="text-ink-strong">{product.brand}</span>
         </p>
@@ -109,7 +133,7 @@ export default async function Page({ params }: Props) {
           <div className="flex-1">
             <Badge variant="brand">{product.positioning}</Badge>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-              {product.brand} İncelemesi (2026)
+              {t("h1", { brand: product.brand })}
             </h1>
             <p className="mt-4 text-lg text-ink-muted">{product.summary}</p>
           </div>
@@ -119,20 +143,24 @@ export default async function Page({ params }: Props) {
 
         <Card className="mt-8 p-6">
           <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
-            <Stat label="Puan" value={`${product.score}/10`} highlight />
             <Stat
-              label="En düşük fiyat"
-              value={`$${product.priceFromUsd.toFixed(2)}/ay`}
+              label={t("stats.score")}
+              value={`${product.score}/10`}
+              highlight
             />
             <Stat
-              label="Yargı yetkisi"
+              label={t("stats.priceFrom")}
+              value={`$${product.priceFromUsd.toFixed(2)}/${t("stats.perMonth")}`}
+            />
+            <Stat
+              label={t("stats.jurisdiction")}
               value={product.highlights.jurisdiction ?? "—"}
             />
             <Stat
-              label="Para iade"
+              label={t("stats.moneyBack")}
               value={
                 product.highlights.moneyBackDays
-                  ? `${product.highlights.moneyBackDays} gün`
+                  ? `${product.highlights.moneyBackDays} ${t("stats.days")}`
                   : "—"
               }
             />
@@ -140,10 +168,10 @@ export default async function Page({ params }: Props) {
 
           <div className="mt-6 border-t border-border pt-6">
             <h2 className="text-lg font-semibold text-ink-strong">
-              Fiyatlandırma
+              {t("pricingTitle")}
             </h2>
             <p className="mt-1 text-sm text-ink-muted">
-              {product.brand} planları ve güncel kampanyalar:
+              {t("pricingIntro", { brand: product.brand })}
             </p>
             <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
               <PricingPlans
@@ -166,7 +194,9 @@ export default async function Page({ params }: Props) {
                     }
                     target={product.hasAffiliate ? "_self" : "_blank"}
                   >
-                    {product.hasAffiliate ? "Fırsata Git" : "Resmi Siteye Git"}
+                    {product.hasAffiliate
+                      ? t("ctaAffiliate")
+                      : t("ctaOfficial")}
                     <ExternalLink className="size-4" />
                   </a>
                 </Button>
@@ -179,7 +209,7 @@ export default async function Page({ params }: Props) {
         <section className="mt-12 grid sm:grid-cols-2 gap-6">
           <Card className="p-6">
             <h2 className="text-lg font-semibold text-success-700 flex items-center gap-2">
-              <Check className="size-5" /> Artıları
+              <Check className="size-5" /> {t("pros")}
             </h2>
             <ul className="mt-3 space-y-2 text-sm text-ink">
               {product.pros.map((p, i) => (
@@ -193,7 +223,7 @@ export default async function Page({ params }: Props) {
 
           <Card className="p-6">
             <h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2">
-              <X className="size-5 text-danger-500" /> Eksileri
+              <X className="size-5 text-danger-500" /> {t("cons")}
             </h2>
             <ul className="mt-3 space-y-2 text-sm text-ink">
               {product.cons.map((c, i) => (
@@ -206,60 +236,67 @@ export default async function Page({ params }: Props) {
           </Card>
         </section>
 
-        {ReviewBody && (
+        {children && (
           <article className="prose prose-stone prose-lg max-w-none mt-16">
-            <ReviewBody />
+            {children}
           </article>
         )}
 
         <section className="mt-12">
           <h2 className="text-2xl font-bold tracking-tight text-ink-strong">
-            Detaylar
+            {t("detailsTitle")}
           </h2>
           <dl className="mt-4 divide-y divide-border rounded-xl border border-border bg-white">
             {product.highlights.audits && (
               <Row
-                label="Bağımsız denetimler"
+                label={t("details.audits")}
                 value={product.highlights.audits}
               />
             )}
             {product.highlights.servers && (
-              <Row label="Sunucular" value={product.highlights.servers} />
+              <Row
+                label={t("details.servers")}
+                value={product.highlights.servers}
+              />
             )}
             {product.highlights.devices && (
               <Row
-                label="Eşzamanlı cihaz"
+                label={t("details.devices")}
                 value={product.highlights.devices}
               />
             )}
             {product.highlights.jurisdiction && (
               <Row
-                label="Yargı yetkisi"
+                label={t("details.jurisdiction")}
                 value={product.highlights.jurisdiction}
               />
             )}
             {product.highlights.openSource !== undefined && (
               <Row
-                label="Açık kaynak istemciler"
-                value={product.highlights.openSource ? "Evet" : "Hayır"}
+                label={t("details.openSource")}
+                value={
+                  product.highlights.openSource
+                    ? t("details.yes")
+                    : t("details.no")
+                }
               />
             )}
             {product.highlights.moneyBackDays && (
               <Row
-                label="Para iade garantisi"
-                value={`${product.highlights.moneyBackDays} gün`}
+                label={t("details.moneyBackGuarantee")}
+                value={`${product.highlights.moneyBackDays} ${t("details.days")}`}
               />
             )}
           </dl>
         </section>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">Tüm karşılaştırmaları gör</p>
+          <p className="text-sm text-ink-muted">{t("footerCta.kicker")}</p>
           <Link
             href="/en-iyi-vpn"
             className="mt-2 inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline"
           >
-            En İyi 10 VPN sıralamasına dön <ArrowRight className="size-4" />
+            {t("footerCta.link")} <ArrowRight className="size-4" />
           </Link>
         </section>
       </Container>
