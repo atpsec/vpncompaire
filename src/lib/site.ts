@@ -8,7 +8,7 @@ export const siteConfig = {
   locales: ["tr"] as const,
   plausibleDomain: env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || undefined,
   description: {
-    tr: "Bağımsız test metodolojisine dayalı, dürüst VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik için doğru VPN'i bul.",
+    tr: "Bağımsız test metodolojisine dayalı, ayrıntılı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik senaryolarını değerlendirir. Gönüllü inceleme projesidir; resmi bir kuruluş değildir.",
   },
   author: {
     name: "vpncompaire Editör Ekibi",

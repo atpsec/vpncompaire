@@ -1,7 +1,7 @@
 {
   "metadata": {
     "siteName": "vpncompaire",
-    "defaultTitle": "vpncompaire — Dürüst VPN Karşılaştırmaları (2026)",
+    "defaultTitle": "vpncompaire — Bağımsız VPN Karşılaştırmaları (2026)",
     "defaultDescription": "Bağımsız test metodolojisine dayalı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik için doğru VPN'i bul."
   },
   "nav": {
@@ -43,7 +43,7 @@
   },
   "home": {
     "hero": {
-      "h1": "2026 için dürüst VPN karşılaştırmaları",
+      "h1": "Gönüllü, bağımsız VPN karşılaştırmaları",
       "subtitle": "Gizlilik, streaming, seyahat ve günlük güvenlik için bağımsız metodolojiyle test edilmiş VPN'ler.",
       "ctaPrimary": "En İyi 10 VPN'i Gör",
       "ctaSecondary": "Nasıl Test Ediyoruz",
@@ -84,7 +84,7 @@
     }
   },
   "footer": {
-    "tagline": "Bağımsız VPN karşılaştırmaları, dürüst incelemeler.",
+    "tagline": "Gönüllü VPN inceleme projesi. Şeffaf metodoloji, bağımsız değerlendirmeler.",
     "sections": {
       "site": "Site",
       "tools": "Araçlar",
@@ -102,7 +102,7 @@
     },
     "copyright": "Tüm hakları saklıdır.",
     "disclosureTitle": "Reklam açıklaması.",
-    "madeWith": "Türkiye'den, dürüstlükle."
+    "madeWith": "Gönüllü inceleme projesi · Resmi bir kuruluş değildir"
   },
   "cookies": {
     "title": "Çerez tercihi",

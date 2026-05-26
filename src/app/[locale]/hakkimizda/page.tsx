@@ -12,7 +12,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Hakkımızda",
   description:
-    "vpncompaire kimdir, neden var, nasıl çalışır. Editoryal bağımsızlık, metodoloji ve değerlerimiz.",
+    "vpncompaire nedir, neden var, nasıl çalışır. Gönüllü inceleme projesi olarak editoryal bağımsızlık, metodoloji ve değerlendirme yaklaşımı.",
 };
 
 type Props = { params: Promise<{ locale: string }> };
@@ -41,21 +41,39 @@ export default async function Page({ params }: Props) {
         <header className="mt-6">
           <Badge variant="brand">Hakkımızda</Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            {siteConfig.name} kimdir?
+            {siteConfig.name} nedir?
           </h1>
           <p className="mt-4 text-lg text-ink-muted">
-            VPN dünyası kafa karıştırıcı. Yüzlerce sağlayıcı, çelişkili
-            incelemeler, agresif pazarlama. Biz farklı yapmaya çalışıyoruz.
+            VPN dünyası kafa karıştırıcı: yüzlerce sağlayıcı, çelişkili
+            incelemeler, agresif pazarlama. {siteConfig.name}, bu karmaşaya
+            karşı kişisel bir cevap olarak başlamış{" "}
+            <strong>gönüllü bir inceleme projesidir</strong>.
           </p>
         </header>
 
+        <Card className="mt-8 p-6 bg-brand-50/40">
+          <p className="text-sm text-ink leading-relaxed">
+            <strong className="text-ink-strong">Bu nedir?</strong>{" "}
+            {siteConfig.name} bir şirket veya kurum değildir; ticari kayıtlı
+            bir tüzel kişiliği yoktur. VPN sağlayıcılarını kendi ihtiyacımız
+            için karşılaştırırken oluşan notların kamuya açılmış halidir.
+            Affiliate komisyonu altyapı maliyetini karşılar; öneriler bunun
+            etkisinde değildir. Detaylar için{" "}
+            <Link href="/reklam-aciklamasi">reklam açıklaması</Link> ve{" "}
+            <Link href="/yasal-uyari">yasal uyarı</Link> sayfalarımıza
+            bakabilirsin.
+          </p>
+        </Card>
+
         <article className="mt-12 prose prose-stone max-w-none">
-          <h2>Misyonumuz</h2>
+          <h2>Yaklaşımımız</h2>
           <p>
-            Türkçe konuşan kullanıcıların — Türkiye&apos;de yaşayan veya yurt
-            dışındaki — VPN seçerken net, dürüst ve metodolojik bilgiye
-            ulaşmasını sağlamak. Pazarlama söyleminden değil, bağımsız
-            test ve denetim kanıtından beslenen tavsiyeler vermek.
+            VPN seçerken net, bağımsız ve metodolojik bilgiye ulaşmayı
+            kolaylaştırmaya çalışıyoruz. Pazarlama söyleminden değil,
+            bağımsız denetim raporları, kamuya açık kaynaklar ve kendi
+            test gözlemlerimizden beslenen değerlendirmeler yayınlıyoruz.
+            Hiçbir öneri kesin bir garanti taşımaz; nihai karar her zaman
+            kullanıcıya aittir.
           </p>
 
           <h2>Üç temel ilkemiz</h2>
@@ -121,9 +139,23 @@ export default async function Page({ params }: Props) {
 
           <h2>Kim yazıyor?</h2>
           <p>
-            İçerikler {siteConfig.name} editör ekibi tarafından hazırlanır.
-            Test sonuçları, audit raporları ve resmi sağlayıcı dokümanları
-            primary kaynak olarak kullanılır.
+            {siteConfig.name} kişisel bir proje olarak başlamıştır.
+            İçerikler gönüllü katkılarla hazırlanır; profesyonel bir
+            yayın ekibi veya editöryel kadro yapısı yoktur. Birincil
+            kaynak olarak sağlayıcıların kendi denetim raporları,
+            kamuya açık dava belgeleri, açık kaynak depoları ve kendi
+            gözlemlerimiz kullanılır. Yanlış veya eksik bulduğun bir
+            şey olursa lütfen bildir — düzeltmeleri ciddiye alıyoruz.
+          </p>
+
+          <h2>Bu site neden var?</h2>
+          <p>
+            Ticari VPN incelemeleri çoğunlukla satış odaklı yazılır;
+            &quot;en iyi&quot; iddiaları kaynak olmadan tekrarlanır.
+            {siteConfig.name} bu boşluğa karşı, hobbiyim olarak başlamış
+            ve zamanla daha sistematik hale gelmiş bir referans projedir.
+            Amacı tek bir &quot;doğru cevap&quot; vermek değil — kullanıcının
+            kendi kararını verebileceği yapılandırılmış bilgi sunmaktır.
           </p>
 
           <h2>İletişim</h2>

@@ -12,7 +12,7 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Dürüst VPN Karşılaştırmaları (2026)`,
+    default: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları (2026)`,
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description.tr,
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "tr_TR",
     url: siteConfig.url,
-    title: `${siteConfig.name} — Dürüst VPN Karşılaştırmaları`,
+    title: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları`,
     description: siteConfig.description.tr,
     siteName: siteConfig.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Dürüst VPN Karşılaştırmaları`,
+    title: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları`,
     description: siteConfig.description.tr,
   },
   robots: {
