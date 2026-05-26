@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { products } from "@/data/products";
 
@@ -10,57 +9,42 @@ export function Hero() {
   const auditCount = products.filter((p) => p.highlights.audits).length;
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Soft, layered background — radial spotlights + subtle grid */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 1100px 480px at 50% -10%, rgb(219 234 254 / 0.65), transparent 60%), radial-gradient(ellipse 600px 400px at 85% 20%, rgb(254 243 199 / 0.5), transparent 65%), linear-gradient(180deg, var(--color-surface-base) 0%, var(--color-background) 100%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgb(0 0 0) 1px, transparent 1px), linear-gradient(90deg, rgb(0 0 0) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
+    <section className="relative">
       <Container>
-        <div className="mx-auto max-w-4xl pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
-            <Sparkles className="size-3.5 text-accent-500" /> 2026 Mayıs · Bağımsız test metodolojisi
+        <div className="mx-auto max-w-4xl pt-20 pb-16 sm:pt-32 sm:pb-24 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-subtle/60 backdrop-blur px-4 py-1.5 text-xs text-ink-muted">
+            <span className="size-1.5 rounded-full bg-brand-400 shadow-[0_0_8px_var(--color-brand-400)]" />
+            Edition · 2026
           </span>
 
-          <h1 className="mt-5 text-[2rem] sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-strong text-balance leading-[1.08]">
-            {t("h1")}
+          <h1 className="mt-7 text-5xl sm:text-6xl lg:text-7xl font-medium tracking-[-0.03em] text-ink-strong leading-[1.02] text-balance">
+            {splitHeadline(t("h1"))}
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-ink-muted text-balance leading-relaxed">
+          <p className="mx-auto mt-7 max-w-2xl text-lg sm:text-xl text-ink-muted leading-relaxed text-balance">
             {t("subtitle")}
           </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild variant="primary" size="md">
-              <Link href="/en-iyi-vpn">
-                {t("ctaPrimary")}
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="secondary" size="md">
-              <Link href="/metodoloji">{t("ctaSecondary")}</Link>
-            </Button>
+          <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/en-iyi-vpn"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink-strong px-6 py-3 text-sm font-medium text-surface-base hover:bg-brand-300 transition-colors"
+            >
+              {t("ctaPrimary")}
+              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+            <Link
+              href="/metodoloji"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border bg-surface-subtle/50 backdrop-blur px-6 py-3 text-sm font-medium text-ink hover:border-brand-400/30 hover:bg-surface-muted transition-colors"
+            >
+              {t("ctaSecondary")}
+            </Link>
           </div>
 
-          {/* Stat strip — compact, editorial */}
-          <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-white/60 backdrop-blur shadow-sm">
+          <dl className="mx-auto mt-20 grid max-w-2xl grid-cols-3 gap-px overflow-hidden rounded-2xl border border-border bg-border">
             <Stat value={products.length} label={t("trust.tested")} />
             <Stat value={auditCount} label={t("trust.audits")} />
-            <Stat value="312" label="saat test" />
+            <Stat value="312" label="hours of testing" />
           </dl>
         </div>
       </Container>
@@ -68,13 +52,29 @@ export function Hero() {
   );
 }
 
+function splitHeadline(text: string) {
+  // Italic the last 2 words for elegance
+  const parts = text.split(" ");
+  if (parts.length <= 2) return text;
+  const head = parts.slice(0, -2).join(" ");
+  const tail = parts.slice(-2).join(" ");
+  return (
+    <>
+      {head}{" "}
+      <span className="font-display italic text-brand-300 font-normal">
+        {tail}
+      </span>
+    </>
+  );
+}
+
 function Stat({ value, label }: { value: string | number; label: string }) {
   return (
-    <div className="px-3 py-3 text-center">
-      <dd className="text-xl sm:text-2xl font-bold tracking-tight text-ink-strong tabular-nums">
+    <div className="bg-surface-subtle/60 backdrop-blur px-4 py-5">
+      <dd className="text-3xl sm:text-4xl font-light text-ink-strong tabular-nums leading-none tracking-tight">
         {value}
       </dd>
-      <dt className="mt-0.5 text-[11px] text-ink-subtle">{label}</dt>
+      <dt className="mt-2 text-xs text-ink-muted">{label}</dt>
     </div>
   );
 }

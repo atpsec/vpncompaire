@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Instrument_Serif } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -8,6 +8,14 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
 type SupportedLocale = "tr" | "en";
@@ -85,8 +93,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c0a09" },
+    { media: "(prefers-color-scheme: light)", color: "#0a0a0f" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0f" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -101,7 +109,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} antialiased`}
+      className={`${geistSans.variable} ${instrumentSerif.variable} antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-background text-foreground font-sans">
