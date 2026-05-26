@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { ShieldCheck, Info } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
+import { SocialLinks } from "@/components/layout/social-links";
 
 export function SiteFooter() {
   const t = useTranslations("footer");
@@ -12,7 +13,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-24 border-t border-border bg-surface-subtle/60">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-5">
           <div className="col-span-2">
             <Link
               href="/"
@@ -24,6 +25,18 @@ export function SiteFooter() {
             <p className="mt-3 max-w-sm text-sm text-ink-muted">
               {t("tagline")}
             </p>
+
+            <div className="mt-5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
+                {t("sections.follow")}
+              </p>
+              <div className="mt-2">
+                <SocialLinks />
+              </div>
+              <p className="mt-2 text-[11px] text-ink-subtle">
+                Sosyal medya hesapları yakında.
+              </p>
+            </div>
           </div>
 
           <div>
@@ -84,6 +97,46 @@ export function SiteFooter() {
 
           <div>
             <h3 className="text-sm font-semibold text-ink-strong">
+              {t("sections.tools")}
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li>
+                <Link
+                  href="/sana-uygun-vpn"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {tNav("quiz")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hesaplayici"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {tNav("calculator")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/sunucu-haritasi"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {tNav("filter")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/sozluk"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {tNav("glossary")}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-ink-strong">
               {t("sections.legal")}
             </h3>
             <ul className="mt-3 space-y-2 text-sm">
@@ -93,6 +146,14 @@ export function SiteFooter() {
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.disclosure")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/yasal-uyari"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  Yasal Uyarı
                 </Link>
               </li>
               <li>

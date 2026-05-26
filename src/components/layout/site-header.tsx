@@ -6,11 +6,12 @@ import { Menu, X, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { SocialLinks } from "@/components/layout/social-links";
 
 const navItems = [
   { href: "/en-iyi-vpn", labelKey: "reviews" },
   { href: "/karsilastir", labelKey: "compare" },
-  { href: "/en-iyi", labelKey: "bestFor" },
+  { href: "/sana-uygun-vpn", labelKey: "quiz" },
   { href: "/cihazlar", labelKey: "devices" },
   { href: "/rehber", labelKey: "guides" },
 ] as const;
@@ -47,7 +48,9 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center gap-3">
+            <SocialLinks variant="header" />
+            <span aria-hidden="true" className="h-5 w-px bg-border" />
             <Button asChild variant="primary" size="sm">
               <Link href="/en-iyi-vpn">{t("reviews")} →</Link>
             </Button>
@@ -87,6 +90,12 @@ export function SiteHeader() {
                   En İyi VPN'leri Gör
                 </Link>
               </Button>
+              <div className="px-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
+                  Bizi takip et
+                </p>
+                <SocialLinks variant="menu" className="mt-0 border-t-0 pt-2" />
+              </div>
             </nav>
           </div>
         </div>

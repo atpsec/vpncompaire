@@ -25,6 +25,19 @@ const guideSlugs = [
   "ucretsiz-vs-ucretli-vpn",
   "vpn-guvenlik-kontrol-listesi",
   "turkiye-de-vpn-yasal-mi",
+  "ogrenciler-icin-vpn",
+  "yurt-disindaki-turkler-icin-vpn",
+  "aile-ve-cocuklar-icin-vpn",
+  "uzaktan-calisanlar-icin-vpn",
+  "yaslilar-icin-vpn",
+  "gamerlar-icin-vpn",
+];
+
+const toolPaths = [
+  { path: "/sana-uygun-vpn", priority: 0.9, changefreq: "weekly" },
+  { path: "/hesaplayici", priority: 0.85, changefreq: "weekly" },
+  { path: "/sunucu-haritasi", priority: 0.8, changefreq: "weekly" },
+  { path: "/sozluk", priority: 0.7, changefreq: "monthly" },
 ];
 
 export function GET() {
@@ -43,6 +56,7 @@ export function GET() {
     { path: "/hakkimizda", priority: 0.5, changefreq: "monthly" },
     { path: "/iletisim", priority: 0.4, changefreq: "yearly" },
     { path: "/reklam-aciklamasi", priority: 0.5, changefreq: "monthly" },
+    { path: "/yasal-uyari", priority: 0.5, changefreq: "monthly" },
     { path: "/gizlilik", priority: 0.4, changefreq: "yearly" },
     { path: "/sartlar", priority: 0.4, changefreq: "yearly" },
   ];
@@ -84,6 +98,7 @@ export function GET() {
     ...useCasePaths,
     ...devicePaths,
     ...guidePaths,
+    ...toolPaths,
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

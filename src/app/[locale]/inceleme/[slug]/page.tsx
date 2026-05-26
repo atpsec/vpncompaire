@@ -14,6 +14,8 @@ import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 import { products, getProduct } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
+import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -113,6 +115,8 @@ export default async function Page({ params }: Props) {
           </div>
         </header>
 
+        <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />
+
         <Card className="mt-8 p-6">
           <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
             <Stat label="Puan" value={`${product.score}/10`} highlight />
@@ -166,6 +170,7 @@ export default async function Page({ params }: Props) {
                     <ExternalLink className="size-4" />
                   </a>
                 </Button>
+                {product.hasAffiliate ? <AffiliateNotice /> : null}
               </div>
             </div>
           </div>

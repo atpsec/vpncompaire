@@ -11,11 +11,12 @@ import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
+import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
 export const metadata: Metadata = {
   title: "NordVPN vs Surfshark Karşılaştırması (2026)",
   description:
-    "NordVPN ve Surfshark'ı 6 kritere göre karşılaştırdık: gizlilik, denetimler, hız, streaming, fiyat ve cihaz desteği. Sana uygun olan hangisi?",
+    "NordVPN ve Surfshark'ı 6 kritere göre karşılaştırdık: gizlilik, denetimler, hız, streaming, fiyat ve cihaz desteği. Hangisinin sana uygun olabileceğini değerlendir.",
 };
 
 type Props = { params: Promise<{ locale: string }> };
@@ -74,7 +75,7 @@ const categories = [
 const faqs = [
   {
     q: "NordVPN mi Surfshark mı daha iyi?",
-    a: "Genel performans ve denetim geçmişi konusunda NordVPN, fiyat ve cihaz desteği konusunda Surfshark öne çıkıyor. Bütçe öncelikse ve çok cihaz koruman gerekiyorsa Surfshark; maksimum istikrar ve denetim sayısı önceliğin ise NordVPN.",
+    a: "Tek bir 'daha iyi' yok — önceliğine bağlı. Genel performans ve denetim geçmişi konusunda NordVPN, fiyat ve cihaz desteği konusunda Surfshark öne çıkıyor. Bütçe öncelikse ve çok cihaz koruman gerekiyorsa Surfshark; tekrarlanan denetim ve geniş ek özellikler önceliğin ise NordVPN değerlendirilebilir. Satın almadan önce her iki sağlayıcının kendi sitesinden güncel bilgileri kontrol etmeni öneririz.",
   },
   {
     q: "Aynı şirketin iki ürünü değil mi?",
@@ -124,16 +125,18 @@ export default async function Page({ params }: Props) {
         </p>
 
         <header className="mt-6">
-          <Badge variant="brand">Kafa kafaya</Badge>
+          <Badge variant="brand">Yan yana karşılaştırma</Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            NordVPN vs Surfshark: Hangisi 2026&apos;da Daha İyi?
+            NordVPN vs Surfshark: 2026 Karşılaştırması
           </h1>
           <p className="mt-4 text-lg text-ink-muted">
             Aynı şirket çatısı altında çalışan iki büyük VPN — ama farklı
-            önceliklerle. 6 kritere göre karşılaştırdık. İşte detaylı analiz
-            ve karar.
+            önceliklerle. 6 kritere göre yan yana karşılaştırdık. Hangisinin
+            sana uygun olabileceğini değerlendirmen için.
           </p>
         </header>
+
+        <DataDisclaimer verifiedAt={nord.pricingVerifiedAt} />
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           <Card className="p-6">
@@ -320,12 +323,14 @@ function WinnerBadge({
   winner: "nordvpn" | "surfshark" | "tie";
 }) {
   if (winner === "tie") {
-    return <Badge variant="neutral">Berabere</Badge>;
+    return <Badge variant="neutral">İkisi de güçlü</Badge>;
   }
   return (
-    <Badge variant="success">
+    <Badge variant="brand">
       <Trophy className="size-3" />{" "}
-      {winner === "nordvpn" ? "NordVPN kazanıyor" : "Surfshark kazanıyor"}
+      {winner === "nordvpn"
+        ? "NordVPN bu kriterde öne çıkıyor"
+        : "Surfshark bu kriterde öne çıkıyor"}
     </Badge>
   );
 }

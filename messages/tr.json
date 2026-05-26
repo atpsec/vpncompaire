@@ -9,6 +9,10 @@
     "reviews": "İncelemeler",
     "compare": "Karşılaştırma",
     "bestFor": "Kullanım Alanları",
+    "quiz": "Quiz",
+    "calculator": "Hesaplayıcı",
+    "glossary": "Sözlük",
+    "filter": "Özellik Filtresi",
     "devices": "Cihazlar",
     "guides": "Rehberler",
     "methodology": "Test Metodolojimiz",
@@ -83,6 +87,7 @@
     "tagline": "Bağımsız VPN karşılaştırmaları, dürüst incelemeler.",
     "sections": {
       "site": "Site",
+      "tools": "Araçlar",
       "legal": "Yasal",
       "follow": "Takip et"
     },

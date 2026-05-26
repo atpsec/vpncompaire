@@ -45,6 +45,48 @@ const guides = [
     available: true,
     tag: "Karar",
   },
+  {
+    slug: "ogrenciler-icin-vpn",
+    title: "Öğrenciler için en iyi VPN",
+    desc: "Kampüs Wi-Fi, akademik erişim, öğrenci bütçesine uygun seçimler.",
+    available: true,
+    tag: "Öğrenciler",
+  },
+  {
+    slug: "yurt-disindaki-turkler-icin-vpn",
+    title: "Yurt dışındaki Türkler için VPN",
+    desc: "BluTV, Exxen, Türk bankacılığı ve e-Devlet erişimi için Türkiye sunuculu VPN'ler.",
+    available: true,
+    tag: "Diaspora",
+  },
+  {
+    slug: "aile-ve-cocuklar-icin-vpn",
+    title: "Aile ve çocuklar için VPN",
+    desc: "Çoklu cihaz, ebeveyn kontrolü, zararlı içerik filtreleme.",
+    available: true,
+    tag: "Aile",
+  },
+  {
+    slug: "uzaktan-calisanlar-icin-vpn",
+    title: "Uzaktan çalışanlar için VPN",
+    desc: "Otel/kafe Wi-Fi güvenliği, müşteri dosyaları, seyahat istikrarı.",
+    available: true,
+    tag: "İş",
+  },
+  {
+    slug: "yaslilar-icin-vpn",
+    title: "Yaşlılar için VPN",
+    desc: "Basit kurulum, dolandırıcılık/phishing koruması, Türkçe arayüz.",
+    available: true,
+    tag: "Yaşlılar",
+  },
+  {
+    slug: "gamerlar-icin-vpn",
+    title: "Gamerlar için VPN",
+    desc: "Düşük ping, DDoS koruması, oyun sunucusu bölge bypass.",
+    available: true,
+    tag: "Gaming",
+  },
 ];
 
 export default async function Page({ params }: Props) {

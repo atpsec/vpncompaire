@@ -5,11 +5,12 @@ import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
 import { rankedProducts } from "@/data/products";
+import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
 export const metadata: Metadata = {
-  title: "2026'nın En İyi 10 VPN'i — Karşılaştırma ve Sıralama",
+  title: "2026'da En İyi 10 VPN — Karşılaştırma ve Editör Sıralaması",
   description:
-    "Bağımsız denetim, gerçek hız testi ve şeffaf fiyat analizi ile 2026'nın en iyi VPN'leri. Genel en iyi, en uygun bütçe, premium ve gizlilik seçimleri.",
+    "Bağımsız denetim raporları, kendi hız testlerimiz ve fiyat şeffaflığı kriterleri ile 2026 için editör sıralamamız. Sıralama bilgi amaçlıdır; kullanıcı kendi önceliklerine göre değerlendirmelidir.",
 };
 
 type Props = { params: Promise<{ locale: string }> };
@@ -34,14 +35,16 @@ export default async function Page({ params }: Props) {
             Ana sayfa › En İyi VPN&apos;ler
           </p>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            2026&apos;nın En İyi 10 VPN&apos;i
+            2026&apos;da En İyi 10 VPN — Editör Sıralaması
           </h1>
           <p className="mt-5 text-lg text-ink-muted">
-            On VPN&apos;i altı kritere göre tek tek test ettik. İşte sonuçlar
-            — bağımsız denetim kanıtı, gerçek hız ölçümleri ve fiyat
-            şeffaflığı dahil.
+            On VPN&apos;i altı kritere göre değerlendirdik. Aşağıdaki sıralama
+            bağımsız denetim raporları, hız testlerimiz ve fiyat şeffaflığına
+            dayalı editör değerlendirmesidir. Kullanıcılar kendi önceliklerine
+            göre değerlendirme yapmalıdır.
           </p>
         </header>
+        <DataDisclaimer />
       </Container>
 
       <TopVPNList />

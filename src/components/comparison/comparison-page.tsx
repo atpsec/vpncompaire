@@ -10,6 +10,7 @@ import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
+import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
 export type ComparisonCategory = {
   name: string;
@@ -74,12 +75,14 @@ export function ComparisonPage({
         </p>
 
         <header className="mt-6">
-          <Badge variant="brand">Kafa kafaya</Badge>
+          <Badge variant="brand">Yan yana karşılaştırma</Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            {title}: Hangisi 2026&apos;da Daha İyi?
+            {title}: 2026 Karşılaştırması
           </h1>
           <p className="mt-4 text-lg text-ink-muted">{tagline}</p>
         </header>
+
+        <DataDisclaimer verifiedAt={a.pricingVerifiedAt} />
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           <Card className="p-6">
@@ -132,8 +135,12 @@ export function ComparisonPage({
 
         <section className="mt-12">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            Kategori bazında karşılaştırma
+            Kategori bazında öne çıkan özellikler
           </h2>
+          <p className="mt-2 text-sm text-ink-muted">
+            Her satırdaki etiket, sağlayıcının o kriterde nasıl konumlandığını
+            gösterir — kategorik bir &quot;kazanan&quot; ilan etmez.
+          </p>
           <div className="mt-6 space-y-4">
             {categories.map((cat) => (
               <Card key={cat.name} className="p-6">
@@ -265,11 +272,12 @@ function WinnerBadge({
   bBrand: string;
 }) {
   if (winner === "tie") {
-    return <Badge variant="neutral">Berabere</Badge>;
+    return <Badge variant="neutral">İkisi de güçlü</Badge>;
   }
   return (
-    <Badge variant="success">
-      <Trophy className="size-3" /> {winner === "a" ? aBrand : bBrand} kazanıyor
+    <Badge variant="brand">
+      <Trophy className="size-3" /> {winner === "a" ? aBrand : bBrand} bu
+      kriterde öne çıkıyor
     </Badge>
   );
 }

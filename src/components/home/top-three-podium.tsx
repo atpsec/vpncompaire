@@ -134,7 +134,7 @@ function RankBadge({ rank }: { rank: number }) {
   if (rank === 1) {
     return (
       <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-500 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow">
-        <Crown className="size-3" /> #1 En iyi
+        <Crown className="size-3" /> #1 Editör seçimi
       </span>
     );
   }

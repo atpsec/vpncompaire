@@ -40,17 +40,17 @@ export const products: Product[] = [
   {
     slug: "nordvpn",
     brand: "NordVPN",
-    positioning: "Genel En İyi",
+    positioning: "Genel kullanım için dengeli seçenek",
     summary:
-      "Geniş sunucu ağı, bağımsız denetim geçmişi ve güvenilir streaming uyumluluğu ile genel kullanım için en dengeli seçim.",
+      "Geniş sunucu ağı, tekrarlanan bağımsız denetim geçmişi ve testlerimizde tutarlı streaming uyumluluğu ile genel kullanım için sıkça önerilen seçeneklerden biri.",
     score: 9.6,
     priceFromUsd: 3.39,
     rank: 1,
     pros: [
-      "2025'te altıncı kez Deloitte tarafından no-logs denetiminden geçti",
-      "6,400+ sunucu, 110+ ülke",
-      "Streaming platformlarında istikrarlı çalışıyor",
-      "Threat Protection ile reklam/zararlı yazılım engelleme",
+      "Sağlayıcı raporlarına göre 2025'te altıncı kez Deloitte tarafından no-logs denetimi yapıldı",
+      "Sağlayıcı verisine göre 6,400+ sunucu, 110+ ülke",
+      "Testlerimizde başlıca streaming platformlarında uyumlu çalıştığı gözlendi",
+      "Threat Protection özelliği reklam/zararlı yazılım engelleme sunar",
     ],
     cons: [
       "Yenileme dönemi fiyatı belirgin biçimde yükseliyor",
@@ -88,17 +88,17 @@ export const products: Product[] = [
   {
     slug: "surfshark",
     brand: "Surfshark",
-    positioning: "En Uygun Bütçe Seçimi",
+    positioning: "Bütçe ve çoklu cihaz odaklı seçenek",
     summary:
-      "Sınırsız cihaz desteği, agresif fiyatlandırma ve iyi performansla bütçe öncelikli kullanıcılar için en mantıklı seçim.",
+      "Sınırsız eşzamanlı cihaz desteği ve uygun fiyatlandırma ile bütçeye dikkat eden ve çok cihaz korumak isteyen kullanıcılar için değerlendirilebilecek bir seçenek.",
     score: 9.3,
     priceFromUsd: 2.19,
     rank: 2,
     pros: [
-      "Sınırsız sayıda cihazda eşzamanlı kullanım",
-      "Türkiye dahil 100+ ülkede sunucu",
-      "CleanWeb ile reklam/izleyici engelleme dahil",
-      "Cure53 ve Deloitte bağımsız denetimleri",
+      "Sağlayıcının açıkladığına göre sınırsız eşzamanlı cihaz kullanımı",
+      "Sağlayıcı verisine göre Türkiye dahil 100+ ülkede sunucu",
+      "CleanWeb özelliği reklam/izleyici engelleme sunar",
+      "Cure53 ve Deloitte tarafından bağımsız denetim raporları yayınlandı",
     ],
     cons: [
       "Hız üst seviye rakiplere göre biraz daha düşük",
@@ -136,20 +136,20 @@ export const products: Product[] = [
   {
     slug: "expressvpn",
     brand: "ExpressVPN",
-    positioning: "Premium ve Kolay Kullanım",
+    positioning: "Premium kullanım ve sade arayüz odaklı",
     summary:
-      "Sade arayüz, kararlı hız ve TrustedServer (RAM-only) mimarisi ile teknik bilgisi olmayan kullanıcılar için en akıcı premium deneyim.",
+      "Sade arayüz, testlerimizde kararlı hız ve sağlayıcının açıkladığı TrustedServer (RAM-only) mimarisi ile premium fiyat seviyesinde değerlendirilebilecek bir seçenek.",
     score: 9.1,
     priceFromUsd: 6.67,
     rank: 3,
     pros: [
-      "Lightway protokolü ile yüksek hız",
-      "TrustedServer (RAM-only) altyapısı",
-      "105 ülkede sunucu",
-      "Çok kolay kurulum ve kullanım",
+      "Lightway protokolü testlerimizde hızlı bağlantı kurulumu sağladı",
+      "Sağlayıcının açıkladığına göre TrustedServer (RAM-only) altyapısı",
+      "Sağlayıcı verisine göre 105 ülkede sunucu",
+      "Kolay kurulum ve sade arayüz",
     ],
     cons: [
-      "En pahalı premium VPN seçeneklerinden biri",
+      "Premium VPN segmentinde fiyatı yüksek",
       "Yalnızca 8 cihaz eşzamanlı bağlantı",
       "Gelişmiş kullanıcılar için özelleştirme sınırlı",
     ],
@@ -184,17 +184,17 @@ export const products: Product[] = [
   {
     slug: "proton-vpn",
     brand: "Proton VPN",
-    positioning: "Gizlilik Odaklı Seçim",
+    positioning: "Gizlilik odaklı kullanıcılar için",
     summary:
-      "İsviçre yasal yetki alanı, açık kaynak istemciler ve yıllık no-logs denetimleri ile gizlilik konusunda kanıtlanmış güven sağlar.",
+      "İsviçre yargı yetkisi, açık kaynak istemciler ve sağlayıcı tarafından her yıl yayınlanan bağımsız no-logs denetimleri ile gizliliği önceliklendirenler için değerlendirilebilecek seçeneklerden biri.",
     score: 9.0,
     priceFromUsd: 3.59,
     rank: 4,
     pros: [
-      "Tüm istemciler açık kaynak ve denetlenebilir",
-      "Her yıl bağımsız no-logs denetiminden geçer",
-      "İsviçre yasaları altında — güçlü gizlilik koruması",
-      "Sınırsız kullanımlı ücretsiz plan mevcut",
+      "Sağlayıcı verisine göre tüm istemciler açık kaynak ve GitHub'da denetlenebilir",
+      "Sağlayıcı raporlarına göre her yıl bağımsız no-logs denetimi yapılıyor",
+      "İsviçre yargı yetkisinde — yerel veri koruma yasaları görece sıkı",
+      "Sağlayıcının açıkladığına göre sınırsız bant genişliğine sahip ücretsiz plan",
     ],
     cons: [
       "Sunucu ağı en büyük rakiplere göre küçük",
@@ -232,17 +232,17 @@ export const products: Product[] = [
   {
     slug: "pia",
     brand: "Private Internet Access",
-    positioning: "Teknik Kullanıcı ve Tam Kontrol",
+    positioning: "Teknik kontrol ve geniş sunucu ağı arayanlar için",
     summary:
-      "Mahkemede kanıtlanmış no-logs politikası, ileri düzey ayar seçenekleri ve devasa sunucu ağı ile teknik kontrolü önemseyen kullanıcılar için.",
+      "Geçmiş federal davalarda no-logs politikasının veri ifşa edemediği raporlanan, ileri düzey ayar seçenekleri ve geniş sunucu ağı sunan bir seçenek. Yargı yetkisi ABD'dir.",
     score: 8.7,
     priceFromUsd: 2.03,
     rank: 5,
     pros: [
-      "Mahkemede kanıtlanmış no-logs (2016, 2018)",
-      "35,000+ sunucu",
-      "Açık kaynak istemciler",
-      "Detaylı protokol ve ayar seçenekleri",
+      "Geçmiş federal davalarda (2016, 2018) sağlayıcının veri ifşa edemediği kamuya açık dava belgelerinde raporlandı",
+      "Sağlayıcı verisine göre 35,000+ sunucu",
+      "Sağlayıcının açıkladığına göre tüm istemciler açık kaynak",
+      "Detaylı protokol ve ayar seçenekleri sunulmaktadır",
     ],
     cons: [
       "ABD yargı yetkisi (5 Eyes ittifakı)",
@@ -250,7 +250,7 @@ export const products: Product[] = [
       "Bazı bölgelerde streaming bypass'ı sorunlu",
     ],
     highlights: {
-      audits: "Mahkeme kanıtlı no-logs",
+      audits: "Federal davalarda no-logs uygulaması raporlandı",
       servers: "35,000+ sunucu · 91 ülke",
       devices: "Sınırsız",
       jurisdiction: "ABD",
@@ -281,17 +281,17 @@ export const products: Product[] = [
   {
     slug: "cyberghost",
     brand: "CyberGhost",
-    positioning: "Yeni Başlayanlar İçin",
+    positioning: "Yeni başlayan kullanıcılar için sade arayüz",
     summary:
-      "Amaca özel optimize sunucular ve 45 günlük iade garantisi ile VPN'e yeni başlayanlar için en kolay giriş seçimi.",
+      "Amaca özel optimize sunucular ve 45 günlük iade süresi ile VPN'e yeni başlayanlar için değerlendirilebilecek seçeneklerden biri. Sağlayıcı raporlarındaki bilgilere göre.",
     score: 8.5,
     priceFromUsd: 2.03,
     rank: 6,
     pros: [
-      "Streaming ve oyun için özel optimize sunucular",
-      "45 günlük para iade garantisi (sektör standardı 30 gün)",
-      "Romanya yargı yetkisi (5/9/14 Eyes dışında)",
-      "Geniş sunucu ağı",
+      "Sağlayıcının açıkladığına göre streaming ve oyun için optimize sunucular sunuluyor",
+      "Sağlayıcı politikasına göre 45 günlük para iade süresi (sektör standardı 30 gün)",
+      "Romanya yargı yetkisi (5/9/14 Eyes ittifakları dışında)",
+      "Sağlayıcı verisine göre geniş sunucu ağı",
     ],
     cons: [
       "Şeffaflık raporları daha az sıklıkta yayınlanıyor",
@@ -328,17 +328,17 @@ export const products: Product[] = [
   {
     slug: "ipvanish",
     brand: "IPVanish",
-    positioning: "ABD merkezli, kendi sunucu donanımı",
+    positioning: "ABD merkezli, kendi sunucu donanımını kullandığını belirten sağlayıcı",
     summary:
-      "Kendi sunucu donanımını kullanan, sınırsız cihaz desteği veren ve agresif yıllık indirimlerle dikkat çeken ABD merkezli sağlayıcı. ABD yargı yetkisi gizlilik puristleri için sınırlayıcı olabilir.",
+      "Sağlayıcının açıklamasına göre kendi sunucu donanımını işleten, sınırsız cihaz desteği sunan ve uzun dönem planlarında indirimli giriş fiyatı sunan ABD merkezli bir seçenek. ABD yargı yetkisi gizliliği önceliklendirenler için değerlendirme gerektirebilir.",
     score: 8.1,
     priceFromUsd: 2.19,
     rank: 8,
     pros: [
-      "Sunucu donanımına doğrudan sahip — üçüncü taraf veri merkezi bağımlılığı azalır",
-      "Sınırsız eşzamanlı cihaz bağlantısı",
-      "İlk bağımsız no-logs denetimi 2022'de Schellman tarafından yapıldı",
-      "İndirimli ilk yıl fiyatı sektörün en agresiflerinden",
+      "Sağlayıcı açıklamasına göre sunucu donanımına doğrudan sahip — üçüncü taraf veri merkezi bağımlılığı azaltılıyor",
+      "Sağlayıcının açıkladığına göre sınırsız eşzamanlı cihaz bağlantısı",
+      "Sağlayıcı raporlarına göre ilk bağımsız no-logs denetimi 2022'de Schellman tarafından yapıldı",
+      "Uzun dönem planlarda indirimli giriş fiyatı sunuluyor",
     ],
     cons: [
       "ABD yargı yetkisi (5 Eyes ittifakı) — adli süreçte veri talebi alabilir",
@@ -376,17 +376,17 @@ export const products: Product[] = [
   {
     slug: "windscribe",
     brand: "Windscribe",
-    positioning: "Cömert ücretsiz plan, esnek fiyatlandırma",
+    positioning: "Ücretsiz plan ve esnek fiyatlandırma sunan seçenek",
     summary:
-      "Aylık 10 GB ücretsiz plan, build-a-plan ile sadece istediğin ülke sunucularını seçme, R.O.B.E.R.T. ile reklam/izleyici engelleme — bütçe ile gizlilik arasında dengeli seçim. Kanada yargı yetkisi 5 Eyes ittifakına dahil.",
+      "Sağlayıcı politikasına göre aylık 10 GB ücretsiz plan, build-a-plan ile özel ülke seçimi ve R.O.B.E.R.T. ile reklam/izleyici engelleme sunulmaktadır. Kanada yargı yetkisi 5 Eyes ittifakına dahildir.",
     score: 7.9,
     priceFromUsd: 5.75,
     rank: 9,
     pros: [
-      "10 GB/ay ücretsiz plan — sınama veya hafif kullanım için yeterli",
-      "Build-a-plan: tek tek ülke seçerek aylık $1'dan başlayan minimal abonelik",
-      "R.O.B.E.R.T. ile sunucu seviyesinde reklam/izleyici/zararlı yazılım engelleme",
-      "Açık kaynak istemciler (Windows, macOS, Linux, mobil)",
+      "Sağlayıcı politikasına göre 10 GB/ay ücretsiz plan",
+      "Sağlayıcının sunduğu build-a-plan ile tek tek ülke seçilebilir (aylık $1'dan başlayan)",
+      "R.O.B.E.R.T. özelliği sunucu seviyesinde reklam/izleyici engelleme sağlar",
+      "Sağlayıcı verisine göre istemciler açık kaynak (Windows, macOS, Linux, mobil)",
     ],
     cons: [
       "Bağımsız no-logs denetimi yok",
@@ -425,17 +425,17 @@ export const products: Product[] = [
   {
     slug: "tunnelbear",
     brand: "TunnelBear",
-    positioning: "Yeni başlayanlar için en sade arayüz",
+    positioning: "Yeni başlayanlar için sade arayüz odaklı",
     summary:
-      "Cure53 tarafından yıllık olarak denetlenen, kullanımı çocuk oyuncağı kadar basit Kanada merkezli sağlayıcı. 2018'den beri McAfee bünyesinde — bu hem destek ve süreklilik avantajı hem de ABD ana şirket bağlantısı endişesi.",
+      "Sağlayıcı raporlarına göre Cure53 tarafından yıllık olarak denetlenen, basit arayüzlü Kanada merkezli bir seçenek. 2018'den beri McAfee bünyesinde — kullanıcılar bu sahiplik yapısının gizlilik tercihleriyle uyumunu kendileri değerlendirmelidir.",
     score: 7.7,
     priceFromUsd: 3.33,
     rank: 10,
     pros: [
-      "2017'den beri her yıl Cure53 tarafından kamu denetimi (sektörde en sıklıkla denetlenenlerden)",
-      "Çok sade arayüz — büyükanne dostu olarak nitelendirilebilir",
-      "2 GB/ay ücretsiz plan, kart bilgisi istemez",
-      "Sınırsız eşzamanlı cihaz (2024 değişikliği)",
+      "Sağlayıcı raporlarına göre 2017'den beri her yıl Cure53 tarafından kamuya açık denetim",
+      "Sade ve kullanıcı dostu arayüz",
+      "Sağlayıcı politikasına göre 2 GB/ay ücretsiz plan (kart bilgisi istemez)",
+      "Sağlayıcının açıkladığı 2024 güncellemesiyle sınırsız eşzamanlı cihaz",
     ],
     cons: [
       "2018'den beri McAfee bünyesinde — ABD ana şirket = 5 Eyes endişesi",
@@ -474,17 +474,17 @@ export const products: Product[] = [
   {
     slug: "mullvad",
     brand: "Mullvad",
-    positioning: "Tarafsız ve Etik (Affiliate Yok)",
+    positioning: "Affiliate ilişkisi olmayan, gizlilik odaklı seçenek",
     summary:
-      "Anonim hesap sistemi, sabit fiyat ve affiliate kullanmama prensibi ile gizlilik puristleri için referans seçim. Bu siteyle finansal bağı yok — sıralamada tarafsızlık göstergesi olarak yer alır.",
+      "Sağlayıcı politikasına göre anonim hesap sistemi, sabit fiyatlandırma ve affiliate programı sunmama prensibi ile gizliliği önceliklendirenler için değerlendirilebilecek bir seçenek. Bu siteyle finansal bağı yok — sıralamada bilgi vermek için yer alır.",
     score: 8.3,
     priceFromUsd: 5.0,
     rank: 7,
     pros: [
-      "Kullanıcı adı veya e-posta gerekmez — yalnızca hesap numarası",
-      "Nakit ödeme kabul ediyor (postayla)",
-      "Açık kaynak istemciler",
-      "Sabit €5/ay fiyat — indirim/promosyon yok",
+      "Sağlayıcı politikasına göre kullanıcı adı veya e-posta istemez — yalnızca hesap numarası",
+      "Sağlayıcının açıkladığına göre postayla nakit ödeme kabul edilir",
+      "Sağlayıcı verisine göre istemciler açık kaynak ve GitHub'da denetlenebilir",
+      "Sağlayıcı politikası gereği sabit €5/ay fiyatlandırma (indirim/promosyon yok)",
     ],
     cons: [
       "Sunucu sayısı diğerlerine göre az",
