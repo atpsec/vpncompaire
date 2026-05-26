@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Heart } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { products } from "@/data/products";
 
@@ -10,57 +9,53 @@ export function Hero() {
   const auditCount = products.filter((p) => p.highlights.audits).length;
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Soft, layered background — radial spotlights + subtle grid */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 1100px 480px at 50% -10%, rgb(219 234 254 / 0.65), transparent 60%), radial-gradient(ellipse 600px 400px at 85% 20%, rgb(254 243 199 / 0.5), transparent 65%), linear-gradient(180deg, var(--color-surface-base) 0%, var(--color-background) 100%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgb(0 0 0) 1px, transparent 1px), linear-gradient(90deg, rgb(0 0 0) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
+    <section className="relative">
       <Container>
-        <div className="mx-auto max-w-4xl pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
-            <Sparkles className="size-3.5 text-accent-500" /> 2026 Mayıs · Bağımsız test metodolojisi
+        <div className="mx-auto max-w-4xl pt-12 pb-10 sm:pt-20 sm:pb-14 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-accent-100 px-4 py-1.5 text-sm font-semibold text-accent-600">
+            <Heart className="size-4 fill-accent-500 text-accent-500" />
+            volunteer-built · made with care
+            <Sparkles className="size-4 text-brand-500" />
           </span>
 
-          <h1 className="mt-5 text-[2rem] sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-strong text-balance leading-[1.08]">
+          <h1 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-ink-strong leading-[1.05] text-balance">
             {t("h1")}
           </h1>
 
-          <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-ink-muted text-balance leading-relaxed">
+          <p className="mx-auto mt-5 max-w-2xl text-lg sm:text-xl text-ink-muted leading-relaxed text-balance">
             {t("subtitle")}
           </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild variant="primary" size="md">
-              <Link href="/en-iyi-vpn">
-                {t("ctaPrimary")}
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="secondary" size="md">
-              <Link href="/metodoloji">{t("ctaSecondary")}</Link>
-            </Button>
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              href="/en-iyi-vpn"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-accent-500 px-7 py-3.5 text-base font-bold text-white shadow-[0_6px_0_var(--color-accent-600)] hover:translate-y-0.5 hover:shadow-[0_4px_0_var(--color-accent-600)] active:translate-y-1 active:shadow-[0_2px_0_var(--color-accent-600)] transition-all"
+            >
+              {t("ctaPrimary")}
+              <ArrowRight className="size-5" />
+            </Link>
+            <Link
+              href="/metodoloji"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-background border-2 border-ink-strong/15 px-7 py-3.5 text-base font-bold text-ink-strong hover:border-ink-strong/40 hover:bg-surface-subtle transition-all"
+            >
+              {t("ctaSecondary")}
+            </Link>
           </div>
 
-          {/* Stat strip — compact, editorial */}
-          <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-white/60 backdrop-blur shadow-sm">
-            <Stat value={products.length} label={t("trust.tested")} />
-            <Stat value={auditCount} label={t("trust.audits")} />
-            <Stat value="312" label="saat test" />
+          <dl className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-3">
+            <Stat
+              value={products.length}
+              label={t("trust.tested")}
+              emoji="🔍"
+              tone="brand"
+            />
+            <Stat
+              value={auditCount}
+              label={t("trust.audits")}
+              emoji="🛡️"
+              tone="accent"
+            />
+            <Stat value="312" label="hours of testing" emoji="⏱️" tone="brand" />
           </dl>
         </div>
       </Container>
@@ -68,13 +63,33 @@ export function Hero() {
   );
 }
 
-function Stat({ value, label }: { value: string | number; label: string }) {
+function Stat({
+  value,
+  label,
+  emoji,
+  tone,
+}: {
+  value: string | number;
+  label: string;
+  emoji: string;
+  tone: "brand" | "accent";
+}) {
   return (
-    <div className="px-3 py-3 text-center">
-      <dd className="text-xl sm:text-2xl font-bold tracking-tight text-ink-strong tabular-nums">
+    <div
+      className={
+        "rounded-3xl p-4 sm:p-5 " +
+        (tone === "accent"
+          ? "bg-accent-100/60"
+          : "bg-brand-100/60")
+      }
+    >
+      <div className="text-2xl mb-1">{emoji}</div>
+      <dd className="text-3xl sm:text-4xl font-extrabold text-ink-strong tabular-nums leading-none">
         {value}
       </dd>
-      <dt className="mt-0.5 text-[11px] text-ink-subtle">{label}</dt>
+      <dt className="mt-1.5 text-xs sm:text-sm font-semibold text-ink-muted">
+        {label}
+      </dt>
     </div>
   );
 }
