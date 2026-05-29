@@ -83,8 +83,9 @@
       "title": "Frequently asked questions"
     },
     "ipBanner": {
-      "exposed": "Your IP is exposed:",
-      "tail": "— hide it with a VPN.",
+      "title": "Your IP is exposed",
+      "ipLabel": "IP",
+      "locationLabel": "Location",
       "compareLink": "Compare VPNs",
       "dismissLabel": "Dismiss notification"
     }

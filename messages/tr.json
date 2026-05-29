@@ -83,8 +83,9 @@
       "title": "Sık Sorulan Sorular"
     },
     "ipBanner": {
-      "exposed": "IP adresiniz açıkta:",
-      "tail": "— VPN ile gizleyebilirsiniz.",
+      "title": "IP adresiniz açıkta",
+      "ipLabel": "IP",
+      "locationLabel": "Konum",
       "compareLink": "VPN'leri karşılaştır",
       "dismissLabel": "Bildirimi kapat"
     }
