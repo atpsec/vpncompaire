@@ -81,6 +81,12 @@
     },
     "faq": {
       "title": "Frequently asked questions"
+    },
+    "ipBanner": {
+      "exposed": "Your IP is exposed:",
+      "tail": "— hide it with a VPN.",
+      "compareLink": "Compare VPNs",
+      "dismissLabel": "Dismiss notification"
     }
   },
   "footer": {

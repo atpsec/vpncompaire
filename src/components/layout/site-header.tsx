@@ -89,7 +89,7 @@ export function SiteHeader() {
               ))}
               <Button asChild variant="primary" size="md" className="mt-2">
                 <Link href="/en-iyi-vpn" onClick={() => setOpen(false)}>
-                  En İyi VPN'leri Gör
+                  En İyi VPN&apos;leri Gör
                 </Link>
               </Button>
               <div className="px-3 mt-3">

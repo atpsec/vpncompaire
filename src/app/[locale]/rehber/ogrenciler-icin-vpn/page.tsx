@@ -160,7 +160,7 @@ export default async function Page({ params }: Props) {
         />
 
         <article className="mt-16 prose prose-stone max-w-none">
-          <h2>Öğrenci olarak neden VPN'e ihtiyacın var?</h2>
+          <h2>Öğrenci olarak neden VPN&apos;e ihtiyacın var?</h2>
           <p>
             Üniversite hayatı, gizlilik açısından özellikle riskli bir dönemdir.
             Yurt, kampüs ve kütüphane Wi-Fi ağları açık veya zayıf şifrelidir;

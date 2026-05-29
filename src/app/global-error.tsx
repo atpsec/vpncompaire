@@ -81,6 +81,9 @@ export default function GlobalError({
             >
               Retry
             </button>
+            {/* global-error renders its own <html>/<body> outside the app shell;
+                a plain <a> is the safest navigation primitive here. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a
               href="/"
               style={{

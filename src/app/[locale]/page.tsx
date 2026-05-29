@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/home/hero";
+import { IpSecurityBanner } from "@/components/home/IpSecurityBanner";
 import { TopThreePodium } from "@/components/home/top-three-podium";
 import { TopVPNList } from "@/components/home/top-vpn-list";
 import { ComparePicker } from "@/components/home/compare-picker";
@@ -32,6 +33,7 @@ export default async function HomePage({ params }: Props) {
       <JsonLd data={itemListSchema(rankedProducts(locale as "tr" | "en"))} />
       <JsonLd data={faqSchema(homeFaqs(locale as "tr" | "en"))} />
       <Hero />
+      <IpSecurityBanner />
       <TopThreePodium />
       <TopVPNList />
       <ComparePicker />

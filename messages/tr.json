@@ -81,6 +81,12 @@
     },
     "faq": {
       "title": "Sık Sorulan Sorular"
+    },
+    "ipBanner": {
+      "exposed": "IP adresiniz açıkta:",
+      "tail": "— VPN ile gizleyebilirsiniz.",
+      "compareLink": "VPN'leri karşılaştır",
+      "dismissLabel": "Bildirimi kapat"
     }
   },
   "footer": {
