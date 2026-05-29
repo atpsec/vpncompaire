@@ -83,9 +83,16 @@
       "title": "Sık Sorulan Sorular"
     },
     "ipBanner": {
-      "title": "IP adresiniz açıkta",
-      "ipLabel": "IP",
-      "locationLabel": "Konum",
+      "ariaLabel": "IP güvenliği bildirimi",
+      "kicker": "Güvenlik bildirimi",
+      "subtitle": "Bu siteyi şu an bu bilgilerle ziyaret ediyorsunuz",
+      "locationKicker": "Konum",
+      "ipKicker": "IP adresi",
+      "statusKicker": "Durum",
+      "ipHint": "Web sunucularına açık görünür",
+      "locationFallback": "Yaklaşık konum",
+      "statusValue": "Açık bağlantı",
+      "statusHint": "VPN olmadan bağlısınız — IP'niz ve konumunuz görünür.",
       "compareLink": "VPN'leri karşılaştır",
       "dismissLabel": "Bildirimi kapat"
     }

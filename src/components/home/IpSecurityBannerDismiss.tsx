@@ -1,10 +1,18 @@
 "use client";
 
-import { useSyncExternalStore, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "vpncompaire:ip-banner-dismissed-at";
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+const DismissContext = createContext<(() => void) | null>(null);
 
 function readDismissedSnapshot(): boolean {
   try {
@@ -28,10 +36,8 @@ function subscribeToStorage(onChange: () => void): () => void {
 
 export function IpSecurityBannerDismiss({
   children,
-  dismissLabel,
 }: {
   children: React.ReactNode;
-  dismissLabel: string;
 }) {
   const dismissedFromStorage = useSyncExternalStore(
     subscribeToStorage,
@@ -42,24 +48,41 @@ export function IpSecurityBannerDismiss({
 
   if (dismissedFromStorage || dismissedThisRender) return null;
 
+  const dismiss = () => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, String(Date.now()));
+    } catch {
+      // storage blocked — fall back to per-session hide
+    }
+    setDismissedThisRender(true);
+  };
+
   return (
-    <div className="relative">
-      {children}
-      <button
-        type="button"
-        aria-label={dismissLabel}
-        onClick={() => {
-          try {
-            window.localStorage.setItem(STORAGE_KEY, String(Date.now()));
-          } catch {
-            // storage blocked — fall back to per-session hide
-          }
-          setDismissedThisRender(true);
-        }}
-        className="absolute right-2 top-1.5 inline-flex h-7 w-7 items-center justify-center rounded-md text-ink-muted hover:bg-accent-100 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 sm:right-3 sm:top-1/2 sm:-translate-y-1/2"
-      >
-        <X className="size-4" aria-hidden="true" />
-      </button>
-    </div>
+    <DismissContext.Provider value={dismiss}>{children}</DismissContext.Provider>
+  );
+}
+
+export function IpSecurityBannerDismissButton({
+  label,
+  className,
+}: {
+  label: string;
+  className?: string;
+}) {
+  const dismiss = useContext(DismissContext);
+  if (!dismiss) return null;
+
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      onClick={dismiss}
+      className={cn(
+        "inline-flex h-8 w-8 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-accent-100 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500",
+        className,
+      )}
+    >
+      <X className="size-4" aria-hidden="true" />
+    </button>
   );
 }

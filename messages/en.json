@@ -83,9 +83,16 @@
       "title": "Frequently asked questions"
     },
     "ipBanner": {
-      "title": "Your IP is exposed",
-      "ipLabel": "IP",
-      "locationLabel": "Location",
+      "ariaLabel": "IP security notice",
+      "kicker": "Security notice",
+      "subtitle": "You are visiting this site with the following information visible",
+      "locationKicker": "Location",
+      "ipKicker": "IP address",
+      "statusKicker": "Status",
+      "ipHint": "Visible to web servers",
+      "locationFallback": "Approximate location",
+      "statusValue": "Open connection",
+      "statusHint": "Connected without a VPN — your IP and location are visible.",
       "compareLink": "Compare VPNs",
       "dismissLabel": "Dismiss notification"
     }

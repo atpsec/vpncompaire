@@ -1,10 +1,14 @@
 import { headers } from "next/headers";
-import { getTranslations } from "next-intl/server";
-import { ShieldAlert, ArrowUpRight } from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { ArrowRight, Globe2, MapPin, ShieldAlert } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { IpSecurityBannerDismiss } from "@/components/home/IpSecurityBannerDismiss";
+import {
+  IpSecurityBannerDismiss,
+  IpSecurityBannerDismissButton,
+} from "@/components/home/IpSecurityBannerDismiss";
 
 function isPrivateOrLocal(ip: string | null | undefined): boolean {
   if (!ip) return true;
@@ -31,6 +35,23 @@ function isPrivateOrLocal(ip: string | null | undefined): boolean {
   return false;
 }
 
+function safeDecode(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function resolveCountryName(code: string, locale: string): string {
+  try {
+    const dn = new Intl.DisplayNames([locale], { type: "region" });
+    return dn.of(code) ?? code;
+  } catch {
+    return code;
+  }
+}
+
 export async function IpSecurityBanner() {
   const h = await headers();
   const xff = h.get("x-forwarded-for");
@@ -41,80 +62,142 @@ export async function IpSecurityBanner() {
 
   if (!country || isPrivateOrLocal(ip)) return null;
 
-  const t = await getTranslations("home.ipBanner");
+  const [locale, t] = await Promise.all([
+    getLocale(),
+    getTranslations("home.ipBanner"),
+  ]);
   const decodedCity = city ? safeDecode(city) : null;
-  const locationParts = [decodedCity, country].filter(Boolean).join(", ");
+  const countryCode = country.toLowerCase();
+  const countryName = resolveCountryName(country, locale);
+  const ipVersion = ip && ip.includes(":") ? "IPv6" : "IPv4";
 
   return (
-    <IpSecurityBannerDismiss dismissLabel={t("dismissLabel")}>
+    <IpSecurityBannerDismiss>
       <section
-        aria-label={t("title")}
-        className="border-y border-accent-200/80 bg-gradient-to-b from-accent-50/80 to-accent-50/30"
+        aria-label={t("ariaLabel")}
+        className="relative -mt-2 pb-8 sm:-mt-4 sm:pb-10"
       >
         <Container size="xl">
-          <div className="flex flex-col gap-3 py-3 pr-10 sm:flex-row sm:items-center sm:gap-x-5 sm:gap-y-0 sm:py-3.5 sm:pr-12">
-            <div className="flex items-center gap-2.5">
-              <span
-                aria-hidden="true"
-                className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-accent-300/80"
-              >
-                <ShieldAlert className="size-4 text-accent-600" />
+          <header className="mb-4 flex items-start justify-between gap-3 sm:mb-5">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-300/70 bg-accent-50/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-accent-700">
+                <ShieldAlert className="size-3" aria-hidden="true" />
+                {t("kicker")}
               </span>
-              <p className="text-[13px] font-semibold leading-tight text-ink-strong sm:text-sm">
-                {t("title")}
+              <p className="mt-2 max-w-xl text-sm text-ink-muted">
+                {t("subtitle")}
               </p>
             </div>
-
-            <div
-              aria-hidden="true"
-              className="hidden h-6 w-px bg-border sm:block"
+            <IpSecurityBannerDismissButton
+              label={t("dismissLabel")}
+              className="-mr-1.5"
             />
+          </header>
 
-            <dl className="flex flex-wrap items-baseline gap-x-5 gap-y-1.5">
-              <div className="flex items-baseline gap-1.5">
-                <dt className="text-[10px] font-medium uppercase tracking-[0.08em] text-ink-subtle">
-                  {t("ipLabel")}
-                </dt>
-                <dd className="font-mono text-[13px] tabular-nums text-ink-strong">
-                  {ip}
-                </dd>
-              </div>
-              {locationParts ? (
-                <div className="flex items-baseline gap-1.5">
-                  <dt className="text-[10px] font-medium uppercase tracking-[0.08em] text-ink-subtle">
-                    {t("locationLabel")}
-                  </dt>
-                  <dd className="text-[13px] text-ink-strong">
-                    {locationParts}
-                  </dd>
+          <ul className="-mx-4 flex gap-3 overflow-x-auto px-4 snap-x snap-mandatory scroll-pl-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0">
+            <li className="snap-start w-[78%] min-w-[260px] shrink-0 sm:w-auto sm:min-w-0">
+              <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent-50/70 blur-3xl"
+                />
+                <div className="relative flex h-full flex-col">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-700">
+                      <MapPin className="size-3" aria-hidden="true" />
+                      {t("locationKicker")}
+                    </span>
+                    <Image
+                      src={`https://flagcdn.com/h40/${countryCode}.png`}
+                      alt={countryName}
+                      width={32}
+                      height={24}
+                      className="h-5 w-auto rounded-sm shadow-sm ring-1 ring-black/5"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="mt-5 flex-1">
+                    <p className="text-2xl font-bold tracking-tight text-ink-strong">
+                      {decodedCity ?? countryName}
+                    </p>
+                    <p className="mt-1 text-sm text-ink-subtle">
+                      {decodedCity ? countryName : t("locationFallback")}
+                    </p>
+                  </div>
                 </div>
-              ) : null}
-            </dl>
+              </article>
+            </li>
 
-            <div className="sm:ml-auto">
-              <Button
-                asChild
-                variant="secondary"
-                size="sm"
-                className="h-8 px-3 text-[12px]"
-              >
-                <Link href="/en-iyi-vpn">
-                  {t("compareLink")}
-                  <ArrowUpRight className="size-3.5" aria-hidden="true" />
-                </Link>
-              </Button>
-            </div>
-          </div>
+            <li className="snap-start w-[78%] min-w-[260px] shrink-0 sm:w-auto sm:min-w-0">
+              <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-brand-50/60 blur-3xl"
+                />
+                <div className="relative flex h-full flex-col">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-700">
+                      <Globe2 className="size-3" aria-hidden="true" />
+                      {t("ipKicker")}
+                    </span>
+                    <span className="text-[10px] font-medium uppercase tracking-wider text-ink-subtle">
+                      {ipVersion}
+                    </span>
+                  </div>
+                  <div className="mt-5 flex-1">
+                    <p className="break-all font-mono text-xl font-bold tracking-tight tabular-nums text-ink-strong sm:text-2xl">
+                      {ip}
+                    </p>
+                    <p className="mt-1 text-sm text-ink-subtle">
+                      {t("ipHint")}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <li className="snap-start w-[78%] min-w-[260px] shrink-0 sm:w-auto sm:min-w-0">
+              <article className="relative h-full overflow-hidden rounded-2xl border border-accent-300 bg-white p-5 shadow-md ring-1 ring-accent-200/60 sm:p-6">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 via-accent-500 to-brand-500"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-12 -bottom-16 h-44 w-44 rounded-full bg-accent-50/80 blur-3xl"
+                />
+                <div className="relative flex h-full flex-col">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-800">
+                      <ShieldAlert className="size-3" aria-hidden="true" />
+                      {t("statusKicker")}
+                    </span>
+                  </div>
+                  <div className="mt-5 flex-1">
+                    <p className="text-xl font-bold tracking-tight text-ink-strong sm:text-2xl">
+                      {t("statusValue")}
+                    </p>
+                    <p className="mt-1 text-sm text-ink-subtle">
+                      {t("statusHint")}
+                    </p>
+                  </div>
+                  <Button
+                    asChild
+                    variant="primary"
+                    size="md"
+                    className="mt-5 w-full"
+                  >
+                    <Link href="/en-iyi-vpn">
+                      {t("compareLink")}
+                      <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </article>
+            </li>
+          </ul>
         </Container>
       </section>
     </IpSecurityBannerDismiss>
   );
-}
-
-function safeDecode(value: string): string {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
 }
