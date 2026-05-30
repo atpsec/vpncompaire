@@ -1,7 +1,8 @@
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import type { BlogPost } from "@/lib/blog";
-import { UnsplashImage } from "./unsplash-image";
+import { getBlogImage } from "@/lib/unsplash";
 import { useTranslations } from "next-intl";
 
 type BlogCardProps = {
@@ -10,17 +11,20 @@ type BlogCardProps = {
 
 export function BlogCard({ post }: BlogCardProps) {
   const t = useTranslations("blog");
+  const image = getBlogImage(post.coverImage, "hero");
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow hover:shadow-md">
       <Link href={`/blog/${post.slug}`} className="block">
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <UnsplashImage
-            keyword={post.unsplashKeyword}
+        <div className="relative aspect-[16/9] overflow-hidden bg-surface-subtle">
+          <Image
+            src={image.url}
             alt={post.title}
-            width={600}
-            height={338}
-            className="transition-transform duration-300 group-hover:scale-105"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+            unoptimized
           />
         </div>
       </Link>

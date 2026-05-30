@@ -58,10 +58,41 @@ export async function getBlogPosts(locale: "tr" | "en"): Promise<BlogPost[]> {
   );
 }
 
+function splitMarkdownContent(content: string): { first: string; second: string } {
+  const lines = content.split("\n");
+  const headingIndices: number[] = [];
+  lines.forEach((line, idx) => {
+    if (/^##\s/.test(line)) {
+      headingIndices.push(idx);
+    }
+  });
+
+  if (headingIndices.length < 2) {
+    const mid = Math.floor(lines.length / 2);
+    return {
+      first: lines.slice(0, mid).join("\n"),
+      second: lines.slice(mid).join("\n"),
+    };
+  }
+
+  const targetMid = Math.floor(lines.length / 2);
+  const splitIndex = headingIndices.reduce((closest, idx) =>
+    Math.abs(idx - targetMid) < Math.abs(closest - targetMid) ? idx : closest
+  );
+
+  return {
+    first: lines.slice(0, splitIndex).join("\n"),
+    second: lines.slice(splitIndex).join("\n"),
+  };
+}
+
 export async function getBlogPost(
   slug: string,
   locale: "tr" | "en"
-): Promise<{ frontmatter: BlogPostFrontmatter; content: React.ReactElement } | null> {
+): Promise<{
+  frontmatter: BlogPostFrontmatter;
+  contentParts: { first: React.ReactElement; second: React.ReactElement };
+} | null> {
   const filePath = path.join(
     process.cwd(),
     "src/content/blog",
@@ -76,15 +107,24 @@ export async function getBlogPost(
   const source = fs.readFileSync(filePath, "utf-8");
   const { data, content: rawContent } = matter(source);
 
-  const { content } = await compileMDX({
-    source: rawContent,
-    options: {
-      parseFrontmatter: false,
-      mdxOptions: {
-        remarkPlugins: [remarkGfm],
+  const { first, second } = splitMarkdownContent(rawContent);
+
+  const [firstResult, secondResult] = await Promise.all([
+    compileMDX({
+      source: first,
+      options: {
+        parseFrontmatter: false,
+        mdxOptions: { remarkPlugins: [remarkGfm] },
       },
-    },
-  });
+    }),
+    compileMDX({
+      source: second,
+      options: {
+        parseFrontmatter: false,
+        mdxOptions: { remarkPlugins: [remarkGfm] },
+      },
+    }),
+  ]);
 
   return {
     frontmatter: {
@@ -100,7 +140,10 @@ export async function getBlogPost(
       coverImage: data.coverImage,
       unsplashKeyword: data.unsplashKeyword,
     },
-    content,
+    contentParts: {
+      first: firstResult.content,
+      second: secondResult.content,
+    },
   };
 }
 

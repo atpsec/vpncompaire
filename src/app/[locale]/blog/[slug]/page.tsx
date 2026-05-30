@@ -1,4 +1,4 @@
-import { setRequestLocale, getTranslations } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { getBlogPost, getBlogPosts, getRelatedPosts } from "@/lib/blog";
@@ -46,7 +46,7 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  const { frontmatter, content } = result;
+  const { frontmatter, contentParts } = result;
 
   const relatedPosts = await getRelatedPosts(
     frontmatter.slug,
@@ -60,12 +60,28 @@ export default async function BlogPostPage({ params }: Props) {
         <BlogHeader post={frontmatter} />
 
         <UnsplashImage
-          keyword={frontmatter.unsplashKeyword}
+          coverImage={frontmatter.coverImage}
+          position="hero"
           alt={frontmatter.title}
           className="my-8"
+          priority
         />
 
-        <BlogContent content={content} />
+        <BlogContent content={contentParts.first} />
+
+        <UnsplashImage
+          coverImage={frontmatter.coverImage}
+          position="mid"
+          className="my-10"
+        />
+
+        <BlogContent content={contentParts.second} />
+
+        <UnsplashImage
+          coverImage={frontmatter.coverImage}
+          position="end"
+          className="my-10"
+        />
 
         <RelatedPosts posts={relatedPosts} />
       </Container>

@@ -1,50 +1,55 @@
 import Image from "next/image";
-import { getUnsplashImageUrl, getUnsplashAttribution } from "@/lib/unsplash";
-import { useTranslations } from "next-intl";
+import { getBlogImage } from "@/lib/unsplash";
+import { getTranslations } from "next-intl/server";
 
 type UnsplashImageProps = {
-  keyword: string;
-  alt: string;
-  width?: number;
-  height?: number;
+  coverImage: string;
+  position?: "hero" | "mid" | "end";
+  alt?: string;
   className?: string;
+  priority?: boolean;
 };
 
-export function UnsplashImage({
-  keyword,
+export async function UnsplashImage({
+  coverImage,
+  position = "hero",
   alt,
-  width = 1200,
-  height = 630,
   className = "",
+  priority = false,
 }: UnsplashImageProps) {
-  const t = useTranslations("blog");
-  const imageUrl = getUnsplashImageUrl(keyword, width, height);
-  const attribution = getUnsplashAttribution(keyword);
+  const t = await getTranslations("blog");
+  const image = getBlogImage(coverImage, position);
+  const isHero = position === "hero";
+  const width = isHero ? 1200 : 800;
+  const height = isHero ? 630 : 450;
 
   return (
-    <div className={className}>
-      <div className="relative overflow-hidden rounded-2xl">
+    <figure className={className}>
+      <div className="relative overflow-hidden rounded-2xl bg-surface-subtle">
         <Image
-          src={imageUrl}
-          alt={alt}
+          src={image.url}
+          alt={alt || image.alt}
           width={width}
           height={height}
-          className="object-cover"
+          className="h-auto w-full object-cover"
+          sizes={isHero ? "(max-width: 768px) 100vw, 1200px" : "(max-width: 768px) 100vw, 800px"}
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
           unoptimized
         />
       </div>
-      <p className="mt-2 text-xs text-ink-subtle">
+      <figcaption className="mt-2 text-xs text-ink-subtle">
         {t("photoBy")}{" "}
         <a
-          href={attribution.url}
+          href={image.photographerUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="underline hover:text-ink-muted"
         >
-          {attribution.text}
+          {image.photographer}
         </a>{" "}
         {t("onUnsplash")}
-      </p>
-    </div>
+      </figcaption>
+    </figure>
   );
 }
