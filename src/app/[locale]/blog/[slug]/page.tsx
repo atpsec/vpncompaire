@@ -24,15 +24,15 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = await getBlogPost(slug, locale as "tr" | "en");
+  const result = await getBlogPost(slug, locale as "tr" | "en");
 
-  if (!post) {
+  if (!result) {
     return {};
   }
 
   return {
-    title: post.title,
-    description: post.description,
+    title: result.frontmatter.title,
+    description: result.frontmatter.description,
   };
 }
 
@@ -40,30 +40,32 @@ export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const post = await getBlogPost(slug, locale as "tr" | "en");
+  const result = await getBlogPost(slug, locale as "tr" | "en");
 
-  if (!post) {
+  if (!result) {
     notFound();
   }
 
+  const { frontmatter, content } = result;
+
   const relatedPosts = await getRelatedPosts(
-    post.slug,
-    post.category,
+    frontmatter.slug,
+    frontmatter.category,
     locale as "tr" | "en"
   );
 
   return (
     <article className="py-12 sm:py-16">
       <Container size="md">
-        <BlogHeader post={post} />
+        <BlogHeader post={frontmatter} />
 
         <UnsplashImage
-          keyword={post.unsplashKeyword}
-          alt={post.title}
+          keyword={frontmatter.unsplashKeyword}
+          alt={frontmatter.title}
           className="my-8"
         />
 
-        <BlogContent content={post.content} />
+        <BlogContent content={content} />
 
         <RelatedPosts posts={relatedPosts} />
       </Container>

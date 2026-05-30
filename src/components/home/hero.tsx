@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,12 @@ import { products } from "@/data/products";
 
 export function Hero() {
   const t = useTranslations("home.hero");
+  const locale = useLocale();
   const auditCount = products.filter((p) => p.highlights.audits).length;
+  const monthYear = new Intl.DateTimeFormat(locale, {
+    year: "numeric",
+    month: "long",
+  }).format(new Date());
 
   return (
     <section className="relative overflow-hidden">
@@ -33,7 +38,7 @@ export function Hero() {
       <Container>
         <div className="mx-auto max-w-4xl pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
-            <Sparkles className="size-3.5 text-accent-500" /> 2026 Mayıs · Bağımsız test metodolojisi
+            <Sparkles className="size-3.5 text-accent-500" /> {monthYear} · {t("methodologyTag")}
           </span>
 
           <h1 className="mt-5 text-[2rem] sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-strong text-balance leading-[1.08]">

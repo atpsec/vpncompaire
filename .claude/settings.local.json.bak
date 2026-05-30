@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(node -e \"const a=Object.keys\\(require\\('./messages/tr.json'\\)\\); const b=Object.keys\\(require\\('./messages/en.json'\\)\\); console.log\\('tr keys:',a\\); console.log\\('en keys:',b\\); console.log\\('match:',JSON.stringify\\(a\\)===JSON.stringify\\(b\\)\\);\")",
+      "Bash(node -e ' *)",
+      "Bash(npm run *)",
+      "Bash(npx eslint *)",
+      "WebFetch(domain:vpncompaire-git-design-v5-premium-dark-ebeveyn-rehber-i.vercel.app)",
+      "Bash(gh pr *)",
+      "Bash(curl *)",
+      "Bash(vercel --version)",
+      "Bash(vercel whoami *)",
+      "Bash(NODE_OPTIONS=\"--use-system-ca\" vercel whoami)",
+      "Bash(node *)",
+      "Bash(python -c ' *)",
+      "Bash(grep -ioE \"\\(error|exception\\)[^<]{0,120}\")",
+      "Bash(grep -oE \"Application error[^<]*|digest[^<]{0,80}\")",
+      "Bash(echo \"EXIT=$?\")"
+    ]
+  }
+}

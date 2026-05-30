@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { compileMDX } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 
 export type BlogPostFrontmatter = {
   slug: string;
@@ -59,7 +61,7 @@ export async function getBlogPosts(locale: "tr" | "en"): Promise<BlogPost[]> {
 export async function getBlogPost(
   slug: string,
   locale: "tr" | "en"
-): Promise<BlogPost | null> {
+): Promise<{ frontmatter: BlogPostFrontmatter; content: React.ReactElement } | null> {
   const filePath = path.join(
     process.cwd(),
     "src/content/blog",
@@ -72,20 +74,32 @@ export async function getBlogPost(
   }
 
   const source = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(source);
+  const { data, content: rawContent } = matter(source);
+
+  const { content } = await compileMDX({
+    source: rawContent,
+    options: {
+      parseFrontmatter: false,
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+      },
+    },
+  });
 
   return {
-    slug: data.slug,
-    title: data.title,
-    description: data.description,
-    publishedAt: data.publishedAt,
-    updatedAt: data.updatedAt,
-    author: data.author,
-    category: data.category,
-    tags: data.tags || [],
-    readingTime: data.readingTime,
-    coverImage: data.coverImage,
-    unsplashKeyword: data.unsplashKeyword,
+    frontmatter: {
+      slug: data.slug,
+      title: data.title,
+      description: data.description,
+      publishedAt: data.publishedAt,
+      updatedAt: data.updatedAt,
+      author: data.author,
+      category: data.category,
+      tags: data.tags || [],
+      readingTime: data.readingTime,
+      coverImage: data.coverImage,
+      unsplashKeyword: data.unsplashKeyword,
+    },
     content,
   };
 }
