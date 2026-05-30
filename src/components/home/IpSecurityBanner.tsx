@@ -78,7 +78,7 @@ export async function IpSecurityBanner() {
     <IpSecurityBannerDismiss>
       <section
         aria-label={t("ariaLabel")}
-        className="relative -mt-2 pb-8 sm:-mt-4 sm:pb-10"
+        className="relative -mt-1 pb-6 sm:-mt-3 sm:pb-10"
       >
         <Container>
           <article className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-md">
@@ -91,17 +91,17 @@ export async function IpSecurityBanner() {
               className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent-50/60 blur-3xl"
             />
 
-            <div className="relative p-5 sm:p-6 lg:p-7">
-              <div className="flex items-start justify-between gap-3">
+            <div className="relative p-4 sm:p-6 lg:p-7">
+              <div className="flex items-start justify-between gap-2 sm:gap-3">
                 <div className="min-w-0 flex-1">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-300/70 bg-accent-50/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-accent-700">
                     <ShieldAlert className="size-3" aria-hidden="true" />
                     {t("kicker")}
                   </span>
-                  <h2 className="mt-3 text-xl font-bold tracking-tight text-ink-strong sm:text-2xl">
+                  <h2 className="mt-2.5 text-base font-bold tracking-tight text-ink-strong sm:mt-3 sm:text-xl lg:text-2xl">
                     {t("title")}
                   </h2>
-                  <p className="mt-1 max-w-2xl text-sm text-ink-muted">
+                  <p className="mt-1 max-w-2xl text-xs leading-relaxed text-ink-muted sm:text-sm">
                     {t("subtitle")}
                   </p>
                 </div>
@@ -111,26 +111,26 @@ export async function IpSecurityBanner() {
                 />
               </div>
 
-              <div className="my-5 h-px w-full bg-border sm:my-6" />
+              <div className="my-4 h-px w-full bg-border sm:my-5 lg:my-6" />
 
-              <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
-                <dl className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6 lg:flex-1">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
+                <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5 lg:flex-1 lg:gap-6">
                   <div className="min-w-0">
                     <dt className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-ink-subtle">
                       <MapPin className="size-3" aria-hidden="true" />
                       {t("locationKicker")}
                     </dt>
-                    <dd className="mt-2 flex items-center gap-2.5">
+                    <dd className="mt-2 flex min-w-0 items-center gap-2 sm:gap-2.5">
                       <Image
                         src={`https://flagcdn.com/h40/${countryCode}.png`}
                         alt={countryName}
                         width={28}
                         height={20}
-                        className="h-5 w-auto rounded-sm shadow-sm ring-1 ring-black/5"
+                        className="h-4 w-auto shrink-0 rounded-sm shadow-sm ring-1 ring-black/5 sm:h-5"
                         unoptimized
                       />
                       <div className="min-w-0">
-                        <p className="truncate text-base font-bold leading-tight text-ink-strong sm:text-lg">
+                        <p className="truncate text-sm font-bold leading-tight text-ink-strong sm:text-base lg:text-lg">
                           {decodedCity ?? countryName}
                         </p>
                         <p className="truncate text-xs leading-tight text-ink-subtle">
@@ -145,8 +145,8 @@ export async function IpSecurityBanner() {
                       <Globe2 className="size-3" aria-hidden="true" />
                       {t("ipKicker")}
                     </dt>
-                    <dd className="mt-2">
-                      <p className="break-all font-mono text-base font-bold leading-tight tabular-nums text-ink-strong sm:text-lg">
+                    <dd className="mt-2 min-w-0">
+                      <p className="break-all font-mono text-sm font-bold leading-tight tabular-nums text-ink-strong sm:text-base lg:text-lg">
                         {ip}
                       </p>
                       <p className="text-xs leading-tight text-ink-subtle">
@@ -160,7 +160,7 @@ export async function IpSecurityBanner() {
                       <Clock className="size-3" aria-hidden="true" />
                       {t("timeKicker")}
                     </dt>
-                    <dd className="mt-2">
+                    <dd className="mt-2 min-w-0">
                       <IpSecurityBannerClock
                         initialIso={initialIso}
                         timezone={timezone}
