@@ -55,13 +55,10 @@ export function IpSecurityBannerClock({ initialIso, timezone, locale }: Props) {
 
   return (
     <>
-      <p className="font-mono text-2xl font-bold tracking-tight tabular-nums text-ink-strong">
+      <p className="font-mono text-base font-bold tracking-tight tabular-nums text-ink-strong sm:text-lg">
         <time suppressHydrationWarning>{time}</time>
       </p>
-      <p
-        className="mt-1 text-sm text-ink-subtle"
-        suppressHydrationWarning
-      >
+      <p className="text-xs text-ink-subtle" suppressHydrationWarning>
         {dateLine}
       </p>
     </>

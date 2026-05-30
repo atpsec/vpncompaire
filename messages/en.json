@@ -85,15 +85,12 @@
     "ipBanner": {
       "ariaLabel": "IP security notice",
       "kicker": "Security notice",
-      "subtitle": "You are visiting this site with the following information visible",
+      "title": "Your connection is unprotected",
+      "subtitle": "Your IP and location are visible to external servers — a VPN hides this information.",
       "locationKicker": "Location",
       "ipKicker": "IP address",
       "timeKicker": "Local time",
-      "statusKicker": "Status",
-      "ipHint": "Visible to web servers",
       "locationFallback": "Approximate location",
-      "statusValue": "Open connection",
-      "statusHint": "Connected without a VPN — your IP and location are visible.",
       "compareLink": "Compare VPNs",
       "dismissLabel": "Dismiss notification"
     }

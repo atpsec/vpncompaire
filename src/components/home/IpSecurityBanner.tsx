@@ -80,152 +80,110 @@ export async function IpSecurityBanner() {
         aria-label={t("ariaLabel")}
         className="relative -mt-2 pb-8 sm:-mt-4 sm:pb-10"
       >
-        <Container size="xl">
-          <header className="mb-4 flex items-start justify-between gap-3 sm:mb-5">
-            <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-300/70 bg-accent-50/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-accent-700">
-                <ShieldAlert className="size-3" aria-hidden="true" />
-                {t("kicker")}
-              </span>
-              <p className="mt-2 max-w-xl text-sm text-ink-muted">
-                {t("subtitle")}
-              </p>
-            </div>
-            <IpSecurityBannerDismissButton
-              label={t("dismissLabel")}
-              className="-mr-1.5"
+        <Container>
+          <article className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-md">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 via-accent-500 to-brand-500"
             />
-          </header>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent-50/60 blur-3xl"
+            />
 
-          <ul className="-mx-4 flex gap-3 overflow-x-auto px-4 snap-x snap-mandatory scroll-pl-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-4">
-            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
-              <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent-50/70 blur-3xl"
+            <div className="relative p-5 sm:p-6 lg:p-7">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-300/70 bg-accent-50/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-accent-700">
+                    <ShieldAlert className="size-3" aria-hidden="true" />
+                    {t("kicker")}
+                  </span>
+                  <h2 className="mt-3 text-xl font-bold tracking-tight text-ink-strong sm:text-2xl">
+                    {t("title")}
+                  </h2>
+                  <p className="mt-1 max-w-2xl text-sm text-ink-muted">
+                    {t("subtitle")}
+                  </p>
+                </div>
+                <IpSecurityBannerDismissButton
+                  label={t("dismissLabel")}
+                  className="-mr-1.5 shrink-0"
                 />
-                <div className="relative flex h-full flex-col">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-700">
+              </div>
+
+              <div className="my-5 h-px w-full bg-border sm:my-6" />
+
+              <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
+                <dl className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6 lg:flex-1">
+                  <div className="min-w-0">
+                    <dt className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-ink-subtle">
                       <MapPin className="size-3" aria-hidden="true" />
                       {t("locationKicker")}
-                    </span>
-                    <Image
-                      src={`https://flagcdn.com/h40/${countryCode}.png`}
-                      alt={countryName}
-                      width={32}
-                      height={24}
-                      className="h-5 w-auto rounded-sm shadow-sm ring-1 ring-black/5"
-                      unoptimized
-                    />
+                    </dt>
+                    <dd className="mt-2 flex items-center gap-2.5">
+                      <Image
+                        src={`https://flagcdn.com/h40/${countryCode}.png`}
+                        alt={countryName}
+                        width={28}
+                        height={20}
+                        className="h-5 w-auto rounded-sm shadow-sm ring-1 ring-black/5"
+                        unoptimized
+                      />
+                      <div className="min-w-0">
+                        <p className="truncate text-base font-bold leading-tight text-ink-strong sm:text-lg">
+                          {decodedCity ?? countryName}
+                        </p>
+                        <p className="truncate text-xs leading-tight text-ink-subtle">
+                          {decodedCity ? countryName : t("locationFallback")}
+                        </p>
+                      </div>
+                    </dd>
                   </div>
-                  <div className="mt-5 flex-1">
-                    <p className="text-2xl font-bold tracking-tight text-ink-strong">
-                      {decodedCity ?? countryName}
-                    </p>
-                    <p className="mt-1 text-sm text-ink-subtle">
-                      {decodedCity ? countryName : t("locationFallback")}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            </li>
 
-            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
-              <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-brand-50/60 blur-3xl"
-                />
-                <div className="relative flex h-full flex-col">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-brand-700">
+                  <div className="min-w-0">
+                    <dt className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-ink-subtle">
                       <Globe2 className="size-3" aria-hidden="true" />
                       {t("ipKicker")}
-                    </span>
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-ink-subtle">
-                      {ipVersion}
-                    </span>
+                    </dt>
+                    <dd className="mt-2">
+                      <p className="break-all font-mono text-base font-bold leading-tight tabular-nums text-ink-strong sm:text-lg">
+                        {ip}
+                      </p>
+                      <p className="text-xs leading-tight text-ink-subtle">
+                        {ipVersion}
+                      </p>
+                    </dd>
                   </div>
-                  <div className="mt-5 flex-1">
-                    <p className="break-all font-mono text-xl font-bold tracking-tight tabular-nums text-ink-strong sm:text-2xl">
-                      {ip}
-                    </p>
-                    <p className="mt-1 text-sm text-ink-subtle">
-                      {t("ipHint")}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            </li>
 
-            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
-              <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-surface-subtle blur-3xl"
-                />
-                <div className="relative flex h-full flex-col">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-subtle px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-ink-strong">
+                  <div className="min-w-0">
+                    <dt className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-ink-subtle">
                       <Clock className="size-3" aria-hidden="true" />
                       {t("timeKicker")}
-                    </span>
-                    <span className="truncate text-[10px] font-medium uppercase tracking-wider text-ink-subtle">
-                      {timezone}
-                    </span>
+                    </dt>
+                    <dd className="mt-2">
+                      <IpSecurityBannerClock
+                        initialIso={initialIso}
+                        timezone={timezone}
+                        locale={locale}
+                      />
+                    </dd>
                   </div>
-                  <div className="mt-5 flex-1">
-                    <IpSecurityBannerClock
-                      initialIso={initialIso}
-                      timezone={timezone}
-                      locale={locale}
-                    />
-                  </div>
-                </div>
-              </article>
-            </li>
+                </dl>
 
-            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
-              <article className="relative h-full overflow-hidden rounded-2xl border border-accent-300 bg-white p-5 shadow-md ring-1 ring-accent-200/60 sm:p-6">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 via-accent-500 to-brand-500"
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-12 -bottom-16 h-44 w-44 rounded-full bg-accent-50/80 blur-3xl"
-                />
-                <div className="relative flex h-full flex-col">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-800">
-                      <ShieldAlert className="size-3" aria-hidden="true" />
-                      {t("statusKicker")}
-                    </span>
-                  </div>
-                  <div className="mt-5 flex-1">
-                    <p className="text-xl font-bold tracking-tight text-ink-strong sm:text-2xl">
-                      {t("statusValue")}
-                    </p>
-                    <p className="mt-1 text-sm text-ink-subtle">
-                      {t("statusHint")}
-                    </p>
-                  </div>
-                  <Button
-                    asChild
-                    variant="primary"
-                    size="md"
-                    className="mt-5 w-full"
-                  >
-                    <Link href="/en-iyi-vpn">
-                      {t("compareLink")}
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </article>
-            </li>
-          </ul>
+                <Button
+                  asChild
+                  variant="primary"
+                  size="md"
+                  className="self-stretch lg:self-auto lg:shrink-0"
+                >
+                  <Link href="/en-iyi-vpn">
+                    {t("compareLink")}
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </article>
         </Container>
       </section>
     </IpSecurityBannerDismiss>

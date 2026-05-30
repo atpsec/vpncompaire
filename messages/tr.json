@@ -85,15 +85,12 @@
     "ipBanner": {
       "ariaLabel": "IP güvenliği bildirimi",
       "kicker": "Güvenlik bildirimi",
-      "subtitle": "Bu siteyi şu an bu bilgilerle ziyaret ediyorsunuz",
+      "title": "Bağlantınız korunmuyor",
+      "subtitle": "IP'niz ve konumunuz dış sunuculara görünür durumda — VPN ile bu bilgileri gizleyebilirsiniz.",
       "locationKicker": "Konum",
       "ipKicker": "IP adresi",
       "timeKicker": "Yerel saat",
-      "statusKicker": "Durum",
-      "ipHint": "Web sunucularına açık görünür",
       "locationFallback": "Yaklaşık konum",
-      "statusValue": "Açık bağlantı",
-      "statusHint": "VPN olmadan bağlısınız — IP'niz ve konumunuz görünür.",
       "compareLink": "VPN'leri karşılaştır",
       "dismissLabel": "Bildirimi kapat"
     }
