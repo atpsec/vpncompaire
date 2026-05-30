@@ -1,0 +1,467 @@
+---
+slug: "vpn-secerken-dikkat-edilmesi-gerekenler"
+title: "VPN Seçerken Dikkat Edilmesi Gerekenler: 12 Kritik Faktör"
+description: "Doğru VPN nasıl seçilir? No-logs politikası, denetimler, yargı yetkisi, özellikler ve fiyat karşılaştırması."
+publishedAt: "2026-05-30"
+updatedAt: "2026-05-30"
+author: "vpncompaire Editör Ekibi"
+category: "secim-rehberi"
+tags: ["vpn-seçimi", "karşılaştırma", "özellikler", "güvenlik"]
+readingTime: 10
+coverImage: "vpn-selection"
+unsplashKeyword: "choice decision selection options"
+---
+
+Piyasada yüzlerce VPN var. Hepsi "en iyi", "en hızlı", "en güvenli" olduğunu iddia ediyor. Peki gerçekten doğru VPN'i nasıl seçersiniz? İşte VPN seçerken mutlaka kontrol etmeniz gereken 12 kritik faktör.
+
+## 1. No-Logs Politikası
+
+VPN kullanmanın amacı gizliliğinizi korumaksa, VPN sağlayıcısının kendisi kayıt tutmamalıdır.
+
+### No-Logs Ne Demek?
+
+VPN sağlayıcısı şunları kaydetmemelidir:
+- Hangi web sitelerini ziyaret ettiğiniz
+- Ne zaman bağlandığınız
+- Ne kadar veri kullandığınız
+- Gerçek IP adresiniz
+- DNS sorguları
+
+### Kabul Edilebilir Loglar
+
+Bazı minimal kayıtlar teknik olarak gereklidir:
+- Toplam bant genişliği kullanımı (bireysel değil)
+- Sunucu yükü (anonim)
+- Bağlantı sayısı (kimlik bilgisi olmadan)
+
+### No-Logs Nasıl Doğrulanır?
+
+**1. Gizlilik Politikasını Okuyun**
+
+Detaylı, açık ve anlaşılır olmalı. Belirsiz ifadelerden kaçının:
+- ❌ "Gerekli bilgileri saklarız"
+- ✅ "Hiçbir aktivite kaydı tutmayız"
+
+**2. Bağımsız Denetimleri Kontrol Edin**
+
+Güvenilir denetim firmaları:
+- Deloitte
+- PwC
+- KPMG
+- Cure53
+- Securitum
+- Assured AB
+
+**Örnek**: ExpressVPN, PwC tarafından denetlendi ve no-logs iddiası doğrulandı.
+
+**3. Mahkeme Testleri**
+
+Bazı VPN'ler mahkemede test edildi:
+- **Private Internet Access (PIA)**: FBI kayıt istedi, PIA kayıt olmadığını kanıtladı
+- **ExpressVPN**: Türkiye'de sunucu ele geçirildi, hiçbir veri bulunamadı
+
+### Kırmızı Bayraklar
+
+- Gizlilik politikası yok veya belirsiz
+- "Yasal zorunluluk halinde veri paylaşırız" ifadesi
+- Üçüncü taraf reklam ağlarıyla çalışma
+- Ücretsiz VPN (veri satarak para kazanıyor olabilir)
+
+## 2. Yargı Yetkisi (Jurisdiction)
+
+VPN şirketinin hangi ülkede kayıtlı olduğu, gizliliğinizi doğrudan etkiler.
+
+### 5/9/14 Eyes İttifakları
+
+İstihbarat paylaşım anlaşmaları:
+
+**5 Eyes (En Kötü):**
+- ABD, İngiltere, Kanada, Avustralya, Yeni Zelanda
+- Kapsamlı gözetim, veri paylaşımı
+
+**9 Eyes:**
+- 5 Eyes + Danimarka, Fransa, Hollanda, Norveç
+
+**14 Eyes:**
+- 9 Eyes + Almanya, Belçika, İtalya, İspanya, İsveç
+
+### Gizlilik Dostu Ülkeler
+
+**İsviçre:**
+- Güçlü gizlilik yasaları
+- 5/9/14 Eyes dışında
+- ProtonVPN, VyprVPN
+
+**Panama:**
+- Veri saklama yasası yok
+- NordVPN, Surfshark
+
+**Britanya Virjin Adaları:**
+- İngiltere yasalarına tabi değil
+- ExpressVPN
+
+**Romanya:**
+- AB üyesi ama esnek gizlilik yasaları
+- CyberGhost
+
+### Türkiye ve VPN
+
+Türkiye, 5651 sayılı kanun gereği:
+- ISP'ler 2 yıl kayıt tutar
+- VPN kullanımı yasal
+- Türk VPN şirketleri veri paylaşmak zorunda kalabilir
+
+**Sonuç**: Türkiye merkezli VPN yerine yurt dışı merkezli tercih edin.
+
+## 3. Şifreleme Standardı
+
+Güçlü şifreleme, verilerinizi korur.
+
+### Minimum Standart: AES-256
+
+- **AES-256**: Askeri düzeyde şifreleme, kırılması imkansız
+- **AES-128**: Yeterli ama AES-256 tercih edilmeli
+- **Blowfish**: Eski, kaçının
+- **PPTP**: Kırılmış, asla kullanmayın
+
+### Şifreleme Protokolleri
+
+- **ChaCha20**: Modern, hızlı (WireGuard'da)
+- **RSA-2048/4096**: Anahtar değişimi için
+- **SHA-256/SHA-512**: Hash fonksiyonu
+
+### Perfect Forward Secrecy (PFS)
+
+Her oturum için yeni şifreleme anahtarı oluşturur. Bir anahtar çalınırsa, sadece o oturum etkilenir.
+
+**Kontrol**: VPN'in PFS desteklediğinden emin olun.
+
+## 4. Kill Switch
+
+VPN bağlantısı kesildiğinde, internet erişimini tamamen kesen özelliktir.
+
+### Neden Kritik?
+
+VPN bağlantısı bazen düşebilir:
+- Sunucu bakımı
+- Ağ değişimi
+- Yazılım hatası
+
+Kill switch olmadan, o an gerçek IP'niz ve trafiğiniz açığa çıkar.
+
+### Kill Switch Türleri
+
+**1. Uygulama Seviyesi:**
+- VPN uygulaması içinde
+- Sadece VPN çalışırken aktif
+
+**2. Sistem Seviyesi:**
+- İşletim sistemi seviyesinde
+- VPN uygulaması kapansa bile çalışır
+
+**Tavsiye**: Sistem seviyesi kill switch tercih edin.
+
+### Test Etme
+
+1. VPN'i açın
+2. Bağlantıyı manuel kesin
+3. İnternet erişimi kesilmeli
+4. IP adresiniz sızmamalı
+
+## 5. DNS Sızıntı Koruması
+
+DNS sızıntısı, VPN kullanırken bile gerçek DNS sorgularınızın ISP'nize gitmesidir.
+
+### DNS Sızıntısı Nedir?
+
+Normal: VPN DNS → Şifreli
+Sızıntı: ISP DNS → Açık
+
+ISP'niz hangi siteleri ziyaret ettiğinizi görür.
+
+### Test Etme
+
+1. VPN'i açın
+2. dnsleaktest.com'a gidin
+3. "Extended Test" çalıştırın
+4. Sonuçlar VPN sağlayıcısının DNS'ini göstermeli
+
+**Kırmızı Bayrak**: ISP'nizin DNS'i görünüyorsa sızıntı var.
+
+### Çözüm
+
+VPN ayarlarından "VPN DNS kullan" seçeneğini aktif edin.
+
+## 6. Sunucu Ağı
+
+Geniş sunucu ağı, daha iyi hız ve erişim sağlar.
+
+### Sunucu Sayısı
+
+- **1000+ sunucu**: İyi
+- **3000+ sunucu**: Çok iyi
+- **5000+ sunucu**: Mükemmel
+
+**Önemli**: Sayıdan çok kalite önemlidir. 10.000 yavaş sunucu, 1.000 hızlı sunucudan kötüdür.
+
+### Ülke Çeşitliliği
+
+- **50+ ülke**: Yeterli
+- **80+ ülke**: İyi
+- **100+ ülke**: Mükemmel
+
+**İhtiyacınız Olan Ülkeler:**
+- Türkiye (yurt dışındayken)
+- ABD (Netflix, Hulu)
+- İngiltere (BBC iPlayer)
+- Almanya, Hollanda (Avrupa içerikleri)
+
+### Fiziksel vs Sanal Sunucular
+
+**Fiziksel Sunucu**: Gerçek sunucu o ülkede
+**Sanal Sunucu**: Sunucu başka ülkede, IP o ülkeden
+
+**Örnek**: Türkiye'de fiziksel sunucu yasak olabilir, sanal sunucu kullanılır.
+
+**Sorun**: Sanal sunucular bazen daha yavaştır.
+
+## 7. Hız ve Performans
+
+VPN hızlı olmalı, aksi takdirde kullanılmaz.
+
+### Hız Faktörleri
+
+1. **Protokol**: WireGuard en hızlı
+2. **Sunucu Kapasitesi**: 10 Gbps sunucular ideal
+3. **Kullanıcı Yoğunluğu**: Az yoğun sunucular hızlı
+4. **Fiziksel Mesafe**: Yakın sunucular hızlı
+
+### Hız Testi
+
+Satın almadan önce:
+- Para iade garantisi olan VPN alın
+- Farklı sunucularda hız testi yapın
+- Beğenmezseniz iade edin
+
+**Beklenti**: %10-20 hız kaybı normal, %50+ kabul edilemez.
+
+## 8. Cihaz Desteği ve Eşzamanlı Bağlantı
+
+VPN, tüm cihazlarınızda çalışmalı.
+
+### Platform Desteği
+
+Olmazsa olmaz:
+- Windows
+- macOS
+- iOS
+- Android
+- Linux
+
+Bonus:
+- Router
+- Smart TV
+- Fire TV Stick
+- Tarayıcı eklentisi
+
+### Eşzamanlı Bağlantı
+
+- **5 cihaz**: Standart
+- **6-10 cihaz**: İyi
+- **Sınırsız**: Mükemmel (Surfshark)
+
+**Hesaplama**: Telefon + Laptop + Tablet + Smart TV + Aile üyeleri = 5+ cihaz
+
+## 9. Streaming Desteği
+
+Netflix, Disney+, BBC iPlayer gibi platformlara erişim.
+
+### Streaming Testi
+
+VPN'in şunları desteklediğinden emin olun:
+- Netflix ABD, İngiltere, Japonya
+- Disney+
+- Amazon Prime Video
+- BBC iPlayer
+- Hulu
+
+**Kontrol**: VPN'in web sitesinde "streaming" bölümüne bakın.
+
+### Özel Streaming Sunucuları
+
+Bazı VPN'ler, streaming için optimize edilmiş sunucular sunar:
+- NordVPN: SmartPlay
+- CyberGhost: Streaming sunucuları
+- Surfshark: Tüm sunucular streaming destekli
+
+## 10. Torrent ve P2P Desteği
+
+Torrent kullanıyorsanız, VPN P2P'yi desteklemeli.
+
+### P2P Politikası
+
+- **Tüm sunucularda P2P**: En iyi (Mullvad, Surfshark)
+- **Özel P2P sunucuları**: İyi (NordVPN, CyberGhost)
+- **P2P yasak**: Kaçının
+
+### Port Forwarding
+
+Torrent hızını artırır. Bazı VPN'ler destekler:
+- PIA
+- AirVPN
+- Mullvad
+
+## 11. Müşteri Desteği
+
+Sorun yaşadığınızda yardım alabilmelisiniz.
+
+### Destek Kanalları
+
+**Olmazsa Olmaz:**
+- 7/24 canlı chat
+- E-posta desteği
+
+**Bonus:**
+- Telefon desteği
+- Türkçe destek
+- Detaylı rehberler
+- Video eğitimleri
+
+### Yanıt Süresi
+
+- **Canlı chat**: 1-5 dakika
+- **E-posta**: 24 saat içinde
+
+**Test**: Satın almadan önce canlı chat'te soru sorun, yanıt kalitesini değerlendirin.
+
+## 12. Fiyat ve Para İade Garantisi
+
+VPN, bütçenize uygun olmalı.
+
+### Fiyat Aralıkları
+
+**Bütçe Dostu**: 2-4 dolar/ay
+- Surfshark
+- PIA
+
+**Orta Segment**: 4-7 dolar/ay
+- NordVPN
+- CyberGhost
+
+**Premium**: 7-12 dolar/ay
+- ExpressVPN
+
+**Sabit Fiyat**: 5 euro/ay
+- Mullvad
+
+### Para İade Garantisi
+
+**Standart**: 30 gün
+**İyi**: 45 gün (CyberGhost)
+
+**Önemli**: Gerçekten iade edip etmediklerini kontrol edin (online yorumlar).
+
+### Ödeme Yöntemleri
+
+- Kredi kartı
+- PayPal
+- Kripto para (anonim)
+- Hediye kartı
+
+**Gizlilik İçin**: Kripto para veya hediye kartı kullanın.
+
+## Bonus: Ekstra Özellikler
+
+### Split Tunneling
+
+Hangi uygulamaların VPN kullanacağını seçin.
+
+### Multi-Hop (Çift VPN)
+
+Trafiğinizi iki VPN sunucusundan geçirir. Ekstra gizlilik.
+
+### Obfuscation (Gizleme)
+
+VPN trafiğini normal HTTPS gibi gösterir. VPN engellerini aşar.
+
+### Reklam Engelleyici
+
+Reklamları, takipçileri ve kötü amaçlı siteleri engeller.
+
+### Dedicated IP
+
+Sadece size özel IP adresi. Bazı siteler paylaşımlı IP'leri engeller.
+
+## VPN Karşılaştırma Kontrol Listesi
+
+Bir VPN değerlendirirken:
+
+- [ ] No-logs politikası var mı?
+- [ ] Bağımsız denetim geçmiş mi?
+- [ ] Gizlilik dostu ülkede mi?
+- [ ] AES-256 şifreleme var mı?
+- [ ] Kill switch var mı?
+- [ ] DNS sızıntı koruması var mı?
+- [ ] Yeterli sunucu ağı var mı?
+- [ ] Hız tatmin edici mi?
+- [ ] Tüm cihazlarımda çalışıyor mu?
+- [ ] Streaming destekliyor mu?
+- [ ] P2P/Torrent izin veriyor mu?
+- [ ] Müşteri desteği iyi mi?
+- [ ] Fiyat uygun mu?
+- [ ] Para iade garantisi var mı?
+
+## Önerilen VPN'ler (2026)
+
+### En İyi Genel: NordVPN
+
+- No-logs (denetimli)
+- Panama merkezli
+- 6000+ sunucu
+- Hızlı (NordLynx)
+- Streaming destekli
+- 6 cihaz
+- ~3.5 dolar/ay
+
+### En Hızlı: ExpressVPN
+
+- No-logs (denetimli)
+- BVI merkezli
+- 3000+ sunucu
+- En hızlı (Lightway)
+- Mükemmel streaming
+- 8 cihaz
+- ~6.5 dolar/ay
+
+### En Uygun: Surfshark
+
+- No-logs (denetimli)
+- BVI merkezli
+- 3200+ sunucu
+- İyi hız
+- Streaming destekli
+- Sınırsız cihaz
+- ~2.5 dolar/ay
+
+### En Gizlilik Odaklı: Mullvad
+
+- No-logs (denetimli)
+- İsveç merkezli
+- 900+ sunucu
+- Hızlı (WireGuard)
+- Anonim hesap
+- 5 cihaz
+- 5 euro/ay (sabit)
+
+## Sonuç
+
+Doğru VPN seçimi, ihtiyaçlarınıza bağlıdır:
+- **Gizlilik öncelikli**: Mullvad, ProtonVPN
+- **Hız öncelikli**: ExpressVPN, NordVPN
+- **Streaming öncelikli**: ExpressVPN, NordVPN
+- **Bütçe öncelikli**: Surfshark, PIA
+- **Torrent öncelikli**: Mullvad, PIA
+
+**Altın Kural**: Para iade garantisi olan VPN alın, test edin, beğenmezseniz iade edin. Hiçbir risk almadan doğru VPN'i bulabilirsiniz.
+
+VPN seçimi, dijital güvenliğiniz için en önemli kararlardan biridir. Acele etmeyin, araştırın, test edin ve doğru seçimi yapın.

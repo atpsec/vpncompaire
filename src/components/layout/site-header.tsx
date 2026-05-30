@@ -12,6 +12,7 @@ import { LanguageSwitcher } from "@/components/layout/language-switcher";
 const navItems = [
   { href: "/en-iyi-vpn", labelKey: "reviews" },
   { href: "/karsilastir", labelKey: "compare" },
+  { href: "/blog", labelKey: "blog" },
   { href: "/sana-uygun-vpn", labelKey: "quiz" },
   { href: "/cihazlar", labelKey: "devices" },
   { href: "/rehber", labelKey: "guides" },

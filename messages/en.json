@@ -9,6 +9,7 @@
     "reviews": "Reviews",
     "compare": "Compare",
     "bestFor": "Best for",
+    "blog": "Blog",
     "quiz": "Quiz",
     "calculator": "Calculator",
     "glossary": "Glossary",
@@ -47,6 +48,7 @@
       "subtitle": "VPNs evaluated with an independent methodology for privacy, streaming, travel and everyday security.",
       "ctaPrimary": "See the top 10 VPNs",
       "ctaSecondary": "How we test",
+      "methodologyTag": "Independent test methodology",
       "trust": {
         "tested": "VPNs tested",
         "audits": "independent audits reviewed",
@@ -795,5 +797,30 @@
     "trust1": "10 VPNs tested",
     "trust2": "Independent audits",
     "trust3": "Transparent methodology"
+  },
+  "blog": {
+    "metaTitle": "Blog — VPN Guides and Tips",
+    "metaDescription": "Detailed guides on VPN usage, privacy, security and streaming.",
+    "breadcrumbHome": "Home",
+    "breadcrumbBlog": "Blog",
+    "h1": "VPN Guides",
+    "intro": "In-depth articles on VPN technology, privacy, security and usage scenarios.",
+    "readMore": "Read more",
+    "readingTime": "{minutes} min read",
+    "publishedOn": "Published",
+    "updatedOn": "Updated",
+    "author": "Author",
+    "category": "Category",
+    "relatedPosts": "Related Posts",
+    "backToBlog": "Back to all posts",
+    "photoBy": "Photo by",
+    "onUnsplash": "on Unsplash",
+    "categories": {
+      "temel-bilgiler": "Basics",
+      "gizlilik-guvenlik": "Privacy & Security",
+      "kullanim-senaryolari": "Use Cases",
+      "teknik": "Technical",
+      "secim-rehberi": "Selection Guide"
+    }
   }
 }

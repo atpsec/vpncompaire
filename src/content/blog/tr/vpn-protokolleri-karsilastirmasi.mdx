@@ -1,0 +1,355 @@
+---
+slug: "vpn-protokolleri-karsilastirmasi"
+title: "VPN Protokolleri Karşılaştırması: WireGuard, OpenVPN, IKEv2 Hangisi?"
+description: "VPN protokollerinin farkları, güvenlik seviyeleri ve performans karşılaştırması. Hangi protokol ne zaman kullanılmalı?"
+publishedAt: "2026-05-30"
+updatedAt: "2026-05-30"
+author: "vpncompaire Editör Ekibi"
+category: "teknik"
+tags: ["wireguard", "openvpn", "ikev2", "protokol", "teknik"]
+readingTime: 9
+coverImage: "vpn-protocols"
+unsplashKeyword: "network technology encryption code"
+---
+
+VPN seçerken en çok göz ardı edilen ama en önemli faktörlerden biri protokoldür. Protokol, VPN'inizin nasıl çalıştığını, ne kadar hızlı ve güvenli olduğunu belirler. Peki WireGuard, OpenVPN, IKEv2 arasındaki farklar nedir ve hangisini seçmelisiniz?
+
+## VPN Protokolü Nedir?
+
+VPN protokolü, cihazınız ile VPN sunucusu arasındaki bağlantının nasıl kurulacağını, verilerin nasıl şifreleneceğini ve iletileceğini tanımlayan kurallar bütünüdür.
+
+Basit bir benzetme: Protokol, iki kişinin hangi dilde konuşacağını belirler. İkisi de aynı dili bilmiyorsa iletişim kuramaz.
+
+### Protokol Seçimi Neden Önemli?
+
+- **Hız**: Bazı protokoller daha hızlıdır
+- **Güvenlik**: Şifreleme gücü farklılık gösterir
+- **Kararlılık**: Bağlantı kopma sıklığı değişir
+- **Uyumluluk**: Tüm cihazlarda çalışmayabilir
+- **Güvenlik Duvarı Bypass**: Bazıları engelleri daha iyi aşar
+
+## Modern VPN Protokolleri
+
+### 1. WireGuard
+
+WireGuard, 2020'de piyasaya çıkan modern, minimalist ve son derece hızlı bir protokoldür.
+
+#### Teknik Özellikler
+
+- **Kod Satırı**: ~4.000 satır (OpenVPN'in 1/100'ü)
+- **Şifreleme**: ChaCha20, Poly1305, Curve25519
+- **Performans**: En hızlı VPN protokolü
+- **Platform**: Linux kernel'e entegre, tüm platformlarda mevcut
+
+#### Avantajlar
+
+**1. Olağanüstü Hız**
+
+WireGuard, diğer protokollerden 2-3 kat daha hızlıdır. Bunun nedenleri:
+- Minimal kod tabanı
+- Modern şifreleme algoritmaları
+- Kernel seviyesinde çalışma
+- Verimli paket işleme
+
+**Hız Karşılaştırması (100 Mbps bağlantıda):**
+- WireGuard: ~85-90 Mbps
+- OpenVPN: ~60-70 Mbps
+- IKEv2: ~70-80 Mbps
+
+**2. Güvenlik**
+
+- Modern, kanıtlanmış kriptografi
+- Küçük kod tabanı = daha az hata riski
+- Düzenli güvenlik denetimleri
+- Açık kaynak
+
+**3. Pil Dostu**
+
+Mobil cihazlarda en az pil tüketen protokoldür. Verimli kod sayesinde işlemci kullanımı minimumdur.
+
+**4. Hızlı Bağlantı**
+
+Bağlantı kurma süresi ~100ms. OpenVPN'de bu 2-3 saniye sürebilir.
+
+**5. Roaming Desteği**
+
+Wi-Fi'dan mobil veriye geçtiğinizde bağlantı kopmuyor, sorunsuz devam ediyor.
+
+#### Dezavantajlar
+
+**1. Statik IP Atama**
+
+WireGuard, her kullanıcıya statik IP atar. Bu, teorik olarak kullanıcı takibini kolaylaştırabilir. Ancak kaliteli VPN'ler bunu çözmüş durumda (NordLynx, Surfshark gibi).
+
+**2. Yeni Protokol**
+
+2020'de çıktı, OpenVPN kadar uzun süredir test edilmedi. Ancak şimdiye kadar ciddi bir güvenlik açığı bulunmadı.
+
+**3. Sınırlı Obfuscation**
+
+VPN trafiğini gizleme (obfuscation) konusunda OpenVPN kadar esnek değil.
+
+#### Ne Zaman Kullanılmalı?
+
+- Hız öncelikliyse
+- Mobil cihazlarda (pil tasarrufu)
+- Streaming için
+- Günlük kullanım
+- Modern cihazlarda
+
+### 2. OpenVPN
+
+OpenVPN, 2001'den beri kullanılan, kanıtlanmış ve en yaygın VPN protokolüdür.
+
+#### Teknik Özellikler
+
+- **Kod Satırı**: ~400.000 satır
+- **Şifreleme**: AES-256, RSA-2048/4096
+- **Port**: TCP 443 veya UDP 1194 (özelleştirilebilir)
+- **Platform**: Tüm platformlarda mevcut
+
+#### Avantajlar
+
+**1. Kanıtlanmış Güvenlik**
+
+20+ yıldır kullanılıyor, milyonlarca kez test edildi. Güvenlik açıkları hızlıca yamalanıyor.
+
+**2. Yüksek Özelleştirilebilirlik**
+
+- Farklı şifreleme algoritmaları
+- TCP veya UDP seçimi
+- Port değiştirme
+- Obfuscation (gizleme) desteği
+
+**3. Güvenlik Duvarı Bypass**
+
+TCP 443 portunu (HTTPS) kullanarak, çoğu güvenlik duvarını ve VPN engelini aşabilir.
+
+**4. Açık Kaynak**
+
+Kod tamamen açık, herkes inceleyebilir. Arka kapı riski yok.
+
+**5. Geniş Destek**
+
+Tüm VPN sağlayıcıları OpenVPN'i destekler. Router'larda, NAS cihazlarında, eski sistemlerde çalışır.
+
+#### Dezavantajlar
+
+**1. Yavaş**
+
+WireGuard'a göre %20-30 daha yavaş. Büyük kod tabanı ve eski algoritmalar nedeniyle.
+
+**2. Karmaşık Kurulum**
+
+Manuel kurulum zor. Sertifikalar, config dosyaları gerekir.
+
+**3. Yüksek Pil Tüketimi**
+
+Mobil cihazlarda WireGuard'dan daha fazla pil tüketir.
+
+**4. Bağlantı Süresi**
+
+Bağlantı kurmak 2-5 saniye sürer.
+
+#### TCP vs UDP
+
+OpenVPN iki modda çalışır:
+
+**UDP (User Datagram Protocol):**
+- Daha hızlı
+- Daha az gecikme
+- Paket kaybı olabilir
+- Streaming ve oyun için ideal
+
+**TCP (Transmission Control Protocol):**
+- Daha yavaş
+- Güvenilir (paket kaybı yok)
+- Güvenlik duvarlarını daha iyi aşar
+- Kısıtlı ağlarda kullanılır
+
+#### Ne Zaman Kullanılmalı?
+
+- Maksimum güvenlik gerekiyorsa
+- VPN engelleri aşılacaksa
+- Eski cihazlarda
+- Router'da VPN kurulacaksa
+- WireGuard mevcut değilse
+
+### 3. IKEv2/IPSec
+
+IKEv2 (Internet Key Exchange version 2), özellikle mobil cihazlar için optimize edilmiş bir protokoldür.
+
+#### Teknik Özellikler
+
+- **Geliştirici**: Microsoft ve Cisco
+- **Şifreleme**: AES-256, 3DES
+- **Port**: UDP 500, 4500
+- **Platform**: Windows, macOS, iOS native desteği
+
+#### Avantajlar
+
+**1. Mobil Optimizasyonu**
+
+MOBIKE (Mobility and Multihoming) özelliği sayesinde:
+- Ağ değişimlerinde bağlantı kopmaz
+- Wi-Fi → 4G geçişi sorunsuz
+- Uçak modundan çıkınca otomatik bağlanır
+
+**2. Hızlı ve Kararlı**
+
+- WireGuard kadar hızlı değil ama OpenVPN'den hızlı
+- Bağlantı kopmaları çok nadir
+- Düşük gecikme
+
+**3. Native Destek**
+
+Windows, macOS, iOS'ta yerleşik destek var. Ekstra uygulama gerekmez.
+
+**4. Güvenlik**
+
+IPSec ile birlikte kullanıldığında güçlü şifreleme sağlar.
+
+#### Dezavantajlar
+
+**1. Kapalı Kaynak (Kısmen)**
+
+Cisco implementasyonu kapalı kaynak. Açık kaynak alternatifleri var (strongSwan).
+
+**2. Güvenlik Duvarı Sorunları**
+
+UDP 500/4500 portları bazı ağlarda engellenebilir.
+
+**3. Sınırlı Özelleştirme**
+
+OpenVPN kadar esnek değil.
+
+#### Ne Zaman Kullanılmalı?
+
+- iPhone/iPad'de
+- Sık ağ değiştiriyorsanız
+- Kararlılık öncelikliyse
+- Native VPN istemcisi kullanılacaksa
+
+## Eski/Güvensiz Protokoller
+
+### PPTP (Point-to-Point Tunneling Protocol)
+
+**Durum**: Kullanılmamalı
+**Neden**: 1990'ların teknolojisi, zayıf şifreleme, bilinen güvenlik açıkları
+**Tek Avantajı**: Çok hızlı (çünkü şifreleme zayıf)
+
+### L2TP/IPSec
+
+**Durum**: Kaçınılmalı
+**Neden**: NSA tarafından zayıflatıldığı iddia ediliyor, yavaş, çift kapsülleme
+**Kullanım**: Sadece başka seçenek yoksa
+
+### SSTP (Secure Socket Tunneling Protocol)
+
+**Durum**: Sadece Windows'ta
+**Neden**: Microsoft'a özel, kapalı kaynak, sınırlı platform desteği
+**Avantajı**: Windows'ta native, TCP 443 kullanır
+
+## Özel/Tescilli Protokoller
+
+Bazı VPN sağlayıcıları kendi protokollerini geliştirmiştir:
+
+### NordLynx (NordVPN)
+
+WireGuard tabanlı, çift NAT sistemi ile gizlilik artırılmış. Hızlı ve güvenli.
+
+### Lightway (ExpressVPN)
+
+Hafif, hızlı, açık kaynak. WireGuard'a alternatif olarak geliştirildi.
+
+### Hydra (Hotspot Shield)
+
+Tescilli protokol, hız odaklı. Kapalı kaynak olduğu için güven sorunu var.
+
+### Catapult Hydra (AnchorFree)
+
+Hotspot Shield'in protokolü. Hızlı ama kapalı kaynak.
+
+## Protokol Karşılaştırma Tablosu
+
+| Özellik | WireGuard | OpenVPN | IKEv2 | PPTP | L2TP |
+|---------|-----------|---------|-------|------|------|
+| **Hız** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
+| **Güvenlik** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐ | ⭐⭐ |
+| **Kararlılık** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| **Mobil** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
+| **Bypass** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
+| **Kurulum** | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+
+## Hangi Protokolü Seçmelisiniz?
+
+### Genel Kullanım
+
+**Öneri**: WireGuard
+
+Hızlı, güvenli, pil dostu. Çoğu kullanıcı için en iyi seçim.
+
+### Streaming
+
+**Öneri**: WireGuard
+
+En yüksek hız, düşük gecikme. Netflix, Disney+ için ideal.
+
+### Oyun
+
+**Öneri**: WireGuard veya IKEv2
+
+Düşük ping, hızlı bağlantı. Oyun deneyimini bozmaz.
+
+### Mobil Cihazlar
+
+**Öneri**: WireGuard veya IKEv2
+
+Pil tasarrufu, ağ değişimlerinde kararlılık.
+
+### Maksimum Güvenlik
+
+**Öneri**: OpenVPN (TCP)
+
+Kanıtlanmış güvenlik, uzun süredir test edilmiş.
+
+### VPN Engelleri
+
+**Öneri**: OpenVPN (TCP 443) + Obfuscation
+
+HTTPS gibi görünür, çoğu engeli aşar.
+
+### Eski Cihazlar
+
+**Öneri**: OpenVPN
+
+Geniş platform desteği, eski sistemlerde çalışır.
+
+### Kurumsal Kullanım
+
+**Öneri**: IKEv2 veya OpenVPN
+
+Kararlılık, merkezi yönetim, compliance.
+
+## Protokol Değiştirme
+
+Çoğu VPN uygulaması, protokol değiştirme imkanı sunar:
+
+**Ayarlar → Protokol → Seçim**
+
+Farklı senaryolar için farklı protokoller deneyin:
+- Hız testi yapın
+- Kararlılık kontrol edin
+- Engelleri test edin
+
+## Sonuç
+
+VPN protokolü, VPN deneyiminizi doğrudan etkiler. Doğru protokol seçimi:
+- Hızınızı artırır
+- Güvenliğinizi güçlendirir
+- Pil ömrünü uzatır
+- Bağlantı sorunlarını azaltır
+
+**Genel Tavsiye**: WireGuard ile başlayın. Sorun yaşarsanız OpenVPN'e geçin. Mobilde IKEv2'yi deneyin.
+
+Unutmayın: En iyi protokol, ihtiyaçlarınıza en uygun olandır. Hepsini deneyin, sizin için en iyisini bulun.

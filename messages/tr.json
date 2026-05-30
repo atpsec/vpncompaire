@@ -9,6 +9,7 @@
     "reviews": "İncelemeler",
     "compare": "Karşılaştırma",
     "bestFor": "Kullanım Alanları",
+    "blog": "Blog",
     "quiz": "Quiz",
     "calculator": "Hesaplayıcı",
     "glossary": "Sözlük",
@@ -47,6 +48,7 @@
       "subtitle": "Gizlilik, streaming, seyahat ve günlük güvenlik için bağımsız metodolojiyle test edilmiş VPN'ler.",
       "ctaPrimary": "En İyi 10 VPN'i Gör",
       "ctaSecondary": "Nasıl Test Ediyoruz",
+      "methodologyTag": "Bağımsız test metodolojisi",
       "trust": {
         "tested": "VPN test edildi",
         "audits": "bağımsız denetim incelendi",
@@ -795,5 +797,30 @@
     "trust1": "10 VPN test edildi",
     "trust2": "Bağımsız denetimler",
     "trust3": "Şeffaf metodoloji"
+  },
+  "blog": {
+    "metaTitle": "Blog — VPN Rehberleri ve İpuçları",
+    "metaDescription": "VPN kullanımı, gizlilik, güvenlik ve streaming hakkında detaylı rehberler.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbBlog": "Blog",
+    "h1": "VPN Rehberleri",
+    "intro": "VPN teknolojisi, gizlilik, güvenlik ve kullanım senaryoları hakkında derinlemesine yazılar.",
+    "readMore": "Devamını oku",
+    "readingTime": "{minutes} dk okuma",
+    "publishedOn": "Yayınlanma",
+    "updatedOn": "Güncelleme",
+    "author": "Yazar",
+    "category": "Kategori",
+    "relatedPosts": "İlgili Yazılar",
+    "backToBlog": "Tüm yazılara dön",
+    "photoBy": "Fotoğraf:",
+    "onUnsplash": "Unsplash'ta",
+    "categories": {
+      "temel-bilgiler": "Temel Bilgiler",
+      "gizlilik-guvenlik": "Gizlilik & Güvenlik",
+      "kullanim-senaryolari": "Kullanım Senaryoları",
+      "teknik": "Teknik",
+      "secim-rehberi": "Seçim Rehberi"
+    }
   }
 }

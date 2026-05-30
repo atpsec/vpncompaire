@@ -1,0 +1,269 @@
+---
+slug: "seyahatte-vpn-kullanimi"
+title: "Seyahatte VPN: Halka Açık Wi-Fi'da Güvenliğinizi Nasıl Korursunuz?"
+description: "Havalimanları, oteller ve kafelerdeki ücretsiz Wi-Fi ağları tehlikeli olabilir. Seyahatte VPN kullanarak güvende kalın."
+publishedAt: "2026-05-30"
+updatedAt: "2026-05-30"
+author: "vpncompaire Editör Ekibi"
+category: "kullanim-senaryolari"
+tags: ["seyahat", "halka-açık-wifi", "güvenlik", "otel", "havalimanı"]
+readingTime: 8
+coverImage: "travel-vpn"
+unsplashKeyword: "airport travel wifi security"
+---
+
+Seyahat ederken internet erişimi artık bir lüks değil, zorunluluk. Uçuş bilgilerini kontrol etmek, otel rezervasyonu yapmak, harita kullanmak veya sevdiklerinizle iletişimde kalmak için sürekli online olmanız gerekiyor. Ancak seyahatte kullandığınız halka açık Wi-Fi ağları, siber suçlular için altın madeni gibidir.
+
+## Halka Açık Wi-Fi Neden Tehlikelidir?
+
+Havalimanları, oteller, kafeler ve alışveriş merkezlerindeki ücretsiz Wi-Fi ağları son derece risklidir. İşte nedenler:
+
+### 1. Şifreleme Eksikliği
+
+Çoğu halka açık Wi-Fi ağı şifresizdir veya zayıf WEP şifrelemesi kullanır. Bu, aynı ağdaki herkesin trafiğinizi görebileceği anlamına gelir.
+
+**Teknik Detay**: Wireshark gibi ücretsiz araçlarla, aynı Wi-Fi'daki diğer kullanıcıların ne yaptığını görmek çok kolaydır. Şifrelenmemiş HTTP trafiği tamamen açıktır.
+
+### 2. Man-in-the-Middle (MITM) Saldırıları
+
+Saldırgan, sizinle internet arasına girerek tüm trafiğinizi görebilir ve değiştirebilir.
+
+**Nasıl Çalışır:**
+1. Saldırgan, halka açık Wi-Fi'a bağlanır
+2. ARP spoofing ile kendini ağ geçidi gibi gösterir
+3. Tüm trafik önce saldırgana gelir
+4. Saldırgan verileri okur/değiştirir, sonra gerçek hedefe iletir
+5. Kurban hiçbir şeyden habersizdir
+
+### 3. Sahte Wi-Fi Noktaları (Evil Twin)
+
+Saldırganlar, meşru görünen sahte Wi-Fi ağları kurar. Örneğin, havalimanında "Airport_Free_WiFi" adında bir ağ görürseniz, bu gerçek olabilir veya bir tuzak olabilir.
+
+**Örnek Senaryo:**
+- Starbucks'ta "Starbucks_Guest" adlı ağ var
+- Saldırgan "Starbucks_Free_WiFi" adlı sahte ağ kurar
+- Kullanıcılar "ücretsiz" kelimesini görünce sahte ağa bağlanır
+- Saldırgan tüm trafiği görebilir
+
+### 4. Paket Koklama (Packet Sniffing)
+
+Aynı ağdaki saldırgan, ağ trafiğini dinleyerek hassas bilgileri çalabilir:
+- Giriş bilgileri (şifrelenmemiş siteler)
+- Çerezler (oturum çalma)
+- E-posta içerikleri
+- Dosya transferleri
+
+### 5. Kötü Amaçlı Yazılım Dağıtımı
+
+Halka açık Wi-Fi üzerinden, cihazınıza kötü amaçlı yazılım bulaştırılabilir:
+- Sahte yazılım güncellemeleri
+- Zararlı pop-up'lar
+- Drive-by download saldırıları
+
+## Gerçek Hayat Örnekleri
+
+### Olay 1: Havalimanı Kredi Kartı Hırsızlığı
+
+2019'da Avrupa'daki büyük bir havalimanında, saldırganlar sahte Wi-Fi ağı kurdu. Binlerce yolcu bağlandı ve kredi kartı bilgileri çalındı. Toplam zarar 2 milyon Euro'yu aştı.
+
+### Olay 2: Otel Fidye Yazılımı
+
+2020'de lüks bir otel zincirinde, misafirlerin otel Wi-Fi'ı üzerinden cihazlarına fidye yazılımı bulaştırıldı. Dosyaları kurtarmak için Bitcoin ödemesi istendi.
+
+### Olay 3: İş Seyahati Veri Sızıntısı
+
+Bir şirket yöneticisi, havalimanı Wi-Fi'ında şirket e-postalarını kontrol etti. Saldırgan, oturum çerezlerini çalarak şirket ağına sızdı ve ticari sırları ele geçirdi.
+
+## VPN Seyahatte Nasıl Korur?
+
+VPN, halka açık Wi-Fi'daki tüm riskleri neredeyse tamamen ortadan kaldırır:
+
+### 1. Uçtan Uca Şifreleme
+
+VPN, cihazınızdan çıkan tüm trafiği askeri düzeyde şifreler. Saldırgan trafiği görebilir ama içeriği okuyamaz.
+
+**Şifreleme Olmadan:**
+```
+Saldırgan → "Kullanıcı gmail.com'a giriş yapıyor, şifresi: 123456"
+```
+
+**VPN ile:**
+```
+Saldırgan → "Şifreli veri, içeriği okunamıyor"
+```
+
+### 2. MITM Saldırılarını Engelleme
+
+VPN tüneli, saldırganın araya girmesini engeller. Trafik şifreli olduğu için, saldırgan görebilir ama değiştiremez veya okuyamaz.
+
+### 3. DNS Sızıntısını Önleme
+
+VPN, DNS sorgularınızı da şifreler. Saldırgan hangi siteleri ziyaret ettiğinizi göremez.
+
+### 4. IP Adresi Gizleme
+
+Gerçek IP adresiniz gizlenir, saldırgan sizi hedef alamaz.
+
+## Seyahat Öncesi VPN Hazırlığı
+
+### 1. VPN'i Evde Test Edin
+
+Seyahate çıkmadan önce VPN'inizi test edin:
+- Tüm cihazlara yükleyin (telefon, tablet, laptop)
+- Bağlantıyı deneyin
+- Hız testleri yapın
+- Kill switch'in çalıştığından emin olun
+
+### 2. Otomatik Bağlantı Ayarlayın
+
+Çoğu VPN, güvenilmeyen ağlara bağlandığınızda otomatik olarak aktif olabilir. Bu özelliği açın.
+
+### 3. Yedek Sunucu Listesi Hazırlayın
+
+Bazı ülkeler VPN'leri engeller. Birden fazla sunucu ve protokol seçeneğiniz olsun:
+- WireGuard
+- OpenVPN
+- IKEv2
+- Obfuscated servers (gizlenmiş sunucular)
+
+### 4. Offline Haritalar İndirin
+
+VPN bazen yavaş olabilir. Google Maps, Maps.me gibi uygulamalara offline haritalar indirin.
+
+### 5. Önemli Bilgileri Yedekleyin
+
+Cihazınız çalınırsa veya kaybolursa, önemli bilgileriniz güvende olsun:
+- Cloud yedekleme (şifreli)
+- İki faktörlü kimlik doğrulama kodlarını yedekleyin
+- Acil durum iletişim bilgileri
+
+## Seyahatte VPN Kullanım Senaryoları
+
+### Havalimanında
+
+**Riskler:**
+- Binlerce insan aynı ağda
+- Uzun bekleme süreleri = daha fazla online aktivite
+- Sahte Wi-Fi ağları yaygın
+
+**VPN Kullanımı:**
+- Havalimanı Wi-Fi'ına bağlanmadan önce VPN'i açın
+- Uçuş bilgilerini kontrol edin
+- Bankacılık işlemleri yapın
+- E-postaları okuyun
+
+**İpucu**: Havalimanı Wi-Fi'ları genellikle yavaştır. En yakın sunucuyu seçin veya WireGuard protokolünü kullanın.
+
+### Otelde
+
+**Riskler:**
+- Otel Wi-Fi'ları genellikle zayıf şifrelidir
+- Tüm misafirler aynı ağdadır
+- Ağ yönetimi zayıf olabilir
+
+**VPN Kullanımı:**
+- Odaya girer girmez VPN'i açın
+- İş e-postalarını güvenle kontrol edin
+- Video konferans yapın
+- Streaming platformlarını kullanın
+
+**İpucu**: Bazı oteller VPN trafiğini engeller. Obfuscation (gizleme) özelliği olan VPN kullanın.
+
+### Kafelerde
+
+**Riskler:**
+- Açık Wi-Fi ağları
+- Uzun süreli oturumlar
+- Omuz sörfü (birinin ekranınızı görmesi)
+
+**VPN Kullanımı:**
+- Kafeye girmeden VPN'i açın
+- Çalışma yaparken aktif tutun
+- Hassas işlemler için mobil veriyi tercih edin
+
+**İpucu**: Gizlilik filtresi (privacy screen) kullanın, böylece ekranınızı yanınızdaki kişi göremez.
+
+### Yurt Dışında
+
+**Riskler:**
+- Bazı ülkeler interneti sansürler
+- Yerel platformlara erişim kısıtlı
+- Türk sitelerine erişim engellenebilir
+
+**VPN Kullanımı:**
+- Türkiye sunucusuna bağlanarak BluTV, Exxen izleyin
+- E-devlet, banka uygulamalarına erişin
+- Sansürlü sitelere girin
+
+**Özel Durumlar:**
+- **Çin**: VPN'ler engellidir, özel obfuscated sunucular gerekir
+- **BAE**: VPN kullanımı yasal ama VoIP (WhatsApp arama) yasak
+- **Rusya**: Sadece onaylı VPN'ler yasal
+- **İran**: VPN'ler ağır şekilde engellenir
+
+## Mobil Cihazlarda VPN
+
+Seyahatte en çok kullanılan cihazlar telefonlar ve tabletlerdir. Mobil VPN kullanımı için ipuçları:
+
+### iOS (iPhone/iPad)
+
+- **Ayarlar → VPN**: Manuel yapılandırma yerine uygulama kullanın
+- **On-Demand VPN**: Güvenilmeyen ağlarda otomatik bağlan
+- **Pil Tüketimi**: WireGuard en az pil tüketir
+
+### Android
+
+- **Always-on VPN**: Ayarlar → Ağ → VPN → Always-on
+- **Kill Switch**: "Bağlantılar olmadan engelle" seçeneği
+- **Split Tunneling**: Hangi uygulamaların VPN kullanacağını seçin
+
+### Pil Tasarrufu
+
+VPN pil tüketir. Seyahatte pil ömrünü uzatmak için:
+- WireGuard protokolünü kullanın (en verimli)
+- Kullanmadığınızda VPN'i kapatın
+- Powerbank taşıyın
+- Uçak modunda VPN'i kapatın
+
+## VPN Olmadan Halka Açık Wi-Fi Kullanımı
+
+VPN'iniz yoksa veya çalışmıyorsa:
+
+### 1. Sadece HTTPS Siteleri Kullanın
+
+Tarayıcı adres çubuğunda kilit simgesi olmalı. HTTP sitelere girmeyin.
+
+### 2. İki Faktörlü Kimlik Doğrulama
+
+Tüm önemli hesaplarda 2FA aktif olsun. Şifreniz çalınsa bile hesabınız güvende olur.
+
+### 3. Hassas İşlemler Yapmayın
+
+Bankacılık, alışveriş gibi hassas işlemleri halka açık Wi-Fi'da yapmayın. Mobil veri kullanın.
+
+### 4. Tarayıcı Eklentileri
+
+- **HTTPS Everywhere**: Siteleri otomatik HTTPS'e yönlendirir
+- **uBlock Origin**: Kötü amaçlı reklamları engeller
+
+### 5. Güvenlik Duvarı Açık Olsun
+
+Windows Defender Firewall veya macOS Firewall'u aktif tutun.
+
+## Sonuç
+
+Seyahat, dijital güvenlik açısından en riskli zamanlardır. Halka açık Wi-Fi ağları, siber suçlular için kolay hedeflerdir. VPN, bu riskleri neredeyse tamamen ortadan kaldırır.
+
+Seyahate çıkmadan önce:
+- Güvenilir bir VPN edinin
+- Tüm cihazlara yükleyin
+- Test edin ve ayarları yapın
+- Otomatik bağlantıyı aktif edin
+
+Seyahat sırasında:
+- Her halka açık Wi-Fi'da VPN kullanın
+- Hassas işlemleri VPN ile yapın
+- Şüpheli ağlardan kaçının
+- Mobil veriyi yedek olarak kullanın
+
+VPN ile seyahat ederken, evinizdeki kadar güvende olabilirsiniz. Dijital güvenliğinizi riske atmayın, VPN kullanın.
