@@ -88,6 +88,7 @@
       "subtitle": "You are visiting this site with the following information visible",
       "locationKicker": "Location",
       "ipKicker": "IP address",
+      "timeKicker": "Local time",
       "statusKicker": "Status",
       "ipHint": "Visible to web servers",
       "locationFallback": "Approximate location",

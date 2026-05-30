@@ -88,6 +88,7 @@
       "subtitle": "Bu siteyi şu an bu bilgilerle ziyaret ediyorsunuz",
       "locationKicker": "Konum",
       "ipKicker": "IP adresi",
+      "timeKicker": "Yerel saat",
       "statusKicker": "Durum",
       "ipHint": "Web sunucularına açık görünür",
       "locationFallback": "Yaklaşık konum",

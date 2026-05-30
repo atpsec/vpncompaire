@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
-import { ArrowRight, Globe2, MapPin, ShieldAlert } from "lucide-react";
+import { ArrowRight, Clock, Globe2, MapPin, ShieldAlert } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -9,6 +9,7 @@ import {
   IpSecurityBannerDismiss,
   IpSecurityBannerDismissButton,
 } from "@/components/home/IpSecurityBannerDismiss";
+import { IpSecurityBannerClock } from "@/components/home/IpSecurityBannerClock";
 
 function isPrivateOrLocal(ip: string | null | undefined): boolean {
   if (!ip) return true;
@@ -58,6 +59,7 @@ export async function IpSecurityBanner() {
   const ip = xff?.split(",")[0]?.trim() ?? h.get("x-real-ip") ?? null;
   const country = h.get("x-vercel-ip-country");
   const city = h.get("x-vercel-ip-city");
+  const timezone = h.get("x-vercel-ip-timezone") ?? "UTC";
   void h.get("x-vercel-ip-region");
 
   if (!country || isPrivateOrLocal(ip)) return null;
@@ -70,6 +72,7 @@ export async function IpSecurityBanner() {
   const countryCode = country.toLowerCase();
   const countryName = resolveCountryName(country, locale);
   const ipVersion = ip && ip.includes(":") ? "IPv6" : "IPv4";
+  const initialIso = new Date().toISOString();
 
   return (
     <IpSecurityBannerDismiss>
@@ -94,8 +97,8 @@ export async function IpSecurityBanner() {
             />
           </header>
 
-          <ul className="-mx-4 flex gap-3 overflow-x-auto px-4 snap-x snap-mandatory scroll-pl-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0">
-            <li className="snap-start w-[78%] min-w-[260px] shrink-0 sm:w-auto sm:min-w-0">
+          <ul className="-mx-4 flex gap-3 overflow-x-auto px-4 snap-x snap-mandatory scroll-pl-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
               <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
                 <div
                   aria-hidden="true"
@@ -128,7 +131,7 @@ export async function IpSecurityBanner() {
               </article>
             </li>
 
-            <li className="snap-start w-[78%] min-w-[260px] shrink-0 sm:w-auto sm:min-w-0">
+            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
               <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
                 <div
                   aria-hidden="true"
@@ -156,7 +159,34 @@ export async function IpSecurityBanner() {
               </article>
             </li>
 
-            <li className="snap-start w-[78%] min-w-[260px] shrink-0 sm:w-auto sm:min-w-0">
+            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
+              <article className="relative h-full overflow-hidden rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-surface-subtle blur-3xl"
+                />
+                <div className="relative flex h-full flex-col">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-subtle px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-ink-strong">
+                      <Clock className="size-3" aria-hidden="true" />
+                      {t("timeKicker")}
+                    </span>
+                    <span className="truncate text-[10px] font-medium uppercase tracking-wider text-ink-subtle">
+                      {timezone}
+                    </span>
+                  </div>
+                  <div className="mt-5 flex-1">
+                    <IpSecurityBannerClock
+                      initialIso={initialIso}
+                      timezone={timezone}
+                      locale={locale}
+                    />
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <li className="snap-start w-[78%] min-w-[240px] shrink-0 sm:w-auto sm:min-w-0">
               <article className="relative h-full overflow-hidden rounded-2xl border border-accent-300 bg-white p-5 shadow-md ring-1 ring-accent-200/60 sm:p-6">
                 <div
                   aria-hidden="true"
