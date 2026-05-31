@@ -200,6 +200,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/cerez-politikasi"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {t("links.cookies")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/sartlar"
                   className="text-ink-muted hover:text-ink"
                 >

@@ -112,6 +112,7 @@
       "contact": "İletişim",
       "disclosure": "Reklam Açıklaması",
       "privacy": "Gizlilik Politikası",
+      "cookies": "Çerez Politikası",
       "terms": "Kullanım Şartları",
       "sitemap": "Site haritası",
       "cancel": "İptal & İade",
@@ -759,6 +760,12 @@
     "metaDescription": "vpncompaire kişisel verilerinizi nasıl işliyor — KVKK uyumlu, çerezsiz, minimum veri prensibi.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Gizlilik Politikası"
+  },
+  "cookies": {
+    "metaTitle": "Çerez Politikası — Çerez Kullanmıyoruz",
+    "metaDescription": "vpncompaire çerez kullanmıyor. Plausible (çerezsiz) analitik, theme tercihi için localStorage, affiliate yönlendirmeleri ve KVKK/GDPR uyumlu açıklama.",
+    "breadcrumbHome": "Ana sayfa",
+    "breadcrumbHere": "Çerez Politikası"
   },
   "terms": {
     "metaTitle": "Kullanım Şartları",

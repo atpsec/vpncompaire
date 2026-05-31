@@ -112,6 +112,7 @@
       "contact": "Contact",
       "disclosure": "Advertising disclosure",
       "privacy": "Privacy policy",
+      "cookies": "Cookie policy",
       "terms": "Terms of use",
       "sitemap": "Sitemap",
       "cancel": "Cancel & refund",
@@ -759,6 +760,12 @@
     "metaDescription": "How vpncompaire handles your personal data — GDPR-aligned, cookieless, minimum-data principle.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Privacy policy"
+  },
+  "cookies": {
+    "metaTitle": "Cookie Policy — We Don't Use Cookies",
+    "metaDescription": "vpncompaire doesn't use cookies. Plausible cookieless analytics, localStorage for theme preference, affiliate redirects, and GDPR/KVKK-aligned disclosure.",
+    "breadcrumbHome": "Home",
+    "breadcrumbHere": "Cookie policy"
   },
   "terms": {
     "metaTitle": "Terms of use",
