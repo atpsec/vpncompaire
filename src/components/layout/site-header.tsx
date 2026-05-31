@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { SocialLinks } from "@/components/layout/social-links";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 
 const navItems = [
   { href: "/en-iyi-vpn", labelKey: "reviews" },
@@ -51,6 +52,7 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             <LanguageSwitcher />
             <SocialLinks variant="header" />
             <span aria-hidden="true" className="h-5 w-px bg-border" />
@@ -59,15 +61,18 @@ export function SiteHeader() {
             </Button>
           </div>
 
-          <button
-            type="button"
-            aria-label={open ? t("closeMenu") : t("menu")}
-            aria-expanded={open}
-            className="lg:hidden rounded-md p-2 text-ink hover:bg-surface-subtle"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X className="size-6" /> : <Menu className="size-6" />}
-          </button>
+          <div className="lg:hidden flex items-center gap-1">
+            <ThemeToggle />
+            <button
+              type="button"
+              aria-label={open ? t("closeMenu") : t("menu")}
+              aria-expanded={open}
+              className="rounded-md p-2 text-ink hover:bg-surface-subtle"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X className="size-6" /> : <Menu className="size-6" />}
+            </button>
+          </div>
         </div>
 
         <div

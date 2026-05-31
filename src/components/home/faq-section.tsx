@@ -21,7 +21,7 @@ export function FAQSection() {
         <Accordion.Root
           type="single"
           collapsible
-          className="mt-10 divide-y divide-border rounded-xl border border-border bg-white dark:bg-surface-subtle"
+          className="mt-10 divide-y divide-border rounded-xl border border-border bg-surface-base dark:bg-surface-subtle"
         >
           {faqs.map((f, i) => (
             <Accordion.Item key={i} value={`item-${i}`}>

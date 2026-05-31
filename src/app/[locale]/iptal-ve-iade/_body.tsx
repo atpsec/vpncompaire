@@ -370,7 +370,7 @@ export function RefundBody({ locale }: { locale: string }) {
           <a
             key={p.slug}
             href={`#${p.slug}`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             <VPNLogo slug={p.slug} size={16} />
             {p.brand}
@@ -424,7 +424,7 @@ export function RefundBody({ locale }: { locale: string }) {
               <div className="mt-4 flex flex-wrap gap-2 text-xs">
                 <Link
                   href={`/inceleme/${p.slug}`}
-                  className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 hover:border-brand-300"
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 hover:border-brand-300"
                 >
                   {p.brand} {strings.reviewSuffix}
                 </Link>
@@ -432,7 +432,7 @@ export function RefundBody({ locale }: { locale: string }) {
                   href={p.pricingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 hover:border-brand-300"
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 hover:border-brand-300"
                 >
                   {strings.supportLink}
                 </a>
@@ -476,19 +476,19 @@ export function RefundBody({ locale }: { locale: string }) {
         <div className="mt-3 flex flex-wrap gap-2 justify-center">
           <Link
             href="/hesaplayici"
-            className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {strings.relatedCalculator}
           </Link>
           <Link
             href="/rehber/ucretsiz-vs-ucretli-vpn"
-            className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {strings.relatedFreeVsPaid}
           </Link>
           <Link
             href="/yasal-uyari"
-            className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {strings.relatedLegal}
           </Link>

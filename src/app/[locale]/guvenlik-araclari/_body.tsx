@@ -644,7 +644,7 @@ export function SecurityToolsBody({ locale }: { locale: string }) {
           <a
             key={cat.id}
             href={`#${cat.id}`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             <cat.icon className="size-3.5 text-brand-600" />
             {cat.title}
@@ -741,7 +741,7 @@ export function SecurityToolsBody({ locale }: { locale: string }) {
             <Link
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {l.label}
             </Link>

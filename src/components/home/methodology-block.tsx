@@ -48,7 +48,7 @@ export function MethodologyBlock() {
             {criteria.map(({ key, Icon }) => (
               <li
                 key={key}
-                className="flex items-start gap-3 rounded-lg border border-border bg-white p-4 dark:bg-surface-subtle"
+                className="flex items-start gap-3 rounded-lg border border-border bg-surface-base p-4 dark:bg-surface-subtle"
               >
                 <div className="inline-flex items-center justify-center size-9 rounded-md bg-brand-50 text-brand-600 shrink-0">
                   <Icon className="size-4.5" aria-hidden="true" />

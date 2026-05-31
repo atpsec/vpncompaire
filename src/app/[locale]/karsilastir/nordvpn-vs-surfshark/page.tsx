@@ -294,19 +294,19 @@ export default async function Page({ params }: Props) {
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/inceleme/expressvpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               ExpressVPN incelemesi
             </Link>
             <Link
               href="/inceleme/proton-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Proton VPN incelemesi
             </Link>
             <Link
               href="/en-iyi-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Tüm sıralama <ArrowRight className="size-3" />
             </Link>

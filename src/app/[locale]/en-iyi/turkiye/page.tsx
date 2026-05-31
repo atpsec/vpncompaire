@@ -240,19 +240,19 @@ export default async function Page({ params }: Props) {
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/en-iyi/gizlilik"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               <Lock className="size-3" /> Gizlilik için
             </Link>
             <Link
               href="/en-iyi/streaming"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               <Tv className="size-3" /> Streaming için
             </Link>
             <Link
               href="/en-iyi/yurt-disindaki-turkler"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Yurt dışındaki Türkler için
             </Link>

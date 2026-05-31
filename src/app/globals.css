@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Manual dark mode toggle via .dark class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Trust blue — primary brand (samimi + profesyonel) */
   --color-brand-50: #eff6ff;
@@ -34,13 +37,13 @@
   --color-danger-500: #ef4444;
   --color-danger-600: #dc2626;
 
-  /* Warm neutral surfaces */
+  /* Warm neutral surfaces — light mode defaults */
   --color-surface-base: #fafaf9;
   --color-surface-subtle: #f5f5f4;
   --color-surface-muted: #e7e5e4;
   --color-surface-strong: #d6d3d1;
 
-  /* Warm ink (foreground) */
+  /* Warm ink (foreground) — light mode defaults */
   --color-ink-strong: #0c0a09;
   --color-ink: #1c1917;
   --color-ink-muted: #57534e;
@@ -67,19 +70,50 @@
   --container-content: 72rem; /* 1152px — readable max */
 }
 
-/* Dark mode (auto, via prefers-color-scheme) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #0c0a09;
-    --color-foreground: #fafaf9;
-    --color-border: #292524;
-  }
+/* Dark mode — applied when <html class="dark"> */
+.dark {
+  /* Warm-toned dark surfaces (slightly elevated stone palette) */
+  --color-surface-base: #0c0a09;
+  --color-surface-subtle: #1c1917;
+  --color-surface-muted: #292524;
+  --color-surface-strong: #44403c;
+
+  /* Inverted ink — bright text on dark background */
+  --color-ink-strong: #fafaf9;
+  --color-ink: #f5f5f4;
+  --color-ink-muted: #a8a29e;
+  --color-ink-subtle: #78716c;
+  --color-ink-faint: #57534e;
+
+  /* Semantic — recomputed for dark */
+  --color-background: var(--color-surface-base);
+  --color-foreground: var(--color-ink);
+  --color-border: var(--color-surface-muted);
+
+  /* Brand colors slightly brightened for dark contrast */
+  --color-brand-50: #172554;
+  --color-brand-100: #1e3a8a;
+  --color-brand-700: #60a5fa;
+
+  /* Accent tweaks for dark */
+  --color-accent-50: #451a03;
+  --color-accent-100: #78350f;
+
+  /* Success tweaks */
+  --color-success-50: #064e3b;
+  --color-success-100: #065f46;
 }
 
 html {
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* Smooth color transition when toggling theme */
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
@@ -90,11 +124,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "cv11", "ss01", "ss03";
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 ::selection {
   background: var(--color-brand-100);
   color: var(--color-brand-900);
+}
+
+.dark ::selection {
+  background: var(--color-brand-700);
+  color: var(--color-brand-50);
 }
 
 :focus-visible {
@@ -121,6 +161,11 @@ body {
   --tw-prose-pre-bg: var(--color-ink-strong);
   --tw-prose-th-borders: var(--color-border);
   --tw-prose-td-borders: var(--color-border);
+}
+
+.dark .prose {
+  --tw-prose-pre-bg: var(--color-surface-muted);
+  --tw-prose-pre-code: var(--color-ink);
 }
 
 .prose h2 {

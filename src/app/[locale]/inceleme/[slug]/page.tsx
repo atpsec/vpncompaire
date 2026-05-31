@@ -246,7 +246,7 @@ function ReviewView({
           <h2 className="text-2xl font-bold tracking-tight text-ink-strong">
             {t("detailsTitle")}
           </h2>
-          <dl className="mt-4 divide-y divide-border rounded-xl border border-border bg-white">
+          <dl className="mt-4 divide-y divide-border rounded-xl border border-border bg-surface-base">
             {product.highlights.audits && (
               <Row
                 label={t("details.audits")}

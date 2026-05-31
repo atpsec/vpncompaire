@@ -282,19 +282,19 @@ export default async function Page({ params }: Props) {
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/en-iyi-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               En iyi 10 VPN sıralaması
             </Link>
             <Link
               href="/rehber/ucretsiz-vs-ucretli-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Ücretsiz vs Ücretli VPN
             </Link>
             <Link
               href="/rehber/vpn-guvenlik-kontrol-listesi"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               VPN güvenlik kontrol listesi
             </Link>

@@ -97,7 +97,7 @@ export function ComparePicker() {
                   disabled={isDisabled}
                   aria-pressed={isSelected}
                   className={cn(
-                    "w-full flex flex-col items-center gap-2 rounded-xl border bg-white p-3 transition-all text-center",
+                    "w-full flex flex-col items-center gap-2 rounded-xl border bg-surface-base p-3 transition-all text-center",
                     isSelected
                       ? "border-brand-500 ring-2 ring-brand-200 shadow-sm"
                       : "border-border hover:border-brand-300",

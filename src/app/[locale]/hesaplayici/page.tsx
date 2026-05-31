@@ -111,19 +111,19 @@ function CalculatorPageView() {
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/sana-uygun-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.quiz")}
             </Link>
             <Link
               href="/karsilastir"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.compare")}
             </Link>
             <Link
               href="/sunucu-haritasi"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.filter")}
             </Link>

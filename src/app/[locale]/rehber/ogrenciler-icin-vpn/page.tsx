@@ -306,19 +306,19 @@ export default async function Page({ params }: Props) {
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/rehber/vpn-nedir"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               VPN nedir?
             </Link>
             <Link
               href="/rehber/ucretsiz-vs-ucretli-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Ücretsiz vs Ücretli
             </Link>
             <Link
               href="/sana-uygun-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Quiz: Sana uygun VPN
             </Link>

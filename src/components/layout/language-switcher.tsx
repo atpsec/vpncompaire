@@ -28,7 +28,7 @@ export function LanguageSwitcher({ className }: Props) {
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-0.5 rounded-md border border-border bg-white p-0.5",
+        "inline-flex items-center gap-0.5 rounded-md border border-border bg-surface-base p-0.5",
         className,
       )}
       role="group"

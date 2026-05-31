@@ -64,7 +64,7 @@ export function FeatureFilter() {
                 className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
                   isActive
                     ? "bg-brand-600 text-white border border-brand-600"
-                    : "border border-border bg-white hover:border-brand-300"
+                    : "border border-border bg-surface-base hover:border-brand-300"
                 }`}
                 title={FILTER_LABELS[key].help}
               >

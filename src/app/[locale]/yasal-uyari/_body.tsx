@@ -385,25 +385,25 @@ function RelatedLinksTr() {
       <div className="mt-3 flex flex-wrap gap-2 justify-center">
         <Link
           href="/reklam-aciklamasi"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Reklam açıklaması
         </Link>
         <Link
           href="/sartlar"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Kullanım şartları
         </Link>
         <Link
           href="/gizlilik"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Gizlilik politikası
         </Link>
         <Link
           href="/metodoloji"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Test metodolojimiz
         </Link>
@@ -419,25 +419,25 @@ function RelatedLinksEn() {
       <div className="mt-3 flex flex-wrap gap-2 justify-center">
         <Link
           href="/reklam-aciklamasi"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Advertising disclosure
         </Link>
         <Link
           href="/sartlar"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Terms of use
         </Link>
         <Link
           href="/gizlilik"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Privacy policy
         </Link>
         <Link
           href="/metodoloji"
-          className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Our methodology
         </Link>

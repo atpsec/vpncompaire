@@ -81,7 +81,7 @@ export async function IpSecurityBanner() {
         className="relative -mt-1 pb-6 sm:-mt-3 sm:pb-10"
       >
         <Container>
-          <article className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-md">
+          <article className="relative overflow-hidden rounded-2xl border border-border bg-surface-base shadow-md">
             <div
               aria-hidden="true"
               className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 via-accent-500 to-brand-500"

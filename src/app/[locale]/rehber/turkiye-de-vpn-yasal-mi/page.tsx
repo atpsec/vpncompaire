@@ -243,19 +243,19 @@ export default async function Page({ params }: Props) {
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/en-iyi/turkiye"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Türkiye için en iyi VPN
             </Link>
             <Link
               href="/en-iyi/yurt-disindaki-turkler"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Yurt dışı Türkler için VPN
             </Link>
             <Link
               href="/en-iyi-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               En iyi VPN&apos;ler 2026 <ArrowRight className="size-3" />
             </Link>

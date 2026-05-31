@@ -89,7 +89,7 @@ const VARIANT_STYLES: Record<
   // Full size: footer block with 6 icons
   footer: {
     wrapper: "flex flex-wrap gap-2",
-    item: "size-9 border border-border bg-white text-ink-muted hover:text-ink-strong hover:border-brand-300",
+    item: "size-9 border border-border bg-surface-base text-ink-muted hover:text-ink-strong hover:border-brand-300",
     iconSize: 16,
   },
   // Compact: header inline strip
@@ -101,7 +101,7 @@ const VARIANT_STYLES: Record<
   // Mobile drawer: horizontal row, slightly larger touch targets
   menu: {
     wrapper: "flex items-center gap-2 pt-4 mt-2 border-t border-border",
-    item: "size-10 border border-border bg-white text-ink-muted hover:text-ink-strong hover:border-brand-300",
+    item: "size-10 border border-border bg-surface-base text-ink-muted hover:text-ink-strong hover:border-brand-300",
     iconSize: 18,
   },
 };

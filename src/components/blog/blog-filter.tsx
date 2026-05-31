@@ -43,14 +43,14 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
           className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
             selectedCategory === null
               ? "border-accent-500 bg-accent-500 text-white"
-              : "border-border bg-white text-ink-muted hover:border-accent-300 hover:bg-accent-50 hover:text-accent-700"
+              : "border-border bg-surface-base text-ink-muted hover:border-accent-300 hover:bg-accent-50 hover:text-accent-700"
           }`}
         >
           {allLabel}
           <span
             className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
               selectedCategory === null
-                ? "bg-white/20 text-white"
+                ? "bg-background/20 text-white"
                 : "bg-ink-subtle/10 text-ink-subtle"
             }`}
           >
@@ -68,14 +68,14 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
               className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                 isSelected
                   ? "border-accent-500 bg-accent-500 text-white"
-                  : "border-border bg-white text-ink-muted hover:border-accent-300 hover:bg-accent-50 hover:text-accent-700"
+                  : "border-border bg-surface-base text-ink-muted hover:border-accent-300 hover:bg-accent-50 hover:text-accent-700"
               }`}
             >
               {t(`categories.${category.name}`)}
               <span
                 className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
                   isSelected
-                    ? "bg-white/20 text-white"
+                    ? "bg-background/20 text-white"
                     : "bg-ink-subtle/10 text-ink-subtle"
                 }`}
               >

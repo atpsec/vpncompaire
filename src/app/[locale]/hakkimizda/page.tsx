@@ -155,19 +155,19 @@ export default async function Page({ params }: Props) {
         <section className="mt-12 flex flex-wrap gap-2 justify-center">
           <Link
             href="/metodoloji"
-            className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             <Scale className="size-3" /> {t("footerLinks.methodology")}
           </Link>
           <Link
             href="/reklam-aciklamasi"
-            className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {t("footerLinks.disclosure")}
           </Link>
           <Link
             href="/gizlilik"
-            className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+            className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {t("footerLinks.privacy")}
           </Link>

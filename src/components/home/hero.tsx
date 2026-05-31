@@ -37,7 +37,7 @@ export function Hero() {
 
       <Container>
         <div className="mx-auto max-w-4xl pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-background/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
             <Sparkles className="size-3.5 text-accent-500" /> {monthYear} · {t("methodologyTag")}
           </span>
 
@@ -62,7 +62,7 @@ export function Hero() {
           </div>
 
           {/* Stat strip — compact, editorial */}
-          <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-white/60 backdrop-blur shadow-sm">
+          <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-background/60 backdrop-blur shadow-sm">
             <Stat value={products.length} label={t("trust.tested")} />
             <Stat value={auditCount} label={t("trust.audits")} />
             <Stat value="312" label="saat test" />

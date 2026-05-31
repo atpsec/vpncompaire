@@ -39,7 +39,7 @@ function PodiumCard({ product, rank }: { product: Product; rank: number }) {
   return (
     <article
       className={cn(
-        "relative h-full overflow-hidden rounded-2xl border bg-white shadow-sm",
+        "relative h-full overflow-hidden rounded-2xl border bg-surface-base shadow-sm",
         isWinner
           ? "border-brand-300 shadow-md ring-1 ring-brand-200/50"
           : "border-border",

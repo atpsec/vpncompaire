@@ -14,7 +14,7 @@ export function BlogCard({ post }: BlogCardProps) {
   const image = getBlogImage(post.coverImage, "hero");
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow hover:shadow-md">
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-base shadow-sm transition-shadow hover:shadow-md">
       <Link href={`/blog/${post.slug}`} className="block">
         <div className="relative aspect-[16/9] overflow-hidden bg-surface-subtle">
           <Image

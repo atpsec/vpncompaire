@@ -92,7 +92,7 @@ function GlossaryPageView() {
             <a
               key={cat}
               href={`#cat-${cat}`}
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {cat}
             </a>
@@ -158,19 +158,19 @@ function GlossaryPageView() {
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
               href="/rehber/vpn-nedir"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("relatedLinks.whatIsVpn")}
             </Link>
             <Link
               href="/rehber/vpn-guvenlik-kontrol-listesi"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("relatedLinks.checklist")}
             </Link>
             <Link
               href="/metodoloji"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("relatedLinks.methodology")}
             </Link>

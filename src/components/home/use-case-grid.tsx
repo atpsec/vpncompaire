@@ -44,7 +44,7 @@ export function UseCaseGrid() {
             <Link
               key={slug}
               href={`/en-iyi/${slug}`}
-              className="group rounded-xl border border-border bg-white p-4 hover:border-brand-300 hover:shadow-md transition-all dark:bg-surface-subtle"
+              className="group rounded-xl border border-border bg-surface-base p-4 hover:border-brand-300 hover:shadow-md transition-all dark:bg-surface-subtle"
             >
               <div
                 className={

@@ -185,7 +185,7 @@ export function UseCasePage({
               <Link
                 key={l.href}
                 href={l.href}
-                className="inline-flex items-center gap-1 rounded-full border border-border bg-white px-3 py-1 text-sm hover:border-brand-300"
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
               >
                 {l.label}
               </Link>
