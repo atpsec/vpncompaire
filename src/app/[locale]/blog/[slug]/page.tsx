@@ -6,6 +6,9 @@ import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogContent } from "@/components/blog/blog-content";
 import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
+import { articleSchema, breadcrumbSchema } from "@/lib/seo";
+import { getBlogImage } from "@/lib/unsplash";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 import type { Metadata } from "next";
 
 type Props = {
@@ -30,9 +33,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
+  const { frontmatter } = result;
+  const localePath = locale === "tr" ? "" : `/${locale}`;
+  const canonical = absoluteUrl(`${localePath}/blog/${frontmatter.slug}`);
+  const ogImage = absoluteUrl(`/og/blog/${frontmatter.slug}`);
+
   return {
-    title: result.frontmatter.title,
-    description: result.frontmatter.description,
+    title: frontmatter.title,
+    description: frontmatter.description,
+    alternates: { canonical },
+    openGraph: {
+      title: frontmatter.title,
+      description: frontmatter.description,
+      url: canonical,
+      type: "article",
+      publishedTime: frontmatter.publishedAt,
+      modifiedTime: frontmatter.updatedAt,
+      authors: [frontmatter.author],
+      siteName: siteConfig.name,
+      locale: locale === "tr" ? "tr_TR" : "en_US",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: frontmatter.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: frontmatter.title,
+      description: frontmatter.description,
+      images: [ogImage],
+    },
   };
 }
 
@@ -54,8 +81,38 @@ export default async function BlogPostPage({ params }: Props) {
     locale as "tr" | "en"
   );
 
+  const heroImage = getBlogImage(frontmatter.coverImage, "hero");
+  const localePath = locale === "tr" ? "" : `/${locale}`;
+  const blogIndexPath = `${localePath}/blog`;
+
+  const articleLd = articleSchema({
+    title: frontmatter.title,
+    description: frontmatter.description,
+    slug: frontmatter.slug,
+    publishedAt: frontmatter.publishedAt,
+    updatedAt: frontmatter.updatedAt,
+    author: frontmatter.author,
+    imageUrl: heroImage.url,
+    locale: locale as "tr" | "en",
+  });
+
+  const breadcrumbLd = breadcrumbSchema([
+    { name: locale === "tr" ? "Ana Sayfa" : "Home", path: `${localePath}/` },
+    { name: "Blog", path: blogIndexPath },
+    { name: frontmatter.title, path: `${blogIndexPath}/${frontmatter.slug}` },
+  ]);
+
   return (
     <article className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+
       <Container size="md">
         <BlogHeader post={frontmatter} />
 

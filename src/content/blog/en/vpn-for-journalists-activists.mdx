@@ -1,0 +1,160 @@
+---
+slug: "vpn-for-journalists-activists"
+title: "VPN for Journalists and Activists: Source Protection"
+description: "VPN guide for journalists and activists: Tor over VPN, no-logs audits, RAM-only servers, working under authoritarian regimes — 2026 practical handbook."
+publishedAt: "2026-05-27"
+updatedAt: "2026-05-27"
+author: "vpncompaire Editorial Team"
+category: "kullanim-senaryolari"
+tags: ["journalism", "activism", "source-protection", "tor", "no-logs"]
+readingTime: 11
+coverImage: "journalism-vpn"
+unsplashKeyword: "journalism privacy"
+---
+
+The digital security needs of journalists and activists go far beyond the average user. Source protection can be life-or-death; one IP leak, one log entry, can collapse an investigation or threaten a journalist's freedom. VPN alone isn't sufficient — but used correctly it's a non-negotiable layer of the security stack.
+
+This guide covers threat modeling for journalists and activists, where VPN fits in the toolchain, and which provider features actually matter. For general provider comparisons see our [VPN comparison page](/en/karsilastir).
+
+## Write Down Your Threat Model
+
+Tool selection without a threat model is random. Questions to ask:
+
+**Who is the adversary?**: State-level (signal intelligence, ISP cooperation, court-ordered log requests), corporate (the source's employer), or lower-level (personal harassment)?
+
+**What is being protected?**: Source identity, the topic you're working on, draft documents, your personal movement patterns?
+
+**What if compromised?**: Imprisonment, exile, job loss, social pressure?
+
+The toolchain shifts based on threat level. A regular reporter may be fine with a strong VPN plus Signal; someone working under an authoritarian regime needs Tor over VPN, hardware security, operational security routines.
+
+## VPN Alone Is Not Enough
+
+Be clear: VPN is a privacy tool, not an anonymity tool. Your VPN provider sees your IP — they replace the ISP, not erase the trace. Their no-logs policy and legal jurisdiction therefore matter enormously.
+
+Where VPN fits in a journalist or activist workflow:
+
+- **Operational work**: Newsroom emails, file transfers, research browsing — VPN is sufficient
+- **Source communication**: Tor + Signal + extra protective layers (e.g., SecureDrop)
+- **High sensitivity**: Tor over VPN, throwaway devices, Tails OS
+
+The general rule is detailed in our [VPN privacy and security article](/en/blog/vpn-privacy-and-security).
+
+## Tor over VPN: When and Why
+
+Tor is the gold standard for anonymity but visible: your ISP sees you connecting to a Tor entry node. In some countries that fact alone draws suspicion.
+
+Tor over VPN works as: You → VPN → Tor entry node → Tor → exit node → destination. Your ISP only sees you connecting to the VPN; the Tor entry node sees the VPN's IP, not yours.
+
+Benefit: hide Tor use from the ISP. Cost: extra latency (Tor is already slow, VPN compounds it), single point of trust (the VPN provider sees everything). Hence audited no-logs is critical.
+
+The reverse (VPN over Tor) is a different threat model and generally not recommended for journalism — the VPN provider knows you, but you arrive over Tor, which is itself a flag.
+
+## Why RAM-only Servers Matter
+
+Traditional VPN servers store configuration and temporary files on disk. If a server is physically seized, theoretically all activity since the last boot is recoverable.
+
+RAM-only (diskless) servers load all configuration into memory. When power is cut, data is gone — extracting logs after physical seizure becomes impossible.
+
+Providers offering this architecture: ExpressVPN (TrustedServer), NordVPN (RAM-only fleet), Surfshark, Mullvad. For detailed comparison see our [RAM-only server VPN article](/en/blog/ram-only-vpn-servers).
+
+For a journalist this isn't nice-to-have, it's must-have. Server seizures during 2017 Turkey Wikileaks raids, 2014 Austria VPN provider compelled to surrender logs — these incidents underline why diskless architecture is necessary.
+
+## No-logs Policy: Words Are Not Enough
+
+Every VPN provider claims "no-logs." Real value comes from independent audit. What to look for:
+
+**Independent audit**: Big 4 (Deloitte, PwC, KPMG, EY) or recognized security firms (Cure53, NCC Group). Audit report should be public.
+
+**Repeated audits**: Not one-shot, but periodic (yearly or biennial).
+
+**Court history**: How has the provider responded to court requests? "User logs requested, none existed" is a strong signal when present.
+
+**Jurisdiction**: Non-14-Eyes jurisdictions are preferred. Switzerland (ProtonVPN), Panama (NordVPN), British Virgin Islands (ExpressVPN), Sweden (Mullvad).
+
+We detailed the audit checklist in our [VPN selection criteria article](/en/blog/how-to-choose-vpn).
+
+## Working Under Authoritarian Regimes
+
+Some countries detect and block VPN traffic via Deep Packet Inspection. China's Great Firewall, Iran's filtering, Russia's post-2022 VPN bans are examples.
+
+Features that work in these environments:
+
+**Obfuscated servers**: Make VPN traffic look like ordinary HTTPS. NordVPN obfuscated servers, ExpressVPN automatic obfuscation, Mullvad bridge mode.
+
+**Stealth protocols**: Shadowsocks, V2Ray, WireGuard-over-tunnel — work in heavily filtered environments like China.
+
+**Multiple egress points**: Switch instantly to another country when one region is blocked.
+
+Our [VPN legality guide](/en/blog/is-vpn-legal) reviews country-by-country VPN status.
+
+## Multi-hop / Double VPN
+
+Multi-hop routes traffic through two different servers. Even under one provider's control, if one leg is compromised the other still stands. Latency cost is real (typically 2x), but acceptable for sensitive scenarios.
+
+NordVPN offers "Double VPN," Surfshark "MultiHop," ProtonVPN "Secure Core." Secure Core specifically routes through hardened servers in privacy-friendly countries (Switzerland, Iceland, Sweden) before exiting elsewhere. Detail in our [double VPN multihop article](/en/blog/double-vpn-multihop).
+
+## Signal + VPN Combination
+
+Signal is the standard for messaging encryption but metadata still leaks at the network layer: which Signal endpoint you connect to, when, from where. VPN masks the location piece.
+
+Practical setup: Signal + VPN + (high-risk) Tor. Disable cloud backups; Signal-PIN-only. Use a separate device for source contact.
+
+## Operational Security Habits
+
+Tools alone don't protect. Operational discipline matters at least as much:
+
+- **Never** mix accounts: separate browsers, separate devices for source work and personal life
+- **Avoid** uploading photos with EXIF GPS metadata
+- **VPN always on** at the OS level, not as a per-app habit
+- **Watch for** DNS leaks: dnsleaktest.com once a month
+- **No** real-name accounts on the work device
+
+## What to Look For in a Journalist VPN
+
+### 1. Public Audit History
+
+ProtonVPN, Mullvad, NordVPN have multiple public audits. Avoid providers without an audit history.
+
+### 2. RAM-only Server Fleet
+
+Mandatory.
+
+### 3. Privacy-friendly Jurisdiction
+
+Switzerland (Proton), Sweden (Mullvad), Panama (Nord), BVI (Express).
+
+### 4. Tor / Onion Site Support
+
+Mullvad and ProtonVPN have onion sites; you can sign up over Tor.
+
+### 5. Anonymous Payment Options
+
+Cash, Monero, Bitcoin support. Mullvad accepts cash by mail (literally an envelope of cash). ProtonVPN accepts crypto.
+
+### 6. Obfuscation
+
+For repressive jurisdictions.
+
+## Frequently Asked Questions
+
+**Is using a VPN as a journalist legal?**
+In most democracies yes, in some authoritarian regimes (Russia, China, Iran, UAE) it is restricted or illegal. Check the local situation in our [VPN legality guide](/en/blog/is-vpn-legal).
+
+**Should I use a free VPN?**
+No. Threat-level high; free VPNs do not offer audited no-logs and may sell data. Worse than no VPN.
+
+**Tor is enough, right?**
+Tor is excellent but slow and visible to ISP. Use VPN to mask Tor entry, and combine with operational security. Detail in our [double VPN multihop article](/en/blog/double-vpn-multihop) and [RAM-only server VPN article](/en/blog/ram-only-vpn-servers).
+
+**Why pay anonymously?**
+Payment data ties identity to the service. Cash or Monero severs this link.
+
+**Can my employer trace VPN use?**
+On a work network and device, depending on inspection, yes: VPN traffic shows up. Use personal devices and own networks for source communications.
+
+## Conclusion
+
+A journalist's or activist's digital security depends on more than tools — but tools are the first wall. Audited no-logs, RAM-only servers, privacy-friendly jurisdiction, obfuscated server support — minimums for a journalism-grade VPN.
+
+Write your threat model, build the toolchain to match, automate the habits. See our [editorial picks for privacy-focused VPNs](/en/en-iyi/gizlilik) for our recommendations.

@@ -1,0 +1,220 @@
+---
+slug: "linux-vpn-setup-guide"
+title: "Linux VPN Setup: Ubuntu, Fedora, Arch Configuration"
+description: "How to set up VPN on Linux: NetworkManager, wg-quick, OpenVPN client, kill switch with iptables/nftables, and auto-connect on boot via systemd."
+publishedAt: "2026-05-02"
+updatedAt: "2026-05-02"
+author: "vpncompaire Editorial Team"
+category: "cihaz-platform"
+tags: ["linux", "ubuntu", "fedora", "arch", "wireguard", "openvpn"]
+readingTime: 11
+coverImage: "device-linux"
+unsplashKeyword: "linux terminal command line"
+---
+
+VPN setup on Linux is more flexible and more powerful than on Windows or macOS, but it leans on the command line rather than a GUI. You can do it with the desktop UI (via NetworkManager) or fully from the shell (wg-quick, openvpn). This guide covers the most common patterns on Ubuntu/Debian, Fedora, and Arch, building a kill switch by hand with iptables/nftables, and auto-connecting on boot via systemd.
+
+For deciding between WireGuard and OpenVPN, our [WireGuard vs OpenVPN comparison](/en/blog/wireguard-vs-openvpn-comparison) is a good starting point.
+
+## Which Method Is Right for You?
+
+There are essentially four ways to run a VPN on Linux:
+
+| Method | Use Case | Target User |
+|---|---|---|
+| NetworkManager GUI | Click-to-connect from GNOME or KDE | Beginners |
+| nmcli (CLI) | NetworkManager from the shell | Power users |
+| wg-quick | WireGuard CLI directly | DevOps, servers |
+| openvpn (CLI) | Classic OpenVPN client | Legacy systems |
+
+For most desktop users NetworkManager is enough. On servers, containers, or headless machines, wg-quick or the openvpn CLI is preferred.
+
+## Ubuntu / Debian: NetworkManager with WireGuard
+
+NetworkManager supports WireGuard out of the box on Ubuntu 22.04+ and modern Debian.
+
+### Step 1: Install Packages
+```
+sudo apt update
+sudo apt install wireguard wireguard-tools network-manager-openvpn-gnome
+```
+
+### Step 2: Get the Config File
+Download the `.conf` file from your VPN provider's dashboard. NordVPN, Surfshark, ProtonVPN, and Mullvad all generate these directly.
+
+### Step 3: Import into NetworkManager
+```
+sudo nmcli connection import type wireguard file ~/Downloads/wg0.conf
+```
+
+### Step 4: Connect
+```
+nmcli connection up wg0
+```
+
+Or use the GNOME Network panel and toggle the new WireGuard connection.
+
+## Fedora and RHEL Derivatives
+
+Fedora 38+ uses the same NetworkManager logic. The package manager is different:
+```
+sudo dnf install wireguard-tools NetworkManager-openvpn-gnome
+```
+
+The WireGuard kernel module is already in the kernel (5.6+ on every modern Linux). The nmcli commands are identical to Ubuntu's.
+
+## Arch / Manjaro
+
+```
+sudo pacman -S wireguard-tools openvpn networkmanager-openvpn
+```
+
+NetworkManager is optional on Arch; on minimal installs it is common to use systemd-networkd plus wg-quick.
+
+## wg-quick for WireGuard (CLI)
+
+If you do not want NetworkManager or are on a headless server:
+
+### Prepare the Config
+Create `/etc/wireguard/wg0.conf`:
+```
+[Interface]
+PrivateKey = <client-private-key>
+Address = 10.0.0.2/32
+DNS = 10.0.0.1, 1.1.1.1
+
+[Peer]
+PublicKey = <server-public-key>
+Endpoint = vpn-server.example.com:51820
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 25
+```
+
+Most VPN providers can auto-generate these from the dashboard.
+
+### Connect
+```
+sudo wg-quick up wg0
+```
+
+### Verify
+```
+sudo wg show
+curl ifconfig.me
+```
+
+You should see your IP change.
+
+### Disconnect
+```
+sudo wg-quick down wg0
+```
+
+## OpenVPN CLI Setup
+
+For older systems or scenarios where WireGuard is not available, classic OpenVPN.
+
+```
+sudo apt install openvpn
+sudo openvpn --config /path/to/config.ovpn
+```
+
+If credentials are prompted, store them in a file and pass `--auth-user-pass auth.txt`. To run as a service:
+```
+sudo cp config.ovpn /etc/openvpn/client/myvpn.conf
+sudo systemctl enable --now openvpn-client@myvpn
+```
+
+## Building a Kill Switch
+
+Linux's NetworkManager usually does not provide a kill switch out of the box; you build one with iptables or nftables.
+
+### Simple iptables Kill Switch
+```
+# Block all traffic
+sudo iptables -P OUTPUT DROP
+sudo iptables -P INPUT DROP
+
+# Allow localhost
+sudo iptables -A OUTPUT -o lo -j ACCEPT
+sudo iptables -A INPUT -i lo -j ACCEPT
+
+# Allow traffic on the WireGuard interface
+sudo iptables -A OUTPUT -o wg0 -j ACCEPT
+sudo iptables -A INPUT -i wg0 -j ACCEPT
+
+# Allow direct access to the VPN server
+sudo iptables -A OUTPUT -d vpn-server-ip -j ACCEPT
+sudo iptables -A INPUT -s vpn-server-ip -j ACCEPT
+```
+
+If the tunnel goes down, traffic is fully blocked. To persist rules across reboots, install `iptables-persistent`.
+
+### nftables: Modern Alternative
+On newer distros nftables is preferred. Same logic, defined in `/etc/nftables.conf`, then `systemctl enable nftables`.
+
+## Auto-Connect via systemd
+
+To bring up the VPN at boot:
+```
+sudo systemctl enable wg-quick@wg0
+```
+
+The `wg0` connection comes up automatically on boot. For OpenVPN:
+```
+sudo systemctl enable openvpn-client@myvpn
+```
+
+For automatic reconnect on tunnel drop, add a systemd timer or `Restart=always` directive.
+
+## Preventing DNS Leaks
+
+DNS issues are common on Linux. WireGuard supports the `DNS` field but it can clash with systemd-resolved. Workarounds:
+
+- Point `/etc/resolv.conf` directly at the VPN DNS
+- Use `resolvectl dns wg0 10.0.0.1` for per-interface DNS
+- Set `dns=none` in NetworkManager.conf for manual control
+
+To test for leaks: compare `dig +short ifconfig.me @1.1.1.1` against your expected VPN DNS.
+
+## Split Tunneling
+
+To keep specific applications outside the VPN:
+
+```
+# Per-user: traffic from a given UID skips VPN
+sudo ip rule add uidrange 1000-1000 lookup main
+```
+
+For more details see our [split tunneling guide](/en/blog/split-tunneling-vpn).
+
+## VPN Providers on Linux
+
+Providers with native Linux apps or solid CLI clients:
+- Mullvad: Official CLI, the cleanest Linux experience
+- ProtonVPN: Official GUI app (DEB/RPM for Ubuntu, Fedora, Arch)
+- NordVPN: Official CLI, debian/rpm packages
+- Surfshark: Limited CLI, manual WireGuard config recommended
+- ExpressVPN: Official CLI
+
+For provider selection see our [comparison page](/en/karsilastir).
+
+## Frequently Asked Questions
+
+**Which distro is best for VPN?**
+All work. Ubuntu has the broadest provider documentation. Arch has the freshest WireGuard kernel module.
+
+**Can WireGuard run without the kernel module?**
+Yes, the `wireguard-go` user-space implementation exists. Performance is much lower though.
+
+**How do I set up a remote-work VPN on Linux?**
+Get an OpenVPN or WireGuard config file from your company; our [VPN for remote work guide](/en/blog/vpn-for-remote-work) gives the broader context.
+
+**Do headless servers need a VPN client?**
+Sometimes — to encrypt server-to-third-party traffic or for region bypass. The wg-quick + systemd combo is ideal.
+
+## Conclusion
+
+Linux VPN setup looks intimidating at first, but it gives you full control over the system. Desktop users can be online with NetworkManager in minutes; for server admins, wg-quick + iptables + systemd is a production-grade combo.
+
+To find the best Linux-friendly VPNs, check our [comparison page](/en/karsilastir). If your goal is to protect every device at home rather than just one Linux box, [router-level VPN](/en/blog/router-vpn-setup-guide) may be a better fit.

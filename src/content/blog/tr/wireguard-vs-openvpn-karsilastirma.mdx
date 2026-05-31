@@ -1,0 +1,127 @@
+---
+slug: "wireguard-vs-openvpn-karsilastirma"
+title: "WireGuard vs OpenVPN: Hangi VPN Protokolü 2026'da Daha İyi?"
+description: "WireGuard ve OpenVPN VPN dünyasının iki ana protokolü. Hız, güvenlik, batarya tüketimi ve sansür direnci açısından detaylı karşılaştırma."
+publishedAt: "2026-05-27"
+updatedAt: "2026-05-27"
+author: "vpncompaire Editör Ekibi"
+category: "gizlilik-guvenlik"
+tags: ["wireguard", "openvpn", "protokol", "teknik", "karşılaştırma"]
+readingTime: 11
+coverImage: "vpn-protocols"
+unsplashKeyword: "wireguard openvpn protocol"
+---
+
+Bir VPN'in performansını ve güvenliğini büyük ölçüde belirleyen şey kullandığı protokoldür. 2026'da iki protokol pratikte tüm pazara hâkim: OpenVPN — eski, geniş test edilmiş ve sektör standardı; WireGuard — modern, dramatik daha hızlı ve gittikçe yaygınlaşan. Hangisini seçmelisiniz? Bu yazıda iki protokolü hız, güvenlik, mobil performans ve sansür direnci açısından karşılaştırıyoruz.
+
+VPN seçimi için [karşılaştırma sayfamız](/karsilastir) ve [VPN seçim rehberimiz](/blog/vpn-secerken-dikkat-edilmesi-gerekenler) ek bağlam sunuyor.
+
+## Kısa Cevap
+
+Çoğu kullanıcı için **WireGuard** tercih edilmeli: %30-50 daha hızlı, daha düşük batarya tüketimi, modern kriptografi. **OpenVPN** sadece şu durumlarda gerekli: derin paket inceleme (DPI) yapan ülkelerde sansür aşma, eski yönlendirici/cihaz uyumluluğu, kurumsal VPN entegrasyonu.
+
+## Teknik Temeller
+
+### OpenVPN
+- **Yıl**: 2001'de oluşturuldu, sektörde en eski olgun açık kaynak protokol
+- **Kod tabanı**: ~70.000 satır C kodu
+- **Kriptografi**: OpenSSL kütüphanesi (AES-256-GCM, RSA-4096, SHA-256+)
+- **Taşıma katmanı**: TCP veya UDP
+- **Port**: Tipik olarak UDP 1194, ancak HTTPS (TCP 443) maskeleme yapılabilir
+
+### WireGuard
+- **Yıl**: 2016'da Jason Donenfeld tarafından duyuruldu, 2020'de Linux kerneline alındı
+- **Kod tabanı**: ~4.000 satır C kodu (çok daha küçük saldırı yüzeyi)
+- **Kriptografi**: Modern, sabit şifreleme paketi — ChaCha20, Poly1305, BLAKE2s, Curve25519
+- **Taşıma katmanı**: Sadece UDP
+- **Port**: Genellikle UDP 51820
+
+## Hız Karşılaştırması
+
+WireGuard'ın hız avantajı bir tasarım sonucudur — kerneldə çalışıyor (Linux'ta), küçük kod tabanı, daha az şifreleme overhead'i.
+
+Pratik testlerde (Türkiye-Almanya rotası, 1 Gbps fiber):
+- **WireGuard**: 850-920 Mbps
+- **OpenVPN UDP**: 380-450 Mbps
+- **OpenVPN TCP** (HTTPS maskeleme): 220-310 Mbps
+
+Mobilde fark daha da belirgin: WireGuard hem hızlı hem de batarya cömert. Detaylar [VPN ve hız performans optimizasyonu yazımızda](/blog/vpn-ve-hiz-performans-optimizasyonu).
+
+## Güvenlik Analizi
+
+İki protokol de modern saldırılara karşı güvenli, ancak yaklaşımları farklı.
+
+### OpenVPN'in Güçlü Yanları
+- 20+ yıl audit ve battle-test
+- Algoritma esnekliği (kriptografi paketinizi seçebilirsiniz)
+- Geniş RFC uyumu
+
+### WireGuard'ın Güçlü Yanları
+- Modern, sabit kriptografi (zayıf seçim yapamazsınız)
+- Daha küçük saldırı yüzeyi (4.000 vs 70.000 satır)
+- "Cryptokey routing" — IP-public key eşleştirmesi mantıklı bir varsayılan
+
+### Bilinen Endişeler
+WireGuard'ın orijinal tasarımında VPN sunucu IP'leri kalıcı olarak saklanıyor (privacy concern). NordVPN'in NordLynx, Mullvad'ın ve diğerlerinin bu durumu özel implementasyonlarla çözmesi gerekti. Sonuç: WireGuard kullanan modern ticari VPN'ler genelde güvenli.
+
+[VPN gizlilik ve güvenlik yazımız](/blog/vpn-gizlilik-ve-guvenlik) bu konuda daha derin.
+
+## Sansür ve DPI Direnci
+
+Çin, İran, Rusya gibi yoğun sansürlü ülkelerde DPI (deep packet inspection) sistemleri VPN trafiğini tanıyıp engelliyor. Burada iki protokol farklı performans gösteriyor:
+
+- **WireGuard**: UDP-only ve karakteristik bir handshake'i var. DPI sistemleri için tanınması kolay. Çin'de büyük çoğunlukla bloke ediliyor.
+- **OpenVPN over TCP 443**: HTTPS gibi görünüyor, DPI'lar için ayırması zor. Yıllarca Çin'de tek pratik seçenek oldu.
+- **Stunnel + OpenVPN, ShadowSocks tabanlı obfuscation**: Modern VPN'ler protokollerini "WireGuard üzerine WireGuard" tarzı obfuscation katmanlarıyla saklıyor.
+
+[Çin ve Rusya'dan AI erişim yazımız](/blog/cin-rusya-ai-erisim-vpn) sansür ortamlarında protokol seçimini detaylandırıyor.
+
+## Mobil ve Batarya Performansı
+
+WireGuard mobilde belirgin önde:
+- Daha hızlı handshake (yeniden bağlanma 1 saniyenin altında, OpenVPN 5-10 saniye)
+- Daha düşük CPU kullanımı = daha az batarya
+- Roaming (Wi-Fi'dan mobil veriye geçiş) sırasında bağlantı kopmaz
+
+iOS ve Android'de modern VPN uygulamalarının çoğu varsayılan olarak WireGuard kullanıyor. [iOS Shortcuts ile VPN otomasyonu](/blog/ios-vpn-shortcuts-otomasyon) yazımız mobil tarafta ek püf noktaları içeriyor.
+
+## Modern Protokoller: Lightway, NordLynx, Other
+
+OpenVPN ve WireGuard tek seçenek değil. Bazı sağlayıcılar kendi protokollerini geliştiriyor:
+
+- **NordLynx (NordVPN)**: WireGuard üzerine kuruldu, IP eşleştirme sorununu çift NAT sistemiyle çözüyor
+- **Lightway (ExpressVPN)**: Sıfırdan yazıldı, wolfSSL kullanıyor, 2-3K satır kod
+- **WireGuard direkt** (Mullvad, Surfshark, ProtonVPN): Üzerine ekstra yazılım katmanı eklemiyor
+
+Performans olarak hepsi WireGuard ailesinde benzer; gerçek fark uygulama UX'i ve sunucu ağında.
+
+## Pratik Öneri: Hangi Protokol Ne Zaman?
+
+| Senaryo | Önerilen | Neden |
+|---|---|---|
+| Genel kullanım, evden | WireGuard / NordLynx / Lightway | Hız + batarya |
+| Streaming (Netflix, Disney+) | WireGuard | Düşük latency |
+| Halka açık Wi-Fi | WireGuard | Hızlı bağlantı |
+| Çin'den iş seyahati | OpenVPN TCP 443 + obfuscation | DPI direnci |
+| Eski yönlendirici (DD-WRT) | OpenVPN | Daha geniş uyum |
+| Online oyun | WireGuard | Düşük gecikme |
+
+Streaming için protokol seçimi [Netflix bölgesel kütüphane yazımızda](/blog/netflix-bolgesel-kutuphane-vpn) ve [canlı spor yayınları rehberinde](/blog/canli-spor-yayinlari-vpn) ek bağlamla işleniyor.
+
+## Split Tunneling, Kill Switch ve Diğer Özellikler
+
+Protokol seçimi tek başına yetmez — VPN'inizin destekleyici özellikleri de önemli:
+- [Kill switch nedir ve neden gerekli](/blog/kill-switch-nedir-vpn)
+- [Split tunneling kullanım rehberi](/blog/split-tunneling-vpn)
+- [DNS leak testi ve önleme](/blog/dns-leak-test-vpn)
+
+## Sıkça Sorulan Sorular
+
+**WireGuard her zaman OpenVPN'den daha güvenli mi?**
+Hayır. İki protokol de uygun konfigürasyonla güvenli. WireGuard'ın avantajı modern varsayılanlar; OpenVPN'in avantajı yıllar süren audit.
+
+**Hangi protokolü seçmem gerektiğini nasıl anlarım?**
+Çoğu modern VPN otomatik en iyiyi seçiyor. El ile değiştirmek istiyorsanız: önce WireGuard deneyin, çalışmıyorsa OpenVPN UDP, hâlâ çalışmıyorsa OpenVPN TCP 443.
+
+**Linux'ta hangisi daha iyi?**
+WireGuard kerne...[truncated 663 chars]

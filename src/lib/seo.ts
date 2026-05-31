@@ -72,3 +72,46 @@ export function breadcrumbSchema(
     })),
   };
 }
+
+export function articleSchema(post: {
+  title: string;
+  description: string;
+  slug: string;
+  publishedAt: string;
+  updatedAt: string;
+  author: string;
+  imageUrl: string;
+  locale: "tr" | "en";
+}): JsonLdObject {
+  const localePath = post.locale === "tr" ? "" : `/${post.locale}`;
+  const articleUrl = absoluteUrl(`${localePath}/blog/${post.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    inLanguage: post.locale === "tr" ? "tr-TR" : "en-US",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/icon"),
+      },
+    },
+    image: post.imageUrl,
+    url: articleUrl,
+  };
+}

@@ -103,6 +103,133 @@ const imageDatabase: Record<string, BlogImageSet> = {
     mid: img("1551434678-e076c223a692", "Liste ve kontrol işaretleri", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Doğru seçimi yapmak", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
+
+  // AI + VPN topics
+  "ai-vpn-access": {
+    hero: img("1677442136019-21780ecad995", "AI ve sohbet asistanı arayüzü", PHOTOGRAPHERS.shahadat),
+    mid: img("1526374965328-7f61d4dc18c5", "Veri akışı ve yapay zeka", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global erişim ve sınırlar", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "ai-tools-comparison": {
+    hero: img("1620712943543-bcc4688e7485", "AI araçları karşılaştırması", PHOTOGRAPHERS.shahadat),
+    mid: img("1551434678-e076c223a692", "Liste ve kontrol işaretleri", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Karar ve seçim", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "ai-creative": {
+    hero: img("1684369175809-1b73fc4cb98f", "AI ile üretilen yaratıcı görsel", PHOTOGRAPHERS.shahadat),
+    mid: img("1518770660439-4636190af475", "Devre kartı ve teknoloji", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1563013544-824ae1b704d3", "Dijital sanat ve kod", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "ai-privacy": {
+    hero: img("1614064641938-3bbee52942c7", "Kilit ve veri koruma", PHOTOGRAPHERS.flyd),
+    mid: img("1555949963-ff9fe0c870eb", "Programlama ve gizlilik", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Veri akışı", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "ai-pricing": {
+    hero: img("1554224155-6726b3ff858f", "Para ve ödeme", PHOTOGRAPHERS.rupixen),
+    mid: img("1556742049-0cfed4f6a45d", "Fiyat karşılaştırması", PHOTOGRAPHERS.blakeWisz, 800, 450),
+    end: img("1454165804606-c3d57bc86b40", "Tasarruf ve değer", PHOTOGRAPHERS.scottGraham, 800, 450),
+  },
+  "ai-security": {
+    hero: img("1550751827-4bd374c3f58b", "Siber güvenlik ve tehdit", PHOTOGRAPHERS.adiGoldstein),
+    mid: img("1614064641938-3bbee52942c7", "Veri koruma kalkanı", PHOTOGRAPHERS.flyd, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Şifreleme ve savunma", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+
+  // Streaming sub-topics
+  "streaming-uk": {
+    hero: img("1522869635100-9f4c5e86aa37", "Akıllı TV ve streaming", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1593359677879-a4bb92f829d1", "Streaming platformları", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+    end: img("1450101499163-c8848c66ca85", "Birleşik Krallık manzarası", PHOTOGRAPHERS.philippeOursel, 800, 450),
+  },
+  "streaming-sports": {
+    hero: img("1522869635100-9f4c5e86aa37", "Canlı spor yayını", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1593359677879-a4bb92f829d1", "Spor karşılaşması", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global yayın haritası", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "streaming-anime": {
+    hero: img("1684369175809-1b73fc4cb98f", "Anime ve dijital içerik", PHOTOGRAPHERS.shahadat),
+    mid: img("1593359677879-a4bb92f829d1", "Streaming platformu", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Bölgesel kütüphaneler", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "streaming-music": {
+    hero: img("1522869635100-9f4c5e86aa37", "Dijital müzik akışı", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1554224155-6726b3ff858f", "Abonelik ödemesi", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global içerik erişimi", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+
+  // Savings topics
+  "gaming-savings": {
+    hero: img("1554224155-6726b3ff858f", "Oyun ve dijital alışveriş", PHOTOGRAPHERS.rupixen),
+    mid: img("1518770660439-4636190af475", "Devre kartı ve oyun teknolojisi", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Fiyat karşılaştırması", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "travel-savings": {
+    hero: img("1488646953014-85cb44e25828", "Seyahat planlama ve tasarruf", PHOTOGRAPHERS.annieSpratt),
+    mid: img("1436491865332-7a61a109cc05", "Havalimanı ve uçuş", PHOTOGRAPHERS.rossParmly, 800, 450),
+    end: img("1554224155-6726b3ff858f", "Bilet ve rezervasyon", PHOTOGRAPHERS.rupixen, 800, 450),
+  },
+  "learning-savings": {
+    hero: img("1454165804606-c3d57bc86b40", "Online öğrenme", PHOTOGRAPHERS.scottGraham),
+    mid: img("1521295121783-8a321d551ad2", "Laptop ile çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Kurs ve tasarruf", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+
+  // Privacy advanced
+  "privacy-advanced": {
+    hero: img("1526374965328-7f61d4dc18c5", "Çoklu katman güvenlik", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1614064641938-3bbee52942c7", "Şifreli sunucu altyapısı", PHOTOGRAPHERS.flyd, 800, 450),
+    end: img("1551808525-51a94da548ce", "İleri seviye şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+
+  // Device/platform topics (share generic tech device imagery)
+  "device-router": {
+    hero: img("1544197150-b99a580bb7a8", "Ev ağı ve router kurulumu", PHOTOGRAPHERS.jordanHarrison),
+    mid: img("1558494949-ef010cbdcc31", "Ağ donanımı ve kabloları", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1518770660439-4636190af475", "Bağlantı ve devre", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "device-tv": {
+    hero: img("1522869635100-9f4c5e86aa37", "Akıllı TV ve uygulamalar", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1593359677879-a4bb92f829d1", "TV uygulamaları", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Streaming bağlantısı", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "device-console": {
+    hero: img("1518770660439-4636190af475", "Oyun konsolu ve donanım", PHOTOGRAPHERS.alexKotliarskyi),
+    mid: img("1554224155-6726b3ff858f", "Dijital satın alma", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global çevrim içi oyun", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "device-linux": {
+    hero: img("1555949963-ff9fe0c870eb", "Linux terminali ve kod", PHOTOGRAPHERS.shahadat),
+    mid: img("1518770660439-4636190af475", "Açık kaynak teknolojisi", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1551808525-51a94da548ce", "Sistem yapılandırması", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "device-mac": {
+    hero: img("1517336714731-489689fd1ca8", "macOS masaüstü", PHOTOGRAPHERS.alexKotliarskyi),
+    mid: img("1521295121783-8a321d551ad2", "Mac ile çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1518770660439-4636190af475", "Modern donanım", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "device-ios": {
+    hero: img("1574944985070-8f3ebc6b79d2", "iPhone ve mobil uygulamalar", PHOTOGRAPHERS.privecstasy),
+    mid: img("1556742049-0cfed4f6a45d", "Mobil iş akışı", PHOTOGRAPHERS.blakeWisz, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Mobil güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+
+  // Audience-targeted
+  "finance-vpn": {
+    hero: img("1554224155-6726b3ff858f", "Finans ve dijital varlıklar", PHOTOGRAPHERS.rupixen),
+    mid: img("1556742049-0cfed4f6a45d", "Yatırım analizi", PHOTOGRAPHERS.blakeWisz, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Finansal güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "journalism-vpn": {
+    hero: img("1555949963-ff9fe0c870eb", "Habercilik ve veri koruma", PHOTOGRAPHERS.shahadat),
+    mid: img("1526374965328-7f61d4dc18c5", "Kaynak gizliliği", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1589994965851-a8f479c573a9", "İfade özgürlüğü", PHOTOGRAPHERS.clintPatterson, 800, 450),
+  },
+  "education-vpn": {
+    hero: img("1454165804606-c3d57bc86b40", "Eğitim ve uzaktan öğrenme", PHOTOGRAPHERS.scottGraham),
+    mid: img("1521295121783-8a321d551ad2", "Öğretmen ve laptop", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Online materyal erişimi", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
 };
 
 // Alias eşleştirmeleri (frontmatter'daki farklı isimlendirmeler için)

@@ -1,0 +1,148 @@
+---
+slug: "ram-only-servers-vpn"
+title: "RAM-Only Servers: Why Diskless VPN Infrastructure Matters"
+description: "RAM-only diskless VPN servers wipe data on every reboot. ExpressVPN TrustedServer, NordVPN colocation, ProtonVPN architecture explained and compared."
+publishedAt: "2026-05-06"
+updatedAt: "2026-05-06"
+author: "vpncompaire Editorial Team"
+category: "gizlilik-guvenlik"
+tags: ["ram-only", "diskless", "no-logs", "infrastructure", "audit"]
+readingTime: 11
+coverImage: "privacy-advanced"
+unsplashKeyword: "server datacenter ram memory"
+---
+
+When a VPN provider says "we have a no-logs policy," it's just a policy statement — saying it has chosen not to keep records on its servers. But if the server has the physical ability to write to disk, the durability of that policy depends on the discipline of administrators. A misconfigured sysadmin, a leaked configuration file, or court-mandated logging on a live server can change everything. RAM-only architecture turns this trust into a technical guarantee: with no disk to write to, you can't keep records even if you wanted to.
+
+## What Is a RAM-Only Server?
+
+A RAM-only or "diskless" server is a server type that runs the operating system and applications only in volatile memory (RAM) instead of local disk. When the server boots, the OS image is loaded remotely (typically from the provider's central configuration servers), runs in RAM, and no data is written to persistent media.
+
+In classic architecture, a server has an SSD or HDD; the OS, log files, temp files, and application state are all written to disk. In RAM-only architecture, there's either no disk or it isn't used. Restarting the server resets all volatile memory — no traces of recent user sessions remain.
+
+## What's the Risk of Disk-Based Servers?
+
+No matter how strict a VPN provider's no-logs policy is, if its servers have disks the following risks exist:
+
+**System logs**: Most Linux distributions write syslog, auth.log, and kernel messages under `/var/log` by default. These files don't contain VPN traffic but may contain connection timestamps, IPs used, and session metadata.
+
+**Temporary files**: Application caches and temporary state files accumulate under `/tmp` and `/var/tmp`. These don't get cleared on reboot.
+
+**Swap file**: When RAM fills, the OS uses swap — and swap is persistent on disk. Sensitive session info can land in swap.
+
+**Physical access to the server**: Beyond the provider's control, the data center operator or a legal action could pull the disk image.
+
+**Configuration files**: The VPN service's own configs, certificates, and customer list files are kept on disk.
+
+**Incident logs**: Cloudflare, fail2ban, and similar defense tools must keep logs to detect attacks.
+
+Each of these vectors has the theoretical potential to undermine a no-logs policy. On a server without a disk, most of these risks are physically impossible.
+
+## How Does RAM-Only Architecture Work?
+
+The typical boot process of a diskless VPN server:
+
+1. **PXE boot or similar**: When power is applied, the server loads a bootloader from the network
+2. **Connects to a config server**: The provider's central orchestration sends a signed, verified OS image
+3. **Loaded into RAM**: All OS and VPN service is loaded into memory
+4. **Certificates and keys distributed**: The server receives its private keys with short lifetimes
+5. **Reboot**: A reboot resets everything, the cycle starts again
+
+In this architecture, anyone who physically steals or pulls the disk from the server finds only empty hardware. Meaningful data exists only in RAM while running and is lost when power is cut.
+
+Some providers harden this architecture further: enforce signed kernel modules, prevent bootloader manipulation with secure boot, verify server identity through cryptographic attestation.
+
+## Major Providers' Approaches
+
+### ExpressVPN TrustedServer
+
+The first major provider to popularize RAM-only architecture. In 2019, it migrated its entire server fleet to TrustedServer infrastructure. Each server loads a signed OS image on every restart and has been audited by independent third parties (PwC, KPMG, Cure53) multiple times.
+
+A key advantage of TrustedServer's signed image chain: even if a server is compromised, the attacker can't leave a persistent backdoor because every reboot returns to the original signed image.
+
+### NordVPN Colocated Servers
+
+After the 2020 Latvia datacenter incident, NordVPN significantly hardened its infrastructure. It moved to RAM-only servers and shifted to a "colocation" model — meaning instead of renting servers, it began placing its own hardware in data centers.
+
+This distinction is critical: in rented servers, the data center operator could theoretically tamper with hardware. In a colocation model, the hardware is the provider's property and physical access controls are tighter.
+
+### ProtonVPN
+
+ProtonVPN uses RAM-only architecture in its "Secure Core" servers. The critical first-hop servers are located in its own data centers in Switzerland, Iceland, and Sweden, away from external control. These servers run fully diskless and are backed by physical security layers (former military bunkers, biometric access).
+
+ProtonVPN's entire fleet isn't yet RAM-only — some main exit servers are still disk-based. The roadmap is to migrate the entire fleet to diskless.
+
+### Surfshark, CyberGhost, and Others
+
+Surfshark has been on RAM-only architecture since 2020. CyberGhost adopted the same approach. Most Mullvad servers are RAM-only, but Mullvad's main differentiator is keeping the hardware in its own ownership and a zero-knowledge architecture.
+
+When choosing a provider, look beyond the "we use RAM-only servers" marketing message and check third-party audit reports. Our [how to choose a VPN](/en/blog/how-to-choose-vpn) article details this audit process.
+
+## RAM-Only Isn't Enough: No-Logs Audits
+
+Diskless architecture is a significant technical guarantee but not enough on its own. The server might still produce logs in RAM, and the provider could be streaming that RAM to a central system. RAM-only architecture doesn't automatically mean no-logs.
+
+Real trust comes from independent third-party audits. Firms like PwC, Deloitte, KPMG, and Cure53 get physical and digital access to VPN providers' servers, examine running processes, and test no-logs claims.
+
+**Key audit examples**:
+
+- **NordVPN**: Full audits by PwC in 2018, 2020, and 2022
+- **ExpressVPN**: TrustedServer architecture audits by PwC and KPMG
+- **ProtonVPN**: No-logs audit by Securitum
+- **Surfshark**: No-logs audit by Deloitte
+- **CyberGhost**: Audit by Deloitte
+
+Two things to note in audit reports: scope (a single data center or the full fleet) and frequency (one-time or recurring). An annual audit is far more valuable than a one-shot review.
+
+Real-world test: in 2017, Turkish authorities seized an ExpressVPN server. No customer information came off the server because they didn't keep it on disk. This event is concrete proof of how a no-logs claim is strengthened when combined with the technical infrastructure.
+
+## Resilience Against Court Compulsion
+
+The provider's jurisdiction matters as much as RAM-only infrastructure. In 5/9/14-Eyes countries like the US or UK, privacy can be compelled by court order.
+
+RAM-only architecture forms an important shield against court compulsion: even if a judge orders "give us customer X's traffic," there's nothing to give if the server doesn't keep that data. Recovering past data is impossible because it was either never written or wiped on power loss.
+
+But "live monitoring" orders can still target future traffic. In that case, the provider may be forced to record a specific user's traffic in real time. The best defense against this vector is [double VPN and multi-hop](/en/blog/double-vpn-multihop-explained) configuration — even if a single provider is compelled, the chain isn't fully exposed.
+
+Providers based in jurisdictions like the British Virgin Islands (ExpressVPN), Panama (NordVPN), Switzerland (ProtonVPN), and Iceland offer stronger legal resistance.
+
+## Is It Safe to Use a VPN Without RAM-Only?
+
+Providers using disk-based servers aren't automatically unsafe. Mullvad's older fleet had disk-based servers but the firm hasn't had a single data leak since 2010 because policy and audits were strong.
+
+But in 2026, if you're picking a new VPN, RAM-only architecture is now the expected standard. Providers using disk-based servers are either trusting permanent policy oversight or cutting costs — both of which are central to the [free vs paid VPN debate](/en/blog/free-vs-paid-vpn).
+
+## User-Side Verification
+
+There's no easy way for the user to directly verify a provider's "RAM-only" claim. So:
+
+1. **Read independent audit reports** — should be published on the provider's website
+2. **Check the jurisdiction** — prefer privacy-friendly countries
+3. **Look at transparency reports** — more credible if published annually
+4. **Follow community review platforms** — PrivacyTools, r/PrivacyGuides, etc.
+5. **Check whether they hold certifications like PCI-DSS, ISO 27001**
+
+## Frequently Asked Questions
+
+**Does a RAM-only server affect VPN speed?**
+No. Modern RAM is much faster than SSDs. Running diskless can even contribute to performance.
+
+**Should every VPN provider use RAM-only?**
+Ideally yes, but cost and complexity are barriers. Most free and low-cost providers can't invest in this infrastructure.
+
+**Will a restarted server drop my connection?**
+No. Your active connection drops when the server reboots, but auto-reconnect happens within seconds. The [kill switch](/en/blog/vpn-kill-switch-explained) prevents leaks during this brief window.
+
+**Do RAM-only servers require certificate changes?**
+Depends on configuration. Some providers issue new certificates on every boot, others use persistent certificates.
+
+**Are diskless servers more secure against cyberattacks?**
+Yes, partially. Persistent malware can't survive on a RAM-only server because the signed image is reloaded on every boot. But the running server is still attackable.
+
+## Conclusion
+
+RAM-only servers are the infrastructure foundation that turns VPN privacy from "stated" to "delivered." Without disk, keeping records is physically impossible — this turns the no-logs claim into a technical guarantee.
+
+But RAM-only alone isn't enough. Regular third-party audits, privacy-friendly jurisdiction, a strong no-logs policy, and transparent infrastructure information are the building blocks that give this guarantee its full value. ExpressVPN's TrustedServer, NordVPN's colocation model, and ProtonVPN's Secure Core servers are different approaches but share the same core principle: don't physically retain user data on the server.
+
+When picking a new VPN in 2026, view these architectural features as a standard expectation. The protection layer formed by RAM-only infrastructure, audited no-logs, and privacy-friendly jurisdiction working together is the minimum a modern VPN should offer. To compare provider infrastructure choices in detail, check out our [VPN comparison page](/karsilastir) — you'll find all infrastructure criteria including RAM-only support, audit history, and no-logs policy in a single table.

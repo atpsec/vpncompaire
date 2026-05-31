@@ -1,0 +1,158 @@
+---
+slug: "ios-vpn-shortcuts-automation"
+title: "iOS VPN Automation with Shortcuts: Smart Triggers"
+description: "Set up automatic VPN on iPhone based on Wi-Fi network and location. Guide to automating WireGuard and OpenVPN profiles using Apple Shortcuts triggers."
+publishedAt: "2026-05-30"
+updatedAt: "2026-05-30"
+author: "vpncompaire Editorial Team"
+category: "cihaz-platform"
+tags: ["ios", "iphone", "shortcuts", "automation", "wireguard"]
+readingTime: 10
+coverImage: "device-ios"
+unsplashKeyword: "iphone shortcuts automation"
+---
+
+Remembering to turn on VPN at the right moment is much less safe and convenient than having it kick in automatically. The way to do this on iPhone is the Apple Shortcuts app — you can auto-activate your VPN profile based on Wi-Fi network, location, time of day, or any other trigger. This guide walks through how to set up auto-VPN on public Wi-Fi, auto-disconnect at the office, auto-connect in specific countries, and other practical scenarios.
+
+If you are not familiar with public Wi-Fi risks, our [VPN for travel guide](/en/blog/vpn-for-travel) covers the full context.
+
+## Why Automate?
+
+Manual on/off has two problems:
+- **Forgetting**: You connect to a cafe Wi-Fi and forget to turn VPN on; the first minutes flow unencrypted
+- **Friction**: When VPN is unnecessary (home network) it stays on and burns battery and speed
+
+Automation fixes both: VPN comes on when needed, off when not. Apple Shortcuts is the best tool because it can directly act on the iPhone's VPN setting.
+
+## Prerequisites
+
+- iOS 16 or newer
+- Your VPN provider's iOS app (NordVPN, ExpressVPN, Surfshark, ProtonVPN, Mullvad)
+- Or the **WireGuard** app (free on the App Store) plus a `.conf` file
+
+Provider apps offer limited automation themselves; with Shortcuts you can wire up any system-wide trigger.
+
+## Scenario 1: Auto-VPN on Public Wi-Fi
+
+The most common and most valuable automation. Auto-VPN whenever you join a cafe, hotel, or airport network.
+
+### Step 1: Create the Automation
+1. Open **Shortcuts**
+2. Switch to the **Automation** tab
+3. **+** for a new automation
+4. Pick **Wi-Fi**
+5. **Network**: choose "Any Network" then add a condition to exclude trusted networks (home, office)
+
+### Step 2: Define the Actions
+**Add Action** > **Get Network Details** to read the current SSID. Add an **If** block:
+```
+If Network is not "HomeWifi" and Network is not "Office"
+  Then: Set VPN On
+End If
+```
+
+### Step 3: Save
+Make sure "Run Without Asking" is enabled so the connection comes up without prompting.
+
+Now whenever you join an unknown Wi-Fi, the VPN comes on automatically.
+
+## Scenario 2: Turn VPN Off When I Get Home
+
+If you do not need VPN on your home network, save battery by turning it off.
+
+1. **Automation** > **+** > **Wi-Fi**
+2. Network: pick "HomeWifi"
+3. Action: **Set VPN Off**
+
+VPN drops as soon as you join the home network.
+
+## Scenario 3: Auto-Connect in a Specific Country
+
+Traveling from Turkey to the UK? Use a location-based trigger.
+
+1. **Automation** > **+** > **Arrive**
+2. Location: "London, UK" or a wide region
+3. Action: **Set VPN On**, then **Open App** > "WireGuard" or your VPN provider
+
+Location services must be on. Pick a wide region (city-level rather than street-level) to keep battery use low.
+
+## Scenario 4: Keep VPN On During Work Hours
+
+Always-on VPN between 09:00 and 18:00.
+
+1. **Automation** > **+** > **Time of Day**
+2. Time: 09:00, Repeat: Weekdays
+3. Action: **Set VPN On**
+
+Add a matching automation for 18:00 with **Set VPN Off**.
+
+## Profile-Specific Automation with the WireGuard App
+
+The WireGuard app exposes a Shortcuts API — activating or deactivating a specific tunnel is a first-class action:
+
+1. Install WireGuard.app and import a profile (e.g. "Germany")
+2. In Shortcuts: **Add Action** > search "WireGuard"
+3. Pick **Activate Tunnel** or **Deactivate Tunnel**
+4. Tunnel name: "Germany"
+
+This way different scenarios connect to different servers:
+- When leaving home: activate WireGuard "Turkey" tunnel (DPI bypass)
+- When arriving in the UK: activate WireGuard "UK" tunnel (BBC iPlayer)
+- In Germany: activate "Germany" tunnel (Netflix DE)
+
+## Remote Work VPN Automation
+
+To bring up your company VPN only on the office Wi-Fi or only during work hours, combine the triggers above. For broader work VPN context see our [VPN for remote work guide](/en/blog/vpn-for-remote-work).
+
+## Public Wi-Fi Security
+
+Hotel and cafe Wi-Fi without VPN is risky. Auto-VPN triggers eliminate that risk completely. Our [VPN privacy and security guide](/en/blog/vpn-privacy-and-security) lays out the threat model.
+
+## Known Limits
+
+**Apple Shortcuts limits**:
+- The VPN action is just "VPN On/Off" — the system remembers which profile to use
+- Shortcuts run in the background but iOS optimization can introduce delays
+- Without "Run Without Asking" each trigger pops a notification
+
+**WireGuard limits**:
+- Activate Tunnel sometimes lags when the device is locked
+- Only one tunnel can be active at a time; no parallel profiles
+- Some actions are unstable on iOS versions before 17
+
+## On-Demand VPN: Apple's Native Option
+
+Beyond Shortcuts, iOS has its own **On-Demand** VPN feature. If your provider's iOS app supports it (NordVPN, ExpressVPN do), you can build a list of Wi-Fi SSIDs that auto-trigger the VPN.
+
+Go to **Settings > General > VPN & Device Management > VPN profile > Connect On Demand** and define rules:
+- "Connect when reaching domain": connect when accessing certain domains
+- "Wi-Fi network is not": connect outside the home network
+
+Simpler than Shortcuts but less flexible. They can be combined — On-Demand for baseline coverage, Shortcuts for advanced scenarios.
+
+## Detecting Hostile Wi-Fi
+
+Some provider apps include "Threat Protection" features that auto-connect VPN on suspicious networks. NordVPN's Threat Protection, Surfshark's CleanWeb, and ProtonVPN's NetShield all fall into this category. They can be chained with Shortcuts.
+
+## Frequently Asked Questions
+
+**Do Shortcuts automations drain battery?**
+Location-based automations require background location, which has some battery cost. Wi-Fi triggers are very cheap.
+
+**Does VPN come on while the phone is locked?**
+Mostly yes, but on some iOS versions there is a delay. "Run Without Asking" must be enabled.
+
+**Are automations shared via Family Sharing?**
+No. Automations are per-device. Each family member sets their own up.
+
+**Do the same automations work on Mac?**
+The macOS Shortcuts app supports Wi-Fi triggers. The same scenarios apply on Mac; see our [macOS VPN setup guide](/en/blog/macos-vpn-setup) for context.
+
+**Can I automate OpenVPN profiles instead of WireGuard?**
+The OpenVPN Connect app does not expose Shortcuts integration. Use the provider's native automation, or switch to WireGuard.
+
+## Conclusion
+
+iOS Shortcuts VPN automation is a small but transformative feature. Auto-VPN on every public Wi-Fi, auto-off at home, auto-on during work hours — it cuts manual effort to zero. Setup takes 10-15 minutes and runs hands-free afterwards.
+
+To pick the best iOS-friendly VPNs, check our [comparison page](/en/karsilastir). With one subscription you get auto-VPN plus cross-device coverage including Mac.

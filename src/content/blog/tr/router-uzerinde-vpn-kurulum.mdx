@@ -1,0 +1,141 @@
+---
+slug: "router-uzerinde-vpn-kurulum"
+title: "Router'da VPN Kurulumu: Tüm Ev Ağını Koruma 2026"
+description: "Router seviyesinde VPN nasıl kurulur? ASUS Merlin, DD-WRT, OpenWRT, Tomato firmware'leri ile tüm ev ağını tek adımda koruma altına almanın rehberi."
+publishedAt: "2026-05-05"
+updatedAt: "2026-05-05"
+author: "vpncompaire Editör Ekibi"
+category: "cihaz-platform"
+tags: ["router", "ev ağı", "openvpn", "wireguard", "kurulum"]
+readingTime: 11
+coverImage: "device-router"
+unsplashKeyword: "wifi router home network"
+---
+
+Telefonunuza, bilgisayarınıza ve tabletinize ayrı ayrı VPN uygulaması yüklemek bir noktadan sonra anlamlı olmaktan çıkar. Smart TV, Apple TV, oyun konsolu, akıllı buzdolabı, IoT termostat — bu cihazların çoğu doğrudan VPN istemcisi çalıştıramaz. Çözüm router'a VPN kurmaktır. Bu yazıda hangi router firmware'lerinin VPN desteklediğini, hangi senaryoda hangi protokolü seçmeniz gerektiğini ve adım adım kurulumu anlatıyoruz.
+
+VPN'in temellerinden başlamak isteyenler için [VPN nedir ve neden gerekli](/blog/vpn-nedir-neden-gerekli) yazımız iyi bir giriş noktası.
+
+## Router Seviyesinde VPN Ne Demek?
+
+Standart kurulumda VPN istemcisi her cihaza ayrı kurulur ve sadece o cihazın trafiği şifrelenir. Router seviyesinde VPN ise tünel router'ın WAN portunda kurulur — eve giren ve evden çıkan tüm trafik şifreli olur. Pratikte:
+
+- Smart TV, Apple TV, Chromecast, Roku otomatik korunur
+- PlayStation, Xbox, Nintendo Switch tek noktadan VPN'in arkasında olur
+- IoT cihazlar (Hue, Nest, Ring) lokasyon sızıntısı yapmaz
+- Misafir Wi-Fi şifreli olarak gider
+- Cihaz başına lisans limiti aşılmaz — tek bağlantı tüm haneyi karşılar
+
+## Hangi Router'larda VPN Kurulabilir?
+
+Stok firmware ile gelen tüketici router'larının çoğunda VPN istemci özelliği yoktur. Genelde üç yol var: VPN destekli stok firmware, üçüncü taraf firmware veya VPN-hazır donanım.
+
+### Stok Firmware ile Doğrudan Destekleyenler
+- ASUS RT serisi (RT-AX58U, RT-AX86U, RT-AX88U, GT-AX gibi gaming modeller) — stok firmware OpenVPN ve WireGuard istemcisi içerir
+- Synology Router (RT2600ac, RT6600ax) — paket merkezinden VPN Plus eklentisi
+- GL.iNet (Slate, Brume, Flint) — OpenWRT tabanlı, web arayüzünden tek tıkla VPN
+
+### Üçüncü Taraf Firmware Gerektirenler
+- Netgear Nighthawk, Linksys WRT serisi, TP-Link Archer modelleri — DD-WRT, OpenWRT veya Tomato yüklenirse VPN istemcisi çalışır
+
+### VPN-Ready Donanım
+- Vilfo, FlashRouters önceden flashlanmış, kurulum ücretsiz destekli, yeni başlayanlar için
+- Privacy Hero, InvizBox tüketici dostu out-of-box çözümler
+
+ASUS modelleri, fiyat-performans ve kullanım kolaylığı açısından çoğu kullanıcı için en doğru seçenek. ASUS Merlin (resmi olmayan ama güvenli ASUS firmware fork'u) WireGuard performansı için ek optimizasyon getirir.
+
+## Firmware Karşılaştırması
+
+| Firmware | WireGuard | OpenVPN | UI Kolaylığı | Performans |
+|---|---|---|---|---|
+| ASUS Stok | Var | Var | Yüksek | İyi |
+| ASUS Merlin | Var | Var | Yüksek | Çok iyi |
+| DD-WRT | Var (yeni sürümlerde) | Var | Orta | Orta |
+| OpenWRT | Var | Var | Düşük (CLI) | Çok iyi |
+| Tomato/FreshTomato | Sınırlı | Var | Orta | İyi |
+| pfSense/OPNsense | Var | Var | Düşük | Mükemmel |
+
+Protokol seçimi router donanımına çok bağlı. Eski 800 MHz CPU'lu bir router OpenVPN ile 50 Mbps'i zor görür; modern ASUS RT-AX86U WireGuard ile 600+ Mbps verebilir. Detaylı protokol karşılaştırması için [WireGuard vs OpenVPN yazımızı](/blog/wireguard-vs-openvpn-karsilastirma) okuyun.
+
+## Adım Adım Kurulum: ASUS Stok Firmware
+
+ASUS RT serisi en yaygın senaryo olduğundan örnek olarak onu işleyelim.
+
+1. VPN sağlayıcınızın panelinden manuel konfigürasyon dosyasını indirin (NordVPN için `.ovpn` dosyaları, WireGuard için `.conf`)
+2. Router admin paneline girin (192.168.50.1 tipik)
+3. **VPN** sekmesi, **VPN Client** alt sekmesi
+4. WireGuard için: yeni profil ekleyin, `.conf` dosyasını yükleyin, **Activate**'i tıklayın
+5. OpenVPN için: yeni profil, `.ovpn` dosyasını yükleyin, kullanıcı adı ve parola girin
+6. **Apply** ile kaydedin
+
+Bağlantı durumu yeşil görünüyorsa tamam. **Network Map** ekranında WAN IP'sinin değiştiğini doğrulayın.
+
+### Kill Switch ve Yönlendirme Kuralları
+
+ASUS Merlin'de **VPN Director** ile cihaz bazında kural yazılabilir: belirli bir cihaz VPN dışında kalsın, başka bir cihaz sadece VPN üzerinden internete çıksın. Bu özellik split tunneling pratikte uygulamasıdır.
+
+Kill switch için: VPN Client ayarlarında "Block routed clients if tunnel goes down" işaretlenmeli. VPN düşerse cihazlar internete çıkamaz, IP sızıntısı olmaz.
+
+## DD-WRT ve OpenWRT için Kısa Notlar
+
+**DD-WRT**: Yönetici paneli > Services > VPN. OpenVPN ve WireGuard sekmeleri ayrı. WireGuard için endpoint, public key, allowed IPs alanlarını VPN sağlayıcınızın panelinden kopyalayın. OpenVPN için `.ovpn` içeriğini "Additional Config" alanına yapıştırın.
+
+**OpenWRT**: Daha esnek ama dik öğrenme eğrisi. `wireguard-tools` paketini kurun, LuCI üzerinden interface ekleyin veya `/etc/config/network` dosyasını editleyin. Linux komut satırı tecrübesi gerekir; Linux'ta VPN kurulumu için ayrıntılı [Linux VPN rehberimiz](/blog/linux-vpn-kurulum-rehberi) yardımcı olur.
+
+## Performans Beklentileri
+
+Router seviyesinde VPN'in maliyeti hızdır. CPU şifreleme/şifre çözmeyi yapacağı için fiber bağlantınızın tamamını alamayabilirsiniz.
+
+Saha gözlemleri:
+- ASUS RT-AX58U + WireGuard: 400-500 Mbps
+- ASUS RT-AX86U + WireGuard: 700-900 Mbps
+- Netgear R7000 + DD-WRT + OpenVPN: 50-80 Mbps
+- pfSense + iX3050 (mini PC) + WireGuard: 1+ Gbps
+
+WireGuard genellikle OpenVPN'den 2-3 kat hızlıdır aynı donanımda. Eğer 1 Gbps fiber kullanıyorsanız ve VPN'i tüm trafikte istiyorsanız modern bir router veya küçük pfSense/OPNsense kutusu mantıklı.
+
+## Hangi Cihazlar Router VPN'inden Faydalanır?
+
+Smart TV ve streaming kutuları Apple TV, Roku, Chromecast, Fire TV — bunlarda native VPN ya yok ya çok sınırlı. Router yoluyla otomatik korunurlar. [Apple TV'de VPN kurulumu](/blog/apple-tv-vpn-kurulum) yazımız bu konuyu detaylandırıyor.
+
+Oyun konsolları PlayStation 5, Xbox Series, Nintendo Switch — bunlarda VPN istemcisi yok. Router-tabanlı VPN regional store erişimi ve coğrafi kısıtlama atlatma için tek pratik çözüm. Detay için [Xbox ve PlayStation'da VPN](/blog/xbox-playstation-vpn) yazımız.
+
+IoT cihazlar Akıllı priz, kamera, ampul, termostat. Bunlar genelde merchant sunucularına telemetri gönderir; router VPN'i lokasyon sızıntısını engeller.
+
+## Yaygın Hatalar ve Çözümleri
+
+**DNS sızıntısı**: VPN aktifken bile router DNS sorgularını ISP DNS'ine gönderebilir. WAN ayarlarında DNS'i 1.1.1.1 / 9.9.9.9 olarak sabitleyin veya VPN sağlayıcınızın özel DNS'ini kullanın.
+
+**Çift NAT**: ISS modeminizin arkasına ikinci bir router koyduysanız, ana modemi bridge moduna alın veya port forwarding yapın. Yoksa VPN handshake başarısız olabilir.
+
+**MTU sorunları**: WireGuard varsayılan MTU 1420; bazı ISS bağlantılarında 1380'e düşürmek gerekir. Router'da WG ayarlarında MTU değerini deneme yanılma ile bulun.
+
+**IPv6 leak**: Router VPN'i sadece IPv4 trafiğini tünele soktuğunda IPv6 sızabilir. WAN ayarlarında IPv6'yı tamamen kapatmak en güvenlisi.
+
+## Hangi VPN Sağlayıcıları Router-Friendly?
+
+Sağlayıcı seçerken router için manuel konfigürasyon dosyalarını indirmeye izin vermesi şart. NordVPN, ExpressVPN, Surfshark, Mullvad, ProtonVPN bunu sağlar. Bazıları (TorGuard, IVPN) router için ayrı dokümantasyon ve destek sunar.
+
+Cihaz limiti olmayan ya da yüksek olan sağlayıcılar router için avantajlı: Surfshark sınırsız, IPVanish sınırsız, Windscribe yüksek limit. Cihaz başına lisans limiti olanlarda bile router tek bir bağlantı sayar — ev içindeki sınırsız cihaz bu bir bağlantıyı paylaşır.
+
+VPN sağlayıcı seçimi için [karşılaştırma sayfamızı](/karsilastir) ziyaret edin.
+
+## Sıkça Sorulan Sorular
+
+**Router VPN her cihazı korur mu?**
+Evet, router'a Wi-Fi veya Ethernet ile bağlı her cihazın trafiği VPN üzerinden gider. Hücresel veriye geçen telefonlar (mobil 4G/5G) dışarıda kalır.
+
+**Bir cihazı VPN'den çıkarabilir miyim?**
+ASUS Merlin'in VPN Director'ı veya OpenWRT'nin policy routing'i ile evet. Belirli MAC adresleri veya IP aralıkları VPN dışında bırakılabilir.
+
+**Router VPN streaming için yeterli hız verir mi?**
+4K streaming 25 Mbps yeter. Modern bir router rahatlıkla 300+ Mbps verir, sorun olmaz. Sınırın üstünde fiber kullanıyorsanız donanım upgrade'i lazım olabilir.
+
+**Çift VPN kullanabilir miyim — hem router hem cihaz?**
+Teknik olarak evet ama performans yarısına düşer ve gereksizdir. Birini seçin.
+
+## Sonuç
+
+Router seviyesinde VPN, çoklu cihazlı haneler için en temiz çözüm. ASUS RT serisi giriş seviyesinde, GL.iNet portatif kullanım için, pfSense/OPNsense maksimum performans için en iyi seçenekler. WireGuard varsayılan protokol olmalı; sansürlü bölgelerde OpenVPN TCP 443 yedek olarak kalır.
+
+Hangi VPN sağlayıcısının router'ınızla en uyumlu olduğunu görmek için [VPN karşılaştırma sayfamıza](/karsilastir) göz atın. Cihaz başı kurulum yerine merkezi bir çözüm arıyorsanız router yatırımı uzun vadede en mantıklı seçim.

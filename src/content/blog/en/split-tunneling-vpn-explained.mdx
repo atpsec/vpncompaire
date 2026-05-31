@@ -1,0 +1,153 @@
+---
+slug: "split-tunneling-vpn-explained"
+title: "Split Tunneling: Selective VPN Routing Explained"
+description: "Split tunneling lets you choose which apps go through the VPN and which go direct. Banking, streaming scenarios, app vs URL based, performance gains."
+publishedAt: "2026-05-08"
+updatedAt: "2026-05-08"
+author: "vpncompaire Editorial Team"
+category: "gizlilik-guvenlik"
+tags: ["split-tunneling", "vpn-features", "performance", "remote-work", "selective-tunnel"]
+readingTime: 10
+coverImage: "vpn-protocols"
+unsplashKeyword: "network split tunnel routing"
+---
+
+A VPN connection routes all traffic through an encrypted tunnel — and that's usually exactly what you want. But sometimes it isn't. Watching Netflix US while your banking app logs in from the same foreign IP can trigger a temporary account lock. Your work-from-home VPN gives you access to company resources but throttles YouTube to 5 mbit. There's no need to push your everyday browsing traffic through the same slow Tor tunnel as your sensitive communications. Split tunneling lets you make this choice yourself.
+
+## What Is Split Tunneling?
+
+Split tunneling is a feature that lets the user decide which traffic goes through the encrypted VPN tunnel and which goes directly through the regular internet. The name says it all: traffic is split, with some flowing through the VPN and some through your normal connection.
+
+In classic VPN behavior, every TCP/UDP packet exits via the tunnel interface. With split tunneling, rules like "this app's packets shouldn't enter the tunnel" or "go directly for this IP range" are defined in the network stack. The result: VPN-protected and unprotected traffic flow simultaneously from the same device.
+
+## Types of Split Tunneling
+
+Providers implement this feature in different ways, and not all of them give the same flexibility.
+
+### App-Based Split Tunneling
+
+The most common approach. The user selects which applications use the VPN — or don't — by application name.
+
+**There are two operating modes**:
+
+- **Through VPN** (allow list): Only selected apps use the VPN, others exit directly
+- **Outside VPN** (bypass list): All traffic goes through the VPN, only selected apps bypass
+
+Common on Windows and Android because these OSes support per-app routing rules. Limited on macOS and iOS — Apple's security model restricts the network extension API.
+
+### URL/Domain-Based Split Tunneling
+
+Excludes specific websites or domains from the VPN. All `*.yourbank.com` traffic exits directly, everything else goes through the VPN.
+
+It works at DNS resolution: when a domain resolves, its IP is added to the bypass list and the route table is updated accordingly. This method is ideal for selective in-browser tunneling — only certain tabs in Chrome or Firefox should exit through the VPN.
+
+### IP-Based Split Tunneling
+
+The lowest-level method. Specific IP ranges (CIDR blocks) are kept outside the tunnel. Frequently used in corporate VPNs: company-internal 10.0.0.0/8 traffic goes through the corporate VPN, the rest of the internet exits directly (a "split tunnel" instead of a full tunnel).
+
+### Inverse Split Tunneling
+
+Standard split tunneling defines a "go through VPN" list. In inverse mode it's the opposite: items not on the list go through the VPN, items on the list exit directly. Same concept, just inverting the default behavior.
+
+## Scenario 1: Streaming + Banking
+
+The most common use case. You're connected to a VPN for Netflix US, but your bank's mobile app considers logins from a different country suspicious.
+
+**Solution**: Add the banking app to the split tunneling list as "outside VPN." Netflix goes through the VPN, the bank exits directly through 4G or your local Wi-Fi. Both sides happy.
+
+The same approach applies to government portals, regional shopping sites, and any other service that performs location-based verification.
+
+## Scenario 2: Remote Work
+
+A corporate VPN is set up — pushing all traffic through the company server is pointless. Does Spotify really need to take a detour through the office server in London?
+
+**Solution**: Route the company VPN only to internal IPs like `192.168.x.x` and `10.x.x.x`; everything else exits directly. This setup preserves performance and reduces company bandwidth costs. Our [VPN for remote work](/en/blog/vpn-for-remote-work) article covers this in detail.
+
+## Scenario 3: Torrent + Browsing
+
+The torrent client's traffic must go through the VPN — copyright tracking firms continuously scrape torrent peer lists. But for daily browsing, video streaming, or job searching, a VPN is unnecessary.
+
+**Solution**: Send only qBittorrent, Transmission, or Deluge through the VPN. Your browsers and other apps exit through the regular connection. If the VPN drops, the [kill switch](/en/blog/vpn-kill-switch-explained) only stops the torrent client; your other work continues.
+
+## Scenario 4: Streaming + Quick Discount
+
+To take advantage of regional Steam pricing, route Steam through a regional VPN server while everything else uses a global exit. Or vice versa.
+
+**Solution**: Pin the Steam client to a specific regional VPN server (via split tunneling), let your browser exit through the global VPN. Both goals served simultaneously.
+
+## Performance Advantage
+
+Split tunneling isn't just about flexibility — it provides speed gains too. The VPN tunnel adds an extra network hop and requires CPU effort for encryption and decryption. The consequences:
+
+- **Latency increase**: 10-50ms additional delay (depending on server distance)
+- **Bandwidth drop**: 5-30% on high-speed connections
+- **Battery drain**: Continuous encryption depletes mobile battery
+
+By routing only the apps that need it through the VPN, you minimize these costs. 4K Netflix streaming through the VPN, YouTube and Twitter direct — the average connection quality improves noticeably. Our [VPN speed optimization](/en/blog/vpn-speed-optimization) article digs into this.
+
+## How Different Providers Implement It
+
+**NordVPN**: Strong app-based split tunneling on Windows and Android. Limited on macOS. Both allow list and bypass list modes are available.
+
+**ExpressVPN**: Implementation on Windows, Mac, and Android. Supports both allow and bypass lists. Reliable.
+
+**Surfshark "Bypasser"**: Per-app and per-website split tunneling. Strong implementation on Android.
+
+**ProtonVPN**: App-based split tunneling on Windows and Android. Lacking on Mac/iOS.
+
+**Mullvad**: Possible at the OS level on Linux but no GUI. Standard app-based split tunneling on Android and Windows.
+
+**CyberGhost**: App-based split tunneling on Windows and Android. iOS not supported.
+
+For comprehensive evaluation, see our [VPN selection guide](/en/blog/how-to-choose-vpn) — it details exactly which platforms and features each provider supports.
+
+## Setting Up Split Tunneling
+
+Although the steps differ across providers, the general flow is:
+
+1. **Open VPN client settings**
+2. **Find the "Split Tunneling" or "Bypasser" tab**
+3. **Choose the mode**: Allow list or bypass list
+4. **Add applications**: Select from the application list or browse for the executable
+5. **Save changes and verify**: Connect to the VPN and check that traffic flows correctly
+
+After setup, run a leak test. The browser-based test on ipleak.net shows whether the apps you bypassed are actually using your real IP.
+
+## Risks and Things to Watch For
+
+Split tunneling brings flexibility but also leak risks if misconfigured.
+
+**Wrong app on the list**: Choosing "outside VPN" for a sensitive app exposes it directly to your ISP.
+
+**Subprocesses**: An app may run subprocesses with different names that the rule doesn't cover.
+
+**Browser exception**: Setting a browser to "outside VPN" makes every tab — including sensitive ones — go through the regular connection.
+
+**Mobile background traffic**: On mobile, background services may not respect split tunneling. Important apps may continue exiting directly.
+
+To minimize these risks, conduct your own leak tests after setting up split tunneling. Each scenario should be tested separately.
+
+## Frequently Asked Questions
+
+**Is split tunneling secure?**
+Yes, when configured correctly. Misconfiguration creates security holes, so be deliberate about which apps go through the VPN.
+
+**Does split tunneling reduce VPN speed?**
+On the contrary — by reducing the load on the VPN, total throughput typically increases. Apps not using the VPN avoid the encryption overhead.
+
+**Is split tunneling enough on its own?**
+No. It's complementary to a [kill switch](/en/blog/vpn-kill-switch-explained), DNS leak protection, and a strong protocol. Use them together.
+
+**Does it work on iOS?**
+Limited. Apple's network extension API doesn't allow per-app routing in the traditional sense. Some providers offer URL-based alternatives.
+
+**Will split tunneling break my work VPN?**
+No, the opposite. Most corporate VPNs are designed in a "split tunnel" model — only company resources go through the VPN, internet traffic exits directly. The same logic applies to consumer VPNs.
+
+## Conclusion
+
+Split tunneling is one of the most underrated VPN features. By routing only the apps that need it through the VPN — leaving banking, local services, and lightweight browsing on the direct connection — you maximize the benefits of the VPN without paying its full performance cost.
+
+When configured correctly, split tunneling preserves speed and lets banking, streaming, and remote work coexist on the same device without conflict. When configured wrong, it becomes a leak vector — that's why you must know exactly which app exits through which path and run regular leak tests.
+
+If you're looking for a VPN with strong split tunneling support, check our [VPN comparison page](/karsilastir) where we evaluate this feature platform by platform.

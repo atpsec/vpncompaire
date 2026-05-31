@@ -1,0 +1,157 @@
+---
+slug: "kill-switch-nedir-vpn"
+title: "VPN Kill Switch Nedir ve Neden Hayati Önemde?"
+description: "VPN kill switch bağlantı koparsa internetinizi anında keser. Sistem-level vs uygulama-level fark, neden zorunlu, hangi sağlayıcılar nasıl uyguluyor."
+publishedAt: "2026-05-21"
+updatedAt: "2026-05-21"
+author: "vpncompaire Editör Ekibi"
+category: "gizlilik-guvenlik"
+tags: ["kill-switch", "gizlilik", "guvenlik", "vpn-ozellikleri", "veri-sizinti"]
+readingTime: 10
+coverImage: "privacy-security"
+unsplashKeyword: "network kill switch security"
+---
+
+VPN bağlantınız bir saniyeliğine bile kopsa ne olur? Cihazınız otomatik olarak normal internet bağlantısına döner, gerçek IP adresiniz ifşa olur ve o anda açık olan tüm uygulamalar — torrent istemciniz, tarayıcınız, yedekleme servisiniz — şifrelenmemiş veriyi gerçek IP'niz üzerinden göndermeye başlar. ISS'iniz, takipçiler ve potansiyel saldırganlar bu kısa pencerede tüm trafiğinizi görür. İşte kill switch tam olarak bu felaket senaryosunu engellemek için var.
+
+## Kill Switch Nedir?
+
+Kill switch, VPN bağlantısı koptuğu anda cihazınızın tüm internet trafiğini otomatik olarak kesen bir güvenlik özelliğidir. VPN tüneli yeniden kurulana kadar hiçbir uygulama internete çıkamaz. Bu sayede gerçek IP adresiniz, DNS sorgularınız ve trafik içeriğiniz hiçbir koşulda dış dünyaya sızmaz.
+
+Adı "kill" yani "öldürme" anahtarıdır çünkü ağ bağlantısını kelimenin tam anlamıyla anında öldürür. Sigorta gibi düşünün: çoğu zaman fark edilmez, ama bağlantı koptuğu o kritik saniyelerde sizi koruyan tek mekanizmadır.
+
+## VPN Bağlantısı Neden Kopar?
+
+VPN'lerin sağlam altyapıları olsa da bağlantı kopmaları kaçınılmazdır. En yaygın sebepler:
+
+**Ağ değişimi**: Wi-Fi'dan mobil veriye geçerken VPN tüneli yeniden kurulmak zorunda kalır.
+
+**Sunucu yoğunluğu**: VPN sağlayıcısının sunucusu kapasiteyi aşarsa bağlantınızı düşürebilir.
+
+**ISS müdahalesi**: Bazı ülkelerde ve ağlarda VPN trafiği aktif olarak engellenir.
+
+**Uyku/uyanma döngüsü**: Laptop kapağını açtığınızda VPN istemcisinin yeniden kurulması saniyeler alabilir.
+
+**Protokol zaman aşımı**: WireGuard, OpenVPN ve IKEv2 protokollerinin handshake süreleri farklıdır, paketler düşerse bağlantı yeniden kurulur.
+
+**Güç tasarrufu**: Mobil cihazlar pil koruması için VPN uygulamasını arka planda öldürebilir.
+
+Önemli olan şu: bu kopmalar saniyelerle ölçülür ama bu kısa pencere bile veri sızdırmak için fazlasıyla yeterlidir. Modern bir torrent istemcisi sadece 200ms içinde tracker'a IP'nizi açabilir.
+
+## Kill Switch Olmadan Ne Sızar?
+
+VPN düştüğü anda kill switch yoksa şunlar dış dünyaya gider:
+
+1. **Gerçek IP adresiniz**: ISS'inizden aldığınız IP, ziyaret ettiğiniz tüm sitelere gönderilir
+2. **DNS sorguları**: Hangi domain'leri çözdüğünüz ISS'inize ifşa olur
+3. **HTTPS olmayan trafiğin tamamı**: Eski API'ler, bazı IoT cihazları ve internal ağ trafiği
+4. **Torrent peer listeleri**: Aynı dosyayı paylaşan herkes IP'nizi görür
+5. **Uygulama telemetrisi**: Arka plan veri toplama servisleri
+
+Telif hakkı takibi yapan firmaların büyük kısmı tam da bu kopma pencerelerini hedef alır. Bir torrent oturumunda 4-5 saniyelik bir kopma, IP'nizin onlarca peer listesine düşmesine yeterlidir.
+
+## Sistem-Level vs Uygulama-Level Kill Switch
+
+Kill switch'in iki temel uygulama biçimi vardır ve aralarındaki fark, koruma seviyenizi doğrudan belirler.
+
+### Uygulama-Level (Application-Level) Kill Switch
+
+Sadece belirli uygulamaları engeller. Kullanıcı, hangi uygulamaların VPN düştüğünde durması gerektiğini önceden işaretler. Liste dışındaki uygulamalar normal şekilde çalışmaya devam eder.
+
+**Avantajı**: Esneklik. Bankacılık uygulamanızın VPN bağımsız çalışmasını isteyebilirsiniz.
+
+**Dezavantajı**: Eksik koruma. Listeye eklemediğiniz arka plan servisleri sızıntı yapmaya devam eder. İşletim sistemi seviyesindeki güncelleme servisleri, bulut yedekleme ajanları gibi.
+
+### Sistem-Level (System-Wide) Kill Switch
+
+Cihazın tüm ağ trafiğini engeller. VPN tüneli aktif değilse hiçbir paket dışarı çıkamaz. Genellikle güvenlik duvarı kuralları (Windows'ta WFP filtreleri, macOS/Linux'ta pf/iptables) üzerinden uygulanır.
+
+**Avantajı**: Sızdırmaz koruma. Hangi uygulama olursa olsun VPN düşünce susar.
+
+**Dezavantajı**: Yerel ağ erişimi de kesilir, yazıcı veya ağ depolaması ayrı yapılandırma gerektirir.
+
+Yüksek riskli senaryolar için (gazetecilik, hassas torrent kullanımı, sansürlü ülkelerde haberleşme) sistem-level kill switch tek doğru tercihtir. Detaylı bağlam için [VPN gizliliği ve güvenliği kılavuzumuza](/blog/vpn-gizlilik-ve-guvenlik) bakabilirsiniz.
+
+## "Always-On" Kill Switch ve Temel Fark
+
+Bazı sağlayıcılar (özellikle Mullvad, ProtonVPN) "always-on" veya "lockdown mode" adında ikinci bir kademe sunar. Standart kill switch sadece VPN bağlantısı kurulduktan sonra koruma sağlar — yani cihaz açıldığı anda VPN bağlanana kadar geçen 3-5 saniyede trafik dışarı çıkabilir.
+
+Always-on modunda ise işletim sistemi açıldığı andan itibaren VPN tüneli kurulana kadar internet erişimi tamamen bloke edilir. Cihazı açar açmaz arka planda çalışan güncelleme servislerinin gerçek IP'nizi görmesini istemiyorsanız bu mod şarttır.
+
+## Hangi Sağlayıcılar Kill Switch'i Nasıl Uyguluyor?
+
+Tüm büyük sağlayıcılar bir tür kill switch sunar ama kalite farkları belirgindir.
+
+**NordVPN**: Hem sistem-level (Windows/macOS/Linux) hem uygulama-level (sadece Windows) seçeneği. NordLynx protokolüyle birlikte güçlü. iOS'ta sınırlı.
+
+**ExpressVPN**: "Network Lock" adıyla pazarlanır, sistem-level çalışır. Tüm masaüstü platformlarda standart açık gelir. Mobilde IKEv2 üzerinden işletim sistemi VPN ayarlarını kullanır.
+
+**ProtonVPN**: Hem standart kill switch hem "Permanent Kill Switch" (always-on benzeri) sunar. Linux istemcide en olgun uygulamalardan biri.
+
+**Mullvad**: Varsayılan olarak her zaman açık, kapatma seçeneği yok. WireGuard'la birlikte sistem-level firewall kuralları kullanır.
+
+**Surfshark**: Sistem-level kill switch tüm platformlarda mevcut. App-level seçeneği yok.
+
+**Sağlayıcı seçerken** kill switch'in hangi platformda hangi seviyede çalıştığını mutlaka kontrol edin. Bazı VPN'lerin Windows'ta mükemmel çalışan kill switch'i Mac'te eksik veya iOS'ta hiç olmayabilir. [VPN seçerken nelere dikkat etmek gerektiğini](/blog/vpn-secerken-dikkat-edilmesi-gerekenler) detaylı anlatan kılavuzumuz konuyu derinlemesine ele alıyor.
+
+## Kill Switch Testi: Çalışıyor mu Nasıl Anlarsınız?
+
+Bir özelliğin etiketinde olması, gerçekten çalıştığı anlamına gelmez. Kendi kill switch'inizi şu şekilde test edebilirsiniz:
+
+1. VPN'i bağlayın ve gerçek IP'nizi `ipleak.net` üzerinden doğrulayın
+2. Test sitesinde sayfayı açık bırakın
+3. VPN istemcisi yerine işletim sisteminin ağ adaptöründen VPN bağlantısını kesin (Windows'ta Network Adapters'tan TAP/WireGuard arayüzünü disable edin)
+4. Birkaç saniye sonra ipleak.net otomatik yenilendiğinde IP'niz boş veya bağlantı hatası göstermeli
+5. Eğer gerçek IP'niz görünüyorsa kill switch çalışmıyor demektir
+
+Aynı testi DNS sızıntısı için de yapın. Kill switch çalışsa bile bazı sağlayıcılar DNS sorgularını sistem DNS'ine düşürür. [DNS leak testi nasıl yapılır](/blog/dns-leak-test-vpn) yazımızda adım adım anlatıyoruz.
+
+## Kill Switch ve Diğer Güvenlik Katmanları
+
+Kill switch tek başına yeterli değildir. Tam koruma için birlikte çalışması gereken katmanlar:
+
+**Şifreleme protokolü**: Kill switch ne kadar iyi olursa olsun, zayıf protokol seçilirse trafiğin kendisi açıktır. Modern protokollerin karşılaştırması için [WireGuard ve OpenVPN karşılaştırmamızı](/blog/wireguard-vs-openvpn-karsilastirma) inceleyin.
+
+**DNS leak koruması**: Kill switch IP'yi gizler ama DNS sorguları farklı yoldan sızabilir.
+
+**IPv6 leak engelleme**: Birçok VPN sadece IPv4 trafiği yönlendirir, IPv6 sızıntı yapar.
+
+**WebRTC leak koruması**: Tarayıcı seviyesinde ek önlem gerekir.
+
+Bu beş katman bir araya gelmediğinde teknik anlamda "VPN korumalı" değilsiniz.
+
+## Kill Switch Ne Zaman Kapatılır?
+
+Sürekli açık tutmak en güvenli seçenek olsa da bazı durumlarda geçici olarak kapatmak gerekebilir:
+
+- **Yerel ağ kullanımı**: Yazıcı, NAS veya akıllı ev cihazlarına erişim
+- **Konferans/sunum**: Anlık bağlantı kopmasının görüntülü görüşmeyi düşürmesini istemiyorsanız
+- **Bankacılık**: Banka VPN trafiğini şüpheli görüp hesabı geçici kilitleyebilir
+- **Hız testi**: VPN olmadan referans değer almak için
+
+Bunlar dışında — özellikle torrent, hassas iletişim ve sansürlü ülkelerde — kill switch açık kalmalıdır.
+
+## Sıkça Sorulan Sorular
+
+**Kill switch pil tüketimini artırır mı?**
+Hayır, kill switch sadece bağlantı koptuğunda devreye girer. Aktif olarak bir şey yapmaz, sadece güvenlik duvarı kuralı olarak bekler.
+
+**Ücretsiz VPN'lerde kill switch var mı?**
+Çoğu ücretsiz VPN'de yoktur veya çok eksiktir. Bu da [ücretsiz ve ücretli VPN farkının](/blog/ucretsiz-vs-ucretli-vpn) en kritik noktalarından biridir.
+
+**iOS'ta kill switch güvenilir mi?**
+Apple'ın "Always-on VPN" özelliği iOS 14'ten beri mevcut ama yapılandırma profili gerektirir. Üçüncü parti VPN uygulamalarının kendi kill switch'leri sınırlıdır.
+
+**Bağlantı her saniye kopuyorsa ne yapmalıyım?**
+Önce protokolü değiştirin (OpenVPN'den WireGuard'a). Sonra farklı sunucu deneyin. Sorun devam ederse kill switch'in always-on modunu değil standart modunu kullanın, böylece otomatik yeniden bağlanma daha hızlı olur.
+
+**Tor üzerinden VPN kullanırken kill switch gerekir mi?**
+Evet, hatta daha kritiktir. Tor bağlantısı düştüğünde VPN tüneli de düşer ve gerçek IP açığa çıkar.
+
+## Sonuç
+
+Kill switch lüks bir özellik değil, modern bir VPN'in olmazsa olmazıdır. Bağlantınızın milisaniyelik bir kopması bile gerçek IP'nizi, DNS sorgularınızı ve uygulama trafiğinizi ifşa etmeye yeter. Sistem-level uygulama her zaman uygulama-level'dan üstündür çünkü hiçbir trafiği geride bırakmaz.
+
+Sağlayıcı seçerken kill switch'in hangi platformlarda hangi seviyede çalıştığını mutlaka kontrol edin, kurulumdan sonra kendi testinizi yapın ve mümkünse always-on modunu açık tutun. Tam liste ve test sonuçları için [en iyi gizlilik VPN'leri karşılaştırmamıza](/en-iyi/gizlilik) göz atın — kill switch uygulamalarını platform-platform değerlendirdiğimiz tabloyu orada bulabilirsiniz.
+
+Gizlilik bir tek katmanla sağlanmaz. Kill switch o katmanlardan en görünmezi ama en kritik olanıdır — siz fark etmediğiniz anda devreye girer ve veri sızıntısının önüne geçer.

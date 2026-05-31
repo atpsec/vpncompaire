@@ -1,0 +1,114 @@
+---
+slug: "ai-araclari-gizlilik-vpn"
+title: "AI Araçları ve Gizlilik: VPN ile Veri Koruma"
+description: "ChatGPT, Claude, Gemini sohbetleriniz nasıl saklanıyor? Opt-out seçenekleri, VPN'in IP gizleme rolü ve hassas konularda AI kullanım rehberi."
+publishedAt: "2026-05-23"
+updatedAt: "2026-05-23"
+author: "vpncompaire Editör Ekibi"
+category: "yapay-zeka-vpn"
+tags: ["yapay-zeka", "gizlilik", "veri-koruma", "chatgpt", "vpn"]
+readingTime: 11
+coverImage: "ai-privacy"
+unsplashKeyword: "ai privacy data"
+---
+
+ChatGPT, Claude veya Gemini'ye yazdığınız her bir mesaj nereye gidiyor? Sohbetleriniz model eğitiminde kullanılıyor mu? IP'niz, lokasyonunuz, tarayıcı parmak iziniz hangi metadata olarak saklanıyor? AI asistanların gündelik iş akışına bu kadar gömülmesiyle birlikte gizlilik sorusu artık "nice to have" değil, ciddi bir endişe.
+
+Bu yazıda büyük AI sağlayıcıların veri politikalarını, kullanıcı tarafında alabileceğiniz önlemleri ve VPN'in nereye değer kattığını ele alıyoruz. VPN sağlayıcı seçimi için [VPN karşılaştırma sayfamıza](/karsilastir) göz atabilirsiniz; gizlilik odaklı sağlayıcılar [en iyi gizlilik VPN listemizde](/en-iyi/gizlilik) sıralı.
+
+## AI Sağlayıcılar Sohbetleri Nasıl Saklıyor?
+
+Hemen hemen tüm büyük sağlayıcılar konuşmaları belirli süreler boyunca saklıyor. Genel görünüm:
+
+**OpenAI (ChatGPT)**: Sohbetler varsayılan olarak hesap geçmişinizde tutulur. "Improve the model for everyone" ayarı kapatılmadıkça bu sohbetler model eğitimi için kullanılabilir. ChatGPT Team ve Enterprise planlarında varsayılan olarak eğitim verisinden çıkarılmıştır.
+
+**Anthropic (Claude)**: Sohbetler hesabınızda kalıyor, ancak Anthropic varsayılan olarak konuşmaları model eğitiminde kullanmıyor. Geri bildirim olarak işaretlediğiniz veya politika ihlali tespit edilen sohbetler istisna.
+
+**Google (Gemini)**: Konuşmalar Google hesabınıza bağlı tutulur. "Gemini Apps Activity" kapatılmadıkça insan inceleyiciler tarafından örneklenebilir. Çocuk hesapları farklı politikalarla çalışıyor.
+
+**Microsoft Copilot**: İşletme planlarında (Microsoft 365 Copilot) veriler tenant'ınızda tutulur ve eğitime gitmez. Tüketici Copilot'unda standart Bing/Microsoft veri politikası geçerli.
+
+**Perplexity**: Sohbetler hesabınızda kalıyor, "AI Data Retention" ayarı ile kontrol edilebilir.
+
+[ChatGPT Türkiye erişim rehberimiz](/blog/chatgpt-turkiye-erisim-vpn) erişim tarafını işliyor; bu yazı veri tarafına odaklanıyor.
+
+## Metadata: Sohbet İçeriği Dışındaki Veriler
+
+Asıl sohbet metni dışında AI sağlayıcı çoğu zaman şu metadata'yı toplar:
+
+- **IP adresi**: Coğrafi konumunuzu belirler. ISP'nize bağlı olarak gerçek kimliğinize kadar zincirlenebilir.
+- **Tarayıcı parmak izi**: Tarayıcı sürümü, ekran çözünürlüğü, fontlar, eklentiler. Cookieler temizlense bile sizi takip edebilir.
+- **Cihaz bilgisi**: User-agent, OS sürümü, mobile/desktop ayrımı.
+- **Kullanım örüntüleri**: Hangi saatlerde kullandığınız, oturum süresi, kaç sohbet açtığınız.
+- **Ödeme bilgisi**: Plus/Pro abonesi iseniz, fatura adresi ve kart altyapısından elde edilen sinyaller.
+
+VPN bu listenin yalnızca ilkini (IP adresi) gizler. Diğerlerine etkisi yok. Tam gizlilik için tarayıcı seviyesinde önlemler (Brave/Firefox, anti-fingerprint eklentiler, ayrı profiller) gerekiyor.
+
+## Opt-out Ayarları: Sağlayıcı Bazında
+
+Sağlayıcı varsayılanlarını kontrol edip kapatmak ilk savunma hattı.
+
+**ChatGPT**: Settings → Data Controls → "Improve the model for everyone" → Off. Ayrıca "Chat history & training" tamamen kapatılabilir, ancak sohbet geçmişi de kaybedilir.
+
+**Claude**: Settings → Privacy → "Help improve Claude" → Off (yeni hesaplarda zaten kapalı geliyor).
+
+**Gemini**: myactivity.google.com → Gemini Apps Activity → Pause. 18 ay otomatik silme seçilebilir.
+
+**Copilot (Microsoft 365)**: Admin Center → Microsoft 365 Copilot → Veri politikası tenant düzeyinde yönetilir.
+
+**Perplexity**: Settings → Account → AI Data Retention → Off.
+
+[VPN gizlilik ve güvenlik yazımız](/blog/vpn-gizlilik-ve-guvenlik) gizliliğin genel resminde VPN'in yerini açıklıyor.
+
+## Hassas Konularda AI: Pratik Öneriler
+
+Tıbbi soru, hukuki danışmanlık, iş stratejisi gibi hassas konularda AI kullanırken katmanlı bir yaklaşım benimsenmeli:
+
+1. **VPN açık tut**: IP ve lokasyon meta verisini gizler. AI sağlayıcı sizin bölgenizi bilemez.
+2. **Geçici / Incognito sohbet**: ChatGPT'nin "Temporary chat" özelliği veya tarayıcı incognito'su geçmişe yazmaz.
+3. **Hesap ayrımı**: Hassas konular için ayrı bir hesap kullanın (farklı email, hatta farklı tarayıcı).
+4. **Anonim AI**: Bazı sağlayıcılar (Duck.ai, Brave Leo) hesap olmadan AI sunuyor. Yanıt kalitesi büyük modellerden düşük olabilir ama gizlilik daha güçlü.
+5. **Yerel modeller**: Ollama, LM Studio ile Llama veya Mistral lokalde çalıştırılabilir. Sohbet hiç internete çıkmaz.
+
+[ChatGPT Türkiye erişim rehberimiz](/blog/chatgpt-turkiye-erisim-vpn) erişim açısından, [AI phishing ve deepfake yazımız](/blog/ai-phishing-deepfake-vpn-koruma) güvenlik açısından tamamlayıcı bilgi sağlıyor.
+
+## DNS Leak ve WebRTC: VPN'in Görünmez Açıkları
+
+VPN açık olsa bile bazı sızıntılar IP'nizi açığa çıkarabilir:
+
+- **DNS leak**: Tarayıcı DNS sorgularını VPN tüneli yerine ISP DNS sunucusuna gönderiyorsa, lokasyonunuz açığa çıkıyor. dnsleaktest.com ile test edin. Detay için [DNS leak test rehberimiz](/blog/dns-leak-test-vpn) yakında yayında.
+- **WebRTC leak**: Tarayıcılar gerçek IP'nizi WebRTC üzerinden sızdırabilir. uBlock Origin veya tarayıcı ayarından WebRTC'yi devre dışı bırakın.
+- **IPv6 leak**: VPN sadece IPv4'ü tünelliyorsa IPv6 trafiği açıkta gidebilir. VPN sağlayıcınızın IPv6 desteğini kontrol edin.
+
+Kaliteli VPN sağlayıcılar bu sızıntıları varsayılan olarak engeller. [VPN seçerken dikkat edilecek yazımız](/blog/vpn-secerken-dikkat-edilmesi-gerekenler) kontrol listesi sunuyor.
+
+## Şirket / Ekip Kullanımı
+
+Şirket ortamında AI araçları farklı bir gizlilik denkleminde:
+
+- **ChatGPT Team / Enterprise**: Veriler eğitime gitmez, retention süresi yapılandırılabilir.
+- **Claude for Work**: Anthropic'in iş paketi, benzer veri-eğitim ayrımı.
+- **Microsoft 365 Copilot**: Tenant izolasyonu, Microsoft Purview entegrasyonu ile DLP.
+- **Self-hosted çözümler**: vLLM, Ollama gibi araçlarla şirket altyapısında AI çalıştırma.
+
+VPN kurumsal kullanımda da rol oynuyor — özellikle uzaktan çalışan ekip üyeleri için. Bu konuda [iş ve uzaktan çalışma için VPN yazımız](/blog/is-ve-uzaktan-calisma-icin-vpn) detaylı.
+
+## Sıkça Sorulan Sorular
+
+**ChatGPT sohbetlerim model eğitiminde kullanılıyor mu?**
+Varsayılan ayarda evet, eğer "Improve the model for everyone" açık ise. Settings → Data Controls'tan kapatabilirsiniz. Team/Enterprise planlarında varsayılan olarak kapalı.
+
+**VPN AI gizliliğimi tam koruyor mu?**
+Hayır, VPN sadece IP ve lokasyon katmanını gizler. Tarayıcı parmak izi, sohbet içeriği, hesap kimliği gibi diğer katmanlara etkisi yoktur. Tam koruma için katmanlı yaklaşım gerekir.
+
+**Yerel AI modelleri pratik mi?**
+Llama 3, Mistral, Qwen gibi modeller 8-32 GB RAM'li bilgisayarlarda çalışıyor. Yanıt kalitesi GPT-4 / Claude düzeyinde değil ama hassas konular için tartışılabilir bir kalite sunuyor. M-serisi Mac veya RTX GPU ideal.
+
+**AI sohbet geçmişimi tamamen silebilir miyim?**
+Çoğu sağlayıcıda evet — hesap ayarlarından geçmiş silinebilir. Ancak sağlayıcının yedeklerinden tam silinmesi için resmi GDPR/KVKK silme talebi gerekebilir.
+
+## Sonuç
+
+AI araçları üretkenliği artırıyor, ancak gizlilik denklemini değiştiriyor. ChatGPT, Claude, Gemini gibi servislerin veri politikaları sürekli evriliyor — kullanıcının düzenli kontrol etmesi ve katmanlı koruma alması gerekiyor. VPN bu katmanlardan biri: IP/lokasyon meta verisini gizler ve coğrafi izlemeyi kırar.
+
+Gizlilik odaklı bir VPN seçimi için [en iyi gizlilik VPN listemizi](/en-iyi/gizlilik) inceleyin — bağımsız denetim, no-logs sertifikası ve şeffaflık raporu olan sağlayıcılar burada sıralı.

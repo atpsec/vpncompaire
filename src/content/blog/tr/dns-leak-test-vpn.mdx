@@ -1,0 +1,145 @@
+---
+slug: "dns-leak-test-vpn"
+title: "DNS Leak Nedir? VPN'de DNS Sızıntısı Testi 2026"
+description: "DNS sızıntısı VPN aktifken gerçek DNS sunucularınızı ifşa eder. ipleak.net ve dnsleaktest.com nasıl kullanılır, IPv6 leak, WebRTC, çözüm yolları."
+publishedAt: "2026-05-20"
+updatedAt: "2026-05-20"
+author: "vpncompaire Editör Ekibi"
+category: "gizlilik-guvenlik"
+tags: ["dns-leak", "ipv6-leak", "webrtc", "test", "gizlilik"]
+readingTime: 11
+coverImage: "privacy-security"
+unsplashKeyword: "dns network leak test"
+---
+
+VPN'iniz aktif, IP adresiniz başka bir ülkede görünüyor, her şey yolunda gibi. Ama tarayıcınızda yazdığınız her domain — `gmail.com`, `netflix.com`, `bankaniz.com.tr` — hâlâ ISS'inizin DNS sunucularına gidiyor olabilir. Bu durum DNS leak olarak adlandırılır ve VPN korumasının en yaygın delik nokta'larından biridir. IP'niz gizli olsa bile hangi sitelere gittiğiniz hâlâ kayıt altına alınıyorsa, gizlilik aslında sahtedir.
+
+## DNS Nedir, Neden Önemli?
+
+DNS (Domain Name System), internetin telefon rehberi gibi çalışır. Tarayıcınıza `youtube.com` yazdığınızda bilgisayarınız önce bu domaini bir IP adresine çevirmek zorundadır. Bu çevirme işini DNS sunucuları yapar. Varsayılan olarak işletim sisteminiz, ISS'inizin (Türk Telekom, Turkcell Superonline, Vodafone vb.) DNS sunucularını kullanır.
+
+Sorun şu: ziyaret ettiğiniz her domain bu DNS sunucularında kayıt altına alınır. ISS'iniz `pornhub.com`, `wikipedia.org`, `protonmail.com` gibi domainlere ne sıklıkla bağlandığınızı tam olarak bilir. Türkiye'de 5651 sayılı kanun gereği bu kayıtlar 2 yıl saklanır.
+
+VPN bağlantısı ideal olarak DNS sorgularını da şifreli tünelin içinden geçirir ve VPN sağlayıcısının kendi DNS sunucularını (veya Cloudflare, Quad9 gibi gizlilik odaklı alternatifleri) kullanır. Ama bu her zaman sorunsuz çalışmaz.
+
+## DNS Leak Nasıl Oluşur?
+
+DNS sızıntısının birkaç tipik nedeni vardır:
+
+**Yanlış yapılandırma**: VPN istemcisi tüneli kurar ama işletim sisteminin DNS yönlendirmesini değiştiremez. Trafik VPN'den gider, DNS sorguları ISS'e.
+
+**IPv6 leak**: Çoğu VPN sadece IPv4 trafiğini şifreler. IPv6 etkin bir bağlantıda IPv6 paketleri tünelin dışına kaçar.
+
+**Transparent DNS proxying**: Bazı ISS'ler DNS sorgularını fark edip kendi sunucularına yönlendirir. VPN içinden bile çıksa ele geçirilir.
+
+**WebRTC leak**: Tarayıcıların gerçek zamanlı iletişim API'si, VPN'i bypass ederek yerel ve genel IP'nizi sızdırabilir.
+
+**Bağlantı kopması**: VPN tüneli düştüğünde DNS sorguları sistem DNS'ine geri döner. Bu yüzden [kill switch hayati önemde](/blog/kill-switch-nedir-vpn).
+
+**DHCP zorlaması**: Bazı router'lar tüm DNS trafiğini kendi sunucularına yönlendirir, VPN istemcisi bunu override edemezse sızıntı olur.
+
+## DNS Leak Nasıl Test Edilir?
+
+Sızıntı testi için en güvenilir araçlar şunlardır:
+
+### ipleak.net
+
+En kapsamlı teste sahip site. Tek sayfada size şunları gösterir:
+- Genel IPv4 adresi
+- IPv6 adresi (varsa)
+- Kullanılan DNS sunucularının listesi ve konumları
+- WebRTC üzerinden tespit edilen IP
+- Torrent IP tespiti
+
+VPN bağlıyken ipleak.net'i açın. DNS sunucuları VPN sağlayıcınıza ait IP'ler veya bilinen gizlilik DNS'leri (Cloudflare 1.1.1.1, Quad9 9.9.9.9) olmalıdır. Eğer Türk Telekom veya başka bir Türkiye merkezli ISS DNS'i görüyorsanız leak var demektir.
+
+### dnsleaktest.com
+
+İki test modu sunar: standart test (5 sorgu) ve genişletilmiş test (yaklaşık 30 sorgu). Genişletilmiş test daha güvenilirdir çünkü bazı leak'ler sadece belirli domainlerde tetiklenir.
+
+VPN bağlıyken Extended Test'i çalıştırın. Çıkan tüm sunucular VPN sağlayıcınızın altyapısında olmalıdır. Birden fazla farklı ISP'nin DNS'i görünüyorsa kısmi leak var demektir.
+
+### browserleaks.com
+
+Tarayıcı bazlı detaylı testler sunar. Özellikle WebRTC, fingerprinting ve canvas leak gibi tarayıcı seviyesindeki riskleri ortaya çıkarır. VPN tek başına bu vektörleri kapatamaz.
+
+## IPv6 Leak: En Sık Atlanan Sorun
+
+IPv6, IPv4'ün halefi olarak tasarlanmış adresleme sistemidir ve giderek yaygınlaşıyor. Türkiye'deki büyük ISS'lerin önemli bir kısmı artık IPv6 destekliyor.
+
+Sorun şu: birçok VPN sağlayıcısı IPv6'yı desteklemez. VPN bağlandığında sadece IPv4 trafiği tünelden geçer. IPv6 paketleri normal ağ adaptöründen, gerçek IPv6 adresinizle dışarı çıkar.
+
+Sonuç: IP kontrolünü IPv4 üzerinden yapan testler "her şey yolunda" der, ama IPv6 destekleyen siteler gerçek konumunuzu görür.
+
+**Çözüm seçenekleri**:
+
+1. **VPN sağlayıcının IPv6 desteğini açın** — ProtonVPN, Mullvad, AirVPN gibi sağlayıcılar destekler
+2. **IPv6'yı tamamen kapatın** — işletim sistemi ağ ayarlarından devre dışı bırakın
+3. **Sağlayıcının "IPv6 leak protection" özelliğini etkinleştirin** — modern istemcilerde mevcut
+
+ipleak.net üzerinde "Your IPv6 address" alanı boş veya VPN sağlayıcısına ait olmalıdır.
+
+## WebRTC Leak: Tarayıcının İhanetı
+
+WebRTC (Web Real-Time Communication), tarayıcıların görüntülü görüşme ve dosya paylaşımı için kullandığı bir API'dir. Sorun: WebRTC, P2P bağlantı kurabilmek için cihazınızın hem yerel hem genel IP'sini öğrenmek zorundadır. Bu işlem işletim sisteminin ağ yığınını VPN'i bypass ederek doğrudan sorgular.
+
+Sonuç: VPN aktif olsa bile bir web sayfası WebRTC API'siyle gerçek IP'nizi öğrenebilir. Reklam ağları yıllardır bu yöntemi takip için kullanıyor.
+
+**Çözüm**:
+
+- **Brave**: Varsayılan olarak WebRTC'yi VPN üzerinden çalışmaya zorlar
+- **Firefox**: `about:config` üzerinden `media.peerconnection.enabled = false`
+- **Chrome/Edge**: WebRTC Network Limiter eklentisi
+- **uBlock Origin**: Settings > "Prevent WebRTC from leaking local IP addresses" işaretli
+
+browserleaks.com/webrtc test sonucunda yerel IP boş veya VPN'e ait olmalıdır.
+
+## DNS-over-HTTPS ve DNS-over-TLS
+
+Klasik DNS sorguları açık metin (port 53) üzerinden gider. Yani VPN olmasa bile DNS trafiği ağdaki herkes tarafından görülebilir. DoH (DNS-over-HTTPS) ve DoT (DNS-over-TLS) bu sorguları şifreler.
+
+Modern tarayıcıların çoğu (Firefox, Chrome, Edge) DoH'yi varsayılan olarak destekler. Cloudflare 1.1.1.1, Quad9 9.9.9.9 ve NextDNS popüler seçenekler arasındadır.
+
+Ama dikkat: DoH VPN'in yerini tutmaz. DoH sadece DNS sorgularını şifreler — geri kalan tüm trafiğiniz hâlâ ISS'in görüş alanındadır. VPN ile birlikte kullanıldığında ekstra katman sağlar, tek başına yetersizdir.
+
+VPN sağlayıcınızın DNS sunucularının zaten DoH/DoT desteklediğinden emin olun. [VPN seçerken bu kriterler önemli](/blog/vpn-secerken-dikkat-edilmesi-gerekenler).
+
+## DNS Leak Çözüm Listesi
+
+Sızıntı tespit ettiyseniz adım adım çözüm:
+
+1. **VPN istemcisini güncelleyin** — eski sürümler bazı leak korumalarına sahip olmayabilir
+2. **Farklı protokol deneyin** — WireGuard genelde OpenVPN'den daha temiz çalışır
+3. **VPN'in DNS leak protection özelliğini açın** — istemci ayarlarında "Use VPN DNS only" benzeri seçenek
+4. **IPv6'yı devre dışı bırakın** — sağlayıcı IPv6 desteklemiyorsa
+5. **WebRTC'yi tarayıcıdan kapatın** — yukarıdaki adımlarla
+6. **Sistem DNS'ini manuel olarak Cloudflare/Quad9'a ayarlayın** — ek katman
+7. **Router seviyesinde VPN kurun** — tüm cihazları kapsar
+8. **Farklı VPN sağlayıcısı deneyin** — sürekli leak veriyorsa altyapısı güvenilir değildir
+
+[WireGuard ve OpenVPN karşılaştırmamız](/blog/wireguard-vs-openvpn-karsilastirma) protokol tercihinde DNS davranışı farklarını da içeriyor.
+
+## Sıkça Sorulan Sorular
+
+**Test bağlıyken yapılırsa nasıl emin olabilirim VPN'den geçtiği?**
+Önce VPN olmadan ipleak.net'i açın ve DNS sunucularının ISS'inize ait olduğunu doğrulayın. Sonra VPN'i bağlayın ve sayfayı yenileyin. DNS sunucuları değişmediyse leak var.
+
+**DNS leak ne kadar tehlikeli?**
+IP'niz gizli olsa bile hangi sitelere bağlandığınız bilgisi açıktır. ISS'iniz tüm tarama geçmişinizi loglayabilir. Hassas konularda (sağlık, finans, politik içerik) bu ciddi bir gizlilik ihlalidir.
+
+**Tüm VPN'ler IPv6 sızıntısını engeller mi?**
+Hayır. Mullvad, ProtonVPN, AirVPN tam IPv6 desteği sağlar. NordVPN, ExpressVPN gibi büyük sağlayıcılar genelde IPv6'yı tamamen bloke eder (leak olmaz ama IPv6 da çalışmaz).
+
+**Mobil cihazlarda DNS leak testi nasıl yapılır?**
+Aynı sitelere telefonun tarayıcısından girin. iOS ve Android'de WebRTC desteklendiği için sonuçlar masaüstüyle paralel olur.
+
+**Quad9 ve Cloudflare DNS arasında fark var mı?**
+Quad9 kötü amaçlı domainleri filtreler ve İsviçre merkezlidir. Cloudflare daha hızlıdır ama log politikası tartışmalıdır. ProtonVPN gibi sağlayıcılar kendi DNS'ini kullanmanızı önerir.
+
+## Sonuç
+
+DNS leak, VPN dünyasının en sinsi sorunudur çünkü görsel olarak hiçbir alarm vermez — bağlantı çalışır görünür, sadece arka planda gizliliğiniz aşınır. Düzenli olarak ipleak.net ve dnsleaktest.com üzerinden test yapmak, VPN gizliliğinizin temelidir.
+
+IPv4, IPv6, WebRTC ve DNS sorgularının dördünü birden kapsayan koruma için kullandığınız VPN'in tüm leak korumalarını desteklediğinden, IPv6'nın ya tünelden geçtiğinden ya da kapalı olduğundan ve tarayıcınızın WebRTC ayarının sertleştirildiğinden emin olun. Sızıntısız bir kurulum için [VPN karşılaştırma sayfamızdaki](/karsilastir) DNS leak protection puanları kararınıza yardımcı olabilir.
+
+Gizlilik sadece IP gizlemek değildir — hangi domain'leri çözdüğünüz de en az IP kadar değerli bir veridir.

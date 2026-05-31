@@ -1,5 +1,6 @@
 import { siteConfig } from "@/lib/site";
 import { products } from "@/data/products";
+import { getBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
@@ -42,7 +43,7 @@ const toolPaths = [
   { path: "/guvenlik-araclari", priority: 0.75, changefreq: "monthly" },
 ];
 
-export function GET() {
+export async function GET() {
   const today = new Date().toISOString().split("T")[0];
 
   type Entry = { path: string; priority: number; changefreq: string };
@@ -54,6 +55,7 @@ export function GET() {
     { path: "/karsilastir", priority: 0.85, changefreq: "weekly" },
     { path: "/cihazlar", priority: 0.8, changefreq: "weekly" },
     { path: "/rehber", priority: 0.8, changefreq: "weekly" },
+    { path: "/blog", priority: 0.85, changefreq: "daily" },
     { path: "/metodoloji", priority: 0.8, changefreq: "monthly" },
     { path: "/hakkimizda", priority: 0.5, changefreq: "monthly" },
     { path: "/iletisim", priority: 0.4, changefreq: "yearly" },
@@ -112,31 +114,83 @@ export function GET() {
     <xhtml:link rel="alternate" hreflang="x-default" href="${trUrl}"/>`;
   }
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${all
-  .flatMap((u) => {
-    const trUrl = `${siteConfig.url}${u.path}`;
-    const enUrl = `${siteConfig.url}/en${u.path === "/" ? "" : u.path}`;
-    return [
-      `  <url>
+  // Blog posts: TR/EN slugs differ, paired via slug-counterpart lookup.
+  const [trPosts, enPosts] = await Promise.all([
+    getBlogPosts("tr"),
+    getBlogPosts("en"),
+  ]);
+
+  const sharedPathsXml = all
+    .flatMap((u) => {
+      const trUrl = `${siteConfig.url}${u.path}`;
+      const enUrl = `${siteConfig.url}/en${u.path === "/" ? "" : u.path}`;
+      return [
+        `  <url>
     <loc>${trUrl}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority.toFixed(2)}</priority>
 ${altLinks(u.path)}
   </url>`,
-      `  <url>
+        `  <url>
     <loc>${enUrl}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${(u.priority * 0.9).toFixed(2)}</priority>
 ${altLinks(u.path)}
   </url>`,
-    ];
-  })
-  .join("\n")}
+      ];
+    })
+    .join("\n");
+
+  function blogAltLinks(trSlug: string | null, enSlug: string | null): string {
+    const lines: string[] = [];
+    if (trSlug) {
+      lines.push(`    <xhtml:link rel="alternate" hreflang="tr" href="${siteConfig.url}/blog/${trSlug}"/>`);
+      lines.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${siteConfig.url}/blog/${trSlug}"/>`);
+    }
+    if (enSlug) {
+      lines.push(`    <xhtml:link rel="alternate" hreflang="en" href="${siteConfig.url}/en/blog/${enSlug}"/>`);
+    }
+    return lines.join("\n");
+  }
+
+  const blogXml = [
+    ...trPosts.map((p) => {
+      const counterpart = enPosts.find((e) =>
+        e.title.toLowerCase().replace(/\s+/g, "") ===
+        p.title.toLowerCase().replace(/\s+/g, "")
+      );
+      const enSlug = counterpart?.slug ?? null;
+      return `  <url>
+    <loc>${siteConfig.url}/blog/${p.slug}</loc>
+    <lastmod>${p.updatedAt}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+${blogAltLinks(p.slug, enSlug)}
+  </url>`;
+    }),
+    ...enPosts.map((p) => {
+      const counterpart = trPosts.find((t) =>
+        t.title.toLowerCase().replace(/\s+/g, "") ===
+        p.title.toLowerCase().replace(/\s+/g, "")
+      );
+      const trSlug = counterpart?.slug ?? null;
+      return `  <url>
+    <loc>${siteConfig.url}/en/blog/${p.slug}</loc>
+    <lastmod>${p.updatedAt}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+${blogAltLinks(trSlug, p.slug)}
+  </url>`;
+    }),
+  ].join("\n");
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sharedPathsXml}
+${blogXml}
 </urlset>`;
 
   return new Response(xml, {
