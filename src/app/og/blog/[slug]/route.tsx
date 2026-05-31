@@ -14,8 +14,12 @@ export async function generateStaticParams() {
     getBlogPosts("en"),
   ]);
   const slugs = new Set<string>();
-  trPosts.forEach((p) => slugs.add(p.slug));
-  enPosts.forEach((p) => slugs.add(p.slug));
+  trPosts.forEach((p) => {
+    if (p.slug) slugs.add(p.slug);
+  });
+  enPosts.forEach((p) => {
+    if (p.slug) slugs.add(p.slug);
+  });
   return Array.from(slugs).map((slug) => ({ slug }));
 }
 

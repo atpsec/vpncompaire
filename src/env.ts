@@ -27,6 +27,13 @@ const envSchema = z.object({
     .optional()
     .or(z.literal("")),
 
+  // Plausible API key for server-side stats (view counter)
+  PLAUSIBLE_API_KEY: z
+    .string()
+    .min(1)
+    .optional()
+    .or(z.literal("")),
+
   // Affiliate tracking URLs — server-side only (not NEXT_PUBLIC_*).
   // Each one holds the FULL personal tracking URL provided by the
   // affiliate dashboard (e.g. https://go.nordvpn.net/aff_c?offer_id=...&aff_id=YOURID).
@@ -52,6 +59,7 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_SITE_BRAND: process.env.NEXT_PUBLIC_SITE_BRAND,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_PLAUSIBLE_DOMAIN: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN,
+  PLAUSIBLE_API_KEY: process.env.PLAUSIBLE_API_KEY,
   AFFILIATE_NORDVPN_URL: process.env.AFFILIATE_NORDVPN_URL,
   AFFILIATE_SURFSHARK_URL: process.env.AFFILIATE_SURFSHARK_URL,
   AFFILIATE_EXPRESSVPN_URL: process.env.AFFILIATE_EXPRESSVPN_URL,

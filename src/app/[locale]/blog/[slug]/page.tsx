@@ -6,6 +6,7 @@ import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogContent } from "@/components/blog/blog-content";
 import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
+import { ViewCounter } from "@/components/blog/view-counter";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -115,6 +116,10 @@ export default async function BlogPostPage({ params }: Props) {
 
       <Container size="md">
         <BlogHeader post={frontmatter} />
+
+        <div className="mt-4 mb-8">
+          <ViewCounter slug={frontmatter.slug} locale={locale as "tr" | "en"} />
+        </div>
 
         <UnsplashImage
           coverImage={frontmatter.coverImage}

@@ -41,6 +41,36 @@ const PHOTOGRAPHERS = {
   joshuaSortino: { name: "Joshua Sortino", url: "https://unsplash.com/@sortino" },
   clintPatterson: { name: "Clint Patterson", url: "https://unsplash.com/@cbpsc1" },
   privecstasy: { name: "Privecstasy", url: "https://unsplash.com/@privecstasy" },
+  growtika: { name: "Growtika", url: "https://unsplash.com/@growtika" },
+  matheusBertelli: { name: "Matheus Bertelli", url: "https://unsplash.com/@bertellifotografia" },
+  lingTang: { name: "Ling Tang", url: "https://unsplash.com/@linglivestolaugh" },
+  possessedPhotography: { name: "Possessed Photography", url: "https://unsplash.com/@possessedphotography" },
+  christinHumeAlt: { name: "Christin Hume", url: "https://unsplash.com/@christinhumephoto" },
+  steveJohnson: { name: "Steve Johnson", url: "https://unsplash.com/@steve_j" },
+  sorasak: { name: "Sorasak", url: "https://unsplash.com/@sorasak" },
+  thibaultPenin: { name: "Thibault Penin", url: "https://unsplash.com/@thibaultpenin" },
+  fauzanSaari: { name: "Fauzan Saari", url: "https://unsplash.com/@fznsr_" },
+  aronVandePol: { name: "Aron Van de Pol", url: "https://unsplash.com/@aronvandepol" },
+  alexanderShatov: { name: "Alexander Shatov", url: "https://unsplash.com/@alexbemore" },
+  christianWiediger: { name: "Christian Wiediger", url: "https://unsplash.com/@christianw" },
+  florianOlivo: { name: "Florian Olivo", url: "https://unsplash.com/@florianolv" },
+  kerdeSeverin: { name: "Kerde Severin", url: "https://unsplash.com/@kerde_severin" },
+  nikitaKachanovsky: { name: "Nikita Kachanovsky", url: "https://unsplash.com/@nkachanovskyyy" },
+  towfiquBarbhuiya: { name: "Towfiqu barbhuiya", url: "https://unsplash.com/@towfiqu999999" },
+  manuelMoreno: { name: "Manuel Moreno", url: "https://unsplash.com/@manufotos" },
+  greenChameleon: { name: "Green Chameleon", url: "https://unsplash.com/@craftedbygc" },
+  jeshoots: { name: "JESHOOTS.COM", url: "https://unsplash.com/@jeshoots" },
+  mishaFeshchak: { name: "Misha Feshchak", url: "https://unsplash.com/@miafeshchak" },
+  gabrielHeinzer: { name: "Gabriel Heinzer", url: "https://unsplash.com/@6heinz3r" },
+  bagusHernawan: { name: "Bagus Hernawan", url: "https://unsplash.com/@bhaguz" },
+  charlesDeluvio: { name: "Charles Deluvio", url: "https://unsplash.com/@charlesdeluvio" },
+  nationalCancerInstitute: { name: "National Cancer Institute", url: "https://unsplash.com/@nci" },
+  chrisLiverani: { name: "Chris Liverani", url: "https://unsplash.com/@chrisliverani" },
+  romanKraft: { name: "Roman Kraft", url: "https://unsplash.com/@romankraft" },
+  philippKatzenberger: { name: "Philipp Katzenberger", url: "https://unsplash.com/@fantasyflip" },
+  liamBriese: { name: "Liam Briese", url: "https://unsplash.com/@liam_1" },
+  rossFindon: { name: "Ross Findon", url: "https://unsplash.com/@rossf" },
+  sebastianPichler: { name: "Sebastian Pichler", url: "https://unsplash.com/@pichler_sebastian" },
 } as const;
 
 function img(photoId: string, alt: string, photographer: { name: string; url: string }, w = 1200, h = 630): UnsplashImage {
@@ -229,6 +259,258 @@ const imageDatabase: Record<string, BlogImageSet> = {
     hero: img("1454165804606-c3d57bc86b40", "Eğitim ve uzaktan öğrenme", PHOTOGRAPHERS.scottGraham),
     mid: img("1521295121783-8a321d551ad2", "Öğretmen ve laptop", PHOTOGRAPHERS.christinHume, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Online materyal erişimi", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+
+  // Yeni unique key'ler (her blog yazısı için)
+  "chatgpt-turkey-access": {
+    hero: img("npxXWgQ33ZQ", "ChatGPT AI interface on laptop", PHOTOGRAPHERS.matheusBertelli),
+    mid: img("1677442136019-21780ecad995", "AI sohbet asistanı", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global erişim", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "ai-phishing-deepfake": {
+    hero: img("FnA5pAzqhMM", "AI security and phishing protection", PHOTOGRAPHERS.growtika),
+    mid: img("1550751827-4bd374c3f58b", "Siber güvenlik", PHOTOGRAPHERS.adiGoldstein, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Veri koruma", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "china-russia-ai-access": {
+    hero: img("WkfDrhxDMC8", "China Russia technology access", PHOTOGRAPHERS.lingTang),
+    mid: img("1611162617474-5b21e879e113", "Global network", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Veri akışı", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "claude-gemini-access": {
+    hero: img("iar-afB0QQw", "AI assistant comparison", PHOTOGRAPHERS.possessedPhotography),
+    mid: img("1677442136019-21780ecad995", "AI interface", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1518770660439-4636190af475", "Teknoloji", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "ai-tools-privacy": {
+    hero: img("08bOYnH_r_E", "AI privacy data protection", PHOTOGRAPHERS.flyd),
+    mid: img("1555949963-ff9fe0c870eb", "Gizlilik kodu", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "ai-content-creation": {
+    hero: img("5QgIuuBxKwM", "Content creation writing", PHOTOGRAPHERS.christinHumeAlt),
+    mid: img("1521295121783-8a321d551ad2", "Laptop çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1563013544-824ae1b704d3", "Dijital içerik", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "midjourney-stable-diffusion": {
+    hero: img("rymh7EZPqRs", "AI generated art colorful", PHOTOGRAPHERS.steveJohnson),
+    mid: img("1684369175809-1b73fc4cb98f", "AI görsel", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1563013544-824ae1b704d3", "Dijital sanat", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "anime-crunchyroll": {
+    hero: img("wSTCaQpiLtc", "Tokyo Japan anime culture", PHOTOGRAPHERS.sorasak),
+    mid: img("1593359677879-a4bb92f829d1", "Streaming platform", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global içerik", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "netflix-regional": {
+    hero: img("tChz4ZXy-P0", "Netflix streaming on TV", PHOTOGRAPHERS.thibaultPenin),
+    mid: img("1593359677879-a4bb92f829d1", "Streaming apps", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Bölgesel kütüphane", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "live-sports-streaming": {
+    hero: img("p_kICQCOM4s", "Sports stadium live event", PHOTOGRAPHERS.fauzanSaari),
+    mid: img("1522869635100-9f4c5e86aa37", "Canlı yayın", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global spor", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "disney-bbc": {
+    hero: img("eLUBGqKGdE4", "London UK Big Ben", PHOTOGRAPHERS.aronVandePol),
+    mid: img("1522869635100-9f4c5e86aa37", "Streaming TV", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1450101499163-c8848c66ca85", "UK manzara", PHOTOGRAPHERS.philippeOursel, 800, 450),
+  },
+  "spotify-regional": {
+    hero: img("tXz6g8JYYoI", "Spotify music streaming", PHOTOGRAPHERS.alexanderShatov),
+    mid: img("1554224155-6726b3ff858f", "Abonelik", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global müzik", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "youtube-premium": {
+    hero: img("2x3GDjcElVg", "YouTube app smartphone", PHOTOGRAPHERS.christianWiediger),
+    mid: img("1554224155-6726b3ff858f", "Fiyat tasarruf", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global erişim", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "steam-regional": {
+    hero: img("sYVY_ZKwaxU", "Gaming PC setup RGB", PHOTOGRAPHERS.florianOlivo),
+    mid: img("1554224155-6726b3ff858f", "Oyun fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1518770660439-4636190af475", "Gaming tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "playstation-xbox-store": {
+    hero: img("0aX51h4WvAk", "PlayStation controller", PHOTOGRAPHERS.kerdeSeverin),
+    mid: img("1554224155-6726b3ff858f", "Store fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1518770660439-4636190af475", "Console tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "xbox-playstation-setup": {
+    hero: img("w2JtIQQXoRU", "Xbox console controller", PHOTOGRAPHERS.nikitaKachanovsky),
+    mid: img("1518770660439-4636190af475", "Gaming hardware", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Online gaming", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "chatgpt-plus-pricing": {
+    hero: img("ZV_64LdGoao", "Subscription pricing calculator", PHOTOGRAPHERS.towfiquBarbhuiya),
+    mid: img("1554224155-6726b3ff858f", "Para tasarruf", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Fiyat karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "software-subscription": {
+    hero: img("Q1p7bh3SHj8", "Software technology digital", PHOTOGRAPHERS.nasa),
+    mid: img("1554224155-6726b3ff858f", "Abonelik fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1518770660439-4636190af475", "Tech software", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "hotel-booking": {
+    hero: img("y2azHvupCVo", "Hotel travel accommodation", PHOTOGRAPHERS.manuelMoreno),
+    mid: img("1554224155-6726b3ff858f", "Rezervasyon fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1488646953014-85cb44e25828", "Seyahat", PHOTOGRAPHERS.annieSpratt, 800, 450),
+  },
+  "flight-tickets": {
+    hero: img("WNoLnJo7tS8", "Airplane travel flight", PHOTOGRAPHERS.rossParmly),
+    mid: img("1554224155-6726b3ff858f", "Bilet fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1436491865332-7a61a109cc05", "Havalimanı", PHOTOGRAPHERS.rossParmly, 800, 450),
+  },
+  "online-courses": {
+    hero: img("505eectW54k", "Online learning education", PHOTOGRAPHERS.greenChameleon),
+    mid: img("1521295121783-8a321d551ad2", "Laptop öğrenme", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1454165804606-c3d57bc86b40", "Eğitim", PHOTOGRAPHERS.scottGraham, 800, 450),
+  },
+  "travel-vpn-security": {
+    hero: img("2gYsZUmockw", "Airport travel wifi", PHOTOGRAPHERS.jeshoots),
+    mid: img("1436491865332-7a61a109cc05", "Havalimanı", PHOTOGRAPHERS.rossParmly, 800, 450),
+    end: img("1521295121783-8a321d551ad2", "Laptop güvenlik", PHOTOGRAPHERS.christinHume, 800, 450),
+  },
+  "router-vpn-setup": {
+    hero: img("Wpnoqo2plFA", "WiFi router home network", PHOTOGRAPHERS.mishaFeshchak),
+    mid: img("1558494949-ef010cbdcc31", "Ağ kabloları", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1518770660439-4636190af475", "Network tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "linux-vpn-setup": {
+    hero: img("4Mw7nkQDByk", "Linux terminal command", PHOTOGRAPHERS.gabrielHeinzer),
+    mid: img("1555949963-ff9fe0c870eb", "Linux kod", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1551808525-51a94da548ce", "Sistem config", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "ios-vpn-shortcuts": {
+    hero: img("svFU0GJlGi8", "iPhone shortcuts automation", PHOTOGRAPHERS.bagusHernawan),
+    mid: img("1574944985070-8f3ebc6b79d2", "iPhone app", PHOTOGRAPHERS.privecstasy, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Mobil güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "macos-vpn-setup": {
+    hero: img("npxXWgQ33ZQ", "MacBook laptop workspace", PHOTOGRAPHERS.matheusBertelli),
+    mid: img("1517336714731-489689fd1ca8", "macOS desktop", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1521295121783-8a321d551ad2", "Mac çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
+  },
+  "apple-tv-vpn": {
+    hero: img("XJXWbfSo2f0", "Apple TV streaming", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1522869635100-9f4c5e86aa37", "TV apps", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1593359677879-a4bb92f829d1", "Streaming", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+  },
+  "remote-work-security": {
+    hero: img("QckxruozjRg", "Remote work home office", PHOTOGRAPHERS.charlesDeluvio),
+    mid: img("1587560699334-cc4ff634909a", "Home office", PHOTOGRAPHERS.mikeyHarris, 800, 450),
+    end: img("1553877522-43269d4ea984", "Video konferans", PHOTOGRAPHERS.chrisMontgomery, 800, 450),
+  },
+  "freelancer-vpn": {
+    hero: img("IgUR1iX0mqM", "Freelancer remote laptop", PHOTOGRAPHERS.christinHumeAlt),
+    mid: img("1521295121783-8a321d551ad2", "Laptop çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "educator-teacher-vpn": {
+    hero: img("NeTPASr-bmQ", "Education classroom teaching", PHOTOGRAPHERS.nationalCancerInstitute),
+    mid: img("1521295121783-8a321d551ad2", "Öğretmen laptop", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1454165804606-c3d57bc86b40", "Online eğitim", PHOTOGRAPHERS.scottGraham, 800, 450),
+  },
+  "investor-trader-vpn": {
+    hero: img("fiXLQXAhCfk", "Trading finance charts", PHOTOGRAPHERS.chrisLiverani),
+    mid: img("1554224155-6726b3ff858f", "Finans", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Finansal güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "journalist-activist-vpn": {
+    hero: img("OgvqXGL7XO4", "Journalism privacy", PHOTOGRAPHERS.romanKraft),
+    mid: img("1555949963-ff9fe0c870eb", "Veri koruma", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1589994965851-a8f479c573a9", "İfade özgürlüğü", PHOTOGRAPHERS.clintPatterson, 800, 450),
+  },
+  "dns-leak-test": {
+    hero: img("JKUTrJ4vK00", "DNS network security", PHOTOGRAPHERS.taylorVick),
+    mid: img("1558494949-ef010cbdcc31", "Network test", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Güvenlik test", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "kill-switch-explained": {
+    hero: img("FO7JIlwjOtU", "Network kill switch", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1526374965328-7f61d4dc18c5", "Güvenlik katmanı", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Koruma", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "vpn-privacy-security-basics": {
+    hero: img("FnA5pAzqhMM", "Cybersecurity privacy", PHOTOGRAPHERS.growtika),
+    mid: img("1555949963-ff9fe0c870eb", "Gizlilik", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "vpn-protocols-explained": {
+    hero: img("hpjSkU2UYSU", "Network encryption", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1544197150-b99a580bb7a8", "Ağ kabloları", PHOTOGRAPHERS.jordanHarrison, 800, 450),
+    end: img("1551808525-51a94da548ce", "Teknoloji", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "wireguard-openvpn": {
+    hero: img("iar-afB0QQw", "VPN protocol technology", PHOTOGRAPHERS.possessedPhotography),
+    mid: img("1518770660439-4636190af475", "Network tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1551808525-51a94da548ce", "Encryption", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "split-tunneling": {
+    hero: img("jG8nlwLRZTM", "Network split routing", PHOTOGRAPHERS.adiGoldstein),
+    mid: img("1544197150-b99a580bb7a8", "Network", PHOTOGRAPHERS.jordanHarrison, 800, 450),
+    end: img("1518770660439-4636190af475", "Tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "double-vpn-multihop": {
+    hero: img("FlPc9_VocJ4", "Double encryption chain", PHOTOGRAPHERS.philippKatzenberger),
+    mid: img("1526374965328-7f61d4dc18c5", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "ram-only-servers": {
+    hero: img("d1eaoAabeXs", "Server datacenter RAM", PHOTOGRAPHERS.liamBriese),
+    mid: img("1558494949-ef010cbdcc31", "Sunucu", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1518770660439-4636190af475", "Hardware", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "nordvpn-surfshark": {
+    hero: img("Wpnoqo2plFA", "VPN comparison", PHOTOGRAPHERS.mishaFeshchak),
+    mid: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
+    end: img("1454165804606-c3d57bc86b40", "Seçim", PHOTOGRAPHERS.scottGraham, 800, 450),
+  },
+  "expressvpn-protonvpn": {
+    hero: img("08bOYnH_r_E", "VPN privacy comparison", PHOTOGRAPHERS.flyd),
+    mid: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "choosing-vpn-guide": {
+    hero: img("5fNmWej4tAA", "Choice decision selection", PHOTOGRAPHERS.rossFindon),
+    mid: img("1551434678-e076c223a692", "Liste kontrol", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Seçim", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "free-vs-paid-vpn": {
+    hero: img("ZV_64LdGoao", "Money cost comparison", PHOTOGRAPHERS.towfiquBarbhuiya),
+    mid: img("1554224155-6726b3ff858f", "Para", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "vpn-subscription-period": {
+    hero: img("mcSDtbWXUZU", "Subscription pricing plan", PHOTOGRAPHERS.towfiquBarbhuiya),
+    mid: img("1554224155-6726b3ff858f", "Fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Plan seçimi", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "fastest-vpn-turkey": {
+    hero: img("JKUTrJ4vK00", "Speed test performance", PHOTOGRAPHERS.taylorVick),
+    mid: img("1451187580459-43490279c0fa", "Hız", PHOTOGRAPHERS.nasa, 800, 450),
+    end: img("1518770660439-4636190af475", "Teknoloji", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "vpn-speed-optimization": {
+    hero: img("hpjSkU2UYSU", "Speed internet fiber", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1451187580459-43490279c0fa", "Hızlı veri", PHOTOGRAPHERS.nasa, 800, 450),
+    end: img("1518770660439-4636190af475", "Performans", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "what-is-vpn": {
+    hero: img("FnA5pAzqhMM", "Digital privacy security", PHOTOGRAPHERS.growtika),
+    mid: img("1558494949-ef010cbdcc31", "Network", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1550751827-4bd374c3f58b", "Güvenlik", PHOTOGRAPHERS.adiGoldstein, 800, 450),
+  },
+  "is-vpn-legal": {
+    hero: img("s9CC2SKySJM", "Law legal justice", PHOTOGRAPHERS.sebastianPichler),
+    mid: img("1589829545856-d10d557cf95f", "Yasal belge", PHOTOGRAPHERS.scottWebb, 800, 450),
+    end: img("1589994965851-a8f479c573a9", "Adalet", PHOTOGRAPHERS.clintPatterson, 800, 450),
+  },
+  "vpn-streaming-access": {
+    hero: img("tChz4ZXy-P0", "Streaming entertainment", PHOTOGRAPHERS.thibaultPenin),
+    mid: img("1522869635100-9f4c5e86aa37", "TV streaming", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global içerik", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
 };
 

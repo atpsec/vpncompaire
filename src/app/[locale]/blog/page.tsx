@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { getBlogPosts } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/blog-card";
+import { BlogStats } from "@/components/blog/blog-stats";
 import type { Metadata } from "next";
 
 type Props = {
@@ -40,6 +41,10 @@ export default async function BlogPage({ params }: Props) {
           <p className="text-lg text-ink-muted leading-relaxed">
             {t("intro")}
           </p>
+
+          <div className="mt-6 flex justify-center">
+            <BlogStats locale={locale as "tr" | "en"} />
+          </div>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
