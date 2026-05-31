@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
 import { Check, X, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -12,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
-import { DealCountdown } from "@/components/marketing/deal-countdown";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -107,7 +105,6 @@ function ReviewView({
   children: React.ReactNode;
 }) {
   const t = useTranslations("review");
-  const locale = useLocale() as "tr" | "en";
 
   return (
     <>
@@ -150,10 +147,6 @@ function ReviewView({
           testEnvironment={product.testEnvironment}
           editorNotes={product.editorNotes}
         />
-
-        <div className="mt-8">
-          <DealCountdown variant="inline" locale={locale} />
-        </div>
 
         <Card className="mt-8 p-6">
           <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">

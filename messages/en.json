@@ -1156,17 +1156,5 @@
       "explainTitle": "How much speed loss with a VPN is normal?",
       "explainBody": "A VPN encrypts your traffic and routes it through a remote server. A 10-30% speed drop is typical. If you lose more than 50%, switch servers or try another protocol (WireGuard is usually fastest)."
     }
-  },
-  "deals": {
-    "countdown": {
-      "title": "Year-End VPN Deal",
-      "subtitle": "The biggest VPN discount window of the year",
-      "days": "Days",
-      "hours": "Hours",
-      "minutes": "Minutes",
-      "seconds": "Seconds",
-      "cta": "See Discounted VPNs",
-      "ended": "Deal ended"
-    }
   }
 }

@@ -1156,17 +1156,5 @@
       "explainTitle": "VPN ile hız düşüşü ne kadar normal?",
       "explainBody": "VPN, trafiğinizi şifreler ve uzak bir sunucuya yönlendirir. Genellikle %10-30 arası bir hız kaybı normaldir. %50'den fazla kayıp varsa sunucu değiştirin veya başka bir protokol deneyin (WireGuard genellikle en hızlısı)."
     }
-  },
-  "deals": {
-    "countdown": {
-      "title": "Yıl Sonu VPN İndirimi",
-      "subtitle": "VPN'lerde yılın en büyük indirim dönemi",
-      "days": "Gün",
-      "hours": "Saat",
-      "minutes": "Dakika",
-      "seconds": "Saniye",
-      "cta": "İndirimli VPN'leri Gör",
-      "ended": "İndirim sona erdi"
-    }
   }
 }
