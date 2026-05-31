@@ -11,12 +11,17 @@ export type PostView = {
 
 export async function getPageViews(slug: string): Promise<number> {
   const apiKey = process.env.PLAUSIBLE_API_KEY;
-  const siteId = process.env.NEXT_PUBLIC_SITE_URL?.replace(/^https?:\/\//, "") || "vpncompaire.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-  if (!apiKey) {
-    console.warn("PLAUSIBLE_API_KEY not set, returning 0 views");
+  // Strict validation: both must be set
+  if (!apiKey || !siteUrl) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Plausible configuration incomplete (API key or site URL missing)");
+    }
     return 0;
   }
+
+  const siteId = siteUrl.replace(/^https?:\/\//, "");
 
   try {
     const response = await fetch(
@@ -30,7 +35,9 @@ export async function getPageViews(slug: string): Promise<number> {
     );
 
     if (!response.ok) {
-      console.error(`Plausible API error: ${response.status}`);
+      if (process.env.NODE_ENV === "development") {
+        console.error(`Plausible API error: ${response.status}`);
+      }
       return 0;
     }
 
@@ -42,19 +49,26 @@ export async function getPageViews(slug: string): Promise<number> {
 
     return 0;
   } catch (error) {
-    console.error("Failed to fetch page views:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Failed to fetch page views:", error);
+    }
     return 0;
   }
 }
 
 export async function getTopPosts(limit = 10): Promise<PostView[]> {
   const apiKey = process.env.PLAUSIBLE_API_KEY;
-  const siteId = process.env.NEXT_PUBLIC_SITE_URL?.replace(/^https?:\/\//, "") || "vpncompaire.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-  if (!apiKey) {
-    console.warn("PLAUSIBLE_API_KEY not set, returning empty array");
+  // Strict validation: both must be set
+  if (!apiKey || !siteUrl) {
+    if (process.env.NODE_ENV === "development") {
+      console.warn("Plausible configuration incomplete (API key or site URL missing)");
+    }
     return [];
   }
+
+  const siteId = siteUrl.replace(/^https?:\/\//, "");
 
   try {
     const response = await fetch(
@@ -68,7 +82,9 @@ export async function getTopPosts(limit = 10): Promise<PostView[]> {
     );
 
     if (!response.ok) {
-      console.error(`Plausible API error: ${response.status}`);
+      if (process.env.NODE_ENV === "development") {
+        console.error(`Plausible API error: ${response.status}`);
+      }
       return [];
     }
 
@@ -86,7 +102,9 @@ export async function getTopPosts(limit = 10): Promise<PostView[]> {
 
     return [];
   } catch (error) {
-    console.error("Failed to fetch top posts:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Failed to fetch top posts:", error);
+    }
     return [];
   }
 }
