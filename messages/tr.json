@@ -123,6 +123,16 @@
     "disclosureTitle": "Reklam açıklaması.",
     "madeWith": "Gönüllü inceleme projesi · Resmi bir kuruluş değildir"
   },
+  "newsletter": {
+    "title": "Bültenimize abone ol",
+    "description": "Haftalık VPN haberleri, fiyat değişimleri ve rehberler",
+    "emailPlaceholder": "E-posta adresin",
+    "submit": "Abone ol",
+    "success": "Teşekkürler! Yakında haber alacaksın.",
+    "error": "Bir hata oluştu, tekrar dene",
+    "invalidEmail": "Geçerli bir e-posta gir",
+    "privacy": "Spam yok. İstediğin zaman ayrıl."
+  },
   "cookies": {
     "title": "Çerez tercihi",
     "body": "Bu site yalnızca gizlilik dostu, çerezsiz analitik (Plausible) kullanır. Kişisel veri toplamayız.",
@@ -591,6 +601,13 @@
       "whatIsVpn": "VPN nedir?",
       "checklist": "Güvenlik kontrol listesi",
       "methodology": "Test metodolojimiz"
+    },
+    "search": {
+      "placeholder": "Terim ara… (Ctrl+K)",
+      "resultsCount": "{count, plural, =0 {Sonuç yok} one {# terim bulundu} other {# terim bulundu}}",
+      "noResults": "Sonuç bulunamadı, başka bir anahtar kelime dene.",
+      "allCategories": "Tümü",
+      "clear": "Temizle"
     }
   },
   "errors": {
@@ -1010,6 +1027,18 @@
       "cihaz-platform": "Cihaz & Platform"
     }
   },
+  "share": {
+    "title": "Paylaş",
+    "copyLink": "Linki kopyala",
+    "copied": "Kopyalandı!",
+    "platforms": {
+      "twitter": "X'te paylaş",
+      "linkedin": "LinkedIn'de paylaş",
+      "facebook": "Facebook'ta paylaş",
+      "whatsapp": "WhatsApp'ta paylaş",
+      "native": "Paylaş"
+    }
+  },
   "tools": {
     "metaTitle": "VPN Araçları - Ücretsiz IP, DNS, WebRTC ve Hız Testi | vpncompaire",
     "metaDescription": "VPN'inizin gerçekten çalıştığını doğrulayan ücretsiz araçlar: IP adresi sorgulama, DNS sızıntı testi, WebRTC sızıntı testi ve hız testi.",
@@ -1119,6 +1148,18 @@
       "openCloudflare": "speed.cloudflare.com'u aç",
       "explainTitle": "VPN ile hız düşüşü ne kadar normal?",
       "explainBody": "VPN, trafiğinizi şifreler ve uzak bir sunucuya yönlendirir. Genellikle %10-30 arası bir hız kaybı normaldir. %50'den fazla kayıp varsa sunucu değiştirin veya başka bir protokol deneyin (WireGuard genellikle en hızlısı)."
+    }
+  },
+  "deals": {
+    "countdown": {
+      "title": "Yıl Sonu VPN İndirimi",
+      "subtitle": "VPN'lerde yılın en büyük indirim dönemi",
+      "days": "Gün",
+      "hours": "Saat",
+      "minutes": "Dakika",
+      "seconds": "Saniye",
+      "cta": "İndirimli VPN'leri Gör",
+      "ended": "İndirim sona erdi"
     }
   }
 }

@@ -123,6 +123,16 @@
     "disclosureTitle": "Affiliate disclosure.",
     "madeWith": "Volunteer review project · Not an official entity"
   },
+  "newsletter": {
+    "title": "Subscribe to our newsletter",
+    "description": "Weekly VPN news, price changes and guides",
+    "emailPlaceholder": "Your email",
+    "submit": "Subscribe",
+    "success": "Thanks! You'll hear from us soon.",
+    "error": "Something went wrong, please try again",
+    "invalidEmail": "Please enter a valid email",
+    "privacy": "No spam. Unsubscribe anytime."
+  },
   "cookies": {
     "title": "Cookie preference",
     "body": "This site uses only a privacy-friendly, cookieless analytics tool (Plausible). We do not collect personal data.",
@@ -591,6 +601,13 @@
       "whatIsVpn": "What is a VPN?",
       "checklist": "Security checklist",
       "methodology": "Our methodology"
+    },
+    "search": {
+      "placeholder": "Search terms… (Ctrl+K)",
+      "resultsCount": "{count, plural, =0 {No results} one {# term found} other {# terms found}}",
+      "noResults": "No results — try a different keyword.",
+      "allCategories": "All",
+      "clear": "Clear"
     }
   },
   "errors": {
@@ -1010,6 +1027,18 @@
       "cihaz-platform": "Device & Platform"
     }
   },
+  "share": {
+    "title": "Share",
+    "copyLink": "Copy link",
+    "copied": "Copied!",
+    "platforms": {
+      "twitter": "Share on X",
+      "linkedin": "Share on LinkedIn",
+      "facebook": "Share on Facebook",
+      "whatsapp": "Share on WhatsApp",
+      "native": "Share"
+    }
+  },
   "tools": {
     "metaTitle": "VPN Tools - Free IP, DNS, WebRTC and Speed Tests | vpncompaire",
     "metaDescription": "Free tools that verify your VPN actually works: IP address lookup, DNS leak test, WebRTC leak test and speed test.",
@@ -1119,6 +1148,18 @@
       "openCloudflare": "Open speed.cloudflare.com",
       "explainTitle": "How much speed loss with a VPN is normal?",
       "explainBody": "A VPN encrypts your traffic and routes it through a remote server. A 10-30% speed drop is typical. If you lose more than 50%, switch servers or try another protocol (WireGuard is usually fastest)."
+    }
+  },
+  "deals": {
+    "countdown": {
+      "title": "Year-End VPN Deal",
+      "subtitle": "The biggest VPN discount window of the year",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds",
+      "cta": "See Discounted VPNs",
+      "ended": "Deal ended"
     }
   }
 }

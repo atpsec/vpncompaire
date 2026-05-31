@@ -8,6 +8,7 @@ import { UseCaseGrid } from "@/components/home/use-case-grid";
 import { ComparisonBlock } from "@/components/home/comparison-block";
 import { MethodologyBlock } from "@/components/home/methodology-block";
 import { FAQSection } from "@/components/home/faq-section";
+import { DealCountdown } from "@/components/marketing/deal-countdown";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   organizationSchema,
@@ -33,6 +34,9 @@ export default async function HomePage({ params }: Props) {
       <JsonLd data={itemListSchema(rankedProducts(locale as "tr" | "en"))} />
       <JsonLd data={faqSchema(homeFaqs(locale as "tr" | "en"))} />
       <Hero />
+      <div className="mt-6 sm:mt-8">
+        <DealCountdown variant="banner" locale={locale as "tr" | "en"} />
+      </div>
       <IpSecurityBanner />
       <TopThreePodium />
       <TopVPNList />

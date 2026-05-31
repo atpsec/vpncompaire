@@ -3,6 +3,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { useLocale, useTranslations } from "next-intl";
 import { TopVPNList } from "@/components/home/top-vpn-list";
 import { Container } from "@/components/ui/container";
+import { DealCountdown } from "@/components/marketing/deal-countdown";
 import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
 import { rankedProducts } from "@/data/products";
@@ -55,6 +56,10 @@ function ReviewsHubView() {
         </header>
         <DataDisclaimer />
       </Container>
+
+      <div className="mt-6 sm:mt-8">
+        <DealCountdown variant="banner" locale={locale} />
+      </div>
 
       <TopVPNList />
     </>

@@ -7,6 +7,7 @@ import { BlogContent } from "@/components/blog/blog-content";
 import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
 import { ViewCounter } from "@/components/blog/view-counter";
+import { SocialShare } from "@/components/blog/social-share";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import { absoluteUrl, siteConfig } from "@/lib/site";
@@ -117,8 +118,14 @@ export default async function BlogPostPage({ params }: Props) {
       <Container size="md">
         <BlogHeader post={frontmatter} />
 
-        <div className="mt-4 mb-8">
+        <div className="mt-4 mb-6 flex flex-wrap items-center justify-between gap-4">
           <ViewCounter slug={frontmatter.slug} locale={locale as "tr" | "en"} />
+          <SocialShare
+            url={absoluteUrl(`${localePath}/blog/${frontmatter.slug}`)}
+            title={frontmatter.title}
+            description={frontmatter.description}
+            locale={locale as "tr" | "en"}
+          />
         </div>
 
         <UnsplashImage

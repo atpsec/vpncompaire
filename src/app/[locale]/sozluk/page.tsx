@@ -4,12 +4,12 @@ import { useTranslations, useLocale } from "next-intl";
 import { BookA } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 import { getGlossary, getCategories } from "@/data/glossary";
+import { GlossarySearch } from "@/components/glossary/glossary-search";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -87,71 +87,33 @@ function GlossaryPageView() {
           <p className="mt-4 text-lg text-ink-muted">{t("intro")}</p>
         </header>
 
-        <nav aria-label={t("categoriesAria")} className="mt-8 flex flex-wrap gap-2">
-          {categories.map((cat) => (
-            <a
-              key={cat}
-              href={`#cat-${cat}`}
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              {cat}
-            </a>
-          ))}
-        </nav>
+        {/* Interactive search + filterable list */}
+        <GlossarySearch
+          terms={glossary}
+          categories={categories}
+          locale={localeKey}
+        />
 
-        {categories.map((cat) => {
-          const terms = glossary.filter((term) => term.category === cat);
-          if (terms.length === 0) return null;
-          return (
-            <section key={cat} id={`cat-${cat}`} className="mt-12 scroll-mt-20">
-              <h2 className="text-2xl font-bold text-ink-strong">{cat}</h2>
-              <div className="mt-4 grid gap-3">
-                {terms.map((term) => (
-                  <Card
-                    key={term.id}
-                    id={term.id}
-                    className="p-5 scroll-mt-20 hover:border-brand-300 transition-colors"
-                  >
-                    <div className="flex items-start justify-between gap-3 flex-wrap">
-                      <div className="min-w-0">
-                        <h3 className="font-semibold text-ink-strong">
-                          {term.term}
-                        </h3>
-                        <p className="mt-1 text-sm text-ink-muted">
-                          {term.short}
-                        </p>
-                      </div>
-                      <Badge variant="outline">{term.category}</Badge>
+        {/* SEO: full static list rendered for crawlers, hidden from visual users */}
+        <div className="sr-only" aria-hidden="true">
+          {categories.map((cat) => {
+            const terms = glossary.filter((term) => term.category === cat);
+            if (terms.length === 0) return null;
+            return (
+              <section key={`seo-${cat}`}>
+                <h2>{cat}</h2>
+                <dl>
+                  {terms.map((term) => (
+                    <div key={`seo-${term.id}`}>
+                      <dt>{term.term}</dt>
+                      <dd>{term.long}</dd>
                     </div>
-                    <p className="mt-3 text-sm text-ink leading-relaxed">
-                      {term.long}
-                    </p>
-                    {term.related && term.related.length > 0 ? (
-                      <p className="mt-3 text-xs text-ink-muted">
-                        {t("relatedLabel")}
-                        {term.related.map((rid, i) => {
-                          const r = glossary.find((g) => g.id === rid);
-                          if (!r) return null;
-                          return (
-                            <span key={rid}>
-                              <a
-                                href={`#${rid}`}
-                                className="text-brand-700 hover:underline"
-                              >
-                                {r.term}
-                              </a>
-                              {i < (term.related!.length - 1) ? ", " : ""}
-                            </span>
-                          );
-                        })}
-                      </p>
-                    ) : null}
-                  </Card>
-                ))}
-              </div>
-            </section>
-          );
-        })}
+                  ))}
+                </dl>
+              </section>
+            );
+          })}
+        </div>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
           <p className="text-sm text-ink-muted">{t("relatedPagesHeading")}</p>
