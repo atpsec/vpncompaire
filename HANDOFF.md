@@ -15,8 +15,9 @@ Sen Claude'sun ve bu projeye yeni atanıyorsun. Sırasıyla şunları yap:
 1. **`CLAUDE.md`** dosyasını oku — proje konvansiyonları, stack, komutlar, dokunulmaması gereken dosyalar burada.
 2. **`AGENTS.md`** dosyasını oku — Next.js 16 / React 19 agent kuralları.
 3. **Bu dosyanın (`HANDOFF.md`) "Mevcut Durum" bölümünü** oku — son ne yapıldığını gör.
-4. **`src/lib/site.ts`** ve **`src/env.ts`** dosyalarını oku — site config ve env değişkenleri.
-5. Kullanıcı (Ahmet) ile **Türkçe konuş**. Onay almadan push/deploy yapma.
+4. **`REVIEW-2026-06.md`** dosyasını oku — Opus 4.8'in tam kalite incelemesi + önceliklendirilmiş aksiyon planı (yapılacak işler burada). **Yeni hesabın asıl yol haritası budur.**
+5. **`src/lib/site.ts`** ve **`src/env.ts`** dosyalarını oku — site config ve env değişkenleri.
+6. Kullanıcı (Ahmet) ile **Türkçe konuş**. Onay almadan push/deploy yapma.
 
 ---
 
