@@ -146,7 +146,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
     end: img("1556742049-0cfed4f6a45d", "Karar ve seçim", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "ai-creative": {
-    hero: img("1684369175809-1b73fc4cb98f", "AI ile üretilen yaratıcı görsel", PHOTOGRAPHERS.shahadat),
+    hero: img("1677442136019-21780ecad995", "AI ile üretilen yaratıcı görsel", PHOTOGRAPHERS.shahadat),
     mid: img("1518770660439-4636190af475", "Devre kartı ve teknoloji", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
     end: img("1563013544-824ae1b704d3", "Dijital sanat ve kod", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
@@ -178,7 +178,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
     end: img("1611162617474-5b21e879e113", "Global yayın haritası", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "streaming-anime": {
-    hero: img("1684369175809-1b73fc4cb98f", "Anime ve dijital içerik", PHOTOGRAPHERS.shahadat),
+    hero: img("1677442136019-21780ecad995", "Anime ve dijital içerik", PHOTOGRAPHERS.shahadat),
     mid: img("1593359677879-a4bb92f829d1", "Streaming platformu", PHOTOGRAPHERS.mollieSivaram, 800, 450),
     end: img("1611162617474-5b21e879e113", "Bölgesel kütüphaneler", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
@@ -263,252 +263,252 @@ const imageDatabase: Record<string, BlogImageSet> = {
 
   // Yeni unique key'ler (her blog yazısı için)
   "chatgpt-turkey-access": {
-    hero: img("npxXWgQ33ZQ", "ChatGPT AI interface on laptop", PHOTOGRAPHERS.matheusBertelli),
+    hero: img("1611162617474-5b21e879e113", "ChatGPT AI interface on laptop", PHOTOGRAPHERS.matheusBertelli),
     mid: img("1677442136019-21780ecad995", "AI sohbet asistanı", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1611162617474-5b21e879e113", "Global erişim", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "ai-phishing-deepfake": {
-    hero: img("FnA5pAzqhMM", "AI security and phishing protection", PHOTOGRAPHERS.growtika),
+    hero: img("1563013544-824ae1b704d3", "AI security and phishing protection", PHOTOGRAPHERS.growtika),
     mid: img("1550751827-4bd374c3f58b", "Siber güvenlik", PHOTOGRAPHERS.adiGoldstein, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Veri koruma", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "china-russia-ai-access": {
-    hero: img("WkfDrhxDMC8", "China Russia technology access", PHOTOGRAPHERS.lingTang),
+    hero: img("1611162617474-5b21e879e113", "China Russia technology access", PHOTOGRAPHERS.lingTang),
     mid: img("1611162617474-5b21e879e113", "Global network", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
     end: img("1526374965328-7f61d4dc18c5", "Veri akışı", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "claude-gemini-access": {
-    hero: img("iar-afB0QQw", "AI assistant comparison", PHOTOGRAPHERS.possessedPhotography),
+    hero: img("1677442136019-21780ecad995", "AI assistant comparison", PHOTOGRAPHERS.possessedPhotography),
     mid: img("1677442136019-21780ecad995", "AI interface", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1518770660439-4636190af475", "Teknoloji", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "ai-tools-privacy": {
-    hero: img("08bOYnH_r_E", "AI privacy data protection", PHOTOGRAPHERS.flyd),
+    hero: img("1614064641938-3bbee52942c7", "AI privacy data protection", PHOTOGRAPHERS.flyd),
     mid: img("1555949963-ff9fe0c870eb", "Gizlilik kodu", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1526374965328-7f61d4dc18c5", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "ai-content-creation": {
-    hero: img("5QgIuuBxKwM", "Content creation writing", PHOTOGRAPHERS.christinHumeAlt),
+    hero: img("1521295121783-8a321d551ad2", "Content creation writing", PHOTOGRAPHERS.christinHumeAlt),
     mid: img("1521295121783-8a321d551ad2", "Laptop çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
     end: img("1563013544-824ae1b704d3", "Dijital içerik", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "midjourney-stable-diffusion": {
-    hero: img("rymh7EZPqRs", "AI generated art colorful", PHOTOGRAPHERS.steveJohnson),
-    mid: img("1684369175809-1b73fc4cb98f", "AI görsel", PHOTOGRAPHERS.shahadat, 800, 450),
+    hero: img("1677442136019-21780ecad995", "AI generated art colorful", PHOTOGRAPHERS.steveJohnson),
+    mid: img("1677442136019-21780ecad995", "AI görsel", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1563013544-824ae1b704d3", "Dijital sanat", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "anime-crunchyroll": {
-    hero: img("wSTCaQpiLtc", "Tokyo Japan anime culture", PHOTOGRAPHERS.sorasak),
+    hero: img("1611162617474-5b21e879e113", "Tokyo Japan anime culture", PHOTOGRAPHERS.sorasak),
     mid: img("1593359677879-a4bb92f829d1", "Streaming platform", PHOTOGRAPHERS.mollieSivaram, 800, 450),
     end: img("1611162617474-5b21e879e113", "Global içerik", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "netflix-regional": {
-    hero: img("tChz4ZXy-P0", "Netflix streaming on TV", PHOTOGRAPHERS.thibaultPenin),
+    hero: img("1593359677879-a4bb92f829d1", "Netflix streaming on TV", PHOTOGRAPHERS.thibaultPenin),
     mid: img("1593359677879-a4bb92f829d1", "Streaming apps", PHOTOGRAPHERS.mollieSivaram, 800, 450),
     end: img("1611162617474-5b21e879e113", "Bölgesel kütüphane", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "live-sports-streaming": {
-    hero: img("p_kICQCOM4s", "Sports stadium live event", PHOTOGRAPHERS.fauzanSaari),
+    hero: img("1517649763962-0c623066013b", "Sports stadium live event", PHOTOGRAPHERS.fauzanSaari),
     mid: img("1522869635100-9f4c5e86aa37", "Canlı yayın", PHOTOGRAPHERS.glennCarstens, 800, 450),
     end: img("1611162617474-5b21e879e113", "Global spor", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "disney-bbc": {
-    hero: img("eLUBGqKGdE4", "London UK Big Ben", PHOTOGRAPHERS.aronVandePol),
+    hero: img("1450101499163-c8848c66ca85", "London UK Big Ben", PHOTOGRAPHERS.aronVandePol),
     mid: img("1522869635100-9f4c5e86aa37", "Streaming TV", PHOTOGRAPHERS.glennCarstens, 800, 450),
     end: img("1450101499163-c8848c66ca85", "UK manzara", PHOTOGRAPHERS.philippeOursel, 800, 450),
   },
   "spotify-regional": {
-    hero: img("tXz6g8JYYoI", "Spotify music streaming", PHOTOGRAPHERS.alexanderShatov),
+    hero: img("1470225620780-dba8ba36b745", "Spotify music streaming", PHOTOGRAPHERS.alexanderShatov),
     mid: img("1554224155-6726b3ff858f", "Abonelik", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1611162617474-5b21e879e113", "Global müzik", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "youtube-premium": {
-    hero: img("2x3GDjcElVg", "YouTube app smartphone", PHOTOGRAPHERS.christianWiediger),
+    hero: img("1522869635100-9f4c5e86aa37", "YouTube app smartphone", PHOTOGRAPHERS.christianWiediger),
     mid: img("1554224155-6726b3ff858f", "Fiyat tasarruf", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1611162617474-5b21e879e113", "Global erişim", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "steam-regional": {
-    hero: img("sYVY_ZKwaxU", "Gaming PC setup RGB", PHOTOGRAPHERS.florianOlivo),
+    hero: img("1611162617474-5b21e879e113", "Gaming PC setup RGB", PHOTOGRAPHERS.florianOlivo),
     mid: img("1554224155-6726b3ff858f", "Oyun fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1518770660439-4636190af475", "Gaming tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "playstation-xbox-store": {
-    hero: img("0aX51h4WvAk", "PlayStation controller", PHOTOGRAPHERS.kerdeSeverin),
+    hero: img("1555949963-ff9fe0c870eb", "PlayStation controller", PHOTOGRAPHERS.kerdeSeverin),
     mid: img("1554224155-6726b3ff858f", "Store fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1518770660439-4636190af475", "Console tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "xbox-playstation-setup": {
-    hero: img("w2JtIQQXoRU", "Xbox console controller", PHOTOGRAPHERS.nikitaKachanovsky),
+    hero: img("1611162617474-5b21e879e113", "Xbox console controller", PHOTOGRAPHERS.nikitaKachanovsky),
     mid: img("1518770660439-4636190af475", "Gaming hardware", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
     end: img("1611162617474-5b21e879e113", "Online gaming", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "chatgpt-plus-pricing": {
-    hero: img("ZV_64LdGoao", "Subscription pricing calculator", PHOTOGRAPHERS.towfiquBarbhuiya),
+    hero: img("1554224155-6726b3ff858f", "Subscription pricing calculator", PHOTOGRAPHERS.towfiquBarbhuiya),
     mid: img("1554224155-6726b3ff858f", "Para tasarruf", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Fiyat karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "software-subscription": {
-    hero: img("Q1p7bh3SHj8", "Software technology digital", PHOTOGRAPHERS.nasa),
+    hero: img("1611162617474-5b21e879e113", "Software technology digital", PHOTOGRAPHERS.nasa),
     mid: img("1554224155-6726b3ff858f", "Abonelik fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1518770660439-4636190af475", "Tech software", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "hotel-booking": {
-    hero: img("y2azHvupCVo", "Hotel travel accommodation", PHOTOGRAPHERS.manuelMoreno),
+    hero: img("1611162617474-5b21e879e113", "Hotel travel accommodation", PHOTOGRAPHERS.manuelMoreno),
     mid: img("1554224155-6726b3ff858f", "Rezervasyon fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1488646953014-85cb44e25828", "Seyahat", PHOTOGRAPHERS.annieSpratt, 800, 450),
   },
   "flight-tickets": {
-    hero: img("WNoLnJo7tS8", "Airplane travel flight", PHOTOGRAPHERS.rossParmly),
+    hero: img("1611162617474-5b21e879e113", "Airplane travel flight", PHOTOGRAPHERS.rossParmly),
     mid: img("1554224155-6726b3ff858f", "Bilet fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1436491865332-7a61a109cc05", "Havalimanı", PHOTOGRAPHERS.rossParmly, 800, 450),
   },
   "online-courses": {
-    hero: img("505eectW54k", "Online learning education", PHOTOGRAPHERS.greenChameleon),
+    hero: img("1611162617474-5b21e879e113", "Online learning education", PHOTOGRAPHERS.greenChameleon),
     mid: img("1521295121783-8a321d551ad2", "Laptop öğrenme", PHOTOGRAPHERS.christinHume, 800, 450),
     end: img("1454165804606-c3d57bc86b40", "Eğitim", PHOTOGRAPHERS.scottGraham, 800, 450),
   },
   "travel-vpn-security": {
-    hero: img("2gYsZUmockw", "Airport travel wifi", PHOTOGRAPHERS.jeshoots),
+    hero: img("1611162617474-5b21e879e113", "Airport travel wifi", PHOTOGRAPHERS.jeshoots),
     mid: img("1436491865332-7a61a109cc05", "Havalimanı", PHOTOGRAPHERS.rossParmly, 800, 450),
     end: img("1521295121783-8a321d551ad2", "Laptop güvenlik", PHOTOGRAPHERS.christinHume, 800, 450),
   },
   "router-vpn-setup": {
-    hero: img("Wpnoqo2plFA", "WiFi router home network", PHOTOGRAPHERS.mishaFeshchak),
+    hero: img("1556742049-0cfed4f6a45d", "WiFi router home network", PHOTOGRAPHERS.mishaFeshchak),
     mid: img("1558494949-ef010cbdcc31", "Ağ kabloları", PHOTOGRAPHERS.taylorVick, 800, 450),
     end: img("1518770660439-4636190af475", "Network tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "linux-vpn-setup": {
-    hero: img("4Mw7nkQDByk", "Linux terminal command", PHOTOGRAPHERS.gabrielHeinzer),
+    hero: img("1593359677879-a4bb92f829d1", "Linux terminal command", PHOTOGRAPHERS.gabrielHeinzer),
     mid: img("1555949963-ff9fe0c870eb", "Linux kod", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1551808525-51a94da548ce", "Sistem config", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "ios-vpn-shortcuts": {
-    hero: img("svFU0GJlGi8", "iPhone shortcuts automation", PHOTOGRAPHERS.bagusHernawan),
+    hero: img("1611162617474-5b21e879e113", "iPhone shortcuts automation", PHOTOGRAPHERS.bagusHernawan),
     mid: img("1574944985070-8f3ebc6b79d2", "iPhone app", PHOTOGRAPHERS.privecstasy, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Mobil güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "macos-vpn-setup": {
-    hero: img("npxXWgQ33ZQ", "MacBook laptop workspace", PHOTOGRAPHERS.matheusBertelli),
+    hero: img("1611162617474-5b21e879e113", "MacBook laptop workspace", PHOTOGRAPHERS.matheusBertelli),
     mid: img("1517336714731-489689fd1ca8", "macOS desktop", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
     end: img("1521295121783-8a321d551ad2", "Mac çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
   },
   "apple-tv-vpn": {
-    hero: img("XJXWbfSo2f0", "Apple TV streaming", PHOTOGRAPHERS.glennCarstens),
+    hero: img("1611162617474-5b21e879e113", "Apple TV streaming", PHOTOGRAPHERS.glennCarstens),
     mid: img("1522869635100-9f4c5e86aa37", "TV apps", PHOTOGRAPHERS.glennCarstens, 800, 450),
     end: img("1593359677879-a4bb92f829d1", "Streaming", PHOTOGRAPHERS.mollieSivaram, 800, 450),
   },
   "remote-work-security": {
-    hero: img("QckxruozjRg", "Remote work home office", PHOTOGRAPHERS.charlesDeluvio),
+    hero: img("1556742049-0cfed4f6a45d", "Remote work home office", PHOTOGRAPHERS.charlesDeluvio),
     mid: img("1587560699334-cc4ff634909a", "Home office", PHOTOGRAPHERS.mikeyHarris, 800, 450),
     end: img("1553877522-43269d4ea984", "Video konferans", PHOTOGRAPHERS.chrisMontgomery, 800, 450),
   },
   "freelancer-vpn": {
-    hero: img("IgUR1iX0mqM", "Freelancer remote laptop", PHOTOGRAPHERS.christinHumeAlt),
+    hero: img("1593359677879-a4bb92f829d1", "Freelancer remote laptop", PHOTOGRAPHERS.christinHumeAlt),
     mid: img("1521295121783-8a321d551ad2", "Laptop çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "educator-teacher-vpn": {
-    hero: img("NeTPASr-bmQ", "Education classroom teaching", PHOTOGRAPHERS.nationalCancerInstitute),
+    hero: img("1611162617474-5b21e879e113", "Education classroom teaching", PHOTOGRAPHERS.nationalCancerInstitute),
     mid: img("1521295121783-8a321d551ad2", "Öğretmen laptop", PHOTOGRAPHERS.christinHume, 800, 450),
     end: img("1454165804606-c3d57bc86b40", "Online eğitim", PHOTOGRAPHERS.scottGraham, 800, 450),
   },
   "investor-trader-vpn": {
-    hero: img("fiXLQXAhCfk", "Trading finance charts", PHOTOGRAPHERS.chrisLiverani),
+    hero: img("1542751371-adc38448a05e", "Trading finance charts", PHOTOGRAPHERS.chrisLiverani),
     mid: img("1554224155-6726b3ff858f", "Finans", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Finansal güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "journalist-activist-vpn": {
-    hero: img("OgvqXGL7XO4", "Journalism privacy", PHOTOGRAPHERS.romanKraft),
+    hero: img("1555949963-ff9fe0c870eb", "Journalism privacy", PHOTOGRAPHERS.romanKraft),
     mid: img("1555949963-ff9fe0c870eb", "Veri koruma", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1589994965851-a8f479c573a9", "İfade özgürlüğü", PHOTOGRAPHERS.clintPatterson, 800, 450),
   },
   "dns-leak-test": {
-    hero: img("JKUTrJ4vK00", "DNS network security", PHOTOGRAPHERS.taylorVick),
+    hero: img("1451187580459-43490279c0fa", "DNS network security", PHOTOGRAPHERS.taylorVick),
     mid: img("1558494949-ef010cbdcc31", "Network test", PHOTOGRAPHERS.taylorVick, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Güvenlik test", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "kill-switch-explained": {
-    hero: img("FO7JIlwjOtU", "Network kill switch", PHOTOGRAPHERS.markusSpiske),
+    hero: img("1611974789855-9c2a0a7236a3", "Network kill switch", PHOTOGRAPHERS.markusSpiske),
     mid: img("1526374965328-7f61d4dc18c5", "Güvenlik katmanı", PHOTOGRAPHERS.markusSpiske, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Koruma", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "vpn-privacy-security-basics": {
-    hero: img("FnA5pAzqhMM", "Cybersecurity privacy", PHOTOGRAPHERS.growtika),
+    hero: img("1563013544-824ae1b704d3", "Cybersecurity privacy", PHOTOGRAPHERS.growtika),
     mid: img("1555949963-ff9fe0c870eb", "Gizlilik", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1526374965328-7f61d4dc18c5", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "vpn-protocols-explained": {
-    hero: img("hpjSkU2UYSU", "Network encryption", PHOTOGRAPHERS.markusSpiske),
+    hero: img("1451187580459-43490279c0fa", "Network encryption", PHOTOGRAPHERS.markusSpiske),
     mid: img("1544197150-b99a580bb7a8", "Ağ kabloları", PHOTOGRAPHERS.jordanHarrison, 800, 450),
     end: img("1551808525-51a94da548ce", "Teknoloji", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "wireguard-openvpn": {
-    hero: img("iar-afB0QQw", "VPN protocol technology", PHOTOGRAPHERS.possessedPhotography),
+    hero: img("1677442136019-21780ecad995", "VPN protocol technology", PHOTOGRAPHERS.possessedPhotography),
     mid: img("1518770660439-4636190af475", "Network tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
     end: img("1551808525-51a94da548ce", "Encryption", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "split-tunneling": {
-    hero: img("jG8nlwLRZTM", "Network split routing", PHOTOGRAPHERS.adiGoldstein),
+    hero: img("1544197150-b99a580bb7a8", "Network split routing", PHOTOGRAPHERS.adiGoldstein),
     mid: img("1544197150-b99a580bb7a8", "Network", PHOTOGRAPHERS.jordanHarrison, 800, 450),
     end: img("1518770660439-4636190af475", "Tech", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "double-vpn-multihop": {
-    hero: img("FlPc9_VocJ4", "Double encryption chain", PHOTOGRAPHERS.philippKatzenberger),
+    hero: img("1614064641938-3bbee52942c7", "Double encryption chain", PHOTOGRAPHERS.philippKatzenberger),
     mid: img("1526374965328-7f61d4dc18c5", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "ram-only-servers": {
-    hero: img("d1eaoAabeXs", "Server datacenter RAM", PHOTOGRAPHERS.liamBriese),
+    hero: img("1558494949-ef010cbdcc31", "Server datacenter RAM", PHOTOGRAPHERS.liamBriese),
     mid: img("1558494949-ef010cbdcc31", "Sunucu", PHOTOGRAPHERS.taylorVick, 800, 450),
     end: img("1518770660439-4636190af475", "Hardware", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "nordvpn-surfshark": {
-    hero: img("Wpnoqo2plFA", "VPN comparison", PHOTOGRAPHERS.mishaFeshchak),
+    hero: img("1556742049-0cfed4f6a45d", "VPN comparison", PHOTOGRAPHERS.mishaFeshchak),
     mid: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
     end: img("1454165804606-c3d57bc86b40", "Seçim", PHOTOGRAPHERS.scottGraham, 800, 450),
   },
   "expressvpn-protonvpn": {
-    hero: img("08bOYnH_r_E", "VPN privacy comparison", PHOTOGRAPHERS.flyd),
+    hero: img("1614064641938-3bbee52942c7", "VPN privacy comparison", PHOTOGRAPHERS.flyd),
     mid: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "choosing-vpn-guide": {
-    hero: img("5fNmWej4tAA", "Choice decision selection", PHOTOGRAPHERS.rossFindon),
+    hero: img("1551434678-e076c223a692", "Choice decision selection", PHOTOGRAPHERS.rossFindon),
     mid: img("1551434678-e076c223a692", "Liste kontrol", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Seçim", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "free-vs-paid-vpn": {
-    hero: img("ZV_64LdGoao", "Money cost comparison", PHOTOGRAPHERS.towfiquBarbhuiya),
+    hero: img("1554224155-6726b3ff858f", "Money cost comparison", PHOTOGRAPHERS.towfiquBarbhuiya),
     mid: img("1554224155-6726b3ff858f", "Para", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "vpn-subscription-period": {
-    hero: img("mcSDtbWXUZU", "Subscription pricing plan", PHOTOGRAPHERS.towfiquBarbhuiya),
+    hero: img("1554224155-6726b3ff858f", "Subscription pricing plan", PHOTOGRAPHERS.towfiquBarbhuiya),
     mid: img("1554224155-6726b3ff858f", "Fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Plan seçimi", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "fastest-vpn-turkey": {
-    hero: img("JKUTrJ4vK00", "Speed test performance", PHOTOGRAPHERS.taylorVick),
+    hero: img("1451187580459-43490279c0fa", "Speed test performance", PHOTOGRAPHERS.taylorVick),
     mid: img("1451187580459-43490279c0fa", "Hız", PHOTOGRAPHERS.nasa, 800, 450),
     end: img("1518770660439-4636190af475", "Teknoloji", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "vpn-speed-optimization": {
-    hero: img("hpjSkU2UYSU", "Speed internet fiber", PHOTOGRAPHERS.markusSpiske),
+    hero: img("1451187580459-43490279c0fa", "Speed internet fiber", PHOTOGRAPHERS.markusSpiske),
     mid: img("1451187580459-43490279c0fa", "Hızlı veri", PHOTOGRAPHERS.nasa, 800, 450),
     end: img("1518770660439-4636190af475", "Performans", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "what-is-vpn": {
-    hero: img("FnA5pAzqhMM", "Digital privacy security", PHOTOGRAPHERS.growtika),
+    hero: img("1563013544-824ae1b704d3", "Digital privacy security", PHOTOGRAPHERS.growtika),
     mid: img("1558494949-ef010cbdcc31", "Network", PHOTOGRAPHERS.taylorVick, 800, 450),
     end: img("1550751827-4bd374c3f58b", "Güvenlik", PHOTOGRAPHERS.adiGoldstein, 800, 450),
   },
   "is-vpn-legal": {
-    hero: img("s9CC2SKySJM", "Law legal justice", PHOTOGRAPHERS.sebastianPichler),
+    hero: img("1589829545856-d10d557cf95f", "Law legal justice", PHOTOGRAPHERS.sebastianPichler),
     mid: img("1589829545856-d10d557cf95f", "Yasal belge", PHOTOGRAPHERS.scottWebb, 800, 450),
     end: img("1589994965851-a8f479c573a9", "Adalet", PHOTOGRAPHERS.clintPatterson, 800, 450),
   },
   "vpn-streaming-access": {
-    hero: img("tChz4ZXy-P0", "Streaming entertainment", PHOTOGRAPHERS.thibaultPenin),
+    hero: img("1593359677879-a4bb92f829d1", "Streaming entertainment", PHOTOGRAPHERS.thibaultPenin),
     mid: img("1522869635100-9f4c5e86aa37", "TV streaming", PHOTOGRAPHERS.glennCarstens, 800, 450),
     end: img("1611162617474-5b21e879e113", "Global içerik", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
@@ -517,7 +517,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
 
   // 2x duplicates - EN versions get unique images
   "vpn-basics-en": {
-    hero: img("FnA5pAzqhMM", "VPN fundamentals", PHOTOGRAPHERS.growtika),
+    hero: img("1563013544-824ae1b704d3", "VPN fundamentals", PHOTOGRAPHERS.growtika),
     mid: img("1563013544-824ae1b704d3", "Network", PHOTOGRAPHERS.markusSpiske, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Security", PHOTOGRAPHERS.flyd, 800, 450),
   },
@@ -544,7 +544,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
   "vpn-legal-en": {
     hero: img("1589829545856-d10d557cf95f", "Legal document", PHOTOGRAPHERS.scottWebb),
     mid: img("1589994965851-a8f479c573a9", "Justice", PHOTOGRAPHERS.clintPatterson, 800, 450),
-    end: img("s9CC2SKySJM", "Law", PHOTOGRAPHERS.sebastianPichler, 800, 450),
+    end: img("1589829545856-d10d557cf95f", "Law", PHOTOGRAPHERS.sebastianPichler, 800, 450),
   },
   "streaming-vpn-en": {
     hero: img("1593359677879-a4bb92f829d1", "Netflix streaming", PHOTOGRAPHERS.mollieSivaram),
@@ -554,7 +554,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
   "streaming-uk-en": {
     hero: img("1450101499163-c8848c66ca85", "UK landscape", PHOTOGRAPHERS.philippeOursel),
     mid: img("1522869635100-9f4c5e86aa37", "BBC", PHOTOGRAPHERS.glennCarstens, 800, 450),
-    end: img("eLUBGqKGdE4", "London", PHOTOGRAPHERS.aronVandePol, 800, 450),
+    end: img("1450101499163-c8848c66ca85", "London", PHOTOGRAPHERS.aronVandePol, 800, 450),
   },
   "streaming-sports-en": {
     hero: img("1517649763962-0c623066013b", "Sports", PHOTOGRAPHERS.daveLowe),
@@ -569,26 +569,26 @@ const imageDatabase: Record<string, BlogImageSet> = {
   "streaming-content-en": {
     hero: img("1611162617474-5b21e879e113", "Global streaming", PHOTOGRAPHERS.guerrillaBuzz),
     mid: img("1593359677879-a4bb92f829d1", "Streaming apps", PHOTOGRAPHERS.mollieSivaram, 800, 450),
-    end: img("tChz4ZXy-P0", "Entertainment", PHOTOGRAPHERS.thibaultPenin, 800, 450),
+    end: img("1593359677879-a4bb92f829d1", "Entertainment", PHOTOGRAPHERS.thibaultPenin, 800, 450),
   },
   "streaming-anime-en": {
     hero: img("1593359677879-a4bb92f829d1", "Anime platform", PHOTOGRAPHERS.mollieSivaram),
     mid: img("1611162617474-5b21e879e113", "Global anime", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
-    end: img("wSTCaQpiLtc", "Tokyo", PHOTOGRAPHERS.sorasak, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Tokyo", PHOTOGRAPHERS.sorasak, 800, 450),
   },
   "split-tunneling-en": {
     hero: img("1544197150-b99a580bb7a8", "Network split", PHOTOGRAPHERS.jordanHarrison),
     mid: img("1558494949-ef010cbdcc31", "VPN routing", PHOTOGRAPHERS.taylorVick, 800, 450),
-    end: img("jG8nlwLRZTM", "Split routing", PHOTOGRAPHERS.adiGoldstein, 800, 450),
+    end: img("1544197150-b99a580bb7a8", "Split routing", PHOTOGRAPHERS.adiGoldstein, 800, 450),
   },
   "speed-performance-en": {
     hero: img("1451187580459-43490279c0fa", "Speed test", PHOTOGRAPHERS.nasa),
-    mid: img("JKUTrJ4vK00", "Performance", PHOTOGRAPHERS.taylorVick, 800, 450),
-    end: img("hpjSkU2UYSU", "Fast", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    mid: img("1451187580459-43490279c0fa", "Performance", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1451187580459-43490279c0fa", "Fast", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "software-subscription-en": {
     hero: img("1554224155-6726b3ff858f", "Subscription", PHOTOGRAPHERS.rupixen),
-    mid: img("ZV_64LdGoao", "Savings", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
+    mid: img("1554224155-6726b3ff858f", "Savings", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
     end: img("1587560699334-cc4ff634909a", "Software", PHOTOGRAPHERS.mikeyHarris, 800, 450),
   },
   "remote-work-vpn-en": {
@@ -644,7 +644,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
   "device-linux-en": {
     hero: img("1526374965328-7f61d4dc18c5", "Linux terminal", PHOTOGRAPHERS.markusSpiske),
     mid: img("1558494949-ef010cbdcc31", "Linux setup", PHOTOGRAPHERS.taylorVick, 800, 450),
-    end: img("1629654297299-71589c632c99", "Linux VPN", PHOTOGRAPHERS.gabrielHeinzer, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Linux VPN", PHOTOGRAPHERS.gabrielHeinzer, 800, 450),
   },
   "device-ios-en": {
     hero: img("1574944985070-8f3ebc6b79d2", "iPhone setup", PHOTOGRAPHERS.jeshoots),
@@ -654,7 +654,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
   "device-console-en": {
     hero: img("1552820728-8b83bb6b773f", "Gaming", PHOTOGRAPHERS.florianOlivo),
     mid: img("1538481199705-c710c4e965fc", "Console", PHOTOGRAPHERS.florianOlivo, 800, 450),
-    end: img("1511512578047-dfea92ed4419", "Console VPN", PHOTOGRAPHERS.kerdeSeverin, 800, 450),
+    end: img("1552820728-8b83bb6b773f", "Console VPN", PHOTOGRAPHERS.kerdeSeverin, 800, 450),
   },
   "chatgpt-plus-pricing-en": {
     hero: img("1620712943543-bcc4688e7485", "AI pricing", PHOTOGRAPHERS.possessedPhotography),
@@ -679,7 +679,7 @@ const imageDatabase: Record<string, BlogImageSet> = {
   "youtube-premium-en": {
     hero: img("1554224155-6726b3ff858f", "Subscription", PHOTOGRAPHERS.rupixen),
     mid: img("1522869635100-9f4c5e86aa37", "Streaming", PHOTOGRAPHERS.glennCarstens, 800, 450),
-    end: img("2x3GDjcElVg", "YouTube", PHOTOGRAPHERS.christianWiediger, 800, 450),
+    end: img("1522869635100-9f4c5e86aa37", "YouTube", PHOTOGRAPHERS.christianWiediger, 800, 450),
   },
   "wireguard-openvpn-en": {
     hero: img("1526374965328-7f61d4dc18c5", "Encryption", PHOTOGRAPHERS.markusSpiske),
@@ -687,35 +687,35 @@ const imageDatabase: Record<string, BlogImageSet> = {
     end: img("1558494949-ef010cbdcc31", "VPN protocols", PHOTOGRAPHERS.taylorVick, 800, 450),
   },
   "vpn-speed-en": {
-    hero: img("JKUTrJ4vK00", "Speed test", PHOTOGRAPHERS.taylorVick),
+    hero: img("1451187580459-43490279c0fa", "Speed test", PHOTOGRAPHERS.taylorVick),
     mid: img("1451187580459-43490279c0fa", "Performance", PHOTOGRAPHERS.nasa, 800, 450),
-    end: img("hpjSkU2UYSU", "Speed", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1451187580459-43490279c0fa", "Speed", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "vpn-selection-en": {
     hero: img("1551434678-e076c223a692", "Selection", PHOTOGRAPHERS.alexKotliarskyi),
-    mid: img("Wpnoqo2plFA", "Choice", PHOTOGRAPHERS.mishaFeshchak, 800, 450),
-    end: img("5fNmWej4tAA", "Provider", PHOTOGRAPHERS.rossFindon, 800, 450),
+    mid: img("1556742049-0cfed4f6a45d", "Choice", PHOTOGRAPHERS.mishaFeshchak, 800, 450),
+    end: img("1551434678-e076c223a692", "Provider", PHOTOGRAPHERS.rossFindon, 800, 450),
   },
 
   // 4x duplicates - 4 unique keys each (TR + EN combinations)
   "ai-creative-content-tr": {
-    hero: img("5QgIuuBxKwM", "İçerik üretimi", PHOTOGRAPHERS.christinHumeAlt),
+    hero: img("1521295121783-8a321d551ad2", "İçerik üretimi", PHOTOGRAPHERS.christinHumeAlt),
     mid: img("1521295121783-8a321d551ad2", "Yazma", PHOTOGRAPHERS.christinHume, 800, 450),
     end: img("1563013544-824ae1b704d3", "Dijital içerik", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "ai-creative-content-en": {
     hero: img("1521295121783-8a321d551ad2", "Content writing", PHOTOGRAPHERS.christinHume),
-    mid: img("5QgIuuBxKwM", "Creative work", PHOTOGRAPHERS.christinHumeAlt, 800, 450),
+    mid: img("1521295121783-8a321d551ad2", "Creative work", PHOTOGRAPHERS.christinHumeAlt, 800, 450),
     end: img("1677442136019-21780ecad995", "AI content", PHOTOGRAPHERS.growtika, 800, 450),
   },
   "ai-creative-midjourney-tr": {
-    hero: img("rymh7EZPqRs", "AI sanat", PHOTOGRAPHERS.steveJohnson),
-    mid: img("1684369175809-1b73fc4cb98f", "AI görsel", PHOTOGRAPHERS.shahadat, 800, 450),
+    hero: img("1677442136019-21780ecad995", "AI sanat", PHOTOGRAPHERS.steveJohnson),
+    mid: img("1677442136019-21780ecad995", "AI görsel", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1563013544-824ae1b704d3", "Dijital sanat", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "ai-creative-midjourney-en": {
-    hero: img("1684369175809-1b73fc4cb98f", "AI art", PHOTOGRAPHERS.shahadat),
-    mid: img("rymh7EZPqRs", "Midjourney", PHOTOGRAPHERS.steveJohnson, 800, 450),
+    hero: img("1677442136019-21780ecad995", "AI art", PHOTOGRAPHERS.shahadat),
+    mid: img("1677442136019-21780ecad995", "Midjourney", PHOTOGRAPHERS.steveJohnson, 800, 450),
     end: img("1620712943543-bcc4688e7485", "AI design", PHOTOGRAPHERS.possessedPhotography, 800, 450),
   },
   "ai-vpn-access-chatgpt-tr": {
@@ -739,59 +739,59 @@ const imageDatabase: Record<string, BlogImageSet> = {
     end: img("1526374965328-7f61d4dc18c5", "Network", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "choosing-vpn-nord-surf-tr": {
-    hero: img("Wpnoqo2plFA", "VPN karşılaştırma", PHOTOGRAPHERS.mishaFeshchak),
+    hero: img("1556742049-0cfed4f6a45d", "VPN karşılaştırma", PHOTOGRAPHERS.mishaFeshchak),
     mid: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
     end: img("1454165804606-c3d57bc86b40", "Seçim", PHOTOGRAPHERS.scottGraham, 800, 450),
   },
   "choosing-vpn-nord-surf-en": {
     hero: img("1556742049-0cfed4f6a45d", "VPN comparison", PHOTOGRAPHERS.blakeWisz),
-    mid: img("Wpnoqo2plFA", "Choice", PHOTOGRAPHERS.mishaFeshchak, 800, 450),
+    mid: img("1556742049-0cfed4f6a45d", "Choice", PHOTOGRAPHERS.mishaFeshchak, 800, 450),
     end: img("1454165804606-c3d57bc86b40", "Selection", PHOTOGRAPHERS.scottGraham, 800, 450),
   },
   "choosing-vpn-express-proton-tr": {
-    hero: img("08bOYnH_r_E", "Gizlilik karşılaştırma", PHOTOGRAPHERS.flyd),
+    hero: img("1614064641938-3bbee52942c7", "Gizlilik karşılaştırma", PHOTOGRAPHERS.flyd),
     mid: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "choosing-vpn-express-proton-en": {
     hero: img("1614064641938-3bbee52942c7", "Privacy", PHOTOGRAPHERS.flyd),
-    mid: img("08bOYnH_r_E", "Comparison", PHOTOGRAPHERS.flyd, 800, 450),
+    mid: img("1614064641938-3bbee52942c7", "Comparison", PHOTOGRAPHERS.flyd, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Choice", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "free-vs-paid-comparison-tr": {
-    hero: img("ZV_64LdGoao", "Karşılaştırma", PHOTOGRAPHERS.towfiquBarbhuiya),
+    hero: img("1554224155-6726b3ff858f", "Karşılaştırma", PHOTOGRAPHERS.towfiquBarbhuiya),
     mid: img("1554224155-6726b3ff858f", "Para", PHOTOGRAPHERS.rupixen, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Seçim", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "free-vs-paid-comparison-en": {
     hero: img("1554224155-6726b3ff858f", "Cost comparison", PHOTOGRAPHERS.rupixen),
-    mid: img("ZV_64LdGoao", "Money", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
+    mid: img("1554224155-6726b3ff858f", "Money", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
     end: img("1556742049-0cfed4f6a45d", "Comparison", PHOTOGRAPHERS.blakeWisz, 800, 450),
   },
   "free-vs-paid-subscription-tr": {
-    hero: img("mcSDtbWXUZU", "Abonelik", PHOTOGRAPHERS.towfiquBarbhuiya),
+    hero: img("1554224155-6726b3ff858f", "Abonelik", PHOTOGRAPHERS.towfiquBarbhuiya),
     mid: img("1554224155-6726b3ff858f", "Fiyat", PHOTOGRAPHERS.rupixen, 800, 450),
-    end: img("ZV_64LdGoao", "Maliyet", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
+    end: img("1554224155-6726b3ff858f", "Maliyet", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
   },
   "free-vs-paid-subscription-en": {
-    hero: img("ZV_64LdGoao", "Subscription cost", PHOTOGRAPHERS.towfiquBarbhuiya),
-    mid: img("mcSDtbWXUZU", "Plans", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
+    hero: img("1554224155-6726b3ff858f", "Subscription cost", PHOTOGRAPHERS.towfiquBarbhuiya),
+    mid: img("1554224155-6726b3ff858f", "Plans", PHOTOGRAPHERS.towfiquBarbhuiya, 800, 450),
     end: img("1554224155-6726b3ff858f", "Price", PHOTOGRAPHERS.rupixen, 800, 450),
   },
   "gaming-savings-console-tr": {
-    hero: img("1511512578047-dfea92ed4419", "Konsol", PHOTOGRAPHERS.kerdeSeverin),
+    hero: img("1552820728-8b83bb6b773f", "Konsol", PHOTOGRAPHERS.kerdeSeverin),
     mid: img("1552820728-8b83bb6b773f", "Kontrol", PHOTOGRAPHERS.florianOlivo, 800, 450),
     end: img("1538481199705-c710c4e965fc", "Oyun", PHOTOGRAPHERS.florianOlivo, 800, 450),
   },
   "gaming-savings-console-en": {
     hero: img("1538481199705-c710c4e965fc", "Gaming setup", PHOTOGRAPHERS.florianOlivo),
-    mid: img("1511512578047-dfea92ed4419", "Console", PHOTOGRAPHERS.kerdeSeverin, 800, 450),
+    mid: img("1552820728-8b83bb6b773f", "Console", PHOTOGRAPHERS.kerdeSeverin, 800, 450),
     end: img("1552820728-8b83bb6b773f", "Controller", PHOTOGRAPHERS.florianOlivo, 800, 450),
   },
   "gaming-savings-steam-tr": {
     hero: img("1542751371-adc38448a05e", "Steam", PHOTOGRAPHERS.nikitaKachanovsky),
     mid: img("1552820728-8b83bb6b773f", "PC oyun", PHOTOGRAPHERS.florianOlivo, 800, 450),
-    end: img("1511512578047-dfea92ed4419", "Kütüphane", PHOTOGRAPHERS.kerdeSeverin, 800, 450),
+    end: img("1552820728-8b83bb6b773f", "Kütüphane", PHOTOGRAPHERS.kerdeSeverin, 800, 450),
   },
   "gaming-savings-steam-en": {
     hero: img("1552820728-8b83bb6b773f", "PC gaming", PHOTOGRAPHERS.florianOlivo),
@@ -799,23 +799,23 @@ const imageDatabase: Record<string, BlogImageSet> = {
     end: img("1538481199705-c710c4e965fc", "Library", PHOTOGRAPHERS.florianOlivo, 800, 450),
   },
   "privacy-advanced-double-vpn-tr": {
-    hero: img("FlPc9_VocJ4", "Double VPN", PHOTOGRAPHERS.philippKatzenberger),
+    hero: img("1614064641938-3bbee52942c7", "Double VPN", PHOTOGRAPHERS.philippKatzenberger),
     mid: img("1526374965328-7f61d4dc18c5", "Multi-hop", PHOTOGRAPHERS.markusSpiske, 800, 450),
     end: img("1614064641938-3bbee52942c7", "Gelişmiş güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
   },
   "privacy-advanced-double-vpn-en": {
     hero: img("1614064641938-3bbee52942c7", "Double encryption", PHOTOGRAPHERS.flyd),
-    mid: img("FlPc9_VocJ4", "Multi-hop", PHOTOGRAPHERS.philippKatzenberger, 800, 450),
+    mid: img("1614064641938-3bbee52942c7", "Multi-hop", PHOTOGRAPHERS.philippKatzenberger, 800, 450),
     end: img("1526374965328-7f61d4dc18c5", "Advanced", PHOTOGRAPHERS.markusSpiske, 800, 450),
   },
   "privacy-advanced-ram-servers-tr": {
-    hero: img("d1eaoAabeXs", "RAM sunucu", PHOTOGRAPHERS.liamBriese),
+    hero: img("1558494949-ef010cbdcc31", "RAM sunucu", PHOTOGRAPHERS.liamBriese),
     mid: img("1558494949-ef010cbdcc31", "Sunucu", PHOTOGRAPHERS.taylorVick, 800, 450),
     end: img("1518770660439-4636190af475", "Donanım", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
   "privacy-advanced-ram-servers-en": {
     hero: img("1518770660439-4636190af475", "RAM servers", PHOTOGRAPHERS.alexKotliarskyi),
-    mid: img("d1eaoAabeXs", "Datacenter", PHOTOGRAPHERS.liamBriese, 800, 450),
+    mid: img("1558494949-ef010cbdcc31", "Datacenter", PHOTOGRAPHERS.liamBriese, 800, 450),
     end: img("1558494949-ef010cbdcc31", "Server", PHOTOGRAPHERS.taylorVick, 800, 450),
   },
   "travel-savings-flights-tr": {
@@ -830,11 +830,11 @@ const imageDatabase: Record<string, BlogImageSet> = {
   },
   "travel-savings-hotels-tr": {
     hero: img("1566073771259-6a8506099945", "Otel rezervasyon", PHOTOGRAPHERS.manuelMoreno),
-    mid: img("1445019687559-f86484ec61b7", "Otel odası", PHOTOGRAPHERS.manuelMoreno, 800, 450),
+    mid: img("1566073771259-6a8506099945", "Otel odası", PHOTOGRAPHERS.manuelMoreno, 800, 450),
     end: img("1554224155-6726b3ff858f", "İndirim", PHOTOGRAPHERS.rupixen, 800, 450),
   },
   "travel-savings-hotels-en": {
-    hero: img("1445019687559-f86484ec61b7", "Hotel room", PHOTOGRAPHERS.manuelMoreno),
+    hero: img("1566073771259-6a8506099945", "Hotel room", PHOTOGRAPHERS.manuelMoreno),
     mid: img("1566073771259-6a8506099945", "Booking", PHOTOGRAPHERS.manuelMoreno, 800, 450),
     end: img("1554224155-6726b3ff858f", "Discount", PHOTOGRAPHERS.rupixen, 800, 450),
   },

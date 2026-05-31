@@ -1,7 +1,7 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { getBlogPosts } from "@/lib/blog";
-import { BlogCard } from "@/components/blog/blog-card";
+import { BlogFilter } from "@/components/blog/blog-filter";
 import { BlogStats } from "@/components/blog/blog-stats";
 import type { Metadata } from "next";
 
@@ -47,13 +47,9 @@ export default async function BlogPage({ params }: Props) {
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
-
-        {posts.length === 0 && (
+        {posts.length > 0 ? (
+          <BlogFilter posts={posts} locale={locale as "tr" | "en"} />
+        ) : (
           <div className="text-center py-12">
             <p className="text-ink-muted">No blog posts available yet.</p>
           </div>
