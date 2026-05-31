@@ -16,6 +16,7 @@
     "filter": "Feature filter",
     "devices": "Devices",
     "guides": "Guides",
+    "tools": "Tools",
     "methodology": "Methodology",
     "about": "About",
     "search": "Search",
@@ -128,40 +129,214 @@
     "accept": "OK"
   },
   "methodology": {
-    "metaTitle": "Our Test Methodology",
-    "metaDescription": "vpncompaire evaluates every VPN against six objective criteria: privacy, independent audits, speed, streaming compatibility, pricing transparency and ease of use.",
+    "metaTitle": "Our Test Methodology — How We Evaluate VPNs",
+    "metaDescription": "vpncompaire's VPN testing process: independence statement, speed measurements, leak tests, streaming verification, no-logs audit review, scoring system and transparency standards.",
     "badge": "Transparent methodology",
-    "h1": "Our Test Methodology",
-    "intro": "Every VPN on the site is evaluated against the same six objective criteria. Affiliate commission does not influence rankings or scores. Below we explain how each criterion is measured — transparency is the prerequisite of trust.",
-    "criteria": {
-      "privacy": {
-        "title": "Privacy policy and jurisdiction",
-        "body": "We evaluate the provider's logging policy, the country its headquarters is in (5/9/14 Eyes alliances, data retention laws) and how it responds to legal requests. Jurisdiction determines how strongly a no-logs claim is actually protected."
+    "h1": "Our VPN Testing Methodology",
+    "intro": "Every VPN on the site is evaluated across five separate test areas using the same standardised procedure. Affiliate commissions do not influence rankings or scores — this page explains in detail how each test is performed, which tools we use and the assumptions behind the scoring.",
+    "lastUpdated": "Last updated",
+    "lastUpdatedDate": "May 25, 2026",
+    "toc": {
+      "title": "On this page",
+      "independence": "1. Independence statement",
+      "tests": "2. Testing methodology",
+      "scoring": "3. Scoring system",
+      "freshness": "4. Freshness policy",
+      "transparency": "5. Transparency and limitations"
+    },
+    "independence": {
+      "title": "1. Independence and Affiliate Disclosure",
+      "intro": "To earn your trust we openly disclose our commercial relationships. The breakdown below shows which providers pay us a commission and which ones we have no commercial ties with.",
+      "withAffiliateTitle": "Providers we earn commission from",
+      "withAffiliateBody": "We participate in the affiliate programmes of the following providers. If a reader starts a subscription via our site we receive a commission: NordVPN, Surfshark, ExpressVPN, Proton VPN, Private Internet Access, CyberGhost, IPVanish, Windscribe, TunnelBear.",
+      "withoutAffiliateTitle": "Providers we do not earn from",
+      "withoutAffiliateBody": "Providers without an affiliate programme — such as Mullvad — are still included in our rankings. We make zero revenue from them, yet they receive identical treatment in scoring. This is the most concrete signal of our impartiality.",
+      "pledgeTitle": "Our editorial pledge",
+      "pledgeItems": {
+        "0": "Every VPN subscription we test is purchased with our own money; we do not accept free or sponsored accounts from providers.",
+        "1": "No provider has pre-publication review, edit or veto rights over our content.",
+        "2": "Rankings, scores and critical notes are the responsibility of the editorial team; sales and marketing have no input.",
+        "3": "A provider's score is calculated independently of commission rate; a higher-paying provider does not appear above a lower-scoring one."
       },
-      "audits": {
-        "title": "Independent audits",
-        "body": "The presence, frequency and scope of third-party audit reports (Deloitte, KPMG, Cure53, Securitum, Assured AB, etc.) drive the weight of this criterion. Court-proven no-logs (e.g. PIA) earns the highest score."
-      },
+      "linkText": "See the Advertising Disclosure page for full details."
+    },
+    "tests": {
+      "title": "2. Testing Methodology",
+      "intro": "Every VPN is tested in five categories using the same procedure. The detailed protocol for each category is below.",
       "speed": {
-        "title": "Speed",
-        "body": "We run real speed tests against the same baseline at near, medium and far server distances. WireGuard and proprietary protocols (Lightway, NordLynx) are scored separately. Peak-hour performance is also checked."
+        "title": "a) Speed test",
+        "summary": "Measurements over the same baseline, with fixed hardware and ISP, across three geographic regions.",
+        "toolsLabel": "Tools used",
+        "tools": "Ookla Speedtest CLI, Cloudflare speed.cloudflare.com (cross-verification), fast.com (CDN-based sanity check).",
+        "locationsLabel": "Test locations",
+        "locations": "Turkey (Istanbul, near server), Germany (Frankfurt, medium distance), USA (New York, far distance).",
+        "methodLabel": "Procedure",
+        "methodSteps": {
+          "0": "Before any test we take 5 measurements with the VPN off and compute the baseline (download, upload, ping).",
+          "1": "For each VPN we select the preferred protocol (WireGuard / Lightway / NordLynx).",
+          "2": "On every server we take 10 measurements 60 seconds apart; the highest and lowest are discarded and the remaining 8 are averaged.",
+          "3": "We run separate tests at a fixed off-peak time (09:00–11:00) and at peak (20:00–22:00).",
+          "4": "Results are reported as the percentage drop versus baseline; raw speed alone is not meaningful."
+        },
+        "metricsLabel": "Metrics we record",
+        "metrics": "Download (Mbps), Upload (Mbps), Ping (ms), Jitter (ms), packet loss (%)."
+      },
+      "security": {
+        "title": "b) Security and leak tests",
+        "summary": "Technical tests that verify how much protection a VPN really delivers.",
+        "toolsLabel": "Tools used",
+        "tools": "ipleak.net, dnsleaktest.com (extended test), browserleaks.com (WebRTC + canvas), test-ipv6.com, Wireshark (TCP-level packet inspection).",
+        "checksLabel": "Checks performed",
+        "checks": {
+          "0": "IPv4 leak: whether the real IP is exposed while the VPN is active.",
+          "1": "IPv6 leak: many home connections have IPv6 enabled; does the provider block it?",
+          "2": "WebRTC leak: tested separately in Chrome, Firefox, Edge and Safari.",
+          "3": "DNS leak: do queries go to the VPN's own resolver or to the ISP? Verified via the extended test across 6 different resolvers.",
+          "4": "Kill switch: the VPN process is forcefully killed during an active connection (Task Manager / kill -9) and we verify that internet access is actually severed."
+        },
+        "configLabel": "Configuration review",
+        "config": "We check whether the provider uses its own DNS, whether the default protocol is modern (WireGuard / OpenVPN UDP), the cipher (AES-256-GCM or ChaCha20) and certificate validation."
       },
       "streaming": {
-        "title": "Streaming compatibility",
-        "body": "Access tests on platforms like Netflix US/UK/TR, Disney+, BBC iPlayer, BluTV and Exxen using different servers. Providers that are persistently blocked score lower."
+        "title": "c) Streaming test",
+        "summary": "How reliable is access to geo-restricted platforms?",
+        "platformsLabel": "Platforms tested",
+        "platforms": "Netflix (US, UK, JP, TR libraries), Disney+, BBC iPlayer, YouTube TV, Amazon Prime Video, BluTV and Exxen.",
+        "methodLabel": "Procedure",
+        "methodSteps": {
+          "0": "We log into each platform with our own paid subscription via parallel browser sessions.",
+          "1": "Every target region is tested across 3 different servers (e.g. US East, US West, US Central).",
+          "2": "For providers that offer Smart DNS, obfuscated or streaming-optimised servers, standard and special servers are reported separately.",
+          "3": "We also record video quality (480p / 1080p / 4K) and buffer time during the test."
+        },
+        "resultLabel": "Result metric",
+        "result": "Success rate per platform (%) — 9/9 working servers means 100%, none working means 0%."
       },
-      "pricing": {
-        "title": "Pricing transparency",
-        "body": "The gap between the first-purchase price and the renewal price, hidden fees, the real money-back policy, and the genuine monthly cost of long-term plans are all reviewed."
+      "privacy": {
+        "title": "d) Privacy and no-logs verification",
+        "summary": "Evidence-based verification that goes beyond marketing claims.",
+        "auditsLabel": "Independent audit review",
+        "audits": "No-logs and application-security reports published by PwC, Deloitte, KPMG, Cure53, Securitum and Assured AB are read in their original form. The scope (servers, code or configuration), cadence and limitations of each report feed into the score.",
+        "jurisdictionLabel": "Jurisdiction analysis",
+        "jurisdiction": "We review which 5/9/14-Eyes alliance the provider's home office belongs to, data-retention laws and history of legal compulsion. Jurisdictions like Panama, Switzerland and BVI are advantageous; the US and UK are disadvantageous.",
+        "policyLabel": "Policy review",
+        "policy": "The privacy policy and terms are read end to end. Existence of a transparency report and a warrant canary is checked.",
+        "infraLabel": "Infrastructure verification",
+        "infra": "Claims of RAM-only servers (no disks, everything wiped on reboot) are validated against provider documentation and independent reports."
       },
       "usability": {
-        "title": "Ease of use",
-        "body": "App interface, initial setup time, server-picker ergonomics, auto-connect rules and customer-support accessibility (live chat, response time) are all assessed."
+        "title": "e) Usability, support and quality",
+        "summary": "The details that make daily use pleasant or painful.",
+        "appsLabel": "Apps",
+        "apps": "Windows, macOS, iOS, Android and Linux apps are installed on real devices; install time, first connect time and UI ergonomics are documented.",
+        "dailyLabel": "Daily use",
+        "daily": "Each VPN is used daily for at least 14 days: browsing, email, video calls, gaming and file transfer. Unstable connections, unexpected drops and battery drain are reported.",
+        "supportLabel": "Customer support test",
+        "support": "We contact live chat at 3 different times (morning, afternoon, night). Response time, resolution quality and whether the agent actually has technical knowledge are evaluated.",
+        "refundLabel": "Refund test",
+        "refund": "Does the money-back guarantee really work? At the end of the test cycle we cancel the subscription and request a refund; we report whether the process is friction-free, how many days it takes and how much is actually refunded."
       }
+    },
+    "scoring": {
+      "title": "3. Scoring System",
+      "intro": "The results of the five test categories are mapped onto six scoring dimensions. Each dimension is rated 1–10 and contributes to the final score with the weights below.",
+      "tableHeaderDimension": "Dimension",
+      "tableHeaderWeight": "Weight",
+      "tableHeaderDescription": "Description",
+      "dimensions": {
+        "security": {
+          "name": "Security",
+          "weight": "25%",
+          "description": "Leak-test results, kill-switch reliability, encryption standard, audit coverage."
+        },
+        "privacy": {
+          "name": "Privacy",
+          "weight": "20%",
+          "description": "Jurisdiction, no-logs audits, RAM-only infrastructure, transparency report."
+        },
+        "speed": {
+          "name": "Speed",
+          "weight": "20%",
+          "description": "Percentage drop versus baseline; weighted average across three regions."
+        },
+        "streaming": {
+          "name": "Streaming",
+          "weight": "15%",
+          "description": "Weighted average of per-platform success rates."
+        },
+        "usability": {
+          "name": "Usability",
+          "weight": "10%",
+          "description": "App quality, support response time, ease of first-time setup."
+        },
+        "pricing": {
+          "name": "Pricing",
+          "weight": "10%",
+          "description": "Renewal-price transparency, true monthly cost, refund policy terms."
+        }
+      },
+      "formulaTitle": "Calculation",
+      "formula": "Final score = Σ(dimension score × weight). Published as a decimal between 0.0 and 10.0."
+    },
+    "freshness": {
+      "title": "4. Freshness Policy",
+      "intro": "The VPN market changes quickly. An independent audit may be strong evidence today and stale in two years. That is why we refresh our data regularly and display it transparently on every page.",
+      "items": {
+        "0": "Every VPN goes through the full test pipeline at least twice per year.",
+        "1": "Each review page shows 'Last tested: DD/MM/YYYY' clearly at the top.",
+        "2": "If a major event occurs (breach, ownership change, new audit, critical feature) we run an emergency re-test.",
+        "3": "Pricing is tracked via a separate 'pricingVerifiedAt' field; we adapt to market price changes within 30 days."
+      }
+    },
+    "transparency": {
+      "title": "5. Transparency and Limitations",
+      "envTitle": "Our test environment",
+      "envItems": {
+        "0": "Hardware: Windows 11 (Intel i7, 32 GB RAM), MacBook Pro M2, Pixel 8 (Android 14), iPhone 15 (iOS 17).",
+        "1": "ISP baseline: Türk Telekom fibre (1 Gbps down / 100 Mbps up).",
+        "2": "Primary test location: Istanbul, Turkey.",
+        "3": "Browsers: latest stable Chrome, Firefox, Edge and Safari."
+      },
+      "limitsTitle": "We disclose our limitations openly",
+      "limitsItems": {
+        "0": "Speed tests are specific to one ISP and location; results may differ in your geography.",
+        "1": "Streaming success rates change over time — platforms continuously update their VPN detection.",
+        "2": "Some tests are synthetic (controlled environments); real-world conditions may diverge slightly.",
+        "3": "We state explicitly that no independent certification body audits us; publishing our methodology openly is our strongest quality safeguard.",
+        "4": "Users should make the final call based on their own priorities (privacy vs speed vs streaming)."
+      },
+      "contactTitle": "Feedback",
+      "contactBody": "If you have a question or suggestion about the methodology, reach out via the contact page. If you find a serious error we verify it, update the affected page and publish a change note."
     },
     "editorial": {
       "title": "Editorial independence",
       "body": "We disclose affiliate revenue transparently (see <link>Advertising Disclosure</link>). VPN providers without an affiliate programme are also included in our ranking; this is the most direct signal of our impartiality."
+    },
+    "criteria": {
+      "privacy": {
+        "title": "Privacy policy and jurisdiction",
+        "body": "We evaluate the provider's logging policy, the country its headquarters is in (5/9/14 Eyes alliances, data retention laws) and how it responds to legal requests."
+      },
+      "audits": {
+        "title": "Independent audits",
+        "body": "The presence, frequency and scope of third-party audit reports (Deloitte, KPMG, Cure53, Securitum, Assured AB) drive the weight of this criterion."
+      },
+      "speed": {
+        "title": "Speed",
+        "body": "We run real speed tests against the same baseline at near, medium and far server distances."
+      },
+      "streaming": {
+        "title": "Streaming compatibility",
+        "body": "Access tests on platforms like Netflix US/UK/TR, Disney+, BBC iPlayer, BluTV and Exxen using different servers."
+      },
+      "pricing": {
+        "title": "Pricing transparency",
+        "body": "The gap between the first-purchase price and the renewal price, hidden fees and the real money-back policy are all reviewed."
+      },
+      "usability": {
+        "title": "Ease of use",
+        "body": "App interface, initial setup time, server-picker ergonomics and customer-support accessibility are all assessed."
+      }
     }
   },
   "reviewsHub": {
@@ -646,6 +821,14 @@
     "faqH2": "Frequently asked questions",
     "relatedTitle": "Other pages"
   },
+  "lastTested": {
+    "label": "Last Tested",
+    "environment": "Test Environment",
+    "testerLocation": "Location",
+    "vpnVersion": "VPN Version",
+    "testDuration": "Test Duration",
+    "editorNote": "Editor's Note"
+  },
   "device": {
     "breadcrumbHome": "Home",
     "breadcrumbHub": "Devices",
@@ -825,6 +1008,117 @@
       "eglence-medya": "Entertainment & Media",
       "alisveris-tasarruf": "Shopping & Savings",
       "cihaz-platform": "Device & Platform"
+    }
+  },
+  "tools": {
+    "metaTitle": "VPN Tools - Free IP, DNS, WebRTC and Speed Tests | vpncompaire",
+    "metaDescription": "Free tools that verify your VPN actually works: IP address lookup, DNS leak test, WebRTC leak test and speed test.",
+    "breadcrumb": "Tools",
+    "indexTitle": "Free VPN Testing Tools",
+    "indexSubtitle": "Four tools that prove your VPN is truly anonymous and fast. No data is stored on our servers.",
+    "cards": {
+      "ip": {
+        "title": "My IP Address",
+        "description": "Instantly see your real IP address, location and ISP."
+      },
+      "dns": {
+        "title": "DNS Leak Test",
+        "description": "Check where your DNS queries go while your VPN is on."
+      },
+      "webrtc": {
+        "title": "WebRTC Leak Test",
+        "description": "Detect whether your browser leaks your real IP via WebRTC."
+      },
+      "speed": {
+        "title": "VPN Speed Test",
+        "description": "Measure the speed drop caused by your VPN."
+      }
+    },
+    "common": {
+      "tryAgain": "Run again",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "loading": "Testing...",
+      "privacyNote": "Results stay in your browser. We never log this data.",
+      "ctaTitle": "Want real protection from a VPN?",
+      "ctaBody": "Compare the top VPNs tested with our independent methodology.",
+      "ctaButton": "See the best VPNs"
+    },
+    "ip": {
+      "metaTitle": "What is My IP? - Free IP Address Lookup 2026 | vpncompaire",
+      "metaDescription": "Instantly see your IP address, ISP, country, city and browser fingerprint. Free, log-free and fast IP lookup tool.",
+      "breadcrumb": "My IP",
+      "title": "Your IP Address",
+      "subtitle": "Websites identify you with this data. Without a VPN, who you are, where you are and what browser you use is fully visible.",
+      "ipKicker": "IP Address",
+      "ipv4": "IPv4",
+      "ipv6": "IPv6",
+      "isp": "Internet Service Provider (ISP)",
+      "country": "Country",
+      "city": "City",
+      "region": "Region",
+      "timezone": "Timezone",
+      "fingerprint": "Browser Fingerprint",
+      "userAgent": "User-Agent",
+      "screen": "Screen resolution",
+      "language": "Language",
+      "platform": "Platform",
+      "unknown": "Unknown",
+      "explainTitle": "What is an IP address? Why hide it?",
+      "explainBody": "Your IP address is your identity card on the internet. Every site you visit can use it to track your physical location, ISP and behavior. A VPN masks your IP and breaks those trails."
+    },
+    "dns": {
+      "metaTitle": "DNS Leak Test 2026 - Free | vpncompaire",
+      "metaDescription": "Is your VPN leaking DNS? Use our free browser-based test to see your DNS resolvers and protect your privacy.",
+      "breadcrumb": "DNS Leak Test",
+      "title": "DNS Leak Test",
+      "subtitle": "Even with a VPN on, your DNS queries might still go to your ISP. This test reveals which resolver you actually use.",
+      "startButton": "Start test",
+      "resultsTitle": "Test results",
+      "detectedServers": "Detected DNS servers",
+      "noLeak": "No leak",
+      "leakDetected": "Possible leak detected",
+      "noLeakBody": "Your DNS queries go through a single resolver. If you use a VPN, make sure it belongs to your provider.",
+      "leakBody": "Multiple distinct resolvers detected. Your ISP can still see the sites you visit.",
+      "explainTitle": "What is a DNS leak, why is it dangerous?",
+      "explainBody": "DNS translates domain names into IP addresses. Even when you use a VPN, misconfiguration can route DNS queries to your ISP, exposing your browsing history."
+    },
+    "webrtc": {
+      "metaTitle": "WebRTC Leak Test - Is Your Real IP Exposed? | vpncompaire",
+      "metaDescription": "WebRTC can leak your real IP even with a VPN on. Use this free browser test to check.",
+      "breadcrumb": "WebRTC Leak Test",
+      "title": "WebRTC Leak Test",
+      "subtitle": "WebRTC powers video calls in your browser. Unfortunately, it can leak your real IP even when your VPN is on.",
+      "startButton": "Start test",
+      "resultsTitle": "Test results",
+      "detectedIps": "Detected IPs",
+      "localIp": "Local IP",
+      "publicIp": "Public IP",
+      "noLeak": "No leak",
+      "leakDetected": "WebRTC leak detected",
+      "noIps": "No IPs detected",
+      "noLeakBody": "Your public IP is not exposed through WebRTC. Your browser is well configured.",
+      "leakBody": "WebRTC is exposing your public IP. Sites can see your real location even with a VPN.",
+      "fixTitle": "How to disable WebRTC",
+      "fixChrome": "Chrome: install the WebRTC Network Limiter extension.",
+      "fixFirefox": "Firefox: open about:config and set media.peerconnection.enabled to false.",
+      "fixBrave": "Brave: Settings > Privacy > WebRTC IP handling policy = Default Public Interface Only."
+    },
+    "speed": {
+      "metaTitle": "VPN Speed Test - Free Internet Speed Check 2026 | vpncompaire",
+      "metaDescription": "Measure your VPN's real speed. Test download speed and latency using Cloudflare infrastructure.",
+      "breadcrumb": "VPN Speed Test",
+      "title": "VPN Speed Test",
+      "subtitle": "Turn on your VPN before running this test. Run it again with the VPN off and compare.",
+      "startButton": "Start speed test",
+      "downloadSpeed": "Download speed",
+      "latency": "Latency",
+      "fileSize": "Test payload size",
+      "embedTitle": "Cloudflare Speed Test",
+      "embedNote": "For a more in-depth test use Cloudflare's official tool.",
+      "openCloudflare": "Open speed.cloudflare.com",
+      "explainTitle": "How much speed loss with a VPN is normal?",
+      "explainBody": "A VPN encrypts your traffic and routes it through a remote server. A 10-30% speed drop is typical. If you lose more than 50%, switch servers or try another protocol (WireGuard is usually fastest)."
     }
   }
 }

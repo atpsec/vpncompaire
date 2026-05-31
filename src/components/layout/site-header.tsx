@@ -16,6 +16,7 @@ const navItems = [
   { href: "/blog", labelKey: "blog" },
   { href: "/sana-uygun-vpn", labelKey: "quiz" },
   { href: "/cihazlar", labelKey: "devices" },
+  { href: "/araclar", labelKey: "tools" },
   { href: "/rehber", labelKey: "guides" },
 ] as const;
 

@@ -13,6 +13,7 @@ import { getProduct } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { LastTestedBadge } from "@/components/product/last-tested-badge";
 
 export type ComparisonCategory = {
   name: string;
@@ -88,6 +89,21 @@ export async function ComparisonPage({
         </header>
 
         <DataDisclaimer verifiedAt={a.pricingVerifiedAt} />
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          <LastTestedBadge
+            lastTestedAt={a.lastTestedAt}
+            testEnvironment={a.testEnvironment}
+            editorNotes={a.editorNotes}
+            className="mt-0"
+          />
+          <LastTestedBadge
+            lastTestedAt={b.lastTestedAt}
+            testEnvironment={b.testEnvironment}
+            editorNotes={b.editorNotes}
+            className="mt-0"
+          />
+        </div>
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           <Card className="p-6">

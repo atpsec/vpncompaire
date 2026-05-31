@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
+import { LastTestedBadge } from "@/components/product/last-tested-badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
@@ -140,6 +141,12 @@ function ReviewView({
         </header>
 
         <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />
+
+        <LastTestedBadge
+          lastTestedAt={product.lastTestedAt}
+          testEnvironment={product.testEnvironment}
+          editorNotes={product.editorNotes}
+        />
 
         <Card className="mt-8 p-6">
           <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
