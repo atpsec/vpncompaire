@@ -517,66 +517,11 @@ const imageDatabase: Record<string, BlogImageSet> = {
 // Alias eşleştirmeleri (frontmatter'daki farklı isimlendirmeler için)
 // Her blog yazısı unique bir görsel setine map edilir
 const aliases: Record<string, string> = {
-  // Streaming aliases
+  // Basic aliases for different naming conventions
   "streaming-vpn": "streaming-content",
   "remote-work-vpn": "remote-work",
   "vpn-selection": "choosing-vpn",
   "vpn-speed": "speed-performance",
-
-  // Travel savings - 4 files, map to different keys
-  "travel-savings": "flight-tickets-savings",  // Default for first file
-
-  // Gaming savings - 4 files
-  "gaming-savings": "steam-regional",
-
-  // Privacy advanced - 4 files
-  "privacy-advanced": "dns-leak-test",
-
-  // Free vs paid - 4 files
-  "free-vs-paid": "free-vs-paid-vpn",
-
-  // Choosing VPN - 4 files
-  "choosing-vpn": "nordvpn-surfshark",
-
-  // AI VPN access - 4 files
-  "ai-vpn-access": "chatgpt-turkey-access",
-
-  // AI creative - 4 files
-  "ai-creative": "ai-content-creation",
-
-  // 2x duplicates
-  "youtube-premium": "youtube-premium",
-  "wireguard-openvpn": "wireguard-openvpn",
-  "vpn-protocols-explained": "vpn-protocols",
-  "vpn-privacy-security-basics": "privacy-security",
-  "vpn-legal": "is-vpn-legal",
-  "vpn-basics": "vpn-basics",
-  "travel-vpn": "travel-vpn",
-  "streaming-uk": "disney-bbc",
-  "streaming-sports": "live-sports-streaming",
-  "streaming-music": "spotify-regional",
-  "streaming-content": "streaming-content",
-  "streaming-anime": "anime-crunchyroll",
-  "split-tunneling": "split-tunneling",
-  "speed-performance": "speed-performance",
-  "software-subscription": "software-subscription",
-  "remote-work": "remote-work",
-  "learning-savings": "online-course-savings",
-  "kill-switch-explained": "kill-switch",
-  "journalism-vpn": "journalist-activist",
-  "finance-vpn": "investor-trader",
-  "education-vpn": "educator-teacher",
-  "dns-leak-test": "dns-leak-test",
-  "device-tv": "apple-tv-vpn",
-  "device-router": "router-vpn",
-  "device-mac": "macos-vpn",
-  "device-linux": "linux-vpn",
-  "device-ios": "ios-vpn-shortcuts",
-  "device-console": "xbox-playstation",
-  "chatgpt-plus-pricing": "chatgpt-plus-pricing",
-  "ai-tools-comparison": "claude-gemini-access",
-  "ai-security": "ai-phishing-deepfake",
-  "ai-privacy": "ai-tools-privacy",
 };
 
 const FALLBACK_IMAGES: BlogImageSet = imageDatabase["vpn-basics"];
