@@ -8,9 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { AudiencePicks } from "@/components/audience/audience-picks";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
-export const metadata: Metadata = {
+const baseMeta: Metadata = {
   title: "Yaşlılar İçin En İyi VPN (2026) — Basit Kurulum + Dolandırıcılık Koruması",
   description:
     "Yaşlı kullanıcılar için VPN: tek tıklama bağlantı, dolandırıcılık/phishing koruması, sade Türkçe arayüz. Anne-baban için en uygun 3 VPN.",
@@ -33,6 +33,18 @@ export const metadata: Metadata = {
 };
 
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    ...baseMeta,
+    alternates: localizedAlternates("/rehber/yaslilar-icin-vpn", locale),
+    openGraph: {
+      ...baseMeta.openGraph,
+      url: absoluteUrl("/rehber/yaslilar-icin-vpn", locale),
+    },
+  };
+}
 
 const faqs = [
   {

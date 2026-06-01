@@ -14,7 +14,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -26,11 +26,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/araclar") },
+    alternates: localizedAlternates("/araclar", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar"),
+      url: absoluteUrl("/araclar", locale),
       type: "website",
     },
   };

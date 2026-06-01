@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { RefundBody, getRefundContent } from "./_body";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/iptal-ve-iade") },
+    alternates: localizedAlternates("/iptal-ve-iade", locale),
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: absoluteUrl("/iptal-ve-iade"),
+      url: absoluteUrl("/iptal-ve-iade", locale),
       type: "article",
     },
   };

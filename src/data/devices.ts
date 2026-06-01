@@ -8,7 +8,7 @@ export type DevicePick = {
 
 export type DeviceSetupMethod = {
   name: string;
-  difficulty: "Kolay" | "Orta" | "İleri düzey";
+  difficulty: "Kolay" | "Orta" | "İleri düzey" | "Easy" | "Medium" | "Advanced";
   description: string;
   whenToUse: string;
 };
@@ -22,6 +22,8 @@ export type DeviceContent = {
   slug: string;
   device: string;
   shortName: string;
+  metaTitle: string;
+  metaDescription: string;
   tagline: string;
   summary: string;
   whyMatters: string[];
@@ -42,6 +44,9 @@ export const devices: DeviceContent[] = [
     slug: "android",
     device: "Android telefon ve tablet",
     shortName: "Android",
+    metaTitle: "Android İçin En İyi VPN (2026) — Telefon ve Tablet Rehberi",
+    metaDescription:
+      "Android telefon ve tablette VPN neden gerekli, nasıl kurulur, hangi sağlayıcı en uygun? Kill switch, split tunneling ve Play Store önerileri.",
     tagline:
       "Google'ın veri toplama ekosisteminden çıkmak ve halka açık Wi-Fi'da güvenlik için Android'de VPN şart.",
     summary:
@@ -145,6 +150,9 @@ export const devices: DeviceContent[] = [
     slug: "iphone",
     device: "iPhone",
     shortName: "iPhone",
+    metaTitle: "iPhone İçin En İyi VPN (2026) — iOS Kurulum ve Öneriler",
+    metaDescription:
+      "iPhone'da VPN neden gerekli, App Store uygulamaları, iCloud Private Relay ile çakışmalar ve günlük kullanım için en iyi seçimler.",
     tagline:
       "Apple güçlü gizlilik markası taşır ama bu IP adresini ve trafiği kapatmaz — iPhone'da da VPN'in yeri farklı.",
     summary:
@@ -248,6 +256,9 @@ export const devices: DeviceContent[] = [
     slug: "ipad",
     device: "iPad",
     shortName: "iPad",
+    metaTitle: "iPad İçin En İyi VPN (2026) — Streaming ve Üretkenlik Rehberi",
+    metaDescription:
+      "iPad'de VPN kurulumu, Stage Manager ile uyumluluk, streaming için en iyi sağlayıcılar ve cihaza özel dikkat noktaları.",
     tagline:
       "Büyük ekran, daha fazla streaming, daha çok genel ağ kullanımı — iPad'in saldırı yüzeyi telefondan farklı.",
     summary:
@@ -350,6 +361,9 @@ export const devices: DeviceContent[] = [
     slug: "smart-tv",
     device: "Smart TV (Samsung, LG, Android TV, Apple TV)",
     shortName: "Smart TV",
+    metaTitle: "Smart TV İçin En İyi VPN (2026) — Samsung, LG, Android TV, Apple TV",
+    metaDescription:
+      "Samsung Tizen ve LG webOS'a VPN nasıl yüklenir? Router seviyesinde VPN, Smart DNS, Android TV ve Apple TV (tvOS 17+) için detaylı rehber.",
     tagline:
       "Akıllı TV'lerin çoğu VPN uygulaması yüklenemez — doğru çözüm cihaza değil, ağa kurmaktan geçer.",
     summary:

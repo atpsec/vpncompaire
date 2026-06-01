@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { CostCalculator } from "@/components/calc/cost-calculator";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -20,11 +20,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/hesaplayici") },
+    alternates: localizedAlternates("/hesaplayici", locale),
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: absoluteUrl("/hesaplayici"),
+      url: absoluteUrl("/hesaplayici", locale),
       type: "website",
     },
   };

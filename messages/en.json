@@ -21,7 +21,12 @@
     "about": "About",
     "search": "Search",
     "menu": "Menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "homeAria": "vpncompaire home",
+    "primaryNav": "Main navigation",
+    "mobileNav": "Mobile menu",
+    "language": "Language",
+    "followUs": "Follow us"
   },
   "common": {
     "readReview": "Read review",
@@ -53,6 +58,7 @@
       "trust": {
         "tested": "VPNs tested",
         "audits": "independent audits reviewed",
+        "hours": "hours tested",
         "updated": "Last updated"
       }
     },

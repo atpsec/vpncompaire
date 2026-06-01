@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { localizedAlternates } from "@/lib/site";
 import { TrBody, EnBody } from "./_body";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/reklam-aciklamasi") },
+    alternates: localizedAlternates("/reklam-aciklamasi", locale),
   };
 }
 

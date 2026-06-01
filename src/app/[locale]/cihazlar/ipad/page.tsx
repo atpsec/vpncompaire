@@ -3,16 +3,20 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { DevicePage } from "@/components/device/device-page";
 import { getDevice } from "@/data/devices";
-import { absoluteUrl } from "@/lib/site";
-
-export const metadata: Metadata = {
-  title: "iPad İçin En İyi VPN (2026) — Streaming ve Üretkenlik Rehberi",
-  description:
-    "iPad'de VPN kurulumu, Stage Manager ile uyumluluk, streaming için en iyi sağlayıcılar ve cihaza özel dikkat noktaları.",
-  alternates: { canonical: absoluteUrl("/cihazlar/ipad") },
-};
+import { localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const device = getDevice("ipad", locale as "tr" | "en");
+  if (!device) return {};
+  return {
+    title: device.metaTitle,
+    description: device.metaDescription,
+    alternates: localizedAlternates("/cihazlar/ipad", locale),
+  };
+}
 
 export default async function Page({ params }: Props) {
   const { locale } = await params;

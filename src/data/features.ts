@@ -30,7 +30,9 @@ export const featureMatrix: Record<string, FeatureFlags> = {
   expressvpn: {
     turkeyServer: true,
     unlimitedDevices: false,
-    openSource: true,
+    // Only the Lightway protocol library is open source; the client app is not.
+    // The "open-source client" filter should therefore read false.
+    openSource: false,
     audited: true,
     portForwarding: false,
     multiHop: false,
@@ -113,7 +115,7 @@ export const featureMatrix: Record<string, FeatureFlags> = {
   },
   tunnelbear: {
     turkeyServer: false,
-    unlimitedDevices: false,
+    unlimitedDevices: true,
     openSource: false,
     audited: true,
     portForwarding: false,

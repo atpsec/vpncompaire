@@ -6,9 +6,9 @@ const COMMON_RELATED = [
 ];
 
 const DIFFICULTY = {
-  easy: "Kolay" as const,
-  medium: "Orta" as const,
-  advanced: "İleri düzey" as const,
+  easy: "Easy" as const,
+  medium: "Medium" as const,
+  advanced: "Advanced" as const,
 };
 
 export const devicesEn: DeviceContent[] = [
@@ -16,6 +16,9 @@ export const devicesEn: DeviceContent[] = [
     slug: "android",
     device: "Android phones and tablets",
     shortName: "Android",
+    metaTitle: "Best VPN for Android (2026) — Phone & Tablet Guide",
+    metaDescription:
+      "Why you need a VPN on Android phones and tablets, how to set it up and which provider fits best. Kill switch, split tunneling and Play Store picks.",
     tagline:
       "Get out of Google's data-collection ecosystem and stay safe on public Wi-Fi — on Android, a VPN is essential.",
     summary:
@@ -119,6 +122,9 @@ export const devicesEn: DeviceContent[] = [
     slug: "iphone",
     device: "iPhone",
     shortName: "iPhone",
+    metaTitle: "Best VPN for iPhone (2026) — iOS Setup & Recommendations",
+    metaDescription:
+      "Why you need a VPN on iPhone, App Store apps, conflicts with iCloud Private Relay and the best picks for everyday use.",
     tagline:
       "Apple has a strong privacy brand, but that doesn't hide your IP or your traffic — on iPhone, a VPN still has a clear job.",
     summary:
@@ -222,6 +228,9 @@ export const devicesEn: DeviceContent[] = [
     slug: "ipad",
     device: "iPad",
     shortName: "iPad",
+    metaTitle: "Best VPN for iPad (2026) — Streaming & Productivity Guide",
+    metaDescription:
+      "Setting up a VPN on iPad, Stage Manager compatibility, the best providers for streaming and device-specific things to watch for.",
     tagline:
       "Bigger screen, more streaming, more public-network use — the iPad's attack surface isn't the same as the phone's.",
     summary:
@@ -324,6 +333,9 @@ export const devicesEn: DeviceContent[] = [
     slug: "smart-tv",
     device: "Smart TV (Samsung, LG, Android TV, Apple TV)",
     shortName: "Smart TV",
+    metaTitle: "Best VPN for Smart TV (2026) — Samsung, LG, Android TV, Apple TV",
+    metaDescription:
+      "How to install a VPN on Samsung Tizen and LG webOS, router-level VPN, Smart DNS, and a detailed guide for Android TV and Apple TV (tvOS 17+).",
     tagline:
       "Most smart TVs can't run a VPN app — the right answer is to put the VPN on the network, not the TV.",
     summary:

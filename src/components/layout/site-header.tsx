@@ -31,14 +31,14 @@ export function SiteHeader() {
           <Link
             href="/"
             className="flex items-center gap-2 text-ink-strong font-semibold tracking-tight"
-            aria-label="vpncompaire ana sayfa"
+            aria-label={t("homeAria")}
           >
             <ShieldCheck className="size-6 text-brand-600" aria-hidden="true" />
             <span className="text-lg">vpncompaire</span>
           </Link>
 
           <nav
-            aria-label="Ana navigasyon"
+            aria-label={t("primaryNav")}
             className="hidden lg:flex items-center gap-1"
           >
             {navItems.map((item) => (
@@ -83,7 +83,7 @@ export function SiteHeader() {
           )}
         >
           <div className="overflow-hidden">
-            <nav className="flex flex-col gap-1 pb-4 pt-2" aria-label="Mobil menü">
+            <nav className="flex flex-col gap-1 pb-4 pt-2" aria-label={t("mobileNav")}>
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -96,18 +96,18 @@ export function SiteHeader() {
               ))}
               <Button asChild variant="primary" size="md" className="mt-2">
                 <Link href="/en-iyi-vpn" onClick={() => setOpen(false)}>
-                  En İyi VPN&apos;leri Gör
+                  {t("reviews")}
                 </Link>
               </Button>
               <div className="px-3 mt-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
-                  Dil / Language
+                  {t("language")}
                 </p>
                 <LanguageSwitcher className="mt-2" />
               </div>
               <div className="px-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
-                  Bizi takip et
+                  {t("followUs")}
                 </p>
                 <SocialLinks variant="menu" className="mt-0 border-t-0 pt-2" />
               </div>

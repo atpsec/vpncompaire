@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { DnsLeakTester } from "@/components/tools/DnsLeakTester";
 import { ToolsCta } from "@/components/tools/ToolsCta";
 
@@ -19,11 +19,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/araclar/dns-leak-test") },
+    alternates: localizedAlternates("/araclar/dns-leak-test", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar/dns-leak-test"),
+      url: absoluteUrl("/araclar/dns-leak-test", locale),
       type: "website",
     },
   };

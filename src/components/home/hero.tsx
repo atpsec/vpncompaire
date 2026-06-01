@@ -65,7 +65,7 @@ export function Hero() {
           <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-background/60 backdrop-blur shadow-sm">
             <Stat value={products.length} label={t("trust.tested")} />
             <Stat value={auditCount} label={t("trust.audits")} />
-            <Stat value="312" label="saat test" />
+            <Stat value="312" label={t("trust.hours")} />
           </dl>
         </div>
       </Container>

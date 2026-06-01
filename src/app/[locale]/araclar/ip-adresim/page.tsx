@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { CopyButton } from "@/components/tools/CopyButton";
 import { BrowserFingerprint } from "@/components/tools/BrowserFingerprint";
 import { ToolsCta } from "@/components/tools/ToolsCta";
@@ -23,11 +23,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/araclar/ip-adresim") },
+    alternates: localizedAlternates("/araclar/ip-adresim", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar/ip-adresim"),
+      url: absoluteUrl("/araclar/ip-adresim", locale),
       type: "website",
     },
   };

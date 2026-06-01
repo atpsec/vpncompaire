@@ -10,7 +10,7 @@ import { ViewCounter } from "@/components/blog/view-counter";
 import { SocialShare } from "@/components/blog/social-share";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import { absoluteUrl, localizedAlternates, siteConfig } from "@/lib/site";
 import type { Metadata } from "next";
 
 type Props = {
@@ -36,14 +36,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const { frontmatter } = result;
-  const localePath = locale === "tr" ? "" : `/${locale}`;
-  const canonical = absoluteUrl(`${localePath}/blog/${frontmatter.slug}`);
+  const canonical = absoluteUrl(`/blog/${frontmatter.slug}`, locale);
   const ogImage = absoluteUrl(`/og/blog/${frontmatter.slug}`);
 
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    alternates: { canonical },
+    alternates: localizedAlternates(`/blog/${frontmatter.slug}`, locale),
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,

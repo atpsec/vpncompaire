@@ -388,8 +388,8 @@ const rawGlossary: RawTerm[] = [
       en: "Opening specific ports to enable P2P / inbound connections",
     },
     long: {
-      tr: "Belirli bir port'u dış dünyaya açarak gelen bağlantıları kabul etme. Peer-to-peer dosya paylaşımı, oyun sunucusu host etme veya BitTorrent'te seeding verimliliği için gerekli. PIA, Proton VPN ve Mullvad destekler; NordVPN ve ExpressVPN desteklemez (gizlilik nedeniyle).",
-      en: "Opens a specific port to the outside world so the device can accept inbound connections. Needed for peer-to-peer file sharing, hosting a game server or efficient BitTorrent seeding. PIA, Proton VPN and Mullvad support it; NordVPN and ExpressVPN do not (for privacy reasons).",
+      tr: "Belirli bir port'u dış dünyaya açarak gelen bağlantıları kabul etme. Peer-to-peer dosya paylaşımı, oyun sunucusu host etme veya BitTorrent'te seeding verimliliği için gerekli. PIA ve Proton VPN destekler; NordVPN, ExpressVPN ve Mullvad (2023'te kaldırdı) desteklemez.",
+      en: "Opens a specific port to the outside world so the device can accept inbound connections. Needed for peer-to-peer file sharing, hosting a game server or efficient BitTorrent seeding. PIA and Proton VPN support it; NordVPN, ExpressVPN and Mullvad (which removed it in 2023) do not.",
     },
     category: "infrastructure",
   },

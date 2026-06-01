@@ -24,6 +24,9 @@ const DIFFICULTY_TONE = {
   Kolay: "bg-success-50 text-success-700 border-success-100",
   Orta: "bg-accent-50 text-accent-600 border-accent-100",
   "İleri düzey": "bg-surface-strong/40 text-ink-strong border-border",
+  Easy: "bg-success-50 text-success-700 border-success-100",
+  Medium: "bg-accent-50 text-accent-600 border-accent-100",
+  Advanced: "bg-surface-strong/40 text-ink-strong border-border",
 } as const;
 
 export async function DevicePage({

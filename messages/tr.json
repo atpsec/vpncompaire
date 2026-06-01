@@ -21,7 +21,12 @@
     "about": "Hakkımızda",
     "search": "Ara",
     "menu": "Menü",
-    "closeMenu": "Menüyü kapat"
+    "closeMenu": "Menüyü kapat",
+    "homeAria": "vpncompaire ana sayfa",
+    "primaryNav": "Ana navigasyon",
+    "mobileNav": "Mobil menü",
+    "language": "Dil / Language",
+    "followUs": "Bizi takip et"
   },
   "common": {
     "readReview": "İncelemeyi oku",
@@ -53,6 +58,7 @@
       "trust": {
         "tested": "VPN test edildi",
         "audits": "bağımsız denetim incelendi",
+        "hours": "saat test",
         "updated": "Son güncelleme"
       }
     },

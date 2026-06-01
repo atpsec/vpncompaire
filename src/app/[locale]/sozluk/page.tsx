@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { getGlossary, getCategories } from "@/data/glossary";
 import { GlossarySearch } from "@/components/glossary/glossary-search";
 
@@ -21,11 +21,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/sozluk") },
+    alternates: localizedAlternates("/sozluk", locale),
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: absoluteUrl("/sozluk"),
+      url: absoluteUrl("/sozluk", locale),
       type: "website",
     },
   };

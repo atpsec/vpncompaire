@@ -36,19 +36,19 @@ const LETTER_MARKS: Record<string, LetterMark> = {
     text: "IP",
     tile: "#FFA300",
     fg: "#1a1300",
-    ariaLabel: "IPVanish logosu",
+    ariaLabel: "IPVanish logo",
   },
   windscribe: {
     text: "W",
     tile: "#1AC8DB",
     fg: "#06222a",
-    ariaLabel: "Windscribe logosu",
+    ariaLabel: "Windscribe logo",
   },
   tunnelbear: {
     text: "T",
     tile: "#A47148",
     fg: "#ffffff",
-    ariaLabel: "TunnelBear logosu",
+    ariaLabel: "TunnelBear logo",
   },
 };
 
@@ -81,7 +81,7 @@ export function VPNLogo({ slug, size = 48, className }: Props) {
       height={size}
       viewBox={`0 0 ${size} ${size}`}
       role="img"
-      aria-label={`${brand.icon.title} logosu`}
+      aria-label={`${brand.icon.title} logo`}
       className={cn("shrink-0", className)}
       style={{ display: "block" }}
     >
@@ -186,7 +186,7 @@ function CyberGhostMark({
       height={size}
       viewBox={`0 0 ${size} ${size}`}
       role="img"
-      aria-label="CyberGhost VPN logosu"
+      aria-label="CyberGhost VPN logo"
       className={cn("shrink-0", className)}
       style={{ display: "block" }}
     >

@@ -13,7 +13,7 @@ import { PricingPlans } from "@/components/product/pricing-plans";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { localizedAlternates } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
 import { affiliatePath } from "@/lib/affiliate";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
@@ -55,7 +55,7 @@ export async function generateMetadata({
       positioning: product.positioning,
     }),
     description: product.summary,
-    alternates: { canonical: absoluteUrl(`/inceleme/${product.slug}`) },
+    alternates: localizedAlternates(`/inceleme/${product.slug}`, locale),
   };
 }
 

@@ -6,7 +6,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { SpeedTester } from "@/components/tools/SpeedTester";
 import { ToolsCta } from "@/components/tools/ToolsCta";
 
@@ -20,11 +20,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: absoluteUrl("/araclar/vpn-hiz-testi") },
+    alternates: localizedAlternates("/araclar/vpn-hiz-testi", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar/vpn-hiz-testi"),
+      url: absoluteUrl("/araclar/vpn-hiz-testi", locale),
       type: "website",
     },
   };

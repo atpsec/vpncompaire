@@ -3,16 +3,20 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { DevicePage } from "@/components/device/device-page";
 import { getDevice } from "@/data/devices";
-import { absoluteUrl } from "@/lib/site";
-
-export const metadata: Metadata = {
-  title: "iPhone İçin En İyi VPN (2026) — iOS Kurulum ve Öneriler",
-  description:
-    "iPhone'da VPN neden gerekli, App Store uygulamaları, iCloud Private Relay ile çakışmalar ve günlük kullanım için en iyi seçimler.",
-  alternates: { canonical: absoluteUrl("/cihazlar/iphone") },
-};
+import { localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const device = getDevice("iphone", locale as "tr" | "en");
+  if (!device) return {};
+  return {
+    title: device.metaTitle,
+    description: device.metaDescription,
+    alternates: localizedAlternates("/cihazlar/iphone", locale),
+  };
+}
 
 export default async function Page({ params }: Props) {
   const { locale } = await params;
