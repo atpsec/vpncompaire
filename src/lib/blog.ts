@@ -1,3 +1,4 @@
+import { cache } from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -236,7 +237,9 @@ export function getCounterpartSlug(slug: string, fromLocale: "tr" | "en"): strin
   return null;
 }
 
-export async function getBlogPosts(locale: "tr" | "en"): Promise<BlogPost[]> {
+export const getBlogPosts = cache(async function getBlogPosts(
+  locale: "tr" | "en",
+): Promise<BlogPost[]> {
   const dir = path.join(process.cwd(), "src/content/blog", locale);
 
   if (!fs.existsSync(dir)) {
@@ -270,7 +273,7 @@ export async function getBlogPosts(locale: "tr" | "en"): Promise<BlogPost[]> {
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
-}
+});
 
 function splitMarkdownContent(content: string): { first: string; second: string } {
   const lines = content.split("\n");
@@ -300,7 +303,7 @@ function splitMarkdownContent(content: string): { first: string; second: string 
   };
 }
 
-export async function getBlogPost(
+export const getBlogPost = cache(async function getBlogPost(
   slug: string,
   locale: "tr" | "en"
 ): Promise<{
@@ -359,7 +362,7 @@ export async function getBlogPost(
       second: secondResult.content,
     },
   };
-}
+});
 
 export async function getRelatedPosts(
   currentSlug: string,

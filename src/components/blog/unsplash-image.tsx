@@ -35,7 +35,6 @@ export async function UnsplashImage({
           sizes={isHero ? "(max-width: 768px) 100vw, 1200px" : "(max-width: 768px) 100vw, 800px"}
           priority={priority}
           loading={priority ? undefined : "lazy"}
-          unoptimized
         />
       </div>
       <figcaption className="mt-2 text-xs text-ink-subtle">

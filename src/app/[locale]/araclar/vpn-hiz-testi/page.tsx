@@ -59,6 +59,7 @@ function SpeedTestView() {
     downloadSpeed: t("downloadSpeed"),
     latency: t("latency"),
     fileSize: t("fileSize"),
+    error: t("error"),
   };
 
   return (

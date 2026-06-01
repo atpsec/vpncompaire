@@ -2,7 +2,7 @@ import { siteConfig } from "@/lib/site";
 import { products } from "@/data/products";
 import { getBlogPosts } from "@/lib/blog";
 
-export const dynamic = "force-static";
+export const revalidate = 3600;
 
 const comparisonSlugs = [
   "nordvpn-vs-surfshark",
@@ -35,6 +35,11 @@ const guideSlugs = [
 ];
 
 const toolPaths = [
+  { path: "/araclar", priority: 0.85, changefreq: "weekly" },
+  { path: "/araclar/ip-adresim", priority: 0.7, changefreq: "monthly" },
+  { path: "/araclar/dns-leak-test", priority: 0.7, changefreq: "monthly" },
+  { path: "/araclar/webrtc-leak-test", priority: 0.7, changefreq: "monthly" },
+  { path: "/araclar/vpn-hiz-testi", priority: 0.7, changefreq: "monthly" },
   { path: "/sana-uygun-vpn", priority: 0.9, changefreq: "weekly" },
   { path: "/hesaplayici", priority: 0.85, changefreq: "weekly" },
   { path: "/sunucu-haritasi", priority: 0.8, changefreq: "weekly" },
@@ -63,6 +68,7 @@ export async function GET() {
     { path: "/yasal-uyari", priority: 0.5, changefreq: "monthly" },
     { path: "/gizlilik", priority: 0.4, changefreq: "yearly" },
     { path: "/sartlar", priority: 0.4, changefreq: "yearly" },
+    { path: "/cerez-politikasi", priority: 0.4, changefreq: "yearly" },
   ];
 
   const reviewPaths: Entry[] = products.map((p) => ({

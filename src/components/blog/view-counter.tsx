@@ -16,7 +16,7 @@ export async function ViewCounter({ slug, locale }: ViewCounterProps) {
   const label = locale === "tr" ? "görüntülenme" : "views";
 
   return (
-    <div className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+    <div className="inline-flex items-center gap-1.5 text-sm text-ink-subtle">
       <Eye className="h-4 w-4" />
       <span>
         {formatViewCount(views)} {label}

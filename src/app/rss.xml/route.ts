@@ -2,7 +2,6 @@ import { siteConfig } from "@/lib/site";
 import { getBlogPosts } from "@/lib/blog";
 import { generateRssFeed, type RssItem } from "@/lib/rss";
 
-export const dynamic = "force-static";
 export const revalidate = 3600;
 
 export async function GET() {

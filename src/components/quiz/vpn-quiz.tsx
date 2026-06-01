@@ -242,6 +242,7 @@ export function VPNQuiz() {
                   <button
                     key={idx}
                     type="button"
+                    aria-pressed={isSelected}
                     onClick={() => select(q.id, idx)}
                     className={`text-left rounded-lg border px-4 py-3 text-sm transition-all flex items-center gap-3 ${
                       isSelected

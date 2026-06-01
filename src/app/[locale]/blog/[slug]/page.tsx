@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
@@ -8,6 +9,7 @@ import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
 import { ViewCounter } from "@/components/blog/view-counter";
 import { SocialShare } from "@/components/blog/social-share";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import { absoluteUrl, localizedAlternates, siteConfig } from "@/lib/site";
@@ -118,13 +120,19 @@ export default async function BlogPostPage({ params }: Props) {
         <BlogHeader post={frontmatter} />
 
         <div className="mt-4 mb-6 flex flex-wrap items-center justify-between gap-4">
-          <ViewCounter slug={frontmatter.slug} locale={locale as "tr" | "en"} />
+          <Suspense fallback={null}>
+            <ViewCounter slug={frontmatter.slug} locale={locale as "tr" | "en"} />
+          </Suspense>
           <SocialShare
             url={absoluteUrl(`${localePath}/blog/${frontmatter.slug}`)}
             title={frontmatter.title}
             description={frontmatter.description}
             locale={locale as "tr" | "en"}
           />
+        </div>
+
+        <div className="mb-6 rounded-lg border border-border bg-surface-subtle px-4 py-2.5">
+          <AffiliateNotice />
         </div>
 
         <UnsplashImage

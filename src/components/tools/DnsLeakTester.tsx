@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AlertTriangle, CheckCircle2, Loader2 } from "lucide-react";
+import { Info, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -10,10 +10,8 @@ type Labels = {
   loading: string;
   resultsTitle: string;
   detectedServers: string;
-  noLeak: string;
-  leakDetected: string;
-  noLeakBody: string;
-  leakBody: string;
+  experimentalTitle: string;
+  experimentalBody: string;
   tryAgain: string;
   unknown: string;
 };
@@ -56,7 +54,6 @@ export function DnsLeakTester({ labels }: { labels: Labels }) {
   };
 
   const uniqueServers = new Set(records.map((r) => r.server));
-  const leak = uniqueServers.size > 1;
 
   return (
     <div className="mt-8">
@@ -80,30 +77,16 @@ export function DnsLeakTester({ labels }: { labels: Labels }) {
       </Button>
 
       {status === "done" && (
-        <Card className="mt-6 p-6">
+        <Card className="mt-6 p-6" aria-live="polite">
           <h2 className="text-lg font-bold text-ink-strong">
             {labels.resultsTitle}
           </h2>
 
-          <div
-            className={`mt-4 flex items-start gap-3 rounded-lg border p-4 ${
-              leak
-                ? "border-red-300 bg-red-50 text-red-900 dark:bg-red-950/40 dark:text-red-200"
-                : "border-emerald-300 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200"
-            }`}
-          >
-            {leak ? (
-              <AlertTriangle className="size-5 shrink-0" aria-hidden="true" />
-            ) : (
-              <CheckCircle2 className="size-5 shrink-0" aria-hidden="true" />
-            )}
+          <div className="mt-4 flex items-start gap-3 rounded-lg border border-amber-300 bg-amber-50 p-4 text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+            <Info className="size-5 shrink-0" aria-hidden="true" />
             <div className="min-w-0">
-              <p className="font-semibold">
-                {leak ? labels.leakDetected : labels.noLeak}
-              </p>
-              <p className="mt-1 text-sm">
-                {leak ? labels.leakBody : labels.noLeakBody}
-              </p>
+              <p className="font-semibold">{labels.experimentalTitle}</p>
+              <p className="mt-1 text-sm">{labels.experimentalBody}</p>
             </div>
           </div>
 

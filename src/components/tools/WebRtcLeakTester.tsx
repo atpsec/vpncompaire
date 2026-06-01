@@ -116,7 +116,7 @@ export function WebRtcLeakTester({ labels }: { labels: Labels }) {
       </Button>
 
       {status === "done" && (
-        <Card className="mt-6 p-6">
+        <Card className="mt-6 p-6" aria-live="polite">
           <h2 className="text-lg font-bold text-ink-strong">
             {labels.resultsTitle}
           </h2>

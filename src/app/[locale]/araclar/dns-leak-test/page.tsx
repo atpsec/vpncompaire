@@ -56,10 +56,8 @@ function DnsLeakView() {
     loading: tCommon("loading"),
     resultsTitle: t("resultsTitle"),
     detectedServers: t("detectedServers"),
-    noLeak: t("noLeak"),
-    leakDetected: t("leakDetected"),
-    noLeakBody: t("noLeakBody"),
-    leakBody: t("leakBody"),
+    experimentalTitle: t("experimentalTitle"),
+    experimentalBody: t("experimentalBody"),
     tryAgain: tCommon("tryAgain"),
     unknown: tCommon("loading"),
   };

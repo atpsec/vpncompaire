@@ -12,6 +12,7 @@ type Labels = {
   downloadSpeed: string;
   latency: string;
   fileSize: string;
+  error: string;
 };
 
 const TEST_BYTES = 10 * 1024 * 1024; // 10 MB
@@ -57,18 +58,20 @@ export function SpeedTester({ labels }: { labels: Labels }) {
   const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
   const [mbps, setMbps] = useState<number | null>(null);
   const [ping, setPing] = useState<number | null>(null);
+  const [error, setError] = useState(false);
 
   const run = async () => {
     setStatus("loading");
     setMbps(null);
     setPing(null);
+    setError(false);
     try {
       const latency = await measureLatency();
       setPing(latency);
       const speed = await measureDownload();
       setMbps(speed);
     } catch {
-      setMbps(0);
+      setError(true);
     } finally {
       setStatus("done");
     }
@@ -95,8 +98,17 @@ export function SpeedTester({ labels }: { labels: Labels }) {
         )}
       </Button>
 
-      {status !== "idle" && (
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+      {status !== "idle" && error && (
+        <p
+          role="alert"
+          className="mt-6 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-900 dark:bg-red-950/40 dark:text-red-200"
+        >
+          {labels.error}
+        </p>
+      )}
+
+      {status !== "idle" && !error && (
+        <div className="mt-6 grid gap-4 sm:grid-cols-3" aria-live="polite">
           <Card className="p-5">
             <div className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink-muted">
               <Gauge className="size-4" aria-hidden="true" />

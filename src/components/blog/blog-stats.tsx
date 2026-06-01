@@ -34,7 +34,7 @@ export async function BlogStats({ locale }: BlogStatsProps) {
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+    <div className="flex flex-wrap items-center gap-3 text-sm text-ink-subtle">
       <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/50 px-3 py-1">
         <span className="font-semibold text-foreground">{stats.totalPosts}</span>
         <span>{t.posts}</span>
