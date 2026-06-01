@@ -197,18 +197,6 @@ ${blogAltLinks(trSlug, p.slug)}
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sharedPathsXml}
 ${blogXml}
-  <url>
-    <loc>${siteConfig.url}/rss.xml</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.50</priority>
-  </url>
-  <url>
-    <loc>${siteConfig.url}/rss.en.xml</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.45</priority>
-  </url>
 </urlset>`;
 
   return new Response(xml, {

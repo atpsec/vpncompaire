@@ -3,12 +3,29 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
+import { VPNLogo } from "@/components/brand/vpn-logo";
 
 const COMPARISONS = [
-  { slug: "nordvpn-vs-surfshark", title: "NordVPN vs Surfshark" },
-  { slug: "expressvpn-vs-nordvpn", title: "ExpressVPN vs NordVPN" },
-  { slug: "proton-vs-mullvad", title: "Proton VPN vs Mullvad" },
-  { slug: "ucretsiz-vs-ucretli-vpn", titleKey: "freeVsPaidTitle" as const },
+  {
+    slug: "nordvpn-vs-surfshark",
+    title: "NordVPN vs Surfshark",
+    logos: ["nordvpn", "surfshark"] as const,
+  },
+  {
+    slug: "expressvpn-vs-nordvpn",
+    title: "ExpressVPN vs NordVPN",
+    logos: ["expressvpn", "nordvpn"] as const,
+  },
+  {
+    slug: "proton-vs-mullvad",
+    title: "Proton VPN vs Mullvad",
+    logos: ["proton-vpn", "mullvad"] as const,
+  },
+  {
+    slug: "ucretsiz-vs-ucretli-vpn",
+    titleKey: "freeVsPaidTitle" as const,
+    logos: null,
+  },
 ];
 
 export function ComparisonBlock() {
@@ -44,6 +61,15 @@ export function ComparisonBlock() {
                 className="group"
               >
                 <Card className="p-5 hover:border-brand-300 hover:shadow-md transition-all h-full">
+                  {c.logos && (
+                    <div className="mb-3 flex items-center gap-2">
+                      <VPNLogo slug={c.logos[0]} size={32} />
+                      <span className="text-xs font-bold uppercase tracking-wider text-ink-subtle">
+                        vs
+                      </span>
+                      <VPNLogo slug={c.logos[1]} size={32} />
+                    </div>
+                  )}
                   <h3 className="font-semibold text-ink-strong group-hover:text-brand-700">
                     {c.titleKey
                       ? blockT("freeVsPaidTitle")

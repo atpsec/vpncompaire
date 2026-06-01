@@ -56,12 +56,6 @@ export async function generateMetadata(): Promise<Metadata> {
         en: `${siteConfig.url}/en`,
         "x-default": siteConfig.url,
       },
-      types: {
-        "application/rss+xml": [
-          { url: "/rss.xml", title: `${siteConfig.name} RSS (TR)` },
-          { url: "/rss.en.xml", title: `${siteConfig.name} RSS (EN)` },
-        ],
-      },
     },
     openGraph: {
       type: "website",

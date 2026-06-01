@@ -1,17 +1,13 @@
-import { useLocale, useTranslations } from "next-intl";
-import { ShieldCheck, Info, Rss } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ShieldCheck, Info } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
 import { SocialLinks } from "@/components/layout/social-links";
-import { NewsletterForm } from "@/components/layout/newsletter-form";
 
 export function SiteFooter() {
   const t = useTranslations("footer");
   const tNav = useTranslations("nav");
   const tDisclosure = useTranslations("disclosure");
-  const locale = useLocale();
-  const rssHref = locale === "en" ? "/rss.en.xml" : "/rss.xml";
-  const rssLabel = locale === "en" ? "RSS Feed" : "RSS Akışı";
   const year = new Date().getFullYear();
 
   return (
@@ -40,10 +36,6 @@ export function SiteFooter() {
               <p className="mt-2 text-[11px] text-ink-subtle">
                 {t("socialSoon")}
               </p>
-            </div>
-
-            <div className="mt-6 max-w-md">
-              <NewsletterForm />
             </div>
           </div>
 
@@ -99,16 +91,6 @@ export function SiteFooter() {
                 >
                   {t("links.about")}
                 </Link>
-              </li>
-              <li>
-                <a
-                  href={rssHref}
-                  className="inline-flex items-center gap-1.5 text-ink-muted hover:text-ink"
-                  aria-label={rssLabel}
-                >
-                  <Rss className="size-3.5 text-accent-600" aria-hidden="true" />
-                  {rssLabel}
-                </a>
               </li>
             </ul>
           </div>
