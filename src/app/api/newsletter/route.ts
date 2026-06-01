@@ -1,16 +1,18 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
+import { rateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
-// Simple in-memory rate limiter — inspired by src/proxy.ts.
-// NOTE: state resets on cold start; no Redis/KV available in this project.
+// Local in-memory fallback — only used when Vercel KV is NOT configured.
+// NOTE: state resets on cold start and is per-instance; the KV-backed
+// `rateLimit` above is the distributed primary.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const RATE_LIMIT_MAX = 5; // 5 submissions / minute / IP
 
-function rateLimit(ip: string): boolean {
+function rateLimitLocal(ip: string): boolean {
   const now = Date.now();
 
   if (rateLimitMap.size > 10000) {
@@ -68,7 +70,11 @@ export async function POST(request: NextRequest) {
   }
 
   const ip = getClientIp(request);
-  if (!rateLimit(ip)) {
+  // Distributed limit (Vercel KV) first; fall back to the in-memory limiter
+  // only when KV is not configured.
+  const kv = await rateLimit(`nl:${ip}`, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW / 1000);
+  const limited = kv.configured ? !kv.allowed : !rateLimitLocal(ip);
+  if (limited) {
     return NextResponse.json(
       { success: false, message: "Too many requests" },
       {

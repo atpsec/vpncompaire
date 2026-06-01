@@ -1,4 +1,5 @@
 import { getAffiliate, isAllowedRedirectHost } from "@/lib/affiliate";
+import { rateLimit, clientIpFrom } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 export const runtime = "edge";
@@ -43,6 +44,13 @@ export async function GET(req: Request, { params }: Context): Promise<Response> 
 
   if (!SLUG_PATTERN.test(slug)) {
     return textResponse("Geçersiz bağlantı.", 400);
+  }
+
+  // Distributed rate limit (Vercel KV). Generous cap — a comparison-shopper may
+  // open several links. No-op when KV is unconfigured; fails open on any error.
+  const rl = await rateLimit(`go:${clientIpFrom(req.headers)}`, 30, 60);
+  if (!rl.allowed) {
+    return textResponse("Çok fazla istek. Lütfen biraz sonra tekrar deneyin.", 429);
   }
 
   const link = getAffiliate(slug);
