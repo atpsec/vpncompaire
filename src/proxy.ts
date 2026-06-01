@@ -2,6 +2,40 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
+import { getCounterpartSlug } from "@/lib/blog-slugs";
+
+const LOCALE_COOKIE = "NEXT_LOCALE";
+const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 yıl
+
+/**
+ * Ziyaretçi için tercih edilen locale:
+ *   1. Açık seçim (NEXT_LOCALE cookie — dil değiştirici yazar) her şeyi ezer.
+ *   2. Aksi halde IP ülkesi: TR → tr, diğer tüm ülkeler → en.
+ *   3. Ülke bilinmiyorsa (lokal dev / header yok) → tr (default).
+ */
+function preferredLocale(request: NextRequest): "tr" | "en" {
+  const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
+  if (cookie === "tr" || cookie === "en") return cookie;
+
+  const country = request.headers.get("x-vercel-ip-country");
+  if (!country || country === "TR") return "tr";
+  return "en";
+}
+
+/**
+ * Prefix'siz (tr namespace) bir yolu /en hedefine çevirir.
+ * Blog detayda TR/EN slug'ları farklı → slug eşlemesiyle doğru EN yazıya
+ * yönlendirir; eşleşme yoksa (sadece TR'de var olan yazı) null döner
+ * (yönlendirme atlanır, 404 önlenir).
+ */
+function toEnglishTarget(pathname: string): string | null {
+  const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
+  if (blogMatch) {
+    const enSlug = getCounterpartSlug(blogMatch[1], "tr");
+    return enSlug ? `/en/blog/${enSlug}` : null;
+  }
+  return `/en${pathname === "/" ? "" : pathname}`;
+}
 
 // Simple in-memory rate limiter (production'da Redis/Vercel KV önerilir)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -56,6 +90,8 @@ function getClientIp(request: NextRequest): string {
   return "unknown";
 }
 
+// localeDetection routing config'inde kapalı (bkz. routing.ts). Locale
+// sinyalini Accept-Language değil, IP ülkesi belirler (aşağıdaki geo bloğu).
 const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
@@ -87,6 +123,25 @@ export default function proxy(request: NextRequest) {
           },
         }
       );
+    }
+  }
+
+  // Geo bazlı locale yönlendirme: TR dışı ziyaretçiyi (veya cookie=en) /en'e
+  // gönder. /en zaten prefix'liyse dokunma. Açık seçim cookie'siyle uyumlu.
+  const isEnPrefixed = pathname === "/en" || pathname.startsWith("/en/");
+  if (!isEnPrefixed && preferredLocale(request) === "en") {
+    const target = toEnglishTarget(pathname);
+    if (target) {
+      const url = request.nextUrl.clone();
+      url.pathname = target;
+      const res = NextResponse.redirect(url);
+      // Tercihi sabitle ki sonraki isteklerde tekrar yönlendirme olmasın.
+      res.cookies.set(LOCALE_COOKIE, "en", {
+        path: "/",
+        maxAge: LOCALE_COOKIE_MAX_AGE,
+        sameSite: "lax",
+      });
+      return res;
     }
   }
 

@@ -10,6 +10,14 @@ const LOCALES = [
   { code: "en", label: "EN", name: "English" },
 ] as const;
 
+// Açık dil seçimini cookie'ye yaz — proxy.ts'teki geo (IP) yönlendirmesi bu
+// cookie'yi her şeyin üstünde tutar, aksi halde TR'ye geçen yurt dışı
+// ziyaretçi sürekli /en'e geri atılırdı. (Modül seviyesinde: component
+// içinde document.cookie ataması immutability lint kuralını tetikliyor.)
+function persistLocaleCookie(target: string) {
+  document.cookie = `NEXT_LOCALE=${target}; path=/; max-age=31536000; samesite=lax`;
+}
+
 type Props = {
   className?: string;
 };
@@ -22,6 +30,7 @@ export function LanguageSwitcher({ className }: Props) {
 
   function switchTo(target: string) {
     if (target === locale) return;
+    persistLocaleCookie(target);
     router.replace(pathname, { locale: target });
   }
 

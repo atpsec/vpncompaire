@@ -6,7 +6,7 @@ export const siteConfig = {
   url: env.NEXT_PUBLIC_SITE_URL,
   defaultLocale: "tr" as const,
   locales: ["tr", "en"] as const,
-  plausibleDomain: env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || undefined,
+  gaId: env.NEXT_PUBLIC_GA_ID || undefined,
   description: {
     tr: "Bağımsız test metodolojisine dayalı, ayrıntılı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik senaryolarını değerlendirir. Gönüllü inceleme projesidir; resmi bir kuruluş değildir.",
     en: "Independent, methodology-driven VPN reviews and comparisons. Covers privacy, streaming, travel and everyday-security scenarios. A volunteer review project — not an official organisation.",

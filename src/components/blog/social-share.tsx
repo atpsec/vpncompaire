@@ -61,9 +61,9 @@ type SocialShareProps = {
 };
 
 function track(platform: string) {
-  if (typeof window !== "undefined" && typeof window.plausible === "function") {
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
     try {
-      window.plausible("Share", { props: { platform } });
+      window.gtag("event", "share", { method: platform });
     } catch {
       // graceful skip — analytics never blocks UX
     }

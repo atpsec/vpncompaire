@@ -142,7 +142,7 @@
   },
   "cookies": {
     "title": "Cookie preference",
-    "body": "This site uses only a privacy-friendly, cookieless analytics tool (Plausible). We do not collect personal data.",
+    "body": "We use optional analytics cookies (Google Analytics) to measure traffic, only with your consent. If you decline, no analytics cookie is set.",
     "accept": "OK"
   },
   "methodology": {
@@ -768,8 +768,8 @@
     "breadcrumbHere": "Privacy policy"
   },
   "cookies": {
-    "metaTitle": "Cookie Policy — We Don't Use Cookies",
-    "metaDescription": "VPN Advisor doesn't use cookies. Plausible cookieless analytics, localStorage for theme preference, affiliate redirects, and GDPR/KVKK-aligned disclosure.",
+    "metaTitle": "Cookie Policy — Consent-Based Cookies",
+    "metaDescription": "VPN Advisor uses consent-based analytics cookies (Google Analytics), a NEXT_LOCALE language cookie, localStorage for theme preference, affiliate redirects, and GDPR/KVKK-aligned disclosure.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Cookie policy"
   },
@@ -1002,6 +1002,13 @@
   "a11y": {
     "skipToContent": "Skip to main content",
     "langGroup": "Language"
+  },
+  "consent": {
+    "title": "Cookie preference",
+    "text": "We'd like to use optional analytics cookies (Google Analytics) to measure traffic. If you decline, no analytics cookies are set and the site works normally.",
+    "accept": "Accept",
+    "reject": "Decline",
+    "learnMore": "Cookie policy"
   },
   "og": {
     "alt": "VPN Advisor — Independent VPN comparisons",

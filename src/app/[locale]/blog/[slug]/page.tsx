@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
@@ -7,7 +6,6 @@ import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogContent } from "@/components/blog/blog-content";
 import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
-import { ViewCounter } from "@/components/blog/view-counter";
 import { SocialShare } from "@/components/blog/social-share";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
@@ -119,10 +117,7 @@ export default async function BlogPostPage({ params }: Props) {
       <Container size="md">
         <BlogHeader post={frontmatter} />
 
-        <div className="mt-4 mb-6 flex flex-wrap items-center justify-between gap-4">
-          <Suspense fallback={null}>
-            <ViewCounter slug={frontmatter.slug} locale={locale as "tr" | "en"} />
-          </Suspense>
+        <div className="mt-4 mb-6 flex flex-wrap items-center justify-end gap-4">
           <SocialShare
             url={absoluteUrl(`${localePath}/blog/${frontmatter.slug}`)}
             title={frontmatter.title}

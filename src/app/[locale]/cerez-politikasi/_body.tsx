@@ -15,26 +15,29 @@ export function TrBody() {
 
       <header className="mt-6">
         <Badge variant="brand">
-          <Cookie className="size-3" /> Çerezsiz site
+          <Cookie className="size-3" /> Onaya dayalı çerez
         </Badge>
         <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
           Çerez Politikası
         </h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Son güncelleme: Mayıs 2026
+          Son güncelleme: Haziran 2026
         </p>
       </header>
 
       <Card className="mt-8 p-6 bg-success-50/60 border-success-200/60">
         <h2 className="text-lg font-semibold text-success-700 flex items-center gap-2">
-          <CheckCircle2 className="size-5" /> Kısa cevap: Çerez kullanmıyoruz
+          <CheckCircle2 className="size-5" /> Kısa cevap: Analitik çerezler
+          yalnızca onayınızla
         </h2>
         <p className="mt-3 text-ink leading-relaxed text-sm">
-          vpnadvisor.net sitesi <strong>hiçbir HTTP çerezi (cookie)
-          set etmez</strong>. Reklam çerezi, analitik çerezi, tracking
-          çerezi yok. Bu sayfa neyi <em>kullandığımızı</em>, neyi{" "}
-          <em>kullanmadığımızı</em> ve tarayıcınızda hangi yerel
-          depolamaların olduğunu açıklar.
+          vpnadvisor.net <strong>zorunlu olmayan hiçbir çerezi siz
+          onaylamadan yazmaz</strong>. Trafiği ölçmek için Google Analytics
+          kullanırız; bu yalnızca çerez banner&apos;ından{" "}
+          <strong>&quot;Kabul et&quot;</strong> dediğinizde devreye girer.
+          Ayrıca dil tercihinizi hatırlamak için tek bir{" "}
+          <strong>zorunlu (fonksiyonel) çerez</strong> kullanırız. Bu sayfa
+          hepsini açıklar.
         </p>
       </Card>
 
@@ -53,41 +56,92 @@ export function TrBody() {
 
         <h2>2. Hangi çerezleri kullanıyoruz?</h2>
         <p>
-          <strong>Hiçbirini.</strong> Aşağıdaki teknolojileri
-          kullanıyoruz ama bunlar çerez değil:
+          İki tür çerez söz konusu: dil tercihini hatırlayan tek bir{" "}
+          <strong>zorunlu (fonksiyonel)</strong> çerez ve yalnızca onayınızla
+          devreye giren <strong>analitik</strong> çerezler.
         </p>
+        <div className="not-prose my-6 overflow-x-auto">
+          <table className="min-w-full border border-border text-sm">
+            <thead className="bg-surface-subtle">
+              <tr>
+                <th className="border border-border px-3 py-2 text-left">
+                  Çerez
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Tür
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Amaç
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Süre
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  NEXT_LOCALE
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Zorunlu / fonksiyonel
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Dil tercihinizi (TR/EN) hatırlar
+                </td>
+                <td className="border border-border px-3 py-2">1 yıl</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  _ga, _ga_*
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Analitik (onaya bağlı)
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Google Analytics — ziyaretçi sayımı
+                </td>
+                <td className="border border-border px-3 py-2">~2 yıl</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h3>2.1 Plausible Analytics — çerezsiz analitik</h3>
+        <h3>2.1 Google Analytics — onaya dayalı analitik</h3>
         <p>
           Site trafiğini ölçmek için{" "}
           <a
-            href="https://plausible.io/data-policy"
+            href="https://policies.google.com/privacy"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Plausible
+            Google Analytics 4
           </a>{" "}
-          kullanıyoruz. Plausible:
+          kullanırız. Çalışma şekli:
         </p>
         <ul>
           <li>
-            <strong>Çerez kullanmaz</strong> (kanıt: kendi web
-            sitesinde de cookie banner yoktur)
+            <strong>Google Consent Mode v2</strong> ile çalışır: onay
+            vermeden önce analitik depolama <strong>&quot;denied&quot;</strong>{" "}
+            durumdadır; bu modda GA <strong>çerez yazmaz</strong>, yalnızca
+            kimliksiz toplu ping gönderir.
           </li>
-          <li>Kişisel veri toplamaz, parmak izi çıkarmaz</li>
-          <li>Veriyi AB sınırları içinde tutar (EU-hosted)</li>
           <li>
-            Sadece sayfa görüntüleme sayısı, ülke (IP&apos;den, IP saklanmaz),
-            cihaz türü ve tarayıcı gibi toplu (agrega) veriler tutar
+            Çerez banner&apos;ından <strong>&quot;Kabul et&quot;</strong>{" "}
+            dediğinizde <code>_ga</code> çerezleri set edilir ve normal
+            ölçüm başlar. <strong>&quot;Reddet&quot;</strong> derseniz hiçbir
+            analitik çerez yazılmaz.
           </li>
-          <li>GDPR, CCPA, PECR ve KVKK uyumludur</li>
+          <li>
+            Sayfa görüntüleme, yaklaşık konum (IP&apos;den, IP saklanmaz),
+            cihaz ve tarayıcı gibi toplu veriler toplanır.
+          </li>
+          <li>
+            Veri işleyici <strong>Google LLC</strong>&apos;dir; veriler AB
+            dışına (ABD) aktarılabilir. Tercihinizi istediğiniz zaman
+            tarayıcı verilerini silerek geri alabilirsiniz.
+          </li>
         </ul>
-        <p>
-          Plausible{" "}
-          <strong>kendi sunucularına gönderilen veride hiçbir
-          tanımlayıcı bilgi olmaz</strong>; bu yüzden çerez veya consent
-          banner&apos;a gerek kalmaz.
-        </p>
 
         <h3>2.2 LocalStorage — yerel tarayıcı tercihleri</h3>
         <p>
@@ -135,6 +189,17 @@ export function TrBody() {
                   Sen silene kadar
                 </td>
               </tr>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  vpnadvisor:consent
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Çerez onay tercihin (kabul / reddet)
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Sen silene kadar
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -167,21 +232,24 @@ export function TrBody() {
           </li>
         </ul>
 
-        <h2>3. Çerez bannerı neden yok?</h2>
+        <h2>3. Çerez onayı (banner)</h2>
         <p>
           Türkiye (KVKK), AB (GDPR/ePrivacy) ve İngiltere (PECR)
-          mevzuatına göre çerez banner&apos;ı{" "}
-          <strong>yalnızca gerekli olmayan çerezler için</strong>{" "}
-          zorunludur. Biz hiç çerez kullanmadığımız için ve
-          localStorage&apos;daki veriler &quot;kesinlikle gerekli&quot;
-          kategorisinde olduğu için consent banner&apos;a ihtiyacımız
-          yok.
+          mevzuatına göre <strong>gerekli olmayan çerezler için</strong>{" "}
+          açık onay gerekir. Bu yüzden analitik (Google Analytics)
+          çerezleri için bir <strong>çerez onay banner&apos;ı</strong>{" "}
+          gösteririz; siz &quot;Kabul et&quot; demeden bu çerezler yazılmaz.
+          Dil tercihini tutan <code>NEXT_LOCALE</code> çerezi ise
+          &quot;kesinlikle gerekli&quot; kategorisindedir ve onay gerektirmez.
+          Seçiminiz tarayıcınızda saklanır; tarayıcı verilerinizi silerek
+          banner&apos;ı tekrar görebilir ve tercihinizi değiştirebilirsiniz.
         </p>
 
         <h2>4. Verileri nasıl silersin?</h2>
         <p>
-          Tarayıcına yerleştirdiğimiz tek şey localStorage tercihleridir.
-          Silmek istiyorsan:
+          Tarayıcına yerleştirdiğimiz şeyler: dil tercihi çerezi
+          (<code>NEXT_LOCALE</code>), onay verdiysen Google Analytics
+          çerezleri ve birkaç localStorage tercihi. Hepsini silmek için:
         </p>
         <ul>
           <li>
@@ -223,9 +291,9 @@ export function TrBody() {
         <h2>6. Politika değişiklikleri</h2>
         <p>
           Bu sayfa değişirse en üstte &quot;Son güncelleme&quot; tarihi
-          yenilenir. Önemli değişikliklerde anasayfada da banner
-          gösterilebilir. Çerez kullanmaya başlarsak{" "}
-          <strong>önceden bildirir, onay isteriz</strong>.
+          yenilenir. Yeni bir izleme teknolojisi eklersek{" "}
+          <strong>çerez banner&apos;ı üzerinden önceden bildirir, onay
+          isteriz</strong>.
         </p>
 
         <h2>7. İletişim</h2>
@@ -283,27 +351,28 @@ export function EnBody() {
 
       <header className="mt-6">
         <Badge variant="brand">
-          <Cookie className="size-3" /> Cookie-free site
+          <Cookie className="size-3" /> Consent-based cookies
         </Badge>
         <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
           Cookie Policy
         </h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Last updated: May 2026
+          Last updated: June 2026
         </p>
       </header>
 
       <Card className="mt-8 p-6 bg-success-50/60 border-success-200/60">
         <h2 className="text-lg font-semibold text-success-700 flex items-center gap-2">
-          <CheckCircle2 className="size-5" /> Short answer: We don&apos;t
-          use cookies
+          <CheckCircle2 className="size-5" /> Short answer: analytics cookies
+          only with your consent
         </h2>
         <p className="mt-3 text-ink leading-relaxed text-sm">
-          The vpnadvisor.net site <strong>sets no HTTP cookies
-          whatsoever</strong>. No advertising cookies, no analytics
-          cookies, no tracking cookies. This page explains what we{" "}
-          <em>do</em> use, what we <em>don&apos;t</em>, and what local
-          storage exists in your browser.
+          vpnadvisor.net <strong>sets no non-essential cookie without your
+          consent</strong>. We use Google Analytics to measure traffic, but
+          it only activates when you click{" "}
+          <strong>&quot;Accept&quot;</strong> on the cookie banner. We also
+          use a single <strong>strictly necessary (functional) cookie</strong>{" "}
+          to remember your language. This page explains all of them.
         </p>
       </Card>
 
@@ -321,41 +390,94 @@ export function EnBody() {
 
         <h2>2. Which cookies do we use?</h2>
         <p>
-          <strong>None.</strong> We use the following technologies, but
-          they are not cookies:
+          Two kinds: a single <strong>strictly necessary (functional)</strong>{" "}
+          cookie that remembers your language, and{" "}
+          <strong>analytics</strong> cookies that only activate with your
+          consent.
         </p>
+        <div className="not-prose my-6 overflow-x-auto">
+          <table className="min-w-full border border-border text-sm">
+            <thead className="bg-surface-subtle">
+              <tr>
+                <th className="border border-border px-3 py-2 text-left">
+                  Cookie
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Type
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Purpose
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Duration
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  NEXT_LOCALE
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Strictly necessary / functional
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Remembers your language (TR/EN)
+                </td>
+                <td className="border border-border px-3 py-2">1 year</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  _ga, _ga_*
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Analytics (consent-based)
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Google Analytics — visitor counting
+                </td>
+                <td className="border border-border px-3 py-2">~2 years</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-        <h3>2.1 Plausible Analytics — cookieless analytics</h3>
+        <h3>2.1 Google Analytics — consent-based analytics</h3>
         <p>
           We use{" "}
           <a
-            href="https://plausible.io/data-policy"
+            href="https://policies.google.com/privacy"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Plausible
+            Google Analytics 4
           </a>{" "}
-          to measure site traffic. Plausible:
+          to measure site traffic. How it works:
         </p>
         <ul>
           <li>
-            <strong>Uses no cookies</strong> (proof: their own website has
-            no cookie banner either)
+            It runs with <strong>Google Consent Mode v2</strong>: before you
+            consent, analytics storage is{" "}
+            <strong>&quot;denied&quot;</strong> — in this mode GA{" "}
+            <strong>sets no cookies</strong> and only sends anonymous
+            aggregated pings.
           </li>
-          <li>Collects no personal data, no fingerprinting</li>
-          <li>Hosts data within EU borders (EU-hosted)</li>
           <li>
-            Only stores aggregated data like page views, country (from
-            IP, IP is not stored), device type, and browser
+            When you click <strong>&quot;Accept&quot;</strong> on the cookie
+            banner, the <code>_ga</code> cookies are set and normal
+            measurement begins. If you click{" "}
+            <strong>&quot;Decline&quot;</strong>, no analytics cookie is set.
           </li>
-          <li>Compliant with GDPR, CCPA, PECR, and KVKK</li>
+          <li>
+            Aggregated data such as page views, approximate location (from
+            IP, IP not stored), device, and browser is collected.
+          </li>
+          <li>
+            The data processor is <strong>Google LLC</strong>; data may be
+            transferred outside the EU (to the US). You can withdraw consent
+            anytime by clearing your browser data.
+          </li>
         </ul>
-        <p>
-          Plausible{" "}
-          <strong>has no identifying information in the data sent to
-          its servers</strong>; therefore no cookies or consent banner
-          are needed.
-        </p>
 
         <h3>2.2 LocalStorage — local browser preferences</h3>
         <p>
@@ -402,6 +524,17 @@ export function EnBody() {
                   Until you delete it
                 </td>
               </tr>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  vpnadvisor:consent
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Your cookie consent choice (accept / decline)
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Until you delete it
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -435,19 +568,25 @@ export function EnBody() {
           </li>
         </ul>
 
-        <h2>3. Why no cookie banner?</h2>
+        <h2>3. Cookie consent (banner)</h2>
         <p>
           Under Turkey (KVKK), EU (GDPR/ePrivacy), and UK (PECR)
-          regulations, cookie banners are{" "}
-          <strong>only mandatory for non-essential cookies</strong>.
-          Since we use no cookies and localStorage data is &quot;strictly
-          necessary&quot;, no consent banner is required.
+          regulations, <strong>non-essential cookies require explicit
+          consent</strong>. That is why we show a{" "}
+          <strong>cookie consent banner</strong> for analytics (Google
+          Analytics) cookies; they are not set until you click
+          &quot;Accept&quot;. The <code>NEXT_LOCALE</code> language cookie is
+          &quot;strictly necessary&quot; and needs no consent. Your choice is
+          stored in your browser; clear your browser data to see the banner
+          again and change your preference.
         </p>
 
         <h2>4. How to delete the data</h2>
         <p>
-          The only thing we place in your browser are localStorage
-          preferences. To delete them:
+          What we place in your browser: a language cookie
+          (<code>NEXT_LOCALE</code>), Google Analytics cookies if you
+          consented, and a few localStorage preferences. To delete all of
+          them:
         </p>
         <ul>
           <li>
@@ -489,9 +628,9 @@ export function EnBody() {
         <h2>6. Policy changes</h2>
         <p>
           If this page changes, the &quot;Last updated&quot; date at the
-          top will be refreshed. Significant changes may also be shown
-          via a banner on the homepage. If we ever start using cookies we
-          will <strong>notify you and ask for consent</strong>.
+          top will be refreshed. If we add a new tracking technology we
+          will <strong>notify you and ask for consent via the cookie
+          banner</strong>.
         </p>
 
         <h2>7. Contact</h2>

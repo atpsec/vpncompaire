@@ -142,7 +142,7 @@
   },
   "cookies": {
     "title": "Çerez tercihi",
-    "body": "Bu site yalnızca gizlilik dostu, çerezsiz analitik (Plausible) kullanır. Kişisel veri toplamayız.",
+    "body": "Trafiği ölçmek için isteğe bağlı analitik çerezler (Google Analytics) kullanırız; yalnızca onayınızla. Onaylamazsanız analitik çerez yazılmaz.",
     "accept": "Tamam"
   },
   "methodology": {
@@ -768,8 +768,8 @@
     "breadcrumbHere": "Gizlilik Politikası"
   },
   "cookies": {
-    "metaTitle": "Çerez Politikası — Çerez Kullanmıyoruz",
-    "metaDescription": "VPN Advisor çerez kullanmıyor. Plausible (çerezsiz) analitik, theme tercihi için localStorage, affiliate yönlendirmeleri ve KVKK/GDPR uyumlu açıklama.",
+    "metaTitle": "Çerez Politikası — Onaya Dayalı Çerez",
+    "metaDescription": "VPN Advisor onaya dayalı analitik çerezler (Google Analytics), dil için NEXT_LOCALE çerezi, theme tercihi için localStorage, affiliate yönlendirmeleri ve KVKK/GDPR uyumlu açıklama kullanır.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Çerez Politikası"
   },
@@ -1002,6 +1002,13 @@
   "a11y": {
     "skipToContent": "Ana içeriğe geç",
     "langGroup": "Dil / Language"
+  },
+  "consent": {
+    "title": "Çerez tercihi",
+    "text": "Trafiği ölçmek için isteğe bağlı analitik çerezleri (Google Analytics) kullanmak istiyoruz. Onaylamazsan analitik çerez yazılmaz; site normal çalışır.",
+    "accept": "Kabul et",
+    "reject": "Reddet",
+    "learnMore": "Çerez politikası"
   },
   "og": {
     "alt": "VPN Advisor — Bağımsız VPN Karşılaştırmaları",

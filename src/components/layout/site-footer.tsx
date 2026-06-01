@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { ShieldCheck, Info } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
-import { SocialLinks } from "@/components/layout/social-links";
+import { SocialLinks, SOCIAL_LINKS_ENABLED } from "@/components/layout/social-links";
 
 export function SiteFooter() {
   const t = useTranslations("footer");
@@ -26,17 +26,19 @@ export function SiteFooter() {
               {t("tagline")}
             </p>
 
-            <div className="mt-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
-                {t("sections.follow")}
-              </p>
-              <div className="mt-2">
-                <SocialLinks />
+            {SOCIAL_LINKS_ENABLED && (
+              <div className="mt-5">
+                <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
+                  {t("sections.follow")}
+                </p>
+                <div className="mt-2">
+                  <SocialLinks />
+                </div>
+                <p className="mt-2 text-[11px] text-ink-subtle">
+                  {t("socialSoon")}
+                </p>
               </div>
-              <p className="mt-2 text-[11px] text-ink-subtle">
-                {t("socialSoon")}
-              </p>
-            </div>
+            )}
           </div>
 
           <div>

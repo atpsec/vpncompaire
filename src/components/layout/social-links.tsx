@@ -10,6 +10,13 @@ import {
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+/**
+ * Sosyal medya hesapları henüz açılmadı. Hesaplar hazır olunca bunu `true`
+ * yap — footer'daki "takip et" bloğu ve ikonlar otomatik geri gelir.
+ * URL'ler `SOCIALS` dizisinde, `siteConfig.social`'da güncellenir.
+ */
+export const SOCIAL_LINKS_ENABLED = false;
+
 type IconData = { title: string; path: string };
 
 // LinkedIn brand mark is no longer distributed via simple-icons (LinkedIn
@@ -109,6 +116,8 @@ const VARIANT_STYLES: Record<
 export function SocialLinks({ variant = "footer", className }: Props) {
   const style = VARIANT_STYLES[variant];
   const t = useTranslations("social");
+
+  if (!SOCIAL_LINKS_ENABLED) return null;
 
   return (
     <ul className={cn(style.wrapper, className)} aria-label={t("listLabel")}>

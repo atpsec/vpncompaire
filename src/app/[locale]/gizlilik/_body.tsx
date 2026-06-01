@@ -23,7 +23,7 @@ export function TrBody() {
           Gizlilik Politikası
         </h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Son güncelleme: Mayıs 2026
+          Son güncelleme: Haziran 2026
         </p>
       </header>
 
@@ -33,8 +33,10 @@ export function TrBody() {
         </h2>
         <ul className="mt-3 space-y-2 text-ink leading-relaxed text-sm">
           <li>
-            <strong>Çerez kullanmıyoruz</strong> — Plausible (gizlilik dostu
-            analitik) açık olduğunda dahi çerezsiz çalışır.
+            <strong>Analitik çerezler yalnızca onayınızla</strong> — Google
+            Analytics yalnızca çerez banner&apos;ından onay verdiğinizde
+            devreye girer. Dil tercihiniz için tek bir zorunlu çerez
+            (NEXT_LOCALE) kullanılır.
           </li>
           <li>
             <strong>Hesap sistemi yok</strong> — kayıt olmuyorsun, login
@@ -86,20 +88,27 @@ export function TrBody() {
           profil oluşturmak için kullanılmaz.
         </p>
 
-        <h3>2.2. Analitik (Plausible)</h3>
+        <h3>2.2. Analitik (Google Analytics)</h3>
         <p>
-          Eğer site analitik açıksa, gizlilik dostu Plausible Analytics
-          kullanırız. Plausible:
+          Site trafiğini ölçmek için Google Analytics 4 kullanırız. Google
+          Consent Mode v2 ile çalışır:
         </p>
         <ul>
-          <li>Çerez kullanmaz</li>
-          <li>Kişisel veri toplamaz</li>
-          <li>IP adresini geçici olarak hash&apos;ler, saklamaz</li>
-          <li>Sayfa görüntülenme istatistiklerini agregat olarak gösterir</li>
+          <li>
+            Çerez banner&apos;ından onay vermeden önce analitik çerez{" "}
+            <strong>yazılmaz</strong> (kimliksiz toplu ping)
+          </li>
+          <li>
+            &quot;Kabul et&quot; dediğinizde <code>_ga</code> çerezleri set
+            edilir; &quot;Reddet&quot; derseniz hiç yazılmaz
+          </li>
+          <li>Sayfa görüntülenme, yaklaşık konum, cihaz ve tarayıcı (agregat)</li>
+          <li>Veri işleyici Google LLC&apos;dir; veriler ABD&apos;ye aktarılabilir</li>
         </ul>
         <p>
-          Plausible verileri, sitemizin performansını değerlendirmek için
-          kullanılır. Bireysel kullanıcı takibi yapılmaz.
+          Analitik veriler sitenin performansını değerlendirmek için
+          kullanılır. Detaylar için{" "}
+          <Link href="/cerez-politikasi">Çerez Politikası</Link>.
         </p>
 
         <h3>2.3. İletişim e-postası</h3>
@@ -116,9 +125,9 @@ export function TrBody() {
             menfaat (güvenlik ve kötüye kullanım engelleme).
           </li>
           <li>
-            <strong>Plausible analitik:</strong> KVKK m. 5/2(f) - meşru
-            menfaat (siteyi iyileştirme); kişisel veri içermediği için
-            KVKK kapsamı dışında.
+            <strong>Google Analytics analitik:</strong> KVKK m. 5/1 ve
+            GDPR m. 6/1(a) - açık rıza (çerez banner&apos;ından onay).
+            Onay vermezseniz işlenmez.
           </li>
           <li>
             <strong>İletişim e-postası:</strong> KVKK m. 5/2(c) - sözleşme
@@ -137,8 +146,9 @@ export function TrBody() {
             loglarını işler. Veri işleme sözleşmesi standart koşullarda.
           </li>
           <li>
-            <strong>Plausible</strong> (varsa, analitik) — anonim sayfa
-            görüntülenme verilerini agregat olarak işler.
+            <strong>Google</strong> (onay verdiyseniz, analitik) — anonim
+            sayfa görüntülenme verilerini işler; veriler ABD&apos;ye
+            aktarılabilir (Google&apos;ın standart sözleşme hükümleri).
           </li>
         </ul>
         <p>
@@ -222,7 +232,7 @@ export function EnBody() {
           Privacy policy
         </h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Last updated: May 2026
+          Last updated: June 2026
         </p>
       </header>
 
@@ -232,8 +242,10 @@ export function EnBody() {
         </h2>
         <ul className="mt-3 space-y-2 text-ink leading-relaxed text-sm">
           <li>
-            <strong>We do not use cookies</strong> — Plausible (privacy-friendly
-            analytics) is cookieless even when enabled.
+            <strong>Analytics cookies only with your consent</strong> —
+            Google Analytics activates only when you accept on the cookie
+            banner. A single strictly necessary cookie (NEXT_LOCALE) stores
+            your language.
           </li>
           <li>
             <strong>No accounts</strong> — there is no sign-up, no login and no
@@ -283,20 +295,26 @@ export function EnBody() {
           profiles.
         </p>
 
-        <h3>2.2. Analytics (Plausible)</h3>
+        <h3>2.2. Analytics (Google Analytics)</h3>
         <p>
-          If analytics is enabled, we use the privacy-friendly Plausible
-          Analytics. Plausible:
+          We use Google Analytics 4 to measure site traffic, running with
+          Google Consent Mode v2:
         </p>
         <ul>
-          <li>does not use cookies</li>
-          <li>does not collect personal data</li>
-          <li>hashes IP addresses transiently and does not store them</li>
-          <li>shows pageview stats in aggregate</li>
+          <li>
+            before you consent on the cookie banner, no analytics cookie is
+            set (anonymous aggregated pings only)
+          </li>
+          <li>
+            on &quot;Accept&quot; the <code>_ga</code> cookies are set; on
+            &quot;Decline&quot; none are set
+          </li>
+          <li>aggregated page views, approximate location, device and browser</li>
+          <li>the processor is Google LLC; data may be transferred to the US</li>
         </ul>
         <p>
-          Plausible data is used to evaluate the site&apos;s performance. No
-          individual tracking is performed.
+          Analytics data is used to evaluate the site&apos;s performance. See
+          the <Link href="/cerez-politikasi">Cookie Policy</Link> for details.
         </p>
 
         <h3>2.3. Contact email</h3>
@@ -314,9 +332,9 @@ export function EnBody() {
             abuse prevention).
           </li>
           <li>
-            <strong>Plausible analytics:</strong> legitimate interest
-            (improving the site); since no personal data is involved, it is
-            outside the scope of personal-data law.
+            <strong>Google Analytics:</strong> consent (GDPR Art. 6(1)(a)
+            and KVKK explicit consent via the cookie banner). Not processed
+            unless you accept.
           </li>
           <li>
             <strong>Contact email:</strong> contract/precontract necessity
@@ -335,8 +353,9 @@ export function EnBody() {
             Standard data-processing agreement.
           </li>
           <li>
-            <strong>Plausible</strong> (if enabled, analytics) — processes
-            anonymous pageview data in aggregate.
+            <strong>Google</strong> (if you consented, analytics) — processes
+            anonymous pageview data in aggregate; data may be transferred to
+            the US (Google&apos;s standard contractual clauses).
           </li>
         </ul>
         <p>

@@ -12,14 +12,14 @@ const withMDX = createMDX({
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 // Content Security Policy — sıkı ama Next.js (inline hydration script + JSON-LD)
-// ve isteğe bağlı Plausible analitik için çalışıyor.
+// ve isteğe bağlı Google Analytics (gtag.js) için çalışıyor.
 const cspDirectives = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://plausible.io",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://flagcdn.com https://images.unsplash.com",
+  "img-src 'self' data: blob: https://flagcdn.com https://images.unsplash.com https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://plausible.io https://1.1.1.1 https://cloudflare-dns.com https://speed.cloudflare.com",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://1.1.1.1 https://cloudflare-dns.com https://speed.cloudflare.com",
   "frame-src https://speed.cloudflare.com",
   "frame-ancestors 'none'",
   "form-action 'self'",
