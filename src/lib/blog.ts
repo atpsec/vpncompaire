@@ -155,14 +155,6 @@ export const BLOG_SLUG_MAP: Record<string, { tr: string; en: string }> = {
     tr: "playstation-xbox-store-vpn",
     en: "playstation-xbox-store-vpn",
   },
-  "claude-gemini-erisim-vpn": {
-    tr: "claude-gemini-erisim-vpn",
-    en: "claude-gemini-access-vpn",
-  },
-  "midjourney-stable-diffusion-vpn": {
-    tr: "midjourney-stable-diffusion-vpn",
-    en: "midjourney-stable-diffusion-vpn",
-  },
   "ai-araclari-gizlilik-vpn": {
     tr: "ai-araclari-gizlilik-vpn",
     en: "ai-tools-privacy-vpn",

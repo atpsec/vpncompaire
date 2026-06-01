@@ -78,6 +78,32 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // İçerik konsolidasyonu (ADIM 4 / Küme C — AI): birleştirilen blog yazıları
+  // pillar'a 301'lendi. Eski URL'lerin backlink/SEO değerini korumak için kalıcı yönlendirme.
+  async redirects() {
+    return [
+      {
+        source: "/blog/claude-gemini-erisim-vpn",
+        destination: "/blog/chatgpt-turkiye-erisim-vpn",
+        permanent: true,
+      },
+      {
+        source: "/en/blog/claude-gemini-access-vpn",
+        destination: "/en/blog/chatgpt-access-turkey-vpn",
+        permanent: true,
+      },
+      {
+        source: "/blog/midjourney-stable-diffusion-vpn",
+        destination: "/blog/chatgpt-turkiye-erisim-vpn",
+        permanent: true,
+      },
+      {
+        source: "/en/blog/midjourney-stable-diffusion-vpn",
+        destination: "/en/blog/chatgpt-access-turkey-vpn",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(withMDX(nextConfig));
