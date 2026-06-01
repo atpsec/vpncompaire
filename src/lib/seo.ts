@@ -3,6 +3,10 @@ import type { FAQ } from "@/data/home-faqs";
 
 type JsonLdObject = Record<string, unknown>;
 
+function inLanguageOf(locale: "tr" | "en"): string {
+  return locale === "en" ? "en-US" : "tr-TR";
+}
+
 export function organizationSchema(): JsonLdObject {
   return {
     "@context": "https://schema.org",
@@ -10,17 +14,21 @@ export function organizationSchema(): JsonLdObject {
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description.tr,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/icon"),
+    },
     sameAs: [siteConfig.social.twitter, siteConfig.social.github].filter(Boolean),
   };
 }
 
-export function websiteSchema(): JsonLdObject {
+export function websiteSchema(locale: "tr" | "en" = "tr"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: siteConfig.name,
     url: siteConfig.url,
-    inLanguage: "tr-TR",
+    inLanguage: inLanguageOf(locale),
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
@@ -45,6 +53,7 @@ export function faqSchema(items: FAQ[]): JsonLdObject {
 
 export function itemListSchema(
   items: { slug: string; brand: string; score: number }[],
+  locale: "tr" | "en" = "tr",
 ): JsonLdObject {
   return {
     "@context": "https://schema.org",
@@ -52,7 +61,7 @@ export function itemListSchema(
     itemListElement: items.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      url: absoluteUrl(`/inceleme/${p.slug}`),
+      url: absoluteUrl(`/inceleme/${p.slug}`, locale),
       name: p.brand,
     })),
   };
@@ -111,7 +120,12 @@ export function articleSchema(post: {
         url: absoluteUrl("/icon"),
       },
     },
-    image: post.imageUrl,
+    image: {
+      "@type": "ImageObject",
+      url: post.imageUrl,
+      width: 1200,
+      height: 630,
+    },
     url: articleUrl,
   };
 }

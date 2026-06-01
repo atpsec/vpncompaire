@@ -29,8 +29,8 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <JsonLd data={organizationSchema()} />
-      <JsonLd data={websiteSchema()} />
-      <JsonLd data={itemListSchema(rankedProducts(locale as "tr" | "en"))} />
+      <JsonLd data={websiteSchema(locale as "tr" | "en")} />
+      <JsonLd data={itemListSchema(rankedProducts(locale as "tr" | "en"), locale as "tr" | "en")} />
       <JsonLd data={faqSchema(homeFaqs(locale as "tr" | "en"))} />
       <Hero />
       <IpSecurityBanner />

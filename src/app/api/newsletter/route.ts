@@ -45,13 +45,15 @@ const BodySchema = z.object({
 });
 
 function isSameOrigin(request: NextRequest): boolean {
-  const origin = request.headers.get("origin");
   const host = request.headers.get("host");
-  // No Origin header (some same-origin POSTs from old browsers) — accept.
-  if (!origin) return true;
+  if (!host) return false;
+  // Prefer Origin; fall back to Referer. Reject when neither is present
+  // (a missing Origin must NOT bypass the CSRF check).
+  const candidate =
+    request.headers.get("origin") ?? request.headers.get("referer");
+  if (!candidate) return false;
   try {
-    const originHost = new URL(origin).host;
-    return !!host && originHost === host;
+    return new URL(candidate).host === host;
   } catch {
     return false;
   }
@@ -102,16 +104,16 @@ export async function POST(request: NextRequest) {
   if (website && website.length > 0) {
     return NextResponse.json({
       success: true,
-      message: "Subscribed",
+      message: "ok",
     });
   }
 
   // No DB in this project — log only. Vercel function logs capture this.
-  // PII note: full email is logged server-side (operator-only); the public
-  // analytics event sent from the client only includes the email domain.
+  // PII: do NOT log the full email. Only the domain (non-identifying) is
+  // recorded so logs can't leak subscriber addresses (GDPR data minimisation).
   const domain = email.split("@")[1] ?? "unknown";
   console.log(
-    `[newsletter] signup email=${email} domain=${domain} ip=${ip} ts=${new Date().toISOString()}`,
+    `[newsletter] signup domain=${domain} ip=${ip} ts=${new Date().toISOString()}`,
   );
 
   return NextResponse.json({

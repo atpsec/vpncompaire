@@ -35,7 +35,7 @@ function ReviewsHubView() {
 
   return (
     <>
-      <JsonLd data={itemListSchema(rankedProducts(locale))} />
+      <JsonLd data={itemListSchema(rankedProducts(locale), locale)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: tNav("home"), path: "/" },

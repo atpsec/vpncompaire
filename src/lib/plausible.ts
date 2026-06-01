@@ -9,9 +9,16 @@ export type PostView = {
   title?: string;
 };
 
+import { env } from "@/env";
+
+/** Strip scheme and any trailing slash so Plausible's site_id matches exactly. */
+function plausibleSiteId(siteUrl: string): string {
+  return siteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+}
+
 export async function getPageViews(slug: string): Promise<number> {
-  const apiKey = process.env.PLAUSIBLE_API_KEY;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const apiKey = env.PLAUSIBLE_API_KEY;
+  const siteUrl = env.NEXT_PUBLIC_SITE_URL;
 
   // Strict validation: both must be set
   if (!apiKey || !siteUrl) {
@@ -21,11 +28,11 @@ export async function getPageViews(slug: string): Promise<number> {
     return 0;
   }
 
-  const siteId = siteUrl.replace(/^https?:\/\//, "");
+  const siteId = plausibleSiteId(siteUrl);
 
   try {
     const response = await fetch(
-      `https://plausible.io/api/v1/stats/breakdown?site_id=${siteId}&period=6mo&property=event:page&filters=event:page==/blog/${slug}`,
+      `https://plausible.io/api/v1/stats/breakdown?site_id=${siteId}&period=6mo&property=event:page&filters=event:page==/blog/${encodeURIComponent(slug)}`,
       {
         headers: {
           Authorization: `Bearer ${apiKey}`,
@@ -57,8 +64,8 @@ export async function getPageViews(slug: string): Promise<number> {
 }
 
 export async function getTopPosts(limit = 10): Promise<PostView[]> {
-  const apiKey = process.env.PLAUSIBLE_API_KEY;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  const apiKey = env.PLAUSIBLE_API_KEY;
+  const siteUrl = env.NEXT_PUBLIC_SITE_URL;
 
   // Strict validation: both must be set
   if (!apiKey || !siteUrl) {
@@ -68,7 +75,7 @@ export async function getTopPosts(limit = 10): Promise<PostView[]> {
     return [];
   }
 
-  const siteId = siteUrl.replace(/^https?:\/\//, "");
+  const siteId = plausibleSiteId(siteUrl);
 
   try {
     const response = await fetch(
