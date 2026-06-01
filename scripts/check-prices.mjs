@@ -21,7 +21,7 @@ const STALE_DAYS = 30;
 const DRIFT_PCT = 0.15;
 const TIMEOUT_MS = 15_000;
 const UA =
-  "Mozilla/5.0 (vpncompaire pricing audit; +https://vpncompaire.vercel.app)";
+  "Mozilla/5.0 (VPN Advisor pricing audit; +https://vpnadvisor.net)";
 
 const text = readFileSync(PRODUCTS_PATH, "utf8");
 

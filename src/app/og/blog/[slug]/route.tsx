@@ -35,7 +35,7 @@ export async function GET(_req: Request, ctx: RouteParams) {
   const { slug } = await ctx.params;
   const found = await findPost(slug);
 
-  const fallbackTitle = "vpncompaire — VPN reviews & guides";
+  const fallbackTitle = "VPN Advisor — VPN reviews & guides";
   const title = found?.post.frontmatter.title ?? fallbackTitle;
   const category = found?.post.frontmatter.category ?? "blog";
   const coverImageKey = found?.post.frontmatter.coverImage ?? "vpn-basics";
@@ -107,7 +107,7 @@ export async function GET(_req: Request, ctx: RouteParams) {
               V
             </div>
             <span style={{ fontSize: 30, fontWeight: 700, letterSpacing: -1 }}>
-              vpncompaire
+              VPN Advisor
             </span>
           </div>
 

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "siteName": "vpncompaire",
-    "defaultTitle": "vpncompaire — Independent VPN Comparisons (2026)",
+    "siteName": "VPN Advisor",
+    "defaultTitle": "VPN Advisor — Independent VPN Comparisons (2026)",
     "defaultDescription": "Independent, methodology-driven VPN reviews and comparisons. Find the right VPN for privacy, streaming, travel and everyday security."
   },
   "nav": {
@@ -22,7 +22,7 @@
     "search": "Search",
     "menu": "Menu",
     "closeMenu": "Close menu",
-    "homeAria": "vpncompaire home",
+    "homeAria": "VPN Advisor home",
     "primaryNav": "Main navigation",
     "mobileNav": "Mobile menu",
     "language": "Language",
@@ -147,7 +147,7 @@
   },
   "methodology": {
     "metaTitle": "Our Test Methodology — How We Evaluate VPNs",
-    "metaDescription": "vpncompaire's VPN testing process: independence statement, speed measurements, leak tests, streaming verification, no-logs audit review, scoring system and transparency standards.",
+    "metaDescription": "VPN Advisor's VPN testing process: independence statement, speed measurements, leak tests, streaming verification, no-logs audit review, scoring system and transparency standards.",
     "badge": "Transparent methodology",
     "h1": "Our VPN Testing Methodology",
     "intro": "Every VPN on the site is evaluated across five separate test areas using the same standardised procedure. Affiliate commissions do not influence rankings or scores — this page explains in detail how each test is performed, which tools we use and the assumptions behind the scoring.",
@@ -596,7 +596,7 @@
     "metaDescription": "Glossary of VPN terminology: no-logs, kill switch, WireGuard, jurisdiction, RAM-only, port forwarding, multi-hop. Plain-language definitions.",
     "ogTitle": "VPN Glossary",
     "ogDescription": "Plain-language definitions of all VPN terms.",
-    "schemaName": "vpncompaire VPN Glossary",
+    "schemaName": "VPN Advisor VPN Glossary",
     "breadcrumb": "VPN glossary",
     "badgeLabel": "Glossary",
     "h1": "VPN glossary",
@@ -669,7 +669,7 @@
   },
   "contact": {
     "metaTitle": "Contact",
-    "metaDescription": "Get in touch with vpncompaire — editorial feedback, corrections, partnerships and legal queries.",
+    "metaDescription": "Get in touch with VPN Advisor — editorial feedback, corrections, partnerships and legal queries.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Contact",
     "badge": "Contact",
@@ -700,7 +700,7 @@
   },
   "about": {
     "metaTitle": "About",
-    "metaDescription": "What vpncompaire is, why it exists and how it works. A volunteer review project with editorial independence and a transparent methodology.",
+    "metaDescription": "What VPN Advisor is, why it exists and how it works. A volunteer review project with editorial independence and a transparent methodology.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "About",
     "badge": "About",
@@ -763,31 +763,31 @@
   },
   "privacy": {
     "metaTitle": "Privacy policy",
-    "metaDescription": "How vpncompaire handles your personal data — GDPR-aligned, cookieless, minimum-data principle.",
+    "metaDescription": "How VPN Advisor handles your personal data — GDPR-aligned, cookieless, minimum-data principle.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Privacy policy"
   },
   "cookies": {
     "metaTitle": "Cookie Policy — We Don't Use Cookies",
-    "metaDescription": "vpncompaire doesn't use cookies. Plausible cookieless analytics, localStorage for theme preference, affiliate redirects, and GDPR/KVKK-aligned disclosure.",
+    "metaDescription": "VPN Advisor doesn't use cookies. Plausible cookieless analytics, localStorage for theme preference, affiliate redirects, and GDPR/KVKK-aligned disclosure.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Cookie policy"
   },
   "terms": {
     "metaTitle": "Terms of use",
-    "metaDescription": "vpncompaire terms of use, liability limits and legal framework.",
+    "metaDescription": "VPN Advisor terms of use, liability limits and legal framework.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Terms of use"
   },
   "legalNotice": {
     "metaTitle": "Legal Notice (Disclaimer) — Information Only",
-    "metaDescription": "vpncompaire content is informational; it provides no legal, financial or cybersecurity guarantee. Final decisions rest with the reader.",
+    "metaDescription": "VPN Advisor content is informational; it provides no legal, financial or cybersecurity guarantee. Final decisions rest with the reader.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Legal notice"
   },
   "disclosurePage": {
     "metaTitle": "Advertising Disclosure (Affiliate Disclosure)",
-    "metaDescription": "Transparent statement of vpncompaire's affiliate relationships, revenue model and editorial independence. FTC-aligned.",
+    "metaDescription": "Transparent statement of VPN Advisor's affiliate relationships, revenue model and editorial independence. FTC-aligned.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Advertising disclosure"
   },
@@ -1004,7 +1004,7 @@
     "langGroup": "Language"
   },
   "og": {
-    "alt": "vpncompaire — Independent VPN comparisons",
+    "alt": "VPN Advisor — Independent VPN comparisons",
     "h1": "Independent VPN comparisons",
     "subtitle": "Volunteer review project · Transparent methodology · Independent assessments.",
     "trust1": "10 VPNs tested",
@@ -1053,7 +1053,7 @@
     }
   },
   "tools": {
-    "metaTitle": "VPN Tools - Free IP, DNS, WebRTC and Speed Tests | vpncompaire",
+    "metaTitle": "VPN Tools - Free IP, DNS, WebRTC and Speed Tests | VPN Advisor",
     "metaDescription": "Free tools that verify your VPN actually works: IP address lookup, DNS leak test, WebRTC leak test and speed test.",
     "breadcrumb": "Tools",
     "indexTitle": "Free VPN Testing Tools",
@@ -1087,7 +1087,7 @@
       "ctaButton": "See the best VPNs"
     },
     "ip": {
-      "metaTitle": "What is My IP? - Free IP Address Lookup 2026 | vpncompaire",
+      "metaTitle": "What is My IP? - Free IP Address Lookup 2026 | VPN Advisor",
       "metaDescription": "Instantly see your IP address, ISP, country, city and browser fingerprint. Free, log-free and fast IP lookup tool.",
       "breadcrumb": "My IP",
       "title": "Your IP Address",
@@ -1110,7 +1110,7 @@
       "explainBody": "Your IP address is your identity card on the internet. Every site you visit can use it to track your physical location, ISP and behavior. A VPN masks your IP and breaks those trails."
     },
     "dns": {
-      "metaTitle": "DNS Leak Test 2026 - Free | vpncompaire",
+      "metaTitle": "DNS Leak Test 2026 - Free | VPN Advisor",
       "metaDescription": "Is your VPN leaking DNS? Use our free browser-based test to see your DNS resolvers and protect your privacy.",
       "breadcrumb": "DNS Leak Test",
       "title": "DNS Leak Test",
@@ -1128,7 +1128,7 @@
       "explainBody": "DNS translates domain names into IP addresses. Even when you use a VPN, misconfiguration can route DNS queries to your ISP, exposing your browsing history."
     },
     "webrtc": {
-      "metaTitle": "WebRTC Leak Test - Is Your Real IP Exposed? | vpncompaire",
+      "metaTitle": "WebRTC Leak Test - Is Your Real IP Exposed? | VPN Advisor",
       "metaDescription": "WebRTC can leak your real IP even with a VPN on. Use this free browser test to check.",
       "breadcrumb": "WebRTC Leak Test",
       "title": "WebRTC Leak Test",
@@ -1149,7 +1149,7 @@
       "fixBrave": "Brave: Settings > Privacy > WebRTC IP handling policy = Default Public Interface Only."
     },
     "speed": {
-      "metaTitle": "VPN Speed Test - Free Internet Speed Check 2026 | vpncompaire",
+      "metaTitle": "VPN Speed Test - Free Internet Speed Check 2026 | VPN Advisor",
       "metaDescription": "Measure your VPN's real speed. Test download speed and latency using Cloudflare infrastructure.",
       "breadcrumb": "VPN Speed Test",
       "title": "VPN Speed Test",

@@ -34,7 +34,7 @@ export function SiteHeader() {
             aria-label={t("homeAria")}
           >
             <ShieldCheck className="size-6 text-brand-600" aria-hidden="true" />
-            <span className="text-lg">vpncompaire</span>
+            <span className="text-lg">VPN Advisor</span>
           </Link>
 
           <nav

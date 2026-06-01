@@ -12,7 +12,7 @@ export const siteConfig = {
     en: "Independent, methodology-driven VPN reviews and comparisons. Covers privacy, streaming, travel and everyday-security scenarios. A volunteer review project — not an official organisation.",
   },
   author: {
-    name: "vpncompaire Editör Ekibi",
+    name: "VPN Advisor Editör Ekibi",
     url: "/hakkimizda",
   },
   social: {

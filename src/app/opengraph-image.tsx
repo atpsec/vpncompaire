@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "vpncompaire — Independent VPN comparisons";
+export const alt = "VPN Advisor — Independent VPN comparisons";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,7 +46,7 @@ export default function OGImage() {
             V
           </div>
           <span style={{ fontSize: 32, fontWeight: 700, letterSpacing: -1 }}>
-            vpncompaire
+            VPN Advisor
           </span>
         </div>
 

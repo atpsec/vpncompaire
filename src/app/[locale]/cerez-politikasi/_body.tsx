@@ -30,7 +30,7 @@ export function TrBody() {
           <CheckCircle2 className="size-5" /> Kısa cevap: Çerez kullanmıyoruz
         </h2>
         <p className="mt-3 text-ink leading-relaxed text-sm">
-          vpncompaire.com sitesi <strong>hiçbir HTTP çerezi (cookie)
+          vpnadvisor.net sitesi <strong>hiçbir HTTP çerezi (cookie)
           set etmez</strong>. Reklam çerezi, analitik çerezi, tracking
           çerezi yok. Bu sayfa neyi <em>kullandığımızı</em>, neyi{" "}
           <em>kullanmadığımızı</em> ve tarayıcınızda hangi yerel
@@ -114,7 +114,7 @@ export function TrBody() {
             <tbody>
               <tr>
                 <td className="border border-border px-3 py-2 font-mono text-xs">
-                  vpncompaire-theme
+                  vpnadvisor-theme
                 </td>
                 <td className="border border-border px-3 py-2">
                   Açık/koyu tema tercihin
@@ -185,7 +185,7 @@ export function TrBody() {
         </p>
         <ul>
           <li>
-            <strong>Chrome/Edge:</strong> Site bilgileri → vpncompaire.com
+            <strong>Chrome/Edge:</strong> Site bilgileri → vpnadvisor.net
             → Depolanan veriyi temizle
           </li>
           <li>
@@ -299,7 +299,7 @@ export function EnBody() {
           use cookies
         </h2>
         <p className="mt-3 text-ink leading-relaxed text-sm">
-          The vpncompaire.com site <strong>sets no HTTP cookies
+          The vpnadvisor.net site <strong>sets no HTTP cookies
           whatsoever</strong>. No advertising cookies, no analytics
           cookies, no tracking cookies. This page explains what we{" "}
           <em>do</em> use, what we <em>don&apos;t</em>, and what local
@@ -382,7 +382,7 @@ export function EnBody() {
             <tbody>
               <tr>
                 <td className="border border-border px-3 py-2 font-mono text-xs">
-                  vpncompaire-theme
+                  vpnadvisor-theme
                 </td>
                 <td className="border border-border px-3 py-2">
                   Your light/dark theme preference
@@ -451,7 +451,7 @@ export function EnBody() {
         </p>
         <ul>
           <li>
-            <strong>Chrome/Edge:</strong> Site info → vpncompaire.com →
+            <strong>Chrome/Edge:</strong> Site info → vpnadvisor.net →
             Clear stored data
           </li>
           <li>

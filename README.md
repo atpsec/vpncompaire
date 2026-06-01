@@ -1,4 +1,4 @@
-# vpncompaire
+# VPN Advisor
 
 Türkçe VPN inceleme ve karşılaştırma sitesi. AI-citability (ChatGPT, Claude, Perplexity, Gemini'da önerilebilirlik) için optimize edilmiş, çok dilli yapıya hazır.
 
@@ -87,8 +87,8 @@ npx vercel --prod
 ```
 
 Environment variables:
-- `NEXT_PUBLIC_SITE_URL=https://vpncompaire.com`
-- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=vpncompaire.com` (analitik açmak için)
+- `NEXT_PUBLIC_SITE_URL=https://vpnadvisor.net`
+- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=vpnadvisor.net` (analitik açmak için)
 
 ## AI sitasyon optimizasyonu (GEO)
 

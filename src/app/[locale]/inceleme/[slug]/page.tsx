@@ -77,7 +77,7 @@ export default async function Page({ params }: Props) {
       applicationCategory: "SecurityApplication",
       operatingSystem: "Windows, macOS, Linux, iOS, Android",
     },
-    author: { "@type": "Organization", name: "vpncompaire" },
+    author: { "@type": "Organization", name: "VPN Advisor" },
     reviewRating: {
       "@type": "Rating",
       ratingValue: product.score,

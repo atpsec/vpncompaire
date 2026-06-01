@@ -9,7 +9,7 @@ import {
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const STORAGE_KEY = "vpncompaire:ip-banner-dismissed-at";
+const STORAGE_KEY = "vpnadvisor:ip-banner-dismissed-at";
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
 const DismissContext = createContext<(() => void) | null>(null);

@@ -11,11 +11,11 @@ const envSchema = z.object({
   NEXT_PUBLIC_SITE_NAME: z
     .string()
     .min(1, "NEXT_PUBLIC_SITE_NAME boş olamaz")
-    .default("vpncompaire"),
+    .default("VPN Advisor"),
   NEXT_PUBLIC_SITE_BRAND: z
     .string()
     .min(1)
-    .default("vpncompaire"),
+    .default("VPN Advisor"),
   NEXT_PUBLIC_SITE_URL: z
     .string()
     .url("NEXT_PUBLIC_SITE_URL geçerli bir URL olmalı")

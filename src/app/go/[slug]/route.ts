@@ -88,7 +88,7 @@ export async function GET(req: Request, { params }: Context): Promise<Response> 
     }
   } else if (link.hasProgram) {
     // No env tracking URL — fall back to public site with UTM markers
-    target.searchParams.set("utm_source", "vpncompaire");
+    target.searchParams.set("utm_source", "vpnadvisor");
     target.searchParams.set("utm_medium", "affiliate");
     target.searchParams.set(
       "utm_campaign",
@@ -97,7 +97,7 @@ export async function GET(req: Request, { params }: Context): Promise<Response> 
   } else if (source) {
     // No affiliate program at all (e.g. Mullvad) — keep utm_source
     // for our own analytics, no medium/campaign.
-    target.searchParams.set("utm_source", "vpncompaire");
+    target.searchParams.set("utm_source", "vpnadvisor");
     target.searchParams.set("utm_campaign", `${slug}-${source}`);
   }
 

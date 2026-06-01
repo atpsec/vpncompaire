@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "siteName": "vpncompaire",
-    "defaultTitle": "vpncompaire — Bağımsız VPN Karşılaştırmaları (2026)",
+    "siteName": "VPN Advisor",
+    "defaultTitle": "VPN Advisor — Bağımsız VPN Karşılaştırmaları (2026)",
     "defaultDescription": "Bağımsız test metodolojisine dayalı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik için doğru VPN'i bul."
   },
   "nav": {
@@ -22,7 +22,7 @@
     "search": "Ara",
     "menu": "Menü",
     "closeMenu": "Menüyü kapat",
-    "homeAria": "vpncompaire ana sayfa",
+    "homeAria": "VPN Advisor ana sayfa",
     "primaryNav": "Ana navigasyon",
     "mobileNav": "Mobil menü",
     "language": "Dil / Language",
@@ -147,7 +147,7 @@
   },
   "methodology": {
     "metaTitle": "Test Metodolojimiz — Nasıl Değerlendiriyoruz",
-    "metaDescription": "vpncompaire'in VPN test süreci: bağımsızlık beyanı, hız ölçümleri, sızıntı testleri, streaming doğrulaması, no-logs denetim incelemesi, puanlama sistemi ve şeffaflık standartları.",
+    "metaDescription": "VPN Advisor'in VPN test süreci: bağımsızlık beyanı, hız ölçümleri, sızıntı testleri, streaming doğrulaması, no-logs denetim incelemesi, puanlama sistemi ve şeffaflık standartları.",
     "badge": "Şeffaf metodoloji",
     "h1": "VPN Test Metodolojimiz",
     "intro": "Sitedeki her VPN beş ayrı test alanı üzerinden, aynı standart prosedürle değerlendirilir. Affiliate komisyonu sıralamayı veya puanları etkilemez — bu sayfa, her bir testi nasıl yürüttüğümüzü, hangi araçları kullandığımızı ve hangi varsayımlarla puanladığımızı detaylı biçimde açıklar.",
@@ -596,7 +596,7 @@
     "metaDescription": "VPN terimleri sözlüğü: no-logs, kill switch, WireGuard, jurisdiction, RAM-only, port forwarding, multi-hop. 20+ terimin Türkçe açıklaması.",
     "ogTitle": "VPN Sözlüğü",
     "ogDescription": "Tüm VPN terimlerinin Türkçe açıklamalı sözlüğü.",
-    "schemaName": "vpncompaire VPN Sözlüğü",
+    "schemaName": "VPN Advisor VPN Sözlüğü",
     "breadcrumb": "VPN sözlüğü",
     "badgeLabel": "Sözlük",
     "h1": "VPN sözlüğü",
@@ -669,7 +669,7 @@
   },
   "contact": {
     "metaTitle": "İletişim",
-    "metaDescription": "vpncompaire ile iletişime geç — editoryal geri bildirim, düzeltme talepleri, iş birlikleri ve yasal başvurular.",
+    "metaDescription": "VPN Advisor ile iletişime geç — editoryal geri bildirim, düzeltme talepleri, iş birlikleri ve yasal başvurular.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "İletişim",
     "badge": "İletişim",
@@ -700,7 +700,7 @@
   },
   "about": {
     "metaTitle": "Hakkımızda",
-    "metaDescription": "vpncompaire nedir, neden var, nasıl çalışır. Gönüllü inceleme projesi olarak editoryal bağımsızlık, metodoloji ve değerlendirme yaklaşımı.",
+    "metaDescription": "VPN Advisor nedir, neden var, nasıl çalışır. Gönüllü inceleme projesi olarak editoryal bağımsızlık, metodoloji ve değerlendirme yaklaşımı.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Hakkımızda",
     "badge": "Hakkımızda",
@@ -763,31 +763,31 @@
   },
   "privacy": {
     "metaTitle": "Gizlilik Politikası",
-    "metaDescription": "vpncompaire kişisel verilerinizi nasıl işliyor — KVKK uyumlu, çerezsiz, minimum veri prensibi.",
+    "metaDescription": "VPN Advisor kişisel verilerinizi nasıl işliyor — KVKK uyumlu, çerezsiz, minimum veri prensibi.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Gizlilik Politikası"
   },
   "cookies": {
     "metaTitle": "Çerez Politikası — Çerez Kullanmıyoruz",
-    "metaDescription": "vpncompaire çerez kullanmıyor. Plausible (çerezsiz) analitik, theme tercihi için localStorage, affiliate yönlendirmeleri ve KVKK/GDPR uyumlu açıklama.",
+    "metaDescription": "VPN Advisor çerez kullanmıyor. Plausible (çerezsiz) analitik, theme tercihi için localStorage, affiliate yönlendirmeleri ve KVKK/GDPR uyumlu açıklama.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Çerez Politikası"
   },
   "terms": {
     "metaTitle": "Kullanım Şartları",
-    "metaDescription": "vpncompaire sitesinin kullanım şartları, sorumluluk sınırları ve yasal çerçeve.",
+    "metaDescription": "VPN Advisor sitesinin kullanım şartları, sorumluluk sınırları ve yasal çerçeve.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Kullanım Şartları"
   },
   "legalNotice": {
     "metaTitle": "Yasal Uyarı (Disclaimer) — Bilgi Amaçlı İçerik",
-    "metaDescription": "vpncompaire içeriği bilgi amaçlıdır; hukuki, finansal veya siber güvenlik garantisi vermez. Kullanıcılar nihai kararı kendileri verir.",
+    "metaDescription": "VPN Advisor içeriği bilgi amaçlıdır; hukuki, finansal veya siber güvenlik garantisi vermez. Kullanıcılar nihai kararı kendileri verir.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Yasal Uyarı"
   },
   "disclosurePage": {
     "metaTitle": "Reklam Açıklaması (Affiliate Disclosure)",
-    "metaDescription": "vpncompaire affiliate (ortaklık) ilişkileri, gelir modelimiz ve editoryal bağımsızlığımız hakkında şeffaf açıklama. FTC ve Türkiye Reklam Kurulu uyumlu.",
+    "metaDescription": "VPN Advisor affiliate (ortaklık) ilişkileri, gelir modelimiz ve editoryal bağımsızlığımız hakkında şeffaf açıklama. FTC ve Türkiye Reklam Kurulu uyumlu.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Reklam Açıklaması"
   },
@@ -1004,7 +1004,7 @@
     "langGroup": "Dil / Language"
   },
   "og": {
-    "alt": "vpncompaire — Bağımsız VPN Karşılaştırmaları",
+    "alt": "VPN Advisor — Bağımsız VPN Karşılaştırmaları",
     "h1": "Bağımsız VPN Karşılaştırmaları",
     "subtitle": "Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız değerlendirmeler.",
     "trust1": "10 VPN test edildi",
@@ -1053,7 +1053,7 @@
     }
   },
   "tools": {
-    "metaTitle": "VPN Araçları - Ücretsiz IP, DNS, WebRTC ve Hız Testi | vpncompaire",
+    "metaTitle": "VPN Araçları - Ücretsiz IP, DNS, WebRTC ve Hız Testi | VPN Advisor",
     "metaDescription": "VPN'inizin gerçekten çalıştığını doğrulayan ücretsiz araçlar: IP adresi sorgulama, DNS sızıntı testi, WebRTC sızıntı testi ve hız testi.",
     "breadcrumb": "Araçlar",
     "indexTitle": "Ücretsiz VPN Test Araçları",
@@ -1087,7 +1087,7 @@
       "ctaButton": "En iyi VPN'leri gör"
     },
     "ip": {
-      "metaTitle": "IP Adresim Ne? - Ücretsiz IP Adresi Sorgulama 2026 | vpncompaire",
+      "metaTitle": "IP Adresim Ne? - Ücretsiz IP Adresi Sorgulama 2026 | VPN Advisor",
       "metaDescription": "IP adresinizi, ISS'nizi, ülkenizi, şehrinizi ve tarayıcı parmak izinizi anında öğrenin. Ücretsiz, kayıtsız ve hızlı IP sorgulama aracı.",
       "breadcrumb": "IP Adresim",
       "title": "IP Adresiniz",
@@ -1110,7 +1110,7 @@
       "explainBody": "IP adresiniz internetteki kimlik kartınızdır. Ziyaret ettiğiniz her site fiziksel konumunuzu, ISS'nizi ve davranışlarınızı takip etmek için bunu kullanabilir. VPN, IP adresinizi maskeleyerek bu izleri keser."
     },
     "dns": {
-      "metaTitle": "DNS Sızıntı Testi 2026 - Ücretsiz | vpncompaire",
+      "metaTitle": "DNS Sızıntı Testi 2026 - Ücretsiz | VPN Advisor",
       "metaDescription": "VPN'iniz DNS sızıntısı yapıyor mu? Tarayıcı tabanlı ücretsiz testimizle DNS sunucularınızı görün ve gizliliğinizi koruyun.",
       "breadcrumb": "DNS Sızıntı Testi",
       "title": "DNS Sızıntı Testi",
@@ -1128,7 +1128,7 @@
       "explainBody": "DNS, alan adlarını IP adreslerine çevirir. VPN kullansanız bile yanlış yapılandırma yüzünden DNS sorguları ISS'nize gidebilir. Bu, geçmişinizi ISS'nizin görebilmesi anlamına gelir."
     },
     "webrtc": {
-      "metaTitle": "WebRTC Sızıntı Testi - Gerçek IP Açığa Çıkıyor mu? | vpncompaire",
+      "metaTitle": "WebRTC Sızıntı Testi - Gerçek IP Açığa Çıkıyor mu? | VPN Advisor",
       "metaDescription": "WebRTC, VPN aktifken bile gerçek IP'nizi sızdırabilir. Ücretsiz tarayıcı testi ile sızıntı olup olmadığını kontrol edin.",
       "breadcrumb": "WebRTC Sızıntı Testi",
       "title": "WebRTC Sızıntı Testi",
@@ -1149,7 +1149,7 @@
       "fixBrave": "Brave: Ayarlar > Gizlilik > WebRTC IP işleme politikasını 'Default Public Interface Only' yapın."
     },
     "speed": {
-      "metaTitle": "VPN Hız Testi - Ücretsiz İnternet Hız Ölçümü 2026 | vpncompaire",
+      "metaTitle": "VPN Hız Testi - Ücretsiz İnternet Hız Ölçümü 2026 | VPN Advisor",
       "metaDescription": "VPN'inizin gerçek hızını ölçün. Cloudflare altyapısıyla indirme hızı ve gecikmeyi test edin.",
       "breadcrumb": "VPN Hız Testi",
       "title": "VPN Hız Testi",

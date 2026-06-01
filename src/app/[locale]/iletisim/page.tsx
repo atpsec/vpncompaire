@@ -22,9 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const channels = [
-  { Icon: Edit3, key: "editorial", email: "editor@vpncompaire.com" },
-  { Icon: Briefcase, key: "partnership", email: "partner@vpncompaire.com" },
-  { Icon: AlertCircle, key: "legal", email: "legal@vpncompaire.com" },
+  { Icon: Edit3, key: "editorial", email: "editor@vpnadvisor.net" },
+  { Icon: Briefcase, key: "partnership", email: "partner@vpnadvisor.net" },
+  { Icon: AlertCircle, key: "legal", email: "legal@vpnadvisor.net" },
 ] as const;
 
 export default async function Page({ params }: Props) {

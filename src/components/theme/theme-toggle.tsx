@@ -5,7 +5,7 @@ import { Moon, Sun, Monitor } from "lucide-react";
 
 type Theme = "light" | "dark" | "system";
 
-const STORAGE_KEY = "vpncompaire-theme";
+const STORAGE_KEY = "vpnadvisor-theme";
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;

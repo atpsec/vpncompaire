@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/site";
 export const dynamic = "force-static";
 
 export function GET() {
-  const body = `# vpncompaire — robots.txt
+  const body = `# VPN Advisor — robots.txt
 # AI ve arama crawler'larına açık erişim verilmiştir.
 
 User-agent: *

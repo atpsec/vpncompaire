@@ -3,7 +3,7 @@
 Bu doküman, üretim için iki kritik adımı kapsar:
 
 1. Affiliate ID'leri Vercel env'ye eklemek
-2. Custom domain (vpncompaire.com) bağlamak
+2. Custom domain (vpnadvisor.net) bağlamak
 
 Her ikisi de **opsiyoneldir** — env eksikse site `utm_*` parametreleriyle public URL'e yönlendirir; custom domain eksikse Vercel'in atadığı `.vercel.app` adresi çalışır.
 
@@ -78,7 +78,7 @@ curl -I https://vpncompaire.vercel.app/go/nordvpn
 # Location: header'ında senin go.nordvpn.net... URL'in olmalı
 ```
 
-Set edilmemişse `Location: https://nordvpn.com/?utm_source=vpncompaire&...` görmelisin (utm fallback).
+Set edilmemişse `Location: https://nordvpn.com/?utm_source=vpnadvisor&...` görmelisin (utm fallback).
 
 ### Sub-id (campaign attribution)
 
@@ -96,13 +96,13 @@ Hangi yerleşimden ne kadar gelir geldiğini ayırt etmek için kullanışlı. �
 
 ---
 
-## 2. Custom domain bağla (vpncompaire.com)
+## 2. Custom domain bağla (vpnadvisor.net)
 
 ### Adım 1: Domain'i Vercel'e ekle
 
 Vercel dashboard → Projeyi seç → Settings → Domains → **Add Domain**.
 
-`vpncompaire.com` yaz, Add.
+`vpnadvisor.net` yaz, Add.
 
 Vercel iki DNS kaydı isteyecek:
 
@@ -113,13 +113,13 @@ Vercel iki DNS kaydı isteyecek:
 
 Domain'i nereden aldıysan (GoDaddy, Namecheap, Cloudflare DNS, vb.) DNS yönetim paneline gir.
 
-**Apex (vpncompaire.com):**
+**Apex (vpnadvisor.net):**
 - Tür: `A`
 - Host: `@` (veya boş bırak)
 - Değer: `76.76.21.21`
 - TTL: 3600 (1 saat)
 
-**Www subdomain (www.vpncompaire.com):**
+**Www subdomain (www.vpnadvisor.net):**
 - Tür: `CNAME`
 - Host: `www`
 - Değer: `cname.vercel-dns.com`
@@ -130,7 +130,7 @@ Domain'i nereden aldıysan (GoDaddy, Namecheap, Cloudflare DNS, vb.) DNS yöneti
 5 dakika ile 48 saat arası. Çoğunlukla 10-30 dk yeterli. Kontrol için:
 
 ```bash
-dig vpncompaire.com +short
+dig vpnadvisor.net +short
 # 76.76.21.21 dönmeli
 ```
 
@@ -141,7 +141,7 @@ Vercel dashboard'da domain otomatik olarak yeşil tik alacak.
 Vercel env vars'da:
 
 ```
-NEXT_PUBLIC_SITE_URL=https://vpncompaire.com
+NEXT_PUBLIC_SITE_URL=https://vpnadvisor.net
 ```
 
 (önceden `https://vpncompaire.vercel.app` ise değiştir)
@@ -152,12 +152,12 @@ Bu güncellemeden sonra **redeploy şart** — sitemap, OG image, canonical URL'
 
 `vpncompaire.vercel.app` adresinin SEO ekosistemine ikiz içerik girmemesi için Vercel'in built-in özelliğiyle ana domain'e 301 yönlendir:
 
-Vercel Dashboard → Settings → Domains → `vpncompaire.vercel.app` satırının yanında **"Edit"** → **"Redirect to"** → `vpncompaire.com` seç.
+Vercel Dashboard → Settings → Domains → `vpncompaire.vercel.app` satırının yanında **"Edit"** → **"Redirect to"** → `vpnadvisor.net` seç.
 
 ### Adım 6: Search Console'a yeniden submit et
 
-- Google Search Console: yeni domain için ayrı bir Property aç (vpncompaire.com)
-- Sitemap submit et: `https://vpncompaire.com/sitemap.xml`
+- Google Search Console: yeni domain için ayrı bir Property aç (vpnadvisor.net)
+- Sitemap submit et: `https://vpnadvisor.net/sitemap.xml`
 - Eski property (vpncompaire.vercel.app) varsa, ondan `Change of Address` aracını çalıştır
 
 ---
@@ -167,7 +167,7 @@ Vercel Dashboard → Settings → Domains → `vpncompaire.vercel.app` satırın
 Plausible kullanmak istersen Vercel env'ye:
 
 ```
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=vpncompaire.com
+NEXT_PUBLIC_PLAUSIBLE_DOMAIN=vpnadvisor.net
 ```
 
 Plausible.io üzerinde aynı domain için site açmış olman gerekir. Bu kısım gizlilik-dostu, çerezsiz analitiktir; GDPR/KVKK uyumludur.
@@ -186,11 +186,11 @@ Plausible.io üzerinde aynı domain için site açmış olman gerekir. Bu kısı
 - [ ] Windscribe affiliate'a başvur
 - [ ] TunnelBear CJ'ye başvur
 - [ ] Onaylanan her hesap için Vercel env vars ekle
-- [ ] vpncompaire.com domain'ini al (henüz alınmadıysa)
+- [ ] vpnadvisor.net domain'ini al (henüz alınmadıysa)
 - [ ] Vercel domain settings'e ekle
 - [ ] DNS A + CNAME kayıtlarını set et
 - [ ] NEXT_PUBLIC_SITE_URL'i custom domain'e güncelle
 - [ ] Redeploy
-- [ ] vpncompaire.vercel.app → vpncompaire.com 301 yönlendirme set et
+- [ ] vpncompaire.vercel.app → vpnadvisor.net 301 yönlendirme set et
 - [ ] Google Search Console'a yeni domain submit et
 - [ ] Plausible (opsiyonel) ayarla
