@@ -1,14 +1,16 @@
 @AGENTS.md
 
-# vpncompaire — proje konvansiyonları
+# VPN Advisor (klasör/repo adı: vpncompaire) — proje konvansiyonları
 
 > Üstte `@AGENTS.md` import'u Next.js 16 agent kurallarını yükler. Aşağısı bu projeye özel pratiklerdir.
 
 ## Stack
 - **Next.js 16** App Router, **TypeScript**, **Tailwind v4**, **next-intl** (locales: `tr`, `en`)
 - UI: **Lucide React** ikonlar, custom design tokenları (aşağıda)
-- Hosting: **Vercel** (proje: `ebeveyn-rehber-i/vpncompaire`, alias: `vpncompaire.vercel.app`)
+- Marka: **VPN Advisor** · Domain: **vpnadvisor.net** (rebrand'da repo/Vercel proje adı DEĞİŞMEDİ)
+- Hosting: **Vercel** (proje adı hâlâ `vpncompaire`)
 - Repo: `https://github.com/atpsec/vpncompaire`, default branch **`master`** (not main)
+- Analytics: **GA4 + consent banner** (`NEXT_PUBLIC_GA_ID`). Plausible kaldırıldı.
 
 ## Komutlar
 | Eylem | Komut |
@@ -82,9 +84,10 @@ Lokal IP'leri (`isPrivateOrLocal`) erken filtrele, dev ortamda banner gösterme.
 - **Affiliate links**: `affiliatePath(slug)` from `@/lib/affiliate`. Affiliate çıktısında `rel="sponsored nofollow"`, `target="_self"`. Direkt URL'lerde `rel="noopener"`, `target="_blank"`.
 
 ## Storage
-- localStorage key prefix: `vpncompaire:*`
+- localStorage key prefix: `vpnadvisor:*` (theme key ayrıca `vpnadvisor-theme`)
 - Bilinen key'ler:
-  - `vpncompaire:ip-banner-dismissed-at` — number (epoch ms), 7 gün dismiss penceresi
+  - `vpnadvisor:ip-banner-dismissed-at` — number (epoch ms), 7 gün dismiss penceresi
+  - `vpnadvisor:consent` — GA4 consent durumu
 - Yeni key eklerken aynı prefix'i kullan ve burada belgele.
 
 ## Yakın tarihte dokunulan dosyalar (referans)

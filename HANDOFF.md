@@ -1,7 +1,12 @@
-# HANDOFF — vpncompaire Proje Devir Notu
+# HANDOFF — VPN Advisor Proje Devir Notu
 
-**Tarih:** 2026-05-31
-**Hedef:** Yeni bir Claude hesabıyla bu projeye sorunsuz devam etmek.
+**Tarih:** 2026-05-31 · **Bu dosya ESKİ bir snapshot'tır.**
+
+> ⚠️ **GÜNCEL DURUM için `DEVIR-RAPORU-2026-06-01.md` (2026-06-02 güncellemesi) geçerlidir.**
+> Bu HANDOFF'tan sonra olanlar: **rebrand vpncompaire → VPN Advisor (vpnadvisor.net)**,
+> **Plausible → GA4 (consent'li)**, **newsletter + RSS kaldırıldı**, blog **100 → 96**,
+> ADIM 4 küme C uygulandı. Aşağıdaki eski marka/Plausible/newsletter/RSS referanslarını
+> bu çerçevede oku. Çelişkide DEVIR-RAPORU kazanır.
 
 > 📌 Bu dosya kullanıcı (Ahmet) farklı bir Anthropic hesabına geçtiğinde,
 > yeni hesabın Claude'unun projeyi sıfırdan anlamasına yardımcı olur.
