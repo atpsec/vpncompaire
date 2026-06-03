@@ -7,7 +7,6 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipToContent } from "@/components/layout/skip-to-content";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { GoogleAdsense } from "@/components/analytics/google-adsense";
-import { TranslationPendingBanner } from "@/components/layout/translation-pending-banner";
 import type { Locale } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -35,7 +34,6 @@ export default async function LocaleLayout({ children, params }: Props) {
       <GoogleAdsense />
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
-        <TranslationPendingBanner />
         <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
           {children}
         </main>
