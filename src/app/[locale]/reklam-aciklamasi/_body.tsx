@@ -16,13 +16,13 @@ export function TrBody() {
 
       <header className="mt-6">
         <Badge variant="brand">
-          <Tag className="size-3" /> Affiliate Disclosure
+          <Tag className="size-3" /> Reklam & Gelir Açıklaması
         </Badge>
         <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
           Reklam Açıklaması
         </h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Son güncelleme: Mayıs 2026
+          Son güncelleme: Haziran 2026
         </p>
       </header>
 
@@ -32,11 +32,12 @@ export function TrBody() {
           <div>
             <p className="font-semibold text-ink-strong">Net açıklama</p>
             <p className="mt-1 text-sm text-ink leading-relaxed">
-              {siteConfig.name}, incelediği bazı VPN sağlayıcılarıyla{" "}
-              <strong>affiliate (ortaklık) ilişkisine sahiptir</strong>.
-              Sayfadaki bağlantılardan birini takip edip satın alırsan, bize{" "}
-              <strong>komisyon</strong> ödenebilir. Bu komisyon senin
-              ödediğin fiyatı değiştirmez ve kullanım deneyimini etkilemez.
+              {siteConfig.name}, gelirini{" "}
+              <strong>Google AdSense reklamlarından</strong> elde eder.
+              Sayfalarda Google tarafından otomatik seçilen reklamlar
+              görüntülenebilir. VPN sağlayıcılarına giden bağlantılar ise{" "}
+              <strong>düz, ticari olmayan bağlantılardır</strong>: bunlardan
+              komisyon almıyoruz ve tıklama takibi yapmıyoruz.
             </p>
           </div>
         </div>
@@ -45,83 +46,74 @@ export function TrBody() {
       <article className="mt-10 prose prose-stone max-w-none">
         <h2>Gelir modelimiz nasıl çalışıyor?</h2>
         <p>
-          {siteConfig.name} reklam göstermez ve kullanıcı verisini satmaz.
-          Tek gelir kaynağımız, sayfadaki bağlantılardan birini takip ederek
-          bir VPN aboneliği satın alan kullanıcılar için sağlayıcı
-          tarafından bize ödenen komisyondur. Bu &quot;cost-per-action&quot;
-          modelidir: yalnızca senin için bir abonelik başlatılırsa komisyon
-          oluşur, sadece bağlantıya tıkladığın için değil.
+          {siteConfig.name} tek gelir kaynağı olarak{" "}
+          <strong>Google AdSense</strong> reklamlarını kullanır. Google,
+          sayfalarımızda otomatik olarak reklam yerleştirir ve bu reklamların
+          gösterimi ya da tıklanması üzerinden bize ödeme yapılır. Bu modelde
+          kazanç, ziyaretçi trafiğine ve reklam gösterimine bağlıdır — belirli
+          bir VPN&apos;i satın almana bağlı değildir. Kullanıcı verisini
+          satmıyoruz.
         </p>
+
+        <h2>VPN bağlantıları komisyon getirmez</h2>
+        <p>
+          Sitemizdeki &quot;Resmi siteye git&quot; benzeri butonlar, doğrudan
+          ilgili VPN sağlayıcısının kendi resmi sitesine gider. Bu bağlantılar:
+        </p>
+        <ul>
+          <li>
+            <strong>Affiliate/ortaklık bağlantısı değildir</strong> — hiçbir
+            sağlayıcıdan satış komisyonu almıyoruz.
+          </li>
+          <li>
+            <code>rel=&quot;noopener nofollow&quot;</code> ve{" "}
+            <code>target=&quot;_blank&quot;</code> ile işaretlenir; yeni
+            sekmede markanın resmi sayfasını açar.
+          </li>
+          <li>
+            Bir yönlendirme/izleme katmanından geçmez; hangi bağlantıya
+            tıkladığını izlemeyiz.
+          </li>
+        </ul>
 
         <h2>Editoryal bağımsızlık</h2>
         <p>
-          Affiliate komisyonu;{" "}
+          Reklam geliri;{" "}
           <strong>
             sıralamamızı, içeriğimizi, değerlendirme puanlarımızı veya
             eleştirilerimizi etkilemez
           </strong>
-          . Bu bağımsızlığı korumak için:
+          . Bunu korumak için:
         </p>
         <ul>
           <li>
-            Editoryal puanlama ve affiliate yönetimi sitemizde ayrı
-            kararlardır. Bir sağlayıcı yüksek komisyon teklif ettiği için
-            sıralaması yükseltilmez.
+            Sayfalardaki Google reklamları, içeriğe ve ziyaretçiye göre Google
+            tarafından otomatik seçilir. Hangi markanın reklamının
+            görüneceğini biz belirlemeyiz; bir reklamın görünmesi o ürünü
+            önerdiğimiz anlamına gelmez.
           </li>
           <li>
-            Affiliate programı bulunmayan sağlayıcıları (örn. Mullvad) da
-            sıralamamıza dahil ediyoruz; başka bir sağlayıcı yerine daha
-            uygun olduklarında önerebiliriz.
+            Editoryal puanlama, reklam gelirinden tamamen bağımsızdır. Bir
+            sağlayıcı bizim sıralamamızı satın alamaz.
           </li>
           <li>
             Sağlayıcıdan içerik kontrolü veya yayın öncesi onay talep
             etmiyoruz. Hiçbir VPN sağlayıcısı yayınlanmadan önce içeriğimizi
             göremez.
           </li>
-          <li>
-            Bir sağlayıcı bizden yanlış/yanıltıcı içerik talep ederse
-            programı sonlandırırız.
-          </li>
         </ul>
 
-        <h2>Hangi markalarla affiliate ilişkimiz var?</h2>
-        <p>Bu sayfa düzenli olarak güncellenir. Mevcut durum:</p>
-        <ul>
-          <li>
-            <strong>Affiliate ilişkisi olan:</strong> NordVPN, Surfshark,
-            ExpressVPN, Proton VPN, Private Internet Access (PIA),
-            CyberGhost, IPVanish, Windscribe, TunnelBear
-          </li>
-          <li>
-            <strong>Affiliate ilişkisi olmayan:</strong> Mullvad (affiliate
-            programı yok — yine de gizlilik odaklı kullanıcılar için iyi
-            bir seçenek olduğunu düşündüğümüzde öneriyoruz)
-          </li>
-        </ul>
-        <p>Bir markayla ilişkimiz değişirse bu liste güncellenir.</p>
-
-        <h2>Bağlantıları nasıl tanıyabilirsin?</h2>
-        <p>Sitemizdeki tüm affiliate bağlantıları:</p>
-        <ul>
-          <li>
-            <code>rel=&quot;sponsored nofollow&quot;</code> özniteliği ile
-            işaretlenir (arama motorlarına şeffaflık için).
-          </li>
-          <li>
-            Sayfadaki &quot;Fırsata git&quot;, &quot;Hemen dene&quot;,
-            &quot;Siteyi ziyaret et&quot; gibi CTA butonları affiliate
-            bağlantıyı içerir.
-          </li>
-          <li>
-            Yakınında veya sayfanın altında bir açıklama notu (örneğin
-            &quot;Reklam açıklaması&quot;) bulunur.
-          </li>
-          <li>
-            <code>/go/[slug]</code> formatlı bir yönlendirme URL&apos;si
-            üzerinden çalışır. Bu, hangi bağlantıya tıklandığını izlememizi
-            sağlar ama kişisel veri toplamaz.
-          </li>
-        </ul>
+        <h2>Reklam çerezleri ve kişiselleştirme</h2>
+        <p>
+          Google AdSense, reklamları kişiselleştirmek için çerez ve benzeri
+          teknolojiler kullanabilir. Avrupa Ekonomik Alanı, Birleşik Krallık
+          ve İsviçre&apos;deki ziyaretçiler için kişiselleştirilmiş reklam ve
+          ölçüm çerezleri yalnızca açık rıza verildiğinde etkinleştirilir.
+          Çerez tercihlerini sayfa altındaki onay panelinden yönetebilirsin;
+          ayrıntılar için{" "}
+          <Link href="/cerez-politikasi">çerez politikamıza</Link> ve{" "}
+          <Link href="/gizlilik">gizlilik politikamıza</Link> bakabilirsin.
+        </p>
 
         <h2>İçerik nasıl ortaya çıkıyor?</h2>
         <p>İncelemelerimiz aşağıdaki kaynaklara dayalıdır:</p>
@@ -157,8 +149,8 @@ export function TrBody() {
         <p>Bu açıklama aşağıdaki düzenlemelere uygun olarak hazırlanmıştır:</p>
         <ul>
           <li>
-            <strong>FTC Endorsement Guides (ABD)</strong>: Affiliate
-            ilişkisinin görünür ve net açıklanması.
+            <strong>Google AdSense Program Politikaları</strong>: reklam ve
+            içerik şeffaflığı yükümlülükleri.
           </li>
           <li>
             <strong>
@@ -177,8 +169,8 @@ export function TrBody() {
 
         <h2>Soruların ya da geri bildirim için</h2>
         <p>
-          Şeffaflık politikamız, içerik yöntemimiz veya affiliate
-          ilişkilerimizle ilgili soruların varsa{" "}
+          Şeffaflık politikamız, reklam modelimiz veya içerik yöntemimizle
+          ilgili soruların varsa{" "}
           <Link href="/iletisim">iletişim sayfamızdan</Link> bize
           ulaşabilirsin.
         </p>
@@ -189,12 +181,11 @@ export function TrBody() {
           <ShieldCheck className="size-5 text-brand-600 mt-0.5 shrink-0" />
           <div>
             <p className="font-semibold text-ink-strong">
-              Affiliate yokmuş gibi davransak ne olurdu?
+              Reklam gelirimiz olmasaydı ne değişirdi?
             </p>
             <p className="mt-1 text-sm text-ink leading-relaxed">
-              Aynı önerileri yapardık. Çünkü sıralamamız affiliate komisyon
-              oranına göre değil, bağımsız test ve doğrulanabilir kanıta
-              göre belirlenir.
+              Aynı önerileri yapardık. Çünkü sıralamamız reklam gelirine göre
+              değil, bağımsız test ve doğrulanabilir kanıta göre belirlenir.
             </p>
           </div>
         </div>
@@ -234,13 +225,13 @@ export function EnBody() {
 
       <header className="mt-6">
         <Badge variant="brand">
-          <Tag className="size-3" /> Affiliate disclosure
+          <Tag className="size-3" /> Advertising & revenue disclosure
         </Badge>
         <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
           Advertising disclosure
         </h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Last updated: May 2026
+          Last updated: June 2026
         </p>
       </header>
 
@@ -250,12 +241,11 @@ export function EnBody() {
           <div>
             <p className="font-semibold text-ink-strong">In plain terms</p>
             <p className="mt-1 text-sm text-ink leading-relaxed">
-              {siteConfig.name} has{" "}
-              <strong>affiliate (partnership) relationships</strong> with some
-              of the VPN providers we review. If you follow a link on the
-              page and make a purchase, we may be paid a{" "}
-              <strong>commission</strong>. This commission does not change
-              the price you pay and does not affect your experience.
+              {siteConfig.name} earns its revenue from{" "}
+              <strong>Google AdSense ads</strong>. Pages may display ads
+              automatically selected by Google. Links to VPN providers are{" "}
+              <strong>plain, non-commercial links</strong>: we receive no
+              commission from them and we do not track your clicks.
             </p>
           </div>
         </div>
@@ -264,80 +254,70 @@ export function EnBody() {
       <article className="mt-10 prose prose-stone max-w-none">
         <h2>How does our revenue model work?</h2>
         <p>
-          {siteConfig.name} runs no ads and does not sell user data. Our
-          only revenue source is the commission a provider pays us when a
-          user follows a link on the page and buys a VPN subscription. This
-          is a &quot;cost-per-action&quot; model: a commission is generated
-          only when a subscription is actually started for you, not just
-          because you clicked a link.
+          {siteConfig.name} uses <strong>Google AdSense</strong> ads as its
+          only revenue source. Google places ads automatically on our pages
+          and pays us based on ad impressions or clicks. In this model, our
+          revenue depends on visitor traffic and ad delivery — not on whether
+          you buy any particular VPN. We do not sell user data.
         </p>
 
-        <h2>Editorial independence</h2>
+        <h2>VPN links earn no commission</h2>
         <p>
-          The affiliate commission{" "}
-          <strong>
-            does not influence our ranking, content, scoring or criticism
-          </strong>
-          . To preserve this independence:
+          Buttons like &quot;Visit official site&quot; on our pages link
+          directly to the VPN provider&apos;s own official website. These
+          links:
         </p>
         <ul>
           <li>
-            Editorial scoring and affiliate management are separate
-            decisions. A provider is not ranked higher because it offers a
-            higher commission.
+            <strong>are not affiliate/partnership links</strong> — we receive
+            no sales commission from any provider.
           </li>
           <li>
-            We include providers without an affiliate programme (e.g.
-            Mullvad); we may recommend them over another provider when they
-            are a better fit.
+            are marked with <code>rel=&quot;noopener nofollow&quot;</code> and{" "}
+            <code>target=&quot;_blank&quot;</code>; they open the brand&apos;s
+            official page in a new tab.
+          </li>
+          <li>
+            do not pass through any redirect/tracking layer; we do not track
+            which link you clicked.
+          </li>
+        </ul>
+
+        <h2>Editorial independence</h2>
+        <p>
+          Ad revenue{" "}
+          <strong>
+            does not influence our ranking, content, scoring or criticism
+          </strong>
+          . To preserve this:
+        </p>
+        <ul>
+          <li>
+            Google ads on our pages are selected automatically by Google based
+            on the content and the visitor. We do not decide which brand&apos;s
+            ad appears; an ad appearing does not mean we endorse that product.
+          </li>
+          <li>
+            Editorial scoring is entirely independent of ad revenue. A
+            provider cannot buy a place in our ranking.
           </li>
           <li>
             We do not ask providers for content control or pre-publish
             approval. No VPN provider sees our content before publication.
           </li>
-          <li>
-            If a provider asks us for misleading content, we end the
-            programme.
-          </li>
         </ul>
 
-        <h2>Which brands do we have an affiliate relationship with?</h2>
-        <p>This page is updated regularly. Current state:</p>
-        <ul>
-          <li>
-            <strong>Affiliate relationship:</strong> NordVPN, Surfshark,
-            ExpressVPN, Proton VPN, Private Internet Access (PIA),
-            CyberGhost, IPVanish, Windscribe, TunnelBear
-          </li>
-          <li>
-            <strong>No affiliate relationship:</strong> Mullvad (no
-            affiliate programme — we still recommend them when we think
-            they are a good fit for privacy-focused users)
-          </li>
-        </ul>
-        <p>If a relationship changes, this list is updated.</p>
-
-        <h2>How can you recognise these links?</h2>
-        <p>All affiliate links on our site:</p>
-        <ul>
-          <li>
-            are marked with the <code>rel=&quot;sponsored nofollow&quot;</code>{" "}
-            attribute (for transparency with search engines).
-          </li>
-          <li>
-            are used in CTA buttons like &quot;Get deal&quot;, &quot;Try
-            now&quot;, &quot;Visit site&quot;.
-          </li>
-          <li>
-            have a disclosure note nearby or at the bottom of the page
-            (e.g. &quot;Advertising disclosure&quot;).
-          </li>
-          <li>
-            run through a redirect URL in the form{" "}
-            <code>/go/[slug]</code>. This lets us see which link was
-            clicked but does not collect personal data.
-          </li>
-        </ul>
+        <h2>Ad cookies and personalisation</h2>
+        <p>
+          Google AdSense may use cookies and similar technologies to
+          personalise ads. For visitors in the European Economic Area, the
+          United Kingdom and Switzerland, personalised advertising and
+          measurement cookies are enabled only with explicit consent. You can
+          manage your cookie preferences from the consent panel at the bottom
+          of the page; for details, see our{" "}
+          <Link href="/cerez-politikasi">cookie policy</Link> and{" "}
+          <Link href="/gizlilik">privacy policy</Link>.
+        </p>
 
         <h2>How is the content produced?</h2>
         <p>Our reviews are based on the following sources:</p>
@@ -371,8 +351,8 @@ export function EnBody() {
         <p>This disclosure is aligned with the following regulations:</p>
         <ul>
           <li>
-            <strong>FTC Endorsement Guides (US)</strong>: clear, visible
-            disclosure of affiliate relationships.
+            <strong>Google AdSense Program Policies</strong>: transparency
+            obligations for ads and content.
           </li>
           <li>
             <strong>
@@ -393,8 +373,8 @@ export function EnBody() {
 
         <h2>For questions or feedback</h2>
         <p>
-          If you have questions about our transparency policy, content
-          methodology or affiliate relationships, get in touch via the{" "}
+          If you have questions about our transparency policy, advertising
+          model or content methodology, get in touch via the{" "}
           <Link href="/iletisim">contact page</Link>.
         </p>
       </article>
@@ -404,12 +384,11 @@ export function EnBody() {
           <ShieldCheck className="size-5 text-brand-600 mt-0.5 shrink-0" />
           <div>
             <p className="font-semibold text-ink-strong">
-              What if we pretended there was no affiliate?
+              What would change without our ad revenue?
             </p>
             <p className="mt-1 text-sm text-ink leading-relaxed">
               We would make the same recommendations. Our ranking is set by
-              independent testing and verifiable evidence, not by commission
-              rates.
+              independent testing and verifiable evidence, not by ad revenue.
             </p>
           </div>
         </div>

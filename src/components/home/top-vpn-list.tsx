@@ -15,7 +15,6 @@ import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
 import { rankedProducts, type Product } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 
 export function TopVPNList() {
   const t = useTranslations("home.topVPNs");
@@ -145,11 +144,11 @@ function WinnerCard({
           />
           <Button asChild variant="primary" size="md">
             <a
-              href={affiliatePath(product.slug)}
-              rel="sponsored nofollow"
-              target="_self"
+              href={product.pricingUrl}
+              rel="noopener nofollow"
+              target="_blank"
             >
-              {tCommon("getDeal")}
+              {tCommon("visitSite")}
               <ArrowRight className="size-4" />
             </a>
           </Button>
@@ -195,9 +194,6 @@ function FeaturedRow({
             <Badge variant={product.hasAffiliate ? "brand" : "outline"}>
               {product.positioning}
             </Badge>
-            {!product.hasAffiliate && (
-              <Badge variant="outline">{tCommon("noAffiliate")}</Badge>
-            )}
           </div>
           <p className="mt-2 text-sm text-ink-muted">{product.summary}</p>
 
@@ -240,21 +236,13 @@ function FeaturedRow({
             verifiedAt={product.pricingVerifiedAt}
             variant="compact"
           />
-          <Button
-            asChild
-            variant={product.hasAffiliate ? "primary" : "secondary"}
-            size="md"
-          >
+          <Button asChild variant="primary" size="md">
             <a
-              href={
-                product.hasAffiliate
-                  ? affiliatePath(product.slug)
-                  : `https://mullvad.net`
-              }
-              rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
-              target={product.hasAffiliate ? "_self" : "_blank"}
+              href={product.pricingUrl}
+              rel="noopener nofollow"
+              target="_blank"
             >
-              {product.hasAffiliate ? tCommon("getDeal") : tCommon("visitSite")}
+              {tCommon("visitSite")}
               <ArrowRight className="size-4" />
             </a>
           </Button>
@@ -292,11 +280,6 @@ function CompactRow({
             <Badge variant={product.hasAffiliate ? "brand" : "outline"}>
               {product.positioning}
             </Badge>
-            {!product.hasAffiliate && (
-              <Badge variant="outline" className="hidden sm:inline-flex">
-                {tCommon("noAffiliate")}
-              </Badge>
-            )}
           </div>
           <p className="mt-1 text-xs text-ink-muted line-clamp-1">
             {product.summary}

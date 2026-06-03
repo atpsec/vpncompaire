@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 
 export const metadata: Metadata = {
   title: "Yurt Dışındaki Türkler İçin En İyi VPN (2026)",
@@ -162,16 +161,13 @@ export default async function Page({ params }: Props) {
                         {pick.why}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-3">
-                        <Button
-                          asChild
-                          variant={product.hasAffiliate ? "primary" : "secondary"}
-                          size="sm"
-                        >
+                        <Button asChild variant="primary" size="sm">
                           <a
-                            href={affiliatePath(product.slug)}
-                            rel="sponsored nofollow"
+                            href={product.pricingUrl}
+                            rel="noopener nofollow"
+                            target="_blank"
                           >
-                            {product.brand} fırsatına git
+                            {product.brand} resmi sitesine git
                             <ArrowRight className="size-4" />
                           </a>
                         </Button>

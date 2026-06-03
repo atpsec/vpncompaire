@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
-  ArrowRight,
   Award,
   Check,
   ExternalLink,
@@ -18,7 +17,6 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
 
 const MIN = 2;
@@ -213,11 +211,6 @@ function ProductColumn({ product }: { product: Product }) {
               : "—"
           }
         />
-        <Row
-          icon={<Check className="size-3.5" />}
-          label={t("rows.affiliate")}
-          value={product.hasAffiliate ? t("rows.yes") : t("rows.no")}
-        />
       </dl>
 
       <div className="p-4 border-t border-border bg-surface-subtle/30 rounded-b-xl">
@@ -239,26 +232,14 @@ function ProductColumn({ product }: { product: Product }) {
           </div>
         )}
         <div className="mt-3 flex flex-col gap-1.5">
-          <Button
-            asChild
-            variant={product.hasAffiliate ? "primary" : "secondary"}
-            size="sm"
-          >
+          <Button asChild variant="primary" size="sm">
             <a
-              href={
-                product.hasAffiliate
-                  ? affiliatePath(product.slug)
-                  : product.pricingUrl
-              }
-              rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
-              target={product.hasAffiliate ? "_self" : "_blank"}
+              href={product.pricingUrl}
+              rel="noopener nofollow"
+              target="_blank"
             >
-              {product.hasAffiliate ? t("ctaDeal") : t("ctaOfficial")}
-              {product.hasAffiliate ? (
-                <ArrowRight className="size-3.5" />
-              ) : (
-                <ExternalLink className="size-3.5" />
-              )}
+              {t("ctaOfficial")}
+              <ExternalLink className="size-3.5" />
             </a>
           </Button>
           <Button asChild variant="ghost" size="sm">

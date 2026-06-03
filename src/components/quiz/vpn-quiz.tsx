@@ -163,10 +163,14 @@ export function VPNQuiz() {
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Button asChild variant="primary">
-              <Link href={`/go/${product.slug}`}>
+              <a
+                href={product.pricingUrl}
+                rel="noopener nofollow"
+                target="_blank"
+              >
                 {t("result.ctaDeal", { brand: product.brand })}
                 <ArrowRight className="size-4" />
-              </Link>
+              </a>
             </Button>
             <Button asChild variant="secondary">
               <Link href={`/inceleme/${product.slug}`}>

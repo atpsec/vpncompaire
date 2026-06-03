@@ -15,9 +15,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { localizedAlternates } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
-import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -186,28 +184,16 @@ function ReviewView({
                 verifiedAt={product.pricingVerifiedAt}
               />
               <div className="flex flex-col gap-2 sm:w-48">
-                <Button
-                  asChild
-                  variant={product.hasAffiliate ? "primary" : "secondary"}
-                >
+                <Button asChild variant="primary">
                   <a
-                    href={
-                      product.hasAffiliate
-                        ? affiliatePath(product.slug)
-                        : product.pricingUrl
-                    }
-                    rel={
-                      product.hasAffiliate ? "sponsored nofollow" : "noopener"
-                    }
-                    target={product.hasAffiliate ? "_self" : "_blank"}
+                    href={product.pricingUrl}
+                    rel="noopener nofollow"
+                    target="_blank"
                   >
-                    {product.hasAffiliate
-                      ? t("ctaAffiliate")
-                      : t("ctaOfficial")}
+                    {t("ctaOfficial")}
                     <ExternalLink className="size-4" />
                   </a>
                 </Button>
-                {product.hasAffiliate ? <AffiliateNotice /> : null}
               </div>
             </div>
           </div>

@@ -59,9 +59,9 @@ export function TrBody() {
 
         <h2>4. Üçüncü taraf bağlantıları</h2>
         <p>
-          Site, VPN sağlayıcılarının kendi sitelerine bağlantı içerir. Bu
-          bağlantıların bazıları affiliate (ortaklık) ilişkisi
-          çerçevesindedir — detaylar için{" "}
+          Site, VPN sağlayıcılarının kendi sitelerine düz (ticari olmayan)
+          bağlantılar içerir; bunlardan komisyon almıyoruz. Sitenin geliri
+          Google AdSense reklamlarından gelir — detaylar için{" "}
           <Link href="/reklam-aciklamasi">Reklam Açıklaması</Link>{" "}
           sayfasına bak. Bağlantıyı takip ettiğinde dış sitenin kendi
           şartları geçerli olur; o sitelerin içeriği veya hizmetlerinden
@@ -218,8 +218,9 @@ export function EnBody() {
 
         <h2>4. Third-party links</h2>
         <p>
-          The site contains links to VPN providers&apos; own websites. Some of
-          these links are affiliate (partnership) links — see the{" "}
+          The site contains plain, non-commercial links to VPN providers&apos;
+          own websites; we earn no commission from them. The site&apos;s
+          revenue comes from Google AdSense ads — see the{" "}
           <Link href="/reklam-aciklamasi">Advertising Disclosure</Link>. Once
           you follow a link, the external site&apos;s own terms apply; we are
           not responsible for that site&apos;s content or services.

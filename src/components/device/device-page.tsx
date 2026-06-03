@@ -16,7 +16,6 @@ import { DeviceIcon } from "@/components/device/device-icon";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 import type { DeviceContent } from "@/data/devices";
 import { cn } from "@/lib/utils";
 
@@ -158,28 +157,13 @@ export async function DevicePage({
                         {pick.why}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-3">
-                        <Button
-                          asChild
-                          variant={
-                            product.hasAffiliate ? "primary" : "secondary"
-                          }
-                          size="sm"
-                        >
+                        <Button asChild variant="primary" size="sm">
                           <a
-                            href={
-                              product.hasAffiliate
-                                ? affiliatePath(product.slug)
-                                : product.pricingUrl
-                            }
-                            rel={
-                              product.hasAffiliate
-                                ? "sponsored nofollow"
-                                : "noopener"
-                            }
+                            href={product.pricingUrl}
+                            rel="noopener nofollow"
+                            target="_blank"
                           >
-                            {product.hasAffiliate
-                              ? t("picks.ctaAffiliate", { brand: product.brand })
-                              : t("picks.ctaOfficial", { brand: product.brand })}
+                            {t("picks.ctaOfficial", { brand: product.brand })}
                             <ArrowRight className="size-4" />
                           </a>
                         </Button>

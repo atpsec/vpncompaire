@@ -10,7 +10,6 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
@@ -119,8 +118,12 @@ export async function ComparisonPage({
             </div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{a.summary}</p>
             <Button asChild variant="primary" className="mt-4 w-full">
-              <a href={affiliatePath(a.slug)} rel="sponsored nofollow">
-                {t("ctaAffiliate", { brand: a.brand })}{" "}
+              <a
+                href={a.pricingUrl}
+                rel="noopener nofollow"
+                target="_blank"
+              >
+                {t("ctaOfficial", { brand: a.brand })}{" "}
                 <ArrowRight className="size-4" />
               </a>
             </Button>
@@ -138,18 +141,13 @@ export async function ComparisonPage({
               </span>
             </div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{b.summary}</p>
-            <Button
-              asChild
-              variant={b.hasAffiliate ? "primary" : "secondary"}
-              className="mt-4 w-full"
-            >
+            <Button asChild variant="primary" className="mt-4 w-full">
               <a
-                href={affiliatePath(b.slug)}
-                rel={b.hasAffiliate ? "sponsored nofollow" : "noopener"}
+                href={b.pricingUrl}
+                rel="noopener nofollow"
+                target="_blank"
               >
-                {b.hasAffiliate
-                  ? t("ctaAffiliate", { brand: b.brand })
-                  : t("ctaOfficial", { brand: b.brand })}
+                {t("ctaOfficial", { brand: b.brand })}
                 <ArrowRight className="size-4" />
               </a>
             </Button>

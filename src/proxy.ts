@@ -151,6 +151,6 @@ export default function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next|_vercel|go|robots\\.txt|sitemap\\.xml|llms\\.txt|.*\\..*).*)",
+    "/((?!api|_next|_vercel|go|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|.*\\..*).*)",
   ],
 };

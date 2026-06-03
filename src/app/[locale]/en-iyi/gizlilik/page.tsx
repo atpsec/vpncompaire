@@ -24,8 +24,8 @@ const CONTENT = {
       },
       {
         slug: "mullvad",
-        bestFor: "Anonim hesap, sabit fiyat, affiliate yok",
-        why: "Hesap açarken e-posta bile gerekmiyor — sadece rastgele bir numara. Nakit ödeme kabul ediyor. Bu sitede affiliate olmayan tek seçim — tarafsızlık göstergesi.",
+        bestFor: "Anonim hesap, sabit fiyat, pazarlama yok",
+        why: "Hesap açarken e-posta bile gerekmiyor — sadece rastgele bir numara. Nakit ödeme kabul ediyor. Affiliate programı bile olmayan, pazarlamadan uzak en sade seçim.",
       },
       {
         slug: "nordvpn",
@@ -89,8 +89,8 @@ const CONTENT = {
       },
       {
         slug: "mullvad",
-        bestFor: "Anonymous account, flat pricing, no affiliate",
-        why: "No email required to sign up — only a random account number. Accepts cash payments. The only non-affiliate pick on this site — a signal of impartiality.",
+        bestFor: "Anonymous account, flat pricing, no marketing",
+        why: "No email required to sign up — only a random account number. Accepts cash payments. The most minimal pick — it doesn't even run an affiliate programme and stays away from marketing.",
       },
       {
         slug: "nordvpn",

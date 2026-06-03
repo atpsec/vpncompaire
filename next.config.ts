@@ -15,12 +15,12 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 // ve isteğe bağlı Google Analytics (gtag.js) için çalışıyor.
 const cspDirectives = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://flagcdn.com https://images.unsplash.com https://www.google-analytics.com https://*.google-analytics.com",
+  "img-src 'self' data: blob: https://flagcdn.com https://images.unsplash.com https://www.google-analytics.com https://*.google-analytics.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://1.1.1.1 https://cloudflare-dns.com https://speed.cloudflare.com",
-  "frame-src https://speed.cloudflare.com",
+  "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.doubleclick.net https://1.1.1.1 https://cloudflare-dns.com https://speed.cloudflare.com",
+  "frame-src https://speed.cloudflare.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://*.googlesyndication.com",
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",

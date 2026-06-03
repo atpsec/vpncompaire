@@ -5,7 +5,6 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
 
 export function TopThreePodium() {
@@ -95,22 +94,13 @@ function PodiumCard({ product, rank }: { product: Product; rank: number }) {
         </div>
 
         <div className="mt-5 flex flex-col gap-2">
-          <Button
-            asChild
-            variant={product.hasAffiliate ? "primary" : "secondary"}
-            size="md"
-            className="w-full"
-          >
+          <Button asChild variant="primary" size="md" className="w-full">
             <a
-              href={
-                product.hasAffiliate
-                  ? affiliatePath(product.slug)
-                  : product.pricingUrl
-              }
-              rel={product.hasAffiliate ? "sponsored nofollow" : "noopener"}
-              target={product.hasAffiliate ? "_self" : "_blank"}
+              href={product.pricingUrl}
+              rel="noopener nofollow"
+              target="_blank"
             >
-              {product.hasAffiliate ? t("ctaAffiliate") : t("ctaOfficial")}
+              {t("ctaOfficial")}
               <ArrowRight className="size-4" />
             </a>
           </Button>

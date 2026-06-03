@@ -119,10 +119,14 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
 
               <div className="mt-auto pt-5 flex flex-col gap-2">
                 <Button asChild variant="primary" size="sm">
-                  <Link href={`/go/${product.slug}`}>
+                  <a
+                    href={product.pricingUrl}
+                    rel="noopener nofollow"
+                    target="_blank"
+                  >
                     {t("ctaDeal", { brand: product.brand })}
                     <ArrowRight className="size-3.5" />
-                  </Link>
+                  </a>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
                   <Link href={`/inceleme/${product.slug}`}>

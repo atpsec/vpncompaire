@@ -27,6 +27,13 @@ const envSchema = z.object({
     .min(1)
     .optional()
     .or(z.literal("")),
+  // Google AdSense publisher kimliği (ca-pub-XXXXXXXXXXXXXXXX). Set edilmezse
+  // AdSense script'i yüklenmez ve /ads.txt boş döner (GA ile aynı pattern).
+  NEXT_PUBLIC_ADSENSE_CLIENT_ID: z
+    .string()
+    .min(1)
+    .optional()
+    .or(z.literal("")),
 
   // Vercel KV / Upstash Redis REST credentials — set automatically when a KV
   // store is linked to the Vercel project. Used by src/lib/rate-limit.ts for
@@ -59,6 +66,7 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_SITE_BRAND: process.env.NEXT_PUBLIC_SITE_BRAND,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+  NEXT_PUBLIC_ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
   KV_REST_API_URL: process.env.KV_REST_API_URL,
   KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
   AFFILIATE_NORDVPN_URL: process.env.AFFILIATE_NORDVPN_URL,

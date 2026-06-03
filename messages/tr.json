@@ -44,8 +44,8 @@
     "noAffiliate": "Affiliate yok — tarafsız seçim"
   },
   "disclosure": {
-    "banner": "Reklam açıklaması: Bu sayfadaki bağlantılardan satın aldığında komisyon kazanabiliriz. Bu durum ödediğin fiyatı değiştirmez. Önerilerimiz; araştırma, özellik analizi, gizlilik politikaları, denetimler, fiyatlandırma ve kullanım kolaylığına dayanır.",
-    "short": "İçerikte affiliate bağlantıları var.",
+    "banner": "Reklam açıklaması: Bu site gelirini Google AdSense reklamlarından elde eder; sayfalarda reklam görebilirsin. VPN sağlayıcılarına giden bağlantılar düz, ticari olmayan bağlantılardır ve bunlardan komisyon almayız. Önerilerimiz; araştırma, özellik analizi, gizlilik politikaları, denetimler, fiyatlandırma ve kullanım kolaylığına dayanır.",
+    "short": "Bu site Google AdSense reklamları gösterir.",
     "learnMore": "Detaylı bilgi"
   },
   "home": {
@@ -81,7 +81,7 @@
     },
     "methodology": {
       "title": "Nasıl Test Ediyoruz",
-      "body": "Sitedeki her VPN aynı 6 kritere göre değerlendirilir: gizlilik politikası ve hukuki yetki alanı, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı ve kullanım kolaylığı. Affiliate komisyonu sıralamayı etkilemez.",
+      "body": "Sitedeki her VPN aynı 6 kritere göre değerlendirilir: gizlilik politikası ve hukuki yetki alanı, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı ve kullanım kolaylığı. Reklam geliri sıralamayı etkilemez.",
       "cta": "Tam metodolojiyi oku"
     },
     "guides": {
@@ -150,7 +150,7 @@
     "metaDescription": "VPN Advisor'in VPN test süreci: bağımsızlık beyanı, hız ölçümleri, sızıntı testleri, streaming doğrulaması, no-logs denetim incelemesi, puanlama sistemi ve şeffaflık standartları.",
     "badge": "Şeffaf metodoloji",
     "h1": "VPN Test Metodolojimiz",
-    "intro": "Sitedeki her VPN beş ayrı test alanı üzerinden, aynı standart prosedürle değerlendirilir. Affiliate komisyonu sıralamayı veya puanları etkilemez — bu sayfa, her bir testi nasıl yürüttüğümüzü, hangi araçları kullandığımızı ve hangi varsayımlarla puanladığımızı detaylı biçimde açıklar.",
+    "intro": "Sitedeki her VPN beş ayrı test alanı üzerinden, aynı standart prosedürle değerlendirilir. Reklam geliri sıralamayı veya puanları etkilemez — bu sayfa, her bir testi nasıl yürüttüğümüzü, hangi araçları kullandığımızı ve hangi varsayımlarla puanladığımızı detaylı biçimde açıklar.",
     "lastUpdated": "Son güncelleme",
     "lastUpdatedDate": "25 Mayıs 2026",
     "toc": {
@@ -162,18 +162,18 @@
       "transparency": "5. Şeffaflık ve sınırlamalar"
     },
     "independence": {
-      "title": "1. Bağımsızlık ve Affiliate Beyanı",
-      "intro": "Güveninizi kazanmak için ticari ilişkilerimizi açıkça beyan ediyoruz. Aşağıdaki tablo, hangi sağlayıcıdan komisyon aldığımızı ve hangileriyle hiçbir ticari bağımız olmadığını göstermektedir.",
-      "withAffiliateTitle": "Komisyon aldığımız sağlayıcılar",
-      "withAffiliateBody": "Aşağıdaki sağlayıcıların affiliate programlarına dahiliz. Bir okuyucu sitemizden geçerek abonelik başlatırsa belirli bir komisyon alırız: NordVPN, Surfshark, ExpressVPN, Proton VPN, Private Internet Access, CyberGhost, IPVanish, Windscribe, TunnelBear.",
-      "withoutAffiliateTitle": "Komisyon almadığımız sağlayıcılar",
-      "withoutAffiliateBody": "Mullvad gibi affiliate programı bulunmayan sağlayıcılar da listelerimize dahil edilir. Bunlardan tek kuruş kazanmıyoruz ama puanlamada eşit muamele görüyorlar — bu, tarafsızlığımızın somut göstergesidir.",
+      "title": "1. Bağımsızlık ve Gelir Beyanı",
+      "intro": "Güveninizi kazanmak için gelir modelimizi açıkça beyan ediyoruz. Sitenin geliri Google AdSense reklamlarından gelir; hiçbir VPN sağlayıcısından komisyon almıyoruz.",
+      "withAffiliateTitle": "Gelir modelimiz",
+      "withAffiliateBody": "Sitenin tek gelir kaynağı Google AdSense reklamlarıdır. Hiçbir VPN sağlayıcısından satış komisyonu almıyoruz; sağlayıcılara giden bağlantılar düz, ticari olmayan bağlantılardır ve doğrudan markanın resmi sitesine gider.",
+      "withoutAffiliateTitle": "Eşit muamele",
+      "withoutAffiliateBody": "Mullvad dahil tüm sağlayıcılar aynı kriterlerle puanlanır. Reklam geliri sıralamayı veya puanları etkilemez — bu, tarafsızlığımızın somut göstergesidir.",
       "pledgeTitle": "Editör taahhüdümüz",
       "pledgeItems": {
         "0": "Test ettiğimiz tüm VPN aboneliklerini kendi paramızla satın aldık; sağlayıcılardan ücretsiz/sponsorlu hesap kabul etmedik.",
         "1": "Hiçbir sağlayıcı yayın öncesi içeriği inceleme, düzenleme veya veto hakkına sahip değildir.",
         "2": "Sıralama, puanlama ve eleştirel notlar editör ekibinin sorumluluğundadır; satış/pazarlama tarafının müdahalesi yoktur.",
-        "3": "Bir sağlayıcının puanı, komisyon oranından bağımsız olarak hesaplanır; daha yüksek komisyon ödeyen sağlayıcı, daha düşük puanlı ise üst sırada yer almaz."
+        "3": "Bir sağlayıcının puanı, reklam gelirinden bağımsız olarak hesaplanır; bir markanın reklam vermesi onu daha üst sıraya taşımaz."
       },
       "linkText": "Tam bilgi için Reklam Açıklaması sayfasına bakın."
     },
@@ -327,7 +327,7 @@
     },
     "editorial": {
       "title": "Editoryal bağımsızlık",
-      "body": "Affiliate gelirini şeffaf biçimde açıklarız (bkz. <link>Reklam Açıklaması</link>). Affiliate programı bulunmayan VPN sağlayıcıları da sıralamamıza dahil edilir; bu, tarafsızlığımızın doğrudan göstergesidir."
+      "body": "Gelir modelimizi şeffaf biçimde açıklarız (bkz. <link>Reklam Açıklaması</link>). Site geliri Google AdSense reklamlarından gelir; hiçbir VPN sağlayıcısından komisyon almayız, bu da tarafsızlığımızın doğrudan göstergesidir."
     },
     "criteria": {
       "privacy": {
@@ -693,7 +693,7 @@
     "quickLinks": {
       "aboutSuffix": "— biz kimiz, nasıl çalışıyoruz",
       "methodologySuffix": "— VPN'leri nasıl değerlendiriyoruz",
-      "disclosureSuffix": "— affiliate ilişkilerimiz",
+      "disclosureSuffix": "— reklam ve gelir açıklamamız",
       "privacySuffix": "— kişisel veri uygulamamız"
     },
     "footer": "{site} editör ekibi"
@@ -708,7 +708,7 @@
     "lede": "VPN dünyası kafa karıştırıcı: yüzlerce sağlayıcı, çelişkili incelemeler, agresif pazarlama. {site}, bu karmaşaya karşı kişisel bir cevap olarak başlamış <strong>gönüllü bir inceleme projesidir</strong>.",
     "explainer": {
       "title": "Bu nedir?",
-      "body": "{site} bir şirket veya kurum değildir; ticari kayıtlı bir tüzel kişiliği yoktur. VPN sağlayıcılarını kendi ihtiyacımız için karşılaştırırken oluşan notların kamuya açılmış halidir. Affiliate komisyonu altyapı maliyetini karşılar; öneriler bunun etkisinde değildir. Detaylar için <disclosure>reklam açıklaması</disclosure> ve <legal>yasal uyarı</legal> sayfalarımıza bakabilirsin."
+      "body": "{site} bir şirket veya kurum değildir; ticari kayıtlı bir tüzel kişiliği yoktur. VPN sağlayıcılarını kendi ihtiyacımız için karşılaştırırken oluşan notların kamuya açılmış halidir. Google AdSense reklam geliri altyapı maliyetini karşılar; öneriler bunun etkisinde değildir. Detaylar için <disclosure>reklam açıklaması</disclosure> ve <legal>yasal uyarı</legal> sayfalarımıza bakabilirsin."
     },
     "approach": {
       "h2": "Yaklaşımımız",
@@ -722,7 +722,7 @@
       },
       "independence": {
         "title": "Editoryal bağımsızlık",
-        "body": "Affiliate komisyonu sıralamayı veya değerlendirmeyi etkilemez. Affiliate olmayan seçenekleri de listeleriz."
+        "body": "Reklam geliri sıralamayı veya değerlendirmeyi etkilemez. Tüm sağlayıcıları aynı kriterlerle listeleriz."
       },
       "evidence": {
         "title": "Kanıt önceliği",
@@ -735,8 +735,8 @@
     },
     "revenue": {
       "h2": "Gelir modelimiz",
-      "body1": "Bu siteyi affiliate (ortaklık) komisyonlarıyla finanse ediyoruz. Sayfadaki bağlantıdan VPN aldığında biz komisyon kazanırız — ödediğin fiyat değişmez. Detayları <disclosure>Reklam Açıklaması</disclosure> sayfasında ayrıntılı açıklıyoruz.",
-      "body2": "<strong>Önemli:</strong> Komisyon farkı sıralamayı etkilemez. Affiliate programı olmayan sağlayıcıları (örn. Mullvad) sıralamaya ekleriz; en yüksek komisyon veren ürünü en üste koymak gibi bir taktik kullanmayız."
+      "body1": "Bu siteyi Google AdSense reklam geliriyle finanse ediyoruz. Sayfalarda Google tarafından sunulan reklamlar görünür; VPN sağlayıcılarına giden bağlantılar düz, ticari olmayan bağlantılardır ve bunlardan komisyon almayız. Detayları <disclosure>Reklam Açıklaması</disclosure> sayfasında ayrıntılı açıklıyoruz.",
+      "body2": "<strong>Önemli:</strong> Reklam geliri sıralamayı etkilemez. Tüm sağlayıcıları (örn. Mullvad dahil) aynı kriterlerle sıralarız; bir markanın reklam vermesi onu üst sıraya taşımaz."
     },
     "authors": {
       "h2": "Kim yazıyor?",
@@ -769,7 +769,7 @@
   },
   "cookies": {
     "metaTitle": "Çerez Politikası — Onaya Dayalı Çerez",
-    "metaDescription": "VPN Advisor onaya dayalı analitik çerezler (Google Analytics), dil için NEXT_LOCALE çerezi, theme tercihi için localStorage, affiliate yönlendirmeleri ve KVKK/GDPR uyumlu açıklama kullanır.",
+    "metaDescription": "VPN Advisor onaya dayalı analitik (Google Analytics) ve reklam (Google AdSense) çerezleri, dil için NEXT_LOCALE çerezi, theme tercihi için localStorage ve KVKK/GDPR uyumlu açıklama kullanır.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Çerez Politikası"
   },
@@ -786,8 +786,8 @@
     "breadcrumbHere": "Yasal Uyarı"
   },
   "disclosurePage": {
-    "metaTitle": "Reklam Açıklaması (Affiliate Disclosure)",
-    "metaDescription": "VPN Advisor affiliate (ortaklık) ilişkileri, gelir modelimiz ve editoryal bağımsızlığımız hakkında şeffaf açıklama. FTC ve Türkiye Reklam Kurulu uyumlu.",
+    "metaTitle": "Reklam Açıklaması",
+    "metaDescription": "VPN Advisor gelir modeli (Google AdSense reklamları), dış bağlantı politikası ve editoryal bağımsızlığı hakkında şeffaf açıklama. Türkiye Reklam Kurulu uyumlu.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "Reklam Açıklaması"
   },

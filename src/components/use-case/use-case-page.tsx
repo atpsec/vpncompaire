@@ -10,7 +10,6 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 
 export type UseCasePick = {
   slug: string;
@@ -114,20 +113,13 @@ export function UseCasePage({
                         {pick.why}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-3">
-                        <Button
-                          asChild
-                          variant={
-                            product.hasAffiliate ? "primary" : "secondary"
-                          }
-                          size="sm"
-                        >
+                        <Button asChild variant="primary" size="sm">
                           <a
-                            href={affiliatePath(product.slug)}
-                            rel="sponsored nofollow"
+                            href={product.pricingUrl}
+                            rel="noopener nofollow"
+                            target="_blank"
                           >
-                            {product.hasAffiliate
-                              ? t("ctaAffiliate", { brand: product.brand })
-                              : t("ctaOfficial", { brand: product.brand })}
+                            {t("ctaOfficial", { brand: product.brand })}
                             <ArrowRight className="size-4" />
                           </a>
                         </Button>

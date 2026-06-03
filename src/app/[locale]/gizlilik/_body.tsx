@@ -47,8 +47,9 @@ export function TrBody() {
             bir form bulunmuyor.
           </li>
           <li>
-            <strong>Affiliate tıklamaları</strong> kayda alınmaz; sadece
-            VPN sağlayıcısına UTM ile yönlendirme yapılır.
+            <strong>VPN sağlayıcı bağlantıları</strong> kayda alınmaz; düz
+            bağlantıyla doğrudan sağlayıcının resmi sitesine gidersin, tıklama
+            takibi yapılmaz.
           </li>
           <li>
             <strong>İletişim için</strong> bize gönderdiğin e-posta sadece
@@ -152,8 +153,11 @@ export function TrBody() {
           </li>
         </ul>
         <p>
-          Affiliate bağlantısına tıkladığında ilgili VPN sağlayıcısına
-          yönlendirilirsin; o noktadan sonra sağlayıcının kendi gizlilik
+          Sayfalarımızda Google AdSense reklamları gösterilir; AdSense,
+          reklamları sunmak ve ölçmek için çerez kullanabilir (ayrıntılar{" "}
+          <Link href="/cerez-politikasi">çerez politikamızda</Link>). Bir VPN
+          sağlayıcısının bağlantısına tıkladığında doğrudan sağlayıcının resmi
+          sitesine gidersin; o noktadan sonra sağlayıcının kendi gizlilik
           politikası geçerli olur.
         </p>
 
@@ -256,8 +260,9 @@ export function EnBody() {
             information.
           </li>
           <li>
-            <strong>Affiliate clicks</strong> are not stored; we simply redirect
-            to the provider with UTM parameters.
+            <strong>VPN provider links</strong> are not stored; a plain link
+            takes you directly to the provider&apos;s official site, with no
+            click tracking.
           </li>
           <li>
             <strong>Email to us</strong> is used only to respond to your message.
@@ -359,8 +364,11 @@ export function EnBody() {
           </li>
         </ul>
         <p>
-          When you click an affiliate link you are redirected to the VPN
-          provider; from that point on the provider&apos;s own privacy policy
+          Our pages display Google AdSense ads; AdSense may use cookies to
+          serve and measure ads (details in our{" "}
+          <Link href="/cerez-politikasi">cookie policy</Link>). When you click
+          a VPN provider link you go directly to the provider&apos;s official
+          site; from that point on the provider&apos;s own privacy policy
           applies.
         </p>
 

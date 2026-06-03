@@ -151,7 +151,13 @@ export function FeatureFilter() {
                   </Link>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
-                  <Link href={`/go/${product.slug}`}>{t("getDeal")}</Link>
+                  <a
+                    href={product.pricingUrl}
+                    rel="noopener nofollow"
+                    target="_blank"
+                  >
+                    {t("getDeal")}
+                  </a>
                 </Button>
               </div>
             </Card>

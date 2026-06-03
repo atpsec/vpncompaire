@@ -44,8 +44,8 @@
     "noAffiliate": "No affiliate — neutral pick"
   },
   "disclosure": {
-    "banner": "Affiliate disclosure: We may earn a commission when you purchase through links on this page. This does not change the price you pay. Our recommendations are based on research, feature analysis, privacy policies, audits, pricing and usability.",
-    "short": "Some links on this page are affiliate links.",
+    "banner": "Advertising disclosure: This site earns its revenue from Google AdSense ads; you may see ads on these pages. Links to VPN providers are plain, non-commercial links and we earn no commission from them. Our recommendations are based on research, feature analysis, privacy policies, audits, pricing and usability.",
+    "short": "This site shows Google AdSense ads.",
     "learnMore": "Learn more"
   },
   "home": {
@@ -81,7 +81,7 @@
     },
     "methodology": {
       "title": "How we test",
-      "body": "Every VPN on this site is evaluated against the same six criteria: privacy policy and jurisdiction, independent audits, speed, streaming compatibility, pricing transparency and ease of use. Affiliate commissions do not influence the ranking.",
+      "body": "Every VPN on this site is evaluated against the same six criteria: privacy policy and jurisdiction, independent audits, speed, streaming compatibility, pricing transparency and ease of use. Ad revenue does not influence the ranking.",
       "cta": "Read the full methodology"
     },
     "guides": {
@@ -127,7 +127,7 @@
     },
     "socialSoon": "Social media accounts coming soon.",
     "copyright": "All rights reserved.",
-    "disclosureTitle": "Affiliate disclosure.",
+    "disclosureTitle": "Advertising disclosure.",
     "madeWith": "Volunteer review project · Not an official entity"
   },
   "newsletter": {
@@ -150,7 +150,7 @@
     "metaDescription": "VPN Advisor's VPN testing process: independence statement, speed measurements, leak tests, streaming verification, no-logs audit review, scoring system and transparency standards.",
     "badge": "Transparent methodology",
     "h1": "Our VPN Testing Methodology",
-    "intro": "Every VPN on the site is evaluated across five separate test areas using the same standardised procedure. Affiliate commissions do not influence rankings or scores — this page explains in detail how each test is performed, which tools we use and the assumptions behind the scoring.",
+    "intro": "Every VPN on the site is evaluated across five separate test areas using the same standardised procedure. Ad revenue does not influence rankings or scores — this page explains in detail how each test is performed, which tools we use and the assumptions behind the scoring.",
     "lastUpdated": "Last updated",
     "lastUpdatedDate": "May 25, 2026",
     "toc": {
@@ -162,18 +162,18 @@
       "transparency": "5. Transparency and limitations"
     },
     "independence": {
-      "title": "1. Independence and Affiliate Disclosure",
-      "intro": "To earn your trust we openly disclose our commercial relationships. The breakdown below shows which providers pay us a commission and which ones we have no commercial ties with.",
-      "withAffiliateTitle": "Providers we earn commission from",
-      "withAffiliateBody": "We participate in the affiliate programmes of the following providers. If a reader starts a subscription via our site we receive a commission: NordVPN, Surfshark, ExpressVPN, Proton VPN, Private Internet Access, CyberGhost, IPVanish, Windscribe, TunnelBear.",
-      "withoutAffiliateTitle": "Providers we do not earn from",
-      "withoutAffiliateBody": "Providers without an affiliate programme — such as Mullvad — are still included in our rankings. We make zero revenue from them, yet they receive identical treatment in scoring. This is the most concrete signal of our impartiality.",
+      "title": "1. Independence and Revenue Disclosure",
+      "intro": "To earn your trust we openly disclose our revenue model. The site's revenue comes from Google AdSense ads; we receive no commission from any VPN provider.",
+      "withAffiliateTitle": "Our revenue model",
+      "withAffiliateBody": "The site's only revenue source is Google AdSense ads. We receive no sales commission from any VPN provider; links to providers are plain, non-commercial links that go directly to the brand's official site.",
+      "withoutAffiliateTitle": "Equal treatment",
+      "withoutAffiliateBody": "All providers, including Mullvad, are scored against the same criteria. Ad revenue does not influence rankings or scores — this is the most concrete signal of our impartiality.",
       "pledgeTitle": "Our editorial pledge",
       "pledgeItems": {
         "0": "Every VPN subscription we test is purchased with our own money; we do not accept free or sponsored accounts from providers.",
         "1": "No provider has pre-publication review, edit or veto rights over our content.",
         "2": "Rankings, scores and critical notes are the responsibility of the editorial team; sales and marketing have no input.",
-        "3": "A provider's score is calculated independently of commission rate; a higher-paying provider does not appear above a lower-scoring one."
+        "3": "A provider's score is calculated independently of ad revenue; a brand running ads does not move it higher in the ranking."
       },
       "linkText": "See the Advertising Disclosure page for full details."
     },
@@ -327,7 +327,7 @@
     },
     "editorial": {
       "title": "Editorial independence",
-      "body": "We disclose affiliate revenue transparently (see <link>Advertising Disclosure</link>). VPN providers without an affiliate programme are also included in our ranking; this is the most direct signal of our impartiality."
+      "body": "We disclose our revenue model transparently (see <link>Advertising Disclosure</link>). The site's revenue comes from Google AdSense ads; we earn no commission from any VPN provider, which is the most direct signal of our impartiality."
     },
     "criteria": {
       "privacy": {
@@ -693,7 +693,7 @@
     "quickLinks": {
       "aboutSuffix": "— who we are and how we work",
       "methodologySuffix": "— how we evaluate VPNs",
-      "disclosureSuffix": "— our affiliate relationships",
+      "disclosureSuffix": "— our advertising and revenue disclosure",
       "privacySuffix": "— our personal-data practices"
     },
     "footer": "{site} editorial team"
@@ -708,7 +708,7 @@
     "lede": "The VPN world is confusing: hundreds of providers, contradicting reviews, aggressive marketing. {site} started as a personal response to that mess — <strong>a volunteer review project</strong>.",
     "explainer": {
       "title": "What is this?",
-      "body": "{site} is not a company or institution; it has no registered legal entity. It is a public version of the notes that built up while we were comparing VPN providers for our own use. Affiliate commissions cover infrastructure costs; they do not influence the recommendations. See <disclosure>Advertising disclosure</disclosure> and <legal>Legal notice</legal> for details."
+      "body": "{site} is not a company or institution; it has no registered legal entity. It is a public version of the notes that built up while we were comparing VPN providers for our own use. Google AdSense ad revenue covers infrastructure costs; it does not influence the recommendations. See <disclosure>Advertising disclosure</disclosure> and <legal>Legal notice</legal> for details."
     },
     "approach": {
       "h2": "Our approach",
@@ -722,7 +722,7 @@
       },
       "independence": {
         "title": "Editorial independence",
-        "body": "Affiliate commissions do not influence the ranking or the assessment. We also list providers without an affiliate programme."
+        "body": "Ad revenue does not influence the ranking or the assessment. We list all providers against the same criteria."
       },
       "evidence": {
         "title": "Evidence first",
@@ -735,8 +735,8 @@
     },
     "revenue": {
       "h2": "Our revenue model",
-      "body1": "We finance this site through affiliate commissions. When you buy a VPN through a link on this page we earn a commission — the price you pay doesn't change. We explain this in detail on the <disclosure>Advertising disclosure</disclosure> page.",
-      "body2": "<strong>Important:</strong> Differences in commission do not influence the ranking. We include providers that don't run an affiliate programme (e.g. Mullvad); we don't put the highest-commission product at the top."
+      "body1": "We finance this site through Google AdSense ad revenue. Pages show ads served by Google; links to VPN providers are plain, non-commercial links and we earn no commission from them. We explain this in detail on the <disclosure>Advertising disclosure</disclosure> page.",
+      "body2": "<strong>Important:</strong> Ad revenue does not influence the ranking. We rank all providers (including e.g. Mullvad) against the same criteria; a brand running ads does not get placed at the top."
     },
     "authors": {
       "h2": "Who writes this?",
@@ -769,7 +769,7 @@
   },
   "cookies": {
     "metaTitle": "Cookie Policy — Consent-Based Cookies",
-    "metaDescription": "VPN Advisor uses consent-based analytics cookies (Google Analytics), a NEXT_LOCALE language cookie, localStorage for theme preference, affiliate redirects, and GDPR/KVKK-aligned disclosure.",
+    "metaDescription": "VPN Advisor uses consent-based analytics (Google Analytics) and advertising (Google AdSense) cookies, a NEXT_LOCALE language cookie, localStorage for theme preference, and GDPR/KVKK-aligned disclosure.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Cookie policy"
   },
@@ -786,8 +786,8 @@
     "breadcrumbHere": "Legal notice"
   },
   "disclosurePage": {
-    "metaTitle": "Advertising Disclosure (Affiliate Disclosure)",
-    "metaDescription": "Transparent statement of VPN Advisor's affiliate relationships, revenue model and editorial independence. FTC-aligned.",
+    "metaTitle": "Advertising Disclosure",
+    "metaDescription": "Transparent statement of VPN Advisor's revenue model (Google AdSense ads), external-link policy and editorial independence.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Advertising disclosure"
   },

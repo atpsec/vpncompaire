@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
-import { affiliatePath } from "@/lib/affiliate";
 import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
@@ -153,8 +152,12 @@ export default async function Page({ params }: Props) {
               {nord.summary}
             </p>
             <Button asChild variant="primary" className="mt-4 w-full">
-              <a href={affiliatePath(nord.slug)} rel="sponsored nofollow">
-                {nord.brand} fırsatı <ArrowRight className="size-4" />
+              <a
+                href={nord.pricingUrl}
+                rel="noopener nofollow"
+                target="_blank"
+              >
+                {nord.brand} resmi sitesi <ArrowRight className="size-4" />
               </a>
             </Button>
           </Card>
@@ -173,8 +176,12 @@ export default async function Page({ params }: Props) {
               {surf.summary}
             </p>
             <Button asChild variant="primary" className="mt-4 w-full">
-              <a href={affiliatePath(surf.slug)} rel="sponsored nofollow">
-                {surf.brand} fırsatı <ArrowRight className="size-4" />
+              <a
+                href={surf.pricingUrl}
+                rel="noopener nofollow"
+                target="_blank"
+              >
+                {surf.brand} resmi sitesi <ArrowRight className="size-4" />
               </a>
             </Button>
           </Card>

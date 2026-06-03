@@ -162,12 +162,11 @@ export function TrBody() {
           (nominative fair use) çerçevesinde kullanılır.
         </p>
 
-        <h2>8. Affiliate ilişkileri</h2>
+        <h2>8. Reklam ve gelir</h2>
         <p>
-          Bazı bağlantılar affiliate (ortaklık) bağlantısıdır. Bir
-          satın alma yapıldığında {siteConfig.name} komisyon
-          kazanabilir; bu komisyon senin ödediğin fiyatı değiştirmez.
-          Detaylar için{" "}
+          {siteConfig.name} gelirini Google AdSense reklamlarından elde eder.
+          VPN sağlayıcılarına giden bağlantılar düz, ticari olmayan
+          bağlantılardır; bunlardan komisyon almıyoruz. Detaylar için{" "}
           <Link href="/reklam-aciklamasi">Reklam Açıklaması</Link>{" "}
           sayfasına bak.
         </p>
@@ -347,11 +346,11 @@ export function EnBody() {
           nominative fair use.
         </p>
 
-        <h2>8. Affiliate relationships</h2>
+        <h2>8. Advertising and revenue</h2>
         <p>
-          Some links are affiliate (partnership) links. {siteConfig.name} may
-          earn a commission when a purchase is made; this commission does not
-          change the price you pay. See the{" "}
+          {siteConfig.name} earns its revenue from Google AdSense ads. Links to
+          VPN providers are plain, non-commercial links; we earn no commission
+          from them. See the{" "}
           <Link href="/reklam-aciklamasi">Advertising Disclosure</Link> for
           details.
         </p>

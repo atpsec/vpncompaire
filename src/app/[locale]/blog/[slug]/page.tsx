@@ -7,7 +7,6 @@ import { BlogContent } from "@/components/blog/blog-content";
 import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
 import { SocialShare } from "@/components/blog/social-share";
-import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import { absoluteUrl, localizedAlternates, siteConfig } from "@/lib/site";
@@ -124,10 +123,6 @@ export default async function BlogPostPage({ params }: Props) {
             description={frontmatter.description}
             locale={locale as "tr" | "en"}
           />
-        </div>
-
-        <div className="mb-6 rounded-lg border border-border bg-surface-subtle px-4 py-2.5">
-          <AffiliateNotice />
         </div>
 
         <UnsplashImage

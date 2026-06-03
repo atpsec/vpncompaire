@@ -47,8 +47,12 @@ export function ConsentBanner() {
     } catch {
       // sessizce geç — onay kalıcı olmasa da UX bloklanmaz
     }
+    const value = granted ? "granted" : "denied";
     window.gtag?.("consent", "update", {
-      analytics_storage: granted ? "granted" : "denied",
+      analytics_storage: value,
+      ad_storage: value,
+      ad_user_data: value,
+      ad_personalization: value,
     });
     setDecided(true);
   }

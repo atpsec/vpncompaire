@@ -209,26 +209,29 @@ export function TrBody() {
           <strong>gerektirmez</strong>.
         </p>
 
-        <h3>2.3 Affiliate yönlendirmeleri (3. taraf çerezler)</h3>
+        <h3>2.3 Reklam çerezleri (Google AdSense)</h3>
         <p>
-          <code>/go/[slug]</code> linklerine tıkladığında seni bir VPN
-          sağlayıcısına (örn. NordVPN, Surfshark) yönlendiririz.{" "}
-          <strong>O sağlayıcı kendi çerezlerini set edebilir</strong>{" "}
-          (sözleşmeye göre tıklamayı takip etmek için). Bu çerezler{" "}
-          <strong>bizim değil, hedef sitenin çerezleridir</strong>.
+          Sayfalarımızda <strong>Google AdSense</strong> reklamları
+          gösterilir. Google ve iş ortakları, reklamları sunmak,
+          kişiselleştirmek ve ölçmek için çerez ve benzeri teknolojiler
+          kullanabilir. Bunlar <strong>bizim değil, üçüncü taraf (Google)
+          çerezleridir</strong>.
         </p>
         <ul>
           <li>
-            Yönlendirme sırasında <code>Referrer-Policy: no-referrer</code>{" "}
-            başlığı kullanırız (hedef siteye sayfa adresimiz gitmez)
+            Avrupa Ekonomik Alanı, Birleşik Krallık ve İsviçre ziyaretçileri
+            için kişiselleştirilmiş reklam ve ölçüm çerezleri yalnızca{" "}
+            <strong>açık onay verdiğinde</strong> etkinleştirilir (Google
+            Consent Mode v2)
           </li>
           <li>
-            Sadece affiliate tracking ID&apos;si UTM parametreleriyle
-            iletilir
+            Onay vermezsen Google sınırlı veya kişiselleştirilmemiş reklam
+            sunabilir
           </li>
           <li>
-            Hedef sitenin çerez politikasını okumak için yönlendirme
-            sonrası o sitenin sayfasını ziyaret etmen gerekir
+            VPN sağlayıcısının bağlantısına tıkladığında doğrudan o
+            sağlayıcının resmi sitesine gidersin; bizim koyduğumuz bir izleme
+            çerezi yoktur, hedef sitenin kendi çerezleri geçerli olur
           </li>
         </ul>
 
@@ -236,9 +239,10 @@ export function TrBody() {
         <p>
           Türkiye (KVKK), AB (GDPR/ePrivacy) ve İngiltere (PECR)
           mevzuatına göre <strong>gerekli olmayan çerezler için</strong>{" "}
-          açık onay gerekir. Bu yüzden analitik (Google Analytics)
-          çerezleri için bir <strong>çerez onay banner&apos;ı</strong>{" "}
-          gösteririz; siz &quot;Kabul et&quot; demeden bu çerezler yazılmaz.
+          açık onay gerekir. Bu yüzden analitik (Google Analytics) ve reklam
+          (Google AdSense) çerezleri için bir{" "}
+          <strong>çerez onay banner&apos;ı</strong> gösteririz; siz
+          &quot;Kabul et&quot; demeden bu çerezler yazılmaz.
           Dil tercihini tutan <code>NEXT_LOCALE</code> çerezi ise
           &quot;kesinlikle gerekli&quot; kategorisindedir ve onay gerektirmez.
           Seçiminiz tarayıcınızda saklanır; tarayıcı verilerinizi silerek
@@ -248,8 +252,9 @@ export function TrBody() {
         <h2>4. Verileri nasıl silersin?</h2>
         <p>
           Tarayıcına yerleştirdiğimiz şeyler: dil tercihi çerezi
-          (<code>NEXT_LOCALE</code>), onay verdiysen Google Analytics
-          çerezleri ve birkaç localStorage tercihi. Hepsini silmek için:
+          (<code>NEXT_LOCALE</code>), onay verdiysen Google Analytics ve
+          Google AdSense reklam çerezleri ve birkaç localStorage tercihi.
+          Hepsini silmek için:
         </p>
         <ul>
           <li>
@@ -276,10 +281,10 @@ export function TrBody() {
             <AlertCircle className="size-5 text-accent-600 shrink-0 mt-0.5" />
             <div className="text-sm">
               <p className="font-semibold text-ink-strong">
-                Affiliate yönlendirmeleri istisna
+                Dış bağlantılar istisna
               </p>
               <p className="mt-1 text-ink-muted">
-                Bir VPN sağlayıcısına yönlendirildiğinde, o sitenin kendi
+                Bir VPN sağlayıcısının sitesine gittiğinde, o sitenin kendi
                 çerez politikası geçerli olur. NordVPN, Surfshark,
                 ExpressVPN ve diğerlerinin politikalarını ilgili
                 sitelerinden okuyabilirsin.
@@ -545,26 +550,27 @@ export function EnBody() {
           <strong>not required</strong>.
         </p>
 
-        <h3>2.3 Affiliate redirects (third-party cookies)</h3>
+        <h3>2.3 Advertising cookies (Google AdSense)</h3>
         <p>
-          When you click a <code>/go/[slug]</code> link, we redirect you
-          to a VPN provider (e.g., NordVPN, Surfshark).{" "}
-          <strong>That provider may set its own cookies</strong>{" "}
-          (contractually, to track the click). Those cookies are{" "}
-          <strong>not ours, they belong to the destination site</strong>.
+          Our pages display <strong>Google AdSense</strong> ads. Google and
+          its partners may use cookies and similar technologies to serve,
+          personalise and measure ads. These are{" "}
+          <strong>not ours, they are third-party (Google) cookies</strong>.
         </p>
         <ul>
           <li>
-            During the redirect we use{" "}
-            <code>Referrer-Policy: no-referrer</code> (our page URL is
-            not sent to the destination)
+            For visitors in the European Economic Area, the United Kingdom and
+            Switzerland, personalised advertising and measurement cookies are
+            enabled <strong>only with explicit consent</strong> (Google
+            Consent Mode v2)
           </li>
           <li>
-            Only the affiliate tracking ID is passed via UTM parameters
+            Without consent, Google may serve limited or non-personalised ads
           </li>
           <li>
-            To read the destination&apos;s cookie policy, visit their
-            site after being redirected
+            When you click a VPN provider link you go directly to the
+            provider&apos;s official site; we set no tracking cookie of our
+            own, and the destination site&apos;s own cookies apply
           </li>
         </ul>
 
@@ -574,8 +580,8 @@ export function EnBody() {
           regulations, <strong>non-essential cookies require explicit
           consent</strong>. That is why we show a{" "}
           <strong>cookie consent banner</strong> for analytics (Google
-          Analytics) cookies; they are not set until you click
-          &quot;Accept&quot;. The <code>NEXT_LOCALE</code> language cookie is
+          Analytics) and advertising (Google AdSense) cookies; they are not
+          set until you click &quot;Accept&quot;. The <code>NEXT_LOCALE</code> language cookie is
           &quot;strictly necessary&quot; and needs no consent. Your choice is
           stored in your browser; clear your browser data to see the banner
           again and change your preference.
@@ -584,9 +590,9 @@ export function EnBody() {
         <h2>4. How to delete the data</h2>
         <p>
           What we place in your browser: a language cookie
-          (<code>NEXT_LOCALE</code>), Google Analytics cookies if you
-          consented, and a few localStorage preferences. To delete all of
-          them:
+          (<code>NEXT_LOCALE</code>), Google Analytics and Google AdSense ad
+          cookies if you consented, and a few localStorage preferences. To
+          delete all of them:
         </p>
         <ul>
           <li>
@@ -613,10 +619,10 @@ export function EnBody() {
             <AlertCircle className="size-5 text-accent-600 shrink-0 mt-0.5" />
             <div className="text-sm">
               <p className="font-semibold text-ink-strong">
-                Affiliate redirects exception
+                External links exception
               </p>
               <p className="mt-1 text-ink-muted">
-                When redirected to a VPN provider, that site&apos;s
+                When you visit a VPN provider&apos;s site, that site&apos;s
                 cookie policy applies. Read NordVPN&apos;s, Surfshark&apos;s,
                 ExpressVPN&apos;s and other providers&apos; policies on
                 their respective sites.
