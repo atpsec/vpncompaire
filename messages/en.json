@@ -1070,6 +1070,10 @@
         "title": "My IP Address",
         "description": "Instantly see your real IP address, location and ISP."
       },
+      "vpnTest": {
+        "title": "VPN/IP Test",
+        "description": "Check your public IP, location, ISP, ASN and VPN/proxy signals."
+      },
       "dns": {
         "title": "DNS Leak Test",
         "description": "Check where your DNS queries go while your VPN is on."
@@ -1115,6 +1119,43 @@
       "unknown": "Unknown",
       "explainTitle": "What is an IP address? Why hide it?",
       "explainBody": "Your IP address is your identity card on the internet. Every site you visit can use it to track your physical location, ISP and behavior. A VPN masks your IP and breaks those trails."
+    },
+    "vpnTest": {
+      "metaTitle": "VPN/IP Test - Check Your Public IP, Location and VPN Status | VPN Advisor",
+      "metaDescription": "Check your public IP address, country, city, ISP, ASN and whether the IP looks like a datacenter, proxy or VPN endpoint.",
+      "breadcrumb": "VPN/IP Test",
+      "title": "VPN/IP Diagnostic Test",
+      "subtitle": "See what websites can infer from your current connection and whether your IP looks like a datacenter, proxy or VPN endpoint.",
+      "checking": "Checking your public IP and connection details...",
+      "errorTitle": "The check could not be completed",
+      "errorBody": "The diagnostic service is temporarily unavailable. Please try again in a moment.",
+      "rateLimitedBody": "Too many checks were requested from this connection. Please wait a minute and try again.",
+      "degradedNote": "The external lookup is unavailable, so we are showing only the IP and location details available from request headers.",
+      "privacyNote": "Your IP is used only for this check and is not stored by VPN Advisor.",
+      "lastChecked": "Checked just now",
+      "unknown": "Unknown",
+      "publicIp": "Public IP",
+      "country": "Country",
+      "city": "City",
+      "isp": "ISP / organization",
+      "asn": "ASN",
+      "networkType": "Network type",
+      "detectionTitle": "VPN/proxy/datacenter check",
+      "detectionDetected": "Datacenter, proxy or VPN signals detected",
+      "detectionClear": "No datacenter, proxy or VPN signals detected",
+      "detectionUnavailable": "Detection unavailable",
+      "detectionCaveat": "VPN, proxy and datacenter detection is heuristic. Some residential VPNs may look clean, and some business or cloud networks may be flagged.",
+      "signals": {
+        "datacenter": "Datacenter",
+        "proxy": "Proxy",
+        "vpn": "VPN",
+        "tor": "Tor"
+      },
+      "signalYes": "Yes",
+      "signalNo": "No",
+      "signalUnknown": "Unknown",
+      "explainTitle": "What this VPN/IP test shows",
+      "explainBody": "This tool checks the public IP address visible to websites, approximate location, provider details and optional risk signals. It does not inspect your traffic, install anything or expose API keys in the browser."
     },
     "dns": {
       "metaTitle": "DNS Leak Test 2026 - Free | VPN Advisor",

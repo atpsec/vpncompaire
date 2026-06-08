@@ -145,6 +145,18 @@ export default function proxy(request: NextRequest) {
     }
   }
 
+  // The default-locale public diagnostic route is intentionally unprefixed
+  // (/vpn-test). Let the real app/vpn-test route handle it directly.
+  if (pathname === "/vpn-test" && preferredLocale(request) === "tr") {
+    const res = NextResponse.next();
+    res.cookies.set(LOCALE_COOKIE, "tr", {
+      path: "/",
+      maxAge: LOCALE_COOKIE_MAX_AGE,
+      sameSite: "lax",
+    });
+    return res;
+  }
+
   // Continue with next-intl middleware
   return intlMiddleware(request);
 }

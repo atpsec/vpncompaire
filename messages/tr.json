@@ -1070,6 +1070,10 @@
         "title": "IP Adresim",
         "description": "Gerçek IP adresinizi, konumunuzu ve ISS'nizi anında öğrenin."
       },
+      "vpnTest": {
+        "title": "VPN/IP Testi",
+        "description": "Genel IP'nizi, konumunuzu, ISS/ASN bilgisini ve VPN/proxy sinyallerini kontrol edin."
+      },
       "dns": {
         "title": "DNS Sızıntı Testi",
         "description": "VPN aktifken DNS sorgularının nereye gittiğini görün."
@@ -1115,6 +1119,43 @@
       "unknown": "Bilinmiyor",
       "explainTitle": "IP adresi nedir? Neden gizlemek isteyebilirsiniz?",
       "explainBody": "IP adresiniz internetteki kimlik kartınızdır. Ziyaret ettiğiniz her site fiziksel konumunuzu, ISS'nizi ve davranışlarınızı takip etmek için bunu kullanabilir. VPN, IP adresinizi maskeleyerek bu izleri keser."
+    },
+    "vpnTest": {
+      "metaTitle": "VPN/IP Testi - Genel IP, Konum ve VPN Durumu Kontrolü | VPN Advisor",
+      "metaDescription": "Genel IP adresinizi, ülkenizi, şehrinizi, ISS/ASN bilgisini ve IP'nin datacenter, proxy veya VPN uç noktası gibi görünüp görünmediğini kontrol edin.",
+      "breadcrumb": "VPN/IP Testi",
+      "title": "VPN/IP Tanı Testi",
+      "subtitle": "Web sitelerinin mevcut bağlantınızdan hangi bilgileri çıkarabildiğini ve IP'nizin datacenter, proxy veya VPN uç noktası gibi görünüp görünmediğini kontrol edin.",
+      "checking": "Genel IP'niz ve bağlantı detaylarınız kontrol ediliyor...",
+      "errorTitle": "Kontrol tamamlanamadı",
+      "errorBody": "Tanı servisi geçici olarak kullanılamıyor. Lütfen birazdan tekrar deneyin.",
+      "rateLimitedBody": "Bu bağlantıdan çok fazla kontrol isteği geldi. Lütfen bir dakika bekleyip tekrar deneyin.",
+      "degradedNote": "Harici sorgu servisi kullanılamıyor; bu yüzden yalnızca istek başlıklarından alınabilen IP ve konum detaylarını gösteriyoruz.",
+      "privacyNote": "IP adresiniz yalnızca bu kontrol için kullanılır ve VPN Advisor tarafından saklanmaz.",
+      "lastChecked": "Az önce kontrol edildi",
+      "unknown": "Bilinmiyor",
+      "publicIp": "Genel IP",
+      "country": "Ülke",
+      "city": "Şehir",
+      "isp": "ISS / organizasyon",
+      "asn": "ASN",
+      "networkType": "Ağ türü",
+      "detectionTitle": "VPN/proxy/datacenter kontrolü",
+      "detectionDetected": "Datacenter, proxy veya VPN sinyali tespit edildi",
+      "detectionClear": "Datacenter, proxy veya VPN sinyali tespit edilmedi",
+      "detectionUnavailable": "Tespit bilgisi yok",
+      "detectionCaveat": "VPN, proxy ve datacenter tespiti kesin değil, sezgisel bir kontroldür. Bazı konut VPN'leri temiz görünebilir; bazı iş veya bulut ağları ise işaretlenebilir.",
+      "signals": {
+        "datacenter": "Datacenter",
+        "proxy": "Proxy",
+        "vpn": "VPN",
+        "tor": "Tor"
+      },
+      "signalYes": "Evet",
+      "signalNo": "Hayır",
+      "signalUnknown": "Bilinmiyor",
+      "explainTitle": "Bu VPN/IP testi ne gösterir?",
+      "explainBody": "Bu araç web sitelerine görünen genel IP adresinizi, yaklaşık konumunuzu, sağlayıcı bilgilerini ve varsa risk sinyallerini kontrol eder. Trafiğinizi incelemez, cihazınıza bir şey kurmaz ve API anahtarlarını tarayıcıya göndermez."
     },
     "dns": {
       "metaTitle": "DNS Sızıntı Testi 2026 - Ücretsiz | VPN Advisor",
