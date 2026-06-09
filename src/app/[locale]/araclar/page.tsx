@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import {
   ArrowRight,
   Gauge,
+  MailCheck,
   Network,
   ShieldCheck,
   Wifi,
@@ -37,10 +38,20 @@ export async function generateMetadata({
 }
 
 const TOOLS: ReadonlyArray<{
-  href: "/vpn-test" | "/araclar/dns-leak-test" | "/araclar/webrtc-leak-test" | "/araclar/vpn-hiz-testi";
-  key: "vpnTest" | "dns" | "webrtc" | "speed";
+  href:
+    | "/araclar/email-guvenlik-kontrolu"
+    | "/vpn-test"
+    | "/araclar/dns-leak-test"
+    | "/araclar/webrtc-leak-test"
+    | "/araclar/vpn-hiz-testi";
+  key: "emailSecurity" | "vpnTest" | "dns" | "webrtc" | "speed";
   Icon: LucideIcon;
 }> = [
+  {
+    href: "/araclar/email-guvenlik-kontrolu",
+    key: "emailSecurity",
+    Icon: MailCheck,
+  },
   { href: "/vpn-test", key: "vpnTest", Icon: ShieldCheck },
   { href: "/araclar/dns-leak-test", key: "dns", Icon: Network },
   { href: "/araclar/webrtc-leak-test", key: "webrtc", Icon: Wifi },
@@ -88,11 +99,26 @@ function ToolsIndexView() {
             <Link
               key={href}
               href={href}
-              className="group block focus-visible:outline-none"
+              className={`group block focus-visible:outline-none ${
+                key === "emailSecurity" ? "sm:col-span-2" : ""
+              }`}
             >
-              <Card className="h-full p-6 transition group-hover:border-brand-300 group-hover:shadow-md group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-brand-500">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-400">
-                  <Icon className="size-6" aria-hidden="true" />
+              <Card
+                className={`h-full p-6 transition group-hover:border-brand-300 group-hover:shadow-md group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-brand-500 ${
+                  key === "emailSecurity"
+                    ? "border-brand-200 bg-brand-50/40 dark:bg-brand-950/20"
+                    : ""
+                }`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-400">
+                    <Icon className="size-6" aria-hidden="true" />
+                  </div>
+                  {key === "emailSecurity" && (
+                    <span className="rounded-full bg-accent-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-ink-strong">
+                      {t("featuredLabel")}
+                    </span>
+                  )}
                 </div>
                 <h2 className="mt-4 text-xl font-bold text-ink-strong">
                   {t(`cards.${key}.title`)}
