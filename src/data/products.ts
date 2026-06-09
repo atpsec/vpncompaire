@@ -947,7 +947,7 @@ export const rawProducts: RawProduct[] = [
 
 function pick<T>(field: Localized<T> | undefined, locale: Locale): T | undefined {
   if (!field) return undefined;
-  return field[locale] ?? field.tr;
+  return field[locale] ?? field.en ?? field.tr;
 }
 
 function resolveProduct(p: RawProduct, locale: Locale): Product {

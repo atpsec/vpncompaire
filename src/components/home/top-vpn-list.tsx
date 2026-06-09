@@ -15,12 +15,13 @@ import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
 import { rankedProducts, type Product } from "@/data/products";
+import type { Locale } from "@/lib/site";
 
 export function TopVPNList() {
   const t = useTranslations("home.topVPNs");
   const tCommon = useTranslations("common");
   const tBlock = useTranslations("homeBlocks.topVPNs");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
   const list = rankedProducts(locale);
   const winner = list[0];
   const podium = list.slice(1, 3);

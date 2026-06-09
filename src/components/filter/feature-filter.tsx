@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts } from "@/data/products";
+import type { Locale } from "@/lib/site";
 import {
   featureMatrix,
   getFilterLabels,
@@ -17,7 +18,7 @@ import {
 
 export function FeatureFilter() {
   const t = useTranslations("filter");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
   const FILTER_LABELS = getFilterLabels(locale);
   const FILTER_KEYS = Object.keys(FILTER_LABELS) as FilterKey[];
   const products = rankedProducts(locale);

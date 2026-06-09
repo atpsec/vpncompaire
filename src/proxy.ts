@@ -2,39 +2,22 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
-import { getCounterpartSlug } from "@/lib/blog-slugs";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 yıl
 
 /**
- * Ziyaretçi için tercih edilen locale:
- *   1. Açık seçim (NEXT_LOCALE cookie — dil değiştirici yazar) her şeyi ezer.
- *   2. Aksi halde IP ülkesi: TR → tr, diğer tüm ülkeler → en.
- *   3. Ülke bilinmiyorsa (lokal dev / header yok) → tr (default).
+ * Visitor locale preference for small route-specific decisions.
+ * Public canonical pages are not geo-redirected; / and /blog stay Turkish.
  */
-function preferredLocale(request: NextRequest): "tr" | "en" {
+function preferredLocale(request: NextRequest): "tr" | "en" | "de" {
   const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
-  if (cookie === "tr" || cookie === "en") return cookie;
+  if (cookie === "tr" || cookie === "en" || cookie === "de") return cookie;
 
   const country = request.headers.get("x-vercel-ip-country");
   if (!country || country === "TR") return "tr";
+  if (country === "DE" || country === "AT" || country === "CH") return "de";
   return "en";
-}
-
-/**
- * Prefix'siz (tr namespace) bir yolu /en hedefine çevirir.
- * Blog detayda TR/EN slug'ları farklı → slug eşlemesiyle doğru EN yazıya
- * yönlendirir; eşleşme yoksa (sadece TR'de var olan yazı) null döner
- * (yönlendirme atlanır, 404 önlenir).
- */
-function toEnglishTarget(pathname: string): string | null {
-  const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
-  if (blogMatch) {
-    const enSlug = getCounterpartSlug(blogMatch[1], "tr");
-    return enSlug ? `/en/blog/${enSlug}` : null;
-  }
-  return `/en${pathname === "/" ? "" : pathname}`;
 }
 
 // Simple in-memory rate limiter (production'da Redis/Vercel KV önerilir)
@@ -90,8 +73,8 @@ function getClientIp(request: NextRequest): string {
   return "unknown";
 }
 
-// localeDetection routing config'inde kapalı (bkz. routing.ts). Locale
-// sinyalini Accept-Language değil, IP ülkesi belirler (aşağıdaki geo bloğu).
+// localeDetection is disabled in routing.ts. Public locale URLs are explicit:
+// /, /blog, /en, /en/blog, /de, /de/blog.
 const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
@@ -126,24 +109,10 @@ export default function proxy(request: NextRequest) {
     }
   }
 
-  // Geo bazlı locale yönlendirme: TR dışı ziyaretçiyi (veya cookie=en) /en'e
-  // gönder. /en zaten prefix'liyse dokunma. Açık seçim cookie'siyle uyumlu.
-  const isEnPrefixed = pathname === "/en" || pathname.startsWith("/en/");
-  if (!isEnPrefixed && preferredLocale(request) === "en") {
-    const target = toEnglishTarget(pathname);
-    if (target) {
-      const url = request.nextUrl.clone();
-      url.pathname = target;
-      const res = NextResponse.redirect(url);
-      // Tercihi sabitle ki sonraki isteklerde tekrar yönlendirme olmasın.
-      res.cookies.set(LOCALE_COOKIE, "en", {
-        path: "/",
-        maxAge: LOCALE_COOKIE_MAX_AGE,
-        sameSite: "lax",
-      });
-      return res;
-    }
-  }
+  // Public locale URLs are explicit now:
+  // / and /blog are Turkish, /en and /en/blog are English, /de and /de/blog are German.
+  // Do not geo-redirect unprefixed canonical URLs; otherwise /blog can become /en/blog
+  // for users with an English cookie or a non-TR country header.
 
   // The default-locale public diagnostic route is intentionally unprefixed
   // (/vpn-test). Let the real app/vpn-test route handle it directly.
@@ -163,6 +132,6 @@ export default function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next|_vercel|go|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|.*\\..*).*)",
+    "/((?!api|_next|_vercel|go|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|.*\\..*).*)",
   ],
 };

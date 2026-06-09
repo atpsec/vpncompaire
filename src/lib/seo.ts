@@ -1,10 +1,13 @@
 import { siteConfig, absoluteUrl } from "@/lib/site";
+import type { Locale } from "@/lib/site";
 import type { FAQ } from "@/data/home-faqs";
 
 type JsonLdObject = Record<string, unknown>;
 
-function inLanguageOf(locale: "tr" | "en"): string {
-  return locale === "en" ? "en-US" : "tr-TR";
+function inLanguageOf(locale: Locale): string {
+  if (locale === "en") return "en-US";
+  if (locale === "de") return "de-DE";
+  return "tr-TR";
 }
 
 export function organizationSchema(): JsonLdObject {
@@ -22,7 +25,7 @@ export function organizationSchema(): JsonLdObject {
   };
 }
 
-export function websiteSchema(locale: "tr" | "en" = "tr"): JsonLdObject {
+export function websiteSchema(locale: Locale = "tr"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -53,7 +56,7 @@ export function faqSchema(items: FAQ[]): JsonLdObject {
 
 export function itemListSchema(
   items: { slug: string; brand: string; score: number }[],
-  locale: "tr" | "en" = "tr",
+  locale: Locale = "tr",
 ): JsonLdObject {
   return {
     "@context": "https://schema.org",
@@ -90,7 +93,7 @@ export function articleSchema(post: {
   updatedAt: string;
   author: string;
   imageUrl: string;
-  locale: "tr" | "en";
+  locale: Locale;
 }): JsonLdObject {
   const localePath = post.locale === "tr" ? "" : `/${post.locale}`;
   const articleUrl = absoluteUrl(`${localePath}/blog/${post.slug}`);
@@ -102,7 +105,7 @@ export function articleSchema(post: {
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
-    inLanguage: post.locale === "tr" ? "tr-TR" : "en-US",
+    inLanguage: inLanguageOf(post.locale),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
@@ -127,5 +130,36 @@ export function articleSchema(post: {
       height: 630,
     },
     url: articleUrl,
+  };
+}
+
+export function blogCollectionSchema(params: {
+  locale: Locale;
+  title: string;
+  description: string;
+  url: string;
+  posts: { slug: string; title: string }[];
+}): JsonLdObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: params.title,
+    description: params.description,
+    url: params.url,
+    inLanguage: inLanguageOf(params.locale),
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: params.posts.map((post, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: absoluteUrl(`/blog/${post.slug}`, params.locale),
+        name: post.title,
+      })),
+    },
   };
 }

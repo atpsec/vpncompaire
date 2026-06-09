@@ -1,6 +1,12 @@
 import { siteConfig } from "@/lib/site";
 import { products } from "@/data/products";
 import { getBlogPosts } from "@/lib/blog";
+import {
+  getBlogSlugEntry,
+  slugForLocale,
+  type BlogLocale,
+  type BlogSlugEntry,
+} from "@/lib/blog-slugs";
 
 export const revalidate = 3600;
 
@@ -112,83 +118,99 @@ export async function GET() {
     ...toolPaths,
   ];
 
-  // Build hreflang alternates per URL. TR is default (no prefix); EN at /en
-  function altLinks(path: string): string {
-    const trUrl = `${siteConfig.url}${path}`;
-    const enUrl = `${siteConfig.url}/en${path === "/" ? "" : path}`;
-    return `    <xhtml:link rel="alternate" hreflang="tr" href="${trUrl}"/>
-    <xhtml:link rel="alternate" hreflang="en" href="${enUrl}"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${trUrl}"/>`;
+  const locales = siteConfig.locales;
+
+  function localizedUrl(path: string, locale: BlogLocale): string {
+    const prefix = locale === siteConfig.defaultLocale ? "" : `/${locale}`;
+    const normalized = path === "/" ? "" : path;
+    return `${siteConfig.url}${prefix}${normalized}`;
   }
 
-  // Blog posts: TR/EN slugs differ, paired via slug-counterpart lookup.
-  const [trPosts, enPosts] = await Promise.all([
+  // Build hreflang alternates per URL. TR is default (no prefix); EN/DE are prefixed.
+  function altLinks(path: string): string {
+    const lines = locales.map(
+      (locale) =>
+        `    <xhtml:link rel="alternate" hreflang="${locale}" href="${localizedUrl(path, locale)}"/>`,
+    );
+    lines.push(
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedUrl(path, siteConfig.defaultLocale)}"/>`,
+    );
+    return lines.join("\n");
+  }
+
+  // Blog posts: TR/EN slugs differ; DE currently reuses EN slugs unless a DE slug exists.
+  const [trPosts, enPosts, dePosts] = await Promise.all([
     getBlogPosts("tr"),
     getBlogPosts("en"),
+    getBlogPosts("de"),
   ]);
 
   const sharedPathsXml = all
-    .flatMap((u) => {
-      const trUrl = `${siteConfig.url}${u.path}`;
-      const enUrl = `${siteConfig.url}/en${u.path === "/" ? "" : u.path}`;
-      return [
-        `  <url>
-    <loc>${trUrl}</loc>
+    .flatMap((u) =>
+      locales.map((locale) => {
+        const priority =
+          locale === siteConfig.defaultLocale ? u.priority : u.priority * 0.9;
+        return `  <url>
+    <loc>${localizedUrl(u.path, locale)}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority.toFixed(2)}</priority>
+    <priority>${priority.toFixed(2)}</priority>
 ${altLinks(u.path)}
-  </url>`,
-        `  <url>
-    <loc>${enUrl}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${u.changefreq}</changefreq>
-    <priority>${(u.priority * 0.9).toFixed(2)}</priority>
-${altLinks(u.path)}
-  </url>`,
-      ];
-    })
+  </url>`;
+      }),
+    )
     .join("\n");
 
-  function blogAltLinks(trSlug: string | null, enSlug: string | null): string {
-    const lines: string[] = [];
-    if (trSlug) {
-      lines.push(`    <xhtml:link rel="alternate" hreflang="tr" href="${siteConfig.url}/blog/${trSlug}"/>`);
-      lines.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${siteConfig.url}/blog/${trSlug}"/>`);
+  function blogUrl(entry: BlogSlugEntry, locale: BlogLocale): string {
+    return localizedUrl(`/blog/${slugForLocale(entry, locale)}`, locale);
+  }
+
+  function blogAltLinks(
+    entry: BlogSlugEntry | null,
+    self: { slug: string; locale: BlogLocale },
+  ): string {
+    if (!entry) {
+      return `    <xhtml:link rel="alternate" hreflang="${self.locale}" href="${localizedUrl(`/blog/${self.slug}`, self.locale)}"/>`;
     }
-    if (enSlug) {
-      lines.push(`    <xhtml:link rel="alternate" hreflang="en" href="${siteConfig.url}/en/blog/${enSlug}"/>`);
-    }
+    const lines = locales.map(
+      (locale) =>
+        `    <xhtml:link rel="alternate" hreflang="${locale}" href="${blogUrl(entry, locale)}"/>`,
+    );
+    lines.push(
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${blogUrl(entry, siteConfig.defaultLocale)}"/>`,
+    );
     return lines.join("\n");
   }
 
   const blogXml = [
     ...trPosts.map((p) => {
-      const counterpart = enPosts.find((e) =>
-        e.title.toLowerCase().replace(/\s+/g, "") ===
-        p.title.toLowerCase().replace(/\s+/g, "")
-      );
-      const enSlug = counterpart?.slug ?? null;
+      const entry = getBlogSlugEntry(p.slug, "tr");
       return `  <url>
     <loc>${siteConfig.url}/blog/${p.slug}</loc>
     <lastmod>${p.updatedAt}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
-${blogAltLinks(p.slug, enSlug)}
+${blogAltLinks(entry, { slug: p.slug, locale: "tr" })}
   </url>`;
     }),
     ...enPosts.map((p) => {
-      const counterpart = trPosts.find((t) =>
-        t.title.toLowerCase().replace(/\s+/g, "") ===
-        p.title.toLowerCase().replace(/\s+/g, "")
-      );
-      const trSlug = counterpart?.slug ?? null;
+      const entry = getBlogSlugEntry(p.slug, "en");
       return `  <url>
     <loc>${siteConfig.url}/en/blog/${p.slug}</loc>
     <lastmod>${p.updatedAt}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
-${blogAltLinks(trSlug, p.slug)}
+${blogAltLinks(entry, { slug: p.slug, locale: "en" })}
+  </url>`;
+    }),
+    ...dePosts.map((p) => {
+      const entry = getBlogSlugEntry(p.slug, "de");
+      return `  <url>
+    <loc>${siteConfig.url}/de/blog/${p.slug}</loc>
+    <lastmod>${p.updatedAt}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+${blogAltLinks(entry, { slug: p.slug, locale: "de" })}
   </url>`;
     }),
   ].join("\n");

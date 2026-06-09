@@ -1,8 +1,9 @@
 import { getBlogPosts } from "./blog";
+import type { Locale } from "@/lib/site";
 
 export type BlogStats = {
   totalPosts: number;
-  postsByLocale: { tr: number; en: number };
+  postsByLocale: Record<Locale, number>;
   categories: Array<{ name: string; count: number }>;
   tags: Array<{ name: string; count: number }>;
   avgReadingTime: number;
@@ -19,7 +20,7 @@ export type TagStat = {
   count: number;
 };
 
-export async function getBlogStats(locale: "tr" | "en"): Promise<BlogStats> {
+export async function getBlogStats(locale: Locale): Promise<BlogStats> {
   const posts = await getBlogPosts(locale);
 
   const categoryMap = new Map<string, number>();
@@ -50,14 +51,18 @@ export async function getBlogStats(locale: "tr" | "en"): Promise<BlogStats> {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count);
 
-  const trPosts = await getBlogPosts("tr");
-  const enPosts = await getBlogPosts("en");
+  const [trPosts, enPosts, dePosts] = await Promise.all([
+    getBlogPosts("tr"),
+    getBlogPosts("en"),
+    getBlogPosts("de"),
+  ]);
 
   return {
     totalPosts: posts.length,
     postsByLocale: {
       tr: trPosts.length,
       en: enPosts.length,
+      de: dePosts.length,
     },
     categories,
     tags,
@@ -66,12 +71,12 @@ export async function getBlogStats(locale: "tr" | "en"): Promise<BlogStats> {
   };
 }
 
-export async function getCategoryStats(locale: "tr" | "en"): Promise<CategoryStat[]> {
+export async function getCategoryStats(locale: Locale): Promise<CategoryStat[]> {
   const stats = await getBlogStats(locale);
   return stats.categories;
 }
 
-export async function getTagStats(locale: "tr" | "en"): Promise<TagStat[]> {
+export async function getTagStats(locale: Locale): Promise<TagStat[]> {
   const stats = await getBlogStats(locale);
   return stats.tags;
 }

@@ -5,12 +5,13 @@ export const siteConfig = {
   brand: env.NEXT_PUBLIC_SITE_BRAND,
   url: env.NEXT_PUBLIC_SITE_URL,
   defaultLocale: "tr" as const,
-  locales: ["tr", "en"] as const,
+  locales: ["tr", "en", "de"] as const,
   gaId: env.NEXT_PUBLIC_GA_ID || undefined,
   adsenseClientId: env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || undefined,
   description: {
     tr: "Bağımsız test metodolojisine dayalı, ayrıntılı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik senaryolarını değerlendirir. Gönüllü inceleme projesidir; resmi bir kuruluş değildir.",
     en: "Independent, methodology-driven VPN reviews and comparisons. Covers privacy, streaming, travel and everyday-security scenarios. A volunteer review project — not an official organisation.",
+    de: "Unabhängige, methodisch geprüfte VPN-Tests und Vergleiche. Mit Fokus auf Datenschutz, Streaming, Reisen und Sicherheit im Alltag. Ein freiwilliges Review-Projekt — keine offizielle Organisation.",
   },
   author: {
     name: "VPN Advisor Editör Ekibi",
@@ -50,6 +51,7 @@ export function localizedAlternates(path = "", locale?: string) {
     languages: {
       tr: absoluteUrl(path, "tr"),
       en: absoluteUrl(path, "en"),
+      de: absoluteUrl(path, "de"),
       "x-default": absoluteUrl(path, siteConfig.defaultLocale),
     },
   };

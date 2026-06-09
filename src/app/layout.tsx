@@ -11,24 +11,33 @@ const geistSans = Geist({
   display: "swap",
 });
 
-type SupportedLocale = "tr" | "en";
+type SupportedLocale = "tr" | "en" | "de";
 
 const isSupported = (l: string): l is SupportedLocale =>
-  l === "tr" || l === "en";
+  l === "tr" || l === "en" || l === "de";
 
 const TITLES: Record<SupportedLocale, string> = {
   tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları (2026)`,
   en: `${siteConfig.name} — Independent VPN Comparisons (2026)`,
+  de: `${siteConfig.name} — Unabhängige VPN-Vergleiche (2026)`,
 };
 
 const TITLE_SHORT: Record<SupportedLocale, string> = {
   tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları`,
   en: `${siteConfig.name} — Independent VPN Comparisons`,
+  de: `${siteConfig.name} — Unabhängige VPN-Vergleiche`,
 };
 
 const OG_LOCALE: Record<SupportedLocale, string> = {
   tr: "tr_TR",
   en: "en_US",
+  de: "de_DE",
+};
+
+const ALTERNATE_OG_LOCALES: Record<SupportedLocale, string[]> = {
+  tr: ["en_US", "de_DE"],
+  en: ["tr_TR", "de_DE"],
+  de: ["tr_TR", "en_US"],
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -54,6 +63,7 @@ export async function generateMetadata(): Promise<Metadata> {
       languages: {
         tr: siteConfig.url,
         en: `${siteConfig.url}/en`,
+        de: `${siteConfig.url}/de`,
         "x-default": siteConfig.url,
       },
     },
@@ -64,7 +74,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: TITLE_SHORT[locale],
       description,
       siteName: siteConfig.name,
-      alternateLocale: locale === "tr" ? ["en_US"] : ["tr_TR"],
+      alternateLocale: ALTERNATE_OG_LOCALES[locale],
     },
     twitter: {
       card: "summary_large_image",

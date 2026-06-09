@@ -221,7 +221,7 @@ const RAW_FILTER_LABELS: Record<FilterKey, FilterLabel> = {
 };
 
 function pick(field: Localized<string>, locale: Locale): string {
-  return field[locale] ?? field.tr;
+  return field[locale] ?? field.en ?? field.tr;
 }
 
 export function getFilterLabels(

@@ -4,10 +4,11 @@ import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import type { BlogPost } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/blog-card";
+import type { Locale } from "@/lib/site";
 
 type BlogFilterProps = {
   posts: BlogPost[];
-  locale: "tr" | "en";
+  locale: Locale;
 };
 
 export function BlogFilter({ posts, locale }: BlogFilterProps) {
@@ -31,7 +32,8 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
     return posts.filter((post) => post.category === selectedCategory);
   }, [posts, selectedCategory]);
 
-  const allLabel = locale === "tr" ? "Tümü" : "All";
+  const allLabel =
+    locale === "tr" ? "Tümü" : locale === "de" ? "Alle" : "All";
 
   return (
     <div>
@@ -98,6 +100,8 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
           <p className="text-ink-muted">
             {locale === "tr"
               ? "Bu kategoride henüz yazı yok."
+              : locale === "de"
+                ? "In dieser Kategorie gibt es noch keine Beiträge."
               : "No posts in this category yet."}
           </p>
         </div>
