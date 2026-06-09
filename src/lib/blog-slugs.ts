@@ -199,6 +199,42 @@ export const BLOG_SLUG_MAP: Record<string, { tr: string; en: string }> = {
     tr: "vpn-abonelik-donemi-aylik-vs-yillik",
     en: "vpn-subscription-monthly-vs-yearly",
   },
+  "dijital-guvenlikten-korkanlar-icin-vpn": {
+    tr: "dijital-guvenlikten-korkanlar-icin-vpn",
+    en: "vpn-for-internet-security-anxiety",
+  },
+  "sahte-kargo-sms-e-devlet-linki-vpn": {
+    tr: "sahte-kargo-sms-e-devlet-linki-vpn",
+    en: "fake-delivery-sms-e-government-link-vpn",
+  },
+  "aile-icin-internet-guvenligi-vpn": {
+    tr: "aile-icin-internet-guvenligi-vpn",
+    en: "family-internet-safety-vpn",
+  },
+  "dns-webrtc-ip-sizintisi-ev-testi": {
+    tr: "dns-webrtc-ip-sizintisi-ev-testi",
+    en: "dns-webrtc-ip-leak-home-test",
+  },
+  "guvenilir-vpn-nasil-secilir-2026": {
+    tr: "guvenilir-vpn-nasil-secilir-2026",
+    en: "how-to-pick-trustworthy-vpn-2026",
+  },
+  "chatgpt-gemini-deepfake-dolandiricilik": {
+    tr: "chatgpt-gemini-deepfake-dolandiricilik",
+    en: "chatgpt-gemini-deepfake-scams",
+  },
+  "sahte-canli-yayin-film-izle-vpn": {
+    tr: "sahte-canli-yayin-film-izle-vpn",
+    en: "fake-live-streaming-sites-vpn",
+  },
+  "gram-altin-alisveris-fiyat-takibi-vpn": {
+    tr: "gram-altin-alisveris-fiyat-takibi-vpn",
+    en: "gold-shopping-price-tracking-vpn-privacy",
+  },
+  "android-iphone-spam-arama-vpn-guvenlik": {
+    tr: "android-iphone-spam-arama-vpn-guvenlik",
+    en: "android-iphone-spam-call-vpn-security",
+  },
 };
 
 export function getCounterpartSlug(
