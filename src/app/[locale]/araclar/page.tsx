@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 import {
   ArrowRight,
   Gauge,
-  Globe,
   Network,
+  ShieldCheck,
   Wifi,
   type LucideIcon,
 } from "lucide-react";
@@ -37,11 +37,11 @@ export async function generateMetadata({
 }
 
 const TOOLS: ReadonlyArray<{
-  href: "/araclar/ip-adresim" | "/araclar/dns-leak-test" | "/araclar/webrtc-leak-test" | "/araclar/vpn-hiz-testi";
-  key: "ip" | "dns" | "webrtc" | "speed";
+  href: "/vpn-test" | "/araclar/dns-leak-test" | "/araclar/webrtc-leak-test" | "/araclar/vpn-hiz-testi";
+  key: "vpnTest" | "dns" | "webrtc" | "speed";
   Icon: LucideIcon;
 }> = [
-  { href: "/araclar/ip-adresim", key: "ip", Icon: Globe },
+  { href: "/vpn-test", key: "vpnTest", Icon: ShieldCheck },
   { href: "/araclar/dns-leak-test", key: "dns", Icon: Network },
   { href: "/araclar/webrtc-leak-test", key: "webrtc", Icon: Wifi },
   { href: "/araclar/vpn-hiz-testi", key: "speed", Icon: Gauge },

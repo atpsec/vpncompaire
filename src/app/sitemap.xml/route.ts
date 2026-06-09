@@ -36,6 +36,7 @@ const guideSlugs = [
 
 const toolPaths = [
   { path: "/araclar", priority: 0.85, changefreq: "weekly" },
+  { path: "/vpn-test", priority: 0.8, changefreq: "monthly" },
   { path: "/araclar/ip-adresim", priority: 0.7, changefreq: "monthly" },
   { path: "/araclar/dns-leak-test", priority: 0.7, changefreq: "monthly" },
   { path: "/araclar/webrtc-leak-test", priority: 0.7, changefreq: "monthly" },
