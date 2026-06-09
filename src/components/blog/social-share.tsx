@@ -56,7 +56,6 @@ type SocialShareProps = {
   url: string;
   title: string;
   description: string;
-  locale: "tr" | "en";
   className?: string;
 };
 
@@ -94,7 +93,6 @@ export function SocialShare({
   url,
   title,
   description,
-  locale,
   className,
 }: SocialShareProps) {
   const t = useTranslations("share");
@@ -274,8 +272,6 @@ export function SocialShare({
         </button>
       ) : null}
 
-      {/* locale prop reserved for future per-locale share intents */}
-      <span className="sr-only">{locale}</span>
     </div>
   );
 }

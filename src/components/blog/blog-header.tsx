@@ -1,8 +1,9 @@
 "use client";
 
 import { Clock, Calendar, User } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import type { BlogPostFrontmatter } from "@/lib/blog";
+import type { Locale } from "@/lib/site";
 
 type BlogHeaderProps = {
   post: BlogPostFrontmatter;
@@ -10,8 +11,11 @@ type BlogHeaderProps = {
 
 export function BlogHeader({ post }: BlogHeaderProps) {
   const t = useTranslations("blog");
+  const locale = useLocale() as Locale;
+  const dateLocale =
+    locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US";
 
-  const publishedDate = new Intl.DateTimeFormat("tr-TR", {
+  const publishedDate = new Intl.DateTimeFormat(dateLocale, {
     year: "numeric",
     month: "long",
     day: "numeric",

@@ -5,10 +5,11 @@ import { ChevronDown } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { homeFaqs } from "@/data/home-faqs";
+import type { Locale } from "@/lib/site";
 
 export function FAQSection() {
   const t = useTranslations("home.faq");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
   const faqs = homeFaqs(locale);
 
   return (

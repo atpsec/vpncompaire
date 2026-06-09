@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
 import { rankedProducts } from "@/data/products";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import type { Locale } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -31,7 +32,7 @@ export default async function Page({ params }: Props) {
 function ReviewsHubView() {
   const t = useTranslations("reviewsHub");
   const tNav = useTranslations("nav");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
 
   return (
     <>

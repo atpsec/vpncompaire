@@ -6,7 +6,19 @@
 //
 // Key = canonical id (eski yazılar için TR slug ile eşleşir).
 // TR/EN slug'ı farklı yeni yazı eklerken buraya giriş ekle.
-export const BLOG_SLUG_MAP: Record<string, { tr: string; en: string }> = {
+export type BlogLocale = "tr" | "en" | "de";
+
+export type BlogSlugEntry = {
+  tr: string;
+  en: string;
+  /**
+   * German content currently reuses the English slug for URL stability unless
+   * a localized German slug is explicitly provided.
+   */
+  de?: string;
+};
+
+export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
   "vpn-nedir-neden-gerekli": {
     tr: "vpn-nedir-neden-gerekli",
     en: "what-is-vpn-why-you-need-it",
@@ -237,13 +249,34 @@ export const BLOG_SLUG_MAP: Record<string, { tr: string; en: string }> = {
   },
 };
 
-export function getCounterpartSlug(
+export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {
+  return locale === "de" ? entry.de ?? entry.en : entry[locale];
+}
+
+export function getBlogSlugEntry(
   slug: string,
-  fromLocale: "tr" | "en",
-): string | null {
-  const toLocale = fromLocale === "tr" ? "en" : "tr";
+  locale: BlogLocale,
+): BlogSlugEntry | null {
   for (const entry of Object.values(BLOG_SLUG_MAP)) {
-    if (entry[fromLocale] === slug) return entry[toLocale];
+    if (slugForLocale(entry, locale) === slug) return entry;
   }
   return null;
+}
+
+export function getLocalizedBlogSlug(
+  slug: string,
+  fromLocale: BlogLocale,
+  toLocale: BlogLocale,
+): string | null {
+  const entry = getBlogSlugEntry(slug, fromLocale);
+  return entry ? slugForLocale(entry, toLocale) : null;
+}
+
+export function getCounterpartSlug(
+  slug: string,
+  fromLocale: BlogLocale,
+  toLocale?: BlogLocale,
+): string | null {
+  const targetLocale = toLocale ?? (fromLocale === "tr" ? "en" : "tr");
+  return getLocalizedBlogSlug(slug, fromLocale, targetLocale);
 }

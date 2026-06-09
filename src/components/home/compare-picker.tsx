@@ -17,6 +17,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
+import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const MIN = 2;
@@ -24,7 +25,7 @@ const MAX = 4;
 
 export function ComparePicker() {
   const t = useTranslations("homeBlocks.comparePicker");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
   const all = rankedProducts(locale);
   const [selected, setSelected] = useState<string[]>(() =>
     all.slice(0, 2).map((p) => p.slug),

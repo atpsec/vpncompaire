@@ -1025,6 +1025,7 @@
     "breadcrumbBlog": "Blog",
     "h1": "VPN Guides",
     "intro": "In-depth articles on VPN technology, privacy, security and usage scenarios.",
+    "latestArticles": "Latest VPN articles",
     "readMore": "Read more",
     "readingTime": "{minutes} min read",
     "publishedOn": "Published",

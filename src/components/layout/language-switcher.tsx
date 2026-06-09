@@ -3,11 +3,13 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Globe } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/routing";
+import { getLocalizedBlogSlug, type BlogLocale } from "@/lib/blog-slugs";
 import { cn } from "@/lib/utils";
 
 const LOCALES = [
   { code: "tr", label: "TR", name: "Türkçe" },
   { code: "en", label: "EN", name: "English" },
+  { code: "de", label: "DE", name: "Deutsch" },
 ] as const;
 
 // Açık dil seçimini cookie'ye yaz — proxy.ts'teki geo (IP) yönlendirmesi bu
@@ -23,15 +25,23 @@ type Props = {
 };
 
 export function LanguageSwitcher({ className }: Props) {
-  const locale = useLocale();
+  const locale = useLocale() as BlogLocale;
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("a11y");
 
-  function switchTo(target: string) {
+  function localizedPathFor(target: BlogLocale) {
+    const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
+    if (!blogMatch) return pathname;
+
+    const targetSlug = getLocalizedBlogSlug(blogMatch[1], locale, target);
+    return targetSlug ? `/blog/${targetSlug}` : pathname;
+  }
+
+  function switchTo(target: BlogLocale) {
     if (target === locale) return;
     persistLocaleCookie(target);
-    router.replace(pathname, { locale: target });
+    router.replace(localizedPathFor(target), { locale: target });
   }
 
   return (

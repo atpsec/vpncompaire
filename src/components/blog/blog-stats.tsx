@@ -1,7 +1,8 @@
 import { getBlogStats } from "@/lib/blog-stats";
+import type { Locale } from "@/lib/site";
 
 type BlogStatsProps = {
-  locale: "tr" | "en";
+  locale: Locale;
 };
 
 export async function BlogStats({ locale }: BlogStatsProps) {
@@ -22,15 +23,26 @@ export async function BlogStats({ locale }: BlogStatsProps) {
       minutes: "min",
       updated: "Last Updated",
     },
+    de: {
+      posts: "Blogbeiträge",
+      categories: "Kategorien",
+      avgReading: "Ø Lesezeit",
+      minutes: "Min.",
+      updated: "Aktualisiert",
+    },
   };
 
   const t = labels[locale];
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return locale === "tr"
-      ? date.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" })
-      : date.toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
+    const dateLocale =
+      locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US";
+    return date.toLocaleDateString(dateLocale, {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
   };
 
   return (

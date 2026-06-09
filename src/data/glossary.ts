@@ -899,7 +899,7 @@ const rawGlossary: RawTerm[] = [
 ];
 
 function pick(field: Localized<string>, locale: Locale): string {
-  return field[locale] ?? field.tr;
+  return field[locale] ?? field.en ?? field.tr;
 }
 
 export function getGlossary(locale: Locale = "tr"): Term[] {

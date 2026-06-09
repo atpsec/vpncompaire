@@ -5,11 +5,12 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts, type Product } from "@/data/products";
+import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function TopThreePodium() {
   const t = useTranslations("homeBlocks.podium");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
   const top = rankedProducts(locale).slice(0, 3);
   return (
     <section

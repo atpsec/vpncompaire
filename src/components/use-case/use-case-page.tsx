@@ -10,6 +10,7 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
+import type { Locale } from "@/lib/site";
 
 export type UseCasePick = {
   slug: string;
@@ -45,7 +46,7 @@ export function UseCasePage({
   relatedLinks,
 }: UseCasePageProps) {
   const t = useTranslations("useCase");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
 
   return (
     <>

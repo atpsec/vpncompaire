@@ -4,6 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import type { Locale } from "@/lib/site";
 
 export type BlogPostFrontmatter = {
   slug: string;
@@ -29,7 +30,7 @@ export type BlogPost = BlogPostFrontmatter & {
 export { BLOG_SLUG_MAP, getCounterpartSlug } from "./blog-slugs";
 
 export const getBlogPosts = cache(async function getBlogPosts(
-  locale: "tr" | "en",
+  locale: Locale,
 ): Promise<BlogPost[]> {
   const dir = path.join(process.cwd(), "src/content/blog", locale);
 
@@ -96,7 +97,7 @@ function splitMarkdownContent(content: string): { first: string; second: string 
 
 export const getBlogPost = cache(async function getBlogPost(
   slug: string,
-  locale: "tr" | "en"
+  locale: Locale
 ): Promise<{
   frontmatter: BlogPostFrontmatter;
   contentParts: { first: React.ReactElement; second: React.ReactElement };
@@ -158,7 +159,7 @@ export const getBlogPost = cache(async function getBlogPost(
 export async function getRelatedPosts(
   currentSlug: string,
   category: string,
-  locale: "tr" | "en",
+  locale: Locale,
   limit = 3
 ): Promise<BlogPost[]> {
   const allPosts = await getBlogPosts(locale);

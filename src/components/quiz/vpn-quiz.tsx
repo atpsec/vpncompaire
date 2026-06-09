@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { getProduct } from "@/data/products";
+import type { Locale } from "@/lib/site";
 
 type QuestionData = {
   id: string;
@@ -85,7 +86,7 @@ const QUESTIONS: ReadonlyArray<QuestionData> = [
 
 export function VPNQuiz() {
   const t = useTranslations("quiz");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [showResult, setShowResult] = useState(false);
 

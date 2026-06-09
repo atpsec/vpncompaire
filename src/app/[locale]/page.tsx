@@ -17,21 +17,23 @@ import {
 } from "@/lib/seo";
 import { homeFaqs } from "@/data/home-faqs";
 import { rankedProducts } from "@/data/products";
+import type { Locale } from "@/lib/site";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
 export default async function HomePage({ params }: Props) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = rawLocale as Locale;
   setRequestLocale(locale);
 
   return (
     <>
       <JsonLd data={organizationSchema()} />
-      <JsonLd data={websiteSchema(locale as "tr" | "en")} />
-      <JsonLd data={itemListSchema(rankedProducts(locale as "tr" | "en"), locale as "tr" | "en")} />
-      <JsonLd data={faqSchema(homeFaqs(locale as "tr" | "en"))} />
+      <JsonLd data={websiteSchema(locale)} />
+      <JsonLd data={itemListSchema(rankedProducts(locale), locale)} />
+      <JsonLd data={faqSchema(homeFaqs(locale))} />
       <Hero />
       <IpSecurityBanner />
       <TopThreePodium />

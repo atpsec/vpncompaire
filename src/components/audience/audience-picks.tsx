@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { getProduct } from "@/data/products";
+import type { Locale } from "@/lib/site";
 
 type Pick = {
   slug: string;
@@ -26,7 +27,7 @@ const RANK_META = [
 
 export function AudiencePicks({ picks, heading, subheading }: Props) {
   const t = useTranslations("audience");
-  const locale = useLocale() as "tr" | "en";
+  const locale = useLocale() as Locale;
   return (
     <section className="mt-12">
       {heading ? (
