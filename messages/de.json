@@ -1082,12 +1082,17 @@
     }
   },
   "tools": {
-    "metaTitle": "VPN Tools - Kostenlose IP-, DNS-, WebRTC- und Speed-Tests | VPN Advisor",
-    "metaDescription": "Kostenlose Tools, die prüfen, ob Ihr VPN wirklich funktioniert: IP-Adresse, DNS-Leak, WebRTC-Leak und Geschwindigkeit.",
+    "metaTitle": "Kostenlose Sicherheitstools - E-Mail, IP, DNS, WebRTC und Speed | VPN Advisor",
+    "metaDescription": "Kostenlose Tools für E-Mail- und VPN-Sicherheit: E-Mail-Leak- und Domain-Check, IP-Abfrage, DNS-Leak-Test, WebRTC-Test und Speed-Test.",
     "breadcrumb": "Tools",
-    "indexTitle": "Kostenlose VPN-Testtools",
-    "indexSubtitle": "Prüfen Sie IP, DNS, WebRTC und Geschwindigkeit. Die Ergebnisse werden nicht auf unseren Servern gespeichert.",
+    "indexTitle": "Kostenlose Sicherheits- und VPN-Testtools",
+    "indexSubtitle": "Starten Sie mit dem E-Mail-Sicherheitscheck und prüfen Sie danach IP, DNS, WebRTC und VPN-Geschwindigkeit. Wir speichern keine Ergebnisse auf unseren Servern.",
+    "featuredLabel": "Empfohlen",
     "cards": {
+      "emailSecurity": {
+        "title": "E-Mail-Sicherheitscheck",
+        "description": "Prüfen Sie MX, SPF und DMARC einer E-Mail-Domain sowie optional Have-I-Been-Pwned-Leak-Signale."
+      },
       "ip": {
         "title": "Meine IP-Adresse",
         "description": "Sehen Sie sofort Ihre Öffentliche IP, Ihren Standort und ISP."
@@ -1178,6 +1183,80 @@
       "signalUnknown": "Unbekannt",
       "explainTitle": "Was dieser VPN/IP-Test zeigt",
       "explainBody": "Das Tool prüft die für Websites sichtbare Öffentliche IP, ungefähren Standort, Providerdaten und optionale Risikosignale."
+    },
+    "emailSecurity": {
+      "metaTitle": "E-Mail-Sicherheitscheck - Kostenloser Leak-, SPF-, DMARC- und MX-Test | VPN Advisor",
+      "metaDescription": "Prüfen Sie eine E-Mail-Adresse auf Domain-Sicherheitssignale: MX, SPF, DMARC, Wegwerfadresse-Risiko und optionale Have-I-Been-Pwned-Treffer. Kostenlos und datenschutzbewusst.",
+      "breadcrumb": "E-Mail-Sicherheit",
+      "featured": "Empfohlenes kostenloses Tool",
+      "title": "E-Mail-Sicherheitscheck",
+      "subtitle": "Prüfen Sie, ob eine E-Mail-Adresse zu einer sauber geschützten Domain gehört und ob, falls konfiguriert, Have I Been Pwned Hinweise auf bekannte Datenlecks liefert.",
+      "emailLabel": "E-Mail-Adresse",
+      "placeholder": "name@example.com",
+      "submit": "E-Mail prüfen",
+      "checking": "Prüfung läuft...",
+      "invalidEmail": "Geben Sie eine gültige E-Mail-Adresse ein und versuchen Sie es erneut.",
+      "errorTitle": "Der E-Mail-Check konnte nicht abgeschlossen werden",
+      "errorBody": "Der Sicherheitscheck ist vorübergehend nicht verfügbar. Bitte versuchen Sie es gleich erneut.",
+      "rateLimitedBody": "Über diese Verbindung wurden zu viele Prüfungen angefragt. Bitte warten Sie eine Minute.",
+      "privacyNote": "Datenschutzhinweis:",
+      "privacyDetail": "Ihre E-Mail wird nur für diese Prüfung verwendet und nicht gespeichert. Wenn Have I Been Pwned aktiviert ist, wird nur ein SHA-1-Hash-Präfix an HIBP gesendet, nicht die vollständige Adresse.",
+      "scoreLabel": "Sicherheitsbewertung",
+      "risk": {
+        "low": "Niedriges Risiko",
+        "medium": "Mittleres Risiko",
+        "high": "Hohes Risiko"
+      },
+      "status": {
+        "pass": "Gut",
+        "warning": "Verbessern",
+        "fail": "Fehlt",
+        "unknown": "Unbekannt"
+      },
+      "checkedAt": "Geprüft",
+      "domainTitle": "Domain-Authentifizierungschecks",
+      "breachTitle": "Datenleck-Datenbankcheck",
+      "recommendationsTitle": "Nächste Schritte",
+      "noFindings": "Es wurden keine dringenden Probleme gefunden. Nutzen Sie weiterhin 2FA und vermeiden Sie Passwort-Wiederverwendung.",
+      "mx": {
+        "title": "MX-Einträge",
+        "pass": "Diese Domain kann E-Mails über konfigurierte Mailserver empfangen.",
+        "fail": "Es wurden keine MX-Einträge gefunden. Die Adresse kann möglicherweise keine E-Mails empfangen."
+      },
+      "spf": {
+        "title": "SPF",
+        "pass": "SPF ist vorhanden und nutzt einen Durchsetzungsmechanismus.",
+        "warning": "SPF ist vorhanden, aber die Policy ist schwach oder unvollständig.",
+        "fail": "Kein SPF-Eintrag gefunden. Spoofing ist für diese Domain leichter."
+      },
+      "dmarc": {
+        "title": "DMARC",
+        "pass": "DMARC ist mit quarantine oder reject konfiguriert.",
+        "warning": "DMARC ist vorhanden, überwacht mit p=none aber nur.",
+        "fail": "Keine DMARC-Policy gefunden. Der Phishing-Schutz ist schwächer."
+      },
+      "breach": {
+        "clear": "Im konfigurierten HIBP-Check wurde kein passendes Datenleck gefunden.",
+        "found": "Diese Adresse erscheint in einem oder mehreren bekannten Datenlecks.",
+        "unavailable": "Der Datenleck-Datenbankcheck ist vorübergehend nicht verfügbar; die Domain-Checks sind abgeschlossen.",
+        "notConfigured": "Der Datenleck-Datenbankcheck ist in diesem Deployment nicht aktiviert. Die Domain-Authentifizierungschecks sind trotzdem abgeschlossen.",
+        "method": "Wird, wenn verfügbar, mit Have I Been Pwned k-Anonymity geprüft.",
+        "visibleBreaches": "Passende Leak-Namen"
+      },
+      "findings": {
+        "breach_found": "Ändern Sie das Passwort für diese E-Mail und alle Konten, in denen dasselbe Passwort genutzt wurde. Aktivieren Sie 2FA für wichtige Konten.",
+        "hibp_not_configured": "Die Have-I-Been-Pwned-Integration ist noch nicht konfiguriert; fügen Sie serverseitig HIBP_API_KEY hinzu, um Leak-Checks zu aktivieren.",
+        "hibp_unavailable": "Have I Been Pwned war nicht erreichbar. Führen Sie die Prüfung später erneut aus.",
+        "no_mx": "Die Domain hat keine MX-Einträge. Prüfen Sie die Adresse oder nutzen Sie eine andere E-Mail.",
+        "no_spf": "Bitten Sie den Domaininhaber, SPF einzurichten, damit gefälschte Absender schwerer werden.",
+        "weak_spf": "Verschärfen Sie die SPF-Policy und vermeiden Sie permissive Mechanismen wie +all.",
+        "no_dmarc": "Fügen Sie DMARC zunächst im Monitoring hinzu und wechseln Sie danach zu quarantine oder reject.",
+        "dmarc_monitor_only": "DMARC läuft nur im Monitoring. Wechseln Sie nach Auswertung der Reports zu quarantine oder reject.",
+        "disposable_email": "Wegwerf-E-Mail-Domains sind für wichtige Konten riskant. Nutzen Sie ein dauerhaftes Postfach.",
+        "role_account": "Rollenadressen werden oft geteilt. Nutzen Sie eindeutige Benutzer, starke Passwörter und 2FA."
+      },
+      "explainTitle": "Was dieser E-Mail-Sicherheitscheck macht",
+      "explainBody": "Das Tool validiert das E-Mail-Format, prüft MX-, SPF- und DMARC-Einträge der Domain, markiert häufige Wegwerf- oder Rollenadressen und sucht, wenn serverseitig ein HIBP-Schlüssel vorhanden ist, über die k-Anonymity-API von Have I Been Pwned nach Leak-Treffern. API-Schlüssel werden nie an den Browser gesendet."
     },
     "dns": {
       "metaTitle": "DNS Leak Test 2026 - Free | VPN Advisor",

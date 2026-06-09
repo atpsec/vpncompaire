@@ -41,6 +41,11 @@ const envSchema = z.object({
   KV_REST_API_URL: z.string().url().optional().or(z.literal("")),
   KV_REST_API_TOKEN: z.string().min(1).optional().or(z.literal("")),
 
+  // Optional Have I Been Pwned API key for the email security checker.
+  // Kept server-side only. When absent, the tool still runs DNS/auth checks
+  // and reports breach-check availability gracefully.
+  HIBP_API_KEY: z.string().min(1).optional().or(z.literal("")),
+
   // Affiliate tracking URLs — server-side only (not NEXT_PUBLIC_*).
   // Each one holds the FULL personal tracking URL provided by the
   // affiliate dashboard (e.g. https://go.nordvpn.net/aff_c?offer_id=...&aff_id=YOURID).
@@ -69,6 +74,7 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
   KV_REST_API_URL: process.env.KV_REST_API_URL,
   KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
+  HIBP_API_KEY: process.env.HIBP_API_KEY,
   AFFILIATE_NORDVPN_URL: process.env.AFFILIATE_NORDVPN_URL,
   AFFILIATE_SURFSHARK_URL: process.env.AFFILIATE_SURFSHARK_URL,
   AFFILIATE_EXPRESSVPN_URL: process.env.AFFILIATE_EXPRESSVPN_URL,
