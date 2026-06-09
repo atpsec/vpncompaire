@@ -1,0 +1,73 @@
+---
+slug: "dns-webrtc-ip-leak-home-test"
+title: "DNS, WebRTC and IP Leak Home Test for Non-Technical Users"
+description: "A step-by-step VPN leak testing guide for everyday users: check real IP exposure, DNS leaks and WebRTC leaks at home."
+publishedAt: "2026-06-09"
+updatedAt: "2026-06-09"
+author: "VPN Advisor Editorial Team"
+category: "teknik"
+tags: ["dns leak", "webrtc", "ip leak", "vpn test", "technical guide"]
+readingTime: 8
+coverImage: "dns-leak-test-en"
+unsplashKeyword: "network diagnostics dashboard"
+---
+
+It is comforting to assume that everything is hidden once VPN is on. That is not always true. A bad setting, browser WebRTC behavior or DNS leak can reveal your real IP or internet provider. This guide helps non-technical users check the basics at home.
+
+## Three Terms to Know
+
+**IP address** is your visible internet address. With VPN on, websites should see the VPN server's IP, not yours.
+
+**DNS** translates domain names into IP addresses. If DNS goes outside the VPN tunnel, your provider may still see what domains you visit.
+
+**WebRTC** is a browser technology for audio and video calls. In some cases it can reveal local or real IP information.
+
+Testing all three gives a clearer picture of whether VPN is working.
+
+## A 5-Minute Home Test
+
+Follow this sequence:
+
+1. Turn VPN off and open our [VPN test tool](/en/vpn-test).
+2. Note the visible IP, country, city and ISP.
+3. Turn VPN on and refresh.
+4. Confirm that IP, country and ISP changed.
+5. Run the checks in our [DNS leak test guide](/en/blog/dns-leak-test-vpn).
+6. Run a WebRTC leak test in your browser.
+7. If your real ISP or city appears, adjust settings.
+
+Repeat this after browser or VPN app updates.
+
+## What to Do If Results Look Bad
+
+Most fixes are simple:
+
+- Enable the VPN kill switch.
+- Turn on DNS leak protection.
+- Enable browser WebRTC leak protection or use a privacy-focused browser.
+- Switch protocol to WireGuard or OpenVPN and test again.
+- Send the test result to VPN support if the problem continues.
+
+Our [WireGuard vs OpenVPN comparison](/en/blog/wireguard-vs-openvpn-comparison) explains protocol differences.
+
+## Mobile Devices
+
+Android and iPhone often expose fewer browser leak issues than desktops, but app permissions and fake VPN apps are bigger risks. Install VPN only from official app stores. Even with VPN on, use official apps for banking and government tasks.
+
+For mobile safety, see our [Android and iPhone security guide](/en/blog/android-iphone-spam-call-vpn-security).
+
+## What Good Results Look Like
+
+A healthy result usually means:
+
+- The visible IP belongs to the VPN server
+- Country and city match the VPN location
+- ISP is not your home or mobile provider
+- DNS servers belong to the VPN or a trusted resolver
+- WebRTC does not show your real IP
+
+Monthly checks turn VPN privacy from assumption into evidence.
+
+## Conclusion
+
+DNS, WebRTC and IP leak tests may sound technical, but they are simple health checks. If you use VPN because you are worried about online safety, these tests answer the most important question: "Is my protection actually working?"
