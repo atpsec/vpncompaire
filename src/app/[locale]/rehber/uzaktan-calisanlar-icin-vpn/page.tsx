@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { AudiencePicks } from "@/components/audience/audience-picks";
-import { absoluteUrl, localizedAlternates } from "@/lib/site";
+import { absoluteUrl, defaultLocaleAlternates } from "@/lib/site";
 
 const baseMeta: Metadata = {
   title:
@@ -37,14 +37,14 @@ const baseMeta: Metadata = {
 
 type Props = { params: Promise<{ locale: string }> };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
+export function generateMetadata(): Metadata {
+  // İçerik yalnızca Türkçe servis ediliyor; canonical/hreflang TR'ye sabit.
   return {
     ...baseMeta,
-    alternates: localizedAlternates("/rehber/uzaktan-calisanlar-icin-vpn", locale),
+    alternates: defaultLocaleAlternates("/rehber/uzaktan-calisanlar-icin-vpn"),
     openGraph: {
       ...baseMeta.openGraph,
-      url: absoluteUrl("/rehber/uzaktan-calisanlar-icin-vpn", locale),
+      url: absoluteUrl("/rehber/uzaktan-calisanlar-icin-vpn"),
     },
   };
 }

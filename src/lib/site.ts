@@ -44,6 +44,10 @@ export function absoluteUrl(path = "", locale?: string): string {
  * Bir sayfanın `alternates` metadata bloğunu locale-aware üretir:
  * canonical aktif locale'i işaret eder, languages tr/en/x-default hreflang verir.
  * `path` her zaman locale-prefix'siz verilir (örn. "/sozluk").
+ *
+ * UYARI: Yalnızca üç dilde de GERÇEK içeriği olan sayfalarda kullan. İçeriği
+ * yalnızca Türkçe olan sayfalar için `defaultLocaleAlternates` kullan; aksi
+ * halde EN/DE hreflang'leri 301'lenen/var olmayan URL'leri işaret eder.
  */
 export function localizedAlternates(path = "", locale?: string) {
   return {
@@ -53,6 +57,22 @@ export function localizedAlternates(path = "", locale?: string) {
       en: absoluteUrl(path, "en"),
       de: absoluteUrl(path, "de"),
       "x-default": absoluteUrl(path, siteConfig.defaultLocale),
+    },
+  };
+}
+
+/**
+ * İçeriği yalnızca varsayılan dilde (TR) servis edilen sayfalar için alternates.
+ * Canonical ve x-default daima TR URL'sini işaret eder; sahte EN/DE hreflang
+ * üretmez. Bu sayfalarda EN/DE istekleri proxy.ts ile TR'ye 301'lenir.
+ */
+export function defaultLocaleAlternates(path = "") {
+  const canonical = absoluteUrl(path, siteConfig.defaultLocale);
+  return {
+    canonical,
+    languages: {
+      tr: canonical,
+      "x-default": canonical,
     },
   };
 }

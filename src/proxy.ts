@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
+import { resolveLocalizedRedirect } from "@/lib/i18n-paths";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 yıl
@@ -79,6 +80,17 @@ const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // i18n slug/locale tutarlılığı: yanlış-dil section/slug kullanan detay
+  // URL'lerini (örn. /de/rehber/vpn-nedir, /en/guide/what-is-a-vpn) içeriğin
+  // gerçek dilindeki kanonik URL'ye 301 yönlendir. Karar registry üzerinden
+  // verilir (bkz. src/lib/i18n-paths.ts). Sorgu parametreleri korunur.
+  const redirectTarget = resolveLocalizedRedirect(pathname);
+  if (redirectTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = redirectTarget;
+    return NextResponse.redirect(url, 301);
+  }
 
   // Apply rate limiting to sensitive routes
   const shouldRateLimit =

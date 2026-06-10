@@ -7,11 +7,15 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { defaultLocaleAlternates } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "VPN Nedir? 5 Dakikalık Başlangıç Rehberi (2026)",
   description:
     "VPN'in ne olduğu, nasıl çalıştığı, seni neye karşı koruduğu ve hangi durumlarda kullanman gerektiği — basit ve net anlatım.",
+  // İçerik yalnızca Türkçe servis ediliyor; canonical TR'ye sabit. EN/DE
+  // istekleri proxy.ts ile /rehber/vpn-nedir'e 301'lenir (bkz. i18n-paths.ts).
+  alternates: defaultLocaleAlternates("/rehber/vpn-nedir"),
 };
 
 type Props = { params: Promise<{ locale: string }> };
