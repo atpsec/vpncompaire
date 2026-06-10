@@ -44,8 +44,15 @@ const REGISTRY = {
     tr: { section: "guide", slug: "vpn-nedir" },
     en: { section: "guide", slug: "what-is-a-vpn" },
     de: { section: "guide", slug: "was-ist-ein-vpn" },
-    served: ["tr"],
+    served: ["tr", "en", "de"],
   },
+};
+
+// Hub'ların lokalize servis edildiği diller (i18n-paths.ts SECTION_HUB_SERVED
+// ile senkron olmalı).
+const HUB_SERVED = {
+  guide: ["tr", "en"],
+  comparison: ["tr", "en", "de"],
 };
 
 function prefix(locale) {
@@ -90,8 +97,8 @@ function servedLocales(contentId) {
   return ["tr", "en", "de"].filter((l) => served.includes(l) && e[l]);
 }
 const served = servedLocales("what-is-vpn");
-if (served.length === 1 && served[0] === "tr") {
-  pass('hreflang: "what-is-vpn" yalnızca TR alternatifi üretiyor (DE/EN içerik yok)');
+if (served.join(",") === "tr,en,de") {
+  pass('hreflang: "what-is-vpn" üç dilde de servis ediliyor (flagship lokalize içerik)');
 } else {
   fail(`hreflang: "what-is-vpn" servis edilen diller beklenenden farklı: ${served.join(",")}`);
 }
@@ -126,9 +133,16 @@ function resolveRedirect(pathname) {
   const ml = segs[0];
   const urlLocale = ml === "en" || ml === "de" ? ml : DEFAULT_LOCALE;
   const rest = urlLocale === DEFAULT_LOCALE ? segs : segs.slice(1);
-  if (rest.length < 2) return null;
+  if (!rest.length) return null;
   const section = sectionForSlug(rest[0]);
   if (!section || !MANAGED.includes(section)) return null;
+  // Hub: localized hub slug'ına kanonikleştir (yalnızca hub-served diller).
+  if (rest.length === 1) {
+    const hubLocales = HUB_SERVED[section];
+    if (!hubLocales || !hubLocales.includes(urlLocale)) return null;
+    const target = `${prefix(urlLocale)}/${SECTION_SLUGS[urlLocale][section]}`;
+    return target === pathname ? null : target;
+  }
   const pageSlug = rest[1];
   const found = findContentBySlug(section, pageSlug);
   const target = found
@@ -138,13 +152,23 @@ function resolveRedirect(pathname) {
   return target === pathname ? null : target;
 }
 const redirectCases = [
-  ["/de/rehber/vpn-nedir", "/rehber/vpn-nedir"],
-  ["/en/rehber/vpn-nedir", "/rehber/vpn-nedir"],
-  ["/en/guide/what-is-a-vpn", "/rehber/vpn-nedir"],
-  ["/de/ratgeber/was-ist-ein-vpn", "/rehber/vpn-nedir"],
+  // Flagship artık 3 dilde servis ediliyor → eski yanlış URL'ler dilin KENDİ
+  // lokalize URL'sine 301'lenir.
+  ["/de/rehber/vpn-nedir", "/de/ratgeber/was-ist-ein-vpn"],
+  ["/en/rehber/vpn-nedir", "/en/guide/what-is-a-vpn"],
+  ["/en/guide/what-is-a-vpn", null],
+  ["/de/ratgeber/was-ist-ein-vpn", null],
+  // TR-only detaylar TR kanoniğe 301.
   ["/en/rehber/ogrenciler-icin-vpn", "/rehber/ogrenciler-icin-vpn"],
   ["/de/karsilastir/proton-vs-mullvad", "/karsilastir/proton-vs-mullvad"],
   ["/de/kategori/streaming", "/kategori/streaming"],
+  // Hub kanonikleştirme (yalnızca hub-served diller).
+  ["/en/rehber", "/en/guide"],
+  ["/en/karsilastir", "/en/comparison"],
+  ["/de/karsilastir", "/de/vergleich"],
+  ["/de/rehber", null], // DE guide hub içeriği yok → mevcut davranış korunur
+  ["/rehber", null],
+  ["/karsilastir", null],
   ["/rehber/vpn-nedir", null],
   ["/blog/vpn-nedir-neden-gerekli", null],
   ["/en/araclar/ip-adresim", null],
@@ -158,6 +182,54 @@ for (const [input, expected] of redirectCases) {
   }
 }
 if (redirOk) pass(`redirect mapping sözleşmesi (${redirectCases.length} senaryo) geçti`);
+
+// ---------------------------------------------------------------------------
+// 3b) Rewrite mapping testleri — localized URL -> iç (TR-slug) route
+// ---------------------------------------------------------------------------
+function resolveRewrite(pathname) {
+  const segs = pathname.split("/").filter(Boolean);
+  if (!segs.length) return null;
+  const ml = segs[0];
+  const urlLocale = ml === "en" || ml === "de" ? ml : DEFAULT_LOCALE;
+  const rest = urlLocale === DEFAULT_LOCALE ? segs : segs.slice(1);
+  if (!rest.length || urlLocale === DEFAULT_LOCALE) return null;
+  const section = sectionForSlug(rest[0]);
+  if (!section || !MANAGED.includes(section)) return null;
+  const trSection = SECTION_SLUGS[DEFAULT_LOCALE][section];
+  if (rest.length === 1) {
+    const hubLocales = HUB_SERVED[section];
+    if (!hubLocales || !hubLocales.includes(urlLocale)) return null;
+    if (rest[0] !== SECTION_SLUGS[urlLocale][section]) return null;
+    return `/${urlLocale}/${trSection}`;
+  }
+  const found = findContentBySlug(section, rest[1]);
+  if (!found) return null;
+  if (!servedLocales(found.id).includes(urlLocale)) return null;
+  const tr = REGISTRY[found.id][DEFAULT_LOCALE];
+  if (!tr) return null;
+  const target = `/${urlLocale}/${trSection}/${tr.slug}`;
+  return target === pathname ? null : target;
+}
+const rewriteCases = [
+  ["/en/guide/what-is-a-vpn", "/en/rehber/vpn-nedir"],
+  ["/de/ratgeber/was-ist-ein-vpn", "/de/rehber/vpn-nedir"],
+  ["/en/guide", "/en/rehber"],
+  ["/en/comparison", "/en/karsilastir"],
+  ["/de/vergleich", "/de/karsilastir"],
+  ["/de/ratgeber", null], // DE guide hub servis edilmiyor
+  ["/rehber/vpn-nedir", null], // TR zaten iç route
+  ["/en/rehber", null], // Türkçe slug rewrite edilmez (301'lenir)
+  ["/en/araclar/ip-adresim", null],
+];
+let rwOk = true;
+for (const [input, expected] of rewriteCases) {
+  const got = resolveRewrite(input);
+  if (got !== expected) {
+    rwOk = false;
+    fail(`resolveRewrite("${input}") = ${JSON.stringify(got)}, beklenen ${JSON.stringify(expected)}`);
+  }
+}
+if (rwOk) pass(`rewrite mapping sözleşmesi (${rewriteCases.length} senaryo) geçti`);
 
 // ---------------------------------------------------------------------------
 // 4) TS kaynağı senkron mu? (i18n-paths.ts beklenen slug'ları içermeli)
@@ -258,7 +330,10 @@ async function checkLiveSitemap(url) {
       /\/(en|de)\/rehber\//,
       /\/(en|de)\/karsilastir\//,
       /\/(en|de)\/kategori\//,
-      /\/de\/rehber$/,
+      // Türkçe-slug hub URL'leri artık localized slug'a 301'leniyor → sitemap'te
+      // olmamalı (yerine /en/guide, /en/comparison, /de/vergleich girer).
+      /\/(en|de)\/rehber$/,
+      /\/(en|de)\/karsilastir$/,
     ];
     const bad = locs.filter((l) => badPatterns.some((re) => re.test(l)));
     if (bad.length) bad.forEach((l) => fail(`Sitemap'te yanlış-dil URL: ${l}`));

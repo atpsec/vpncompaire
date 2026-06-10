@@ -9,13 +9,20 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
+import { sectionHubAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "compareHub" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    // Canonical, dilin yerelleştirilmiş hub slug'ını işaret eder
+    // (/karsilastir, /en/comparison, /de/vergleich) — bkz. i18n-paths.ts.
+    alternates: sectionHubAlternates("comparison", locale),
+  };
 }
 
 type Comparison = {

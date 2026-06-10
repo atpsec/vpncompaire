@@ -7,273 +7,188 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
-import { defaultLocaleAlternates } from "@/lib/site";
-
-export const metadata: Metadata = {
-  title: "VPN Nedir? 5 Dakikalık Başlangıç Rehberi (2026)",
-  description:
-    "VPN'in ne olduğu, nasıl çalıştığı, seni neye karşı koruduğu ve hangi durumlarda kullanman gerektiği — basit ve net anlatım.",
-  // İçerik yalnızca Türkçe servis ediliyor; canonical TR'ye sabit. EN/DE
-  // istekleri proxy.ts ile /rehber/vpn-nedir'e 301'lenir (bkz. i18n-paths.ts).
-  alternates: defaultLocaleAlternates("/rehber/vpn-nedir"),
-};
+import { contentAlternates } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  SECTION_HUB_SERVED,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
+import { getWhatIsVpnContent } from "@/content/guides/what-is-vpn";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const faqs = [
-  {
-    q: "VPN'in açılımı ne?",
-    a: "VPN, 'Virtual Private Network' (Sanal Özel Ağ) ifadesinin kısaltmasıdır.",
-  },
-  {
-    q: "VPN'i kim kullanmalı?",
-    a: "Halka açık Wi-Fi kullanan herkes, gizliliğini önemseyen kullanıcılar, yurt dışındaki Türkler, uzaktan çalışanlar ve seyahat edenler VPN'den fayda görür.",
-  },
-  {
-    q: "VPN ücretsiz mi?",
-    a: "Ücretsiz VPN'ler var ama çoğu güvensiz (veri satarlar, reklam enjekte ederler). Proton VPN'in ücretsiz planı istisnadır. Genelde ücretli bir VPN gizlilik ve güvenlik için daha güvenli.",
-  },
-  {
-    q: "VPN internetimi yavaşlatır mı?",
-    a: "Modern VPN'ler genelde %5-15 hız kaybına yol açar. Sunucu mesafesi ve protokol seçimi en büyük etkenler.",
-  },
-  {
-    q: "VPN beni tamamen anonim yapar mı?",
-    a: "Hayır. VPN, ISP'nin ve halka açık ağdaki diğer kullanıcıların seni izlemesini engeller ama %100 anonimlik sağlamaz. Tarayıcı parmak izi, cookie ve giriş yaptığın hesaplar üzerinden hâlâ izlenebilirsin.",
-  },
-];
+function asAppLocale(locale: string): AppLocale {
+  return locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const c = getWhatIsVpnContent(locale);
+  return {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    // Canonical aktif dilin yerelleştirilmiş URL'si; hreflang yalnızca gerçekten
+    // servis edilen dilleri işaret eder (bkz. CONTENT_REGISTRY.served).
+    alternates: contentAlternates("what-is-vpn", locale),
+  };
+}
 
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  const { locale: rawLocale } = await params;
+  setRequestLocale(rawLocale);
+  const locale = asAppLocale(rawLocale);
+  const c = getWhatIsVpnContent(locale);
+
+  // Rehber hub'ı bu dilde yerelleştirilmiş slug ile servis ediliyorsa onu
+  // kullan (örn. en -> /guide); aksi halde mevcut TR-slug davranışını koru.
+  // next-intl Link, aktif locale prefix'ini kendisi ekler — href prefix'siz.
+  const guideHubServed = SECTION_HUB_SERVED.guide?.includes(locale) ?? false;
+  const guideHubHref = `/${guideHubServed ? SECTION_SLUGS[locale].guide : SECTION_SLUGS[DEFAULT_LOCALE].guide}`;
+
+  const breadcrumbPaths = [
+    { name: c.breadcrumb.home, path: locale === DEFAULT_LOCALE ? "/" : `/${locale}` },
+    {
+      name: c.breadcrumb.guides,
+      path: guideHubServed
+        ? getLocalizedSectionPath(locale, "guide")
+        : `${locale === DEFAULT_LOCALE ? "" : `/${locale}`}/${SECTION_SLUGS[DEFAULT_LOCALE].guide}`,
+    },
+    {
+      name: c.breadcrumb.current,
+      path: getLocalizedPath({ locale, section: "guide", contentId: "what-is-vpn" }),
+    },
+  ];
+
+  const protectIcons = [Lock, Globe, ShieldCheck];
 
   return (
     <>
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Rehberler", path: "/rehber" },
-          { name: "VPN nedir?", path: "/rehber/vpn-nedir" },
-        ])}
-      />
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={breadcrumbSchema(breadcrumbPaths)} />
+      <JsonLd data={faqSchema(c.faqs)} />
 
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {c.breadcrumb.home}
           </Link>{" "}
           ›{" "}
-          <Link href="/rehber" className="hover:text-ink">
-            Rehberler
+          <Link href={guideHubHref} className="hover:text-ink">
+            {c.breadcrumb.guides}
           </Link>{" "}
-          › <span className="text-ink-strong">VPN nedir?</span>
+          › <span className="text-ink-strong">{c.breadcrumb.current}</span>
         </p>
 
         <header className="mt-6">
           <Badge variant="brand">
-            <BookOpen className="size-3" /> Başlangıç rehberi
+            <BookOpen className="size-3" /> {c.badge}
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            VPN nedir?
+            {c.h1}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            5 dakikada VPN&apos;in ne olduğunu, nasıl çalıştığını ve seni
-            neye karşı koruduğunu net şekilde anlatıyoruz.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{c.lede}</p>
         </header>
 
         <Card className="mt-8 p-6 bg-brand-50/40">
           <h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2">
-            <ShieldCheck className="size-5 text-brand-600" /> Tek cümlede VPN
+            <ShieldCheck className="size-5 text-brand-600" /> {c.oneLine.title}
           </h2>
-          <p className="mt-3 text-ink leading-relaxed">
-            VPN (Virtual Private Network), internet trafiğini şifreleyerek bir
-            ara sunucu üzerinden yönlendiren ve böylece kimliğini ve
-            verilerini gizleyen bir teknolojidir.
-          </p>
+          <p className="mt-3 text-ink leading-relaxed">{c.oneLine.body}</p>
         </Card>
 
         <article className="mt-12 prose prose-stone max-w-none">
-          <h2>VPN nasıl çalışır?</h2>
-          <p>
-            Normalde internete bağlandığında, cihazından çıkan veri doğrudan
-            internet servis sağlayıcına (ISP&apos;ye) gider; ISP de bu veriyi
-            hedef siteye yönlendirir. Bu süreçte:
-          </p>
+          <h2>{c.howItWorks.h2}</h2>
+          <p>{c.howItWorks.intro}</p>
           <ul>
-            <li>ISP, hangi siteleri ziyaret ettiğini görür.</li>
-            <li>Halka açık Wi-Fi&apos;deki diğer kullanıcılar trafiğini izleyebilir.</li>
-            <li>Hedef site, gerçek IP adresini görür.</li>
+            {c.howItWorks.beforeList.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
-          <p>
-            VPN aktifken bu akış değişir:
-          </p>
+          <p>{c.howItWorks.afterIntro}</p>
           <ol>
-            <li>
-              Cihazın, VPN uygulaması aracılığıyla VPN sunucusuna{" "}
-              <strong>şifreli bir tünel</strong> kurar.
-            </li>
-            <li>
-              Tüm internet trafiğin bu tünelden geçer. ISP yalnızca
-              &quot;şifreli veri VPN sunucusuna gidiyor&quot; görür — içeriği
-              göremez.
-            </li>
-            <li>
-              VPN sunucusu trafiği çözer ve hedef siteye yönlendirir. Hedef
-              site, gerçek IP&apos;ni değil VPN sunucusunun IP&apos;sini
-              görür.
-            </li>
-            <li>Yanıt aynı yoldan, şifrelenmiş olarak sana döner.</li>
+            {c.howItWorks.afterList.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ol>
 
-          <h2>VPN seni neye karşı korur?</h2>
+          <h2>{c.protects.h2}</h2>
         </article>
 
         <div className="mt-6 grid sm:grid-cols-3 gap-4">
-          <Card className="p-5">
-            <Lock className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              ISP gözetimi
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              ISP&apos;n hangi siteleri ziyaret ettiğini, ne aradığını veya
-              hangi içerikleri tükettiğini göremez.
-            </p>
-          </Card>
-          <Card className="p-5">
-            <Globe className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              Halka açık Wi-Fi
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Otel, kafe, havaalanı ağlarındaki diğer kullanıcılar trafiğini
-              dinleyemez.
-            </p>
-          </Card>
-          <Card className="p-5">
-            <ShieldCheck className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              IP bazlı takip
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Web siteleri gerçek IP&apos;n yerine VPN sunucusunun IP&apos;sini
-              görür. Coğrafi konumun maskelenir.
-            </p>
-          </Card>
+          {c.protects.cards.map((card, i) => {
+            const Icon = protectIcons[i] ?? ShieldCheck;
+            return (
+              <Card key={card.title} className="p-5">
+                <Icon className="size-6 text-brand-600" />
+                <h3 className="mt-3 font-semibold text-ink-strong">
+                  {card.title}
+                </h3>
+                <p className="mt-1 text-sm text-ink-muted">{card.desc}</p>
+              </Card>
+            );
+          })}
         </div>
 
         <article className="mt-12 prose prose-stone max-w-none">
-          <h2>VPN&apos;in koruyamadığı şeyler</h2>
-          <p>VPN bir sihirli değnek değildir. Şunlara karşı korumaz:</p>
+          <h2>{c.cantProtect.h2}</h2>
+          <p>{c.cantProtect.intro}</p>
           <ul>
-            <li>
-              <strong>Tarayıcı parmak izi:</strong> Tarayıcı, ekran çözünürlüğü,
-              tipografi gibi bilgiler birleşince seni hâlâ tanıyabilir.
-            </li>
-            <li>
-              <strong>Cookies (çerezler):</strong> Eğer Google&apos;a giriş
-              yaptıysan, Google seni VPN üzerinden de tanır.
-            </li>
-            <li>
-              <strong>Bilinçli verdiğin bilgiler:</strong> Bir forma adını
-              yazarsan, VPN bunu engelleyemez.
-            </li>
-            <li>
-              <strong>Zararlı yazılım:</strong> VPN, bilgisayarına zararlı
-              yazılım bulaşmasını engellemez (antivirus farklı bir araç).
-            </li>
-            <li>
-              <strong>Phishing:</strong> Sahte siteye bilgi girersen, VPN seni
-              bu hatadan kurtaramaz.
-            </li>
+            {c.cantProtect.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h2>Hangi durumlarda VPN kullanmalısın?</h2>
+          <h2>{c.whenUse.h2}</h2>
           <ul>
-            <li>
-              <strong>Halka açık Wi-Fi kullanırken</strong> (otel, kafe,
-              havaalanı) — pasif dinlemeye karşı koruma.
-            </li>
-            <li>
-              <strong>Yurt dışındayken</strong> — evdeki içeriklere (BluTV,
-              Exxen, Netflix TR, bankacılık) erişim için.
-            </li>
-            <li>
-              <strong>Gizlilik öncelikli</strong> olduğunda — ISP&apos;nin
-              tarama geçmişini görmemesi için.
-            </li>
-            <li>
-              <strong>Kısıtlayıcı ağlarda</strong> — bazı işyeri/üniversite
-              ağlarında engellenmiş sitelere erişim.
-            </li>
-            <li>
-              <strong>Coğrafi kısıtlamayı aşmak</strong> için — Netflix US
-              kütüphanesine erişmek gibi.
-            </li>
+            {c.whenUse.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h2>Hangi durumlarda VPN&apos;e ihtiyacın yok?</h2>
+          <h2>{c.whenNoNeed.h2}</h2>
           <ul>
-            <li>
-              Sadece evdeki güvenli Wi-Fi&apos;den, sosyal medyada vakit
-              geçirmek için.
-            </li>
-            <li>
-              Banka uygulamasında işlem yaparken (bazı bankalar VPN tespit
-              ederse oturumu kapatabilir).
-            </li>
+            {c.whenNoNeed.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
 
-          <h2>VPN protokolleri nedir?</h2>
-          <p>
-            Protokol, VPN tünelinin nasıl kurulduğunu belirleyen teknik
-            standardı ifade eder. En yaygın olanlar:
-          </p>
+          <h2>{c.protocols.h2}</h2>
+          <p>{c.protocols.intro}</p>
           <ul>
-            <li>
-              <strong>WireGuard:</strong> Modern, hızlı, küçük kod tabanı.
-              2026&apos;da altın standart.
-            </li>
-            <li>
-              <strong>OpenVPN:</strong> Daha eski, daha yavaş ama çok yaygın
-              destek.
-            </li>
-            <li>
-              <strong>Lightway</strong> (ExpressVPN&apos;in özel protokolü):
-              WireGuard ile rekabetçi, hızlı bağlantı kurulumu.
-            </li>
-            <li>
-              <strong>NordLynx</strong> (NordVPN&apos;in özel protokolü):
-              WireGuard tabanlı, optimize edilmiş.
-            </li>
+            {c.protocols.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h2>İlk VPN&apos;ini seçerken</h2>
-          <p>Üç temel kriter:</p>
+          <h2>{c.choosing.h2}</h2>
+          <p>{c.choosing.intro}</p>
           <ol>
-            <li>
-              <strong>Bağımsız denetim geçmişi:</strong> Sağlayıcının no-logs
-              iddiası üçüncü bir taraf tarafından doğrulanmış mı?
-            </li>
-            <li>
-              <strong>Yargı yetkisi:</strong> Sağlayıcı hangi ülke yasalarına
-              tabi? 14 Eyes ittifakı dışı (Panama, İsviçre, Romanya) tercih
-              edilir.
-            </li>
-            <li>
-              <strong>Senin kullanım senaryona uyum:</strong> Streaming mi,
-              gizlilik mi, çok cihaz mı?
-            </li>
+            {c.choosing.criteria.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ol>
           <p>
-            Bu üç kriteri en iyi karşılayan seçimler için{" "}
-            <Link href="/en-iyi-vpn">2026&apos;nın en iyi VPN&apos;leri</Link>{" "}
-            sıralamamıza göz at.
+            {c.choosing.closingBefore}
+            <Link href="/en-iyi-vpn">{c.choosing.closingLink}</Link>
+            {c.choosing.closingAfter}
           </p>
 
-          <h2>Sıkça sorulan sorular</h2>
-          {faqs.map((f) => (
+          <h2>{c.faqHeading}</h2>
+          {c.faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
               <p>{f.a}</p>
@@ -282,26 +197,17 @@ export default async function Page({ params }: Props) {
         </article>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">Sıradaki adım</p>
+          <p className="text-sm text-ink-muted">{c.nextStepLabel}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            <Link
-              href="/en-iyi-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              En iyi 10 VPN sıralaması
-            </Link>
-            <Link
-              href="/rehber/ucretsiz-vs-ucretli-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Ücretsiz vs Ücretli VPN
-            </Link>
-            <Link
-              href="/rehber/vpn-guvenlik-kontrol-listesi"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              VPN güvenlik kontrol listesi
-            </Link>
+            {c.nextStepLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+              >
+                {link.text}
+              </Link>
+            ))}
           </div>
         </section>
       </Container>

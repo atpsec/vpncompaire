@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
+import { sectionHubAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -62,7 +63,13 @@ const CONTENT = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[locale === "en" ? "en" : "tr"];
-  return { title: c.metaTitle, description: c.metaDescription };
+  return {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    // Canonical, dilin yerelleştirilmiş hub slug'ını işaret eder
+    // (/rehber, /en/guide) — bkz. i18n-paths.ts.
+    alternates: sectionHubAlternates("guide", locale),
+  };
 }
 
 export default async function Page({ params }: Props) {

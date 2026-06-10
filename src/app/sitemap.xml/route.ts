@@ -7,6 +7,16 @@ import {
   type BlogLocale,
   type BlogSlugEntry,
 } from "@/lib/blog-slugs";
+import {
+  CONTENT_REGISTRY,
+  SECTION_HUB_SERVED,
+  availableLocales,
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  DEFAULT_LOCALE,
+  type AppLocale,
+  type SectionKey,
+} from "@/lib/i18n-paths";
 
 export const revalidate = 3600;
 
@@ -27,8 +37,9 @@ const useCaseSlugs = [
 
 const deviceSlugs = ["android", "iphone", "ipad", "smart-tv"];
 
+// NOT: "vpn-nedir" CONTENT_REGISTRY üzerinden lokalize grup olarak üretilir
+// (tr/en/de yerelleştirilmiş slug'larıyla); bu TR-only listede yer almaz.
 const guideSlugs = [
-  "vpn-nedir",
   "ucretsiz-vs-ucretli-vpn",
   "vpn-guvenlik-kontrol-listesi",
   "turkiye-de-vpn-yasal-mi",
@@ -64,9 +75,6 @@ export async function GET() {
   // yalnızca TR URL'i üret. EN/DE yanlış-dil varyantları proxy.ts tarafından
   // 301'lendiği için sitemap'e ASLA girmemeli.
   const trOnly: BlogLocale[] = ["tr"];
-  // Rehber hub'ı TR + EN içeriğe sahip (DE şu an TR'ye düşüyor): DE'yi dışarıda
-  // bırak ki yanlış-dil URL sitemap'e girmesin.
-  const trEn: BlogLocale[] = ["tr", "en"];
 
   type Entry = {
     path: string;
@@ -80,9 +88,10 @@ export async function GET() {
     { path: "/", priority: 1.0, changefreq: "daily" },
     { path: "/en-iyi-vpn", priority: 0.95, changefreq: "weekly" },
     { path: "/en-iyi", priority: 0.8, changefreq: "weekly" },
-    { path: "/karsilastir", priority: 0.85, changefreq: "weekly" },
+    // NOT: /karsilastir ve /rehber hub'ları SECTION_HUB_SERVED üzerinden
+    // yerelleştirilmiş slug'larıyla (örn. /en/comparison, /de/vergleich)
+    // aşağıda ayrıca üretilir; Türkçe-slug EN/DE varyantları 301'lenir.
     { path: "/cihazlar", priority: 0.8, changefreq: "weekly" },
-    { path: "/rehber", priority: 0.8, changefreq: "weekly", locales: trEn },
     { path: "/blog", priority: 0.85, changefreq: "daily" },
     { path: "/metodoloji", priority: 0.8, changefreq: "monthly" },
     { path: "/hakkimizda", priority: 0.5, changefreq: "monthly" },
@@ -187,6 +196,65 @@ ${altLinks(u.path, pathLocales)}
     })
     .join("\n");
 
+  // Yerelleştirilmiş slug'lı gruplar: section hub'ları (SECTION_HUB_SERVED) ve
+  // CONTENT_REGISTRY'de birden çok dilde servis edilen içerikler. Her dilin
+  // KENDİ slug'lı URL'i üretilir (örn. /rehber, /en/guide); hreflang yalnızca
+  // servis edilen dilleri içerir.
+  function localizedGroupXml(
+    urlFor: (locale: AppLocale) => string,
+    locales: readonly AppLocale[],
+    priority: number,
+    changefreq: string,
+  ): string[] {
+    const alt = [
+      ...locales.map(
+        (l) =>
+          `    <xhtml:link rel="alternate" hreflang="${l}" href="${urlFor(l)}"/>`,
+      ),
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(
+        locales.includes(DEFAULT_LOCALE) ? DEFAULT_LOCALE : locales[0],
+      )}"/>`,
+    ].join("\n");
+    return locales.map((locale) => {
+      const p = locale === DEFAULT_LOCALE ? priority : priority * 0.9;
+      return `  <url>
+    <loc>${urlFor(locale)}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${p.toFixed(2)}</priority>
+${alt}
+  </url>`;
+    });
+  }
+
+  const hubGroups: { section: SectionKey; priority: number; changefreq: string }[] = [
+    { section: "guide", priority: 0.8, changefreq: "weekly" },
+    { section: "comparison", priority: 0.85, changefreq: "weekly" },
+  ];
+
+  const localizedXml = [
+    ...hubGroups.flatMap((g) =>
+      localizedGroupXml(
+        (l) => `${siteConfig.url}${getLocalizedSectionPath(l, g.section)}`,
+        SECTION_HUB_SERVED[g.section] ?? [DEFAULT_LOCALE],
+        g.priority,
+        g.changefreq,
+      ),
+    ),
+    ...Object.values(CONTENT_REGISTRY).flatMap((entry) => {
+      const served = availableLocales(entry.id);
+      const section = entry.translations[DEFAULT_LOCALE]?.section;
+      if (!section || served.length === 0) return [];
+      return localizedGroupXml(
+        (l) =>
+          `${siteConfig.url}${getLocalizedPath({ locale: l, section, contentId: entry.id })}`,
+        served,
+        0.75,
+        "monthly",
+      );
+    }),
+  ].join("\n");
+
   function blogUrl(entry: BlogSlugEntry, locale: BlogLocale): string {
     return localizedUrl(`/blog/${slugForLocale(entry, locale)}`, locale);
   }
@@ -245,6 +313,7 @@ ${blogAltLinks(entry, { slug: p.slug, locale: "de" })}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${sharedPathsXml}
+${localizedXml}
 ${blogXml}
 </urlset>`;
 

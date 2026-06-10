@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
-import { resolveLocalizedRedirect } from "@/lib/i18n-paths";
+import {
+  resolveLocalizedRedirect,
+  resolveInternalRewrite,
+} from "@/lib/i18n-paths";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 yıl
@@ -90,6 +93,23 @@ export default function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = redirectTarget;
     return NextResponse.redirect(url, 301);
+  }
+
+  // Yerelleştirilmiş slug'ları (örn. /en/guide/what-is-a-vpn, /de/vergleich) iç
+  // Türkçe-slug route'una rewrite et. URL değişmez; doğru locale içeriği
+  // [locale] segmentinden gelir. (bkz. src/lib/i18n-paths.ts)
+  // next-intl middleware'i bypass edildiği için locale header'ı
+  // (X-NEXT-INTL-LOCALE) elle kurulur — root layout'taki getLocale() ve
+  // <html lang> bunu okur.
+  const rewriteTarget = resolveInternalRewrite(pathname);
+  if (rewriteTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = rewriteTarget;
+    // rewriteTarget yalnızca en/de prefix'li üretilir (bkz. i18n-paths.ts).
+    const locale = rewriteTarget.split("/")[1];
+    const headers = new Headers(request.headers);
+    headers.set("X-NEXT-INTL-LOCALE", locale);
+    return NextResponse.rewrite(url, { request: { headers } });
   }
 
   // Apply rate limiting to sensitive routes

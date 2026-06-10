@@ -81,10 +81,24 @@ export const CONTENT_REGISTRY: Record<string, ContentEntry> = {
         title: "Was ist ein VPN?",
       },
     },
-    // İçerik bugün yalnızca Türkçe servis ediliyor (gerçek EN/DE rehber sayfası
-    // henüz yok). EN/DE çevirisi eklendiğinde bu listeye eklenecek.
-    served: ["tr"],
+    // Flagship: üç dilde de gerçek lokalize içerik mevcut (locale-aware sayfa).
+    served: ["tr", "en", "de"],
   },
+};
+
+/**
+ * Section HUB sayfalarının (örn. /rehber, /karsilastir) hangi dillerde GERÇEK
+ * lokalize içeriği var. Yalnızca burada listelenen diller için localized hub
+ * slug'ı (örn. /en/guide, /de/vergleich) etkinleştirilir; diğerleri olduğu gibi
+ * (Türkçe slug + mevcut davranış) bırakılır.
+ *
+ *  - guide hub (rehber/page.tsx): tr + en içerik var (de TR'ye düşüyor).
+ *  - comparison hub (karsilastir/page.tsx): compareHub namespace ile tr/en/de.
+ *  - category: hub route'u yok.
+ */
+export const SECTION_HUB_SERVED: Partial<Record<SectionKey, AppLocale[]>> = {
+  guide: ["tr", "en"],
+  comparison: ["tr", "en", "de"],
 };
 
 function localePrefix(locale: AppLocale): string {
@@ -269,25 +283,39 @@ const REDIRECT_MANAGED_SECTIONS: SectionKey[] = [
   "category",
 ];
 
+function parseLocale(segments: string[]): {
+  urlLocale: AppLocale;
+  rest: string[];
+} {
+  const maybeLocale = segments[0];
+  const urlLocale: AppLocale =
+    maybeLocale === "en" || maybeLocale === "de" ? maybeLocale : DEFAULT_LOCALE;
+  const rest = urlLocale === DEFAULT_LOCALE ? segments : segments.slice(1);
+  return { urlLocale, rest };
+}
+
 export function resolveLocalizedRedirect(pathname: string): string | null {
   const segments = pathname.split("/").filter(Boolean);
   if (segments.length === 0) return null;
 
-  const maybeLocale = segments[0];
-  const urlLocale: AppLocale =
-    maybeLocale === "en" || maybeLocale === "de" ? maybeLocale : DEFAULT_LOCALE;
-  const rest =
-    urlLocale === DEFAULT_LOCALE ? segments : segments.slice(1);
-
-  if (rest.length < 2) return null; // yalnızca detay sayfaları (section + slug)
+  const { urlLocale, rest } = parseLocale(segments);
+  if (rest.length === 0) return null;
 
   const sectionSlug = rest[0];
   const section = sectionForSlug(sectionSlug);
   if (!section || !REDIRECT_MANAGED_SECTIONS.includes(section)) return null;
 
+  // HUB (section + slug yok): localized hub slug'ına kanonikleştir.
+  // Örn. /en/rehber -> /en/guide, /de/karsilastir -> /de/vergleich.
+  if (rest.length === 1) {
+    const hubLocales = SECTION_HUB_SERVED[section];
+    if (!hubLocales || !hubLocales.includes(urlLocale)) return null;
+    const target = getLocalizedSectionPath(urlLocale, section);
+    return target === pathname ? null : target;
+  }
+
+  // DETAY (section + page slug): içeriğin gerçek dilindeki kanonik URL.
   const pageSlug = rest[1];
-  // İç içe daha derin path'ler (rest.length > 2) bu içerik modelinde yok;
-  // yine de güvenli davranıp yalnızca ilk iki segmenti yönetiyoruz.
   const extra = rest.slice(2).join("/");
 
   let target: string | null;
@@ -302,6 +330,58 @@ export function resolveLocalizedRedirect(pathname: string): string | null {
   if (!target) return null;
   if (extra) target = `${target}/${extra}`;
 
+  return target === pathname ? null : target;
+}
+
+/**
+ * Yerelleştirilmiş (public) URL'yi, sayfayı render eden iç (Türkçe-slug)
+ * route'a çevirir (NextResponse.rewrite için). URL değişmez; yalnızca hangi
+ * dosyanın render edileceği belirlenir.
+ *
+ *  /en/guide/what-is-a-vpn   -> /en/rehber/vpn-nedir   (kayıtlı içerik)
+ *  /de/ratgeber/was-ist-ein-vpn -> /de/rehber/vpn-nedir
+ *  /en/comparison            -> /en/karsilastir        (hub)
+ *  /de/vergleich             -> /de/karsilastir
+ *
+ * Rewrite gerekmiyorsa (zaten iç route, TR slug, veya yönetilmeyen path) null.
+ */
+export function resolveInternalRewrite(pathname: string): string | null {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 0) return null;
+
+  const { urlLocale, rest } = parseLocale(segments);
+  if (rest.length === 0) return null;
+  // TR'de public slug = iç slug; rewrite gerekmez.
+  if (urlLocale === DEFAULT_LOCALE) return null;
+
+  const sectionSlug = rest[0];
+  const section = sectionForSlug(sectionSlug);
+  if (!section || !REDIRECT_MANAGED_SECTIONS.includes(section)) return null;
+
+  const trSection = SECTION_SLUGS[DEFAULT_LOCALE][section];
+  const prefix = `/${urlLocale}`;
+
+  // HUB
+  if (rest.length === 1) {
+    const hubLocales = SECTION_HUB_SERVED[section];
+    if (!hubLocales || !hubLocales.includes(urlLocale)) return null;
+    // Yalnızca localized slug (TR slug değil) gelen istekleri rewrite et.
+    if (sectionSlug !== SECTION_SLUGS[urlLocale][section]) return null;
+    return `${prefix}/${trSection}`;
+  }
+
+  // DETAY
+  const pageSlug = rest[1];
+  const extra = rest.slice(2).join("/");
+  const found = findContentBySlug(section, pageSlug);
+  if (!found) return null;
+  if (!availableLocales(found.contentId).includes(urlLocale)) return null;
+
+  const trTranslation = CONTENT_REGISTRY[found.contentId].translations[DEFAULT_LOCALE];
+  if (!trTranslation) return null;
+
+  let target = `${prefix}/${trSection}/${trTranslation.slug}`;
+  if (extra) target = `${target}/${extra}`;
   return target === pathname ? null : target;
 }
 

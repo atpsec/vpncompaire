@@ -1,4 +1,14 @@
 import { env } from "@/env";
+import {
+  availableLocales,
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  CONTENT_REGISTRY,
+  SECTION_HUB_SERVED,
+  DEFAULT_LOCALE,
+  type AppLocale,
+  type SectionKey,
+} from "@/lib/i18n-paths";
 
 export const siteConfig = {
   name: env.NEXT_PUBLIC_SITE_NAME,
@@ -74,5 +84,56 @@ export function defaultLocaleAlternates(path = "") {
       tr: canonical,
       "x-default": canonical,
     },
+  };
+}
+
+/**
+ * CONTENT_REGISTRY'de kayıtlı bir içerik için alternates üretir. Canonical,
+ * aktif locale'in (o dilde servis ediliyorsa) yerelleştirilmiş URL'sini;
+ * hreflang yalnızca gerçekten servis edilen dilleri işaret eder.
+ * x-default daima TR.
+ */
+export function contentAlternates(contentId: string, locale: string) {
+  const entry = CONTENT_REGISTRY[contentId];
+  const served = availableLocales(contentId);
+  const activeLocale: AppLocale = served.includes(locale as AppLocale)
+    ? (locale as AppLocale)
+    : DEFAULT_LOCALE;
+  const section = entry.translations[DEFAULT_LOCALE]!.section;
+
+  const pathFor = (l: AppLocale) =>
+    absoluteUrl(getLocalizedPath({ locale: l, section, contentId }));
+
+  const languages: Record<string, string> = {};
+  for (const l of served) languages[l] = pathFor(l);
+  languages["x-default"] = pathFor(DEFAULT_LOCALE);
+
+  return {
+    canonical: pathFor(activeLocale),
+    languages,
+  };
+}
+
+/**
+ * Section hub sayfaları (/rehber, /karsilastir, ...) için alternates. Canonical
+ * aktif dilin YERELLEŞTİRİLMİŞ hub slug'ını işaret eder (örn. en -> /en/guide);
+ * hreflang yalnızca SECTION_HUB_SERVED'daki dilleri içerir.
+ */
+export function sectionHubAlternates(section: SectionKey, locale: string) {
+  const served = SECTION_HUB_SERVED[section] ?? [DEFAULT_LOCALE];
+  const activeLocale: AppLocale = served.includes(locale as AppLocale)
+    ? (locale as AppLocale)
+    : DEFAULT_LOCALE;
+
+  const pathFor = (l: AppLocale) =>
+    absoluteUrl(getLocalizedSectionPath(l, section));
+
+  const languages: Record<string, string> = {};
+  for (const l of served) languages[l] = pathFor(l);
+  languages["x-default"] = pathFor(DEFAULT_LOCALE);
+
+  return {
+    canonical: pathFor(activeLocale),
+    languages,
   };
 }
