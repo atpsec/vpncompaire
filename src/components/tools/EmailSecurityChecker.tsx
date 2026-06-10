@@ -369,6 +369,11 @@ export function EmailSecurityChecker({ labels }: { labels: Labels }) {
                     ? labels.mx.pass
                     : labels.mx.fail
                 }
+                detail={
+                  result.domainChecks.mx.count > 0
+                    ? `${result.domainChecks.mx.count} MX`
+                    : undefined
+                }
               />
               <DomainCheckCard
                 icon={ShieldCheck}
@@ -382,6 +387,7 @@ export function EmailSecurityChecker({ labels }: { labels: Labels }) {
                       ? labels.spf.warning
                       : labels.spf.fail
                 }
+                detail={result.domainChecks.spf.record ?? undefined}
               />
               <DomainCheckCard
                 icon={ShieldCheck}
@@ -395,6 +401,7 @@ export function EmailSecurityChecker({ labels }: { labels: Labels }) {
                       ? labels.dmarc.warning
                       : labels.dmarc.fail
                 }
+                detail={result.domainChecks.dmarc.record ?? undefined}
               />
             </div>
           </Card>
@@ -439,12 +446,14 @@ function DomainCheckCard({
   status,
   statusLabel,
   body,
+  detail,
 }: {
   icon: LucideIcon;
   title: string;
   status: CheckStatus;
   statusLabel: string;
   body: string;
+  detail?: string;
 }) {
   const StatusIcon = STATUS_ICONS[status];
 
@@ -465,6 +474,11 @@ function DomainCheckCard({
         </span>
       </div>
       <p className="mt-3 text-sm leading-relaxed text-ink-muted">{body}</p>
+      {detail ? (
+        <p className="mt-2 break-all font-mono text-[11px] leading-relaxed text-ink-subtle">
+          {detail}
+        </p>
+      ) : null}
     </div>
   );
 }

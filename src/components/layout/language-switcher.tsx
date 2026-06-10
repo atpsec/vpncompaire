@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Globe } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/routing";
@@ -7,9 +8,9 @@ import { getLocalizedBlogSlug, type BlogLocale } from "@/lib/blog-slugs";
 import { cn } from "@/lib/utils";
 
 const LOCALES = [
-  { code: "tr", label: "TR", name: "Türkçe" },
-  { code: "en", label: "EN", name: "English" },
-  { code: "de", label: "DE", name: "Deutsch" },
+  { code: "tr", label: "TR", name: "Türkçe", flag: "tr" },
+  { code: "en", label: "EN", name: "English", flag: "gb" },
+  { code: "de", label: "DE", name: "Deutsch", flag: "de" },
 ] as const;
 
 // Açık dil seçimini cookie'ye yaz — proxy.ts'teki geo (IP) yönlendirmesi bu
@@ -67,12 +68,21 @@ export function LanguageSwitcher({ className }: Props) {
             aria-current={active ? "true" : undefined}
             aria-label={l.name}
             className={cn(
-              "rounded px-2 py-1 text-[11px] font-semibold tracking-wide transition-colors",
+              "inline-flex items-center gap-1 rounded px-2 py-1 text-[11px] font-semibold tracking-wide transition-colors",
               active
                 ? "bg-brand-600 text-white"
                 : "text-ink-muted hover:text-ink-strong hover:bg-surface-subtle",
             )}
           >
+            <Image
+              src={`https://flagcdn.com/h40/${l.flag}.png`}
+              alt=""
+              width={16}
+              height={12}
+              className="h-3 w-auto shrink-0 rounded-sm ring-1 ring-black/10"
+              unoptimized
+              aria-hidden
+            />
             {l.label}
           </button>
         );

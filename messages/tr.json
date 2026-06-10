@@ -1179,7 +1179,7 @@
       "errorBody": "Güvenlik kontrolü geçici olarak kullanılamıyor. Lütfen birazdan tekrar deneyin.",
       "rateLimitedBody": "Bu bağlantıdan çok fazla kontrol isteği geldi. Lütfen bir dakika bekleyip tekrar deneyin.",
       "privacyNote": "Gizlilik notu:",
-      "privacyDetail": "E-posta adresiniz yalnızca bu kontrol için kullanılır ve saklanmaz. Have I Been Pwned etkinse HIBP'ye tam adres değil, yalnızca SHA-1 hash ön eki gönderilir.",
+      "privacyDetail": "E-posta adresiniz yalnızca bu kontrol için kullanılır ve saklanmaz. MX, SPF ve DMARC sonuçları gerçek zamanlı DNS sorgularıdır. Sızıntı kontrolü Have I Been Pwned API'sine sunucu tarafından yapılır; API anahtarı tarayıcıya gönderilmez.",
       "scoreLabel": "Güvenlik skoru",
       "risk": {
         "low": "Düşük risk",
@@ -1215,16 +1215,16 @@
         "fail": "DMARC politikası bulunamadı. Phishing koruması daha zayıftır."
       },
       "breach": {
-        "clear": "Yapılandırılmış HIBP kontrolünde eşleşen sızıntı bulunmadı.",
+        "clear": "Have I Been Pwned veritabanında bu adres için bilinen bir sızıntı bulunmadı.",
         "found": "Bu adres bir veya daha fazla bilinen sızıntıda görünüyor.",
-        "unavailable": "Sızıntı veritabanı kontrolü geçici olarak kullanılamıyor; domain kontrolleri tamamlandı.",
-        "notConfigured": "Bu deployment'ta sızıntı veritabanı kontrolü etkin değil. Domain kimlik doğrulama kontrolleri yine tamamlandı.",
-        "method": "Uygun olduğunda Have I Been Pwned k-anonymity yöntemiyle kontrol edilir.",
+        "unavailable": "Sızıntı veritabanı geçici olarak yanıt vermiyor. MX, SPF ve DMARC sonuçları gerçek zamanlı DNS sorgularıyla alındı.",
+        "notConfigured": "Sızıntı veritabanı kontrolü şu an devre dışı. MX, SPF ve DMARC sonuçları gerçek zamanlı DNS sorgularıdır.",
+        "method": "Have I Been Pwned API (sunucu tarafı)",
         "visibleBreaches": "Eşleşen sızıntı adları"
       },
       "findings": {
         "breach_found": "Bu e-posta için kullandığınız parolayı ve aynı parolanın tekrar edildiği tüm hesapları değiştirin. Önemli hesaplarda 2FA açın.",
-        "hibp_not_configured": "Have I Been Pwned entegrasyonu henüz yapılandırılmamış; sızıntı kontrolü için sunucuda HIBP_API_KEY ekleyin.",
+        "hibp_not_configured": "Sızıntı veritabanı kontrolü şu an kullanılamıyor; MX, SPF ve DMARC sonuçları yine de gerçek DNS sorgularıdır.",
         "hibp_unavailable": "Have I Been Pwned'e ulaşılamadı. Kontrolü daha sonra tekrar çalıştırın.",
         "no_mx": "Domain için MX kaydı yok. Adresi kontrol edin veya farklı bir e-posta kullanın.",
         "no_spf": "Sahte göndericileri zorlaştırmak için domain sahibinden SPF kaydı eklemesini isteyin.",
@@ -1235,7 +1235,7 @@
         "role_account": "Paylaşılan rol hesapları risklidir. Benzersiz kullanıcı, güçlü parola ve 2FA kullanın."
       },
       "explainTitle": "Bu e-posta güvenliği kontrolü ne yapar?",
-      "explainBody": "Araç e-posta formatını doğrular, domainin MX, SPF ve DMARC kayıtlarını kontrol eder, yaygın geçici veya paylaşılan rol adreslerini işaretler ve server tarafında HIBP anahtarı varsa Have I Been Pwned k-anonymity API'siyle sızıntı eşleşmesi arar. API anahtarları tarayıcıya gönderilmez."
+      "explainBody": "Araç e-posta formatını doğrular, domainin MX, SPF ve DMARC kayıtlarını gerçek zamanlı DNS sorgularıyla kontrol eder, yaygın geçici veya paylaşılan rol adreslerini işaretler ve Have I Been Pwned API'siyle bilinen sızıntılarda eşleşme arar. Sonuçlar simülasyon değildir; DNS yanıtları canlı sorgulardan gelir."
     },
     "dns": {
       "metaTitle": "DNS Sızıntı Testi 2026 - Ücretsiz | VPN Advisor",

@@ -82,9 +82,8 @@ type EmailSecurityResult = {
   };
 };
 
-type HibpRangeRow = {
-  hashSuffix?: unknown;
-  websites?: unknown;
+type HibpBreachRow = {
+  Name?: unknown;
 };
 
 function hashIdentity(value: string): string {
@@ -183,34 +182,20 @@ async function checkDomainAuth(domain: string) {
 async function checkHibp(email: string): Promise<EmailSecurityResult["breachCheck"]> {
   if (!env.HIBP_API_KEY) return { status: "not_configured" };
 
-  const hash = createHash("sha1").update(email).digest("hex").toUpperCase();
-  const prefix = hash.slice(0, 6);
-  const suffix = hash.slice(6);
-
   try {
     const res = await fetch(
-      `https://haveibeenpwned.com/api/v3/breachedaccount/range/${prefix}`,
+      `https://haveibeenpwned.com/api/v3/breachedaccount/${encodeURIComponent(email)}?truncateResponse=false`,
       {
         headers: {
           "hibp-api-key": env.HIBP_API_KEY,
           "user-agent": HIBP_USER_AGENT,
         },
         cache: "no-store",
-        signal: AbortSignal.timeout(5000),
+        signal: AbortSignal.timeout(12_000),
       },
     );
 
-    if (!res.ok) return { status: "unavailable" };
-
-    const body = (await res.json()) as unknown;
-    const rows = Array.isArray(body) ? (body as HibpRangeRow[]) : [];
-    const match = rows.find(
-      (row) =>
-        typeof row.hashSuffix === "string" &&
-        row.hashSuffix.toUpperCase() === suffix,
-    );
-
-    if (!match) {
+    if (res.status === 404) {
       return {
         status: "checked",
         method: "hibp-k-anonymity",
@@ -220,9 +205,13 @@ async function checkHibp(email: string): Promise<EmailSecurityResult["breachChec
       };
     }
 
-    const breaches = (Array.isArray(match.websites) ? match.websites : [])
-      .filter((name): name is string => typeof name === "string")
-      .map((name) => name.trim())
+    if (res.status === 429 || !res.ok) return { status: "unavailable" };
+
+    const body = (await res.json()) as unknown;
+    if (!Array.isArray(body)) return { status: "unavailable" };
+
+    const breaches = (body as HibpBreachRow[])
+      .map((row) => (typeof row.Name === "string" ? row.Name.trim() : ""))
       .filter(Boolean)
       .slice(0, 20);
 

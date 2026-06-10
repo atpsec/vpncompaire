@@ -1179,7 +1179,7 @@
       "errorBody": "The security check is temporarily unavailable. Please try again in a moment.",
       "rateLimitedBody": "Too many checks were requested from this connection. Please wait a minute and try again.",
       "privacyNote": "Privacy note:",
-      "privacyDetail": "Your email is used only for this check and is not stored. If Have I Been Pwned is enabled, only a SHA-1 hash prefix is sent to HIBP, not the full email address.",
+      "privacyDetail": "Your email is used only for this check and is not stored. MX, SPF and DMARC results come from live DNS lookups. Breach checks run server-side via the Have I Been Pwned API; no API key is sent to the browser.",
       "scoreLabel": "Security score",
       "risk": {
         "low": "Low risk",
@@ -1215,16 +1215,16 @@
         "fail": "No DMARC policy was found. Phishing protection is weaker."
       },
       "breach": {
-        "clear": "No matching breach was found in the configured HIBP check.",
+        "clear": "No known breach was found for this address in Have I Been Pwned.",
         "found": "This address appears in one or more known breaches.",
-        "unavailable": "The breach database check is temporarily unavailable; domain checks are still complete.",
-        "notConfigured": "The breach database check is not enabled on this deployment. Domain authentication checks are still complete.",
-        "method": "Checked with Have I Been Pwned k-anonymity when available.",
+        "unavailable": "The breach database is temporarily unavailable. MX, SPF and DMARC results were fetched via live DNS lookups.",
+        "notConfigured": "Breach database checks are currently disabled. MX, SPF and DMARC results are live DNS lookups.",
+        "method": "Have I Been Pwned API (server-side)",
         "visibleBreaches": "Matched breach names"
       },
       "findings": {
         "breach_found": "Change the password for this email and every reused password. Turn on 2FA for important accounts.",
-        "hibp_not_configured": "Have I Been Pwned integration is not configured yet; add HIBP_API_KEY on the server to enable breach checks.",
+        "hibp_not_configured": "Breach database check is unavailable right now; MX, SPF and DMARC results are still live DNS lookups.",
         "hibp_unavailable": "Have I Been Pwned could not be reached. Re-run the check later.",
         "no_mx": "The domain has no MX records. Check the address or use a different email.",
         "no_spf": "Ask the domain owner to add SPF so fake senders are harder to spoof.",
@@ -1235,7 +1235,7 @@
         "role_account": "Role accounts are often shared. Use unique users, strong passwords and 2FA."
       },
       "explainTitle": "What this email security check does",
-      "explainBody": "The tool validates the email format, checks the domain's MX, SPF and DMARC records, flags common disposable or shared role addresses and, when a server-side HIBP key exists, checks breach exposure with Have I Been Pwned's k-anonymity API. API keys are never exposed to the browser."
+      "explainBody": "The tool validates the email format, checks the domain's MX, SPF and DMARC records via live DNS queries, flags common disposable or shared role addresses and searches Have I Been Pwned for known breaches. Results are not simulated — DNS answers come from real lookups."
     },
     "dns": {
       "metaTitle": "DNS Leak Test 2026 - Free | VPN Advisor",
