@@ -39,21 +39,104 @@ const SECTION_SLUGS = {
 };
 const DEFAULT_LOCALE = "tr";
 
+// i18n-paths.ts CONTENT_REGISTRY ile senkron olmalı (bağımsız oracle kopyası).
+const G = "guide";
+const C = "comparison";
+const ALL = ["tr", "en", "de"];
 const REGISTRY = {
   "what-is-vpn": {
-    tr: { section: "guide", slug: "vpn-nedir" },
-    en: { section: "guide", slug: "what-is-a-vpn" },
-    de: { section: "guide", slug: "was-ist-ein-vpn" },
-    served: ["tr", "en", "de"],
+    tr: { section: G, slug: "vpn-nedir" },
+    en: { section: G, slug: "what-is-a-vpn" },
+    de: { section: G, slug: "was-ist-ein-vpn" },
+    served: ALL,
+  },
+  "free-vs-paid-vpn": {
+    tr: { section: G, slug: "ucretsiz-vs-ucretli-vpn" },
+    en: { section: G, slug: "free-vs-paid-vpn" },
+    de: { section: G, slug: "kostenloses-vs-kostenpflichtiges-vpn" },
+    served: ALL,
+  },
+  "vpn-security-checklist": {
+    tr: { section: G, slug: "vpn-guvenlik-kontrol-listesi" },
+    en: { section: G, slug: "vpn-security-checklist" },
+    de: { section: G, slug: "vpn-sicherheits-checkliste" },
+    served: ALL,
+  },
+  "is-vpn-legal-in-turkey": {
+    tr: { section: G, slug: "turkiye-de-vpn-yasal-mi" },
+    en: { section: G, slug: "is-vpn-legal-in-turkey" },
+    de: { section: G, slug: "ist-vpn-in-der-tuerkei-legal" },
+    served: ALL,
+  },
+  "vpn-for-students": {
+    tr: { section: G, slug: "ogrenciler-icin-vpn" },
+    en: { section: G, slug: "vpn-for-students" },
+    de: { section: G, slug: "vpn-fuer-studenten" },
+    served: ALL,
+  },
+  "vpn-for-turks-abroad": {
+    tr: { section: G, slug: "yurt-disindaki-turkler-icin-vpn" },
+    en: { section: G, slug: "vpn-for-turks-abroad" },
+    de: { section: G, slug: "vpn-fuer-tuerken-im-ausland" },
+    served: ALL,
+  },
+  "vpn-for-families": {
+    tr: { section: G, slug: "aile-ve-cocuklar-icin-vpn" },
+    en: { section: G, slug: "vpn-for-families" },
+    de: { section: G, slug: "vpn-fuer-familien" },
+    served: ALL,
+  },
+  "vpn-for-remote-workers": {
+    tr: { section: G, slug: "uzaktan-calisanlar-icin-vpn" },
+    en: { section: G, slug: "vpn-for-remote-workers" },
+    de: { section: G, slug: "vpn-fuer-remote-arbeit" },
+    served: ALL,
+  },
+  "vpn-for-seniors": {
+    tr: { section: G, slug: "yaslilar-icin-vpn" },
+    en: { section: G, slug: "vpn-for-seniors" },
+    de: { section: G, slug: "vpn-fuer-senioren" },
+    served: ALL,
+  },
+  "vpn-for-gamers": {
+    tr: { section: G, slug: "gamerlar-icin-vpn" },
+    en: { section: G, slug: "vpn-for-gamers" },
+    de: { section: G, slug: "vpn-fuer-gamer" },
+    served: ALL,
+  },
+  "nordvpn-vs-surfshark": {
+    tr: { section: C, slug: "nordvpn-vs-surfshark" },
+    en: { section: C, slug: "nordvpn-vs-surfshark" },
+    de: { section: C, slug: "nordvpn-vs-surfshark" },
+    served: ALL,
+  },
+  "expressvpn-vs-nordvpn": {
+    tr: { section: C, slug: "expressvpn-vs-nordvpn" },
+    en: { section: C, slug: "expressvpn-vs-nordvpn" },
+    de: { section: C, slug: "expressvpn-vs-nordvpn" },
+    served: ALL,
+  },
+  "proton-vs-mullvad": {
+    tr: { section: C, slug: "proton-vs-mullvad" },
+    en: { section: C, slug: "proton-vs-mullvad" },
+    de: { section: C, slug: "proton-vs-mullvad" },
+    served: ALL,
   },
 };
 
 // Hub'ların lokalize servis edildiği diller (i18n-paths.ts SECTION_HUB_SERVED
 // ile senkron olmalı).
 const HUB_SERVED = {
-  guide: ["tr", "en"],
+  guide: ["tr", "en", "de"],
   comparison: ["tr", "en", "de"],
 };
+
+// Section modeli dışındaki TR-only tekil sayfalar (i18n-paths.ts
+// TR_ONLY_EXACT_PATHS ile senkron olmalı).
+const TR_ONLY_EXACT = new Set([
+  "en-iyi/turkiye",
+  "en-iyi/yurt-disindaki-turkler",
+]);
 
 function prefix(locale) {
   return locale === DEFAULT_LOCALE ? "" : `/${locale}`;
@@ -134,6 +217,9 @@ function resolveRedirect(pathname) {
   const urlLocale = ml === "en" || ml === "de" ? ml : DEFAULT_LOCALE;
   const rest = urlLocale === DEFAULT_LOCALE ? segs : segs.slice(1);
   if (!rest.length) return null;
+  if (urlLocale !== DEFAULT_LOCALE && TR_ONLY_EXACT.has(rest.join("/"))) {
+    return `/${rest.join("/")}`;
+  }
   const section = sectionForSlug(rest[0]);
   if (!section || !MANAGED.includes(section)) return null;
   // Hub: localized hub slug'ına kanonikleştir (yalnızca hub-served diller).
@@ -152,24 +238,34 @@ function resolveRedirect(pathname) {
   return target === pathname ? null : target;
 }
 const redirectCases = [
-  // Flagship artık 3 dilde servis ediliyor → eski yanlış URL'ler dilin KENDİ
-  // lokalize URL'sine 301'lenir.
+  // Tüm rehber/karşılaştırma detayları 3 dilde servis ediliyor → eski yanlış
+  // URL'ler dilin KENDİ lokalize URL'sine 301'lenir.
   ["/de/rehber/vpn-nedir", "/de/ratgeber/was-ist-ein-vpn"],
   ["/en/rehber/vpn-nedir", "/en/guide/what-is-a-vpn"],
   ["/en/guide/what-is-a-vpn", null],
   ["/de/ratgeber/was-ist-ein-vpn", null],
-  // TR-only detaylar TR kanoniğe 301.
-  ["/en/rehber/ogrenciler-icin-vpn", "/rehber/ogrenciler-icin-vpn"],
-  ["/de/karsilastir/proton-vs-mullvad", "/karsilastir/proton-vs-mullvad"],
+  ["/en/rehber/ogrenciler-icin-vpn", "/en/guide/vpn-for-students"],
+  ["/de/rehber/gamerlar-icin-vpn", "/de/ratgeber/vpn-fuer-gamer"],
+  ["/de/karsilastir/proton-vs-mullvad", "/de/vergleich/proton-vs-mullvad"],
+  ["/en/karsilastir/nordvpn-vs-surfshark", "/en/comparison/nordvpn-vs-surfshark"],
+  ["/en/comparison/nordvpn-vs-surfshark", null],
+  // Kayıtlı olmayan slug → politika gereği TR kanonik.
   ["/de/kategori/streaming", "/kategori/streaming"],
-  // Hub kanonikleştirme (yalnızca hub-served diller).
+  ["/en/guide/bilinmeyen-rehber", "/rehber/bilinmeyen-rehber"],
+  // Hub kanonikleştirme (üç dil de hub-served).
   ["/en/rehber", "/en/guide"],
+  ["/de/rehber", "/de/ratgeber"],
   ["/en/karsilastir", "/en/comparison"],
   ["/de/karsilastir", "/de/vergleich"],
-  ["/de/rehber", null], // DE guide hub içeriği yok → mevcut davranış korunur
   ["/rehber", null],
   ["/karsilastir", null],
   ["/rehber/vpn-nedir", null],
+  ["/karsilastir/proton-vs-mullvad", null],
+  // Section modeli dışındaki TR-only tekil sayfalar.
+  ["/en/en-iyi/turkiye", "/en-iyi/turkiye"],
+  ["/de/en-iyi/yurt-disindaki-turkler", "/en-iyi/yurt-disindaki-turkler"],
+  ["/en-iyi/turkiye", null],
+  ["/en/en-iyi/gizlilik", null], // lokalize use-case etkilenmez
   ["/blog/vpn-nedir-neden-gerekli", null],
   ["/en/araclar/ip-adresim", null],
 ];
@@ -213,10 +309,14 @@ function resolveRewrite(pathname) {
 const rewriteCases = [
   ["/en/guide/what-is-a-vpn", "/en/rehber/vpn-nedir"],
   ["/de/ratgeber/was-ist-ein-vpn", "/de/rehber/vpn-nedir"],
+  ["/en/guide/vpn-for-students", "/en/rehber/ogrenciler-icin-vpn"],
+  ["/de/ratgeber/vpn-fuer-gamer", "/de/rehber/gamerlar-icin-vpn"],
+  ["/en/comparison/proton-vs-mullvad", "/en/karsilastir/proton-vs-mullvad"],
+  ["/de/vergleich/nordvpn-vs-surfshark", "/de/karsilastir/nordvpn-vs-surfshark"],
   ["/en/guide", "/en/rehber"],
+  ["/de/ratgeber", "/de/rehber"],
   ["/en/comparison", "/en/karsilastir"],
   ["/de/vergleich", "/de/karsilastir"],
-  ["/de/ratgeber", null], // DE guide hub servis edilmiyor
   ["/rehber/vpn-nedir", null], // TR zaten iç route
   ["/en/rehber", null], // Türkçe slug rewrite edilmez (301'lenir)
   ["/en/araclar/ip-adresim", null],
@@ -248,6 +348,12 @@ const requiredLiterals = [
   'slug: "vpn-nedir"',
   'slug: "what-is-a-vpn"',
   'slug: "was-ist-ein-vpn"',
+  'slug: "free-vs-paid-vpn"',
+  'slug: "kostenloses-vs-kostenpflichtiges-vpn"',
+  'slug: "vpn-for-students"',
+  'slug: "vpn-fuer-gamer"',
+  'slug: "ist-vpn-in-der-tuerkei-legal"',
+  'slug: "nordvpn-vs-surfshark"',
 ];
 const missing = requiredLiterals.filter((l) => !i18nPathsSrc.includes(l));
 if (missing.length) fail(`i18n-paths.ts spec'ten sapmış, eksik: ${missing.join(" | ")}`);
@@ -297,21 +403,22 @@ for (const file of walk(SRC)) {
 if (scanHits === 0) pass("Kaynak taraması: hardcoded yanlış-dil section URL'i bulunamadı");
 
 // ---------------------------------------------------------------------------
-// 6) Sitemap (statik): guide + comparison detayları TR-only mu?
+// 6) Sitemap (statik): detaylar registry-driven mı, statik TR-slug listeleri
+//    kaldırıldı mı?
 // ---------------------------------------------------------------------------
 const sitemapSrc = readFileSync(join(SRC, "app", "sitemap.xml", "route.ts"), "utf8");
-function assertTrOnlyBlock(label, anchor) {
-  const idx = sitemapSrc.indexOf(anchor);
-  if (idx === -1) {
-    warn(`Sitemap: "${anchor}" bloğu bulunamadı (yapı değişmiş olabilir)`);
-    return;
-  }
-  const window = sitemapSrc.slice(idx, idx + 320);
-  if (/locales:\s*trOnly/.test(window)) pass(`Sitemap: ${label} TR-only`);
-  else fail(`Sitemap: ${label} TR-only değil (yanlış-dil URL sitemap'e girebilir)`);
+if (/const guidePaths|const comparisonPaths|const guideSlugs|const comparisonSlugs/.test(sitemapSrc)) {
+  fail("Sitemap: statik guide/comparison listeleri hâlâ mevcut (registry-driven olmalı)");
+} else if (sitemapSrc.includes("CONTENT_REGISTRY") && sitemapSrc.includes("SECTION_HUB_SERVED")) {
+  pass("Sitemap: guide/comparison detayları + hub'lar registry-driven üretiliyor");
+} else {
+  fail("Sitemap: CONTENT_REGISTRY/SECTION_HUB_SERVED tabanlı üretim bulunamadı");
 }
-assertTrOnlyBlock("rehber detayları (guidePaths)", "const guidePaths");
-assertTrOnlyBlock("karşılaştırma detayları (comparisonPaths)", "const comparisonPaths");
+if (/trOnlyUseCases/.test(sitemapSrc)) {
+  pass("Sitemap: TR-only use-case sayfaları (turkiye, yurt-disindaki-turkler) TR-only");
+} else {
+  warn("Sitemap: trOnlyUseCases bloğu bulunamadı (yapı değişmiş olabilir)");
+}
 
 // ---------------------------------------------------------------------------
 // 7) Opsiyonel: canlı sitemap XML denetimi
@@ -334,6 +441,8 @@ async function checkLiveSitemap(url) {
       // olmamalı (yerine /en/guide, /en/comparison, /de/vergleich girer).
       /\/(en|de)\/rehber$/,
       /\/(en|de)\/karsilastir$/,
+      // TR-only tekil use-case sayfalarının EN/DE varyantları 301'lenir.
+      /\/(en|de)\/en-iyi\/(turkiye|yurt-disindaki-turkler)$/,
     ];
     const bad = locs.filter((l) => badPatterns.some((re) => re.test(l)));
     if (bad.length) bad.forEach((l) => fail(`Sitemap'te yanlış-dil URL: ${l}`));

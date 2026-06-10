@@ -1,9 +1,10 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
+import { SECTION_SLUGS, DEFAULT_LOCALE, type AppLocale } from "@/lib/i18n-paths";
 
 const COMPARISONS = [
   {
@@ -31,6 +32,12 @@ const COMPARISONS = [
 export function ComparisonBlock() {
   const t = useTranslations("home.comparisons");
   const blockT = useTranslations("homeBlocks.comparisons");
+  const rawLocale = useLocale();
+  const locale: AppLocale =
+    rawLocale === "en" || rawLocale === "de" ? rawLocale : DEFAULT_LOCALE;
+  // Aktif dilin yerelleştirilmiş karşılaştırma section slug'ı (Link locale
+  // prefix'ini kendisi ekler) — örn. en: /comparison, de: /vergleich.
+  const comparisonBase = `/${SECTION_SLUGS[locale].comparison}`;
 
   return (
     <section className="py-16 sm:py-20">
@@ -40,7 +47,7 @@ export function ComparisonBlock() {
             {t("title")}
           </h2>
           <Link
-            href="/karsilastir"
+            href={comparisonBase}
             className="text-sm font-medium text-brand-700 hover:underline inline-flex items-center gap-1"
           >
             {blockT("allLink")} <ArrowRight className="size-3.5" />
@@ -57,7 +64,7 @@ export function ComparisonBlock() {
             return (
               <Link
                 key={c.slug}
-                href={`/karsilastir/${c.slug}`}
+                href={`${comparisonBase}/${c.slug}`}
                 className="group"
               >
                 <Card className="p-5 hover:border-brand-300 hover:shadow-md transition-all h-full">

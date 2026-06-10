@@ -17,11 +17,14 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
+import { defaultLocaleAlternates } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Türkiye İçin En İyi VPN'ler (2026)",
   description:
     "Türkiye'de yasalı, hızlı ve güvenilir VPN seçimi. TR sunucusu, DPI bypass, BluTV/Exxen erişimi ve gizlilik için 2026'nın en iyi seçimleri.",
+  // İçerik yalnızca Türkçe servis ediliyor; EN/DE istekleri middleware 301'ler.
+  alternates: defaultLocaleAlternates("/en-iyi/turkiye"),
 };
 
 type Props = { params: Promise<{ locale: string }> };

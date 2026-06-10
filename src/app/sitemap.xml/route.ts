@@ -20,12 +20,9 @@ import {
 
 export const revalidate = 3600;
 
-const comparisonSlugs = [
-  "nordvpn-vs-surfshark",
-  "expressvpn-vs-nordvpn",
-  "proton-vs-mullvad",
-];
-
+// NOT: rehber ve karşılaştırma DETAY sayfaları CONTENT_REGISTRY üzerinden
+// lokalize gruplar olarak üretilir (tr/en/de yerelleştirilmiş slug'larıyla);
+// burada statik liste tutulmaz.
 const useCaseSlugs = [
   "gizlilik",
   "streaming",
@@ -36,20 +33,6 @@ const useCaseSlugs = [
 ];
 
 const deviceSlugs = ["android", "iphone", "ipad", "smart-tv"];
-
-// NOT: "vpn-nedir" CONTENT_REGISTRY üzerinden lokalize grup olarak üretilir
-// (tr/en/de yerelleştirilmiş slug'larıyla); bu TR-only listede yer almaz.
-const guideSlugs = [
-  "ucretsiz-vs-ucretli-vpn",
-  "vpn-guvenlik-kontrol-listesi",
-  "turkiye-de-vpn-yasal-mi",
-  "ogrenciler-icin-vpn",
-  "yurt-disindaki-turkler-icin-vpn",
-  "aile-ve-cocuklar-icin-vpn",
-  "uzaktan-calisanlar-icin-vpn",
-  "yaslilar-icin-vpn",
-  "gamerlar-icin-vpn",
-];
 
 const toolPaths = [
   { path: "/araclar", priority: 0.85, changefreq: "weekly" },
@@ -109,14 +92,6 @@ export async function GET() {
     changefreq: "weekly",
   }));
 
-  // Karşılaştırma DETAY içerikleri yalnızca Türkçe → TR-only.
-  const comparisonPaths: Entry[] = comparisonSlugs.map((slug) => ({
-    path: `/karsilastir/${slug}`,
-    priority: 0.8,
-    changefreq: "weekly",
-    locales: trOnly,
-  }));
-
   // Türkçe-only use-case sayfaları (turkiye, yurt-disindaki-turkler) yalnızca TR.
   const trOnlyUseCases = new Set(["turkiye", "yurt-disindaki-turkler"]);
   const useCasePaths: Entry[] = useCaseSlugs.map((slug) => ({
@@ -132,21 +107,11 @@ export async function GET() {
     changefreq: "monthly",
   }));
 
-  // Rehber DETAY içerikleri yalnızca Türkçe → TR-only.
-  const guidePaths: Entry[] = guideSlugs.map((slug) => ({
-    path: `/rehber/${slug}`,
-    priority: 0.75,
-    changefreq: "monthly",
-    locales: trOnly,
-  }));
-
   const all: Entry[] = [
     ...staticPaths,
     ...reviewPaths,
-    ...comparisonPaths,
     ...useCasePaths,
     ...devicePaths,
-    ...guidePaths,
     ...toolPaths,
   ];
 
@@ -245,12 +210,16 @@ ${alt}
       const served = availableLocales(entry.id);
       const section = entry.translations[DEFAULT_LOCALE]?.section;
       if (!section || served.length === 0) return [];
+      const meta =
+        section === "comparison"
+          ? { priority: 0.8, changefreq: "weekly" }
+          : { priority: 0.75, changefreq: "monthly" };
       return localizedGroupXml(
         (l) =>
           `${siteConfig.url}${getLocalizedPath({ locale: l, section, contentId: entry.id })}`,
         served,
-        0.75,
-        "monthly",
+        meta.priority,
+        meta.changefreq,
       );
     }),
   ].join("\n");

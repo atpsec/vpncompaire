@@ -8,298 +8,194 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { AudiencePicks } from "@/components/audience/audience-picks";
-import { absoluteUrl, defaultLocaleAlternates } from "@/lib/site";
-
-const baseMeta: Metadata = {
-  title:
-    "Gamerlar İçin En İyi VPN (2026) — Düşük Ping, DDoS Koruması, Bölge Atlama",
-  description:
-    "Oyuncular için VPN: ping/jitter testleri, DDoS koruması, oyun sunucusu bölge değişimi (Valorant, CS2, LoL). 2026'da en iyi gaming VPN'leri.",
-  alternates: { canonical: absoluteUrl("/rehber/gamerlar-icin-vpn") },
-  openGraph: {
-    title: "Gamerlar İçin En İyi VPN (2026)",
-    description:
-      "Düşük ping, DDoS koruması ve bölge bypass için en iyi gaming VPN'leri.",
-    url: absoluteUrl("/rehber/gamerlar-icin-vpn"),
-    type: "article",
-  },
-  keywords: [
-    "gaming vpn",
-    "oyun vpn",
-    "düşük ping vpn",
-    "ddos koruması",
-    "valorant vpn",
-    "cs2 vpn",
-    "league of legends vpn bölge",
-  ],
-};
+import { absoluteUrl, contentAlternates } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  SECTION_HUB_SERVED,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
+import { getGamersContent } from "@/content/guides/vpn-for-gamers";
 
 type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata(): Metadata {
-  // İçerik yalnızca Türkçe servis ediliyor; canonical/hreflang TR'ye sabit.
+function asAppLocale(locale: string): AppLocale {
+  return locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const c = getGamersContent(locale);
+  const url = absoluteUrl(
+    getLocalizedPath({
+      locale: asAppLocale(locale),
+      section: "guide",
+      contentId: "vpn-for-gamers",
+    }),
+  );
   return {
-    ...baseMeta,
-    alternates: defaultLocaleAlternates("/rehber/gamerlar-icin-vpn"),
+    title: c.metaTitle,
+    description: c.metaDescription,
+    keywords: c.keywords,
+    // Canonical aktif dilin yerelleştirilmiş URL'si; hreflang yalnızca gerçekten
+    // servis edilen dilleri işaret eder (bkz. CONTENT_REGISTRY.served).
+    alternates: contentAlternates("vpn-for-gamers", locale),
     openGraph: {
-      ...baseMeta.openGraph,
-      url: absoluteUrl("/rehber/gamerlar-icin-vpn"),
+      title: c.ogTitle,
+      description: c.ogDescription,
+      url,
+      type: "article",
     },
   };
 }
 
-const faqs = [
-  {
-    q: "VPN oyunda ping'i düşürür mü yoksa yükseltir mi?",
-    a: "Genelde yükseltir — ek hop eklendiği için. Ama bazı senaryolarda düşürür: ISP'nin yavaş peering yaptığı oyun sunucusuna VPN kestirme rota sunabilir. ExpressVPN ve NordVPN bu konuda en iyi sonuç verir; deneme süresi içinde kendi bağlantını test et.",
-  },
-  {
-    q: "VPN kullanmak yasak mı? Hesap banlanır mı?",
-    a: "Çoğu oyun yayıncısının kullanım şartlarında 'farklı bölgeden oynamak' yasak ama VPN tespiti zayıf. Riot Games (Valorant, LoL) en agresif denetim yapar — bölge değiştirmek için VPN kullanırken yakalanırsan ban riski var. Sadece DDoS koruması için kullanıyorsan risk minimum.",
-  },
-  {
-    q: "DDoS saldırısına karşı VPN nasıl korur?",
-    a: "Saldırgan gerçek IP'ni göremez — VPN sunucusunun IP'sini görür. DDoS saldırısı VPN sunucusuna yapılır, sen değil. Sıralı maçlarda (CS2, Valorant, Fortnite turnuvaları) sürekli yenilen IP'lerle korunursun.",
-  },
-  {
-    q: "Hangi VPN PlayStation/Xbox'ta çalışır?",
-    a: "Konsollar VPN uygulamasını desteklemez. Çözüm: VPN'i router'a kur (ExpressVPN, NordVPN, Surfshark router kılavuzları sunar). Veya PC'de VPN açıp internet paylaşımı yap.",
-  },
-  {
-    q: "Türkiye sunucu fiyatları daha ucuz mu?",
-    a: "Bazı oyunlarda evet — Steam bölge fiyatlandırması Türkiye'de daha düşüktü ama 2022'den sonra büyük ölçüde dolarize oldu. PlayStation Store ve Xbox Store'da bazı oyunlar hâlâ ucuz, ama VPN ile bölge değiştirmek hesap askıya alınmasına yol açabilir.",
-  },
-];
-
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  const { locale: rawLocale } = await params;
+  setRequestLocale(rawLocale);
+  const locale = asAppLocale(rawLocale);
+  const c = getGamersContent(locale);
+
+  // Rehber hub'ı bu dilde yerelleştirilmiş slug ile servis ediliyorsa onu
+  // kullan; next-intl Link, aktif locale prefix'ini kendisi ekler.
+  const guideHubServed = SECTION_HUB_SERVED.guide?.includes(locale) ?? false;
+  const guideHubHref = `/${guideHubServed ? SECTION_SLUGS[locale].guide : SECTION_SLUGS[DEFAULT_LOCALE].guide}`;
+
+  const breadcrumbPaths = [
+    { name: c.breadcrumb.home, path: locale === DEFAULT_LOCALE ? "/" : `/${locale}` },
+    {
+      name: c.breadcrumb.guides,
+      path: guideHubServed
+        ? getLocalizedSectionPath(locale, "guide")
+        : `${locale === DEFAULT_LOCALE ? "" : `/${locale}`}/${SECTION_SLUGS[DEFAULT_LOCALE].guide}`,
+    },
+    {
+      name: c.breadcrumb.current,
+      path: getLocalizedPath({
+        locale,
+        section: "guide",
+        contentId: "vpn-for-gamers",
+      }),
+    },
+  ];
+
+  const cardIcons = [Zap, Shield, Globe];
 
   return (
     <>
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Rehberler", path: "/rehber" },
-          {
-            name: "Gamerlar için VPN",
-            path: "/rehber/gamerlar-icin-vpn",
-          },
-        ])}
-      />
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={breadcrumbSchema(breadcrumbPaths)} />
+      <JsonLd data={faqSchema(c.faqs)} />
 
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {c.breadcrumb.home}
           </Link>{" "}
           ›{" "}
-          <Link href="/rehber" className="hover:text-ink">
-            Rehberler
+          <Link href={guideHubHref} className="hover:text-ink">
+            {c.breadcrumb.guides}
           </Link>{" "}
-          ›{" "}
-          <span className="text-ink-strong">Gamerlar için VPN</span>
+          › <span className="text-ink-strong">{c.breadcrumb.current}</span>
         </p>
 
         <header className="mt-6">
           <Badge variant="brand">
-            <Gamepad2 className="size-3" /> Gaming
+            <Gamepad2 className="size-3" /> {c.badge}
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            Gamerlar için en iyi VPN
+            {c.h1}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            Düşük ping, DDoS koruması ve bölge bypass için en iyi 3 VPN.
-            Valorant, CS2, League of Legends, Fortnite testlerimize göre.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{c.lede}</p>
         </header>
 
         <AudiencePicks
-          heading="Gamerlar için en iyi 3 VPN"
-          subheading="Ping etkisi, DDoS koruması ve istikrara göre."
-          picks={[
-            {
-              slug: "nordvpn",
-              label: "Düşük ping etkisi gözlenenlerden",
-              reason:
-                "Testlerimizde NordLynx protokolü düşük ping etkisi gösteren protokoller arasında öne çıktı — Türkiye-Almanya rotasında ortalama %3-5 ping artışı gözlendi. Threat Protection DDoS koruma katmanı ekler.",
-            },
-            {
-              slug: "expressvpn",
-              label: "Testlerimizde istikrarlı bağlantı",
-              reason:
-                "Testlerimizde Lightway protokolü oyun sırasında tutarlı bağlantı sundu. Sağlayıcı verisine göre 105+ ülkede sunucu — Pazifik veya Asya sunucularına bağlanırken değerlendirilebilir.",
-            },
-            {
-              slug: "pia",
-              label: "Port forwarding + uzun dönem fiyat",
-              reason:
-                "Sağlayıcı politikasına göre port forwarding (peer-to-peer oyunlar için) ve açık kaynak istemci sunulmaktadır. Uzun dönem planda aylık $2.03 fiyatla gamer bütçesine uygun bir seçenek olabilir.",
-            },
-          ]}
+          heading={c.picks.heading}
+          subheading={c.picks.subheading}
+          picks={c.picks.items}
         />
 
         <article className="mt-16 prose prose-stone max-w-none">
-          <h2>Gaming için VPN — ne zaman mantıklı, ne zaman değil?</h2>
+          <h2>{c.whenMakesSense.h2}</h2>
 
-          <h3>Mantıklı senaryolar</h3>
+          <h3>{c.whenMakesSense.good.h3}</h3>
           <ul>
-            <li>
-              <strong>DDoS saldırısına maruz kaldıysan:</strong> Rakip oyuncu
-              IP&apos;ni öğrendi — VPN yeni IP verir, saldırı VPN sunucusuna gider.
-            </li>
-            <li>
-              <strong>ISP throttling:</strong> Bazı ISP&apos;ler oyun trafiğini
-              yavaşlatır. VPN bu davranışı bypass edebilir.
-            </li>
-            <li>
-              <strong>Bölge bazlı oyun erişimi:</strong> Çin&apos;e özel oyunlar
-              veya bölge kısıtlı sunucular.
-            </li>
-            <li>
-              <strong>Erken erişim:</strong> Yeni oyunlar bazı bölgelerde önce
-              çıkar.
-            </li>
-            <li>
-              <strong>Halka açık Wi-Fi&apos;den oynamak:</strong> Yurtta, kafede,
-              otelde — DDoS riski artar.
-            </li>
+            {c.whenMakesSense.good.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h3>Mantıksız/zararlı senaryolar</h3>
+          <h3>{c.whenMakesSense.bad.h3}</h3>
           <ul>
-            <li>
-              <strong>Daha düşük ping için:</strong> VPN ek hop ekler — neredeyse
-              her zaman ping&apos;i yükseltir. ISP routing&apos;in çok kötüyse
-              ender istisna.
-            </li>
-            <li>
-              <strong>Hile için:</strong> VPN aim-bot, wallhack gibi hileleri
-              gizlemez. Oyun yayıncısı tespit ederse hesap banlanır.
-            </li>
-            <li>
-              <strong>Sıralı/turnuva maçlarında:</strong> Riot Games gibi
-              yayıncılar bölge değişimi tespit ederse hesabı askıya alır.
-            </li>
+            {c.whenMakesSense.bad.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h2>Ping etkisi — ortalama VPN performansı</h2>
-          <p>
-            Türkiye&apos;den (İstanbul) farklı oyun sunucularına bağlanırken VPN
-            ping etkisi (testlerimize göre, Nisan-Mayıs 2026):
-          </p>
+          <h2>{c.pingImpact.h2}</h2>
+          <p>{c.pingImpact.intro}</p>
           <table>
             <thead>
               <tr>
-                <th>Oyun sunucusu</th>
-                <th>VPN&apos;siz ping</th>
-                <th>NordVPN</th>
-                <th>ExpressVPN</th>
-                <th>Surfshark</th>
+                {c.pingImpact.headers.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Frankfurt (EU)</td>
-                <td>45ms</td>
-                <td>52ms</td>
-                <td>54ms</td>
-                <td>58ms</td>
-              </tr>
-              <tr>
-                <td>Londra (EU West)</td>
-                <td>62ms</td>
-                <td>68ms</td>
-                <td>71ms</td>
-                <td>75ms</td>
-              </tr>
-              <tr>
-                <td>New York (NA East)</td>
-                <td>115ms</td>
-                <td>124ms</td>
-                <td>122ms</td>
-                <td>132ms</td>
-              </tr>
-              <tr>
-                <td>Tokyo (Asia)</td>
-                <td>230ms</td>
-                <td>245ms</td>
-                <td>242ms</td>
-                <td>258ms</td>
-              </tr>
+              {c.pingImpact.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, i) => (
+                    <td key={i}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
           <p>
-            <strong>Sonuç:</strong> Testlerimizde yakın sunucularda %10-15 ping
-            artışı, uzak sunucularda %5-8 gözlendi. NordVPN ve ExpressVPN bu
-            kategoride düşük etki gözlenenler arasında yer aldı. Sonuçlar test
-            tarihindeki gözlemlerimizi yansıtır; senin kendi ağ koşullarında
-            farklılık gösterebilir.
+            <strong>{c.pingImpact.resultBold}</strong>
+            {c.pingImpact.resultText}
           </p>
 
-          <h2>DDoS koruması — gerçek koruma seviyesi</h2>
-          <p>
-            VPN DDoS koruması iki katmanda çalışır:
-          </p>
+          <h2>{c.ddos.h2}</h2>
+          <p>{c.ddos.intro}</p>
           <ol>
-            <li>
-              <strong>IP gizleme:</strong> Saldırgan gerçek IP&apos;ni göremez,
-              sadece VPN sunucusunun IP&apos;sini.
-            </li>
-            <li>
-              <strong>VPN sağlayıcı altyapısı:</strong> Büyük sağlayıcıların
-              (NordVPN, ExpressVPN) sunucu altyapısı DDoS koruma katmanı içerir.
-            </li>
+            {c.ddos.layers.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ol>
-          <p>
-            Hardcore esports oyuncuları için VPN tek başına yeterli değil —
-            Cloudflare Spectrum veya benzeri kurumsal koruma da gerekebilir.
-            Casual streaming ve ranked oyunlar için VPN yeterli.
-          </p>
+          <p>{c.ddos.outro}</p>
 
-          <h2>Bölge atlama — riskleri ve sınırlamaları</h2>
-          <p>
-            <strong>Riot Games (Valorant, LoL):</strong> Bölge tespit sistemi
-            agresif. Hesap askıya alma riski yüksek. Sadece DDoS koruması için
-            kendi bölgendeki sunucuyu kullan.
-          </p>
-          <p>
-            <strong>Steam:</strong> Bölge bazlı fiyat farkı 2022&apos;ye göre çok
-            azaldı. Bölge değiştirme hesap askıya alma sebebi.
-          </p>
-          <p>
-            <strong>PlayStation/Xbox Store:</strong> Bölge değişimi tespit edilirse
-            hesap askıya alınabilir; ödeme yöntemleri farklı bölgelerde çalışmaz.
-          </p>
-          <p>
-            <strong>Genel öneri:</strong> Bölge atlama yerine VPN&apos;i DDoS
-            koruması ve kendi bölgendeki ağ kalitesi için kullan.
-          </p>
+          <h2>{c.regionHopping.h2}</h2>
+          {c.regionHopping.paragraphs.map((item) => (
+            <p key={item.bold}>
+              <strong>{item.bold}</strong>
+              {item.text}
+            </p>
+          ))}
 
-          <h2>Konsol kurulumu — router yöntemi</h2>
-          <p>
-            PlayStation, Xbox ve Switch&apos;te doğrudan VPN uygulaması yok.
-            Çözüm:
-          </p>
+          <h2>{c.console.h2}</h2>
+          <p>{c.console.intro}</p>
           <ol>
-            <li>
-              <strong>Router&apos;a kur:</strong> ASUS, GL.iNet, OPNsense gibi
-              router&apos;lar VPN istemci destekler.
-            </li>
-            <li>
-              <strong>PC paylaşımı:</strong> PC&apos;de VPN aç → Mobil hotspot
-              veya ethernet paylaşımıyla konsola ver.
-            </li>
-            <li>
-              <strong>Smart DNS:</strong> NordVPN SmartDNS özelliği ile
-              konsoldan DNS değiştirerek bazı kısıtlamaları aşabilirsin (DDoS
-              koruması olmaz).
-            </li>
+            {c.console.steps.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ol>
 
-          <h2>Sıkça sorulan sorular</h2>
-          {faqs.map((f) => (
+          <h2>{c.faqHeading}</h2>
+          {c.faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
               <p>{f.a}</p>
@@ -308,56 +204,32 @@ export default async function Page({ params }: Props) {
         </article>
 
         <section className="mt-12 grid sm:grid-cols-3 gap-4">
-          <Card className="p-5">
-            <Zap className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              Düşük gecikme
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              WireGuard tabanlı protokoller.
-            </p>
-          </Card>
-          <Card className="p-5">
-            <Shield className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              DDoS koruması
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              IP gizleme + altyapı koruma.
-            </p>
-          </Card>
-          <Card className="p-5">
-            <Globe className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              105+ ülke
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Bölge bypass (riske dikkat).
-            </p>
-          </Card>
+          {c.cards.map((card, i) => {
+            const Icon = cardIcons[i] ?? Zap;
+            return (
+              <Card key={card.title} className="p-5">
+                <Icon className="size-6 text-brand-600" />
+                <h3 className="mt-3 font-semibold text-ink-strong">
+                  {card.title}
+                </h3>
+                <p className="mt-1 text-sm text-ink-muted">{card.desc}</p>
+              </Card>
+            );
+          })}
         </section>
 
         <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">İlgili sayfalar</p>
+          <p className="text-sm text-ink-muted">{c.related.label}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            <Link
-              href="/en-iyi/oyun"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Oyun için en iyi VPN
-            </Link>
-            <Link
-              href="/rehber/vpn-guvenlik-kontrol-listesi"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Güvenlik kontrol listesi
-            </Link>
-            <Link
-              href="/sana-uygun-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Quiz: Sana uygun VPN
-            </Link>
+            {c.related.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+              >
+                {link.text}
+              </Link>
+            ))}
           </div>
         </section>
       </Container>
