@@ -8,109 +8,89 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { AudiencePicks } from "@/components/audience/audience-picks";
-import { absoluteUrl, defaultLocaleAlternates } from "@/lib/site";
-
-const baseMeta: Metadata = {
-  title: "Öğrenciler İçin En İyi VPN (2026) — Kampüs, JSTOR ve İndirim Rehberi",
-  description:
-    "Öğrenciler için VPN seçimi: kampüs Wi-Fi güvenliği, akademik veritabanı erişimi (JSTOR, ScienceDirect), öğrenci indirimleri ve bütçeye uygun en iyi 3 VPN.",
-  alternates: { canonical: absoluteUrl("/rehber/ogrenciler-icin-vpn") },
-  openGraph: {
-    title: "Öğrenciler İçin En İyi VPN (2026)",
-    description:
-      "Kampüs Wi-Fi, akademik veritabanı erişimi ve öğrenci indirimleri için en iyi VPN önerileri.",
-    url: absoluteUrl("/rehber/ogrenciler-icin-vpn"),
-    type: "article",
-  },
-  keywords: [
-    "öğrenci vpn",
-    "ucuz vpn",
-    "öğrenci indirimi vpn",
-    "kampüs wifi güvenliği",
-    "jstor erişim vpn",
-    "akademik veritabanı vpn",
-  ],
-};
+import { absoluteUrl, contentAlternates } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  SECTION_HUB_SERVED,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
+import { getVpnForStudentsContent } from "@/content/guides/vpn-for-students";
 
 type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata(): Metadata {
-  // İçerik yalnızca Türkçe servis ediliyor; canonical/hreflang TR'ye sabit.
+function asAppLocale(locale: string): AppLocale {
+  return locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const appLocale = asAppLocale(locale);
+  const c = getVpnForStudentsContent(locale);
   return {
-    ...baseMeta,
-    alternates: defaultLocaleAlternates("/rehber/ogrenciler-icin-vpn"),
+    title: c.metaTitle,
+    description: c.metaDescription,
+    keywords: c.keywords,
+    // Canonical aktif dilin yerelleştirilmiş URL'si; hreflang yalnızca gerçekten
+    // servis edilen dilleri işaret eder (bkz. CONTENT_REGISTRY.served).
+    alternates: contentAlternates("vpn-for-students", locale),
     openGraph: {
-      ...baseMeta.openGraph,
-      url: absoluteUrl("/rehber/ogrenciler-icin-vpn"),
+      title: c.ogTitle,
+      description: c.ogDescription,
+      url: absoluteUrl(
+        getLocalizedPath({
+          locale: appLocale,
+          section: "guide",
+          contentId: "vpn-for-students",
+        }),
+      ),
+      type: "article",
     },
   };
 }
 
-const faqs = [
-  {
-    q: "Öğrencilere özel VPN indirimi var mı?",
-    a: "Doğrudan öğrenci indirimi nadirdir. Bunun yerine 2-3 yıllık planlar en uygun fiyatı sunar — Surfshark $2.19/ay (2 yıl) ve NordVPN $3.39/ay (2 yıl + 3 ay) öğrenci bütçesine en uygun seçenekler. Yenileme döneminde fiyat yükseldiği için otomatik yenilemeyi kapatmak önemli.",
-  },
-  {
-    q: "VPN ile JSTOR ve ScienceDirect'e erişebilir miyim?",
-    a: "Hayır, ücretli akademik veritabanları üniversite IP'leri üzerinden çalışır. VPN üniversite ağına bağlanmak için kullanılabilir (üniversitenizin sunduğu kurumsal VPN), ama ticari bir VPN size üniversitenin abonelik haklarını vermez.",
-  },
-  {
-    q: "Kampüs Wi-Fi'de VPN kullanmam gerekir mi?",
-    a: "Evet. Kampüs ve yurt ağları açık veya zayıf şifrelidir; aynı ağdaki diğer kullanıcılar trafiğinizi pasif olarak dinleyebilir. VPN, login bilgilerinizi ve gezinti geçmişinizi şifreler.",
-  },
-  {
-    q: "Ücretsiz VPN öğrenci için yeterli mi?",
-    a: "Çoğu ücretsiz VPN gelirini veri satışından sağlar — öğrenci kimliği gibi hassas bilgilerinizin ele geçirildiği ağlarda bu risk artar. Proton VPN'in ücretsiz planı istisnadır; sınırlı (3 ülke, tek cihaz) ama güvenlidir.",
-  },
-  {
-    q: "Yurt dışı staj/değişim programında VPN gerekli mi?",
-    a: "Evet — Türkiye'deki bankacılık, TRT, BluTV gibi servislere yurt dışından erişmek için Türkiye sunucusu olan bir VPN şart. NordVPN, Surfshark ve ExpressVPN Türkiye sanal sunucusu sunar.",
-  },
-];
-
-const howToSteps = [
-  {
-    name: "Bütçeni belirle",
-    text: "Aylık 50 TL altı için 2-3 yıllık plan al; aylık plan öğrenci bütçesi için çok pahalı.",
-  },
-  {
-    name: "Cihaz sayını say",
-    text: "Telefon + dizüstü + tablet en az 3 cihaz demek. Surfshark sınırsız, NordVPN 10 cihaz destekler.",
-  },
-  {
-    name: "Yurt dışına gidecek misin kontrol et",
-    text: "Erasmus, staj, değişim programında Türkiye sunucusu şart. NordVPN ve Surfshark sunuyor.",
-  },
-  {
-    name: "Otomatik yenilemeyi kapat",
-    text: "Yenileme dönemi fiyatı 2-3 katına çıkıyor. İlk dönem bitince elle yenile veya başka sağlayıcıya geç.",
-  },
-];
-
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  const { locale: rawLocale } = await params;
+  setRequestLocale(rawLocale);
+  const locale = asAppLocale(rawLocale);
+  const c = getVpnForStudentsContent(locale);
+
+  // Rehber hub'ı bu dilde yerelleştirilmiş slug ile servis ediliyorsa onu
+  // kullan (örn. en -> /guide); aksi halde mevcut TR-slug davranışını koru.
+  // next-intl Link, aktif locale prefix'ini kendisi ekler — href prefix'siz.
+  const guideHubServed = SECTION_HUB_SERVED.guide?.includes(locale) ?? false;
+  const guideHubHref = `/${guideHubServed ? SECTION_SLUGS[locale].guide : SECTION_SLUGS[DEFAULT_LOCALE].guide}`;
+
+  const breadcrumbPaths = [
+    { name: c.breadcrumb.home, path: locale === DEFAULT_LOCALE ? "/" : `/${locale}` },
+    {
+      name: c.breadcrumb.guides,
+      path: guideHubServed
+        ? getLocalizedSectionPath(locale, "guide")
+        : `${locale === DEFAULT_LOCALE ? "" : `/${locale}`}/${SECTION_SLUGS[DEFAULT_LOCALE].guide}`,
+    },
+    {
+      name: c.breadcrumb.current,
+      path: getLocalizedPath({
+        locale,
+        section: "guide",
+        contentId: "vpn-for-students",
+      }),
+    },
+  ];
 
   return (
     <>
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Rehberler", path: "/rehber" },
-          {
-            name: "Öğrenciler için VPN",
-            path: "/rehber/ogrenciler-icin-vpn",
-          },
-        ])}
-      />
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={breadcrumbSchema(breadcrumbPaths)} />
+      <JsonLd data={faqSchema(c.faqs)} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": "HowTo",
-          name: "Öğrenci olarak VPN nasıl seçilir?",
-          step: howToSteps.map((s, i) => ({
+          name: c.howToName,
+          step: c.howToSteps.map((s, i) => ({
             "@type": "HowToStep",
             position: i + 1,
             name: s.name,
@@ -122,162 +102,97 @@ export default async function Page({ params }: Props) {
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {c.breadcrumb.home}
           </Link>{" "}
           ›{" "}
-          <Link href="/rehber" className="hover:text-ink">
-            Rehberler
+          <Link href={guideHubHref} className="hover:text-ink">
+            {c.breadcrumb.guides}
           </Link>{" "}
-          ›{" "}
-          <span className="text-ink-strong">Öğrenciler için VPN</span>
+          › <span className="text-ink-strong">{c.breadcrumb.current}</span>
         </p>
 
         <header className="mt-6">
           <Badge variant="brand">
-            <GraduationCap className="size-3" /> Öğrenciler
+            <GraduationCap className="size-3" /> {c.badge}
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            Öğrenciler için en iyi VPN
+            {c.h1}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            Kampüs Wi-Fi güvenliği, yurt dışı staj/değişim, akademik kaynak
-            erişimi ve öğrenci bütçesine uygun en iyi 3 VPN — bağımsız test
-            sonuçlarımıza dayalı.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{c.lede}</p>
         </header>
 
         <AudiencePicks
-          heading="Öğrenciler için en iyi 3 VPN"
-          subheading="Fiyat, çoklu cihaz desteği ve denetim geçmişine göre."
-          picks={[
-            {
-              slug: "surfshark",
-              label: "Bütçe odaklı seçenek",
-              reason:
-                "Sağlayıcı politikasına göre sınırsız eşzamanlı cihaz desteği ile tek hesap birden fazla kullanıcıyı kapsayabilir. Sağlayıcının uzun dönem plan fiyatı öğrenci bütçesine uygun bir seçenek olarak değerlendirilebilir.",
-            },
-            {
-              slug: "nordvpn",
-              label: "Türkiye sunucusu + hız",
-              reason:
-                "Sağlayıcı verisine göre Türkiye sunucusu mevcut; Erasmus/değişimde Türk bankacılığı ve BluTV erişimi için değerlendirilebilir. Testlerimizde kampüs Wi-Fi koşullarında tutarlı hız gözlendi.",
-            },
-            {
-              slug: "proton-vpn",
-              label: "Ücretsiz plan seçeneği",
-              reason:
-                "Sağlayıcı politikasına göre ücretsiz plan veri satmaz ve açık kaynak istemci sunar. Hafif kullanım için değerlendirilebilir; satın alma öncesi sağlayıcının resmi koşullarını kontrol etmen önerilir.",
-            },
-          ]}
+          heading={c.picksHeading}
+          subheading={c.picksSubheading}
+          picks={c.picks}
         />
 
         <article className="mt-16 prose prose-stone max-w-none">
-          <h2>Öğrenci olarak neden VPN&apos;e ihtiyacın var?</h2>
-          <p>
-            Üniversite hayatı, gizlilik açısından özellikle riskli bir dönemdir.
-            Yurt, kampüs ve kütüphane Wi-Fi ağları açık veya zayıf şifrelidir;
-            aynı ağdaki diğer kullanıcılar trafiği pasif olarak dinleyebilir.
-            2025 EDUCAUSE araştırmasına göre kampüs ağlarında yapılan ortalama
-            siber saldırı sayısı, kurumsal ağlara göre %38 daha yüksek.
-          </p>
+          <h2>{c.whyNeed.h2}</h2>
+          <p>{c.whyNeed.p}</p>
 
-          <h3>Tipik öğrenci senaryoları</h3>
+          <h3>{c.scenarios.h3}</h3>
           <ul>
-            <li>
-              <strong>Kütüphanede ödev yaparken:</strong> Google Drive, e-posta,
-              banka hesabı login bilgileri açık Wi-Fi&apos;de risk altında.
-            </li>
-            <li>
-              <strong>Yurtta torrent indirirken:</strong> Üniversite ağ
-              yöneticisi IP üzerinden takip edebilir; bazı üniversitelerde
-              uyarı/disiplin cezası riskine yol açar.
-            </li>
-            <li>
-              <strong>Yurt dışı staj/Erasmus:</strong> Türkiye&apos;deki
-              banka, BluTV, Exxen, TRT erişimi için Türkiye sunucusu şart.
-            </li>
-            <li>
-              <strong>VPN engellenen ağlarda:</strong> Bazı kampüs ağları belli
-              siteleri engeller — VPN bu kısıtlamaları aşmana yardımcı olur.
-            </li>
+            {c.scenarios.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h2>Öğrenci bütçesine en uygun fiyatlandırma</h2>
+          <h2>{c.pricing.h2}</h2>
           <table>
             <thead>
               <tr>
-                <th>VPN</th>
-                <th>İlk dönem aylık</th>
-                <th>Cihaz</th>
-                <th>Türkiye sunucusu</th>
+                {c.pricing.head.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Surfshark (2 yıl)</td>
-                <td>$2.19</td>
-                <td>Sınırsız</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>NordVPN (2 yıl + 3 ay)</td>
-                <td>$3.39</td>
-                <td>10</td>
-                <td>✓</td>
-              </tr>
-              <tr>
-                <td>Proton VPN ücretsiz</td>
-                <td>$0</td>
-                <td>1</td>
-                <td>✗</td>
-              </tr>
+              {c.pricing.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, i) => (
+                    <td key={i}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
 
-          <h2>Akademik veritabanlarına erişim — ne yapar, ne yapmaz?</h2>
+          <h2>{c.academic.h2}</h2>
           <p>
-            <strong>VPN yapamaz:</strong> JSTOR, ScienceDirect, IEEE Xplore
-            gibi ücretli veritabanlarına ücretsiz erişim sağlamaz. Bunlar
-            üniversitenin abonelik IP&apos;leri üzerinden çalışır.
+            <strong>{c.academic.p1.bold}</strong>
+            {c.academic.p1.text}
           </p>
           <p>
-            <strong>VPN yapar:</strong> Üniversitenin sunduğu kurumsal
-            VPN&apos;e (genelde &quot;OpenVPN&quot; veya &quot;Pulse
-            Secure&quot;) bağlanırsan kampüs IP&apos;si gibi davranır ve
-            erişim açılır. Ticari VPN ise hızlı, güvenli ama akademik abonelik
-            yerine geçmez.
+            <strong>{c.academic.p2.bold}</strong>
+            {c.academic.p2.text}
           </p>
 
-          <h2>Yurt dışı değişim/staj programı senaryosu</h2>
-          <p>
-            Erasmus, Mevlana veya benzeri bir programda yurt dışındaysan:
-          </p>
+          <h2>{c.abroad.h2}</h2>
+          <p>{c.abroad.intro}</p>
           <ul>
-            <li>
-              <strong>Türk bankacılığı:</strong> Bazı bankalar yabancı
-              IP&apos;den giriş izin vermez. Türkiye sunucusu olan bir VPN şart.
-            </li>
-            <li>
-              <strong>BluTV, Exxen, TRT:</strong> Coğrafi kısıtlı — Türkiye
-              sunucusundan bağlanırsan erişim açılır.
-            </li>
-            <li>
-              <strong>WhatsApp/Telegram engeli:</strong> Bazı ülkelerde (Çin,
-              BAE) engelliyse VPN ile bypass yapabilirsin.
-            </li>
+            {c.abroad.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h2>Yapılması gereken adımlar</h2>
+          <h2>{c.stepsHeading}</h2>
           <ol>
-            {howToSteps.map((s) => (
+            {c.howToSteps.map((s) => (
               <li key={s.name}>
                 <strong>{s.name}:</strong> {s.text}
               </li>
             ))}
           </ol>
 
-          <h2>Sıkça sorulan sorular</h2>
-          {faqs.map((f) => (
+          <h2>{c.faqHeading}</h2>
+          {c.faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
               <p>{f.a}</p>
@@ -288,52 +203,39 @@ export default async function Page({ params }: Props) {
         <section className="mt-12 grid sm:grid-cols-3 gap-4">
           <Card className="p-5">
             <BookOpen className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">Kampüs Wi-Fi</h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Açık ağda login bilgilerini şifrele.
-            </p>
+            <h3 className="mt-3 font-semibold text-ink-strong">
+              {c.cards[0].title}
+            </h3>
+            <p className="mt-1 text-sm text-ink-muted">{c.cards[0].desc}</p>
           </Card>
           <Card className="p-5">
             <Globe className="size-6 text-brand-600" />
             <h3 className="mt-3 font-semibold text-ink-strong">
-              Yurt dışı erişim
+              {c.cards[1].title}
             </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Erasmus&apos;ta Türkiye bankacılığı ve BluTV.
-            </p>
+            <p className="mt-1 text-sm text-ink-muted">{c.cards[1].desc}</p>
           </Card>
           <Card className="p-5">
             <ShieldCheck className="size-6 text-brand-600" />
             <h3 className="mt-3 font-semibold text-ink-strong">
-              Kişisel veri
+              {c.cards[2].title}
             </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              ISP tarama geçmişini görmesin.
-            </p>
+            <p className="mt-1 text-sm text-ink-muted">{c.cards[2].desc}</p>
           </Card>
         </section>
 
         <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">İlgili rehberler</p>
+          <p className="text-sm text-ink-muted">{c.relatedLabel}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            <Link
-              href="/rehber/vpn-nedir"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              VPN nedir?
-            </Link>
-            <Link
-              href="/rehber/ucretsiz-vs-ucretli-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Ücretsiz vs Ücretli
-            </Link>
-            <Link
-              href="/sana-uygun-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Quiz: Sana uygun VPN
-            </Link>
+            {c.relatedLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+              >
+                {link.text}
+              </Link>
+            ))}
           </div>
         </section>
       </Container>

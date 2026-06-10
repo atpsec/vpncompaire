@@ -10,6 +10,12 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import { sectionHubAlternates } from "@/lib/site";
+import {
+  getLocalizedSectionPath,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -67,15 +73,26 @@ const comparisons: readonly Comparison[] = [
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const localeKey = locale as "tr" | "en";
+  const appLocale: AppLocale =
+    locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+  const localeKey = appLocale;
   const t = await getTranslations({ locale, namespace: "compareHub" });
+  // Aktif dilin yerelleştirilmiş karşılaştırma section slug'ı (Link locale
+  // prefix'ini kendisi ekler) — örn. en: /comparison/<slug>.
+  const comparisonBase = `/${SECTION_SLUGS[appLocale].comparison}`;
 
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: t("breadcrumbHome"), path: "/" },
-          { name: t("breadcrumbHere"), path: "/karsilastir" },
+          {
+            name: t("breadcrumbHome"),
+            path: appLocale === DEFAULT_LOCALE ? "/" : `/${appLocale}`,
+          },
+          {
+            name: t("breadcrumbHere"),
+            path: getLocalizedSectionPath(appLocale, "comparison"),
+          },
         ])}
       />
 
@@ -166,7 +183,7 @@ export default async function Page({ params }: Props) {
             return c.available ? (
               <Link
                 key={c.slug}
-                href={`/karsilastir/${c.slug}`}
+                href={`${comparisonBase}/${c.slug}`}
                 className="group"
               >
                 {inner}

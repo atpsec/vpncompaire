@@ -11,128 +11,105 @@ import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { absoluteUrl, contentAlternates } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
+import {
+  getNordvpnVsSurfsharkContent,
+  type NordSurfWinner,
+  type NordvpnVsSurfsharkContent,
+} from "@/content/comparisons/nordvpn-vs-surfshark";
 
-export const metadata: Metadata = {
-  title: "NordVPN vs Surfshark Karşılaştırması (2026)",
-  description:
-    "NordVPN ve Surfshark'ı 6 kritere göre karşılaştırdık: gizlilik, denetimler, hız, streaming, fiyat ve cihaz desteği. Hangisinin sana uygun olabileceğini değerlendir.",
-};
+const CONTENT_ID = "nordvpn-vs-surfshark";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const categories = [
-  {
-    name: "Gizlilik ve yargı yetkisi",
-    winner: "tie" as const,
-    nord: "Panama (14 Eyes dışı, zorunlu veri saklama yok)",
-    surf: "Hollanda (14 Eyes ama AB'nin sıkı veri koruma yasaları)",
-    reasoning:
-      "Her ikisi de güçlü no-logs politikası uyguluyor. Panama hukuki olarak biraz daha avantajlı; Hollanda da AB veri koruma yasaları çerçevesinde güçlü konumda.",
-  },
-  {
-    name: "Bağımsız denetimler",
-    winner: "nordvpn" as const,
-    nord: "Deloitte no-logs (6 defa, son: 2025) + Cure53 istemci denetimleri (3x)",
-    surf: "Cure53 + Deloitte denetimleri (2023)",
-    reasoning:
-      "NordVPN'in tekrarlanan altı kez Deloitte denetimi, sektördeki en kapsamlı no-logs ispatlarından biri. Surfshark da denetlendi ama süreklilik açısından NordVPN önde.",
-  },
-  {
-    name: "Hız performansı",
-    winner: "nordvpn" as const,
-    nord: "NordLynx (WireGuard tabanlı) — %91-96 yakın, %72-80 uzak",
-    surf: "WireGuard — %85-92 yakın, %65-75 uzak",
-    reasoning:
-      "NordLynx'in özel optimizasyonu sayesinde Surfshark'ın WireGuard implementasyonundan %5-7 daha yüksek throughput sağlıyor. Pratikte günlük kullanımda fark sınırlı.",
-  },
-  {
-    name: "Streaming uyumluluğu",
-    winner: "tie" as const,
-    nord: "Netflix US/UK/JP/TR, Disney+, BBC iPlayer, BluTV, Exxen — stabil",
-    surf: "Netflix US/UK/JP/TR/BR, Disney+, BBC iPlayer, BluTV, Exxen, HBO Max — stabil",
-    reasoning:
-      "İkisi de sektörün üst seviye streaming bypass'ına sahip. Surfshark'ın Türkiye sunucusu, yurt dışından Türk içeriklere erişim için somut bir avantaj.",
-  },
-  {
-    name: "Fiyat (uzun dönem)",
-    winner: "surfshark" as const,
-    nord: "2 yıllık plan: ~$3.39/ay (ilk dönem)",
-    surf: "2 yıllık plan: ~$2.19/ay (ilk dönem)",
-    reasoning:
-      "Surfshark, NordVPN'den yaklaşık %35 daha ucuz. Yenileme dönemi ikisi için de yükseliyor — ancak Surfshark'ın temel fiyatı kalıcı olarak daha düşük.",
-  },
-  {
-    name: "Cihaz desteği",
-    winner: "surfshark" as const,
-    nord: "10 eşzamanlı cihaz",
-    surf: "Sınırsız eşzamanlı cihaz",
-    reasoning:
-      "Surfshark'ın sınırsız cihaz politikası, aile veya çok cihazlı kullanıcılar için belirleyici avantaj. NordVPN'in 10 cihaz limiti çoğu birey/çekirdek aile için yeterli ama tam aile + akıllı ev senaryosunda yetersiz kalabilir.",
-  },
-] as const;
+function asAppLocale(locale: string): AppLocale {
+  return locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+}
 
-const faqs = [
-  {
-    q: "NordVPN mi Surfshark mı daha iyi?",
-    a: "Tek bir 'daha iyi' yok — önceliğine bağlı. Genel performans ve denetim geçmişi konusunda NordVPN, fiyat ve cihaz desteği konusunda Surfshark öne çıkıyor. Bütçe öncelikse ve çok cihaz koruman gerekiyorsa Surfshark; tekrarlanan denetim ve geniş ek özellikler önceliğin ise NordVPN değerlendirilebilir. Satın almadan önce her iki sağlayıcının kendi sitesinden güncel bilgileri kontrol etmeni öneririz.",
-  },
-  {
-    q: "Aynı şirketin iki ürünü değil mi?",
-    a: "Mart 2022'de kurumsal olarak birleştiler — Nord Security ana şirket olarak iki markayı da yönetiyor. Ancak ürün geliştirme, altyapı, no-logs denetimleri ve operasyonel ekipler ayrı çalışıyor. Pratik olarak iki farklı VPN olarak davranıyorlar.",
-  },
-  {
-    q: "Hangisi Türkiye'de daha iyi çalışıyor?",
-    a: "Surfshark — Türkiye lokasyonlu sunucusu ve Camouflage Mode (DPI bypass) özelliği var. NordVPN Türkiye sunucusu sunmuyor ama yakın Avrupa sunucularıyla iyi performans veriyor.",
-  },
-  {
-    q: "İki abonelik birden almak mantıklı mı?",
-    a: "Genelde hayır. Tek bir kaliteli VPN sıradan kullanıcı için yeterli. İki abonelik almak yerine, sana uygun olanı seçip diğerlerine harcayacağın parayı diğer güvenlik araçlarına (parola yöneticisi, şifreli e-posta vb.) yatırabilirsin.",
-  },
-];
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const appLocale = asAppLocale(locale);
+  const c = getNordvpnVsSurfsharkContent(appLocale);
+  return {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    alternates: contentAlternates(CONTENT_ID, locale),
+    openGraph: {
+      title: c.metaTitle,
+      description: c.metaDescription,
+      url: absoluteUrl(
+        getLocalizedPath({
+          locale: appLocale,
+          section: "comparison",
+          contentId: CONTENT_ID,
+        }),
+      ),
+      type: "article",
+    },
+  };
+}
 
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const nord = getProduct("nordvpn")!;
-  const surf = getProduct("surfshark")!;
+  const { locale: rawLocale } = await params;
+  setRequestLocale(rawLocale);
+  const locale = asAppLocale(rawLocale);
+  const c = getNordvpnVsSurfsharkContent(locale);
+  const nord = getProduct("nordvpn", locale)!;
+  const surf = getProduct("surfshark", locale)!;
+
+  // next-intl Link aktif locale prefix'ini kendisi ekler — href prefix'siz.
+  const hubHref = `/${SECTION_SLUGS[locale].comparison}`;
 
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Karşılaştırma", path: "/karsilastir" },
           {
-            name: "NordVPN vs Surfshark",
-            path: "/karsilastir/nordvpn-vs-surfshark",
+            name: c.breadcrumb.home,
+            path: locale === DEFAULT_LOCALE ? "/" : `/${locale}`,
+          },
+          {
+            name: c.breadcrumb.hub,
+            path: getLocalizedSectionPath(locale, "comparison"),
+          },
+          {
+            name: c.breadcrumb.current,
+            path: getLocalizedPath({
+              locale,
+              section: "comparison",
+              contentId: CONTENT_ID,
+            }),
           },
         ])}
       />
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={faqSchema(c.faqs)} />
 
       <Container size="lg" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {c.breadcrumb.home}
           </Link>{" "}
           ›{" "}
-          <Link href="/karsilastir" className="hover:text-ink">
-            Karşılaştırma
+          <Link href={hubHref} className="hover:text-ink">
+            {c.breadcrumb.hub}
           </Link>{" "}
           ›{" "}
-          <span className="text-ink-strong">NordVPN vs Surfshark</span>
+          <span className="text-ink-strong">{c.breadcrumb.current}</span>
         </p>
 
         <header className="mt-6">
-          <Badge variant="brand">Yan yana karşılaştırma</Badge>
+          <Badge variant="brand">{c.badge}</Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            NordVPN vs Surfshark: 2026 Karşılaştırması
+            {c.h1}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            Aynı şirket çatısı altında çalışan iki büyük VPN — ama farklı
-            önceliklerle. 6 kritere göre yan yana karşılaştırdık. Hangisinin
-            sana uygun olabileceğini değerlendirmen için.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{c.lede}</p>
         </header>
 
         <DataDisclaimer verifiedAt={nord.pricingVerifiedAt} />
@@ -157,7 +134,7 @@ export default async function Page({ params }: Props) {
                 rel="noopener nofollow"
                 target="_blank"
               >
-                {nord.brand} resmi sitesi <ArrowRight className="size-4" />
+                {c.ctaOfficial.nordvpn} <ArrowRight className="size-4" />
               </a>
             </Button>
           </Card>
@@ -181,7 +158,7 @@ export default async function Page({ params }: Props) {
                 rel="noopener nofollow"
                 target="_blank"
               >
-                {surf.brand} resmi sitesi <ArrowRight className="size-4" />
+                {c.ctaOfficial.surfshark} <ArrowRight className="size-4" />
               </a>
             </Button>
           </Card>
@@ -189,17 +166,17 @@ export default async function Page({ params }: Props) {
 
         <section className="mt-12">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            Kategori bazında karşılaştırma
+            {c.categoriesH2}
           </h2>
 
           <div className="mt-6 space-y-4">
-            {categories.map((cat) => (
+            {c.categories.map((cat) => (
               <Card key={cat.name} className="p-6">
                 <div className="flex items-start justify-between gap-3 flex-wrap">
                   <h3 className="text-lg font-semibold text-ink-strong">
                     {cat.name}
                   </h3>
-                  <WinnerBadge winner={cat.winner} />
+                  <WinnerBadge winner={cat.winner} content={c} />
                 </div>
 
                 <div className="mt-4 grid sm:grid-cols-2 gap-4">
@@ -238,7 +215,9 @@ export default async function Page({ params }: Props) {
                 </div>
 
                 <p className="mt-4 text-sm text-ink leading-relaxed">
-                  <span className="font-medium text-ink-strong">Neden: </span>
+                  <span className="font-medium text-ink-strong">
+                    {c.reasonLabel}{" "}
+                  </span>
                   {cat.reasoning}
                 </p>
               </Card>
@@ -250,45 +229,37 @@ export default async function Page({ params }: Props) {
           <Card className="p-6 border-brand-200 bg-brand-50/40">
             <h3 className="text-xl font-bold text-ink-strong flex items-center gap-2">
               <Check className="size-5 text-brand-600" />
-              NordVPN&apos;i seç eğer...
+              {c.chooseNord.title}
             </h3>
             <ul className="mt-4 space-y-2 text-sm text-ink">
-              <li>Maksimum hız performansı isteğin var</li>
-              <li>Tekrarlanan bağımsız denetimler kritik</li>
-              <li>Streaming çok kullanıyorsun ve istikrar arıyorsun</li>
-              <li>10 cihaz limiti senin için yeterli</li>
-              <li>Threat Protection, Meshnet, Onion over VPN gibi ek özellikler değerli</li>
+              {c.chooseNord.bullets.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
             <Button asChild variant="primary" className="mt-5 w-full">
-              <Link href="/inceleme/nordvpn">
-                NordVPN&apos;i incele
-              </Link>
+              <Link href="/inceleme/nordvpn">{c.chooseNord.cta}</Link>
             </Button>
           </Card>
 
           <Card className="p-6 border-accent-300 bg-accent-50/40">
             <h3 className="text-xl font-bold text-ink-strong flex items-center gap-2">
               <Check className="size-5 text-accent-600" />
-              Surfshark&apos;ı seç eğer...
+              {c.chooseSurf.title}
             </h3>
             <ul className="mt-4 space-y-2 text-sm text-ink">
-              <li>Bütçe önemli ve uzun dönem plan tercih ediyorsun</li>
-              <li>Çok sayıda cihazı korumak istiyorsun (sınırsız)</li>
-              <li>Türkiye lokasyonlu sunucu lazım</li>
-              <li>Camouflage Mode (DPI bypass) önemli</li>
-              <li>BluTV / Exxen erişimi yurt dışından</li>
+              {c.chooseSurf.bullets.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
             <Button asChild variant="primary" className="mt-5 w-full">
-              <Link href="/inceleme/surfshark">
-                Surfshark&apos;ı incele
-              </Link>
+              <Link href="/inceleme/surfshark">{c.chooseSurf.cta}</Link>
             </Button>
           </Card>
         </section>
 
         <section className="mt-16 prose prose-stone max-w-none">
-          <h2>Sıkça sorulan sorular</h2>
-          {faqs.map((f) => (
+          <h2>{c.faqHeading}</h2>
+          {c.faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
               <p>{f.a}</p>
@@ -297,25 +268,22 @@ export default async function Page({ params }: Props) {
         </section>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">Diğer karşılaştırmalar</p>
+          <p className="text-sm text-ink-muted">{c.related.title}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
+            {c.related.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+              >
+                {link.text}
+              </Link>
+            ))}
             <Link
-              href="/inceleme/expressvpn"
+              href={c.related.allLink.href}
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
-              ExpressVPN incelemesi
-            </Link>
-            <Link
-              href="/inceleme/proton-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Proton VPN incelemesi
-            </Link>
-            <Link
-              href="/en-iyi-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Tüm sıralama <ArrowRight className="size-3" />
+              {c.related.allLink.text} <ArrowRight className="size-3" />
             </Link>
           </div>
         </section>
@@ -326,18 +294,17 @@ export default async function Page({ params }: Props) {
 
 function WinnerBadge({
   winner,
+  content,
 }: {
-  winner: "nordvpn" | "surfshark" | "tie";
+  winner: NordSurfWinner;
+  content: NordvpnVsSurfsharkContent;
 }) {
   if (winner === "tie") {
-    return <Badge variant="neutral">İkisi de güçlü</Badge>;
+    return <Badge variant="neutral">{content.winnerTie}</Badge>;
   }
   return (
     <Badge variant="brand">
-      <Trophy className="size-3" />{" "}
-      {winner === "nordvpn"
-        ? "NordVPN bu kriterde öne çıkıyor"
-        : "Surfshark bu kriterde öne çıkıyor"}
+      <Trophy className="size-3" /> {content.winnerLeads[winner]}
     </Badge>
   );
 }

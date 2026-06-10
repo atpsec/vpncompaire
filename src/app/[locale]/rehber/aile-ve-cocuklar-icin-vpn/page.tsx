@@ -8,263 +8,183 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { AudiencePicks } from "@/components/audience/audience-picks";
-import { absoluteUrl, defaultLocaleAlternates } from "@/lib/site";
-
-const baseMeta: Metadata = {
-  title: "Aile ve Çocuklar İçin En İyi VPN (2026) — Ebeveyn Kontrolü + Çoklu Cihaz",
-  description:
-    "Aile için VPN: çoklu cihaz desteği, ebeveyn kontrolü, zararlı içerik filtreleme, çocukların güvenli internet kullanımı. Sınırsız cihazlı en iyi 3 VPN.",
-  alternates: { canonical: absoluteUrl("/rehber/aile-ve-cocuklar-icin-vpn") },
-  openGraph: {
-    title: "Aile ve Çocuklar İçin En İyi VPN (2026)",
-    description:
-      "Çoklu cihaz, ebeveyn kontrolü ve zararlı içerik filtreleme için en iyi aile VPN'leri.",
-    url: absoluteUrl("/rehber/aile-ve-cocuklar-icin-vpn"),
-    type: "article",
-  },
-  keywords: [
-    "aile vpn",
-    "çocuklar için vpn",
-    "ebeveyn kontrolü vpn",
-    "zararlı içerik filtreleme",
-    "çoklu cihaz vpn",
-    "güvenli internet çocuk",
-  ],
-};
+import { absoluteUrl, contentAlternates } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  SECTION_HUB_SERVED,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
+import { getVpnForFamiliesContent } from "@/content/guides/vpn-for-families";
 
 type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata(): Metadata {
-  // İçerik yalnızca Türkçe servis ediliyor; canonical/hreflang TR'ye sabit.
+function asAppLocale(locale: string): AppLocale {
+  return locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const appLocale = asAppLocale(locale);
+  const c = getVpnForFamiliesContent(locale);
   return {
-    ...baseMeta,
-    alternates: defaultLocaleAlternates("/rehber/aile-ve-cocuklar-icin-vpn"),
+    title: c.metaTitle,
+    description: c.metaDescription,
+    keywords: c.keywords,
+    // Canonical aktif dilin yerelleştirilmiş URL'si; hreflang yalnızca gerçekten
+    // servis edilen dilleri işaret eder (bkz. CONTENT_REGISTRY.served).
+    alternates: contentAlternates("vpn-for-families", locale),
     openGraph: {
-      ...baseMeta.openGraph,
-      url: absoluteUrl("/rehber/aile-ve-cocuklar-icin-vpn"),
+      title: c.ogTitle,
+      description: c.ogDescription,
+      url: absoluteUrl(
+        getLocalizedPath({
+          locale: appLocale,
+          section: "guide",
+          contentId: "vpn-for-families",
+        }),
+      ),
+      type: "article",
     },
   };
 }
 
-const faqs = [
-  {
-    q: "VPN çocuğumun zararlı içeriklere erişmesini engelleyebilir mi?",
-    a: "Bazıları evet. Surfshark CleanWeb, NordVPN Threat Protection ve Proton VPN NetShield reklam, kötü amaçlı yazılım ve yetişkin içerik kategorilerini DNS düzeyinde engelleyebilir. Tam ebeveyn kontrolü değildir (Qustodio gibi yazılımlar tam çözüm sunar) ama temel filtreleme için yeterli.",
-  },
-  {
-    q: "Bir aile aboneliği kaç cihaz desteklemeli?",
-    a: "Tipik bir 4 kişilik ailede: 4 telefon + 2 dizüstü + 1-2 tablet + 1 akıllı TV = en az 8-9 cihaz. Surfshark sınırsız sunar; NordVPN 10, ExpressVPN 8 cihaz. Tek hesap tüm aile için yeterli.",
-  },
-  {
-    q: "Aile üyeleri farklı ülke sunucularına aynı anda bağlanabilir mi?",
-    a: "Evet. NordVPN, Surfshark, ExpressVPN tüm aile cihazlarına izin verir ve her cihaz farklı bir ülkeden bağlanabilir — birisi Türkiye, birisi ABD, birisi Almanya sunucusunda olabilir.",
-  },
-  {
-    q: "Çocuğumun akıllı TV'sinde VPN nasıl kullanırım?",
-    a: "Android TV uygulaması olan VPN (Surfshark, NordVPN, ExpressVPN) doğrudan kurulabilir. Apple TV veya eski TV'ler için VPN'i router'da kurarak tüm ev ağına uygulayabilirsiniz — bu durumda tek 'cihaz' sayılır.",
-  },
-  {
-    q: "Aile VPN'i ne kadar tutar?",
-    a: "Aylık ortalama $2-5 (uzun dönem planlarda). Surfshark $2.19/ay (2 yıl), NordVPN $3.39/ay (2 yıl + 3 ay). 4 kişilik bir aile için ayrı ayrı ödemek yerine tek hesap çok daha ekonomiktir.",
-  },
-];
-
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  const { locale: rawLocale } = await params;
+  setRequestLocale(rawLocale);
+  const locale = asAppLocale(rawLocale);
+  const c = getVpnForFamiliesContent(locale);
+
+  // Rehber hub'ı bu dilde yerelleştirilmiş slug ile servis ediliyorsa onu
+  // kullan (örn. en -> /guide); aksi halde mevcut TR-slug davranışını koru.
+  // next-intl Link, aktif locale prefix'ini kendisi ekler — href prefix'siz.
+  const guideHubServed = SECTION_HUB_SERVED.guide?.includes(locale) ?? false;
+  const guideHubHref = `/${guideHubServed ? SECTION_SLUGS[locale].guide : SECTION_SLUGS[DEFAULT_LOCALE].guide}`;
+
+  const breadcrumbPaths = [
+    { name: c.breadcrumb.home, path: locale === DEFAULT_LOCALE ? "/" : `/${locale}` },
+    {
+      name: c.breadcrumb.guides,
+      path: guideHubServed
+        ? getLocalizedSectionPath(locale, "guide")
+        : `${locale === DEFAULT_LOCALE ? "" : `/${locale}`}/${SECTION_SLUGS[DEFAULT_LOCALE].guide}`,
+    },
+    {
+      name: c.breadcrumb.current,
+      path: getLocalizedPath({
+        locale,
+        section: "guide",
+        contentId: "vpn-for-families",
+      }),
+    },
+  ];
 
   return (
     <>
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Rehberler", path: "/rehber" },
-          {
-            name: "Aile ve çocuklar için VPN",
-            path: "/rehber/aile-ve-cocuklar-icin-vpn",
-          },
-        ])}
-      />
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={breadcrumbSchema(breadcrumbPaths)} />
+      <JsonLd data={faqSchema(c.faqs)} />
 
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {c.breadcrumb.home}
           </Link>{" "}
           ›{" "}
-          <Link href="/rehber" className="hover:text-ink">
-            Rehberler
+          <Link href={guideHubHref} className="hover:text-ink">
+            {c.breadcrumb.guides}
           </Link>{" "}
-          ›{" "}
-          <span className="text-ink-strong">Aile ve çocuklar</span>
+          › <span className="text-ink-strong">{c.breadcrumb.current}</span>
         </p>
 
         <header className="mt-6">
           <Badge variant="brand">
-            <Users className="size-3" /> Aile
+            <Users className="size-3" /> {c.badge}
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            Aile ve çocuklar için en iyi VPN
+            {c.h1}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            Çoklu cihaz desteği, zararlı içerik filtreleme ve tüm aile ev ağı
-            koruması için en iyi 3 VPN. Tek hesap, sınırsız aile üyesi.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{c.lede}</p>
         </header>
 
         <AudiencePicks
-          heading="Aile için en iyi 3 VPN"
-          subheading="Cihaz limiti, içerik filtreleme ve fiyata göre."
-          picks={[
-            {
-              slug: "surfshark",
-              label: "Çoklu cihaz odaklı seçenek",
-              reason:
-                "Sağlayıcı politikasına göre sınırsız eşzamanlı cihaz desteği — aile içi paylaşım için değerlendirilebilir. CleanWeb özelliği içerik filtreleme katmanı sunar.",
-            },
-            {
-              slug: "nordvpn",
-              label: "Threat Protection özelliği",
-              reason:
-                "Sağlayıcı verisine göre 10 cihaz limiti çoğu aile için yeterli olabilir. Threat Protection özelliği reklam, izleyici ve zararlı yazılım engelleme katmanı sunar; tam ebeveyn kontrolü değildir, ek koruma yazılımı önerilir.",
-            },
-            {
-              slug: "proton-vpn",
-              label: "Açık kaynak istemci",
-              reason:
-                "Sağlayıcı verisine göre NetShield ile reklam/zararlı yazılım filtreleme ve açık kaynak istemciler sunulmaktadır. Kod GitHub&apos;da yayınlanmıştır; bağımsız denetim için referans alınabilir.",
-            },
-          ]}
+          heading={c.picksHeading}
+          subheading={c.picksSubheading}
+          picks={c.picks}
         />
 
         <article className="mt-16 prose prose-stone max-w-none">
-          <h2>Aile için VPN — basit bir karar matrisi</h2>
-          <p>
-            4 kişilik bir ailede ortalama 8-10 cihaz var: telefonlar, dizüstüler,
-            tabletler, akıllı TV. VPN&apos;in aile için anlamlı olması için 3
-            temel özellik olmalı:
-          </p>
+          <h2>{c.decision.h2}</h2>
+          <p>{c.decision.intro}</p>
           <ol>
-            <li>
-              <strong>Yeterli cihaz limiti</strong> — minimum 8, ideali sınırsız.
-            </li>
-            <li>
-              <strong>İçerik filtreleme</strong> — DNS düzeyinde reklam,
-              izleyici, zararlı içerik engelleme.
-            </li>
-            <li>
-              <strong>Kolay kurulum</strong> — eşin/çocuğun teknik bilgisi
-              olmadan kullanabilmeli.
-            </li>
+            {c.decision.criteria.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ol>
 
-          <h2>Çocukların internet güvenliği için VPN ne yapar?</h2>
+          <h2>{c.kidSafety.h2}</h2>
 
-          <h3>Yapar:</h3>
+          <h3>{c.kidSafety.doesH3}</h3>
           <ul>
-            <li>
-              <strong>Halka açık Wi-Fi koruması:</strong> Tatilde, alışveriş
-              merkezinde, kafede çocuğun cihazını dinlemeden korur.
-            </li>
-            <li>
-              <strong>Reklam/izleyici engelleme:</strong> Surfshark CleanWeb,
-              NordVPN Threat Protection, Proton NetShield bu özelliği sunar.
-            </li>
-            <li>
-              <strong>Zararlı site engelleme:</strong> Phishing ve malware
-              dağıtan bilinen domain&apos;leri DNS düzeyinde bloklar.
-            </li>
-            <li>
-              <strong>Coğrafi bypass:</strong> Yurt dışında Türkçe çocuk
-              içeriklerine (TRT Çocuk, vb.) erişim.
-            </li>
+            {c.kidSafety.doesItems.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h3>Yapmaz:</h3>
+          <h3>{c.kidSafety.doesntH3}</h3>
           <ul>
-            <li>
-              <strong>Detaylı ebeveyn kontrolü:</strong> Ekran süresi, uygulama
-              kısıtlaması, içerik kategori bazlı engelleme için Qustodio,
-              Norton Family veya Apple Screen Time gibi araçlar gerekir.
-            </li>
-            <li>
-              <strong>Sosyal medya kullanımı izleme:</strong> VPN, mesaj
-              içeriğini görmez — sadece şifreler.
-            </li>
-            <li>
-              <strong>Yaş bazlı içerik kısıtlaması:</strong> Google Family Link
-              veya işletim sistemi düzeyinde kontroller daha etkili.
-            </li>
+            {c.kidSafety.doesntItems.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h2>Router&apos;a kurmak: tüm ev ağı korunsun</h2>
-          <p>
-            VPN&apos;i ev router&apos;ına kurarak tüm cihazları (akıllı TV,
-            oyun konsolu, IoT cihazlar) tek seferde korumak mümkün. Avantajlar:
-          </p>
+          <h2>{c.router.h2}</h2>
+          <p>{c.router.intro}</p>
           <ul>
-            <li>Tek &quot;cihaz&quot; sayılır — cihaz limiti dert değil.</li>
-            <li>
-              VPN uygulaması olmayan cihazlar (akıllı TV, eski tablet) da
-              korunur.
-            </li>
-            <li>Misafirler de otomatik korunur.</li>
+            {c.router.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
           <p>
-            <strong>Dezavantaj:</strong> Bazı router&apos;lar (özellikle ISP&apos;den
-            verilen) VPN istemci desteklemez. ASUS, GL.iNet veya OPNsense
-            tabanlı router&apos;lar destekler. NordVPN, ExpressVPN ve Surfshark
-            router kurulum kılavuzları sunar.
+            <strong>{c.router.disadvantage.bold}</strong>
+            {c.router.disadvantage.text}
           </p>
 
-          <h2>Aile üyeleri farklı ülkelerden bağlanabilir mi?</h2>
-          <p>
-            Evet. Eş Türkiye sunucusunda BluTV izlerken, çocuk Almanya
-            sunucusundan ödev yapabilir, sen ABD sunucusundan Netflix US&apos;te
-            içerik izleyebilirsin — hepsi aynı hesapla, aynı anda.
-          </p>
+          <h2>{c.multiCountry.h2}</h2>
+          <p>{c.multiCountry.p}</p>
 
-          <h2>Cihaz başına maliyet karşılaştırması</h2>
+          <h2>{c.costTable.h2}</h2>
           <table>
             <thead>
               <tr>
-                <th>VPN</th>
-                <th>Cihaz limiti</th>
-                <th>Aylık fiyat</th>
-                <th>9 cihaz için cihaz başı</th>
+                {c.costTable.head.map((h) => (
+                  <th key={h}>{h}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Surfshark</td>
-                <td>Sınırsız</td>
-                <td>$2.19</td>
-                <td>$0.24/cihaz</td>
-              </tr>
-              <tr>
-                <td>NordVPN</td>
-                <td>10</td>
-                <td>$3.39</td>
-                <td>$0.34/cihaz</td>
-              </tr>
-              <tr>
-                <td>Proton VPN Plus</td>
-                <td>10</td>
-                <td>$4.99</td>
-                <td>$0.50/cihaz</td>
-              </tr>
-              <tr>
-                <td>ExpressVPN</td>
-                <td>8</td>
-                <td>$6.67</td>
-                <td>$0.83/cihaz</td>
-              </tr>
+              {c.costTable.rows.map((row) => (
+                <tr key={row[0]}>
+                  {row.map((cell, i) => (
+                    <td key={i}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
 
-          <h2>Sıkça sorulan sorular</h2>
-          {faqs.map((f) => (
+          <h2>{c.faqHeading}</h2>
+          {c.faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
               <p>{f.a}</p>
@@ -276,53 +196,38 @@ export default async function Page({ params }: Props) {
           <Card className="p-5">
             <Smartphone className="size-6 text-brand-600" />
             <h3 className="mt-3 font-semibold text-ink-strong">
-              Çoklu cihaz
+              {c.cards[0].title}
             </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Tek hesap, tüm aile.
-            </p>
+            <p className="mt-1 text-sm text-ink-muted">{c.cards[0].desc}</p>
           </Card>
           <Card className="p-5">
             <Filter className="size-6 text-brand-600" />
             <h3 className="mt-3 font-semibold text-ink-strong">
-              İçerik filtreleme
+              {c.cards[1].title}
             </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Reklam, izleyici, zararlı site.
-            </p>
+            <p className="mt-1 text-sm text-ink-muted">{c.cards[1].desc}</p>
           </Card>
           <Card className="p-5">
             <ShieldCheck className="size-6 text-brand-600" />
             <h3 className="mt-3 font-semibold text-ink-strong">
-              Halka açık Wi-Fi
+              {c.cards[2].title}
             </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Tatil, AVM, kafe — çocuk güvende.
-            </p>
+            <p className="mt-1 text-sm text-ink-muted">{c.cards[2].desc}</p>
           </Card>
         </section>
 
         <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">İlgili sayfalar</p>
+          <p className="text-sm text-ink-muted">{c.relatedLabel}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            <Link
-              href="/cihazlar"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Cihaz bazlı kurulum
-            </Link>
-            <Link
-              href="/rehber/uzaktan-calisanlar-icin-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Uzaktan çalışanlar
-            </Link>
-            <Link
-              href="/sana-uygun-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Quiz: Sana uygun VPN
-            </Link>
+            {c.relatedLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+              >
+                {link.text}
+              </Link>
+            ))}
           </div>
         </section>
       </Container>

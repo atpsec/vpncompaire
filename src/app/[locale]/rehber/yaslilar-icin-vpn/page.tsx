@@ -8,259 +8,175 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { AudiencePicks } from "@/components/audience/audience-picks";
-import { absoluteUrl, defaultLocaleAlternates } from "@/lib/site";
-
-const baseMeta: Metadata = {
-  title: "Yaşlılar İçin En İyi VPN (2026) — Basit Kurulum + Dolandırıcılık Koruması",
-  description:
-    "Yaşlı kullanıcılar için VPN: tek tıklama bağlantı, dolandırıcılık/phishing koruması, sade Türkçe arayüz. Anne-baban için en uygun 3 VPN.",
-  alternates: { canonical: absoluteUrl("/rehber/yaslilar-icin-vpn") },
-  openGraph: {
-    title: "Yaşlılar İçin En İyi VPN (2026)",
-    description:
-      "Basit kurulum, dolandırıcılık koruması ve sade arayüzlü VPN'ler.",
-    url: absoluteUrl("/rehber/yaslilar-icin-vpn"),
-    type: "article",
-  },
-  keywords: [
-    "yaşlılar için vpn",
-    "kolay kurulum vpn",
-    "dolandırıcılık koruması vpn",
-    "phishing koruması",
-    "basit vpn türkçe",
-    "anne baba vpn",
-  ],
-};
+import { absoluteUrl, contentAlternates } from "@/lib/site";
+import {
+  getLocalizedPath,
+  getLocalizedSectionPath,
+  SECTION_HUB_SERVED,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
+import { getSeniorsContent } from "@/content/guides/vpn-for-seniors";
 
 type Props = { params: Promise<{ locale: string }> };
 
-export function generateMetadata(): Metadata {
-  // İçerik yalnızca Türkçe servis ediliyor; canonical/hreflang TR'ye sabit.
+function asAppLocale(locale: string): AppLocale {
+  return locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const c = getSeniorsContent(locale);
+  const url = absoluteUrl(
+    getLocalizedPath({
+      locale: asAppLocale(locale),
+      section: "guide",
+      contentId: "vpn-for-seniors",
+    }),
+  );
   return {
-    ...baseMeta,
-    alternates: defaultLocaleAlternates("/rehber/yaslilar-icin-vpn"),
+    title: c.metaTitle,
+    description: c.metaDescription,
+    keywords: c.keywords,
+    // Canonical aktif dilin yerelleştirilmiş URL'si; hreflang yalnızca gerçekten
+    // servis edilen dilleri işaret eder (bkz. CONTENT_REGISTRY.served).
+    alternates: contentAlternates("vpn-for-seniors", locale),
     openGraph: {
-      ...baseMeta.openGraph,
-      url: absoluteUrl("/rehber/yaslilar-icin-vpn"),
+      title: c.ogTitle,
+      description: c.ogDescription,
+      url,
+      type: "article",
     },
   };
 }
 
-const faqs = [
-  {
-    q: "Yaşlı biri VPN'i tek başına kullanabilir mi?",
-    a: "Modern VPN uygulamaları büyük 'Bağlan' butonu ile tasarlandı. NordVPN, Surfshark ve ExpressVPN tek tıklamayla bağlantı sunar. İlk kurulumu birinin yapması (öneririz: sen) ve otomatik başlatmayı açman yeterli.",
-  },
-  {
-    q: "VPN sahte SMS ve dolandırıcılığı engelliyor mu?",
-    a: "Tamamen değil ama önemli yardım eder. NordVPN Threat Protection, Surfshark CleanWeb, Proton NetShield bilinen phishing ve dolandırıcılık sitelerini DNS düzeyinde engeller. 'banka mesajı' diye gelen sahte linke tıklasa bile, çoğu zaman site açılmaz.",
-  },
-  {
-    q: "Telefonda VPN yaşlılar için çok karmaşık değil mi?",
-    a: "Hayır. iPhone ve Android uygulamaları tek ekranlı: büyük bağlan butonu + ülke seçimi. Otomatik bağlantı özelliği açılırsa kullanıcı manuel müdahale yapmaz — sadece açtığında bağlı olur.",
-  },
-  {
-    q: "Yanlışlıkla bir tuşa basarsa zarar verir mi?",
-    a: "Hayır. VPN uygulamasında yanlış tuşa basmak en fazla bağlantıyı koparır — internet erişimi sürer (kill switch açık değilse). Veri kaybı veya finansal zarar mümkün değildir.",
-  },
-  {
-    q: "Hangi VPN'i annem/babam için kuralım?",
-    a: "Surfshark veya NordVPN. Türkçe arayüz, büyük bağlan butonu, otomatik başlatma, içerik filtreleme. ExpressVPN de iyi ama daha pahalı; yaşlı kullanıcı için ek özellikler boşa gidiyor.",
-  },
-];
-
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
+  const { locale: rawLocale } = await params;
+  setRequestLocale(rawLocale);
+  const locale = asAppLocale(rawLocale);
+  const c = getSeniorsContent(locale);
+
+  // Rehber hub'ı bu dilde yerelleştirilmiş slug ile servis ediliyorsa onu
+  // kullan; next-intl Link, aktif locale prefix'ini kendisi ekler.
+  const guideHubServed = SECTION_HUB_SERVED.guide?.includes(locale) ?? false;
+  const guideHubHref = `/${guideHubServed ? SECTION_SLUGS[locale].guide : SECTION_SLUGS[DEFAULT_LOCALE].guide}`;
+
+  const breadcrumbPaths = [
+    { name: c.breadcrumb.home, path: locale === DEFAULT_LOCALE ? "/" : `/${locale}` },
+    {
+      name: c.breadcrumb.guides,
+      path: guideHubServed
+        ? getLocalizedSectionPath(locale, "guide")
+        : `${locale === DEFAULT_LOCALE ? "" : `/${locale}`}/${SECTION_SLUGS[DEFAULT_LOCALE].guide}`,
+    },
+    {
+      name: c.breadcrumb.current,
+      path: getLocalizedPath({
+        locale,
+        section: "guide",
+        contentId: "vpn-for-seniors",
+      }),
+    },
+  ];
+
+  const cardIcons = [MousePointerClick, ShieldCheck, Heart];
 
   return (
     <>
-      <JsonLd
-        data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Rehberler", path: "/rehber" },
-          {
-            name: "Yaşlılar için VPN",
-            path: "/rehber/yaslilar-icin-vpn",
-          },
-        ])}
-      />
-      <JsonLd data={faqSchema(faqs)} />
+      <JsonLd data={breadcrumbSchema(breadcrumbPaths)} />
+      <JsonLd data={faqSchema(c.faqs)} />
 
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
           <Link href="/" className="hover:text-ink">
-            Ana sayfa
+            {c.breadcrumb.home}
           </Link>{" "}
           ›{" "}
-          <Link href="/rehber" className="hover:text-ink">
-            Rehberler
+          <Link href={guideHubHref} className="hover:text-ink">
+            {c.breadcrumb.guides}
           </Link>{" "}
-          ›{" "}
-          <span className="text-ink-strong">Yaşlılar için VPN</span>
+          › <span className="text-ink-strong">{c.breadcrumb.current}</span>
         </p>
 
         <header className="mt-6">
           <Badge variant="brand">
-            <Heart className="size-3" /> Yaşlılar
+            <Heart className="size-3" /> {c.badge}
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            Yaşlılar için en iyi VPN
+            {c.h1}
           </h1>
-          <p className="mt-4 text-lg text-ink-muted">
-            Anne-baban veya büyüklerin için: basit kurulum, dolandırıcılık
-            koruması, sade Türkçe arayüz. Tek tıklamayla bağlantı, otomatik
-            başlatma.
-          </p>
+          <p className="mt-4 text-lg text-ink-muted">{c.lede}</p>
         </header>
 
         <Card className="mt-8 p-6 border-accent-300 bg-accent-50/40">
           <div className="flex items-start gap-3">
             <AlertTriangle className="size-5 text-accent-600 mt-0.5 shrink-0" />
             <div>
-              <p className="font-semibold text-ink-strong">
-                Önemli istatistik
-              </p>
+              <p className="font-semibold text-ink-strong">{c.statBox.title}</p>
               <p className="mt-1 text-sm text-ink leading-relaxed">
-                Yaşlı bireyler, kamuya yansıyan araştırmalara göre siber
-                dolandırıcılık vakalarının önemli bir kısmında risk
-                grubundadır. VPN&apos;in DNS düzeyinde içerik filtreleme
-                özelliği bilinen sahte siteleri engelleme katmanı sunabilir;
-                ancak tek başına bir koruma garantisi değildir. Bilinçli
-                kullanım ve aile içi eğitim önerilir.
+                {c.statBox.body}
               </p>
             </div>
           </div>
         </Card>
 
         <AudiencePicks
-          heading="Yaşlılar için en iyi 3 VPN"
-          subheading="Kolay kullanım, içerik filtreleme ve fiyata göre."
-          picks={[
-            {
-              slug: "surfshark",
-              label: "Sade arayüz odaklı seçenek",
-              reason:
-                "Sağlayıcı uygulamasında tek ekranlı sade arayüz, Türkçe dil desteği mevcuttur. CleanWeb özelliği bilinen sahte siteleri DNS düzeyinde engelleme katmanı sunar. Sınırsız cihaz politikası tek hesapla aile kullanımı için değerlendirilebilir.",
-            },
-            {
-              slug: "nordvpn",
-              label: "Threat Protection",
-              reason:
-                "Sağlayıcının Threat Protection özelliği, sahte banka SMS&apos;leri ve phishing linklerine karşı koruma katmanı sunar. Türkçe arayüz ve sade kullanım, yaşlı kullanıcılar için değerlendirilebilir.",
-            },
-            {
-              slug: "expressvpn",
-              label: "Maksimum İstikrar",
-              reason:
-                "Testlerimizde tutarlı bağlantı gözlenen sağlayıcılardan. Sağlayıcı politikasına göre 7/24 canlı sohbet desteği mevcut (Türkçe destek bulunmamaktadır). Premium fiyat seviyesinde değerlendirme gerektirebilir.",
-            },
-          ]}
+          heading={c.picks.heading}
+          subheading={c.picks.subheading}
+          picks={c.picks.items}
         />
 
         <article className="mt-16 prose prose-stone max-w-none">
-          <h2>Yaşlılar için VPN&apos;in en önemli özellikleri</h2>
+          <h2>{c.features.h2}</h2>
 
-          <h3>1. Tek tıklamayla bağlantı</h3>
-          <p>
-            Modern VPN uygulamaları artık &quot;ülke seç, protokol seç, bağlan&quot;
-            ekranı değil. NordVPN, Surfshark ve ExpressVPN uygulamaları açılır
-            açılmaz büyük bir &quot;Bağlan&quot; butonu gösterir. Tek dokunuş
-            yeter.
-          </p>
+          <h3>{c.features.oneClick.h3}</h3>
+          <p>{c.features.oneClick.p}</p>
 
-          <h3>2. Otomatik başlatma</h3>
-          <p>
-            Telefon açılınca VPN&apos;in otomatik bağlanması. Yaşlı kullanıcı
-            manuel müdahale yapmaz; cihazı her açtığında zaten korunur durumda
-            olur.
-          </p>
+          <h3>{c.features.autoStart.h3}</h3>
+          <p>{c.features.autoStart.p}</p>
 
-          <h3>3. Dolandırıcılık/phishing koruması</h3>
-          <p>
-            DNS düzeyinde bilinen sahte siteleri engelleme:
-          </p>
+          <h3>{c.features.phishing.h3}</h3>
+          <p>{c.features.phishing.intro}</p>
           <ul>
-            <li>
-              <strong>NordVPN Threat Protection:</strong> Kötü amaçlı URL
-              veritabanı sürekli güncellenir. Sahte banka, sahte kargo, sahte
-              ödüllendirme linkleri engelli.
-            </li>
-            <li>
-              <strong>Surfshark CleanWeb:</strong> Reklam + phishing + malware
-              engelleme.
-            </li>
-            <li>
-              <strong>Proton VPN NetShield:</strong> Aynı kategoride çalışır,
-              açık kaynak doğrulanabilir.
-            </li>
+            {c.features.phishing.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
 
-          <h3>4. Türkçe arayüz</h3>
-          <p>
-            NordVPN, Surfshark ve ExpressVPN uygulamaları Türkçe destekler.
-            Proton VPN ve Mullvad Türkçe yok — bu sayfa için uygun değiller.
-          </p>
+          <h3>{c.features.language.h3}</h3>
+          <p>{c.features.language.p}</p>
 
-          <h2>Yaşlı bireyi en çok hedef alan dolandırıcılık türleri</h2>
+          <h2>{c.scams.h2}</h2>
           <ul>
-            <li>
-              <strong>Sahte banka SMS&apos;leri:</strong> &quot;Kart kullanım
-              limitiniz aşıldı, bu linke tıklayın&quot; — link sahte siteye gider.
-              VPN bunu DNS&apos;te engeller.
-            </li>
-            <li>
-              <strong>Kargo bildirimleri:</strong> &quot;Paketiniz
-              gönderilemedi, gümrük ödeyin&quot; — sahte ödeme sayfası.
-            </li>
-            <li>
-              <strong>Sahte SGK/devlet mesajları:</strong> &quot;Ek emekli
-              ödemesi&quot; veya &quot;ceza ödemesi&quot; vaadi.
-            </li>
-            <li>
-              <strong>Romantizm dolandırıcılığı:</strong> Sosyal medyada tanışan
-              &quot;asker&quot; veya &quot;dul kadın&quot; — burada VPN
-              koruyamaz, eğitim/uyarı şart.
-            </li>
+            {c.scams.items.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong>
+                {item.text}
+              </li>
+            ))}
           </ul>
           <p>
-            <strong>VPN sınırı:</strong> VPN sosyal mühendislik (ikna ederek
-            bilgi alma) tabanlı dolandırıcılığa karşı koruyamaz. Aile içi
-            eğitim ve şüpheci yaklaşım şart.
+            <strong>{c.scams.limitBold}</strong>
+            {c.scams.limitText}
           </p>
 
-          <h2>Kurulum adımları (sevdiğin için sen yap)</h2>
+          <h2>{c.setup.h2}</h2>
           <ol>
-            <li>
-              VPN hesabını <strong>kendi e-postanla aç</strong> — kullanıcının
-              değil. Böylece yenileme ve sorunla sen ilgilenirsin.
-            </li>
-            <li>
-              Telefona/tablete uygulamayı <strong>kur, giriş yap</strong>.
-            </li>
-            <li>
-              <strong>Otomatik bağlantı</strong> ayarını aç (Ayarlar → Otomatik
-              Bağlantı → Açık).
-            </li>
-            <li>
-              <strong>Threat Protection / CleanWeb / NetShield</strong>
-              özelliğini etkinleştir.
-            </li>
-            <li>
-              <strong>Türkçe dili</strong> ayarla.
-            </li>
-            <li>
-              Telefonu yeniden başlat, uygulamanın otomatik bağlandığını
-              doğrula.
-            </li>
-            <li>
-              Kullanıcıya <strong>tek bir şey öğret</strong>: &quot;Yeşil yazıyorsa
-              güvendesin, gri ise bağlantı yok&quot;.
-            </li>
+            {c.setup.steps.map((step, i) => (
+              <li key={i}>
+                {step.before}
+                {step.bold ? <strong>{step.bold}</strong> : null}
+                {step.after}
+              </li>
+            ))}
           </ol>
 
-          <h2>Sıkça sorulan sorular</h2>
-          {faqs.map((f) => (
+          <h2>{c.faqHeading}</h2>
+          {c.faqs.map((f) => (
             <div key={f.q}>
               <h3>{f.q}</h3>
               <p>{f.a}</p>
@@ -269,56 +185,32 @@ export default async function Page({ params }: Props) {
         </article>
 
         <section className="mt-12 grid sm:grid-cols-3 gap-4">
-          <Card className="p-5">
-            <MousePointerClick className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              Tek tıkla bağlan
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Büyük buton, sade arayüz.
-            </p>
-          </Card>
-          <Card className="p-5">
-            <ShieldCheck className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              Phishing engelleme
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Sahte banka/kargo linkleri engelli.
-            </p>
-          </Card>
-          <Card className="p-5">
-            <Heart className="size-6 text-brand-600" />
-            <h3 className="mt-3 font-semibold text-ink-strong">
-              Türkçe destek
-            </h3>
-            <p className="mt-1 text-sm text-ink-muted">
-              Anlaşılır arayüz, Türkçe metin.
-            </p>
-          </Card>
+          {c.cards.map((card, i) => {
+            const Icon = cardIcons[i] ?? Heart;
+            return (
+              <Card key={card.title} className="p-5">
+                <Icon className="size-6 text-brand-600" />
+                <h3 className="mt-3 font-semibold text-ink-strong">
+                  {card.title}
+                </h3>
+                <p className="mt-1 text-sm text-ink-muted">{card.desc}</p>
+              </Card>
+            );
+          })}
         </section>
 
         <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">İlgili sayfalar</p>
+          <p className="text-sm text-ink-muted">{c.related.label}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            <Link
-              href="/rehber/vpn-nedir"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              VPN nedir?
-            </Link>
-            <Link
-              href="/rehber/aile-ve-cocuklar-icin-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Aile için VPN
-            </Link>
-            <Link
-              href="/sana-uygun-vpn"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-            >
-              Quiz: Sana uygun VPN
-            </Link>
+            {c.related.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+              >
+                {link.text}
+              </Link>
+            ))}
           </div>
         </section>
       </Container>

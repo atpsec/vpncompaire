@@ -8,8 +8,19 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { sectionHubAlternates } from "@/lib/site";
+import {
+  findContentBySlug,
+  getLocalizedLinkHref,
+  getLocalizedSectionPath,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
 
 type Props = { params: Promise<{ locale: string }> };
+
+function asAppLocale(locale: string): AppLocale {
+  return locale === "en" || locale === "de" ? locale : DEFAULT_LOCALE;
+}
 
 const CONTENT = {
   tr: {
@@ -58,11 +69,34 @@ const CONTENT = {
       { slug: "gamerlar-icin-vpn", title: "VPN for gamers", desc: "Low ping, DDoS protection and regional bypass for game servers.", tag: "Gaming" },
     ],
   },
+  de: {
+    metaTitle: "VPN-Ratgeber",
+    metaDescription:
+      "Alles, was du über VPNs wissen musst: Was ein VPN ist, wie du eines auswählst, die Rechtslage in der Türkei und typische Einsatzszenarien.",
+    breadcrumbHome: "Startseite",
+    breadcrumbHere: "Ratgeber",
+    badge: "Ratgeber",
+    h1: "VPN-Ratgeber",
+    lede: "Die grundlegenden Fragen zu VPNs, Einsatzszenarien und Entscheidungshilfen.",
+    cta: "Ratgeber lesen",
+    guides: [
+      { slug: "vpn-nedir", title: "Was ist ein VPN? Ein 5-Minuten-Einsteigerleitfaden", desc: "Was ein VPN ist, wie es funktioniert und wovor es dich tatsächlich schützt.", tag: "Einsteiger" },
+      { slug: "turkiye-de-vpn-yasal-mi", title: "Ist VPN in der Türkei legal?", desc: "Ein ausführlicher Rechtsleitfaden: rechtlicher Rahmen, BTK-Sperren und Risikoszenarien.", tag: "Türkei" },
+      { slug: "ucretsiz-vs-ucretli-vpn", title: "Kostenloses vs. kostenpflichtiges VPN: Lohnt es sich wirklich?", desc: "Wie kostenlose VPNs Geld verdienen und wann sie tatsächlich ausreichen.", tag: "Entscheidung" },
+      { slug: "vpn-guvenlik-kontrol-listesi", title: "VPN-Sicherheits-Checkliste (12 Punkte)", desc: "Alles, was du vor der Wahl eines VPN prüfen solltest.", tag: "Entscheidung" },
+      { slug: "ogrenciler-icin-vpn", title: "Das beste VPN für Studenten", desc: "Campus-WLAN, akademischer Zugang und Tipps fürs Studierendenbudget.", tag: "Studenten" },
+      { slug: "yurt-disindaki-turkler-icin-vpn", title: "VPN für Türken im Ausland", desc: "VPNs mit türkischen Servern für BluTV, Exxen, türkisches Banking und e-Devlet.", tag: "Diaspora" },
+      { slug: "aile-ve-cocuklar-icin-vpn", title: "VPN für Familien und Kinder", desc: "Mehrere Geräte, Kindersicherung und Inhaltsfilter.", tag: "Familie" },
+      { slug: "uzaktan-calisanlar-icin-vpn", title: "VPN für Remote-Arbeit", desc: "Sicherheit in Hotel-/Café-WLAN, Kundendaten und stabile Verbindungen auf Reisen.", tag: "Arbeit" },
+      { slug: "yaslilar-icin-vpn", title: "VPN für Senioren", desc: "Einfache Einrichtung, Schutz vor Betrug/Phishing und eine verständliche Oberfläche.", tag: "Senioren" },
+      { slug: "gamerlar-icin-vpn", title: "VPN für Gamer", desc: "Niedriger Ping, DDoS-Schutz und Region-Bypass für Game-Server.", tag: "Gaming" },
+    ],
+  },
 } as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[asAppLocale(locale)];
   return {
     title: c.metaTitle,
     description: c.metaDescription,
@@ -75,14 +109,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const appLocale = asAppLocale(locale);
+  const c = CONTENT[appLocale];
 
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
-          { name: c.breadcrumbHome, path: "/" },
-          { name: c.breadcrumbHere, path: "/rehber" },
+          {
+            name: c.breadcrumbHome,
+            path: appLocale === DEFAULT_LOCALE ? "/" : `/${appLocale}`,
+          },
+          {
+            name: c.breadcrumbHere,
+            path: getLocalizedSectionPath(appLocale, "guide"),
+          },
         ])}
       />
 
@@ -108,7 +149,18 @@ export default async function Page({ params }: Props) {
           {c.guides.map((g) => (
             <Link
               key={g.slug}
-              href={`/rehber/${g.slug}`}
+              // Aktif dilin yerelleştirilmiş rehber URL'i (Link locale
+              // prefix'ini kendisi ekler); kayıt yoksa TR slug'a düş.
+              href={(() => {
+                const found = findContentBySlug("guide", g.slug);
+                return found
+                  ? getLocalizedLinkHref({
+                      locale: appLocale,
+                      section: "guide",
+                      contentId: found.contentId,
+                    })
+                  : `/rehber/${g.slug}`;
+              })()}
               className="group block"
             >
               <Card className="p-5 hover:border-brand-300 hover:shadow-md transition-all">

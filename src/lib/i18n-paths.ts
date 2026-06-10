@@ -84,7 +84,272 @@ export const CONTENT_REGISTRY: Record<string, ContentEntry> = {
     // Flagship: üç dilde de gerçek lokalize içerik mevcut (locale-aware sayfa).
     served: ["tr", "en", "de"],
   },
+  "free-vs-paid-vpn": {
+    id: "free-vs-paid-vpn",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "ucretsiz-vs-ucretli-vpn",
+        title: "Ücretsiz vs Ücretli VPN",
+      },
+      en: {
+        section: "guide",
+        slug: "free-vs-paid-vpn",
+        title: "Free vs Paid VPN",
+      },
+      de: {
+        section: "guide",
+        slug: "kostenloses-vs-kostenpflichtiges-vpn",
+        title: "Kostenloses vs. kostenpflichtiges VPN",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "vpn-security-checklist": {
+    id: "vpn-security-checklist",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "vpn-guvenlik-kontrol-listesi",
+        title: "VPN güvenlik kontrol listesi",
+      },
+      en: {
+        section: "guide",
+        slug: "vpn-security-checklist",
+        title: "VPN Security Checklist",
+      },
+      de: {
+        section: "guide",
+        slug: "vpn-sicherheits-checkliste",
+        title: "VPN-Sicherheits-Checkliste",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "is-vpn-legal-in-turkey": {
+    id: "is-vpn-legal-in-turkey",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "turkiye-de-vpn-yasal-mi",
+        title: "Türkiye'de VPN yasal mı?",
+      },
+      en: {
+        section: "guide",
+        slug: "is-vpn-legal-in-turkey",
+        title: "Is VPN Legal in Turkey?",
+      },
+      de: {
+        section: "guide",
+        slug: "ist-vpn-in-der-tuerkei-legal",
+        title: "Ist VPN in der Türkei legal?",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "vpn-for-students": {
+    id: "vpn-for-students",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "ogrenciler-icin-vpn",
+        title: "Öğrenciler için VPN",
+      },
+      en: {
+        section: "guide",
+        slug: "vpn-for-students",
+        title: "VPN for Students",
+      },
+      de: {
+        section: "guide",
+        slug: "vpn-fuer-studenten",
+        title: "VPN für Studenten",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "vpn-for-turks-abroad": {
+    id: "vpn-for-turks-abroad",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "yurt-disindaki-turkler-icin-vpn",
+        title: "Yurt dışındaki Türkler için VPN",
+      },
+      en: {
+        section: "guide",
+        slug: "vpn-for-turks-abroad",
+        title: "VPN for Turks Abroad",
+      },
+      de: {
+        section: "guide",
+        slug: "vpn-fuer-tuerken-im-ausland",
+        title: "VPN für Türken im Ausland",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "vpn-for-families": {
+    id: "vpn-for-families",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "aile-ve-cocuklar-icin-vpn",
+        title: "Aile ve çocuklar için VPN",
+      },
+      en: {
+        section: "guide",
+        slug: "vpn-for-families",
+        title: "VPN for Families",
+      },
+      de: {
+        section: "guide",
+        slug: "vpn-fuer-familien",
+        title: "VPN für Familien",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "vpn-for-remote-workers": {
+    id: "vpn-for-remote-workers",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "uzaktan-calisanlar-icin-vpn",
+        title: "Uzaktan çalışanlar için VPN",
+      },
+      en: {
+        section: "guide",
+        slug: "vpn-for-remote-workers",
+        title: "VPN for Remote Workers",
+      },
+      de: {
+        section: "guide",
+        slug: "vpn-fuer-remote-arbeit",
+        title: "VPN für Remote-Arbeit",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "vpn-for-seniors": {
+    id: "vpn-for-seniors",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "yaslilar-icin-vpn",
+        title: "Yaşlılar için VPN",
+      },
+      en: {
+        section: "guide",
+        slug: "vpn-for-seniors",
+        title: "VPN for Seniors",
+      },
+      de: {
+        section: "guide",
+        slug: "vpn-fuer-senioren",
+        title: "VPN für Senioren",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "vpn-for-gamers": {
+    id: "vpn-for-gamers",
+    translations: {
+      tr: {
+        section: "guide",
+        slug: "gamerlar-icin-vpn",
+        title: "Gamerlar için VPN",
+      },
+      en: {
+        section: "guide",
+        slug: "vpn-for-gamers",
+        title: "VPN for Gamers",
+      },
+      de: {
+        section: "guide",
+        slug: "vpn-fuer-gamer",
+        title: "VPN für Gamer",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  // Karşılaştırmalar: marka isimleri evrensel olduğundan slug üç dilde de aynı;
+  // yalnızca section slug'ı lokalize olur (/karsilastir, /comparison, /vergleich).
+  "nordvpn-vs-surfshark": {
+    id: "nordvpn-vs-surfshark",
+    translations: {
+      tr: {
+        section: "comparison",
+        slug: "nordvpn-vs-surfshark",
+        title: "NordVPN vs Surfshark",
+      },
+      en: {
+        section: "comparison",
+        slug: "nordvpn-vs-surfshark",
+        title: "NordVPN vs Surfshark",
+      },
+      de: {
+        section: "comparison",
+        slug: "nordvpn-vs-surfshark",
+        title: "NordVPN vs Surfshark",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "expressvpn-vs-nordvpn": {
+    id: "expressvpn-vs-nordvpn",
+    translations: {
+      tr: {
+        section: "comparison",
+        slug: "expressvpn-vs-nordvpn",
+        title: "ExpressVPN vs NordVPN",
+      },
+      en: {
+        section: "comparison",
+        slug: "expressvpn-vs-nordvpn",
+        title: "ExpressVPN vs NordVPN",
+      },
+      de: {
+        section: "comparison",
+        slug: "expressvpn-vs-nordvpn",
+        title: "ExpressVPN vs NordVPN",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
+  "proton-vs-mullvad": {
+    id: "proton-vs-mullvad",
+    translations: {
+      tr: {
+        section: "comparison",
+        slug: "proton-vs-mullvad",
+        title: "Proton VPN vs Mullvad",
+      },
+      en: {
+        section: "comparison",
+        slug: "proton-vs-mullvad",
+        title: "Proton VPN vs Mullvad",
+      },
+      de: {
+        section: "comparison",
+        slug: "proton-vs-mullvad",
+        title: "Proton VPN vs Mullvad",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
 };
+
+/**
+ * Bölüm (section) modeline girmeyen, içeriği yalnızca Türkçe servis edilen
+ * TEKİL sayfalar. EN/DE prefix'li istekleri TR kanoniğe 301'lenir.
+ * (Örn. /en/en-iyi/turkiye -> /en-iyi/turkiye. /en-iyi altındaki lokalize
+ * use-case sayfaları — gizlilik, streaming, oyun, seyahat — etkilenmez.)
+ */
+export const TR_ONLY_EXACT_PATHS: ReadonlySet<string> = new Set([
+  "en-iyi/turkiye",
+  "en-iyi/yurt-disindaki-turkler",
+]);
 
 /**
  * Section HUB sayfalarının (örn. /rehber, /karsilastir) hangi dillerde GERÇEK
@@ -92,12 +357,12 @@ export const CONTENT_REGISTRY: Record<string, ContentEntry> = {
  * slug'ı (örn. /en/guide, /de/vergleich) etkinleştirilir; diğerleri olduğu gibi
  * (Türkçe slug + mevcut davranış) bırakılır.
  *
- *  - guide hub (rehber/page.tsx): tr + en içerik var (de TR'ye düşüyor).
+ *  - guide hub (rehber/page.tsx): tr/en/de içerik var.
  *  - comparison hub (karsilastir/page.tsx): compareHub namespace ile tr/en/de.
  *  - category: hub route'u yok.
  */
 export const SECTION_HUB_SERVED: Partial<Record<SectionKey, AppLocale[]>> = {
-  guide: ["tr", "en"],
+  guide: ["tr", "en", "de"],
   comparison: ["tr", "en", "de"],
 };
 
@@ -121,6 +386,18 @@ export type LocalizedPathInput = {
   section: SectionKey;
   contentId?: string;
 };
+
+/**
+ * next-intl `Link` için locale-PREFIX'SİZ yerelleştirilmiş yol üretir
+ * (Link aktif locale prefix'ini kendisi ekler). Örn. locale=en, what-is-vpn
+ * -> "/guide/what-is-a-vpn"; locale=tr -> "/rehber/vpn-nedir".
+ */
+export function getLocalizedLinkHref(input: LocalizedPathInput): string {
+  const full = getLocalizedPath(input);
+  return input.locale === DEFAULT_LOCALE
+    ? full
+    : full.slice(`/${input.locale}`.length);
+}
 
 /**
  * Locale + section + contentId'den DOĞRU, locale-aware tam yolu üretir.
@@ -300,6 +577,12 @@ export function resolveLocalizedRedirect(pathname: string): string | null {
 
   const { urlLocale, rest } = parseLocale(segments);
   if (rest.length === 0) return null;
+
+  // Section modeli dışındaki TR-only tekil sayfalar (örn. /en-iyi/turkiye):
+  // EN/DE prefix'li istekleri TR kanoniğe 301.
+  if (urlLocale !== DEFAULT_LOCALE && TR_ONLY_EXACT_PATHS.has(rest.join("/"))) {
+    return `/${rest.join("/")}`;
+  }
 
   const sectionSlug = rest[0];
   const section = sectionForSlug(sectionSlug);

@@ -9,11 +9,14 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
+import { defaultLocaleAlternates } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Yurt Dışındaki Türkler İçin En İyi VPN (2026)",
   description:
     "BluTV, Exxen, Netflix TR, e-Devlet ve Türk bankacılık uygulamalarına yurt dışından erişim için 2026'nın en iyi VPN seçimleri ve pratik kullanım rehberi.",
+  // İçerik yalnızca Türkçe servis ediliyor; EN/DE istekleri middleware 301'ler.
+  alternates: defaultLocaleAlternates("/en-iyi/yurt-disindaki-turkler"),
 };
 
 type Props = { params: Promise<{ locale: string }> };

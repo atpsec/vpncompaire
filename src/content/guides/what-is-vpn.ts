@@ -385,9 +385,9 @@ const en: WhatIsVpnContent = {
   nextStepLabel: "Next step",
   nextStepLinks: [
     { href: "/en-iyi-vpn", text: "Top 10 VPN ranking" },
-    { href: "/rehber/ucretsiz-vs-ucretli-vpn", text: "Free vs paid VPN" },
+    { href: "/guide/free-vs-paid-vpn", text: "Free vs paid VPN" },
     {
-      href: "/rehber/vpn-guvenlik-kontrol-listesi",
+      href: "/guide/vpn-security-checklist",
       text: "VPN security checklist",
     },
   ],
@@ -561,9 +561,9 @@ const de: WhatIsVpnContent = {
   nextStepLabel: "Nächster Schritt",
   nextStepLinks: [
     { href: "/en-iyi-vpn", text: "Top-10-VPN-Ranking" },
-    { href: "/rehber/ucretsiz-vs-ucretli-vpn", text: "Kostenlos vs. kostenpflichtig" },
+    { href: "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn", text: "Kostenlos vs. kostenpflichtig" },
     {
-      href: "/rehber/vpn-guvenlik-kontrol-listesi",
+      href: "/ratgeber/vpn-sicherheits-checkliste",
       text: "VPN-Sicherheits-Checkliste",
     },
   ],
