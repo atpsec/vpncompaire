@@ -12,6 +12,7 @@ import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { CopyButton } from "@/components/tools/CopyButton";
 import { BrowserFingerprint } from "@/components/tools/BrowserFingerprint";
 import { ToolsCta } from "@/components/tools/ToolsCta";
+import { resolveRequestGeo } from "@/lib/request-geo";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -33,14 +34,6 @@ export async function generateMetadata({
   };
 }
 
-function safeDecode(value: string): string {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
-}
-
 function resolveCountryName(code: string, locale: string): string {
   try {
     const dn = new Intl.DisplayNames([locale], { type: "region" });
@@ -55,12 +48,12 @@ export default async function Page({ params }: Props) {
   setRequestLocale(locale);
 
   const h = await headers();
-  const xff = h.get("x-forwarded-for");
-  const ip = xff?.split(",")[0]?.trim() ?? h.get("x-real-ip") ?? "";
-  const country = h.get("x-vercel-ip-country");
-  const city = h.get("x-vercel-ip-city");
-  const region = h.get("x-vercel-ip-region");
-  const timezone = h.get("x-vercel-ip-timezone");
+  const geo = await resolveRequestGeo(h);
+  const ip = geo.ip ?? "";
+  const country = geo.countryCode;
+  const decodedCity = geo.city;
+  const decodedRegion = geo.region;
+  const timezone = geo.timezone;
 
   const [t, tNav, tCommon, tIp, currentLocale] = await Promise.all([
     getTranslations("tools.ip"),
@@ -71,8 +64,6 @@ export default async function Page({ params }: Props) {
   ]);
 
   const ipVersion = ip.includes(":") ? "IPv6" : "IPv4";
-  const decodedCity = city ? safeDecode(city) : null;
-  const decodedRegion = region ? safeDecode(region) : null;
   const countryCode = country?.toLowerCase() ?? null;
   const countryName = country
     ? resolveCountryName(country, currentLocale)

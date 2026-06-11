@@ -35,9 +35,9 @@ const envSchema = z.object({
     .optional()
     .or(z.literal("")),
 
-  // Vercel KV / Upstash Redis REST credentials — set automatically when a KV
-  // store is linked to the Vercel project. Used by src/lib/rate-limit.ts for
-  // distributed rate limiting. When absent, the limiter is a no-op (allows).
+  // Upstash Redis REST credentials (optional). Used by src/lib/rate-limit.ts
+  // for distributed rate limiting on /go and /api routes. When absent, the
+  // limiter is a no-op (allows).
   KV_REST_API_URL: z.string().url().optional().or(z.literal("")),
   KV_REST_API_TOKEN: z.string().min(1).optional().or(z.literal("")),
 
@@ -52,8 +52,9 @@ const envSchema = z.object({
   // /go/[slug] redirects here when set; otherwise falls back to the
   // brand's public URL with utm_* parameters appended.
   //
-  // To enable for a provider, set the env var in Vercel project settings
-  // (or .env.local for local dev). Leave empty/unset to disable affiliate
+  // To enable for a provider, set the env var in hosting panel
+  // (Hostinger Node.js env vars or .env.local for local dev). Leave empty/unset
+  // to disable affiliate
   // for that provider.
   AFFILIATE_NORDVPN_URL: z.string().url().optional().or(z.literal("")),
   AFFILIATE_SURFSHARK_URL: z.string().url().optional().or(z.literal("")),

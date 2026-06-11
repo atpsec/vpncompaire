@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { clientIpFrom, rateLimit } from "@/lib/rate-limit";
+import { geoFromHeaders } from "@/lib/request-geo";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -89,24 +90,16 @@ function isPublicIpCandidate(ip: string): boolean {
   return true;
 }
 
-function decodeHeader(value: string | null): string | null {
-  if (!value) return null;
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
-}
-
 function fallbackResult(req: NextRequest, ip: string): VpnTestResult {
-  const countryCode = asString(req.headers.get("x-vercel-ip-country"));
+  const geo = geoFromHeaders(req.headers);
+  const countryCode = geo.countryCode;
 
   return {
     ip: isPublicIpCandidate(ip) ? ip : null,
     country: countryCode,
     countryCode,
-    city: decodeHeader(req.headers.get("x-vercel-ip-city")),
-    region: decodeHeader(req.headers.get("x-vercel-ip-region")),
+    city: geo.city,
+    region: geo.region,
     isp: null,
     asn: null,
     networkType: null,

@@ -2,7 +2,7 @@ import { getAffiliate, isAllowedRedirectHost } from "@/lib/affiliate";
 import { rateLimit, clientIpFrom } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 /**
  * Affiliate redirect handler.

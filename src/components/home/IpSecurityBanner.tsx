@@ -10,39 +10,10 @@ import {
   IpSecurityBannerDismissButton,
 } from "@/components/home/IpSecurityBannerDismiss";
 import { IpSecurityBannerClock } from "@/components/home/IpSecurityBannerClock";
-
-function isPrivateOrLocal(ip: string | null | undefined): boolean {
-  if (!ip) return true;
-  const trimmed = ip.trim();
-  if (!trimmed) return true;
-  if (trimmed === "::1" || trimmed === "127.0.0.1") return true;
-  if (
-    trimmed.startsWith("10.") ||
-    trimmed.startsWith("127.") ||
-    trimmed.startsWith("192.168.") ||
-    trimmed.startsWith("0.")
-  ) {
-    return true;
-  }
-  if (/^172\.(1[6-9]|2\d|3[01])\./.test(trimmed)) return true;
-  const lower = trimmed.toLowerCase();
-  if (
-    lower.startsWith("fe80:") ||
-    lower.startsWith("fc") ||
-    lower.startsWith("fd")
-  ) {
-    return true;
-  }
-  return false;
-}
-
-function safeDecode(value: string): string {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
-}
+import {
+  isPrivateOrLocal,
+  resolveRequestGeo,
+} from "@/lib/request-geo";
 
 function resolveCountryName(code: string, locale: string): string {
   try {
@@ -55,22 +26,19 @@ function resolveCountryName(code: string, locale: string): string {
 
 export async function IpSecurityBanner() {
   const h = await headers();
-  const xff = h.get("x-forwarded-for");
-  const ip = xff?.split(",")[0]?.trim() ?? h.get("x-real-ip") ?? null;
-  const country = h.get("x-vercel-ip-country");
-  const city = h.get("x-vercel-ip-city");
-  const timezone = h.get("x-vercel-ip-timezone") ?? "UTC";
-  void h.get("x-vercel-ip-region");
+  const geo = await resolveRequestGeo(h);
+  const ip = geo.ip;
 
-  if (!country || isPrivateOrLocal(ip)) return null;
+  if (!geo.countryCode || isPrivateOrLocal(ip)) return null;
 
   const [locale, t] = await Promise.all([
     getLocale(),
     getTranslations("home.ipBanner"),
   ]);
-  const decodedCity = city ? safeDecode(city) : null;
-  const countryCode = country.toLowerCase();
-  const countryName = resolveCountryName(country, locale);
+  const decodedCity = geo.city;
+  const countryCode = geo.countryCode.toLowerCase();
+  const countryName = resolveCountryName(geo.countryCode, locale);
+  const timezone = geo.timezone;
   const ipVersion = ip && ip.includes(":") ? "IPv6" : "IPv4";
   const initialIso = new Date().toISOString();
 

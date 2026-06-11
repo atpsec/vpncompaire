@@ -6,6 +6,7 @@ import {
   resolveLocalizedRedirect,
   resolveInternalRewrite,
 } from "@/lib/i18n-paths";
+import { countryCodeFromHeaders } from "@/lib/request-geo";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 yıl
@@ -18,7 +19,7 @@ function preferredLocale(request: NextRequest): "tr" | "en" | "de" {
   const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
   if (cookie === "tr" || cookie === "en" || cookie === "de") return cookie;
 
-  const country = request.headers.get("x-vercel-ip-country");
+  const country = countryCodeFromHeaders(request.headers);
   if (!country || country === "TR") return "tr";
   if (country === "DE" || country === "AT" || country === "CH") return "de";
   return "en";
