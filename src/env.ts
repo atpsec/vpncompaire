@@ -28,7 +28,7 @@ const envSchema = z.object({
     .optional()
     .or(z.literal("")),
   // Google AdSense publisher kimliği (ca-pub-XXXXXXXXXXXXXXXX). Set edilmezse
-  // AdSense script'i yüklenmez ve /ads.txt boş döner (GA ile aynı pattern).
+  // AdSense script'i yüklenmez. /ads.txt public/ads.txt statik dosyasından servis edilir.
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: z
     .string()
     .min(1)
