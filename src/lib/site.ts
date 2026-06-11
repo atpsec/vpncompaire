@@ -17,7 +17,9 @@ export const siteConfig = {
   defaultLocale: "tr" as const,
   locales: ["tr", "en", "de"] as const,
   gaId: env.NEXT_PUBLIC_GA_ID || undefined,
-  adsenseClientId: env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || undefined,
+  // ads.txt ile aynı publisher; env override edebilir.
+  adsenseClientId:
+    env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-8715861903175610",
   description: {
     tr: "Bağımsız test metodolojisine dayalı, ayrıntılı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik senaryolarını değerlendirir. Gönüllü inceleme projesidir; resmi bir kuruluş değildir.",
     en: "Independent, methodology-driven VPN reviews and comparisons. Covers privacy, streaming, travel and everyday-security scenarios. A volunteer review project — not an official organisation.",
