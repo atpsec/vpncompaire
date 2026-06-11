@@ -48,12 +48,11 @@ type EmailSecurityResult = {
   breachCheck:
     | {
         status: "checked";
-        method: "hibp-k-anonymity";
+        method: "hibp" | "xposedornot";
         found: boolean;
         count: number;
         breaches: string[];
       }
-    | { status: "not_configured" }
     | { status: "unavailable" };
   flags: {
     disposable: boolean;
@@ -102,8 +101,8 @@ type Labels = {
     clear: string;
     found: string;
     unavailable: string;
-    notConfigured: string;
-    method: string;
+    methodHibp: string;
+    methodXon: string;
     visibleBreaches: string;
   };
   findings: Record<FindingKey, string>;
@@ -483,6 +482,13 @@ function DomainCheckCard({
   );
 }
 
+function breachMethodLabel(
+  method: "hibp" | "xposedornot",
+  labels: Labels,
+): string {
+  return method === "hibp" ? labels.breach.methodHibp : labels.breach.methodXon;
+}
+
 function BreachStatus({
   result,
   labels,
@@ -490,14 +496,6 @@ function BreachStatus({
   result: EmailSecurityResult;
   labels: Labels;
 }) {
-  if (result.breachCheck.status === "not_configured") {
-    return (
-      <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-        {labels.breach.notConfigured}
-      </p>
-    );
-  }
-
   if (result.breachCheck.status === "unavailable") {
     return (
       <p className="mt-3 text-sm leading-relaxed text-ink-muted">
@@ -512,7 +510,9 @@ function BreachStatus({
         <CheckCircle2 className="size-5 shrink-0" aria-hidden />
         <div>
           <p className="font-semibold">{labels.breach.clear}</p>
-          <p className="mt-1 text-xs opacity-80">{labels.breach.method}</p>
+          <p className="mt-1 text-xs opacity-80">
+            {breachMethodLabel(result.breachCheck.method, labels)}
+          </p>
         </div>
       </div>
     );
@@ -524,7 +524,9 @@ function BreachStatus({
         <ShieldX className="size-5 shrink-0" aria-hidden />
         <div>
           <p className="font-semibold">{labels.breach.found}</p>
-          <p className="mt-1 text-xs opacity-80">{labels.breach.method}</p>
+          <p className="mt-1 text-xs opacity-80">
+            {breachMethodLabel(result.breachCheck.method, labels)}
+          </p>
         </div>
       </div>
       {result.breachCheck.breaches.length > 0 && (

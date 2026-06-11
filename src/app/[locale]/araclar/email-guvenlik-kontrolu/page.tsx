@@ -110,8 +110,8 @@ function EmailSecurityView() {
       clear: t("breach.clear"),
       found: t("breach.found"),
       unavailable: t("breach.unavailable"),
-      notConfigured: t("breach.notConfigured"),
-      method: t("breach.method"),
+      methodHibp: t("breach.methodHibp"),
+      methodXon: t("breach.methodXon"),
       visibleBreaches: t("breach.visibleBreaches"),
     },
     findings: {

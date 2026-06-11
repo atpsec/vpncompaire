@@ -1200,7 +1200,7 @@
       "errorBody": "Der Sicherheitscheck ist vorübergehend nicht verfügbar. Bitte versuchen Sie es gleich erneut.",
       "rateLimitedBody": "Über diese Verbindung wurden zu viele Prüfungen angefragt. Bitte warten Sie eine Minute.",
       "privacyNote": "Datenschutzhinweis:",
-      "privacyDetail": "Ihre E-Mail wird nur für diese Prüfung verwendet und nicht gespeichert. MX-, SPF- und DMARC-Ergebnisse stammen aus Live-DNS-Abfragen. Leak-Checks laufen serverseitig über die Have-I-Been-Pwned-API; kein API-Schlüssel wird an den Browser gesendet.",
+      "privacyDetail": "Ihre E-Mail wird nur für diese Prüfung verwendet und nicht gespeichert. MX-, SPF- und DMARC-Ergebnisse stammen aus Live-DNS-Abfragen. Leak-Checks laufen serverseitig (Have I Been Pwned wenn konfiguriert, sonst XposedOrNot); keine API-Schlüssel werden an den Browser gesendet.",
       "scoreLabel": "Sicherheitsbewertung",
       "risk": {
         "low": "Niedriges Risiko",
@@ -1236,17 +1236,17 @@
         "fail": "Keine DMARC-Policy gefunden. Der Phishing-Schutz ist schwächer."
       },
       "breach": {
-        "clear": "In Have I Been Pwned wurde für diese Adresse kein bekanntes Leak gefunden.",
+        "clear": "In der Leak-Datenbank wurde für diese Adresse kein bekannter Eintrag gefunden.",
         "found": "Diese Adresse erscheint in einem oder mehreren bekannten Datenlecks.",
         "unavailable": "Die Leak-Datenbank antwortet vorübergehend nicht. MX-, SPF- und DMARC-Ergebnisse stammen aus Live-DNS-Abfragen.",
-        "notConfigured": "Leak-Datenbank-Checks sind derzeit deaktiviert. MX-, SPF- und DMARC-Ergebnisse sind Live-DNS-Abfragen.",
-        "method": "Have I Been Pwned API (serverseitig)",
+        "methodHibp": "Have I Been Pwned API (serverseitig)",
+        "methodXon": "XposedOrNot API (serverseitig)",
         "visibleBreaches": "Passende Leak-Namen"
       },
       "findings": {
         "breach_found": "Ändern Sie das Passwort für diese E-Mail und alle Konten, in denen dasselbe Passwort genutzt wurde. Aktivieren Sie 2FA für wichtige Konten.",
         "hibp_not_configured": "Leak-Datenbank-Check ist derzeit nicht verfügbar; MX-, SPF- und DMARC-Ergebnisse sind dennoch Live-DNS-Abfragen.",
-        "hibp_unavailable": "Have I Been Pwned war nicht erreichbar. Führen Sie die Prüfung später erneut aus.",
+        "hibp_unavailable": "Die Leak-Datenbank war nicht erreichbar. Führen Sie die Prüfung später erneut aus.",
         "no_mx": "Die Domain hat keine MX-Einträge. Prüfen Sie die Adresse oder nutzen Sie eine andere E-Mail.",
         "no_spf": "Bitten Sie den Domaininhaber, SPF einzurichten, damit gefälschte Absender schwerer werden.",
         "weak_spf": "Verschärfen Sie die SPF-Policy und vermeiden Sie permissive Mechanismen wie +all.",
@@ -1256,7 +1256,7 @@
         "role_account": "Rollenadressen werden oft geteilt. Nutzen Sie eindeutige Benutzer, starke Passwörter und 2FA."
       },
       "explainTitle": "Was dieser E-Mail-Sicherheitscheck macht",
-      "explainBody": "Das Tool validiert das E-Mail-Format, prüft MX-, SPF- und DMARC-Einträge der Domain per Live-DNS, markiert häufige Wegwerf- oder Rollenadressen und sucht in Have I Been Pwned nach bekannten Leaks. Die Ergebnisse sind keine Simulation — DNS-Antworten kommen aus echten Abfragen."
+      "explainBody": "Das Tool validiert das E-Mail-Format, prüft MX-, SPF- und DMARC-Einträge der Domain per Live-DNS, markiert häufige Wegwerf- oder Rollenadressen und sucht in Leak-Datenbanken (Have I Been Pwned wenn konfiguriert, sonst XposedOrNot). Die Ergebnisse sind keine Simulation."
     },
     "dns": {
       "metaTitle": "DNS Leak Test 2026 - Free | VPN Advisor",

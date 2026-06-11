@@ -12,7 +12,8 @@ const NO_STORE_HEADERS = {
   "Cache-Control": "no-store, no-cache, must-revalidate",
 };
 
-const HIBP_USER_AGENT = "VPN Advisor Email Security Tool";
+const BREACH_USER_AGENT = "VPN Advisor Email Security Tool";
+const XON_API_BASE = "https://api.xposedornot.com/v1";
 
 const DISPOSABLE_DOMAINS = new Set([
   "10minutemail.com",
@@ -69,12 +70,11 @@ type EmailSecurityResult = {
   breachCheck:
     | {
         status: "checked";
-        method: "hibp-k-anonymity";
+        method: "hibp" | "xposedornot";
         found: boolean;
         count: number;
         breaches: string[];
       }
-    | { status: "not_configured" }
     | { status: "unavailable" };
   flags: {
     disposable: boolean;
@@ -179,16 +179,62 @@ async function checkDomainAuth(domain: string) {
   };
 }
 
-async function checkHibp(email: string): Promise<EmailSecurityResult["breachCheck"]> {
-  if (!env.HIBP_API_KEY) return { status: "not_configured" };
+function parseXonBreaches(body: unknown): string[] {
+  if (!body || typeof body !== "object") return [];
+  const row = body as { Error?: unknown; breaches?: unknown };
+  if (row.Error === "Not found") return [];
+  if (!Array.isArray(row.breaches)) return [];
 
+  const names: string[] = [];
+  for (const group of row.breaches) {
+    if (!Array.isArray(group)) continue;
+    for (const name of group) {
+      if (typeof name === "string" && name.trim()) names.push(name.trim());
+    }
+  }
+  return [...new Set(names)].slice(0, 20);
+}
+
+async function checkXposedOrNot(
+  email: string,
+): Promise<Extract<EmailSecurityResult["breachCheck"], { status: "checked" }> | { status: "unavailable" }> {
+  try {
+    const res = await fetch(
+      `${XON_API_BASE}/check-email/${encodeURIComponent(email)}`,
+      {
+        headers: { "user-agent": BREACH_USER_AGENT },
+        cache: "no-store",
+        signal: AbortSignal.timeout(12_000),
+      },
+    );
+
+    if (res.status === 429 || !res.ok) return { status: "unavailable" };
+
+    const body = (await res.json()) as unknown;
+    const breaches = parseXonBreaches(body);
+
+    return {
+      status: "checked",
+      method: "xposedornot",
+      found: breaches.length > 0,
+      count: breaches.length,
+      breaches,
+    };
+  } catch {
+    return { status: "unavailable" };
+  }
+}
+
+async function checkHibp(
+  email: string,
+): Promise<Extract<EmailSecurityResult["breachCheck"], { status: "checked" }> | { status: "unavailable" }> {
   try {
     const res = await fetch(
       `https://haveibeenpwned.com/api/v3/breachedaccount/${encodeURIComponent(email)}?truncateResponse=false`,
       {
         headers: {
-          "hibp-api-key": env.HIBP_API_KEY,
-          "user-agent": HIBP_USER_AGENT,
+          "hibp-api-key": env.HIBP_API_KEY!,
+          "user-agent": BREACH_USER_AGENT,
         },
         cache: "no-store",
         signal: AbortSignal.timeout(12_000),
@@ -198,7 +244,7 @@ async function checkHibp(email: string): Promise<EmailSecurityResult["breachChec
     if (res.status === 404) {
       return {
         status: "checked",
-        method: "hibp-k-anonymity",
+        method: "hibp",
         found: false,
         count: 0,
         breaches: [],
@@ -217,7 +263,7 @@ async function checkHibp(email: string): Promise<EmailSecurityResult["breachChec
 
     return {
       status: "checked",
-      method: "hibp-k-anonymity",
+      method: "hibp",
       found: breaches.length > 0,
       count: breaches.length,
       breaches,
@@ -225,6 +271,14 @@ async function checkHibp(email: string): Promise<EmailSecurityResult["breachChec
   } catch {
     return { status: "unavailable" };
   }
+}
+
+/** HIBP anahtarı varsa öncelik HIBP; yoksa ücretsiz XposedOrNot API. */
+async function checkBreaches(
+  email: string,
+): Promise<EmailSecurityResult["breachCheck"]> {
+  if (env.HIBP_API_KEY) return checkHibp(email);
+  return checkXposedOrNot(email);
 }
 
 function scoreResult(params: {
@@ -257,9 +311,6 @@ function scoreResult(params: {
   if (params.breachCheck.status === "checked" && params.breachCheck.found) {
     findings.push("breach_found");
     score -= 35;
-  } else if (params.breachCheck.status === "not_configured") {
-    findings.push("hibp_not_configured");
-    score -= 5;
   } else if (params.breachCheck.status === "unavailable") {
     findings.push("hibp_unavailable");
     score -= 5;
@@ -327,7 +378,7 @@ export async function POST(req: NextRequest) {
 
   const [domainChecks, breachCheck] = await Promise.all([
     checkDomainAuth(parsed.domain),
-    checkHibp(parsed.email),
+    checkBreaches(parsed.email),
   ]);
   const disposable = DISPOSABLE_DOMAINS.has(parsed.domain);
   const roleAccount = ROLE_ALIASES.has(parsed.local.split("+")[0]);
