@@ -19,7 +19,7 @@ export function organizationSchema(): JsonLdObject {
     description: siteConfig.description.tr,
     logo: {
       "@type": "ImageObject",
-      url: absoluteUrl("/icon"),
+      url: absoluteUrl("/favicon.svg"),
     },
     sameAs: [siteConfig.social.twitter, siteConfig.social.github].filter(Boolean),
   };
@@ -120,7 +120,7 @@ export function articleSchema(post: {
       url: siteConfig.url,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/icon"),
+        url: absoluteUrl("/favicon.svg"),
       },
     },
     image: {

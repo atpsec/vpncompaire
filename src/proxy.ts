@@ -165,6 +165,6 @@ export default function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next|_vercel|go|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|.*\\..*).*)",
+    "/((?!api|_next|_vercel|go|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.svg|icon|apple-icon|.*\\..*).*)",
   ],
 };
