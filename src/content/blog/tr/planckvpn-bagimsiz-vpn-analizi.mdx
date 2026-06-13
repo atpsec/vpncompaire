@@ -1,0 +1,139 @@
+---
+slug: "planckvpn-bagimsiz-vpn-analizi"
+title: "PlanckVPN Nedir? Yeni Bağımsız VPN'in Vaatleri ve Eksikleri (2026)"
+description: "PlanckVPN'i puan vermeden inceliyoruz: WireGuard, sahiplik şeffaflığı, ücretsiz katman, ABD yargı yetkisi ve bağımsız denetim boşluğu. Henüz Top 10 listesinde değil."
+publishedAt: "2026-06-11"
+updatedAt: "2026-06-11"
+author: "VPN Advisor Editör Ekibi"
+category: "secim-rehberi"
+tags: ["planckvpn", "bağımsız vpn", "wireguard", "no logs", "yeni vpn", "ios vpn"]
+readingTime: 11
+coverImage: "choosing-vpn-nord-surf-tr"
+unsplashKeyword: "vpn privacy independent security"
+---
+
+**Editoryal not:** Bu yazı bir **haber/analiz** metnidir. PlanckVPN henüz [En İyi 10 VPN](/en-iyi) listemizde yer almıyor; bağımsız hız, streaming veya sızıntı testi yapmadık ve **puan vermiyoruz**. Amaç, 2026'da öne çıkan yeni bir bağımsız VPN'in ne vaat ettiğini ve metodolojimize göre hangi kanıtların eksik kaldığını şeffaf biçimde özetlemek.
+
+[PlanckVPN](https://planckvpn.com/), 2026'da piyasaya çıkan, **WireGuard** tabanlı, "bağımsız ve zero-log" konumlandırmalı bir iOS VPN uygulaması. Rakip VPN'lerin sahiplik yapısını (Kape Technologies, Nord Security) kamuya açık kaynaklarla anlatması; ücretsiz katmanı reklamla finanse etmesini açıkça söylemesi; VPN'in ne yapamayacağını dürüstçe listelemesi — editoryal açıdan dikkat çekici.
+
+Peki gerçekten bağımsız mı? Türkiye'deki tipik kullanıcı için uygun mu? Metodolojimize göre nerede duruyor?
+
+## PlanckVPN kısaca ne sunuyor?
+
+Sağlayıcının kendi sitesi ve [App Store](https://apps.apple.com/us/app/planck-vpn-no-logs-fast/id6758999980) kayıtlarına göre özet:
+
+| Alan | PlanckVPN iddiası |
+|------|-------------------|
+| **Kuruluş** | 2026, Virginia (ABD) |
+| **Yasal tüzel kişi** | Everly Hill LLC |
+| **Platform** | Yalnızca **iOS** (Android "yakında") |
+| **Protokol** | WireGuard |
+| **Sunucu** | ~60 sunucu, "birden fazla ülke" (detaylı liste yok) |
+| **Ücretsiz katman** | Var — Google AdMob reklamlı, süre sınırı yok |
+| **Premium** | $2.49/ay (yıllık), $4.99/ay (aylık) |
+| **Affiliate programı** | Görünmüyor |
+
+Uygulama modları arasında "Maximum Security" (ağ düzeyinde tehdit engelleme iddiası), "Ad Block" ve standart VPN modu sayılıyor. Premium'da reklamlar kalkıyor ve tüm sunucu lokasyonları açılıyor.
+
+## Bağımsızlık mesajı: ne anlama geliyor?
+
+PlanckVPN'in ana hikâyesi, büyük VPN markalarının veri şirketleri veya holding yapıları tarafından satın alınması. Site, Kape Technologies ve Nord Security birleşmelerini **belgelenmiş kamu kaynaklarıyla** anlatıyor; ExpressVPN–Project Raven gibi olayları da referans veriyor — yanlış yapma iddiası olmadan, "yüksek riskli ortamlarda sahiplik bilgisi önemli" çerçevesinde.
+
+Bu ton, VPN Advisor'ın da önemsediği **sahiplik şeffaflığı** ile örtüşüyor. Fark şu: biz sıralamada [Mullvad](/inceleme/mullvad) gibi affiliate ilişkisi olmayan seçenekleri bilinçli olarak tutuyoruz; PlanckVPN henüz aynı seviyede kanıt sunmuyor.
+
+**Kurucu ve şirket:** About sayfasında **Kuzzat Altay** (Virginia, ABD) anlatılıyor; App Store geliştiricisi **Everly Hill LLC**. "Yatırımcı yok, ana şirket yok" mesajı var — bu iddiayı bağımsız kurumsal kayıtlarla (SEC, Virginia SCC vb.) doğrulamak henüz rutin editoryal pratiğimizde değil; kullanıcı olarak siz de [Virginia işletme kayıtları](https://cis.scc.virginia.gov/) üzerinden kontrol edebilirsiniz.
+
+## Gizlilik politikası: zero-log iddiası vs metin
+
+Pazarlama dili sert: *"Zero logs. Period."* Gizlilik politikası ise daha nüanslı:
+
+- VPN tüneli **içindeki** trafik, DNS, hedef IP kaydedilmez iddiası var.
+- Bağlantı kurulurken **kaynak genel IP adresi geçici** işlenebilir; cihaz tipi ve işletim sistemi sürümü gibi oturum metadata'sı geçiyor.
+- Ücretsiz katmanda **Google AdMob** kullanılıyor; VPN tüneli ile reklam profili arasında "air-gap" iddiası var.
+
+Bu, sektörde sık görülen bir ayrım — tam "hiçbir metadata yok" ile "tünel içi zero-log" farklı şeyler. [Mullvad](/inceleme/mullvad) ve [Proton VPN](/inceleme/proton-vpn) bu ayrımı yıllarca denetim raporlarıyla destekliyor. PlanckVPN için **henüz bağımsız no-log denetimi yok** (Cure53, Deloitte, Assured AB vb.).
+
+Terms of Service ile privacy policy arasında bağlantı zaman damgası ifadesi tam örtüşmüyor olabilir; ciddi bir gizlilik değerlendirmesinde bu tutarlılık incelenmeli.
+
+## Metodolojimize göre kontrol listesi (puansız)
+
+[Metodoloji](/metodoloji) sayfamızdaki altı kritere PlanckVPN'i **bugünkü kamuya açık bilgilerle** uyguladık — test yapmadan, iddiaları doğrulamadan:
+
+### 1. Gizlilik politikası ve yargı yetkisi
+
+- **Artı:** Politika okunabilir; AdMob finansmanı açık.
+- **Eksi:** Virginia, ABD yargı yetkisi — [5 Eyes](/sozluk) bağlamında değerlendirme gerektirir. Mullvad (İsveç) veya NordVPN (Panama) kadar "yargı yetkisi avantajı" yok.
+
+### 2. Bağımsız denetimler
+
+- **Eksi:** Kamuya açık üçüncü taraf no-log veya güvenlik denetimi bulunmuyor. Bu kriterde listemizdeki ciddi adayların gerisinde.
+
+### 3. Hız (gerçek dünya testleri)
+
+- **Belirsiz:** Henüz test etmedik. ~60 sunucu, küçük ağ; Türkiye'den performans verisi yok.
+
+### 4. Streaming uyumluluğu
+
+- **Belirsiz / muhtemelen zayıf:** Streaming bypass odaklı pazarlama yok; BluTV, Exxen, Netflix senaryoları için veri yok. Bağımsızlık odaklı konumlandırma streaming'i önceliklendirmiyor.
+
+### 5. Fiyat şeffaflığı
+
+- **Artı:** Fiyatlar sitede net ($2.49/ay yıllık, ücretsiz katman açık). App Store abonelik yönetimi Apple üzerinden — ödeme bilgisi sağlayıcıya gitmiyor (terms'e göre).
+
+### 6. Kullanım kolaylığı
+
+- **Artı (iOS):** "One tap connect" — sade UX vaadi tutarlı.
+- **Eksi (genel kitle):** **Yalnızca iPhone/iPad.** Türkiye'de Android payı yüksek; çoğu okuyucumuz için şu an **kapsam dışı**.
+
+## Ücretsiz katman: dürüst mü, güvenli mi?
+
+PlanckVPN ücretsiz katmanı **AdMob reklamlarıyla** finanse ediyor — bunu gizlemiyor. Bu, [ücretsiz vs ücretli VPN](/blog/ucretsiz-vs-ucretli-vpn) yazımızdaki "bedava VPN nasıl para kazanır?" sorusuna dürüst bir cevap.
+
+Dikkat edilmesi gerekenler:
+
+- Reklam SDK'sı cihaz düzeyinde çalışır; "air-gap" iddiasını bağımsız denetim olmadan doğrulayamıyoruz.
+- Ücretsiz planda "core server locations" — premium'daki tüm lokasyonlar yok.
+- Tanınmış marka değil; App Store dışından indirme riski (sahte klon uygulamalar) her yeni VPN'de geçerli.
+
+[Güvenilir VPN nasıl seçilir?](/blog/guvenilir-vpn-nasil-secilir-2026) rehberimizdeki ücretsiz VPN tuzağı maddelerini burada da uygulayın.
+
+## Kimler için erken ilgi, kimler beklemeli?
+
+**Erken ilgi gösterebilecek profil:**
+
+- iOS kullanıcısı, sahiplik şeffaflığına öncelik veren
+- WireGuard ve sade arayüz isteyen
+- Ücretsiz katmanı denemek isteyen (reklam trade-off'unu kabul eden)
+- Streaming veya Türkiye sunucusu şart değil
+
+**Beklemesi mantıklı profil:**
+
+- Android, Windows, macOS kullanıcısı (henüz yok)
+- Bağımsız denetim raporu isteyen — [Proton VPN](/inceleme/proton-vpn) veya [Mullvad](/inceleme/mullvad) daha olgun kanıt sunuyor
+- BluTV / Exxen / diaspora senaryosu
+- Kurumsal veya yüksek riskli gazetecilik/aktivist kullanım (henüz kanıt yetersiz)
+
+## VPN Advisor'da neden henüz listelenmiyor?
+
+PlanckVPN'i **izleme listesinde** tutuyoruz. Top 10 veya tam inceleme sayfası (`/inceleme/planckvpn`) için şu koşulların en az bir kısmının oluşması gerekir:
+
+1. **Android (ve tercihen masaüstü) sürümü**
+2. **Bağımsız no-log veya güvenlik denetimi**
+3. Sunucu listesi, ülke dağılımı ve şirket yapısının şeffaf dokümantasyonu
+4. VPN Advisor tarafında gerçek test: DNS/WebRTC sızıntısı, hız, kill switch davranışı
+5. Anlamlı kullanıcı tabanı ve olay geçmişi (mahkeme, ihlal, vb.)
+
+Affiliate programı olmaması tarafsızlık açısından olumlu sinyal olabilir — tıpkı Mullvad gibi — ama tek başına listeye girmek için yeterli değil.
+
+## Sonuç
+
+PlanckVPN, VPN endüstrisindeki sahiplik konsolidasyonuna karşı **net ve belgeli bir karşı anlatı** sunuyor; WireGuard, ücretsiz katman ve fiyat şeffaflığı iddiaları tutarlı. Ancak 2026 ortasında hâlâ **çok genç bir ürün**: bağımsız denetim yok, ağ küçük, platform iOS ile sınırlı, ABD yargı yetkisi var ve biz henüz hands-on test yapmadık.
+
+**Özet:** İlginç bir aday — özellikle bağımsızlık ve sahiplik şeffaflığı mesajı açısından. Şu an **öneri değil, izleme** kategorisinde. Android çıkışı ve bağımsız denetim geldiğinde metodolojimize göre yeniden değerlendiririz.
+
+İlgili okumalar:
+
+- [Güvenilir VPN nasıl seçilir? (2026)](/blog/guvenilir-vpn-nasil-secilir-2026)
+- [RAM-only sunucular ve no-logs](/blog/ram-only-sunucu-vpn)
+- [Mullvad incelemesi](/inceleme/mullvad) — affiliate'siz, gizlilik odaklı referans
+- [Nasıl test ediyoruz](/metodoloji)

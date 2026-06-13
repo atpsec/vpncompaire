@@ -247,6 +247,10 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "android-iphone-spam-arama-vpn-guvenlik",
     en: "android-iphone-spam-call-vpn-security",
   },
+  "planckvpn-bagimsiz-vpn-analizi": {
+    tr: "planckvpn-bagimsiz-vpn-analizi",
+    en: "planckvpn-independent-vpn-analysis",
+  },
 };
 
 export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {
