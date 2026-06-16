@@ -1,0 +1,66 @@
+---
+slug: "webrtc-leak-vpn-fix"
+title: "What Is a WebRTC Leak? VPN Fix Guide 2026"
+description: "WebRTC can expose your real IP even with VPN on. How to test WebRTC leaks and fix them in browser and VPN settings."
+publishedAt: "2026-06-17"
+updatedAt: "2026-06-17"
+author: "VPN Advisor Editorial Team"
+category: "gizlilik-guvenlik"
+tags: ["webrtc", "ip-leak", "vpn", "browser"]
+readingTime: 9
+coverImage: "webrtc-leak-en"
+unsplashKeyword: "webrtc browser privacy leak"
+---
+
+VPN connected, IP check shows another country — but a WebRTC test may still reveal your home IP. That is a WebRTC leak: the browser's real-time API can bypass the VPN tunnel and expose local or public addresses. IP masking alone is not enough; you need the browser layer too.
+
+## Why WebRTC Leaks IP
+
+WebRTC lets browsers run video calls and peer connections. To find the best network path, it queries STUN servers — sometimes revealing:
+
+- Your local LAN IP (e.g. `192.168.x.x`)
+- Your ISP-assigned public IP
+
+even while VPN is active.
+
+[DNS leaks](/blog/dns-leak-test-vpn) are a separate vector; test both. For a simple home check see [DNS/WebRTC home test](/blog/dns-webrtc-ip-leak-home-test).
+
+## How to Test
+
+1. Connect VPN and note server country.
+2. Open **browserleaks.com/webrtc** or **ipleak.net**.
+3. If Turkish ISP or home IP appears under Public/Local IP, you have a leak.
+
+Test Chrome and Firefox; results can differ.
+
+## Fixes
+
+### Browser settings
+
+**Firefox**: `about:config` → `media.peerconnection.enabled` → `false`.
+
+**Chrome / Edge**: No built-in off switch — extension or VPN client protection needed.
+
+**Brave**: Settings → Shields → fingerprint blocking + WebRTC IP handling → "Disable non-proxied UDP".
+
+### VPN client
+
+Enable "WebRTC leak protection" in the app. Providers like Mullvad, Proton VPN and NordVPN offer this. See [privacy VPN picks](/en-iyi/gizlilik) for consistent protection.
+
+### Extensions (use carefully)
+
+uBlock Origin or WebRTC Leak Prevent can help but may break video calls. Install only from trusted sources.
+
+## Does VPN Block WebRTC Completely?
+
+No. VPN encrypts IP traffic; WebRTC runs inside the browser. Full coverage needs:
+
+- VPN + browser/WebRTC settings
+- [Kill switch](/blog/vpn-kill-switch-explained) where appropriate
+- Regular leak tests
+
+[Browser fingerprinting](/blog/browser-fingerprint-vpn) is another tracking vector VPN does not fix.
+
+## Summary
+
+WebRTC leak is easy to overlook. Test, configure browser and VPN together. Leak tests are part of our [methodology](/metodoloji).

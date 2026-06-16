@@ -1,0 +1,45 @@
+---
+slug: "webrtc-leak-vpn-fix"
+title: "WebRTC-Leak: Was es ist und wie VPN + Browser helfen 2026"
+description: "WebRTC kann Ihre echte IP auch mit VPN offenlegen. Test, Browser- und VPN-Einstellungen zum Schließen der Lücke."
+publishedAt: "2026-06-17"
+updatedAt: "2026-06-17"
+author: "VPN Advisor Redaktion"
+category: "gizlilik-guvenlik"
+tags: ["webrtc", "ip-leak", "vpn", "browser"]
+readingTime: 9
+coverImage: "webrtc-leak-en"
+unsplashKeyword: "webrtc browser privacy leak"
+---
+
+VPN aktiv, IP-Check zeigt ein anderes Land — ein WebRTC-Test kann trotzdem Ihre Heim-IP anzeigen. Das ist ein WebRTC-Leak: Die Browser-API umgeht den VPN-Tunnel und gibt lokale oder öffentliche Adressen preis.
+
+## Warum WebRTC IP leakt
+
+WebRTC nutzt STUN-Server für Video und P2P. Dabei können LAN-IP und ISP-öffentliche IP sichtbar werden — auch mit VPN.
+
+[DNS-Leaks](/blog/dns-leak-test-vpn) sind ein separates Thema; beides testen. Einfacher Heimtest: [DNS/WebRTC-Test](/blog/dns-webrtc-ip-leak-home-test).
+
+## Test
+
+1. VPN verbinden
+2. **browserleaks.com/webrtc** oder **ipleak.net** öffnen
+3. Heim- oder ISP-IP unter Public/Local IP = Leak
+
+Chrome und Firefox getrennt testen.
+
+## Lösungen
+
+**Firefox**: `media.peerconnection.enabled` → `false`
+
+**Brave**: WebRTC IP handling → „Disable non-proxied UDP“
+
+**VPN-Client**: WebRTC-Leak-Schutz aktivieren — siehe [Datenschutz-VPNs](/en-iyi/gizlilik)
+
+**Erweiterungen**: uBlock Origin — kann Videoanrufe stören
+
+## VPN allein reicht nicht
+
+Kombination: VPN + Browser-Einstellungen + [Kill Switch](/blog/vpn-kill-switch-explained) + regelmäßige Tests. [Browser-Fingerprint](/blog/browser-fingerprint-vpn) ist ein weiterer Vektor.
+
+Details in der [Methodik](/metodoloji).

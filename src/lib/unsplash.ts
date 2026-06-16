@@ -970,6 +970,36 @@ const imageDatabase: Record<string, BlogImageSet> = {
     mid: img("1516321318423-f06f85e504b3", "Connection settings", PHOTOGRAPHERS.johnSchnobrich, 800, 450),
     end: img("1551434678-e076c223a692", "Checklist", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
+  "webrtc-leak-tr": {
+    hero: img("1555949963-ff9fe0c870eb", "Tarayıcı ve ağ güvenliği", PHOTOGRAPHERS.shahadat),
+    mid: img("1526374965328-7f61d4dc18c5", "Veri akışı", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "WebRTC koruma", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "webrtc-leak-en": {
+    hero: img("1551808525-51a94da548ce", "Browser network security", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1555949963-ff9fe0c870eb", "Code and privacy", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "WebRTC protection", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "vpn-2fa-tr": {
+    hero: img("1563013544-824ae1b704d3", "Hesap güvenliği", PHOTOGRAPHERS.growtika),
+    mid: img("1554224155-6726b3ff858f", "Güvenli erişim", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Kimlik doğrulama", PHOTOGRAPHERS.philippKatzenberger, 800, 450),
+  },
+  "vpn-2fa-en": {
+    hero: img("1550751827-4bd374c3f58b", "Account security layers", PHOTOGRAPHERS.adiGoldstein),
+    mid: img("1563013544-824ae1b704d3", "Digital protection", PHOTOGRAPHERS.growtika, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Two-factor lock", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "browser-fingerprint-tr": {
+    hero: img("1526374965328-7f61d4dc18c5", "Dijital iz ve veri", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1677442136019-21780ecad995", "Tarayıcı arayüzü", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1551434678-e076c223a692", "Anonimlik katmanları", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "browser-fingerprint-en": {
+    hero: img("1677442136019-21780ecad995", "Browser identity", PHOTOGRAPHERS.shahadat),
+    mid: img("1526374965328-7f61d4dc18c5", "Digital fingerprint data", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1551434678-e076c223a692", "Privacy layers", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
 };
 
 // Alias eşleştirmeleri (frontmatter'daki farklı isimlendirmeler için)

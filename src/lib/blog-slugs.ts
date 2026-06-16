@@ -263,6 +263,18 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "vpn-bagli-ama-calismiyor",
     en: "vpn-connected-but-not-working",
   },
+  "webrtc-leak-vpn-cozum": {
+    tr: "webrtc-leak-vpn-cozum",
+    en: "webrtc-leak-vpn-fix",
+  },
+  "vpn-iki-faktorlu-dogrulama": {
+    tr: "vpn-iki-faktorlu-dogrulama",
+    en: "vpn-two-factor-authentication",
+  },
+  "tarayici-fingerprint-vpn": {
+    tr: "tarayici-fingerprint-vpn",
+    en: "browser-fingerprint-vpn",
+  },
 };
 
 export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {
