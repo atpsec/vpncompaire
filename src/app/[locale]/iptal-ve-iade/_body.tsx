@@ -232,7 +232,7 @@ const TR_STRINGS: Strings = {
   breadcrumbHere: "İptal ve İade",
   badge: "Tüketici rehberi",
   h1: "VPN iptal ve iade rehberi",
-  lede: "10 VPN sağlayıcısı için iptal adımları, iade penceresi ve yaygın tuzaklar — sağlayıcı politikalarına göre derlenmiştir. Yenileme yaklaştığında veya iade talep etmek istediğinde başvurabileceğin tek sayfa.",
+  lede: "20 VPN sağlayıcısı için iptal adımları, iade penceresi ve yaygın tuzaklar — sağlayıcı politikalarına göre derlenmiştir. Yenileme yaklaştığında veya iade talep etmek istediğinde başvurabileceğin tek sayfa.",
   warningTitle: "Genel uyarı",
   warningBody:
     "İade ve iptal koşulları sağlayıcı tarafından haber verilmeksizin değişebilir. İade penceresi tipik olarak 30 gündür (CyberGhost 45, Windscribe 3, IPVanish aylık plan için 7 gün). Satın almadan önce sağlayıcının kendi iade politikasını okumanı öneririz.",
@@ -277,7 +277,7 @@ const EN_STRINGS: Strings = {
   breadcrumbHere: "Cancellation & refund",
   badge: "Consumer guide",
   h1: "VPN cancellation & refund guide",
-  lede: "Cancellation steps, refund windows and common pitfalls for 10 VPN providers — compiled from provider policies. The one page to come back to when renewal approaches or when you want to request a refund.",
+  lede: "Cancellation steps, refund windows and common pitfalls for 20 VPN providers — compiled from provider policies. The one page to come back to when renewal approaches or when you want to request a refund.",
   warningTitle: "General warning",
   warningBody:
     "Refund and cancellation terms may change without notice from the provider. The refund window is typically 30 days (CyberGhost 45, Windscribe 3, IPVanish 7 for monthly plans). Before buying, we recommend reading the provider's own refund policy.",

@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Calculator, Info, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
-import { products } from "@/data/products";
+import { rankedProducts } from "@/data/products";
+import type { Locale } from "@/lib/site";
 
 type Horizon = 1 | 2 | 3;
 
@@ -26,11 +27,12 @@ function estimateTotal(
 
 export function CostCalculator() {
   const t = useTranslations("calculator.tool");
+  const locale = useLocale() as Locale;
   const [horizon, setHorizon] = useState<Horizon>(3);
 
   const horizonMonths = horizon * 12;
 
-  const rows = products
+  const rows = rankedProducts(locale)
     .map((product) => {
       const bestPlan =
         product.plans.find((p) => p.isBestValue) ?? product.plans[0];

@@ -25,7 +25,8 @@ export function TopVPNList() {
   const list = topRankedProducts(locale);
   const winner = list[0];
   const podium = list.slice(1, 3);
-  const rest = list.slice(3);
+  const restTop = list.slice(3, 10);
+  const extended = list.slice(10);
 
   return (
     <section id="top" className="py-16 sm:py-24">
@@ -52,10 +53,29 @@ export function TopVPNList() {
           {podium.map((p) => (
             <FeaturedRow key={p.slug} product={p} tCommon={tCommon} />
           ))}
-          {rest.map((p) => (
+          {restTop.map((p) => (
             <CompactRow key={p.slug} product={p} tCommon={tCommon} />
           ))}
         </ul>
+
+        {extended.length > 0 && (
+          <div className="mt-14">
+            <div className="mb-6 max-w-2xl">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-700">
+                {t("extendedKicker")}
+              </span>
+              <h3 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
+                {t("extendedTitle")}
+              </h3>
+              <p className="mt-2 text-sm text-ink-muted">{t("extendedSubtitle")}</p>
+            </div>
+            <ul className="space-y-3">
+              {extended.map((p) => (
+                <CompactRow key={p.slug} product={p} tCommon={tCommon} />
+              ))}
+            </ul>
+          </div>
+        )}
       </Container>
     </section>
   );

@@ -994,8 +994,8 @@ export function getProduct(slug: string, locale: Locale = "tr"): Product | undef
   return raw ? resolveProduct(raw, locale) : undefined;
 }
 
-/** Ana sıralama listesinde gösterilen VPN sayısı (UI “En İyi 10”). */
-export const TOP_RANKED_LIMIT = 10;
+/** Ana sıralama listesinde gösterilen VPN sayısı (UI “En İyi 20”). */
+export const TOP_RANKED_LIMIT = 20;
 
 export function rankedProducts(locale: Locale = "tr"): Product[] {
   return [...rawProducts]

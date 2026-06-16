@@ -52,7 +52,7 @@
     "hero": {
       "h1": "Freiwillige, unabhängige VPN-Vergleiche",
       "subtitle": "VPNs bewertet nach einer transparenten Methodik für Datenschutz, Streaming, Reisen und Sicherheit im Alltag.",
-      "ctaPrimary": "Top 10 VPNs ansehen",
+      "ctaPrimary": "Top 20 VPNs ansehen",
       "ctaSecondary": "So testen wir",
       "methodologyTag": "Unabhängige Testmethodik",
       "trust": {
@@ -63,8 +63,11 @@
       }
     },
     "topVPNs": {
-      "title": "Die Top 10 VPNs 2026",
-      "subtitle": "Bewertet nach unabhängigen Audits, Praxistests zur Geschwindigkeit und transparenter Preisanalyse."
+      "title": "Die Top 20 VPNs 2026",
+      "subtitle": "Unabhängige Audits, echte Speedtests und transparente Preisanalyse.",
+      "extendedKicker": "Rang 11–20",
+      "extendedTitle": "Erweiterter Review-Pool",
+      "extendedSubtitle": "Alternativen außerhalb der Top 20 — für Budget, Nischenfeatures oder eine zweite Option."
     },
     "useCase": {
       "title": "VPN nach Einsatzzweck finden",
@@ -451,7 +454,7 @@
     },
     "footerCta": {
       "kicker": "See all comparisons",
-      "link": "Back to the Top 10 VPN ranking"
+      "link": "Back to the Top 20 VPN ranking"
     }
   },
   "quiz": {
@@ -540,7 +543,7 @@
     "reset": "Reset",
     "altDirectHeading": "Skip the quiz",
     "altLinks": {
-      "top": "Top 10 VPN ranking",
+      "top": "Top 20 VPN ranking",
       "compare": "Compare two VPNs",
       "calculator": "Cost calculator"
     },
@@ -637,7 +640,7 @@
       "cards": {
         "reviews": {
           "title": "Reviews",
-          "desc": "Detailed reviews of 10 VPNs.",
+          "desc": "Detailed reviews of 20 VPNs.",
           "link": "Go to reviews →"
         },
         "compare": {
@@ -826,7 +829,7 @@
     },
     "readComparison": "Read comparison",
     "footerKicker": "Before comparing, see each VPN's full review",
-    "footerLink": "Go to the Top 10 VPN ranking",
+    "footerLink": "Go to the Top 20 VPN ranking",
     "intro": "Direkte Vergleiche wichtiger VPN-Anbieter."
   },
   "deviceHub": {
@@ -846,7 +849,7 @@
     "metaTitle": "VPN kündigen und Erstattung erhalten",
     "metaDescription": "So kündigen Sie VPN-Abos und nutzen Geld-zurück-Garantien richtig.",
     "ogTitle": "VPN Cancellation & Refund Guide",
-    "ogDescription": "Cancellation and refund steps for 10 VPNs, all on one page.",
+    "ogDescription": "Cancellation and refund steps for 20 VPNs, all on one page.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Cancellation & refund",
     "h1": "Kündigung & Erstattung"
@@ -907,7 +910,7 @@
     "resetWithCount": "Reset filters ({count} active)",
     "matchCount": "<strong>{count}</strong> VPNs matched",
     "activeCount": "Active filters: {count}",
-    "allShown": "Showing all 10 VPNs",
+    "allShown": "Showing all 20 VPNs",
     "readReview": "Read review",
     "getDeal": "Get deal",
     "emptyTitle": "No matching VPNs",
@@ -1035,7 +1038,7 @@
     "alt": "VPN Advisor - Unabhängige VPN-Vergleiche",
     "h1": "Unabhängige VPN-Vergleiche",
     "subtitle": "Freiwilliges Review-Projekt - Transparente Methodik - Unabhängige Bewertungen.",
-    "trust1": "10 VPNs getestet",
+    "trust1": "20 VPNs getestet",
     "trust2": "Unabhängige Audits",
     "trust3": "Transparente Methodik"
   },

@@ -32,6 +32,16 @@ const reviewBodies = {
   ipvanish: () => import("@/content/reviews/ipvanish.mdx"),
   windscribe: () => import("@/content/reviews/windscribe.mdx"),
   tunnelbear: () => import("@/content/reviews/tunnelbear.mdx"),
+  "atlas-vpn": () => import("@/content/reviews/atlas-vpn.mdx"),
+  purevpn: () => import("@/content/reviews/purevpn.mdx"),
+  vyprvpn: () => import("@/content/reviews/vyprvpn.mdx"),
+  ivpn: () => import("@/content/reviews/ivpn.mdx"),
+  hideme: () => import("@/content/reviews/hideme.mdx"),
+  "privado-vpn": () => import("@/content/reviews/privado-vpn.mdx"),
+  "hotspot-shield": () => import("@/content/reviews/hotspot-shield.mdx"),
+  strongvpn: () => import("@/content/reviews/strongvpn.mdx"),
+  zoogvpn: () => import("@/content/reviews/zoogvpn.mdx"),
+  "norton-vpn": () => import("@/content/reviews/norton-vpn.mdx"),
 } as const;
 
 export function generateStaticParams() {
