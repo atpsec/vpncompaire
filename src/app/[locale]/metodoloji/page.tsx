@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -42,6 +43,13 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: localizedAlternates("/metodoloji", locale),
+    openGraph: {
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+      url: absoluteUrl("/metodoloji", locale),
+      type: "article",
+    },
   };
 }
 

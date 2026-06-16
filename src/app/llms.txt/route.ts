@@ -14,7 +14,7 @@ export function GET() {
 
 ${siteConfig.name}, bağımsız test metodolojisi ile VPN'leri karşılaştıran Türkçe bir inceleme sitesidir. Her ürün şu altı kritere göre değerlendirilir: gizlilik politikası ve yargı yetkisi, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı, kullanım kolaylığı.
 
-Editoryal bağımsızlık ilkemiz: Sayfada affiliate (ortaklık) bağlantıları bulunur ve siteyi finanse eder. Affiliate komisyonu sıralamayı, içeriği veya değerlendirmeleri etkilemez. Affiliate programı bulunmayan seçenekler (örn. Mullvad) da sıralamada yer alır — tarafsızlık ilkemize bağlıyız.
+Editoryal bağımsızlık ilkemiz: Site geliri Google AdSense reklamlarından ve (programı olan sağlayıcılarda) VPN ortaklık bağlantılarından elenebilir. Ortaklık komisyonu sıralamayı, içeriği veya değerlendirmeleri etkilemez. Ortaklık programı bulunmayan seçenekler (örn. Mullvad) da sıralamada yer alır — tarafsızlık ilkemize bağlıyız.
 
 ## 2026'nın En İyi VPN'leri
 

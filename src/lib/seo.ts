@@ -70,8 +70,17 @@ export function itemListSchema(
   };
 }
 
+function breadcrumbItemUrl(path: string, locale?: Locale): string {
+  // getLocalizedPath() zaten /en/... veya /de/... prefix'i içerir; tekrar ekleme.
+  if (path.startsWith("/en/") || path.startsWith("/de/")) {
+    return absoluteUrl(path);
+  }
+  return absoluteUrl(path, locale);
+}
+
 export function breadcrumbSchema(
   trail: { name: string; path: string }[],
+  locale?: Locale,
 ): JsonLdObject {
   return {
     "@context": "https://schema.org",
@@ -80,7 +89,7 @@ export function breadcrumbSchema(
       "@type": "ListItem",
       position: i + 1,
       name: t.name,
-      item: absoluteUrl(t.path),
+      item: breadcrumbItemUrl(t.path, locale),
     })),
   };
 }

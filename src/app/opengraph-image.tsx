@@ -1,10 +1,50 @@
 import { ImageResponse } from "next/og";
+import { getLocale } from "next-intl/server";
 
 export const alt = "VPN Advisor — Independent VPN comparisons";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OGImage() {
+type OgLocale = "tr" | "en" | "de";
+
+const CONTENT: Record<
+  OgLocale,
+  { title: string; subtitle: string; signals: [string, string, string] }
+> = {
+  tr: {
+    title: "Bağımsız VPN karşılaştırmaları",
+    subtitle:
+      "Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız değerlendirmeler.",
+    signals: ["10 VPN test edildi", "Bağımsız denetimler", "Şeffaf metodoloji"],
+  },
+  en: {
+    title: "Independent VPN comparisons",
+    subtitle:
+      "Volunteer review project · Transparent methodology · Independent assessments.",
+    signals: ["10 VPNs tested", "Independent audits", "Transparent methodology"],
+  },
+  de: {
+    title: "Unabhängige VPN-Vergleiche",
+    subtitle:
+      "Freiwilliges Review-Projekt · Transparente Methodik · Unabhängige Bewertungen.",
+    signals: [
+      "10 VPNs getestet",
+      "Unabhängige Audits",
+      "Transparente Methodik",
+    ],
+  },
+};
+
+function asOgLocale(raw: string): OgLocale {
+  if (raw === "en" || raw === "de") return raw;
+  return "tr";
+}
+
+export default async function OGImage() {
+  const raw = await getLocale();
+  const locale = asOgLocale(raw);
+  const c = CONTENT[locale];
+
   return new ImageResponse(
     (
       <div
@@ -21,7 +61,6 @@ export default function OGImage() {
           color: "white",
         }}
       >
-        {/* Logo area */}
         <div
           style={{
             display: "flex",
@@ -50,7 +89,6 @@ export default function OGImage() {
           </span>
         </div>
 
-        {/* Main heading */}
         <div
           style={{
             marginTop: "auto",
@@ -68,7 +106,7 @@ export default function OGImage() {
               maxWidth: 900,
             }}
           >
-            Independent VPN comparisons
+            {c.title}
           </div>
           <div
             style={{
@@ -78,11 +116,9 @@ export default function OGImage() {
               maxWidth: 900,
             }}
           >
-            Volunteer review project · Transparent methodology · Independent
-            assessments.
+            {c.subtitle}
           </div>
 
-          {/* Trust signals */}
           <div
             style={{
               display: "flex",
@@ -93,19 +129,17 @@ export default function OGImage() {
               alignItems: "center",
             }}
           >
-            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ✓ 10 VPNs tested
-            </span>
-            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ✓ Independent audits
-            </span>
-            <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              ✓ Transparent methodology
-            </span>
+            {c.signals.map((signal) => (
+              <span
+                key={signal}
+                style={{ display: "flex", alignItems: "center", gap: 8 }}
+              >
+                ✓ {signal}
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Year accent */}
         <div
           style={{
             position: "absolute",

@@ -7,14 +7,24 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "about" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: localizedAlternates("/hakkimizda", locale),
+    openGraph: {
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+      url: absoluteUrl("/hakkimizda", locale),
+      type: "website",
+    },
+  };
 }
 
 export default async function Page({ params }: Props) {
@@ -25,10 +35,13 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumbHome"), path: "/" },
-          { name: t("breadcrumbHere"), path: "/hakkimizda" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumbHome"), path: "/" },
+            { name: t("breadcrumbHere"), path: "/hakkimizda" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="md" className="py-12 sm:py-16">

@@ -9,13 +9,24 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { devices } from "@/data/devices";
 import { devicesEn } from "@/data/devices.en";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "deviceHub" });
-  return { title: t("metaTitle"), description: t("metaDescription") };
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: localizedAlternates("/cihazlar", locale),
+    openGraph: {
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+      url: absoluteUrl("/cihazlar", locale),
+      type: "website",
+    },
+  };
 }
 
 export default async function Page({ params }: Props) {
@@ -27,10 +38,13 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumbHome"), path: "/" },
-          { name: t("breadcrumbHere"), path: "/cihazlar" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumbHome"), path: "/" },
+            { name: t("breadcrumbHere"), path: "/cihazlar" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="lg" className="py-12 sm:py-16">

@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { localizedAlternates } from "@/lib/site";
+import { localizedAlternates, absoluteUrl } from "@/lib/site";
 import { TrBody, EnBody } from "./_body";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -15,6 +15,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("metaTitle"),
     description: t("metaDescription"),
     alternates: localizedAlternates("/reklam-aciklamasi", locale),
+    openGraph: {
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+      url: absoluteUrl("/reklam-aciklamasi", locale),
+      type: "article",
+    },
   };
 }
 
@@ -26,10 +32,13 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumbHome"), path: "/" },
-          { name: t("breadcrumbHere"), path: "/reklam-aciklamasi" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumbHome"), path: "/" },
+            { name: t("breadcrumbHere"), path: "/reklam-aciklamasi" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="md" className="py-12 sm:py-16">

@@ -50,6 +50,66 @@ const LETTER_MARKS: Record<string, LetterMark> = {
     fg: "#ffffff",
     ariaLabel: "TunnelBear logo",
   },
+  "atlas-vpn": {
+    text: "A",
+    tile: "#2563EB",
+    fg: "#ffffff",
+    ariaLabel: "Atlas VPN logo",
+  },
+  purevpn: {
+    text: "P",
+    tile: "#F97316",
+    fg: "#1a0a00",
+    ariaLabel: "PureVPN logo",
+  },
+  vyprvpn: {
+    text: "V",
+    tile: "#0D9488",
+    fg: "#ffffff",
+    ariaLabel: "VyprVPN logo",
+  },
+  ivpn: {
+    text: "IV",
+    tile: "#1E293B",
+    fg: "#ffffff",
+    ariaLabel: "IVPN logo",
+  },
+  hideme: {
+    text: "H",
+    tile: "#059669",
+    fg: "#ffffff",
+    ariaLabel: "hide.me logo",
+  },
+  "privado-vpn": {
+    text: "Pr",
+    tile: "#7C3AED",
+    fg: "#ffffff",
+    ariaLabel: "PrivadoVPN logo",
+  },
+  "hotspot-shield": {
+    text: "HS",
+    tile: "#EF4444",
+    fg: "#ffffff",
+    ariaLabel: "Hotspot Shield logo",
+  },
+  strongvpn: {
+    text: "S",
+    tile: "#0369A1",
+    fg: "#ffffff",
+    ariaLabel: "StrongVPN logo",
+  },
+  zoogvpn: {
+    text: "Z",
+    tile: "#DB2777",
+    fg: "#ffffff",
+    ariaLabel: "ZoogVPN logo",
+  },
+  "norton-vpn": {
+    text: "N",
+    tile: "#FBBF24",
+    fg: "#1a1300",
+    ariaLabel: "Norton VPN logo",
+  },
 };
 
 type Props = {

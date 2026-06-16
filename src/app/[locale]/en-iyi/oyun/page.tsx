@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Gamepad2 } from "lucide-react";
 import { UseCasePage } from "@/components/use-case/use-case-page";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -149,7 +150,17 @@ const CONTENT = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const c = CONTENT[locale === "en" ? "en" : "tr"];
-  return { title: c.metaTitle, description: c.metaDescription };
+  return {
+    title: c.metaTitle,
+    description: c.metaDescription,
+    alternates: localizedAlternates("/en-iyi/oyun", locale),
+    openGraph: {
+      title: c.metaTitle,
+      description: c.metaDescription,
+      url: absoluteUrl("/en-iyi/oyun", locale),
+      type: "article",
+    },
+  };
 }
 
 export default async function Page({ params }: Props) {

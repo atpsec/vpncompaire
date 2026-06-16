@@ -44,8 +44,8 @@
     "noAffiliate": "Keine Provision - neutrale Auswahl"
   },
   "disclosure": {
-    "banner": "Werbehinweis: Diese Website finanziert sich über Google-AdSense-Anzeigen. Links zu VPN-Anbietern sind normale, nicht-kommerzielle Links; wir erhalten keine Provision. Empfehlungen basieren auf Recherche, Funktionsanalyse, Datenschutzrichtlinien, Audits, Preisen und Nutzbarkeit.",
-    "short": "Diese Website zeigt Google-AdSense-Anzeigen.",
+    "banner": "Werbehinweis: Diese Website kann Einnahmen aus Google-AdSense-Anzeigen und (wenn aktiv) VPN-Affiliate-Links erhalten. Affiliate-Provisionen beeinflussen Rankings, Inhalte oder Bewertungen nicht. Empfehlungen basieren auf Recherche, Funktionsanalyse, Datenschutzrichtlinien, Audits, Preisen und Nutzbarkeit.",
+    "short": "Diese Website kann Google-AdSense-Anzeigen zeigen; einige VPN-Links können Affiliate-Programme nutzen.",
     "learnMore": "Mehr erfahren"
   },
   "home": {

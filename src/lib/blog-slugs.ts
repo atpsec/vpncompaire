@@ -251,6 +251,18 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "planckvpn-bagimsiz-vpn-analizi",
     en: "planckvpn-independent-vpn-analysis",
   },
+  "halka-acik-wifi-vpn-guvenligi": {
+    tr: "halka-acik-wifi-vpn-guvenligi",
+    en: "public-wifi-vpn-security",
+  },
+  "iss-hiz-kisitlama-vpn": {
+    tr: "iss-hiz-kisitlama-vpn",
+    en: "isp-throttling-vpn",
+  },
+  "vpn-bagli-ama-calismiyor": {
+    tr: "vpn-bagli-ama-calismiyor",
+    en: "vpn-connected-but-not-working",
+  },
 };
 
 export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {

@@ -678,3 +678,41 @@ export const ALL_SECTION_SLUGS: string[] = Array.from(
     ),
   ),
 );
+
+/**
+ * Dil değiştirici için: mevcut pathname'i hedef locale'in doğru public path'ine
+ * çevirir. Blog slug'ları language-switcher içinde ayrı işlenir.
+ */
+export function localizePathname(pathname: string, targetLocale: AppLocale): string {
+  const normalized = pathname.startsWith("/") ? pathname : `/${pathname}`;
+  const segments = normalized.split("/").filter(Boolean);
+  if (segments.length === 0) return normalized;
+
+  const sectionSlug = segments[0];
+  const section = sectionForSlug(sectionSlug);
+  if (!section) return normalized;
+
+  if (segments.length === 1) {
+    const hubLocales = SECTION_HUB_SERVED[section];
+    if (hubLocales?.includes(targetLocale)) {
+      return getLocalizedSectionPath(targetLocale, section);
+    }
+    return normalized;
+  }
+
+  const pageSlug = segments[1];
+  const found = findContentBySlug(section, pageSlug);
+  if (found) {
+    const served = availableLocales(found.contentId);
+    const effectiveLocale = served.includes(targetLocale)
+      ? targetLocale
+      : DEFAULT_LOCALE;
+    const canonical = canonicalServedPath(found.contentId, effectiveLocale);
+    if (canonical) {
+      const extra = segments.slice(2);
+      return extra.length > 0 ? `${canonical}/${extra.join("/")}` : canonical;
+    }
+  }
+
+  return normalized;
+}

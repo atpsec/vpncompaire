@@ -32,12 +32,12 @@ export function TrBody() {
           <div>
             <p className="font-semibold text-ink-strong">Net açıklama</p>
             <p className="mt-1 text-sm text-ink leading-relaxed">
-              {siteConfig.name}, gelirini{" "}
-              <strong>Google AdSense reklamlarından</strong> elde eder.
+              {siteConfig.name} gelirini{" "}
+              <strong>Google AdSense reklamlarından</strong> ve (programı olan
+              sağlayıcılarda) <strong>ortaklık bağlantılarından</strong> elde
+              edebilir. Ortaklık komisyonu sıralamayı veya puanları etkilemez.
               Sayfalarda Google tarafından otomatik seçilen reklamlar
-              görüntülenebilir. VPN sağlayıcılarına giden bağlantılar ise{" "}
-              <strong>düz, ticari olmayan bağlantılardır</strong>: bunlardan
-              komisyon almıyoruz ve tıklama takibi yapmıyoruz.
+              görüntülenebilir.
             </p>
           </div>
         </div>
@@ -55,24 +55,27 @@ export function TrBody() {
           satmıyoruz.
         </p>
 
-        <h2>VPN bağlantıları komisyon getirmez</h2>
+        <h2>VPN bağlantıları ve ortaklık</h2>
         <p>
-          Sitemizdeki &quot;Resmi siteye git&quot; benzeri butonlar, doğrudan
-          ilgili VPN sağlayıcısının kendi resmi sitesine gider. Bu bağlantılar:
+          &quot;Resmi siteye git&quot; benzeri butonlar ilgili sağlayıcının
+          resmi sitesine gider. Programı olan sağlayıcılarda bağlantılar
+          ortaklık izleme içerebilir; bu durumda{" "}
+          <code>rel=&quot;sponsored nofollow&quot;</code> ile işaretlenir.
+          Ortaklık programı olmayan sağlayıcılar (ör. Mullvad) düz resmi URL
+          kullanır. Komisyon, editoryal sıralamayı veya puanları{" "}
+          <strong>belirlemez</strong>.
         </p>
         <ul>
           <li>
-            <strong>Affiliate/ortaklık bağlantısı değildir</strong> — hiçbir
-            sağlayıcıdan satış komisyonu almıyoruz.
+            Gelir kaynakları: Google AdSense + (varsa) sağlayıcı ortaklığı.
           </li>
           <li>
-            <code>rel=&quot;noopener nofollow&quot;</code> ve{" "}
-            <code>target=&quot;_blank&quot;</code> ile işaretlenir; yeni
-            sekmede markanın resmi sayfasını açar.
+            Sağlayıcılar bize içerik onayı veya sıralama satın alma imkânı
+            vermez.
           </li>
           <li>
-            Bir yönlendirme/izleme katmanından geçmez; hangi bağlantıya
-            tıkladığını izlemeyiz.
+            Affiliate ilişkisi olmayan seçenekler de metodolojimize göre
+            listede kalır.
           </li>
         </ul>
 
@@ -241,11 +244,11 @@ export function EnBody() {
           <div>
             <p className="font-semibold text-ink-strong">In plain terms</p>
             <p className="mt-1 text-sm text-ink leading-relaxed">
-              {siteConfig.name} earns its revenue from{" "}
-              <strong>Google AdSense ads</strong>. Pages may display ads
-              automatically selected by Google. Links to VPN providers are{" "}
-              <strong>plain, non-commercial links</strong>: we receive no
-              commission from them and we do not track your clicks.
+              {siteConfig.name} earns revenue from{" "}
+              <strong>Google AdSense ads</strong> and, where programs exist,{" "}
+              <strong>VPN affiliate links</strong>. Affiliate commission does not
+              affect rankings or scores. Pages may also display ads selected
+              automatically by Google.
             </p>
           </div>
         </div>
@@ -261,25 +264,26 @@ export function EnBody() {
           you buy any particular VPN. We do not sell user data.
         </p>
 
-        <h2>VPN links earn no commission</h2>
+        <h2>VPN links and affiliate programs</h2>
         <p>
-          Buttons like &quot;Visit official site&quot; on our pages link
-          directly to the VPN provider&apos;s own official website. These
-          links:
+          Buttons like &quot;Visit official site&quot; on our pages link to the
+          VPN provider&apos;s official website. Where an affiliate program is
+          active, links may include tracking parameters and are marked with{" "}
+          <code>rel=&quot;sponsored nofollow&quot;</code>. Providers without a
+          program (e.g. Mullvad) use plain official URLs. Commission{" "}
+          <strong>does not determine</strong> our ranking or scores.
         </p>
         <ul>
           <li>
-            <strong>are not affiliate/partnership links</strong> — we receive
-            no sales commission from any provider.
+            Revenue sources: Google AdSense + (where available) provider
+            affiliate programs.
           </li>
           <li>
-            are marked with <code>rel=&quot;noopener nofollow&quot;</code> and{" "}
-            <code>target=&quot;_blank&quot;</code>; they open the brand&apos;s
-            official page in a new tab.
+            Providers cannot buy placement or pre-approve our editorial content.
           </li>
           <li>
-            do not pass through any redirect/tracking layer; we do not track
-            which link you clicked.
+            Non-affiliate options remain in our lists based on methodology, not
+            monetisation.
           </li>
         </ul>
 

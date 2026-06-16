@@ -5,9 +5,9 @@ import { TopVPNList } from "@/components/home/top-vpn-list";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
-import { rankedProducts } from "@/data/products";
+import { topRankedProducts } from "@/data/products";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
-import type { Locale } from "@/lib/site";
+import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -19,6 +19,13 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: localizedAlternates("/en-iyi-vpn", locale),
+    openGraph: {
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+      url: absoluteUrl("/en-iyi-vpn", locale),
+      type: "website",
+    },
   };
 }
 
@@ -36,12 +43,15 @@ function ReviewsHubView() {
 
   return (
     <>
-      <JsonLd data={itemListSchema(rankedProducts(locale), locale)} />
+      <JsonLd data={itemListSchema(topRankedProducts(locale), locale)} />
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: tNav("reviews"), path: "/en-iyi-vpn" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: tNav("reviews"), path: "/en-iyi-vpn" },
+          ],
+          locale,
+        )}
       />
 
       <Container className="pt-12 sm:pt-16">

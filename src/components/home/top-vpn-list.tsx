@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
-import { rankedProducts, type Product } from "@/data/products";
+import { topRankedProducts, type Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 
 export function TopVPNList() {
@@ -22,7 +22,7 @@ export function TopVPNList() {
   const tCommon = useTranslations("common");
   const tBlock = useTranslations("homeBlocks.topVPNs");
   const locale = useLocale() as Locale;
-  const list = rankedProducts(locale);
+  const list = topRankedProducts(locale);
   const winner = list[0];
   const podium = list.slice(1, 3);
   const rest = list.slice(3);

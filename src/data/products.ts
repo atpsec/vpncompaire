@@ -1,4 +1,5 @@
 import type { Locale, Localized } from "@/i18n/pick";
+import { extendedRawProducts } from "./products-extended";
 
 type LocText = Localized<string>;
 
@@ -37,7 +38,7 @@ export type TestEnvironment = {
   testDuration: string;
 };
 
-type RawProduct = {
+export type RawProduct = {
   slug: string;
   brand: string;
   positioning: LocText;
@@ -943,6 +944,7 @@ export const rawProducts: RawProduct[] = [
       },
     ],
   },
+  ...extendedRawProducts,
 ];
 
 function pick<T>(field: Localized<T> | undefined, locale: Locale): T | undefined {
@@ -992,10 +994,18 @@ export function getProduct(slug: string, locale: Locale = "tr"): Product | undef
   return raw ? resolveProduct(raw, locale) : undefined;
 }
 
+/** Ana sıralama listesinde gösterilen VPN sayısı (UI “En İyi 10”). */
+export const TOP_RANKED_LIMIT = 10;
+
 export function rankedProducts(locale: Locale = "tr"): Product[] {
   return [...rawProducts]
     .sort((a, b) => a.rank - b.rank)
     .map((p) => resolveProduct(p, locale));
+}
+
+/** Sıralama hub, ana sayfa ve karşılaştırma seçicisi için ilk N VPN. */
+export function topRankedProducts(locale: Locale = "tr"): Product[] {
+  return rankedProducts(locale).slice(0, TOP_RANKED_LIMIT);
 }
 
 export const products: Product[] = rankedProducts("tr");

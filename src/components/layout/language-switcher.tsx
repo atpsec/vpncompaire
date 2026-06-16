@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Globe } from "lucide-react";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { getLocalizedBlogSlug, type BlogLocale } from "@/lib/blog-slugs";
+import { localizePathname, type AppLocale } from "@/lib/i18n-paths";
 import { cn } from "@/lib/utils";
 
 const LOCALES = [
@@ -33,10 +34,11 @@ export function LanguageSwitcher({ className }: Props) {
 
   function localizedPathFor(target: BlogLocale) {
     const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
-    if (!blogMatch) return pathname;
-
-    const targetSlug = getLocalizedBlogSlug(blogMatch[1], locale, target);
-    return targetSlug ? `/blog/${targetSlug}` : pathname;
+    if (blogMatch) {
+      const targetSlug = getLocalizedBlogSlug(blogMatch[1], locale, target);
+      return targetSlug ? `/blog/${targetSlug}` : pathname;
+    }
+    return localizePathname(pathname, target as AppLocale);
   }
 
   function switchTo(target: BlogLocale) {

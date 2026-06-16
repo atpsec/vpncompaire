@@ -59,11 +59,14 @@ export async function ComparisonPage({
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumbHome"), path: "/" },
-          { name: t("breadcrumbHub"), path: "/karsilastir" },
-          { name: title, path: `/karsilastir/${slug}` },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumbHome"), path: "/" },
+            { name: t("breadcrumbHub"), path: "/karsilastir" },
+            { name: title, path: `/karsilastir/${slug}` },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={faqSchema([...faqs])} />
 

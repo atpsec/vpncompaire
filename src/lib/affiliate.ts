@@ -34,6 +34,16 @@ const STATIC_ALLOWED_HOSTS: ReadonlySet<string> = new Set([
   "www.ipvanish.com",
   "windscribe.com",
   "www.tunnelbear.com",
+  "atlasvpn.com",
+  "www.purevpn.com",
+  "www.vyprvpn.com",
+  "www.ivpn.net",
+  "hide.me",
+  "privadovpn.com",
+  "www.hotspotshield.com",
+  "strongvpn.com",
+  "zoogvpn.com",
+  "us.norton.com",
 ]);
 
 /**
@@ -72,6 +82,16 @@ const PUBLIC_URLS: Record<string, { brand: string; url: string; hasProgram: bool
   ipvanish: { brand: "IPVanish", url: "https://www.ipvanish.com/", hasProgram: true },
   windscribe: { brand: "Windscribe", url: "https://windscribe.com/", hasProgram: true },
   tunnelbear: { brand: "TunnelBear", url: "https://www.tunnelbear.com/", hasProgram: true },
+  "atlas-vpn": { brand: "Atlas VPN", url: "https://atlasvpn.com/", hasProgram: true },
+  purevpn: { brand: "PureVPN", url: "https://www.purevpn.com/", hasProgram: true },
+  vyprvpn: { brand: "VyprVPN", url: "https://www.vyprvpn.com/", hasProgram: true },
+  ivpn: { brand: "IVPN", url: "https://www.ivpn.net/", hasProgram: true },
+  hideme: { brand: "hide.me", url: "https://hide.me/", hasProgram: true },
+  "privado-vpn": { brand: "PrivadoVPN", url: "https://privadovpn.com/", hasProgram: true },
+  "hotspot-shield": { brand: "Hotspot Shield", url: "https://www.hotspotshield.com/", hasProgram: true },
+  strongvpn: { brand: "StrongVPN", url: "https://strongvpn.com/", hasProgram: true },
+  zoogvpn: { brand: "ZoogVPN", url: "https://zoogvpn.com/", hasProgram: true },
+  "norton-vpn": { brand: "Norton VPN", url: "https://us.norton.com/products/norton-secure-vpn", hasProgram: true },
 };
 
 export const affiliateLinks: Record<string, AffiliateLink> = Object.fromEntries(

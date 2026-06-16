@@ -513,6 +513,108 @@ const imageDatabase: Record<string, BlogImageSet> = {
     end: img("1611162617474-5b21e879e113", "Global içerik", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
 
+  // Aynı coverImage key'ini paylaşan farklı konular için ayrı hero setleri
+  "dns-webrtc-home-test": {
+    hero: img("1611974789855-9c2a0a7236a3", "Ev ağı DNS ve WebRTC testi", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1558494949-ef010cbdcc31", "Ağ testi", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Güvenlik kontrolü", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "dns-webrtc-home-test-en": {
+    hero: img("1611974789855-9c2a0a7236a3", "Home DNS and WebRTC leak test", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1558494949-ef010cbdcc31", "Network test", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Security check", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "gold-shopping-privacy": {
+    hero: img("1542751371-adc38448a05e", "Altın ve fiyat takibi", PHOTOGRAPHERS.chrisLiverani),
+    mid: img("1554224155-6726b3ff858f", "Online alışveriş", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Gizlilik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "gold-shopping-privacy-en": {
+    hero: img("1542751371-adc38448a05e", "Gold price tracking privacy", PHOTOGRAPHERS.chrisLiverani),
+    mid: img("1554224155-6726b3ff858f", "Online shopping", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Privacy", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "trustworthy-vpn-guide": {
+    hero: img("1454165804606-c3d57bc86b40", "Güvenilir VPN seçimi", PHOTOGRAPHERS.scottGraham),
+    mid: img("1551434678-e076c223a692", "Kontrol listesi", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "trustworthy-vpn-guide-en": {
+    hero: img("1454165804606-c3d57bc86b40", "Choosing a trustworthy VPN", PHOTOGRAPHERS.scottGraham),
+    mid: img("1551434678-e076c223a692", "Checklist", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Comparison", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "planckvpn-review": {
+    hero: img("1551808525-51a94da548ce", "Bağımsız VPN analizi", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1563013544-824ae1b704d3", "Güvenlik değerlendirme", PHOTOGRAPHERS.growtika, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Gizlilik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "planckvpn-review-en": {
+    hero: img("1551808525-51a94da548ce", "Independent VPN review", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1563013544-824ae1b704d3", "Security assessment", PHOTOGRAPHERS.growtika, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Privacy", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "family-internet-safety": {
+    hero: img("1587560699334-cc4ff634909a", "Aile internet güvenliği", PHOTOGRAPHERS.mikeyHarris),
+    mid: img("1521295121783-8a321d551ad2", "Evde çocuklar", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Koruma", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "family-internet-safety-en": {
+    hero: img("1587560699334-cc4ff634909a", "Family internet safety", PHOTOGRAPHERS.mikeyHarris),
+    mid: img("1521295121783-8a321d551ad2", "Kids at home", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Protection", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "freelancer-remote-work": {
+    hero: img("1593359677879-a4bb92f829d1", "Freelancer uzaktan çalışma", PHOTOGRAPHERS.christinHumeAlt),
+    mid: img("1521295121783-8a321d551ad2", "Laptop", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1553877522-43269d4ea984", "Video görüşme", PHOTOGRAPHERS.chrisMontgomery, 800, 450),
+  },
+  "freelancer-remote-work-en": {
+    hero: img("1593359677879-a4bb92f829d1", "Freelancer remote work", PHOTOGRAPHERS.christinHumeAlt),
+    mid: img("1521295121783-8a321d551ad2", "Laptop work", PHOTOGRAPHERS.christinHume, 800, 450),
+    end: img("1553877522-43269d4ea984", "Video call", PHOTOGRAPHERS.chrisMontgomery, 800, 450),
+  },
+  "fake-streaming-sites": {
+    hero: img("1461896836934-ffe607ba8211", "Sahte canlı yayın siteleri", PHOTOGRAPHERS.daveLowe),
+    mid: img("1522869635100-9f4c5e86aa37", "TV ekranı", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Güvenlik", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "fake-streaming-sites-en": {
+    hero: img("1461896836934-ffe607ba8211", "Fake streaming websites", PHOTOGRAPHERS.daveLowe),
+    mid: img("1522869635100-9f4c5e86aa37", "TV screen", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Security", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "internet-security-anxiety": {
+    hero: img("1550751827-4bd374c3f58b", "İnternet güvenlik kaygısı", PHOTOGRAPHERS.adiGoldstein),
+    mid: img("1614064641938-3bbee52942c7", "Koruma", PHOTOGRAPHERS.flyd, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "internet-security-anxiety-en": {
+    hero: img("1550751827-4bd374c3f58b", "Internet security anxiety", PHOTOGRAPHERS.adiGoldstein),
+    mid: img("1614064641938-3bbee52942c7", "Protection", PHOTOGRAPHERS.flyd, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Encryption", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "spam-call-mobile": {
+    hero: img("1574944985070-8f3ebc6b79d2", "Spam arama ve mobil güvenlik", PHOTOGRAPHERS.privecstasy),
+    mid: img("1614064641938-3bbee52942c7", "Mobil koruma", PHOTOGRAPHERS.flyd, 800, 450),
+    end: img("1555949963-ff9fe0c870eb", "Güvenlik", PHOTOGRAPHERS.shahadat, 800, 450),
+  },
+  "spam-call-mobile-en": {
+    hero: img("1574944985070-8f3ebc6b79d2", "Spam calls mobile security", PHOTOGRAPHERS.privecstasy),
+    mid: img("1614064641938-3bbee52942c7", "Mobile protection", PHOTOGRAPHERS.flyd, 800, 450),
+    end: img("1555949963-ff9fe0c870eb", "Security", PHOTOGRAPHERS.shahadat, 800, 450),
+  },
+  "fake-delivery-phishing": {
+    hero: img("1526374965328-7f61d4dc18c5", "Sahte kargo SMS dolandırıcılığı", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1550751827-4bd374c3f58b", "Phishing", PHOTOGRAPHERS.adiGoldstein, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Koruma", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "fake-delivery-phishing-en": {
+    hero: img("1526374965328-7f61d4dc18c5", "Fake delivery SMS phishing", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1550751827-4bd374c3f58b", "Phishing alert", PHOTOGRAPHERS.adiGoldstein, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Protection", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+
   // === UNIQUE KEYS FOR EACH BLOG POST (TR/EN SEPARATION) ===
 
   // 2x duplicates - EN versions get unique images
@@ -837,6 +939,36 @@ const imageDatabase: Record<string, BlogImageSet> = {
     hero: img("1566073771259-6a8506099945", "Hotel room", PHOTOGRAPHERS.manuelMoreno),
     mid: img("1566073771259-6a8506099945", "Booking", PHOTOGRAPHERS.manuelMoreno, 800, 450),
     end: img("1554224155-6726b3ff858f", "Discount", PHOTOGRAPHERS.rupixen, 800, 450),
+  },
+  "public-wifi-security-tr": {
+    hero: img("1521295121783-8a321d551ad2", "Kafede Wi-Fi kullanımı", PHOTOGRAPHERS.christinHume),
+    mid: img("1550751827-4bd374c3f58b", "Siber güvenlik", PHOTOGRAPHERS.adiGoldstein, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Şifreleme ve koruma", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "public-wifi-security-en": {
+    hero: img("1521295121783-8a321d551ad2", "Public Wi-Fi at cafe", PHOTOGRAPHERS.christinHume),
+    mid: img("1555949963-ff9fe0c870eb", "Network security", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Encryption lock", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "isp-throttling-tr": {
+    hero: img("1451187580459-43490279c0fa", "Veri akışı ve hız", PHOTOGRAPHERS.nasa),
+    mid: img("1614064641938-3bbee52942c7", "Performans ölçümü", PHOTOGRAPHERS.flyd, 800, 450),
+    end: img("1518770660439-4636190af475", "Ağ altyapısı", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "isp-throttling-en": {
+    hero: img("1544197150-b99a580bb7a8", "Network cables", PHOTOGRAPHERS.jordanHarrison),
+    mid: img("1451187580459-43490279c0fa", "Data throughput", PHOTOGRAPHERS.nasa, 800, 450),
+    end: img("1518770660439-4636190af475", "Infrastructure", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "vpn-troubleshoot-tr": {
+    hero: img("1587560699334-cc4ff634909a", "Evden çalışma sorun giderme", PHOTOGRAPHERS.mikeyHarris),
+    mid: img("1516321318423-f06f85e504b3", "Bağlantı ayarları", PHOTOGRAPHERS.johnSchnobrich, 800, 450),
+    end: img("1551434678-e076c223a692", "Kontrol listesi", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "vpn-troubleshoot-en": {
+    hero: img("1587560699334-cc4ff634909a", "Troubleshooting VPN", PHOTOGRAPHERS.mikeyHarris),
+    mid: img("1516321318423-f06f85e504b3", "Connection settings", PHOTOGRAPHERS.johnSchnobrich, 800, 450),
+    end: img("1551434678-e076c223a692", "Checklist", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
 };
 

@@ -1,0 +1,67 @@
+---
+slug: "vpn-connected-but-not-working"
+title: "VPN Connected But Not Working: 2026 Troubleshooting Guide"
+description: "VPN shows connected but no internet, sites won't load or IP won't change? Step-by-step VPN troubleshooting and common causes."
+publishedAt: "2026-06-16"
+updatedAt: "2026-06-16"
+author: "VPN Advisor Editorial Team"
+category: "temel-bilgiler"
+tags: ["troubleshooting", "vpn", "connection", "dns"]
+readingTime: 10
+coverImage: "vpn-troubleshoot-en"
+unsplashKeyword: "vpn connection troubleshooting laptop"
+---
+
+The app says "Connected" and the icon is green — but the browser won't load, WhatsApp hangs, or an IP check still shows your home address. This is one of the most common user complaints and usually comes down to configuration, DNS or network-layer issues. A systematic check fixes most cases without switching providers.
+
+## Clarify the Symptom
+
+| What you see | Likely cause |
+|--------------|--------------|
+| Nothing loads | Stuck kill switch, broken DNS, conflicting VPN |
+| Some sites fail | Split tunneling, regional block, DNS leak |
+| IP unchanged | Fake connect state, WebRTC leak, wrong test |
+| Very slow | Distant server, ISP VPN throttle, Wi-Fi |
+
+Run a [DNS leak test](/blog/dns-leak-test-vpn) and ipleak.net for IP, DNS and WebRTC together.
+
+## Step-by-Step Fixes
+
+### 1. Full reconnect
+
+- Disconnect, wait 10 seconds, pick another server.
+- Force-quit the app and reopen.
+- Reboot the device if needed — Windows TAP/Wintun drivers can stick.
+
+### 2. Kill switch
+
+With [kill switch](/blog/vpn-kill-switch-explained) enabled, a dropped tunnel cuts internet. The UI may still show "connected". Temporarily disable kill switch to test; if that fixes it, change server or protocol.
+
+### 3. DNS settings
+
+If VPN DNS is not applied, names won't resolve. Enable "Use VPN DNS" or try Cloudflare 1.1.1.1 in the client. On Windows, `ipconfig /flushdns` can help.
+
+### 4. Change protocol
+
+Switch between WireGuard, OpenVPN (UDP/TCP) and IKEv2. Some ISPs filter specific protocols. See [protocol comparison](/blog/vpn-protocols-comparison).
+
+### 5. Conflicting software
+
+Another VPN, antivirus web shield, corporate proxy or Pi-hole can break the tunnel. Disable temporarily and retest.
+
+### 6. Router and modem
+
+VPN passthrough off on the router or forced DNS on the modem causes Wi-Fi-only issues. Test on mobile data — if mobile works but Wi-Fi fails, the problem is local network.
+
+## Still Broken?
+
+- Check provider status page.
+- Try another device (phone vs laptop).
+- [Split tunneling](/blog/split-tunneling-vpn-explained) misconfiguration — force all traffic through the tunnel.
+- Free tier limits — see [free vs paid VPN](/blog/free-vs-paid-vpn).
+
+For persistent issues, our [reviews](/inceleme/nordvpn) and [methodology](/metodoloji) show which providers are consistent on kill switch and DNS protection.
+
+## Summary
+
+"Connected but not working" is usually DNS, kill switch, protocol filtering or conflicting apps — not a broken VPN market. Fix configuration first; change provider only after systematic checks.

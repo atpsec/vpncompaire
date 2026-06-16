@@ -44,8 +44,8 @@
     "noAffiliate": "No affiliate — neutral pick"
   },
   "disclosure": {
-    "banner": "Advertising disclosure: This site earns its revenue from Google AdSense ads; you may see ads on these pages. Links to VPN providers are plain, non-commercial links and we earn no commission from them. Our recommendations are based on research, feature analysis, privacy policies, audits, pricing and usability.",
-    "short": "This site shows Google AdSense ads.",
+    "banner": "Advertising disclosure: This site may earn revenue from Google AdSense ads and, where active, VPN affiliate links. Affiliate commission does not affect rankings, content, or scores. Recommendations are based on research, feature analysis, privacy policies, audits, pricing, and usability.",
+    "short": "This site may show Google AdSense ads; some VPN links may be affiliate.",
     "learnMore": "Learn more"
   },
   "home": {
@@ -163,9 +163,9 @@
     },
     "independence": {
       "title": "1. Independence and Revenue Disclosure",
-      "intro": "To earn your trust we openly disclose our revenue model. The site's revenue comes from Google AdSense ads; we receive no commission from any VPN provider.",
+      "intro": "To earn your trust we openly disclose our revenue model. Primary revenue comes from Google AdSense ads and, where programs exist, VPN affiliate links. Commission does not affect rankings.",
       "withAffiliateTitle": "Our revenue model",
-      "withAffiliateBody": "The site's only revenue source is Google AdSense ads. We receive no sales commission from any VPN provider; links to providers are plain, non-commercial links that go directly to the brand's official site.",
+      "withAffiliateBody": "Revenue comes from Google AdSense and some provider affiliate programs. Affiliate commission does not change editorial scores or rankings; providers without affiliate programs (e.g. Mullvad) remain listed.",
       "withoutAffiliateTitle": "Equal treatment",
       "withoutAffiliateBody": "All providers, including Mullvad, are scored against the same criteria. Ad revenue does not influence rankings or scores — this is the most concrete signal of our impartiality.",
       "pledgeTitle": "Our editorial pledge",

@@ -33,7 +33,8 @@ export const siteConfig = {
     twitter: "",
     github: "",
   },
-  ogImage: "/og-default.png",
+  /** Next.js file-based OG (`src/app/opengraph-image.tsx`) */
+  ogImage: "/opengraph-image",
 } as const;
 
 export type Locale = (typeof siteConfig.locales)[number];

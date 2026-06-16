@@ -51,11 +51,14 @@ export function UseCasePage({
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumb.home"), path: "/" },
-          { name: t("breadcrumb.hub"), path: "/en-iyi" },
-          { name: title, path: `/en-iyi/${slug}` },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumb.home"), path: "/" },
+            { name: t("breadcrumb.hub"), path: "/en-iyi" },
+            { name: title, path: `/en-iyi/${slug}` },
+          ],
+          locale,
+        )}
       />
       <JsonLd data={faqSchema([...faqs])} />
 

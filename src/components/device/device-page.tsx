@@ -40,11 +40,14 @@ export async function DevicePage({
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumbHome"), path: "/" },
-          { name: t("breadcrumbHub"), path: "/cihazlar" },
-          { name: device.shortName, path: `/cihazlar/${device.slug}` },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumbHome"), path: "/" },
+            { name: t("breadcrumbHub"), path: "/cihazlar" },
+            { name: device.shortName, path: `/cihazlar/${device.slug}` },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={faqSchema([...device.faqs])} />
 

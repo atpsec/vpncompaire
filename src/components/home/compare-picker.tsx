@@ -11,12 +11,12 @@ import {
   Smartphone,
   X,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
-import { rankedProducts, type Product } from "@/data/products";
+import { topRankedProducts, type Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +26,7 @@ const MAX = 4;
 export function ComparePicker() {
   const t = useTranslations("homeBlocks.comparePicker");
   const locale = useLocale() as Locale;
-  const all = rankedProducts(locale);
+  const all = topRankedProducts(locale);
   const [selected, setSelected] = useState<string[]>(() =>
     all.slice(0, 2).map((p) => p.slug),
   );

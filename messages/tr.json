@@ -44,8 +44,8 @@
     "noAffiliate": "Affiliate yok — tarafsız seçim"
   },
   "disclosure": {
-    "banner": "Reklam açıklaması: Bu site gelirini Google AdSense reklamlarından elde eder; sayfalarda reklam görebilirsin. VPN sağlayıcılarına giden bağlantılar düz, ticari olmayan bağlantılardır ve bunlardan komisyon almayız. Önerilerimiz; araştırma, özellik analizi, gizlilik politikaları, denetimler, fiyatlandırma ve kullanım kolaylığına dayanır.",
-    "short": "Bu site Google AdSense reklamları gösterir.",
+    "banner": "Reklam açıklaması: Bu site gelirini Google AdSense reklamlarından ve (etkin olduğunda) bazı VPN sağlayıcı ortaklık bağlantılarından elde edebilir. Ortaklık komisyonu sıralamayı, içeriği veya puanları etkilemez. Önerilerimiz; araştırma, özellik analizi, gizlilik politikaları, denetimler, fiyatlandırma ve kullanım kolaylığına dayanır.",
+    "short": "Bu site Google AdSense reklamları gösterebilir; bazı VPN bağlantıları ortaklık programına dahil olabilir.",
     "learnMore": "Detaylı bilgi"
   },
   "home": {
@@ -163,9 +163,9 @@
     },
     "independence": {
       "title": "1. Bağımsızlık ve Gelir Beyanı",
-      "intro": "Güveninizi kazanmak için gelir modelimizi açıkça beyan ediyoruz. Sitenin geliri Google AdSense reklamlarından gelir; hiçbir VPN sağlayıcısından komisyon almıyoruz.",
+      "intro": "Güveninizi kazanmak için gelir modelimizi açıkça beyan ediyoruz. Ana gelir kaynaklarımız Google AdSense reklamları ve (programı olan sağlayıcılarda) ortaklık bağlantılarıdır; komisyon sıralamayı etkilemez.",
       "withAffiliateTitle": "Gelir modelimiz",
-      "withAffiliateBody": "Sitenin tek gelir kaynağı Google AdSense reklamlarıdır. Hiçbir VPN sağlayıcısından satış komisyonu almıyoruz; sağlayıcılara giden bağlantılar düz, ticari olmayan bağlantılardır ve doğrudan markanın resmi sitesine gider.",
+      "withAffiliateBody": "Site geliri Google AdSense reklamlarından ve bazı sağlayıcı ortaklık programlarından gelir. Ortaklık komisyonu editoryal puanları veya sıralamayı değiştirmez; affiliate programı olmayan sağlayıcılar (ör. Mullvad) da listede yer alır.",
       "withoutAffiliateTitle": "Eşit muamele",
       "withoutAffiliateBody": "Mullvad dahil tüm sağlayıcılar aynı kriterlerle puanlanır. Reklam geliri sıralamayı veya puanları etkilemez — bu, tarafsızlığımızın somut göstergesidir.",
       "pledgeTitle": "Editör taahhüdümüz",
@@ -327,7 +327,7 @@
     },
     "editorial": {
       "title": "Editoryal bağımsızlık",
-      "body": "Gelir modelimizi şeffaf biçimde açıklarız (bkz. <link>Reklam Açıklaması</link>). Site geliri Google AdSense reklamlarından gelir; hiçbir VPN sağlayıcısından komisyon almayız, bu da tarafsızlığımızın doğrudan göstergesidir."
+      "body": "Gelir modelimizi şeffaf biçimde açıklarız (bkz. <link>Reklam Açıklaması</link>). AdSense ve (varsa) ortaklık geliri alıyoruz; komisyon sıralamayı belirlemez — Mullvad gibi affiliate ilişkisi olmayan seçenekler de listede kalır."
     },
     "criteria": {
       "privacy": {
@@ -708,7 +708,7 @@
     "lede": "VPN dünyası kafa karıştırıcı: yüzlerce sağlayıcı, çelişkili incelemeler, agresif pazarlama. {site}, bu karmaşaya karşı kişisel bir cevap olarak başlamış <strong>gönüllü bir inceleme projesidir</strong>.",
     "explainer": {
       "title": "Bu nedir?",
-      "body": "{site} bir şirket veya kurum değildir; ticari kayıtlı bir tüzel kişiliği yoktur. VPN sağlayıcılarını kendi ihtiyacımız için karşılaştırırken oluşan notların kamuya açılmış halidir. Google AdSense reklam geliri altyapı maliyetini karşılar; öneriler bunun etkisinde değildir. Detaylar için <disclosure>reklam açıklaması</disclosure> ve <legal>yasal uyarı</legal> sayfalarımıza bakabilirsin."
+      "body": "{site} bir şirket veya kurum değildir; ticari kayıtlı bir tüzel kişiliği yoktur. VPN sağlayıcılarını kendi ihtiyacımız için karşılaştırırken oluşan notların kamuya açılmış halidir. Google AdSense ve (etkin olduğunda) ortaklık geliri altyapı maliyetini karşılar; öneriler bunun etkisinde değildir. Detaylar için <disclosure>reklam açıklaması</disclosure> ve <legal>yasal uyarı</legal> sayfalarımıza bakabilirsin."
     },
     "approach": {
       "h2": "Yaklaşımımız",
@@ -735,7 +735,7 @@
     },
     "revenue": {
       "h2": "Gelir modelimiz",
-      "body1": "Bu siteyi Google AdSense reklam geliriyle finanse ediyoruz. Sayfalarda Google tarafından sunulan reklamlar görünür; VPN sağlayıcılarına giden bağlantılar düz, ticari olmayan bağlantılardır ve bunlardan komisyon almayız. Detayları <disclosure>Reklam Açıklaması</disclosure> sayfasında ayrıntılı açıklıyoruz.",
+      "body1": "Bu siteyi Google AdSense reklamları ve (programı olan sağlayıcılarda) ortaklık bağlantılarıyla finanse ediyoruz. Ortaklık komisyonu sıralamayı etkilemez. Ayrıntılar <disclosure>Reklam Açıklaması</disclosure> sayfasında.",
       "body2": "<strong>Önemli:</strong> Reklam geliri sıralamayı etkilemez. Tüm sağlayıcıları (örn. Mullvad dahil) aynı kriterlerle sıralarız; bir markanın reklam vermesi onu üst sıraya taşımaz."
     },
     "authors": {
