@@ -1,0 +1,68 @@
+---
+slug: "vpn-mtu-optimizasyon"
+title: "VPN MTU Ayarı: Hız ve Bağlantı Kararlılığı 2026"
+description: "Yanlış MTU VPN'de yavaşlama ve kopmalara yol açar. MTU nedir, nasıl test edilir ve OpenVPN/WireGuard için önerilen değerler."
+publishedAt: "2026-06-19"
+updatedAt: "2026-06-19"
+author: "VPN Advisor Editör Ekibi"
+category: "teknik"
+tags: ["mtu", "hız", "openvpn", "wireguard", "teknik"]
+readingTime: 10
+coverImage: "vpn-mtu-tr"
+unsplashKeyword: "network mtu packet vpn"
+---
+
+VPN bağlantısı kuruluyor ama bazı siteler açılmıyor, streaming takılıyor veya hız testi düşük — sorun bazen şifreleme değil, **MTU (Maximum Transmission Unit)** uyumsuzluğudur. Paketler parçalanır (fragmentation), gecikme artar ve bağlantı kararsız görünür.
+
+## MTU Nedir?
+
+MTU, bir ağ paketinde taşınabilecek en büyük veri boyutudur (byte). Ethernet'te tipik değer 1500; VPN tüneli ek başlık eklediği için efektif MTU düşer.
+
+VPN paketi = orijinal paket + şifreleme/tünel başlıkları. MTU çok yüksekse paket parçalanır veya düşer; çok düşükse verim azalır.
+
+## MTU Sorunları Nasıl Görünür?
+
+- Belirli siteler açılmıyor, küçük sayfalar çalışıyor
+- HTTPS handshake timeout
+- Video buffering, VoIP kesintileri
+- "Bağlı ama yavaş" — [sorun giderme](/blog/vpn-bagli-ama-calismiyor) ile overlap
+
+## MTU Nasıl Test Edilir?
+
+Windows PowerShell (VPN bağlı):
+
+```text
+ping -f -l 1472 8.8.8.8
+```
+
+`-f` fragmentation yasak; `-l` payload boyutu. 1472 + 28 byte header ≈ 1500. "Packet needs to be fragmented" alırsanız boyutu düşürün (1460, 1450...) ta ki başarılı olana kadar.
+
+Başarılı en büyük değer + 28 = path MTU. VPN için genelde **path MTU − VPN overhead** hedeflenir.
+
+## Önerilen Başlangıç Değerleri
+
+| Protokol | Tipik MTU ayarı |
+|----------|-----------------|
+| OpenVPN UDP | 1400–1450 |
+| OpenVPN TCP | 1400 (TCP overhead daha yüksek) |
+| WireGuard | 1420 (çoğu istemci varsayılan) |
+| IKEv2 | 1400 civarı test edin |
+
+Sağlayıcı dokümantasyonunu kontrol edin; [protokol karşılaştırması](/blog/vpn-protokolleri-karsilastirmasi) overhead farklarını özetler.
+
+## Ayar Nerede Yapılır?
+
+- **OpenVPN**: `.ovpn` dosyasında `mssfix` veya `tun-mtu`
+- **WireGuard**: arayüz `MTU = 1420`
+- **Windows istemci**: bazı uygulamalarda Advanced → MTU alanı
+- **Router VPN**: WAN MTU + VPN MTU birlikte düşünülmeli
+
+[Router VPN](/blog/router-uzerinde-vpn-kurulum) kurulumunda MTU sık gözden kaçan adımdır.
+
+## MTU ve Hız Optimizasyonu
+
+MTU düzeltmesi [hız optimizasyonunun](/blog/vpn-ve-hiz-performans-optimizasyonu) bir parçasıdır; sunucu mesafesi ve protokol seçimiyle birlikte değerlendirin. [WireGuard vs OpenVPN](/blog/wireguard-vs-openvpn-karsilastirma) overhead açısından farklıdır.
+
+## Özet
+
+MTU, teknik ama pratik bir ayar: test edin, 1400–1420 bandında deneyin, kopma ve yavaşlık devam ederse sağlayıcı desteğine veya [metodoloji](/metodoloji) test sürecimize bakın.

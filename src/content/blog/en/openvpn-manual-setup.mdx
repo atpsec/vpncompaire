@@ -1,0 +1,71 @@
+---
+slug: "openvpn-manual-setup"
+title: "OpenVPN Manual Setup: Advanced User Guide 2026"
+description: "Connect with OpenVPN config files instead of the vendor app. .ovpn files, certificates and basic Windows/Linux steps."
+publishedAt: "2026-06-19"
+updatedAt: "2026-06-19"
+author: "VPN Advisor Editorial Team"
+category: "teknik"
+tags: ["openvpn", "setup", "manual", "technical"]
+readingTime: 11
+coverImage: "openvpn-manual-en"
+unsplashKeyword: "openvpn manual configuration terminal"
+---
+
+Most users install the vendor app and stop. Manual OpenVPN setup remains relevant for power users, Linux servers and router integration. This guide explains the pattern — filenames vary by provider.
+
+## When Manual Setup?
+
+- You avoid vendor clients (minimal software)
+- **Router** or **headless Linux** VPN
+- Employer issued a `.ovpn` file
+- No WireGuard support — OpenVPN required
+
+[WireGuard vs OpenVPN](/blog/wireguard-vs-openvpn-comparison) compares protocols; manual setup is mostly OpenVPN territory.
+
+## Required Files
+
+Typical bundle:
+
+- `client.ovpn` — main config
+- `ca.crt` — server chain
+- `client.crt` + `client.key` — client identity (or embedded in ovpn)
+- Sometimes `ta.key` — tls-auth
+
+Download only from the **official provider panel** — third-party `.ovpn` files are a phishing risk.
+
+## Windows (OpenVPN GUI)
+
+1. Install [OpenVPN Community](https://openvpn.net/community-downloads/) or vendor GUI
+2. Copy `.ovpn` and certs to `config` folder
+3. Run as administrator, select profile, Connect
+4. [Kill switch](/blog/vpn-kill-switch-explained) via vendor app or firewall rules
+
+Run [DNS leak test](/blog/dns-leak-test-vpn) after connect.
+
+## Linux (CLI)
+
+```bash
+sudo openvpn --config client.ovpn
+```
+
+For persistence use `systemd` or NetworkManager. See [Linux VPN guide](/blog/linux-vpn-setup-guide) and [macOS setup](/blog/macos-vpn-setup).
+
+## Common .ovpn Lines
+
+- `remote vpn.example.com 1194`
+- `proto udp` or `tcp` — [protocol comparison](/blog/vpn-protocols-comparison)
+- `cipher` / `auth` — must match server
+- `mssfix 1400` — [MTU](/blog/vpn-mtu-optimization) issues
+
+Backup before edits; wrong cipher breaks the tunnel.
+
+## Security Notes
+
+- Never share `client.key`
+- If `auth-user-pass` is set, store credentials in a restricted file
+- No auto-updates — refresh configs when server lists change
+
+## Summary
+
+Manual OpenVPN is flexible but your responsibility: correct files, leak tests, MTU and kill switch. Official apps are safer for daily users; power users can follow this guide and our [methodology](/metodoloji).

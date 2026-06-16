@@ -275,6 +275,30 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "tarayici-fingerprint-vpn",
     en: "browser-fingerprint-vpn",
   },
+  "seyahatte-bankacilik-vpn": {
+    tr: "seyahatte-bankacilik-vpn",
+    en: "banking-while-traveling-vpn",
+  },
+  "vpn-birden-fazla-cihaz": {
+    tr: "vpn-birden-fazla-cihaz",
+    en: "vpn-multiple-devices-guide",
+  },
+  "uzaktan-calisma-gunluk-guvenlik": {
+    tr: "uzaktan-calisma-gunluk-guvenlik",
+    en: "remote-work-daily-security-vpn",
+  },
+  "vpn-mtu-optimizasyon": {
+    tr: "vpn-mtu-optimizasyon",
+    en: "vpn-mtu-optimization",
+  },
+  "ipv6-vpn-teknik-rehber": {
+    tr: "ipv6-vpn-teknik-rehber",
+    en: "ipv6-vpn-technical-guide",
+  },
+  "openvpn-manuel-kurulum": {
+    tr: "openvpn-manuel-kurulum",
+    en: "openvpn-manual-setup",
+  },
 };
 
 export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {

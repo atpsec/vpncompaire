@@ -1,0 +1,66 @@
+---
+slug: "vpn-mtu-optimization"
+title: "VPN MTU Settings: Speed and Stability 2026"
+description: "Wrong MTU causes VPN slowdowns and drops. What MTU is, how to test it, and recommended values for OpenVPN and WireGuard."
+publishedAt: "2026-06-19"
+updatedAt: "2026-06-19"
+author: "VPN Advisor Editorial Team"
+category: "teknik"
+tags: ["mtu", "speed", "openvpn", "wireguard", "technical"]
+readingTime: 10
+coverImage: "vpn-mtu-en"
+unsplashKeyword: "network mtu packet vpn"
+---
+
+VPN connects but some sites fail, streaming stutters or speed tests look poor — the issue may be **MTU (Maximum Transmission Unit)** mismatch, not encryption itself. Packets fragment, latency rises and the link feels unstable.
+
+## What Is MTU?
+
+MTU is the largest data size in one network packet (bytes). Ethernet often uses 1500; VPN tunnels add headers so effective MTU drops.
+
+VPN packet = original data + encryption/tunnel headers. Too high MTU causes fragmentation or drops; too low reduces efficiency.
+
+## Symptoms
+
+- Some sites fail, small pages work
+- HTTPS handshake timeout
+- Video buffering, VoIP drops
+- "Connected but slow" — overlaps [troubleshooting](/blog/vpn-connected-but-not-working)
+
+## How to Test
+
+Windows PowerShell (with VPN on):
+
+```text
+ping -f -l 1472 8.8.8.8
+```
+
+`-f` disables fragmentation; `-l` is payload size. 1472 + 28 header bytes ≈ 1500. If you get "Packet needs to be fragmented", lower the value until ping succeeds.
+
+Successful largest value + 28 ≈ path MTU. Target **path MTU − VPN overhead** for tunnel MTU.
+
+## Starting Values
+
+| Protocol | Typical MTU |
+|----------|-------------|
+| OpenVPN UDP | 1400–1450 |
+| OpenVPN TCP | ~1400 |
+| WireGuard | 1420 (common default) |
+| IKEv2 | test around 1400 |
+
+Check provider docs; [protocol comparison](/blog/vpn-protocols-comparison) covers overhead differences.
+
+## Where to Set
+
+- **OpenVPN**: `mssfix` or `tun-mtu` in `.ovpn`
+- **WireGuard**: interface `MTU = 1420`
+- **Client apps**: Advanced → MTU where available
+- **Router VPN**: WAN MTU + VPN MTU together — see [router VPN guide](/blog/router-vpn-setup-guide)
+
+## MTU and Speed Tuning
+
+MTU fixes are part of [speed optimization](/blog/vpn-speed-optimization); combine with server choice and protocol. [WireGuard vs OpenVPN](/blog/wireguard-vs-openvpn-comparison) differs in overhead.
+
+## Summary
+
+MTU is technical but practical: test, try 1400–1420, escalate to provider support or our [methodology](/metodoloji) if issues persist.

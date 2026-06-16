@@ -1,0 +1,71 @@
+---
+slug: "openvpn-manuel-kurulum"
+title: "OpenVPN Manuel Kurulum: İleri Seviye Kullanıcı Rehberi 2026"
+description: "Resmi uygulama yerine OpenVPN config dosyası ile manuel bağlantı. .ovpn dosyası, sertifika ve Windows/Linux temel adımlar."
+publishedAt: "2026-06-19"
+updatedAt: "2026-06-19"
+author: "VPN Advisor Editör Ekibi"
+category: "teknik"
+tags: ["openvpn", "kurulum", "manuel", "teknik"]
+readingTime: 11
+coverImage: "openvpn-manual-tr"
+unsplashKeyword: "openvpn manual configuration terminal"
+---
+
+Çoğu kullanıcı sağlayıcı uygulamasını indirir ve biter. Manuel OpenVPN kurulumu, ileri seviye kullanıcılar, Linux sunucular ve router entegrasyonu için hâlâ gerekli. Bu rehber genel mantığı açıklar — her sağlayıcının dosya adları farklı olabilir.
+
+## Ne Zaman Manuel Kurulum?
+
+- Sağlayıcı uygulaması istemiyorsunuz (minimal yazılım)
+- **Router** veya **headless Linux** üzerinde VPN
+- Kurumsal `.ovpn` dosyası size verildi
+- WireGuard desteklenmiyor, OpenVPN zorunlu
+
+[WireGuard vs OpenVPN](/blog/wireguard-vs-openvpn-karsilastirma) hangi protokolün ne zaman mantıklı olduğunu karşılaştırır; manuel kurulum çoğunlukla OpenVPN tarafında.
+
+## Gerekli Dosyalar
+
+Tipik OpenVPN paketi:
+
+- `client.ovpn` — ana yapılandırma
+- `ca.crt` — sunucu sertifika zinciri
+- `client.crt` + `client.key` — istemci kimlik (veya tek dosyada gömülü)
+- Bazen `ta.key` — tls-auth
+
+Dosyaları yalnızca **resmi sağlayıcı panelinden** indirin; üçüncü parti `.ovpn` phishing riski taşır.
+
+## Windows (OpenVPN GUI)
+
+1. [OpenVPN Community](https://openvpn.net/community-downloads/) veya sağlayıcı GUI kurun
+2. `.ovpn` ve sertifikaları `config` klasörüne kopyalayın
+3. Yönetici olarak çalıştırın, profili seçin, Connect
+4. [Kill switch](/blog/kill-switch-nedir-vpn) için sağlayıcı uygulaması veya Windows firewall kuralları
+
+Bağlantı sonrası [DNS leak](/blog/dns-leak-test-vpn) testi yapın.
+
+## Linux (komut satırı)
+
+```bash
+sudo openvpn --config client.ovpn
+```
+
+Kalıcı kurulum için `systemd` unit veya NetworkManager plugin. Detaylı adımlar [Linux VPN rehberi](/blog/linux-vpn-kurulum-rehberi) ve [macOS kurulum](/blog/macos-vpn-kurulum) yazılarımızda.
+
+## .ovpn İçinde Sık Düzenlenen Satırlar
+
+- `remote vpn.example.com 1194` — sunucu ve port
+- `proto udp` veya `tcp` — [protokol karşılaştırması](/blog/vpn-protokolleri-karsilastirmasi)
+- `cipher` / `auth` — şifreleme (sağlayıcı ile uyumlu olmalı)
+- `mssfix 1400` — [MTU](/blog/vpn-mtu-optimizasyon) sorunları için
+
+Dosyayı rastgele düzenlemek bağlantıyı kırar; değişiklik öncesi yedek alın.
+
+## Güvenlik Uyarıları
+
+- `client.key` dosyasını paylaşmayın
+- `.ovpn` içinde `auth-user-pass` varsa kimlik bilgilerini güvenli dosyada tutun
+- Manuel kurulumda otomatik güncelleme yok — sunucu listesi değişince dosyayı yenileyin
+
+## Özet
+
+Manuel OpenVPN esnek ama sorumluluk size aittir: doğru dosyalar, leak testi, MTU ve kill switch. Günlük kullanıcı için resmi uygulama genelde daha güvenli; teknik kullanıcı için bu rehber ve [metodoloji](/metodoloji) test standartları referans.

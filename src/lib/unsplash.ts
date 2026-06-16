@@ -1000,6 +1000,66 @@ const imageDatabase: Record<string, BlogImageSet> = {
     mid: img("1526374965328-7f61d4dc18c5", "Digital fingerprint data", PHOTOGRAPHERS.markusSpiske, 800, 450),
     end: img("1551434678-e076c223a692", "Privacy layers", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
+  "travel-banking-tr": {
+    hero: img("1554224155-6726b3ff858f", "Mobil bankacılık güvenliği", PHOTOGRAPHERS.rupixen),
+    mid: img("1436491865332-7a61a109cc05", "Seyahat ve uçuş", PHOTOGRAPHERS.rossParmly, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Finansal koruma", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "travel-banking-en": {
+    hero: img("1542751371-adc38448a05e", "Mobile banking security", PHOTOGRAPHERS.chrisLiverani),
+    mid: img("1488646953014-85cb44e25828", "Travel planning", PHOTOGRAPHERS.annieSpratt, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Financial lock", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "vpn-multi-device-tr": {
+    hero: img("1553877522-43269d4ea984", "Çoklu cihaz bağlantı", PHOTOGRAPHERS.chrisMontgomery),
+    mid: img("1518770660439-4636190af475", "Telefon ve laptop", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1587560699334-cc4ff634909a", "Ev ofisi cihazları", PHOTOGRAPHERS.mikeyHarris, 800, 450),
+  },
+  "vpn-multi-device-en": {
+    hero: img("1518770660439-4636190af475", "Multiple devices", PHOTOGRAPHERS.alexKotliarskyi),
+    mid: img("1553877522-43269d4ea984", "Connected workspace", PHOTOGRAPHERS.chrisMontgomery, 800, 450),
+    end: img("1587560699334-cc4ff634909a", "Home office devices", PHOTOGRAPHERS.mikeyHarris, 800, 450),
+  },
+  "remote-daily-security-tr": {
+    hero: img("1556742049-0cfed4f6a45d", "Uzaktan çalışma rutini", PHOTOGRAPHERS.charlesDeluvio),
+    mid: img("1553877522-43269d4ea984", "Video toplantı", PHOTOGRAPHERS.chrisMontgomery, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Güvenli bağlantı", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "remote-daily-security-en": {
+    hero: img("1587560699334-cc4ff634909a", "Remote work routine", PHOTOGRAPHERS.mikeyHarris),
+    mid: img("1556742049-0cfed4f6a45d", "Home office desk", PHOTOGRAPHERS.charlesDeluvio, 800, 450),
+    end: img("1553877522-43269d4ea984", "Secure meeting", PHOTOGRAPHERS.chrisMontgomery, 800, 450),
+  },
+  "vpn-mtu-tr": {
+    hero: img("1544197150-b99a580bb7a8", "Ağ kabloları ve MTU", PHOTOGRAPHERS.jordanHarrison),
+    mid: img("1451187580459-43490279c0fa", "Veri paketleri", PHOTOGRAPHERS.nasa, 800, 450),
+    end: img("1518770660439-4636190af475", "Ağ performansı", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "vpn-mtu-en": {
+    hero: img("1451187580459-43490279c0fa", "Network throughput", PHOTOGRAPHERS.nasa),
+    mid: img("1544197150-b99a580bb7a8", "Network cables", PHOTOGRAPHERS.jordanHarrison, 800, 450),
+    end: img("1518770660439-4636190af475", "Packet routing", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "ipv6-vpn-tr": {
+    hero: img("1451187580459-43490279c0fa", "IPv6 global network", PHOTOGRAPHERS.nasa),
+    mid: img("1558494949-ef010cbdcc31", "Sunucu altyapısı", PHOTOGRAPHERS.taylorVick, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Ağ trafiği", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "ipv6-vpn-en": {
+    hero: img("1558494949-ef010cbdcc31", "Server infrastructure", PHOTOGRAPHERS.taylorVick),
+    mid: img("1451187580459-43490279c0fa", "IPv6 connectivity", PHOTOGRAPHERS.nasa, 800, 450),
+    end: img("1526374965328-7f61d4dc18c5", "Data flow", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "openvpn-manual-tr": {
+    hero: img("1555949963-ff9fe0c870eb", "OpenVPN yapılandırma", PHOTOGRAPHERS.shahadat),
+    mid: img("1516321318423-f06f85e504b3", "Terminal kurulum", PHOTOGRAPHERS.johnSchnobrich, 800, 450),
+    end: img("1544197150-b99a580bb7a8", "Ağ bağlantısı", PHOTOGRAPHERS.jordanHarrison, 800, 450),
+  },
+  "openvpn-manual-en": {
+    hero: img("1516321318423-f06f85e504b3", "OpenVPN terminal setup", PHOTOGRAPHERS.johnSchnobrich),
+    mid: img("1555949963-ff9fe0c870eb", "Configuration code", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1544197150-b99a580bb7a8", "Network connection", PHOTOGRAPHERS.jordanHarrison, 800, 450),
+  },
 };
 
 // Alias eşleştirmeleri (frontmatter'daki farklı isimlendirmeler için)
