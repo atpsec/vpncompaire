@@ -323,6 +323,42 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "perplexity-ai-arama-vpn",
     en: "perplexity-ai-search-vpn",
   },
+  "amazon-prime-video-vpn-rehber": {
+    tr: "amazon-prime-video-vpn-rehber",
+    en: "amazon-prime-video-vpn-guide",
+  },
+  "twitch-yayin-vpn-rehber": {
+    tr: "twitch-yayin-vpn-rehber",
+    en: "twitch-streaming-vpn-guide",
+  },
+  "hbo-max-vpn-rehber": {
+    tr: "hbo-max-vpn-rehber",
+    en: "hbo-max-streaming-vpn-guide",
+  },
+  "araba-kiralama-vpn-tasarruf": {
+    tr: "araba-kiralama-vpn-tasarruf",
+    en: "car-rental-vpn-savings",
+  },
+  "online-alisveris-bolgesel-fiyat-vpn": {
+    tr: "online-alisveris-bolgesel-fiyat-vpn",
+    en: "online-shopping-regional-pricing-vpn",
+  },
+  "app-store-google-play-vpn-fiyat": {
+    tr: "app-store-google-play-vpn-fiyat",
+    en: "app-store-regional-pricing-vpn",
+  },
+  "chromebook-vpn-kurulum": {
+    tr: "chromebook-vpn-kurulum",
+    en: "chromebook-vpn-setup",
+  },
+  "fire-tv-stick-vpn-kurulum": {
+    tr: "fire-tv-stick-vpn-kurulum",
+    en: "fire-tv-stick-vpn-setup",
+  },
+  "android-tv-vpn-kurulum": {
+    tr: "android-tv-vpn-kurulum",
+    en: "android-tv-vpn-setup",
+  },
 };
 
 export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {

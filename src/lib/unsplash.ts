@@ -1120,6 +1120,96 @@ const imageDatabase: Record<string, BlogImageSet> = {
     mid: img("1451187580459-43490279c0fa", "Data discovery", PHOTOGRAPHERS.nasa, 800, 450),
     end: img("1611162617474-5b21e879e113", "Global access", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
+  "prime-video-tr": {
+    hero: img("1593359677879-a4bb92f829d1", "Prime Video streaming", PHOTOGRAPHERS.mollieSivaram),
+    mid: img("1522869635100-9f4c5e86aa37", "Smart TV film", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global katalog", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "prime-video-en": {
+    hero: img("1522869635100-9f4c5e86aa37", "Amazon Prime on TV", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1593359677879-a4bb92f829d1", "Streaming catalog", PHOTOGRAPHERS.mollieSivaram, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Regional access", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "twitch-stream-tr": {
+    hero: img("1542751371-adc38448a05e", "Canlı yayın gaming", PHOTOGRAPHERS.nikitaKachanovsky),
+    mid: img("1538481199705-c710c4e965fc", "Oyun kütüphanesi", PHOTOGRAPHERS.florianOlivo, 800, 450),
+    end: img("1451187580459-43490279c0fa", "Düşük gecikme", PHOTOGRAPHERS.nasa, 800, 450),
+  },
+  "twitch-stream-en": {
+    hero: img("1538481199705-c710c4e965fc", "Twitch live gaming", PHOTOGRAPHERS.florianOlivo),
+    mid: img("1542751371-adc38448a05e", "Stream setup", PHOTOGRAPHERS.nikitaKachanovsky, 800, 450),
+    end: img("1451187580459-43490279c0fa", "Low latency", PHOTOGRAPHERS.nasa, 800, 450),
+  },
+  "hbo-max-tr": {
+    hero: img("1593359677879-a4bb92f829d1", "HBO Max dizi", PHOTOGRAPHERS.thibaultPenin),
+    mid: img("1522869635100-9f4c5e86aa37", "Premium streaming", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Bölgesel erişim", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "hbo-max-en": {
+    hero: img("1522869635100-9f4c5e86aa37", "HBO Max streaming", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1593359677879-a4bb92f829d1", "Series catalog", PHOTOGRAPHERS.thibaultPenin, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Geo access", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "car-rental-tr": {
+    hero: img("1488646953014-85cb44e25828", "Araba kiralama seyahat", PHOTOGRAPHERS.annieSpratt),
+    mid: img("1566073771259-6a8506099945", "Yolculuk planı", PHOTOGRAPHERS.manuelMoreno, 800, 450),
+    end: img("1554224155-6726b3ff858f", "Tasarruf", PHOTOGRAPHERS.rupixen, 800, 450),
+  },
+  "car-rental-en": {
+    hero: img("1566073771259-6a8506099945", "Car rental travel", PHOTOGRAPHERS.manuelMoreno),
+    mid: img("1488646953014-85cb44e25828", "Road trip map", PHOTOGRAPHERS.annieSpratt, 800, 450),
+    end: img("1554224155-6726b3ff858f", "Travel savings", PHOTOGRAPHERS.rupixen, 800, 450),
+  },
+  "online-shopping-tr": {
+    hero: img("1556742049-0cfed4f6a45d", "Online alışveriş", PHOTOGRAPHERS.blakeWisz),
+    mid: img("1472852897357-fb1c29a0ce51", "E-ticaret", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1454165804606-c3d57bc86b40", "Fiyat karşılaştırma", PHOTOGRAPHERS.scottGraham, 800, 450),
+  },
+  "online-shopping-en": {
+    hero: img("1472852897357-fb1c29a0ce51", "Online shopping cart", PHOTOGRAPHERS.rupixen),
+    mid: img("1556742049-0cfed4f6a45d", "E-commerce checkout", PHOTOGRAPHERS.blakeWisz, 800, 450),
+    end: img("1454165804606-c3d57bc86b40", "Price comparison", PHOTOGRAPHERS.scottGraham, 800, 450),
+  },
+  "app-store-pricing-tr": {
+    hero: img("1518770660439-4636190af475", "Mobil uygulama mağazası", PHOTOGRAPHERS.alexKotliarskyi),
+    mid: img("1554224155-6726b3ff858f", "Dijital ödeme", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Abonelik fiyatı", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "app-store-pricing-en": {
+    hero: img("1554224155-6726b3ff858f", "App store pricing", PHOTOGRAPHERS.rupixen),
+    mid: img("1518770660439-4636190af475", "Mobile apps", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Subscription cost", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "chromebook-tr": {
+    hero: img("1498050108023-c5249b4fd3b0", "Chromebook laptop", PHOTOGRAPHERS.alexKotliarskyi),
+    mid: img("1517336714731-489689fd1ca8", "Laptop çalışma", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1551434678-e076c223a692", "Güvenli bağlantı", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "chromebook-en": {
+    hero: img("1517336714731-489689fd1ca8", "Chromebook workspace", PHOTOGRAPHERS.alexKotliarskyi),
+    mid: img("1498050108023-c5249b4fd3b0", "Laptop coding", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1551434678-e076c223a692", "Secure connection", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "fire-tv-tr": {
+    hero: img("1593359677879-a4bb92f829d1", "TV streaming", PHOTOGRAPHERS.thibaultPenin),
+    mid: img("1522869635100-9f4c5e86aa37", "Smart TV remote", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Streaming device", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "fire-tv-en": {
+    hero: img("1522869635100-9f4c5e86aa37", "Fire TV streaming", PHOTOGRAPHERS.glennCarstens),
+    mid: img("1593359677879-a4bb92f829d1", "TV entertainment", PHOTOGRAPHERS.thibaultPenin, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Media device", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "android-tv-tr": {
+    hero: img("1611162617474-5b21e879e113", "Android TV", PHOTOGRAPHERS.guerrillaBuzz),
+    mid: img("1522869635100-9f4c5e86aa37", "TV ekran", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1593359677879-a4bb92f829d1", "Streaming apps", PHOTOGRAPHERS.thibaultPenin, 800, 450),
+  },
+  "android-tv-en": {
+    hero: img("1611162617474-5b21e879e113", "Android TV box", PHOTOGRAPHERS.guerrillaBuzz),
+    mid: img("1522869635100-9f4c5e86aa37", "Television screen", PHOTOGRAPHERS.glennCarstens, 800, 450),
+    end: img("1593359677879-a4bb92f829d1", "App launcher", PHOTOGRAPHERS.thibaultPenin, 800, 450),
+  },
 };
 
 // Alias eşleştirmeleri (frontmatter'daki farklı isimlendirmeler için)

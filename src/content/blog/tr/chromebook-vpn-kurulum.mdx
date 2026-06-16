@@ -1,0 +1,56 @@
+---
+slug: "chromebook-vpn-kurulum"
+title: "Chromebook VPN Kurulum Rehberi 2026"
+description: "Chrome OS'ta VPN nasıl kurulur? Play Store uygulaması, L2TP/OpenVPN ve router yöntemleri."
+publishedAt: "2026-06-24"
+updatedAt: "2026-06-24"
+author: "VPN Advisor Editör Ekibi"
+category: "cihaz-platform"
+tags: ["chromebook", "chrome-os", "kurulum", "vpn"]
+readingTime: 9
+coverImage: "chromebook-tr"
+unsplashKeyword: "chromebook vpn setup"
+---
+
+Chromebook'lar okul ve uzaktan çalışma için yaygın; VPN kurulumu Windows veya macOS'tan farklı. Chrome OS'ta üç ana yol var: Play Store VPN uygulaması, yerleşik VPN profili ve [router üzerinde VPN](/blog/router-uzerinde-vpn-kurulum).
+
+## Play Store VPN Uygulaması (Önerilen)
+
+Android destekli Chromebook'larda en kolay yol:
+
+1. Google Play Store'u açın
+2. VPN sağlayıcınızın uygulamasını indirin
+3. Hesapla giriş yapın, sunucu seçin, bağlanın
+4. [Kill switch](/blog/kill-switch-nedir-vpn) ve otomatik bağlanma ayarlarını kontrol edin
+
+Avantaj: hızlı lokasyon değişimi, WireGuard/OpenVPN seçimi. Dezavantaj: eski Chromebook'larda Play Store yok.
+
+## Yerleşik VPN Profili
+
+Ayarlar → Ağ → VPN → Ekle:
+
+- **L2TP/IPsec** — bazı kurumsal ağlar ve eski sağlayıcılar
+- **OpenVPN** — sağlayıcı `.ovpn` dosyası verirse (Chrome OS sürümüne bağlı)
+
+Kurumsal okul Chromebook'larında politika VPN zorunlu olabilir; kişisel cihazda Play Store yolu genelde daha pratik.
+
+## Router veya Hotspot
+
+Play Store kapalı cihazlarda:
+
+- Ev [router VPN](/blog/router-uzerinde-vpn-kurulum) — tüm cihazlar korunur
+- Telefonda VPN + Chromebook'u hotspot ile bağlamak (geçici çözüm)
+
+## Streaming ve Okul Ağı
+
+Okul veya kütüphane ağı VPN'i engelleyebilir. Farklı protokol veya obfuscation sunucusu deneyin — [yüksek kısıtlama rehberi](/blog/cin-rusya-ai-erisim-vpn). Streaming için [VPN streaming rehberi](/blog/vpn-streaming-ve-icerik-erisimi) ve [en iyi VPN](/en-iyi) listesi.
+
+## Güvenlik İpuçları
+
+- Halka açık Wi-Fi'de VPN önce — [otel Wi-Fi güvenliği](/blog/halka-acik-wifi-vpn-guvenligi)
+- [DNS leak test](/blog/dns-leak-test-vpn) yapın
+- Güvenilir sağlayıcı — [güvenilir VPN nasıl seçilir](/blog/guvenilir-vpn-nasil-secilir-2026)
+
+## Özet
+
+Chromebook VPN: Play Store uygulaması birinci seçenek; yedek olarak yerleşik profil veya router. [Metodoloji](/metodoloji) ile test edilen sağlayıcıları tercih edin.
