@@ -311,6 +311,18 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "vpn-denetim-raporu-okuma",
     en: "vpn-audit-report-guide",
   },
+  "claude-anthropic-erisim-vpn": {
+    tr: "claude-anthropic-erisim-vpn",
+    en: "claude-anthropic-access-vpn",
+  },
+  "ai-api-anahtar-guvenlik-vpn": {
+    tr: "ai-api-anahtar-guvenlik-vpn",
+    en: "ai-api-keys-security-vpn",
+  },
+  "perplexity-ai-arama-vpn": {
+    tr: "perplexity-ai-arama-vpn",
+    en: "perplexity-ai-search-vpn",
+  },
 };
 
 export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {

@@ -1090,6 +1090,36 @@ const imageDatabase: Record<string, BlogImageSet> = {
     mid: img("1454165804606-c3d57bc86b40", "Compliance review", PHOTOGRAPHERS.scottGraham, 800, 450),
     end: img("1551434678-e076c223a692", "Verification checklist", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
   },
+  "claude-ai-tr": {
+    hero: img("1620712943543-bcc4688e7485", "AI asistan arayüzü", PHOTOGRAPHERS.growtika),
+    mid: img("1677442136019-21780ecad995", "Sohbet ve yapay zeka", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Gizlilik kilidi", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "claude-ai-en": {
+    hero: img("1677442136019-21780ecad995", "Claude AI assistant", PHOTOGRAPHERS.shahadat),
+    mid: img("1620712943543-bcc4688e7485", "AI chat interface", PHOTOGRAPHERS.growtika, 800, 450),
+    end: img("1614064641938-3bbee52942c7", "Privacy lock", PHOTOGRAPHERS.flyd, 800, 450),
+  },
+  "ai-api-keys-tr": {
+    hero: img("1555949963-ff9fe0c870eb", "API ve kod güvenliği", PHOTOGRAPHERS.shahadat),
+    mid: img("1518770660439-4636190af475", "Geliştirici altyapı", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+    end: img("1563013544-824ae1b704d3", "Şifreleme", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "ai-api-keys-en": {
+    hero: img("1518770660439-4636190af475", "API keys developer", PHOTOGRAPHERS.alexKotliarskyi),
+    mid: img("1555949963-ff9fe0c870eb", "Secure coding", PHOTOGRAPHERS.shahadat, 800, 450),
+    end: img("1563013544-824ae1b704d3", "Encryption", PHOTOGRAPHERS.markusSpiske, 800, 450),
+  },
+  "perplexity-ai-tr": {
+    hero: img("1451187580459-43490279c0fa", "AI arama ve veri", PHOTOGRAPHERS.nasa),
+    mid: img("1526374965328-7f61d4dc18c5", "Arama sonuçları", PHOTOGRAPHERS.markusSpiske, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global erişim", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
+  "perplexity-ai-en": {
+    hero: img("1526374965328-7f61d4dc18c5", "AI search network", PHOTOGRAPHERS.markusSpiske),
+    mid: img("1451187580459-43490279c0fa", "Data discovery", PHOTOGRAPHERS.nasa, 800, 450),
+    end: img("1611162617474-5b21e879e113", "Global access", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
+  },
 };
 
 // Alias eşleştirmeleri (frontmatter'daki farklı isimlendirmeler için)
