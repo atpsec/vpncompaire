@@ -1,4 +1,4 @@
-// "Ücretsiz vs Ücretli VPN" rehberinin locale-aware içeriği (tr/en/de).
+﻿// "Ücretsiz vs Ücretli VPN" rehberinin locale-aware içeriği (tr/en/de).
 // Sayfa (src/app/[locale]/rehber/ucretsiz-vs-ucretli-vpn/page.tsx) bu modülden
 // render eder; yerelleştirilmiş URL'ler (/rehber/ucretsiz-vs-ucretli-vpn,
 // /en/guide/free-vs-paid-vpn, /de/ratgeber/kostenloses-vs-kostenpflichtiges-vpn)
@@ -200,7 +200,7 @@ const tr: FreeVsPaidVpnContent = {
       href: "/rehber/vpn-guvenlik-kontrol-listesi",
       text: "Güvenlik kontrol listesi",
     },
-    { href: "/en-iyi-vpn", text: "En iyi 10 VPN" },
+    { href: "/en-iyi-vpn", text: "En iyi 20 VPN" },
   ],
 };
 
@@ -363,7 +363,7 @@ const en: FreeVsPaidVpnContent = {
       href: "/guide/vpn-security-checklist",
       text: "Security checklist",
     },
-    { href: "/en-iyi-vpn", text: "Top 10 VPNs" },
+    { href: "/en-iyi-vpn", text: "Top 20 VPNs" },
   ],
 };
 
@@ -526,7 +526,7 @@ const de: FreeVsPaidVpnContent = {
       href: "/ratgeber/vpn-sicherheits-checkliste",
       text: "Sicherheits-Checkliste",
     },
-    { href: "/en-iyi-vpn", text: "Top-10-VPNs" },
+    { href: "/en-iyi-vpn", text: "Top-20-VPNs" },
   ],
 };
 

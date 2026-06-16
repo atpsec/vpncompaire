@@ -1,5 +1,5 @@
-/**
- * Rank 11–20 VPN'ler: Top 10 listesinde gösterilmez; /inceleme, özellik filtresi ve
+﻿/**
+ * Rank 11–20 VPN'ler: En İyi 20 listesinde gösterilmez; /inceleme, özellik filtresi ve
  * ilerideki genişletilmiş inceleme havuzu için. Sıralama popüler karşılaştırma
  * sitelerindeki yaygın isimlerle uyumlu seçildi (PCMag, TechRadar, VPNMentor vb.).
  */
@@ -48,7 +48,7 @@ function extendedVpn(
     ],
     cons: [
       L(
-        "Top 10 seçeneklere kıyasla daha sınırlı bağımsız denetim geçmişi veya şeffaflık",
+        "üst 10 sıraya kıyasla daha sınırlı bağımsız denetim geçmişi veya şeffaflık",
         "More limited audit history or transparency vs top-10 picks",
       ),
       L(
@@ -73,8 +73,8 @@ function extendedVpn(
       testDuration: "7 gün",
     },
     editorNotes: L(
-      "Genişletilmiş inceleme havuzunda değerlendirildi; genel kullanım için alternatif, ancak editör Top 10 listesindeki seçenekler daha dengeli profil sunuyor.",
-      "Evaluated in our extended review pool; viable alternative, though editor Top 10 picks offer a more balanced profile.",
+      "Genişletilmiş inceleme havuzunda değerlendirildi; genel kullanım için alternatif, ancak editör En İyi 20 listesindeki seçenekler daha dengeli profil sunuyor.",
+      "Evaluated in our extended review pool; viable alternative, though editor top-10 picks offer a more balanced profile.",
     ),
     plans: [
       {

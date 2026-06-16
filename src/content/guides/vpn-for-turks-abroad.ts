@@ -1,4 +1,4 @@
-// "Yurt dışındaki Türkler için VPN" rehberinin locale-aware içeriği (tr/en/de).
+﻿// "Yurt dışındaki Türkler için VPN" rehberinin locale-aware içeriği (tr/en/de).
 // Sayfa (src/app/[locale]/rehber/yurt-disindaki-turkler-icin-vpn/page.tsx) bu
 // modülden render eder; yerelleştirilmiş URL'ler (/rehber/yurt-disindaki-turkler-icin-vpn,
 // /en/guide/vpn-for-turks-abroad, /de/ratgeber/vpn-fuer-tuerken-im-ausland)
@@ -138,7 +138,7 @@ const tr: VpnForTurksAbroadContent = {
   },
   turkeyServers: {
     h2: "Türkiye sunucusu olan VPN'ler",
-    intro: "10 inceleme yaptığımız VPN'den Türkiye sunucusu sunanlar:",
+    intro: "20 inceleme yaptığımız VPN'den Türkiye sunucusu sunanlar:",
     items: [
       {
         href: "/inceleme/nordvpn",
@@ -299,7 +299,7 @@ const en: VpnForTurksAbroadContent = {
   },
   turkeyServers: {
     h2: "VPNs with a Türkiye server",
-    intro: "Of the 10 VPNs we've reviewed, these offer a Türkiye server:",
+    intro: "Of the 20 VPNs we've reviewed, these offer a Türkiye server:",
     items: [
       {
         href: "/inceleme/nordvpn",
@@ -467,7 +467,7 @@ const de: VpnForTurksAbroadContent = {
   turkeyServers: {
     h2: "VPNs mit Türkei-Server",
     intro:
-      "Von den 10 VPNs, die wir getestet haben, bieten diese einen Türkei-Server:",
+      "Von den 20 VPNs, die wir getestet haben, bieten diese einen Türkei-Server:",
     items: [
       {
         href: "/inceleme/nordvpn",

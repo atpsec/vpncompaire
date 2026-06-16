@@ -1,4 +1,4 @@
-// "VPN nedir?" flagship rehberinin locale-aware içeriği (tr/en/de).
+﻿// "VPN nedir?" flagship rehberinin locale-aware içeriği (tr/en/de).
 // Sayfa (src/app/[locale]/rehber/vpn-nedir/page.tsx) bu modülden render eder;
 // yerelleştirilmiş URL'ler (/rehber/vpn-nedir, /en/guide/what-is-a-vpn,
 // /de/ratgeber/was-ist-ein-vpn) proxy rewrite ile aynı sayfaya düşer.
@@ -208,7 +208,7 @@ const tr: WhatIsVpnContent = {
   ],
   nextStepLabel: "Sıradaki adım",
   nextStepLinks: [
-    { href: "/en-iyi-vpn", text: "En iyi 10 VPN sıralaması" },
+    { href: "/en-iyi-vpn", text: "En iyi 20 VPN sıralaması" },
     { href: "/rehber/ucretsiz-vs-ucretli-vpn", text: "Ücretsiz vs Ücretli VPN" },
     {
       href: "/rehber/vpn-guvenlik-kontrol-listesi",
@@ -384,7 +384,7 @@ const en: WhatIsVpnContent = {
   ],
   nextStepLabel: "Next step",
   nextStepLinks: [
-    { href: "/en-iyi-vpn", text: "Top 10 VPN ranking" },
+    { href: "/en-iyi-vpn", text: "Top 20 VPN ranking" },
     { href: "/guide/free-vs-paid-vpn", text: "Free vs paid VPN" },
     {
       href: "/guide/vpn-security-checklist",
@@ -560,7 +560,7 @@ const de: WhatIsVpnContent = {
   ],
   nextStepLabel: "Nächster Schritt",
   nextStepLinks: [
-    { href: "/en-iyi-vpn", text: "Top-10-VPN-Ranking" },
+    { href: "/en-iyi-vpn", text: "Top-20-VPN-Ranking" },
     { href: "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn", text: "Kostenlos vs. kostenpflichtig" },
     {
       href: "/ratgeber/vpn-sicherheits-checkliste",

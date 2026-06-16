@@ -1,4 +1,4 @@
-// "VPN güvenlik kontrol listesi" rehberinin locale-aware içeriği (tr/en/de).
+﻿// "VPN güvenlik kontrol listesi" rehberinin locale-aware içeriği (tr/en/de).
 // Sayfa (src/app/[locale]/rehber/vpn-guvenlik-kontrol-listesi/page.tsx) bu
 // modülden render eder; yerelleştirilmiş URL'ler
 // (/rehber/vpn-guvenlik-kontrol-listesi, /en/guide/vpn-security-checklist,
@@ -111,7 +111,7 @@ const tr: VpnSecurityChecklistContent = {
     h2: "Bu listeyi nasıl kullan?",
     before:
       "Bir VPN seçerken bu 12 maddeyi sağlayıcının kendi sitesinde, denetim raporlarında ve bağımsız incelemelerde doğrula. İncelemelerimiz zaten bu kriterleri kullanıyor — kendi sıralamamızı görmek için ",
-    linkText: "en iyi 10 VPN",
+    linkText: "en iyi 20 VPN",
     after: " sayfasını ziyaret edebilirsin.",
   },
   relatedLabel: "İlgili sayfalar",
@@ -216,7 +216,7 @@ const en: VpnSecurityChecklistContent = {
     h2: "How to use this list",
     before:
       "When picking a VPN, verify these 12 points on the provider's own site, in audit reports and in independent reviews. Our reviews already apply these criteria — to see our own ranking, visit the ",
-    linkText: "top 10 VPNs",
+    linkText: "top 20 VPNs",
     after: " page.",
   },
   relatedLabel: "Related pages",
@@ -321,7 +321,7 @@ const de: VpnSecurityChecklistContent = {
     h2: "Wie nutzt du diese Liste?",
     before:
       "Prüfe diese 12 Punkte bei der VPN-Wahl auf der Website des Anbieters, in Audit-Berichten und in unabhängigen Tests. Unsere Tests wenden genau diese Kriterien an — unser eigenes Ranking findest du auf der Seite ",
-    linkText: "Top 10 VPNs",
+    linkText: "Top 20 VPNs",
     after: ".",
   },
   relatedLabel: "Verwandte Seiten",
