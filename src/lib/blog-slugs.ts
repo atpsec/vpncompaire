@@ -299,6 +299,18 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "openvpn-manuel-kurulum",
     en: "openvpn-manual-setup",
   },
+  "vpn-deneme-para-iade": {
+    tr: "vpn-deneme-para-iade",
+    en: "vpn-trial-money-back-guide",
+  },
+  "vpn-yargi-yetkisi-secimi": {
+    tr: "vpn-yargi-yetkisi-secimi",
+    en: "vpn-jurisdiction-selection-guide",
+  },
+  "vpn-denetim-raporu-okuma": {
+    tr: "vpn-denetim-raporu-okuma",
+    en: "vpn-audit-report-guide",
+  },
 };
 
 export function slugForLocale(entry: BlogSlugEntry, locale: BlogLocale): string {

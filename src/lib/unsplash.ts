@@ -1060,6 +1060,36 @@ const imageDatabase: Record<string, BlogImageSet> = {
     mid: img("1555949963-ff9fe0c870eb", "Configuration code", PHOTOGRAPHERS.shahadat, 800, 450),
     end: img("1544197150-b99a580bb7a8", "Network connection", PHOTOGRAPHERS.jordanHarrison, 800, 450),
   },
+  "vpn-trial-refund-tr": {
+    hero: img("1554224155-6726b3ff858f", "Para iade ve abonelik", PHOTOGRAPHERS.rupixen),
+    mid: img("1556742049-0cfed4f6a45d", "Fiyat karşılaştırma", PHOTOGRAPHERS.blakeWisz, 800, 450),
+    end: img("1454165804606-c3d57bc86b40", "Karar matrisi", PHOTOGRAPHERS.scottGraham, 800, 450),
+  },
+  "vpn-trial-refund-en": {
+    hero: img("1454165804606-c3d57bc86b40", "Refund and subscription", PHOTOGRAPHERS.scottGraham),
+    mid: img("1554224155-6726b3ff858f", "Pricing comparison", PHOTOGRAPHERS.rupixen, 800, 450),
+    end: img("1556742049-0cfed4f6a45d", "Value decision", PHOTOGRAPHERS.blakeWisz, 800, 450),
+  },
+  "vpn-jurisdiction-tr": {
+    hero: img("1589829545856-d10d557cf95f", "Yasal belge ve yargı", PHOTOGRAPHERS.scottWebb),
+    mid: img("1450101499163-c8848c66ca85", "Dünya haritası", PHOTOGRAPHERS.philippeOursel, 800, 450),
+    end: img("1589994965851-a8f479c573a9", "Hukuk ve adalet", PHOTOGRAPHERS.clintPatterson, 800, 450),
+  },
+  "vpn-jurisdiction-en": {
+    hero: img("1450101499163-c8848c66ca85", "Global jurisdictions map", PHOTOGRAPHERS.philippeOursel),
+    mid: img("1589829545856-d10d557cf95f", "Legal documents", PHOTOGRAPHERS.scottWebb, 800, 450),
+    end: img("1589994965851-a8f479c573a9", "Law and privacy", PHOTOGRAPHERS.clintPatterson, 800, 450),
+  },
+  "vpn-audit-tr": {
+    hero: img("1454165804606-c3d57bc86b40", "Denetim ve rapor", PHOTOGRAPHERS.scottGraham),
+    mid: img("1563013544-824ae1b704d3", "Güvenlik analizi", PHOTOGRAPHERS.growtika, 800, 450),
+    end: img("1551434678-e076c223a692", "Kontrol listesi", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
+  "vpn-audit-en": {
+    hero: img("1563013544-824ae1b704d3", "Security audit report", PHOTOGRAPHERS.growtika),
+    mid: img("1454165804606-c3d57bc86b40", "Compliance review", PHOTOGRAPHERS.scottGraham, 800, 450),
+    end: img("1551434678-e076c223a692", "Verification checklist", PHOTOGRAPHERS.alexKotliarskyi, 800, 450),
+  },
 };
 
 // Alias eşleştirmeleri (frontmatter'daki farklı isimlendirmeler için)

@@ -1,0 +1,67 @@
+---
+slug: "vpn-denetim-raporu-okuma"
+title: "VPN Denetim Raporu Nasıl Okunur? 2026 Şeffaflık Rehberi"
+description: "Cure53, Deloitte, Securitum denetimleri ne anlama gelir? VPN audit raporlarında bakılacak bölümler ve kırmızı bayraklar."
+publishedAt: "2026-06-20"
+updatedAt: "2026-06-20"
+author: "VPN Advisor Editör Ekibi"
+category: "secim-rehberi"
+tags: ["denetim", "audit", "no-logs", "vpn-seçimi"]
+readingTime: 10
+coverImage: "vpn-audit-tr"
+unsplashKeyword: "security audit report vpn"
+---
+
+"Bağımsız denetimden geçti" rozeti çoğu VPN sitesinde var. Ancak her denetim aynı şeyi test etmez: biri uygulama kodunu, biri no-logs politikasını, biri sunucu yapılandırmasını inceler. Raporu okumadan veya en azından özetini anlamadan seçim yapmak yanıltıcı olabilir.
+
+## Denetim Türleri
+
+| Tür | Ne doğrular | Örnek |
+|-----|-------------|-------|
+| **Uygulama güvenliği** | İstemci kodu, zafiyetler | Cure53 pentest |
+| **No-logs denetimi** | Sunucularda kullanıcı verisi yok | Deloitte, Securitum |
+| **Altyapı / SOC 2** | Operasyonel süreçler | Kurumsal sağlayıcılar |
+
+"No-logs denetimi" ile "uygulama pentesti" aynı değil — ikisi de değerli, farklı sorulara cevap verir.
+
+## Raporda Bakılacak Bölümler
+
+1. **Denetim kapsamı** — Hangi ürün, hangi tarih, hangi sunucu lokasyonları?
+2. **Metodoloji** — Black-box, white-box, log erişimi denendi mi?
+3. **Bulgular (findings)** — Kritik / yüksek / orta sınıflandırma
+4. **Sağlayıcı yanıtı** — Bulgular düzeltildi mi, süre?
+5. **Sınırlamalar** — "Bu denetim gelecekteki ihlalleri garanti etmez" uyarısı normal
+
+Eski rapor (3+ yıl) güncel mimariyi yansıtmayabilir — tarih önemli. [Metodoloji](/metodoloji) sayfamızda denetim tarihini not ederiz.
+
+## Kırmızı Bayraklar
+
+- "Denetlendi" ama rapor linki yok veya özet gizli
+- Sadece marketing PDF, teknik detay yok
+- Denetim sağlayıcının kendi isteğiyle sınırlı kapsamda
+- No-logs iddiası var ama sadece uygulama pentesti yapılmış
+- Rapor yayımlandıktan sonra büyük altyapı değişikliği, yeni denetim yok
+
+## Bilinen Denetim Firmaları
+
+- **Cure53** — tarayıcı ve uygulama güvenliği
+- **Deloitte / PwC** — no-logs ve süreç denetimleri
+- **Securitum** — Avrupa odaklı güvenlik değerlendirmeleri
+
+Firma adı tek başına yeterli değil — kapsamı okuyun.
+
+## Denetim Olmayan Sağlayıcılar
+
+Mullvad gibi açık kaynak + şeffaflık ile denetim yerine topluluk incelemesi güven oluşturan örnekler var. [Gizlilik VPN](/en-iyi/gizlilik) listesinde denetim ve açık kaynak birlikte değerlendirilir.
+
+Denetim yok = otomatik kötü değil; risk profilinize göre karar verin.
+
+## Seçimle Birleştirme
+
+Denetim + [yargı yetkisi](/blog/vpn-yargi-yetkisi-secimi) + [kill switch](/blog/kill-switch-nedir-vpn) testi + [güvenilir VPN checklist](/blog/guvenilir-vpn-nasil-secilir-2026).
+
+[ExpressVPN vs ProtonVPN](/blog/expressvpn-vs-protonvpn-karsilastirma) denetim ve yargı farklarını somutlaştırır.
+
+## Özet
+
+Denetim rozeti süs değil — raporun neyi kapsadığını sorun. Tarih, kapsam ve bulgular [inceleme sayfalarımızda](/inceleme/nordvpn) özetlenir; tam raporu sağlayıcı sitesinden doğrulayın.
