@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function GlobalNotFound() {
   return (
-    <html lang="en">
+    <html lang="tr">
       <body
         style={{
           margin: 0,
@@ -28,10 +28,10 @@ export default function GlobalNotFound() {
               marginBottom: 12,
             }}
           >
-            Page not found
+            Sayfa bulunamadı
           </h1>
           <p style={{ color: "#57534e", lineHeight: 1.6 }}>
-            The page you were looking for may have moved or been removed.
+            Aradığınız sayfa taşınmış veya kaldırılmış olabilir.
           </p>
           <Link
             href="/"
@@ -46,7 +46,7 @@ export default function GlobalNotFound() {
               fontWeight: 500,
             }}
           >
-            Back to home
+            Ana sayfaya dön
           </Link>
         </main>
       </body>

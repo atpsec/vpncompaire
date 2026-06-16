@@ -92,11 +92,14 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: tCommon("ctaTitle"), path: "/araclar" },
-          { name: t("breadcrumb"), path: "/araclar/ip-adresim" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: tCommon("ctaTitle"), path: "/araclar" },
+            { name: t("breadcrumb"), path: "/araclar/ip-adresim" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={webAppSchema} />
 

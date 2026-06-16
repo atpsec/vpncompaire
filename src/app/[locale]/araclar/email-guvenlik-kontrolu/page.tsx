@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -48,6 +48,7 @@ function EmailSecurityView() {
   const t = useTranslations("tools.emailSecurity");
   const tNav = useTranslations("nav");
   const tCommon = useTranslations("tools.common");
+  const locale = useLocale();
 
   const webAppSchema = {
     "@context": "https://schema.org",
@@ -131,11 +132,14 @@ function EmailSecurityView() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: tNav("tools"), path: "/araclar" },
-          { name: t("breadcrumb"), path: "/araclar/email-guvenlik-kontrolu" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: tNav("tools"), path: "/araclar" },
+            { name: t("breadcrumb"), path: "/araclar/email-guvenlik-kontrolu" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={webAppSchema} />
 

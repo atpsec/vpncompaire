@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Sparkles } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -39,14 +39,18 @@ export default async function Page({ params }: Props) {
 function QuizPageView() {
   const t = useTranslations("quiz");
   const tNav = useTranslations("nav");
+  const locale = useLocale();
 
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: t("breadcrumb"), path: "/sana-uygun-vpn" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: t("breadcrumb"), path: "/sana-uygun-vpn" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="md" className="py-12 sm:py-16">

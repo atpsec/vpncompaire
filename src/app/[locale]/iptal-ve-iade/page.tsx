@@ -33,10 +33,13 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumbHome"), path: "/" },
-          { name: t("breadcrumbHere"), path: "/iptal-ve-iade" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumbHome"), path: "/" },
+            { name: t("breadcrumbHere"), path: "/iptal-ve-iade" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={faqSchema(faqs)} />
 

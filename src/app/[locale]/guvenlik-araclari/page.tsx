@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { SecurityToolsBody, getSecurityContent } from "./_body";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -35,11 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: m.title,
     description: m.description,
-    alternates: { canonical: absoluteUrl("/guvenlik-araclari") },
+    alternates: localizedAlternates("/guvenlik-araclari", locale),
     openGraph: {
       title: m.ogTitle,
       description: m.ogDescription,
-      url: absoluteUrl("/guvenlik-araclari"),
+      url: absoluteUrl("/guvenlik-araclari", locale),
       type: "article",
     },
   };
@@ -53,10 +53,13 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: strings.breadcrumbHome, path: "/" },
-          { name: strings.breadcrumbHere, path: "/guvenlik-araclari" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: strings.breadcrumbHome, path: "/" },
+            { name: strings.breadcrumbHere, path: "/guvenlik-araclari" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="md" className="py-12 sm:py-16">

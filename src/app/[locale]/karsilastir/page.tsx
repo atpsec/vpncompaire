@@ -84,16 +84,19 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          {
-            name: t("breadcrumbHome"),
-            path: appLocale === DEFAULT_LOCALE ? "/" : `/${appLocale}`,
-          },
-          {
-            name: t("breadcrumbHere"),
-            path: getLocalizedSectionPath(appLocale, "comparison"),
-          },
-        ])}
+        data={breadcrumbSchema(
+          [
+            {
+              name: t("breadcrumbHome"),
+              path: appLocale === DEFAULT_LOCALE ? "/" : `/${appLocale}`,
+            },
+            {
+              name: t("breadcrumbHere"),
+              path: getLocalizedSectionPath(appLocale, "comparison"),
+            },
+          ],
+          appLocale,
+        )}
       />
 
       <Container size="lg" className="py-12 sm:py-16">

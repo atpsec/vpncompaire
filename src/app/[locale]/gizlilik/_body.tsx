@@ -1,6 +1,5 @@
 import { Shield, Database, UserCheck } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/lib/site";
@@ -426,6 +425,237 @@ export function EnBody() {
                 contact page
               </Link>
               .
+            </p>
+          </div>
+        </div>
+      </Card>
+    </>
+  );
+}
+
+export function DeBody() {
+  return (
+    <>
+      <p className="text-sm text-ink-muted">
+        <Link href="/" className="hover:text-ink">
+          Startseite
+        </Link>{" "}
+        › <span className="text-ink-strong">Datenschutzerklärung</span>
+      </p>
+
+      <header className="mt-6">
+        <Badge variant="brand">
+          <Shield className="size-3" /> DSGVO-konform
+        </Badge>
+        <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+          Datenschutzerklärung
+        </h1>
+        <p className="mt-3 text-sm text-ink-muted">
+          Zuletzt aktualisiert: Juni 2026
+        </p>
+      </header>
+
+      <Card className="mt-8 p-6 bg-success-50/60">
+        <h2 className="text-lg font-semibold text-success-700 flex items-center gap-2">
+          <Database className="size-5" /> Kurzfassung
+        </h2>
+        <ul className="mt-3 space-y-2 text-ink leading-relaxed text-sm">
+          <li>
+            <strong>Analyse-Cookies nur mit Ihrer Einwilligung</strong> —
+            Google Analytics wird erst aktiviert, wenn Sie im Cookie-Banner
+            zustimmen. Ein einziges unbedingt erforderliches Cookie
+            (NEXT_LOCALE) speichert Ihre Sprache.
+          </li>
+          <li>
+            <strong>Keine Konten</strong> — keine Registrierung, kein Login
+            und kein Passwort.
+          </li>
+          <li>
+            <strong>Keine Formulare</strong> — kein Formular auf dieser
+            Website erhebt personenbezogene Daten.
+          </li>
+          <li>
+            <strong>VPN-Anbieter-Links</strong> werden nicht gespeichert; ein
+            einfacher Link führt Sie direkt zur offiziellen Website des
+            Anbieters, ohne Klick-Tracking.
+          </li>
+          <li>
+            <strong>E-Mails an uns</strong> werden nur zur Beantwortung Ihrer
+            Nachricht verwendet.
+          </li>
+        </ul>
+      </Card>
+
+      <article className="mt-12 prose prose-stone max-w-none">
+        <h2>1. Verantwortlicher</h2>
+        <p>
+          Diese Erklärung betrifft personenbezogene Daten, die bei der Nutzung
+          von <Link href="/">{siteConfig.url}</Link> verarbeitet werden,
+          betrieben von {siteConfig.name} (&quot;wir&quot;, &quot;unsere
+          Website&quot;). Wir handeln als Verantwortlicher im Sinne der
+          einschlägigen Datenschutzgesetze (einschließlich des türkischen
+          KVKK und, soweit anwendbar, der EU-DSGVO).
+        </p>
+
+        <h2>2. Welche Daten wir verarbeiten</h2>
+
+        <h3>2.1. Automatische technische Daten (Server-Logs)</h3>
+        <p>
+          Unsere Vercel-Hosting-Infrastruktur speichert vorübergehend
+          standardmäßige Webserver-Logs:
+        </p>
+        <ul>
+          <li>IP-Adresse (anonymisiert)</li>
+          <li>Browsertyp und -version (User-Agent)</li>
+          <li>Datum/Uhrzeit des Zugriffs</li>
+          <li>Aufgerufene URL</li>
+          <li>HTTP-Antwortcode</li>
+        </ul>
+        <p>
+          Diese Einträge werden 30 Tage lang für Sicherheit, Fehlerbehebung
+          und Missbrauchserkennung aufbewahrt und danach automatisch gelöscht.
+          Sie werden nicht zur Erstellung persönlicher Profile verwendet.
+        </p>
+
+        <h3>2.2. Analyse (Google Analytics)</h3>
+        <p>
+          Wir nutzen Google Analytics 4 zur Messung des Website-Traffics mit
+          Google Consent Mode v2:
+        </p>
+        <ul>
+          <li>
+            vor Ihrer Einwilligung im Cookie-Banner wird kein Analyse-Cookie
+            gesetzt (nur anonyme aggregierte Pings)
+          </li>
+          <li>
+            bei &quot;Akzeptieren&quot; werden die <code>_ga</code>-Cookies
+            gesetzt; bei &quot;Ablehnen&quot; werden keine gesetzt
+          </li>
+          <li>
+            aggregierte Seitenaufrufe, ungefähre Region, Gerät und Browser
+          </li>
+          <li>
+            Auftragsverarbeiter ist Google LLC; Daten können in die USA
+            übermittelt werden
+          </li>
+        </ul>
+        <p>
+          Analysedaten dienen der Bewertung der Website-Performance. Details
+          finden Sie in der{" "}
+          <Link href="/cerez-politikasi">Cookie-Richtlinie</Link>.
+        </p>
+
+        <h3>2.3. Kontakt-E-Mail</h3>
+        <p>
+          Wenn Sie uns eine E-Mail senden, werden Inhalt und Adresse Ihrer
+          Nachricht ausschließlich zur Beantwortung verarbeitet. Nach der
+          Antwort erfolgt keine weitere Verarbeitung; die Nachricht kann
+          jedoch bis zu 1 Jahr als Geschäftsunterlage aufbewahrt werden.
+        </p>
+
+        <h2>3. Warum wir Daten verarbeiten (Rechtsgrundlage)</h2>
+        <ul>
+          <li>
+            <strong>Server-Logs:</strong> berechtigtes Interesse (Sicherheit
+            und Missbrauchsprävention).
+          </li>
+          <li>
+            <strong>Google Analytics:</strong> Einwilligung (DSGVO Art. 6
+            Abs. 1 lit. a und ausdrückliche Einwilligung nach KVKK über das
+            Cookie-Banner). Ohne Zustimmung keine Verarbeitung.
+          </li>
+          <li>
+            <strong>Kontakt-E-Mail:</strong> Vertrag/Vorvertrag (Beantwortung
+            Ihrer Anfrage).
+          </li>
+        </ul>
+
+        <h2>4. Weitergabe von Daten</h2>
+        <p>
+          Wir geben Ihre Daten nicht an Dritte weiter. Die erforderlichen
+          technischen Abläufe betreffen diese Dienstleister:
+        </p>
+        <ul>
+          <li>
+            <strong>Vercel</strong> (Webhosting) — verarbeitet Server-Logs.
+            Standard-Auftragsverarbeitungsvertrag.
+          </li>
+          <li>
+            <strong>Google</strong> (bei Einwilligung, Analyse) — verarbeitet
+            anonyme Seitenaufrufdaten in aggregierter Form; Daten können in
+            die USA übermittelt werden (Standardvertragsklauseln von Google).
+          </li>
+        </ul>
+        <p>
+          Auf unseren Seiten werden Google-AdSense-Anzeigen ausgeliefert;
+          AdSense kann Cookies zum Ausliefern und Messen von Anzeigen
+          verwenden (Details in unserer{" "}
+          <Link href="/cerez-politikasi">Cookie-Richtlinie</Link>). Wenn Sie
+          auf einen VPN-Anbieter-Link klicken, gelangen Sie direkt zur
+          offiziellen Website des Anbieters; ab diesem Zeitpunkt gilt dessen
+          eigene Datenschutzerklärung.
+        </p>
+
+        <h2>5. Ihre Rechte</h2>
+        <p>
+          Nach geltendem Datenschutzrecht haben Sie unter anderem folgende
+          Rechte:
+        </p>
+        <ul>
+          <li>
+            Auskunft darüber, ob Ihre personenbezogenen Daten verarbeitet
+            werden
+          </li>
+          <li>Informationen über die Verarbeitung anzufordern</li>
+          <li>
+            den Zweck der Verarbeitung und die zweckgemäße Nutzung zu erfahren
+          </li>
+          <li>
+            zu erfahren, an welche Dritten (im In- oder Ausland) Daten
+            übermittelt werden
+          </li>
+          <li>
+            Berichtigung unvollständiger oder unrichtiger Daten zu verlangen
+          </li>
+          <li>Löschung oder Vernichtung der Daten zu verlangen</li>
+          <li>Widerspruch gegen automatisierte Analyseergebnisse</li>
+          <li>Schadensersatz bei entstandenem Schaden zu verlangen</li>
+        </ul>
+        <p>
+          Zur Ausübung dieser Rechte erreichen Sie uns über die{" "}
+          <Link href="/iletisim">Kontaktseite</Link>.
+        </p>
+
+        <h2>6. Datensicherheit</h2>
+        <p>
+          Der Server-Traffic ist über HTTPS (TLS 1.3) verschlüsselt.
+          HTTP-Header sind gehärtet (HSTS, CSP, X-Frame-Options usw.). Da
+          wir keine Cookies ohne Einwilligung setzen, ist unsere Angriffsfläche
+          für cookiebasierte Angriffe minimal.
+        </p>
+
+        <h2>7. Aktualisierungen dieser Erklärung</h2>
+        <p>
+          Wir können diese Erklärung von Zeit zu Zeit aktualisieren.
+          Wesentliche Änderungen werden durch das Datum &quot;Zuletzt
+          aktualisiert&quot; oben auf der Seite kenntlich gemacht.
+        </p>
+      </article>
+
+      <Card className="mt-12 p-6 bg-brand-50/40">
+        <div className="flex items-start gap-3">
+          <UserCheck className="size-5 text-brand-600 mt-0.5 shrink-0" />
+          <div>
+            <p className="font-semibold text-ink-strong">
+              Ich habe eine Anfrage zu meinen Daten
+            </p>
+            <p className="mt-1 text-sm text-ink leading-relaxed">
+              Um Ihre Rechte auszuüben oder eine Frage zu dieser
+              Datenschutzerklärung zu stellen, wenden Sie sich über die{" "}
+              <Link href="/iletisim" className="text-brand-700 underline">
+                Kontaktseite
+              </Link>{" "}
+              an uns.
             </p>
           </div>
         </div>

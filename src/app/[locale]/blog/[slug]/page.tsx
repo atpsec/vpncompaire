@@ -131,11 +131,14 @@ export default async function BlogPostPage({ params }: Props) {
 
   const homeName =
     locale === "tr" ? "Ana Sayfa" : locale === "de" ? "Startseite" : "Home";
-  const breadcrumbLd = breadcrumbSchema([
-    { name: homeName, path: `${localePath}/` },
-    { name: "Blog", path: blogIndexPath },
-    { name: frontmatter.title, path: `${blogIndexPath}/${frontmatter.slug}` },
-  ]);
+  const breadcrumbLd = breadcrumbSchema(
+    [
+      { name: homeName, path: `${localePath}/` },
+      { name: "Blog", path: blogIndexPath },
+      { name: frontmatter.title, path: `${blogIndexPath}/${frontmatter.slug}` },
+    ],
+    locale,
+  );
 
   return (
     <article className="py-12 sm:py-16">

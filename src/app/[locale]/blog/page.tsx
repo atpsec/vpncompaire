@@ -64,10 +64,13 @@ export default async function BlogPage({ params }: Props) {
     url: canonical,
     posts: posts.map((post) => ({ slug: post.slug, title: post.title })),
   });
-  const breadcrumbLd = breadcrumbSchema([
-    { name: homeName, path: `${localePath}/` },
-    { name: t("breadcrumbBlog"), path: `${localePath}/blog` },
-  ]);
+  const breadcrumbLd = breadcrumbSchema(
+    [
+      { name: homeName, path: `${localePath}/` },
+      { name: t("breadcrumbBlog"), path: `${localePath}/blog` },
+    ],
+    locale,
+  );
 
   return (
     <div className="py-12 sm:py-16">

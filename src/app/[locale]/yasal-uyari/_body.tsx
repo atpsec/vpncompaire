@@ -377,6 +377,196 @@ export function EnBody() {
   );
 }
 
+export function DeBody() {
+  return (
+    <>
+      <p className="text-sm text-ink-muted">
+        <Link href="/" className="hover:text-ink">
+          Startseite
+        </Link>{" "}
+        › <span className="text-ink-strong">Rechtlicher Hinweis</span>
+      </p>
+
+      <header className="mt-6">
+        <Badge variant="brand">
+          <Scale className="size-3" /> Rechtlicher Hinweis
+        </Badge>
+        <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+          Rechtlicher Hinweis (Haftungsausschluss)
+        </h1>
+        <p className="mt-3 text-sm text-ink-muted">
+          Zuletzt aktualisiert: Mai 2026
+        </p>
+      </header>
+
+      <Card className="mt-8 p-6 border-accent-300 bg-accent-50/40">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="size-5 text-accent-600 mt-0.5 shrink-0" />
+          <div>
+            <p className="font-semibold text-ink-strong">
+              Wichtig: Inhalte nur zu Informationszwecken
+            </p>
+            <p className="mt-1 text-sm text-ink leading-relaxed">
+              Alle Inhalte auf dieser Website dienen der allgemeinen
+              Information. {siteConfig.name} gibt keine rechtliche, finanzielle
+              oder Cybersicherheits-Garantie. Bevor Sie eine VPN-Entscheidung
+              oder Datenschutzentscheidung treffen, sind Sie selbst dafür
+              verantwortlich, Ihre Situation zu bewerten.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      <article className="mt-10 prose prose-stone max-w-none">
+        <h2>1. Haftungsausschluss für Garantien</h2>
+        <p>
+          {siteConfig.name} gibt keine ausdrückliche oder stillschweigende
+          Garantie hinsichtlich der{" "}
+          <strong>Richtigkeit, Vollständigkeit oder Aktualität</strong> der
+          Informationen auf dieser Website. Inhalte werden &quot;wie
+          besehen&quot; bereitgestellt. Die Website:
+        </p>
+        <ul>
+          <li>
+            garantiert nicht, dass ein bestimmtes VPN Sie{" "}
+            <strong>schützt</strong>
+          </li>
+          <li>
+            behauptet nicht, dass ein VPN{" "}
+            <strong>vollständige Anonymität</strong> bietet. Ein VPN ist ein
+            datenschutzförderndes Werkzeug, nicht die einzige Garantie für
+            Anonymität
+          </li>
+          <li>
+            garantiert nicht, dass Anbieter in rechtlichen Verfahren{" "}
+            <strong>Nutzerdaten nicht offenlegen</strong>. Vergangenes
+            Verhalten ist kein Beweis für zukünftiges Verhalten
+          </li>
+          <li>
+            garantiert nicht die <strong>Beständigkeit</strong> von
+            Streaming-Kompatibilität oder erfolgreichem Bypass. Plattform-
+            Kontrollen ändern sich ständig
+          </li>
+        </ul>
+
+        <h2>2. Variabilität von Anbieterdaten</h2>
+        <p>
+          Folgende Informationen über VPN-Anbieter können sich ändern, ohne
+          dass wir es bemerken oder eine Seite rechtzeitig aktualisieren
+          können:
+        </p>
+        <ul>
+          <li>Monatliche/jährliche Preise und Rabattaktionen</li>
+          <li>Preise in der Verlängerungsphase</li>
+          <li>Rückerstattungsfrist und -bedingungen</li>
+          <li>Serveranzahl, Länderliste, neue/entfernte Standorte</li>
+          <li>Limit für gleichzeitige Geräte</li>
+          <li>Audit-Häufigkeit und Datum des letzten Audits</li>
+          <li>Datenschutzrichtlinie und No-Logs-Umsetzung</li>
+          <li>Rechtsordnung (z. B. Übernahmen, Verlagerungen)</li>
+          <li>Unterstützte Zahlungsmethoden</li>
+          <li>Streaming-Plattform-Kompatibilität</li>
+        </ul>
+        <p>
+          <strong>
+            Bevor Sie einen Kauf tätigen, sind Sie selbst dafür verantwortlich,
+            die aktuellsten Informationen auf der offiziellen Website des
+            Anbieters zu prüfen.
+          </strong>
+        </p>
+
+        <h2>3. Keine Rechtsberatung</h2>
+        <p>
+          Ratgeber auf der Website wie &quot;Ist VPN in der Türkei legal?&quot;{" "}
+          <strong>dürfen nicht als Rechtsberatung ausgelegt werden</strong>.
+          Gesetze ändern sich; individuelle Situationen unterscheiden sich.
+          Für eine konkrete Rechtsfrage empfehlen wir die Konsultation eines
+          Anwalts.
+        </p>
+
+        <h2>4. Keine Finanzberatung</h2>
+        <p>
+          Preisvergleiche und der Kostenrechner{" "}
+          <strong>ersetzen keine Finanzberatung</strong>. Ob ein Abonnement
+          für Sie im Rahmen Ihres Budgets und Ihrer Bedürfnisse passt, liegt in
+          Ihrer Verantwortung.
+        </p>
+
+        <h2>5. Keine Cybersicherheits-Garantie</h2>
+        <p>
+          Ein VPN ist nur ein Teil einer umfassenden Cybersicherheitsstrategie.
+          Kein VPN allein wird:
+        </p>
+        <ul>
+          <li>Sie vor Malware schützen (Sie benötigen Antivirus-Software)</li>
+          <li>
+            Sie allein vor Phishing/Social Engineering schützen (achtsames
+            Verhalten ist erforderlich)
+          </li>
+          <li>
+            Sie vor Browser-Fingerprinting oder cookiebasiertem Tracking
+            schützen
+          </li>
+          <li>
+            Sie davor schützen, persönliche Informationen preiszugeben, die
+            Sie bewusst teilen
+          </li>
+          <li>
+            Ihre Identität in rechtlichen Verfahren kategorisch vor
+            Offenlegung schützen
+          </li>
+        </ul>
+
+        <h2>6. Drittanbieter-Dienste</h2>
+        <p>
+          Die Bedingungen, Datenschutzrichtlinien und Servicequalität der VPN-
+          Anbieter, mit denen Sie sich verbinden, gelten auf deren Seite.{" "}
+          {siteConfig.name} ist nicht verantwortlich für Handlungen dieser
+          Drittanbieter, Preisänderungen, Serviceausfälle oder
+          Richtlinienänderungen.
+        </p>
+
+        <h2>7. Markennamen</h2>
+        <p>
+          Auf der Website genannte Markennamen (NordVPN, Surfshark,
+          ExpressVPN, Proton VPN, PIA, CyberGhost, Mullvad, IPVanish,
+          Windscribe, TunnelBear usw.) sind eingetragene Marken der jeweiligen
+          Inhaber und werden hier nur zur Produktidentifikation im Rahmen des
+          nominativen fairen Gebrauchs verwendet.
+        </p>
+
+        <h2>8. Werbung und Einnahmen</h2>
+        <p>
+          {siteConfig.name} erzielt Einnahmen aus Google-AdSense-Anzeigen.
+          Links zu VPN-Anbietern sind einfache, nicht-kommerzielle Links; wir
+          erhalten dafür keine Provision. Details finden Sie im{" "}
+          <Link href="/reklam-aciklamasi">Werbehinweis</Link>.
+        </p>
+
+        <h2>9. Haftungsbeschränkung</h2>
+        <p>
+          Im gesetzlich zulässigen Umfang haften {siteConfig.name} und
+          seine Autoren/Redakteure nicht für{" "}
+          <strong>direkte, indirekte, zufällige oder besondere Schäden</strong>,
+          die aus Entscheidungen resultieren, die auf den Informationen dieser
+          Website basieren.
+        </p>
+
+        <h2>10. Die endgültige Entscheidung liegt beim Nutzer</h2>
+        <p>
+          Welches VPN Sie wählen, welchen Plan Sie kaufen, wie Sie das VPN
+          konfigurieren und in welchem rechtlichen/technischen Kontext Sie es
+          nutzen, ist <strong>ausschließlich Ihre Entscheidung</strong>. Die
+          Empfehlungen auf dieser Website sollten als Ausgangspunkt dienen,
+          nicht als verbindliche Anweisung.
+        </p>
+      </article>
+
+      <RelatedLinksDe />
+    </>
+  );
+}
+
 function RelatedLinksTr() {
   return (
     <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
@@ -439,6 +629,40 @@ function RelatedLinksEn() {
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Our methodology
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+function RelatedLinksDe() {
+  return (
+    <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
+      <p className="text-sm text-ink-muted">Verwandte Seiten</p>
+      <div className="mt-3 flex flex-wrap gap-2 justify-center">
+        <Link
+          href="/reklam-aciklamasi"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+        >
+          Werbehinweis
+        </Link>
+        <Link
+          href="/sartlar"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+        >
+          Nutzungsbedingungen
+        </Link>
+        <Link
+          href="/gizlilik"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+        >
+          Datenschutzerklärung
+        </Link>
+        <Link
+          href="/metodoloji"
+          className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+        >
+          Unsere Methodik
         </Link>
       </div>
     </section>

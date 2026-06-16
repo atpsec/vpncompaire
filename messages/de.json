@@ -779,29 +779,29 @@
   "privacy": {
     "metaTitle": "Datenschutzerklärung",
     "metaDescription": "Datenschutzhinweise zu VPN Advisor, Cookies, Analyse und Anzeigen.",
-    "breadcrumbHome": "Home",
-    "breadcrumbHere": "Privacy policy",
+    "breadcrumbHome": "Startseite",
+    "breadcrumbHere": "Datenschutzerklärung",
     "h1": "Datenschutzerklärung"
   },
   "terms": {
     "metaTitle": "Nutzungsbedingungen",
     "metaDescription": "Nutzungsbedingungen für VPN Advisor.",
-    "breadcrumbHome": "Home",
-    "breadcrumbHere": "Terms of use",
+    "breadcrumbHome": "Startseite",
+    "breadcrumbHere": "Nutzungsbedingungen",
     "h1": "Nutzungsbedingungen"
   },
   "legalNotice": {
     "metaTitle": "Rechtlicher Hinweis",
     "metaDescription": "Rechtliche Hinweise und Haftungsausschluss für VPN Advisor.",
-    "breadcrumbHome": "Home",
-    "breadcrumbHere": "Legal notice",
+    "breadcrumbHome": "Startseite",
+    "breadcrumbHere": "Rechtlicher Hinweis",
     "h1": "Rechtlicher Hinweis"
   },
   "disclosurePage": {
     "metaTitle": "Werbehinweis",
     "metaDescription": "So finanziert sich VPN Advisor und wie redaktionelle Unabhängigkeit gewahrt wird.",
-    "breadcrumbHome": "Home",
-    "breadcrumbHere": "Advertising disclosure",
+    "breadcrumbHome": "Startseite",
+    "breadcrumbHere": "Werbehinweis",
     "h1": "Werbehinweis"
   },
   "compareHub": {

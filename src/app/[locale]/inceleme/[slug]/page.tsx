@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Check, X, ArrowRight, ExternalLink } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -103,16 +103,20 @@ function ReviewView({
   children: React.ReactNode;
 }) {
   const t = useTranslations("review");
+  const locale = useLocale();
 
   return (
     <>
       <JsonLd data={reviewSchema} />
       <JsonLd
-        data={breadcrumbSchema([
-          { name: t("breadcrumb.home"), path: "/" },
-          { name: t("breadcrumb.reviews"), path: "/en-iyi-vpn" },
-          { name: product.brand, path: `/inceleme/${product.slug}` },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: t("breadcrumb.home"), path: "/" },
+            { name: t("breadcrumb.reviews"), path: "/en-iyi-vpn" },
+            { name: product.brand, path: `/inceleme/${product.slug}` },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="md" className="py-12 sm:py-16">

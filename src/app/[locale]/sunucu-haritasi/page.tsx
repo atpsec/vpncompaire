@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { FeatureFilter } from "@/components/filter/feature-filter";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -86,11 +86,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: { canonical: absoluteUrl("/sunucu-haritasi") },
+    alternates: localizedAlternates("/sunucu-haritasi", locale),
     openGraph: {
       title: c.ogTitle,
       description: c.ogDescription,
-      url: absoluteUrl("/sunucu-haritasi"),
+      url: absoluteUrl("/sunucu-haritasi", locale),
       type: "website",
     },
   };
@@ -104,10 +104,13 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: c.breadcrumbHome, path: "/" },
-          { name: c.breadcrumbHere, path: "/sunucu-haritasi" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: c.breadcrumbHome, path: "/" },
+            { name: c.breadcrumbHere, path: "/sunucu-haritasi" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="lg" className="py-12 sm:py-16">

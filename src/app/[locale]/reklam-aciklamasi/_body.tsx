@@ -418,3 +418,217 @@ export function EnBody() {
     </>
   );
 }
+
+export function DeBody() {
+  return (
+    <>
+      <p className="text-sm text-ink-muted">
+        <Link href="/" className="hover:text-ink">
+          Startseite
+        </Link>{" "}
+        › <span className="text-ink-strong">Werbehinweis</span>
+      </p>
+
+      <header className="mt-6">
+        <Badge variant="brand">
+          <Tag className="size-3" /> Werbe- & Einnahmenhinweis
+        </Badge>
+        <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+          Werbehinweis
+        </h1>
+        <p className="mt-3 text-sm text-ink-muted">
+          Zuletzt aktualisiert: Juni 2026
+        </p>
+      </header>
+
+      <Card className="mt-8 p-6 border-accent-300 bg-accent-50/40">
+        <div className="flex items-start gap-3">
+          <Tag className="size-5 text-accent-600 mt-0.5 shrink-0" />
+          <div>
+            <p className="font-semibold text-ink-strong">In einfachen Worten</p>
+            <p className="mt-1 text-sm text-ink leading-relaxed">
+              {siteConfig.name} erzielt Einnahmen aus{" "}
+              <strong>Google-AdSense-Anzeigen</strong> und, wo Programme
+              bestehen, aus <strong>VPN-Affiliate-Links</strong>.
+              Affiliate-Provisionen beeinflussen Rankings oder Bewertungen
+              nicht. Auf den Seiten können außerdem automatisch von Google
+              ausgewählte Anzeigen erscheinen.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      <article className="mt-10 prose prose-stone max-w-none">
+        <h2>Wie funktioniert unser Einnahmenmodell?</h2>
+        <p>
+          {siteConfig.name} nutzt <strong>Google AdSense</strong>-Anzeigen als
+          Einnahmequelle. Google platziert Anzeigen automatisch auf unseren
+          Seiten und zahlt uns basierend auf Anzeigenimpressionen oder Klicks.
+          In diesem Modell hängen unsere Einnahmen vom Besucherverkehr und der
+          Anzeigenauslieferung ab — nicht davon, ob Sie ein bestimmtes VPN
+          kaufen. Wir verkaufen keine Nutzerdaten.
+        </p>
+
+        <h2>VPN-Links und Affiliate-Programme</h2>
+        <p>
+          Schaltflächen wie &quot;Zur offiziellen Website&quot; auf unseren
+          Seiten verlinken zur offiziellen Website des VPN-Anbieters. Wo ein
+          Affiliate-Programm aktiv ist, können Links Tracking-Parameter
+          enthalten und sind mit{" "}
+          <code>rel=&quot;sponsored nofollow&quot;</code> gekennzeichnet.
+          Anbieter ohne Programm (z. B. Mullvad) nutzen einfache offizielle
+          URLs. Provisionen{" "}
+          <strong>bestimmen nicht</strong> unsere Rankings oder Bewertungen.
+        </p>
+        <ul>
+          <li>
+            Einnahmequellen: Google AdSense + (wo verfügbar)
+            Anbieter-Affiliate-Programme.
+          </li>
+          <li>
+            Anbieter können keine Platzierung kaufen oder unsere redaktionellen
+            Inhalte vorab freigeben.
+          </li>
+          <li>
+            Nicht-affiliate Optionen bleiben in unseren Listen auf Basis der
+            Methodik, nicht der Monetarisierung.
+          </li>
+        </ul>
+
+        <h2>Redaktionelle Unabhängigkeit</h2>
+        <p>
+          Werbeeinnahmen{" "}
+          <strong>
+            beeinflussen unser Ranking, unsere Inhalte, Bewertungen oder
+            Kritik nicht
+          </strong>
+          . Um dies zu wahren:
+        </p>
+        <ul>
+          <li>
+            Google-Anzeigen auf unseren Seiten werden automatisch von Google
+            basierend auf Inhalt und Besucher ausgewählt. Wir entscheiden
+            nicht, welche Marke erscheint; eine Anzeige bedeutet nicht, dass
+            wir das Produkt empfehlen.
+          </li>
+          <li>
+            Redaktionelle Bewertungen sind vollständig unabhängig von
+            Werbeeinnahmen. Ein Anbieter kann keinen Platz in unserem Ranking
+            kaufen.
+          </li>
+          <li>
+            Wir verlangen keine Inhaltskontrolle oder Vorab-Freigabe von
+            Anbietern. Kein VPN-Anbieter sieht unsere Inhalte vor
+            Veröffentlichung.
+          </li>
+        </ul>
+
+        <h2>Werbe-Cookies und Personalisierung</h2>
+        <p>
+          Google AdSense kann Cookies und ähnliche Technologien nutzen, um
+          Anzeigen zu personalisieren. Für Besucher im Europäischen
+          Wirtschaftsraum, im Vereinigten Königreich und in der Schweiz werden
+          personalisierte Werbe- und Mess-Cookies nur mit ausdrücklicher
+          Einwilligung aktiviert. Sie können Ihre Cookie-Einstellungen über
+          das Einwilligungsfeld am Seitenende verwalten; Details finden Sie in
+          unserer{" "}
+          <Link href="/cerez-politikasi">Cookie-Richtlinie</Link> und{" "}
+          <Link href="/gizlilik">Datenschutzerklärung</Link>.
+        </p>
+
+        <h2>Wie entstehen die Inhalte?</h2>
+        <p>Unsere Reviews basieren auf folgenden Quellen:</p>
+        <ul>
+          <li>
+            <strong>Offizielle Anbieterdaten:</strong> Website, Datenschutz-
+            richtlinie und Preisseite des Anbieters — zusammen mit einem
+            Datum &quot;Zuletzt geprüft&quot;.
+          </li>
+          <li>
+            <strong>Audit-Berichte Dritter:</strong> öffentlich verfügbare
+            Berichte von Firmen wie Deloitte, Cure53 oder Securitum.
+          </li>
+          <li>
+            <strong>Eigene Tests:</strong> Labortests zu Geschwindigkeit,
+            Streaming-Kompatibilität und Kill-Switch-Verhalten. Die Methodik
+            ist auf der{" "}
+            <Link href="/metodoloji">Methodik-Seite</Link> beschrieben.
+          </li>
+          <li>
+            <strong>Open-Source-Prüfung:</strong> für Anbieter mit Open-Source-
+            Clients prüfen wir die GitHub-Repositories.
+          </li>
+        </ul>
+        <p>
+          Informationen können sich seit der Veröffentlichung geändert haben;
+          wir empfehlen stets, die offizielle Website des Anbieters zu prüfen.
+        </p>
+
+        <h2>Rechtliche Grundlage</h2>
+        <p>Dieser Hinweis orientiert sich an folgenden Vorschriften:</p>
+        <ul>
+          <li>
+            <strong>Google-AdSense-Programmrichtlinien</strong>:
+            Transparenzpflichten für Anzeigen und Inhalte.
+          </li>
+          <li>
+            <strong>
+              Türkisches Verbraucherschutzgesetz (Nr. 6502)
+            </strong>{" "}
+            und{" "}
+            <strong>
+              Verordnung über kommerzielle Werbung und unlautere
+              Geschäftspraktiken
+            </strong>
+            : Offenlegung von Werbebeziehungen gegenüber Verbrauchern.
+          </li>
+          <li>
+            <strong>EU Digital Services Act</strong>: Transparenzpflichten für
+            Online-Plattformen.
+          </li>
+        </ul>
+
+        <h2>Fragen oder Feedback</h2>
+        <p>
+          Bei Fragen zu unserer Transparenzpolitik, unserem Werbemodell oder
+          unserer Inhaltsmethodik erreichen Sie uns über die{" "}
+          <Link href="/iletisim">Kontaktseite</Link>.
+        </p>
+      </article>
+
+      <Card className="mt-12 p-6">
+        <div className="flex items-start gap-3">
+          <ShieldCheck className="size-5 text-brand-600 mt-0.5 shrink-0" />
+          <div>
+            <p className="font-semibold text-ink-strong">
+              Was würde sich ohne unsere Werbeeinnahmen ändern?
+            </p>
+            <p className="mt-1 text-sm text-ink leading-relaxed">
+              Wir würden dieselben Empfehlungen geben. Unser Ranking wird durch
+              unabhängige Tests und überprüfbare Belege bestimmt, nicht durch
+              Werbeeinnahmen.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      <Card className="mt-6 p-6 border-accent-300 bg-accent-50/40">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="size-5 text-accent-600 mt-0.5 shrink-0" />
+          <div>
+            <p className="font-semibold text-ink-strong">Erinnerung</p>
+            <p className="mt-1 text-sm text-ink leading-relaxed">
+              Diese Seite ist kein{" "}
+              <Link href="/yasal-uyari" className="text-brand-700 underline">
+                rechtlicher Hinweis
+              </Link>{" "}
+              und gibt keine Inhaltsgarantie. Anbieterdaten können sich ändern;
+              prüfen Sie vor einem Kauf die aktuellen Angaben auf der
+              offiziellen Seite des VPN-Anbieters.
+            </p>
+          </div>
+        </div>
+      </Card>
+    </>
+  );
+}

@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
-import { TrBody, EnBody } from "./_body";
+import { TrBody, EnBody, DeBody } from "./_body";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -42,7 +42,13 @@ export default async function Page({ params }: Props) {
       />
 
       <Container size="md" className="py-12 sm:py-16">
-        {locale === "en" ? <EnBody /> : <TrBody />}
+        {locale === "en" ? (
+          <EnBody />
+        ) : locale === "de" ? (
+          <DeBody />
+        ) : (
+          <TrBody />
+        )}
       </Container>
     </>
   );

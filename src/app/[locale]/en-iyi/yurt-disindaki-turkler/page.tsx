@@ -72,14 +72,17 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: "Ana sayfa", path: "/" },
-          { name: "Kullanım Alanları", path: "/en-iyi" },
-          {
-            name: "Yurt dışındaki Türkler için",
-            path: "/en-iyi/yurt-disindaki-turkler",
-          },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: "Ana sayfa", path: "/" },
+            { name: "Kullanım Alanları", path: "/en-iyi" },
+            {
+              name: "Yurt dışındaki Türkler için",
+              path: "/en-iyi/yurt-disindaki-turkler",
+            },
+          ],
+          "tr",
+        )}
       />
       <JsonLd data={faqSchema(faqs)} />
 

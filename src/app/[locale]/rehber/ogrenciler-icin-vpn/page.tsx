@@ -83,7 +83,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema(breadcrumbPaths)} />
+      <JsonLd data={breadcrumbSchema(breadcrumbPaths, locale)} />
       <JsonLd data={faqSchema(c.faqs)} />
       <JsonLd
         data={{

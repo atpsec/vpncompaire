@@ -680,3 +680,349 @@ export function EnBody() {
     </>
   );
 }
+
+export function DeBody() {
+  return (
+    <>
+      <p className="text-sm text-ink-muted">
+        <Link href="/" className="hover:text-ink">
+          Startseite
+        </Link>{" "}
+        › <span className="text-ink-strong">Cookie-Richtlinie</span>
+      </p>
+
+      <header className="mt-6">
+        <Badge variant="brand">
+          <Cookie className="size-3" /> Einwilligungsbasierte Cookies
+        </Badge>
+        <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+          Cookie-Richtlinie
+        </h1>
+        <p className="mt-3 text-sm text-ink-muted">
+          Zuletzt aktualisiert: Juni 2026
+        </p>
+      </header>
+
+      <Card className="mt-8 p-6 bg-success-50/60 border-success-200/60">
+        <h2 className="text-lg font-semibold text-success-700 flex items-center gap-2">
+          <CheckCircle2 className="size-5" /> Kurzantwort: Analyse-Cookies nur
+          mit Ihrer Einwilligung
+        </h2>
+        <p className="mt-3 text-ink leading-relaxed text-sm">
+          vpnadvisor.net <strong>setzt ohne Ihre Einwilligung keine
+          nicht-essentiellen Cookies</strong>. Wir nutzen Google Analytics zur
+          Traffic-Messung; dies wird erst aktiviert, wenn Sie im Cookie-Banner
+          auf <strong>&quot;Akzeptieren&quot;</strong> klicken. Zusätzlich
+          verwenden wir ein einziges{" "}
+          <strong>unbedingt erforderliches (funktionales) Cookie</strong>, um
+          Ihre Sprache zu speichern. Diese Seite erklärt alle Details.
+        </p>
+      </Card>
+
+      <article className="mt-12 prose prose-stone max-w-none dark:prose-invert">
+        <h2>1. Was ist ein Cookie?</h2>
+        <p>
+          Ein Cookie ist eine kleine Textdatei, die eine von Ihnen besuchte
+          Website in Ihrem Browser speichert. Cookies werden häufig genutzt,
+          um Sitzungen aufrechtzuerhalten, Werbung anzuzeigen oder
+          Nutzerverhalten zu verfolgen.{" "}
+          <strong>
+            Sie unterscheiden sich in First-Party-Cookies (der Website) und
+            Third-Party-Cookies (Werbung, Analyse usw.).
+          </strong>
+        </p>
+
+        <h2>2. Welche Cookies verwenden wir?</h2>
+        <p>
+          Zwei Arten: ein einziges{" "}
+          <strong>unbedingt erforderliches (funktionales)</strong> Cookie zur
+          Speicherung Ihrer Sprache und <strong>Analyse-Cookies</strong>, die
+          nur mit Ihrer Einwilligung aktiviert werden.
+        </p>
+        <div className="not-prose my-6 overflow-x-auto">
+          <table className="min-w-full border border-border text-sm">
+            <thead className="bg-surface-subtle">
+              <tr>
+                <th className="border border-border px-3 py-2 text-left">
+                  Cookie
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Typ
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Zweck
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Dauer
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  NEXT_LOCALE
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Unbedingt erforderlich / funktional
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Speichert Ihre Sprache (TR/EN/DE)
+                </td>
+                <td className="border border-border px-3 py-2">1 Jahr</td>
+              </tr>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  _ga, _ga_*
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Analyse (einwilligungsbasiert)
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Google Analytics — Besucherzählung
+                </td>
+                <td className="border border-border px-3 py-2">~2 Jahre</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.1 Google Analytics — einwilligungsbasierte Analyse</h3>
+        <p>
+          Wir nutzen{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Analytics 4
+          </a>{" "}
+          zur Messung des Website-Traffics. So funktioniert es:
+        </p>
+        <ul>
+          <li>
+            Es läuft mit <strong>Google Consent Mode v2</strong>: vor Ihrer
+            Einwilligung ist die Analyse-Speicherung{" "}
+            <strong>&quot;denied&quot;</strong> — in diesem Modus setzt GA{" "}
+            <strong>keine Cookies</strong> und sendet nur anonyme aggregierte
+            Pings.
+          </li>
+          <li>
+            Wenn Sie im Cookie-Banner auf{" "}
+            <strong>&quot;Akzeptieren&quot;</strong> klicken, werden die{" "}
+            <code>_ga</code>-Cookies gesetzt und die normale Messung beginnt.
+            Bei <strong>&quot;Ablehnen&quot;</strong> wird kein Analyse-Cookie
+            gesetzt.
+          </li>
+          <li>
+            Aggregierte Daten wie Seitenaufrufe, ungefähre Region (aus der IP,
+            IP wird nicht gespeichert), Gerät und Browser werden erhoben.
+          </li>
+          <li>
+            Auftragsverarbeiter ist <strong>Google LLC</strong>; Daten können
+            außerhalb der EU (in die USA) übermittelt werden. Sie können Ihre
+            Einwilligung jederzeit durch Löschen der Browserdaten widerrufen.
+          </li>
+        </ul>
+
+        <h3>2.2 LocalStorage — lokale Browsereinstellungen</h3>
+        <p>
+          Der lokale Speicher (localStorage) des Browsers ist eine andere
+          Technologie als Cookies. Daten{" "}
+          <strong>bleiben nur in Ihrem Browser</strong> und werden nie an
+          unseren Server gesendet. Was wir nutzen:
+        </p>
+        <div className="not-prose my-6 overflow-x-auto">
+          <table className="min-w-full border border-border text-sm">
+            <thead className="bg-surface-subtle">
+              <tr>
+                <th className="border border-border px-3 py-2 text-left">
+                  Schlüssel
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Zweck
+                </th>
+                <th className="border border-border px-3 py-2 text-left">
+                  Dauer
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  vpnadvisor-theme
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Ihre Hell-/Dunkelmodus-Einstellung
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Bis Sie sie löschen
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  ip-security-banner-dismissed
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Dass Sie das IP-Sicherheitsbanner geschlossen haben
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Bis Sie sie löschen
+                </td>
+              </tr>
+              <tr>
+                <td className="border border-border px-3 py-2 font-mono text-xs">
+                  vpnadvisor:consent
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Ihre Cookie-Einwilligung (akzeptieren / ablehnen)
+                </td>
+                <td className="border border-border px-3 py-2">
+                  Bis Sie sie löschen
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          Diese Daten fallen unter{" "}
+          <strong>unbedingt erforderlich</strong> (Speicherung von
+          Einstellungen) — nach DSGVO und KVKK ist dafür{" "}
+          <strong>keine Einwilligung erforderlich</strong>.
+        </p>
+
+        <h3>2.3 Werbe-Cookies (Google AdSense)</h3>
+        <p>
+          Auf unseren Seiten werden <strong>Google-AdSense</strong>-Anzeigen
+          ausgeliefert. Google und Partner können Cookies und ähnliche
+          Technologien nutzen, um Anzeigen auszuliefern, zu personalisieren
+          und zu messen. Dies sind{" "}
+          <strong>keine Cookies von uns, sondern Drittanbieter-Cookies
+          (Google)</strong>.
+        </p>
+        <ul>
+          <li>
+            Für Besucher im Europäischen Wirtschaftsraum, im Vereinigten
+            Königreich und in der Schweiz werden personalisierte Werbe- und
+            Mess-Cookies <strong>nur mit ausdrücklicher Einwilligung</strong>{" "}
+            aktiviert (Google Consent Mode v2)
+          </li>
+          <li>
+            Ohne Einwilligung kann Google eingeschränkte oder nicht
+            personalisierte Anzeigen ausliefern
+          </li>
+          <li>
+            Wenn Sie auf einen VPN-Anbieter-Link klicken, gelangen Sie direkt
+            zur offiziellen Website des Anbieters; wir setzen kein eigenes
+            Tracking-Cookie, es gelten die Cookies der Zielwebsite
+          </li>
+        </ul>
+
+        <h2>3. Cookie-Einwilligung (Banner)</h2>
+        <p>
+          Nach den Vorschriften der Türkei (KVKK), der EU (DSGVO/ePrivacy) und
+          des Vereinigten Königreichs (PECR){" "}
+          <strong>erfordern nicht-essentielle Cookies eine ausdrückliche
+          Einwilligung</strong>. Deshalb zeigen wir ein{" "}
+          <strong>Cookie-Einwilligungsbanner</strong> für Analyse- (Google
+          Analytics) und Werbe-Cookies (Google AdSense); sie werden erst
+          gesetzt, wenn Sie auf &quot;Akzeptieren&quot; klicken. Das{" "}
+          <code>NEXT_LOCALE</code>-Sprachcookie ist &quot;unbedingt
+          erforderlich&quot; und benötigt keine Einwilligung. Ihre Wahl wird
+          in Ihrem Browser gespeichert; löschen Sie Ihre Browserdaten, um das
+          Banner erneut zu sehen und Ihre Einstellung zu ändern.
+        </p>
+
+        <h2>4. Wie löschen Sie die Daten?</h2>
+        <p>
+          Was wir in Ihrem Browser speichern: ein Sprachcookie
+          (<code>NEXT_LOCALE</code>), Google-Analytics- und Google-AdSense-Werbe-
+          Cookies, sofern Sie zugestimmt haben, sowie einige localStorage-
+          Einstellungen. So löschen Sie alles:
+        </p>
+        <ul>
+          <li>
+            <strong>Chrome/Edge:</strong> Website-Informationen →
+            vpnadvisor.net → Gespeicherte Daten löschen
+          </li>
+          <li>
+            <strong>Firefox:</strong> Einstellungen → Datenschutz → Cookies und
+            Website-Daten → Daten verwalten
+          </li>
+          <li>
+            <strong>Safari:</strong> Einstellungen → Datenschutz →
+            Website-Daten verwalten
+          </li>
+          <li>
+            <strong>Mobil (Android/iOS):</strong> Browser-Einstellungen →
+            Website-Daten
+          </li>
+        </ul>
+
+        <h2>5. Drittanbieter-Dienste</h2>
+        <Card className="not-prose p-5 bg-accent-50/40 border-accent-200/60 my-6">
+          <div className="flex gap-3">
+            <AlertCircle className="size-5 text-accent-600 shrink-0 mt-0.5" />
+            <div className="text-sm">
+              <p className="font-semibold text-ink-strong">
+                Ausnahme bei externen Links
+              </p>
+              <p className="mt-1 text-ink-muted">
+                Wenn Sie die Website eines VPN-Anbieters besuchen, gilt dessen
+                eigene Cookie-Richtlinie. Lesen Sie die Richtlinien von
+                NordVPN, Surfshark, ExpressVPN und anderen Anbietern auf deren
+                jeweiligen Websites.
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <h2>6. Änderungen dieser Richtlinie</h2>
+        <p>
+          Bei Änderungen dieser Seite wird das Datum &quot;Zuletzt
+          aktualisiert&quot; oben aktualisiert. Wenn wir eine neue
+          Tracking-Technologie hinzufügen,{" "}
+          <strong>informieren wir Sie vorab und holen Ihre Einwilligung über
+          das Cookie-Banner ein</strong>.
+        </p>
+
+        <h2>7. Kontakt</h2>
+        <p>
+          Bei Fragen zu unserer Cookie-Richtlinie erreichen Sie uns über{" "}
+          <Link href="/iletisim">unsere Kontaktseite</Link>.
+        </p>
+      </article>
+
+      <Card className="not-prose mt-12 p-6 bg-surface-subtle/60 border-border">
+        <h3 className="text-base font-semibold text-ink-strong flex items-center gap-2">
+          <Database className="size-4 text-brand-600" /> Weiterführende Links
+        </h3>
+        <ul className="mt-3 space-y-2 text-sm">
+          <li>
+            <Link
+              href="/gizlilik"
+              className="text-brand-700 hover:underline"
+            >
+              Datenschutzerklärung →
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/sartlar"
+              className="text-brand-700 hover:underline"
+            >
+              Nutzungsbedingungen →
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/reklam-aciklamasi"
+              className="text-brand-700 hover:underline"
+            >
+              Werbehinweis →
+            </Link>
+          </li>
+        </ul>
+      </Card>
+    </>
+  );
+}

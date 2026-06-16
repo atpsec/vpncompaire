@@ -72,24 +72,27 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          {
-            name: c.breadcrumb.home,
-            path: locale === DEFAULT_LOCALE ? "/" : `/${locale}`,
-          },
-          {
-            name: c.breadcrumb.hub,
-            path: getLocalizedSectionPath(locale, "comparison"),
-          },
-          {
-            name: c.breadcrumb.current,
-            path: getLocalizedPath({
-              locale,
-              section: "comparison",
-              contentId: CONTENT_ID,
-            }),
-          },
-        ])}
+        data={breadcrumbSchema(
+          [
+            {
+              name: c.breadcrumb.home,
+              path: locale === DEFAULT_LOCALE ? "/" : `/${locale}`,
+            },
+            {
+              name: c.breadcrumb.hub,
+              path: getLocalizedSectionPath(locale, "comparison"),
+            },
+            {
+              name: c.breadcrumb.current,
+              path: getLocalizedPath({
+                locale,
+                section: "comparison",
+                contentId: CONTENT_ID,
+              }),
+            },
+          ],
+          locale,
+        )}
       />
       <JsonLd data={faqSchema(c.faqs)} />
 

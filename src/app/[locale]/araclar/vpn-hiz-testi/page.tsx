@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ExternalLink } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -40,6 +40,7 @@ function SpeedTestView() {
   const t = useTranslations("tools.speed");
   const tNav = useTranslations("nav");
   const tCommon = useTranslations("tools.common");
+  const locale = useLocale();
 
   const webAppSchema = {
     "@context": "https://schema.org",
@@ -65,11 +66,14 @@ function SpeedTestView() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: tNav("tools"), path: "/araclar" },
-          { name: t("breadcrumb"), path: "/araclar/vpn-hiz-testi" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: tNav("tools"), path: "/araclar" },
+            { name: t("breadcrumb"), path: "/araclar/vpn-hiz-testi" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={webAppSchema} />
 

@@ -49,23 +49,27 @@ function GlossaryPageView() {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
     name: t("schemaName"),
-    inLanguage: locale === "en" ? "en" : "tr-TR",
+    inLanguage:
+      locale === "en" ? "en" : locale === "de" ? "de" : "tr-TR",
     hasDefinedTerm: glossary.map((term) => ({
       "@type": "DefinedTerm",
-      "@id": absoluteUrl(`/sozluk#${term.id}`),
+      "@id": absoluteUrl(`/sozluk#${term.id}`, locale),
       name: term.term,
       description: term.long,
-      inDefinedTermSet: absoluteUrl("/sozluk"),
+      inDefinedTermSet: absoluteUrl("/sozluk", locale),
     })),
   };
 
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: t("breadcrumb"), path: "/sozluk" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: t("breadcrumb"), path: "/sozluk" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={definedTermSet} />
 

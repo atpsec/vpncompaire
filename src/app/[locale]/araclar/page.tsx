@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   ArrowRight,
   Gauge,
@@ -67,14 +67,18 @@ export default async function Page({ params }: Props) {
 function ToolsIndexView() {
   const t = useTranslations("tools");
   const tNav = useTranslations("nav");
+  const locale = useLocale();
 
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: t("breadcrumb"), path: "/araclar" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: t("breadcrumb"), path: "/araclar" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="lg" className="py-12 sm:py-16">

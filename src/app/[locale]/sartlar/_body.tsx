@@ -1,6 +1,5 @@
 import { FileText, AlertTriangle } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/lib/site";
@@ -313,6 +312,169 @@ export function EnBody() {
             <p className="mt-1 text-sm text-ink leading-relaxed">
               For professional guidance on a specific legal issue, we recommend
               consulting a lawyer.
+            </p>
+          </div>
+        </div>
+      </Card>
+    </>
+  );
+}
+
+export function DeBody() {
+  return (
+    <>
+      <p className="text-sm text-ink-muted">
+        <Link href="/" className="hover:text-ink">
+          Startseite
+        </Link>{" "}
+        › <span className="text-ink-strong">Nutzungsbedingungen</span>
+      </p>
+
+      <header className="mt-6">
+        <Badge variant="brand">
+          <FileText className="size-3" /> Rechtliches
+        </Badge>
+        <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
+          Nutzungsbedingungen
+        </h1>
+        <p className="mt-3 text-sm text-ink-muted">
+          Zuletzt aktualisiert: Mai 2026
+        </p>
+      </header>
+
+      <article className="mt-12 prose prose-stone max-w-none">
+        <h2>1. Beschreibung des Dienstes</h2>
+        <p>
+          {siteConfig.name} (&quot;die Website&quot;) ist eine
+          Informationswebsite, die VPN-Dienste mit unabhängiger Methodik
+          prüft und vergleicht. Die Website bietet redaktionelle Inhalte,
+          Vergleiche und Ratgeber zu VPN-Anbietern.
+        </p>
+
+        <h2>2. Annahme</h2>
+        <p>
+          Durch die Nutzung dieser Website akzeptieren Sie diese
+          Nutzungsbedingungen, die Datenschutzerklärung und den
+          Werbehinweis. Wenn Sie diese nicht akzeptieren, dürfen Sie die
+          Website nicht nutzen.
+        </p>
+
+        <h2>3. Zweck der Inhalte und Haftungsgrenzen</h2>
+        <p>
+          Alle Inhalte auf dieser Website dienen der allgemeinen Information.
+          Sie:
+        </p>
+        <ul>
+          <li>ersetzen keine Rechtsberatung</li>
+          <li>ersetzen keine Finanzberatung</li>
+          <li>sind keine personalisierte Sicherheitsberatung</li>
+          <li>garantieren keine Eignung für individuelle Situationen</li>
+        </ul>
+        <p>
+          Unsere Empfehlungen basieren auf unabhängigen Tests und allgemeinen
+          Erkenntnissen; bevor Sie eine konkrete Entscheidung treffen, sollten
+          Sie Ihre eigene Situation bewerten.
+        </p>
+
+        <h2>4. Links zu Drittanbietern</h2>
+        <p>
+          Die Website enthält einfache, nicht-kommerzielle Links zu den
+          Websites der VPN-Anbieter; wir erhalten dafür keine Provision. Der
+          Umsatz der Website stammt aus Google-AdSense-Anzeigen — siehe den{" "}
+          <Link href="/reklam-aciklamasi">Werbehinweis</Link>. Sobald Sie
+          einem Link folgen, gelten die Bedingungen der externen Website; wir
+          sind nicht verantwortlich für deren Inhalte oder Dienste.
+        </p>
+
+        <h2>5. Haftungsausschluss für Garantien</h2>
+        <p>
+          Die Website wird &quot;wie besehen&quot; bereitgestellt. Wir bemühen
+          uns, Inhalte aktuell, korrekt und vollständig zu halten, jedoch:
+        </p>
+        <ul>
+          <li>
+            Preise, Funktionen oder Richtlinien von Anbietern können sich ohne
+            Vorankündigung ändern
+          </li>
+          <li>Audit-Berichte und Prüfungen können aktualisiert werden</li>
+          <li>
+            Streaming-Kompatibilität kann sich durch Anbieter-Sperren plötzlich
+            ändern
+          </li>
+        </ul>
+        <p>
+          Für den aktuellen Stand empfehlen wir, die Website des jeweiligen
+          VPN-Anbieters zu prüfen.
+        </p>
+
+        <h2>6. Haftungsbeschränkung</h2>
+        <p>
+          Im gesetzlich zulässigen Umfang haftet {siteConfig.name} nicht für
+          direkte, indirekte, zufällige oder besondere Schäden im
+          Zusammenhang mit der Website. Diese Beschränkung gilt auch für
+          Schäden, die aus der Nutzung der Informationen in den Inhalten
+          entstehen.
+        </p>
+
+        <h2>7. Geistiges Eigentum</h2>
+        <p>
+          Alle originalen Texte, Bilder und das Design der Website stammen von{" "}
+          {siteConfig.name} und sind urheberrechtlich geschützt. Zitate sind
+          im Rahmen des fairen Gebrauchs erlaubt; Kopieren ohne Quellenangabe
+          und systematische Weiterveröffentlichung sind untersagt.
+        </p>
+        <p>
+          Markennamen (NordVPN, Surfshark, ExpressVPN, Proton VPN, PIA,
+          CyberGhost, Mullvad usw.) sind eingetragene Marken der jeweiligen
+          Inhaber und werden hier nur zur Identifikation verwendet.
+        </p>
+
+        <h2>8. Verbotene Nutzungen</h2>
+        <p>Über die Website oder deren Inhalte dürfen Sie nicht:</p>
+        <ul>
+          <li>automatisiertes Data Scraping durchführen</li>
+          <li>
+            die Website außerhalb der normalen Nutzung in einer Weise abfragen,
+            die den Dienst stört (DDoS usw.)
+          </li>
+          <li>
+            Inhalte in einer Weise weiterveröffentlichen, die Urheber- oder
+            Markenrechte verletzt
+          </li>
+        </ul>
+
+        <h2>9. Änderungen der Bedingungen</h2>
+        <p>
+          Wir können diese Bedingungen von Zeit zu Zeit aktualisieren.
+          Wesentliche Änderungen werden durch das Datum &quot;Zuletzt
+          aktualisiert&quot; oben auf der Seite kenntlich gemacht. Die
+          fortgesetzte Nutzung nach einer Aktualisierung gilt als Annahme der
+          geänderten Bedingungen.
+        </p>
+
+        <h2>10. Anwendbares Recht</h2>
+        <p>
+          Diese Bedingungen unterliegen dem Recht der Republik Türkei.
+          Für etwaige Streitigkeiten sind türkische Gerichte zuständig.
+        </p>
+
+        <h2>11. Kontakt</h2>
+        <p>
+          Bei Fragen zu diesen Nutzungsbedingungen erreichen Sie uns über die{" "}
+          <Link href="/iletisim">Kontaktseite</Link>.
+        </p>
+      </article>
+
+      <Card className="mt-12 p-6 border-accent-300 bg-accent-50/40">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="size-5 text-accent-600 mt-0.5 shrink-0" />
+          <div>
+            <p className="font-semibold text-ink-strong">
+              Diese Seite ist keine Rechtsberatung
+            </p>
+            <p className="mt-1 text-sm text-ink leading-relaxed">
+              Für professionelle Beratung in einer konkreten Rechtsfrage
+              empfehlen wir die Konsultation eines Anwalts.
             </p>
           </div>
         </div>

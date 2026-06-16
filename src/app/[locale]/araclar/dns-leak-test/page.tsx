@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -39,6 +39,7 @@ function DnsLeakView() {
   const t = useTranslations("tools.dns");
   const tNav = useTranslations("nav");
   const tCommon = useTranslations("tools.common");
+  const locale = useLocale();
 
   const webAppSchema = {
     "@context": "https://schema.org",
@@ -65,11 +66,14 @@ function DnsLeakView() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: tNav("tools"), path: "/araclar" },
-          { name: t("breadcrumb"), path: "/araclar/dns-leak-test" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: tNav("tools"), path: "/araclar" },
+            { name: t("breadcrumb"), path: "/araclar/dns-leak-test" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
       <JsonLd data={webAppSchema} />
 

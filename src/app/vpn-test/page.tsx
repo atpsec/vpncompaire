@@ -100,11 +100,14 @@ function VpnTestView() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav.home, path: "/" },
-          { name: tNav.tools, path: "/araclar" },
-          { name: t.breadcrumb, path: "/vpn-test" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav.home, path: "/" },
+            { name: tNav.tools, path: "/araclar" },
+            { name: t.breadcrumb, path: "/vpn-test" },
+          ],
+          "tr",
+        )}
       />
       <JsonLd data={webAppSchema} />
 

@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema(breadcrumbPaths)} />
+      <JsonLd data={breadcrumbSchema(breadcrumbPaths, locale)} />
       <JsonLd data={faqSchema(c.faqs)} />
 
       <Container size="md" className="py-12 sm:py-16">

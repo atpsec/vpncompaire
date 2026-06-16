@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Calculator } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
@@ -39,14 +39,18 @@ export default async function Page({ params }: Props) {
 function CalculatorPageView() {
   const t = useTranslations("calculator");
   const tNav = useTranslations("nav");
+  const locale = useLocale();
 
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: tNav("home"), path: "/" },
-          { name: t("breadcrumb"), path: "/hesaplayici" },
-        ])}
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: t("breadcrumb"), path: "/hesaplayici" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
       />
 
       <Container size="lg" className="py-12 sm:py-16">
