@@ -55,6 +55,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
+  // Hostinger/Turbopack deploymentlerinde MDX renderer'ın harici modül
+  // olarak yüklenmesi `open EEXIST` hatasına yol açabiliyor; doğrudan bundle'la.
+  transpilePackages: ["next-mdx-remote"],
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
@@ -107,3 +110,4 @@ const nextConfig: NextConfig = {
 };
 
 export default withNextIntl(withMDX(nextConfig));
+

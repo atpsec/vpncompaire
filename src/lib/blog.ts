@@ -2,8 +2,6 @@ import { cache } from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { compileMDX } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
 import type { Locale } from "@/lib/site";
 
 export type BlogPostFrontmatter = {
@@ -117,6 +115,10 @@ export const getBlogPost = cache(async function getBlogPost(
   const { data, content: rawContent } = matter(source);
 
   const { first, second } = splitMarkdownContent(rawContent);
+  const [{ compileMDX }, { default: remarkGfm }] = await Promise.all([
+    import("next-mdx-remote/rsc"),
+    import("remark-gfm"),
+  ]);
 
   const [firstResult, secondResult] = await Promise.all([
     compileMDX({
@@ -168,3 +170,4 @@ export async function getRelatedPosts(
     .filter((post) => post.slug !== currentSlug && post.category === category)
     .slice(0, limit);
 }
+
