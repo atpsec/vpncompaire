@@ -56,11 +56,6 @@ export function ComparisonBlock() {
 
         <div className="grid sm:grid-cols-2 gap-4">
           {COMPARISONS.map((c) => {
-            const title = c.title ?? blockT(`items.freeVsPaidTitle` as never);
-            const titleResolved = c.titleKey
-              ? blockT(`items.freeVsPaidTitle` as never) as unknown as string
-              : (c.title as string);
-            void title;
             return (
               <Link
                 key={c.slug}
