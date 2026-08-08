@@ -2,6 +2,8 @@ import Script from "next/script";
 import { siteConfig } from "@/lib/site";
 import { ConsentBanner } from "@/components/analytics/consent-banner";
 
+type SupportedLocale = "tr" | "en" | "de";
+
 /**
  * Google Analytics 4 — trafik takibi, Google Consent Mode v2 ile.
  * Yalnızca NEXT_PUBLIC_GA_ID env var set edildiğinde yüklenir (G-XXXXXXXXXX).
@@ -11,7 +13,7 @@ import { ConsentBanner } from "@/components/analytics/consent-banner";
  * (ConsentBanner) analytics_storage "granted" olur ve normal GA devreye girer.
  * Bu yüzden onay öncesi hiçbir analitik çerez set edilmez (KVKK/GDPR uyumu).
  */
-export function GoogleAnalytics() {
+export function GoogleAnalytics({ locale }: { locale: SupportedLocale }) {
   const id = siteConfig.gaId;
   if (!id) return null;
 
@@ -39,7 +41,7 @@ gtag('consent', 'default', {
         {`gtag('js', new Date());
 gtag('config', '${id}');`}
       </Script>
-      <ConsentBanner />
+      <ConsentBanner locale={locale} />
     </>
   );
 }
