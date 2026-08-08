@@ -1,0 +1,64 @@
+---
+slug: "vpn-her-seyi-gizler-mi-tehdit-modeli-2026"
+title: "VPN Her Şeyi Gizler mi? 2026 Tehdit Modeli Rehberi"
+description: "VPN'in neleri gizlediğini ve neleri gizleyemediğini 2026 tehdit modeliyle açıklıyoruz: ISP, web siteleri, çerezler, cihaz parmak izi ve hesap oturumları."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "temel-bilgiler"
+tags: ["vpn", "tehdit-modeli", "gizlilik", "çerez", "fingerprint", "2026"]
+readingTime: 7
+coverImage: "vpn-basics"
+unsplashKeyword: "privacy threat model"
+---
+
+VPN kullanınca “internette görünmez” olduğunuzu düşünmek kolaydır. Gerçekte VPN yalnızca belirli katmanlarda koruma sağlar. 2026’da doğru yaklaşım, VPN’i tek başına anonimlik aracı değil, savunma katmanlarından biri olarak değerlendirmektir.
+
+## VPN hangi bilgileri değiştirir?
+
+VPN bağlantısı kurulduğunda internet trafiğiniz VPN sunucusuna kadar şifreli bir tünelden geçer. Hedef siteler çoğunlukla ev veya mobil bağlantınızın IP adresi yerine VPN sunucusunun IP adresini görür. Aynı ağdaki kişiler de trafiğin içeriğini doğrudan okumakta zorlanır.
+
+Bu, özellikle halka açık Wi‑Fi, otel ağı, ortak çalışma alanı ve güvenilmeyen yerel ağlarda anlamlıdır.
+
+## ISP ne görebilir?
+
+İnternet servis sağlayıcınız VPN kullandığınızı ve VPN sunucusuyla veri alışverişi yaptığınızı görebilir. Ancak düzgün yapılandırılmış bir VPN’de hedef alan adları ve içerik doğrudan ISP tarafından görülemez. DNS sızıntısı, IPv6 sızıntısı veya uygulamanın VPN dışında trafik göndermesi bu modeli bozabilir.
+
+## Web sitesi sizi yine tanıyabilir mi?
+
+Evet. Bir siteye hesabınızla giriş yaptıysanız IP adresiniz değişse bile kimliğiniz hesap üzerinden bellidir. Ayrıca şu veriler sizi ilişkilendirebilir:
+
+- çerezler ve oturum kimlikleri,
+- tarayıcı parmak izi,
+- ekran çözünürlüğü ve cihaz özellikleri,
+- dil ve saat dilimi,
+- giriş yapılan hesaplar,
+- ödeme bilgileri.
+
+Bu nedenle “VPN açtım, artık izlenemem” sonucu doğru değildir.
+
+## VPN kötü amaçlı yazılımları durdurur mu?
+
+Tek başına hayır. VPN ağ trafiğini tüneller; cihazdaki zararlı yazılımı temizlemez, sahte bir giriş sayfasında parolanızı yazmanızı engellemez ve güvenilmeyen bir dosyayı güvenli hale getirmez. DNS filtreleme veya zararlı alan adı engelleme sunan VPN özellikleri yardımcı olabilir ama antivirüs, güncelleme ve güvenli kimlik doğrulamanın yerini tutmaz.
+
+## 2026 tehdit modeli nasıl kurulur?
+
+Kendinize dört soru sorun:
+
+1. Kimden korunuyorum: yerel ağ, ISP, reklam ağı, saldırgan, işveren?
+2. Hangi veri önemli: IP, hesap kimliği, dosyalar, mesajlar, konum?
+3. Hangi cihaz ve uygulamalar kullanılıyor?
+4. VPN dışında hangi kontroller gerekli: passkey, MFA, güncelleme, disk şifreleme, DNS güvenliği?
+
+## Pratik kombinasyon
+
+Günlük kullanıcı için dengeli yaklaşım şudur: güvenilir VPN + HTTPS + güncel işletim sistemi + passkey veya güçlü MFA + tarayıcı gizlilik ayarları + düzenli hesap oturumu kontrolü.
+
+## Sonuç
+
+VPN önemli bir ağ gizliliği aracıdır ama kimlik gizleme, hesap güvenliği ve cihaz güvenliği ayrı problemlerdir. Koruma beklentisini bu sınırlara göre kurarsanız VPN’den daha doğru fayda sağlarsınız.
+
+### Kaynaklar ve 2026 kontrol notu
+
+- FIDO Alliance passkeys: https://fidoalliance.org/passkeys/
+- Apple Private Relay açıklaması: https://support.apple.com/guide/icloud/use-icloud-private-relay-mm8010d8daf3/icloud
