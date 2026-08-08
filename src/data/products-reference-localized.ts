@@ -1,8 +1,12 @@
 import type { Locale } from "@/i18n/pick";
 import type { Product } from "./products";
-import { referenceProducts } from "./products-reference";
+import { referenceProducts as baseReferenceProducts } from "./products-reference";
+import { currentSupplementProducts } from "./products-current";
 
-export { referenceProducts } from "./products-reference";
+export const referenceProducts: Product[] = [
+  ...baseReferenceProducts,
+  ...currentSupplementProducts,
+];
 
 const copy = {
   en: {
