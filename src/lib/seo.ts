@@ -21,6 +21,14 @@ export function organizationSchema(): JsonLdObject {
       "@type": "ImageObject",
       url: absoluteUrl("/favicon.svg"),
     },
+    knowsAbout: [
+      "Virtual private networks",
+      "VPN protocols",
+      "Digital privacy",
+      "Network security",
+      "Independent security audits",
+      "VPN pricing and subscription terms",
+    ],
     sameAs: [siteConfig.social.twitter, siteConfig.social.github].filter(Boolean),
   };
 }
@@ -31,10 +39,12 @@ export function websiteSchema(locale: Locale = "tr"): JsonLdObject {
     "@type": "WebSite",
     name: siteConfig.name,
     url: siteConfig.url,
+    description: siteConfig.description[locale],
     inLanguage: inLanguageOf(locale),
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
+      url: siteConfig.url,
     },
   };
 }
@@ -55,12 +65,19 @@ export function faqSchema(items: FAQ[]): JsonLdObject {
 }
 
 export function itemListSchema(
-  items: { slug: string; brand: string; score: number }[],
+  items: { slug: string; brand: string }[],
   locale: Locale = "tr",
 ): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    name:
+      locale === "tr"
+        ? "VPN sağlayıcı profilleri"
+        : locale === "de"
+          ? "VPN-Anbieterprofile"
+          : "VPN provider profiles",
+    itemListOrder: "https://schema.org/ItemListUnordered",
     itemListElement: items.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -71,7 +88,6 @@ export function itemListSchema(
 }
 
 function breadcrumbItemUrl(path: string, locale?: Locale): string {
-  // getLocalizedPath() zaten /en/... veya /de/... prefix'i içerir; tekrar ekleme.
   if (path.startsWith("/en/") || path.startsWith("/de/")) {
     return absoluteUrl(path);
   }
@@ -120,8 +136,9 @@ export function articleSchema(post: {
       "@id": articleUrl,
     },
     author: {
-      "@type": "Person",
-      name: post.author,
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
     },
     publisher: {
       "@type": "Organization",
@@ -163,6 +180,7 @@ export function blogCollectionSchema(params: {
     },
     mainEntity: {
       "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListUnordered",
       itemListElement: params.posts.map((post, i) => ({
         "@type": "ListItem",
         position: i + 1,
