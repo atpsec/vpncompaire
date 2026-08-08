@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { setRequestLocale, getTranslations } from "next-intl/server";
-import { useTranslations, useLocale } from "next-intl";
-import { Check, X, ArrowRight, ExternalLink } from "lucide-react";
+import { setRequestLocale } from "next-intl/server";
+import { CheckCircle2, ExternalLink, Info, FileSearch, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
@@ -10,202 +9,201 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
-import { LastTestedBadge } from "@/components/product/last-tested-badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { localizedAlternates } from "@/lib/site";
+import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
-import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-const reviewBodies = {
-  nordvpn: () => import("@/content/reviews/nordvpn.mdx"),
-  surfshark: () => import("@/content/reviews/surfshark.mdx"),
-  expressvpn: () => import("@/content/reviews/expressvpn.mdx"),
-  "proton-vpn": () => import("@/content/reviews/proton-vpn.mdx"),
-  pia: () => import("@/content/reviews/pia.mdx"),
-  cyberghost: () => import("@/content/reviews/cyberghost.mdx"),
-  mullvad: () => import("@/content/reviews/mullvad.mdx"),
-  ipvanish: () => import("@/content/reviews/ipvanish.mdx"),
-  windscribe: () => import("@/content/reviews/windscribe.mdx"),
-  tunnelbear: () => import("@/content/reviews/tunnelbear.mdx"),
-  "atlas-vpn": () => import("@/content/reviews/atlas-vpn.mdx"),
-  purevpn: () => import("@/content/reviews/purevpn.mdx"),
-  vyprvpn: () => import("@/content/reviews/vyprvpn.mdx"),
-  ivpn: () => import("@/content/reviews/ivpn.mdx"),
-  hideme: () => import("@/content/reviews/hideme.mdx"),
-  "privado-vpn": () => import("@/content/reviews/privado-vpn.mdx"),
-  "hotspot-shield": () => import("@/content/reviews/hotspot-shield.mdx"),
-  strongvpn: () => import("@/content/reviews/strongvpn.mdx"),
-  zoogvpn: () => import("@/content/reviews/zoogvpn.mdx"),
-  "norton-vpn": () => import("@/content/reviews/norton-vpn.mdx"),
+const COPY = {
+  tr: {
+    suffix: "VPN Bilgi Profili 2026",
+    description: "Kaynak temelli VPN sağlayıcı profili: gizlilik, bağımsız denetim, cihaz desteği, yargı yetkisi, fiyatlandırma ve iade koşulları.",
+    home: "Ana sayfa",
+    hub: "VPN Rehberi",
+    badge: "Kaynak temelli bilgi profili",
+    intro: "Bu sayfa laboratuvar incelemesi veya puanlama değildir. Kamuya açık sağlayıcı belgeleri, denetim bilgileri ve fiyatlandırma verilerini karşılaştırılabilir biçimde özetler.",
+    sourceNote: "Bilgiler zamanla değişebilir. Fiyat, sunucu sayısı, cihaz limiti, denetim kapsamı ve iade şartlarını satın alma öncesinde resmi kaynaktan doğrulayın.",
+    facts: "Doğrulanabilir bilgi özeti",
+    audit: "Bağımsız denetim / güvence",
+    servers: "Sunucu / ülke bilgisi",
+    devices: "Cihaz desteği",
+    jurisdiction: "Yargı yetkisi",
+    openSource: "Açık kaynak istemci",
+    refund: "İade süresi",
+    yes: "Evet",
+    no: "Belirtilmemiş / hayır",
+    days: "gün",
+    pricing: "Fiyatlandırma bilgisi",
+    pricingIntro: "Aşağıdaki fiyatlar son kaydedilen sağlayıcı verileridir; kampanya ve yenileme koşulları değişebilir.",
+    official: "Resmi siteyi aç",
+    method: "Bu profil nasıl hazırlanıyor?",
+    methodBody: "VPN Advisor sağlayıcılara laboratuvar puanı vermez. Bu profil; sağlayıcının resmi sayfaları, gizlilik politikaları, yayınlanan denetim raporları ve kamuya açık teknik dokümantasyon gibi kaynaklardan derlenen bilgileri düzenler.",
+    back: "Tüm VPN profillerine dön",
+  },
+  en: {
+    suffix: "VPN Information Profile 2026",
+    description: "Source-based VPN provider profile covering privacy, independent audits, device support, jurisdiction, pricing and refund terms.",
+    home: "Home",
+    hub: "VPN Guide",
+    badge: "Source-based information profile",
+    intro: "This page is not a lab review or a rating. It organises public provider documentation, audit information and pricing data into comparable fields.",
+    sourceNote: "Information changes over time. Verify pricing, server counts, device limits, audit scope and refund terms at the official source before purchasing.",
+    facts: "Verifiable information summary",
+    audit: "Independent audit / assurance",
+    servers: "Server / country information",
+    devices: "Device support",
+    jurisdiction: "Jurisdiction",
+    openSource: "Open-source client",
+    refund: "Refund period",
+    yes: "Yes",
+    no: "Not stated / no",
+    days: "days",
+    pricing: "Pricing information",
+    pricingIntro: "Prices below reflect the last recorded provider data; promotions and renewal terms can change.",
+    official: "Open official site",
+    method: "How is this profile prepared?",
+    methodBody: "VPN Advisor does not assign laboratory scores to providers. This profile organises information from official provider pages, privacy policies, published audit reports and public technical documentation.",
+    back: "Back to all VPN profiles",
+  },
+  de: {
+    suffix: "VPN-Informationsprofil 2026",
+    description: "Quellenbasiertes VPN-Anbieterprofil zu Datenschutz, unabhängigen Audits, Geräteunterstützung, Zuständigkeit, Preisen und Erstattung.",
+    home: "Startseite",
+    hub: "VPN-Ratgeber",
+    badge: "Quellenbasiertes Informationsprofil",
+    intro: "Diese Seite ist kein Labortest und keine Bewertung. Sie ordnet öffentliche Anbieterdokumente, Auditinformationen und Preisdaten in vergleichbare Felder ein.",
+    sourceNote: "Angaben können sich ändern. Prüfen Sie Preise, Serverzahlen, Gerätelimits, Auditumfang und Erstattungsbedingungen vor dem Kauf bei der offiziellen Quelle.",
+    facts: "Überprüfbare Informationsübersicht",
+    audit: "Unabhängiges Audit / Prüfung",
+    servers: "Server- / Länderangaben",
+    devices: "Geräteunterstützung",
+    jurisdiction: "Zuständigkeit",
+    openSource: "Open-Source-Client",
+    refund: "Erstattungszeitraum",
+    yes: "Ja",
+    no: "Nicht angegeben / nein",
+    days: "Tage",
+    pricing: "Preisinformationen",
+    pricingIntro: "Die Preise entsprechen den zuletzt erfassten Anbieterangaben; Aktionen und Verlängerungsbedingungen können sich ändern.",
+    official: "Offizielle Website öffnen",
+    method: "Wie wird dieses Profil erstellt?",
+    methodBody: "VPN Advisor vergibt keine Laborbewertungen. Dieses Profil strukturiert Informationen aus offiziellen Anbieterseiten, Datenschutzrichtlinien, veröffentlichten Auditberichten und öffentlicher technischer Dokumentation.",
+    back: "Zurück zu allen VPN-Profilen",
+  },
 } as const;
+
+function safeLocale(value: string): Locale {
+  return value === "en" || value === "de" ? value : "tr";
+}
+
+function copyFor(locale: Locale) {
+  return COPY[locale];
+}
 
 export function generateStaticParams() {
   return rawProducts.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
-  const { locale, slug } = await params;
-  const product = getProduct(slug, locale as "tr" | "en");
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params;
+  const locale = safeLocale(rawLocale);
+  const product = getProduct(slug, (locale === "de" ? "en" : locale) as "tr" | "en");
   if (!product) return {};
-
-  const t = await getTranslations({ locale, namespace: "review" });
-
+  const copy = copyFor(locale);
+  const title = `${product.brand} — ${copy.suffix}`;
   return {
-    title: t("metaTitle", {
-      brand: product.brand,
-      positioning: product.positioning,
-    }),
-    description: product.summary,
+    title,
+    description: `${product.brand}: ${copy.description}`,
     alternates: localizedAlternates(`/inceleme/${product.slug}`, locale),
+    openGraph: {
+      title,
+      description: `${product.brand}: ${copy.description}`,
+      url: absoluteUrl(`/inceleme/${product.slug}`, locale),
+      type: "website",
+    },
   };
 }
 
 export default async function Page({ params }: Props) {
-  const { locale, slug } = await params;
+  const { locale: rawLocale, slug } = await params;
+  const locale = safeLocale(rawLocale);
   setRequestLocale(locale);
-  const product = getProduct(slug, locale as "tr" | "en");
+  const product = getProduct(slug, (locale === "de" ? "en" : locale) as "tr" | "en");
   if (!product) notFound();
+  const copy = copyFor(locale);
 
-  const importer = reviewBodies[slug as keyof typeof reviewBodies];
-  const ReviewBody = importer ? (await importer()).default : null;
-
-  const reviewSchema = {
+  const appSchema = {
     "@context": "https://schema.org",
-    "@type": "Review",
-    itemReviewed: {
-      "@type": "SoftwareApplication",
-      name: product.brand,
-      applicationCategory: "SecurityApplication",
-      operatingSystem: "Windows, macOS, Linux, iOS, Android",
-    },
-    author: { "@type": "Organization", name: "VPN Advisor" },
-    reviewRating: {
-      "@type": "Rating",
-      ratingValue: product.score,
-      bestRating: 10,
-    },
-    name: `${product.brand} Review (2026)`,
-    reviewBody: product.summary,
-    datePublished: "2026-05-01",
+    "@type": "SoftwareApplication",
+    name: product.brand,
+    applicationCategory: "SecurityApplication",
+    operatingSystem: "Windows, macOS, Linux, iOS, Android",
+    url: product.pricingUrl,
   };
 
   return (
-    <ReviewView product={product} reviewSchema={reviewSchema}>
-      {ReviewBody && <ReviewBody />}
-    </ReviewView>
-  );
-}
-
-function ReviewView({
-  product,
-  reviewSchema,
-  children,
-}: {
-  product: Product;
-  reviewSchema: Record<string, unknown>;
-  children: React.ReactNode;
-}) {
-  const t = useTranslations("review");
-  const locale = useLocale();
-
-  return (
     <>
-      <JsonLd data={reviewSchema} />
+      <JsonLd data={appSchema} />
       <JsonLd
         data={breadcrumbSchema(
           [
-            { name: t("breadcrumb.home"), path: "/" },
-            { name: t("breadcrumb.reviews"), path: "/en-iyi-vpn" },
+            { name: copy.home, path: "/" },
+            { name: copy.hub, path: "/en-iyi-vpn" },
             { name: product.brand, path: `/inceleme/${product.slug}` },
           ],
-          locale as "tr" | "en" | "de",
+          locale,
         )}
       />
 
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted">
-          <Link href="/" className="hover:text-ink">
-            {t("breadcrumb.home")}
-          </Link>{" "}
-          ›{" "}
-          <Link href="/en-iyi-vpn" className="hover:text-ink">
-            {t("breadcrumb.reviews")}
-          </Link>{" "}
-          › <span className="text-ink-strong">{product.brand}</span>
+          <Link href="/" className="hover:text-ink">{copy.home}</Link>{" "}›{" "}
+          <Link href="/en-iyi-vpn" className="hover:text-ink">{copy.hub}</Link>{" "}›{" "}
+          <span className="text-ink-strong">{product.brand}</span>
         </p>
 
         <header className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start">
           <VPNLogo slug={product.slug} size={72} className="sm:mt-2" />
           <div className="flex-1">
-            <Badge variant="brand">{product.positioning}</Badge>
+            <Badge variant="brand">{copy.badge}</Badge>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-              {t("h1", { brand: product.brand })}
+              {product.brand} — {copy.suffix}
             </h1>
-            <p className="mt-4 text-lg text-ink-muted">{product.summary}</p>
+            <p className="mt-4 text-lg text-ink-muted">{copy.intro}</p>
           </div>
         </header>
 
-        <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />
-
-        <LastTestedBadge
-          lastTestedAt={product.lastTestedAt}
-          testEnvironment={product.testEnvironment}
-          editorNotes={product.editorNotes}
-        />
+        <div className="mt-6 rounded-lg border border-border bg-surface-subtle/40 p-4">
+          <div className="flex items-start gap-3 text-xs leading-relaxed text-ink-muted">
+            <Info className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden="true" />
+            <p>{copy.sourceNote}</p>
+          </div>
+        </div>
 
         <Card className="mt-8 p-6">
-          <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
-            <Stat
-              label={t("stats.score")}
-              value={`${product.score}/10`}
-              highlight
-            />
-            <Stat
-              label={t("stats.priceFrom")}
-              value={`$${product.priceFromUsd.toFixed(2)}/${t("stats.perMonth")}`}
-            />
-            <Stat
-              label={t("stats.jurisdiction")}
-              value={product.highlights.jurisdiction ?? "—"}
-            />
-            <Stat
-              label={t("stats.moneyBack")}
-              value={
-                product.highlights.moneyBackDays
-                  ? `${product.highlights.moneyBackDays} ${t("stats.days")}`
-                  : "—"
-              }
-            />
+          <h2 className="text-lg font-semibold text-ink-strong">{copy.facts}</h2>
+          <dl className="mt-4 divide-y divide-border rounded-xl border border-border bg-surface-base">
+            <Row label={copy.audit} value={product.highlights.audits ?? "—"} />
+            <Row label={copy.servers} value={product.highlights.servers ?? "—"} />
+            <Row label={copy.devices} value={product.highlights.devices ?? "—"} />
+            <Row label={copy.jurisdiction} value={product.highlights.jurisdiction ?? "—"} />
+            <Row label={copy.openSource} value={product.highlights.openSource ? copy.yes : copy.no} />
+            <Row label={copy.refund} value={product.highlights.moneyBackDays ? `${product.highlights.moneyBackDays} ${copy.days}` : "—"} />
           </dl>
 
-          <div className="mt-6 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold text-ink-strong">
-              {t("pricingTitle")}
-            </h2>
-            <p className="mt-1 text-sm text-ink-muted">
-              {t("pricingIntro", { brand: product.brand })}
-            </p>
+          <div className="mt-8 border-t border-border pt-6">
+            <h2 className="text-lg font-semibold text-ink-strong">{copy.pricing}</h2>
+            <p className="mt-1 text-sm text-ink-muted">{copy.pricingIntro}</p>
             <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
-              <PricingPlans
-                plans={product.plans}
-                verifiedAt={product.pricingVerifiedAt}
-              />
-              <div className="flex flex-col gap-2 sm:w-48">
+              <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} />
+              <div className="flex flex-col gap-2 sm:w-52">
                 <Button asChild variant="primary">
-                  <a
-                    href={product.pricingUrl}
-                    rel="noopener nofollow"
-                    target="_blank"
-                  >
-                    {t("ctaOfficial")}
-                    <ExternalLink className="size-4" />
+                  <a href={product.pricingUrl} rel="noopener nofollow" target="_blank">
+                    {copy.official}<ExternalLink className="size-4" />
                   </a>
                 </Button>
               </div>
@@ -215,123 +213,30 @@ function ReviewView({
 
         <section className="mt-12 grid sm:grid-cols-2 gap-6">
           <Card className="p-6">
-            <h2 className="text-lg font-semibold text-success-700 flex items-center gap-2">
-              <Check className="size-5" /> {t("pros")}
+            <h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2">
+              <FileSearch className="size-5 text-brand-600" /> {copy.method}
             </h2>
-            <ul className="mt-3 space-y-2 text-sm text-ink">
-              {product.pros.map((p, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <Check className="size-4 text-success-600 mt-0.5 shrink-0" />
-                  <span>{p}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="mt-3 text-sm text-ink leading-relaxed">{copy.methodBody}</p>
           </Card>
-
           <Card className="p-6">
             <h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2">
-              <X className="size-5 text-danger-500" /> {t("cons")}
+              <CheckCircle2 className="size-5 text-success-600" /> {copy.sourceNote.split(".")[0]}
             </h2>
-            <ul className="mt-3 space-y-2 text-sm text-ink">
-              {product.cons.map((c, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <X className="size-4 text-danger-500 mt-0.5 shrink-0" />
-                  <span>{c}</span>
-                </li>
-              ))}
+            <ul className="mt-3 space-y-2 text-sm text-ink-muted">
+              <li>• {product.pricingUrl}</li>
+              <li>• {product.highlights.audits ?? copy.audit}</li>
+              <li>• {product.pricingVerifiedAt}</li>
             </ul>
           </Card>
-        </section>
-
-        {children && (
-          <article className="prose prose-stone prose-lg max-w-none mt-16">
-            {children}
-          </article>
-        )}
-
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold tracking-tight text-ink-strong">
-            {t("detailsTitle")}
-          </h2>
-          <dl className="mt-4 divide-y divide-border rounded-xl border border-border bg-surface-base">
-            {product.highlights.audits && (
-              <Row
-                label={t("details.audits")}
-                value={product.highlights.audits}
-              />
-            )}
-            {product.highlights.servers && (
-              <Row
-                label={t("details.servers")}
-                value={product.highlights.servers}
-              />
-            )}
-            {product.highlights.devices && (
-              <Row
-                label={t("details.devices")}
-                value={product.highlights.devices}
-              />
-            )}
-            {product.highlights.jurisdiction && (
-              <Row
-                label={t("details.jurisdiction")}
-                value={product.highlights.jurisdiction}
-              />
-            )}
-            {product.highlights.openSource !== undefined && (
-              <Row
-                label={t("details.openSource")}
-                value={
-                  product.highlights.openSource
-                    ? t("details.yes")
-                    : t("details.no")
-                }
-              />
-            )}
-            {product.highlights.moneyBackDays && (
-              <Row
-                label={t("details.moneyBackGuarantee")}
-                value={`${product.highlights.moneyBackDays} ${t("details.days")}`}
-              />
-            )}
-          </dl>
         </section>
 
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
-          <p className="text-sm text-ink-muted">{t("footerCta.kicker")}</p>
-          <Link
-            href="/en-iyi-vpn"
-            className="mt-2 inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline"
-          >
-            {t("footerCta.link")} <ArrowRight className="size-4" />
+          <Link href="/en-iyi-vpn" className="inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline">
+            {copy.back} <ArrowRight className="size-4" />
           </Link>
         </section>
       </Container>
     </>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  highlight = false,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div>
-      <dt className="text-xs text-ink-subtle">{label}</dt>
-      <dd
-        className={
-          "mt-0.5 font-semibold " +
-          (highlight ? "text-2xl text-brand-700" : "text-ink-strong")
-        }
-      >
-        {value}
-      </dd>
-    </div>
   );
 }
 
