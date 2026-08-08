@@ -1,0 +1,57 @@
+---
+slug: "dns-over-https-private-dns-vpn-farki-2026"
+title: "DNS over HTTPS, Private DNS ve VPN Farkı: 2026 Rehberi"
+description: "DoH, DoT, Android Private DNS ve VPN hangi katmanı korur? 2026 itibarıyla DNS gizliliği, IP adresi ve sızıntı risklerini sade şekilde karşılaştırıyoruz."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "temel-bilgiler"
+tags: ["dns", "doh", "dot", "private-dns", "vpn", "2026"]
+readingTime: 7
+coverImage: "vpn-basics"
+unsplashKeyword: "dns privacy network"
+---
+
+DNS over HTTPS (DoH), DNS over TLS (DoT), Android Private DNS ve VPN aynı probleme farklı katmanlardan yaklaşır. 2026’da tarayıcılar ve mobil işletim sistemleri şifreli DNS’i yaygınlaştırmış olsa da bu özellikler VPN’in yaptığı işi tamamen üstlenmez.
+
+## DNS ne yapar?
+
+Bir siteye bağlanırken cihazınız alan adını IP adresine çevirmek için DNS sorgusu yapar. Geleneksel DNS sorguları ağ üzerinde açık biçimde görülebilir. DoH ve DoT bu sorguları şifreleyerek aradaki ağların alan adı sorgularını kolayca okumasını zorlaştırır.
+
+Android’in Private DNS özelliği de bu amaçla DNS trafiğini güvenli bir sağlayıcıya yönlendirebilir. Google’ın Android yardım sayfası, Private DNS’in yalnızca DNS sorgu ve cevaplarını koruduğunu özellikle vurgular.
+
+## VPN bundan farklı olarak ne yapar?
+
+VPN yalnızca DNS’i değil, uygulamanın IP trafiğini de tüneller. İyi yapılandırılmış bir VPN genellikle kendi DNS çözümleyicisini kullanır ve DNS sorgularının VPN dışına çıkmasını engeller.
+
+Bu nedenle yalnızca Private DNS açmak, hedef sunucunun gerçek IP adresinizi görmesini engellemez. VPN ise çıkış IP’sini değiştirir.
+
+## DoH kullanırken VPN gerekli mi?
+
+İhtiyaca bağlıdır. Ev ağınızda yalnızca DNS sorgularının ISP tarafından kolay okunmasını azaltmak istiyorsanız DoH veya DoT yeterli olabilir. Halka açık Wi‑Fi, IP adresi gizleme, tüm uygulamaları tünelleme ve farklı ağlar arasında tutarlı politika istiyorsanız VPN daha geniş kapsam sağlar.
+
+## Çift DNS yapılandırması sorun yaratır mı?
+
+Bazen. Tarayıcıdaki Secure DNS, işletim sistemindeki Private DNS ve VPN’in DNS çözümleyicisi aynı anda farklı yollar kullanabilir. Bu durum beklenmedik DNS sızıntılarına veya kurumsal alan adlarının çözülememesine yol açabilir.
+
+Test için şunlara bakın:
+
+- VPN açıkken hangi DNS sunucusu görünüyor?
+- IPv4 ve IPv6 aynı tünelden mi gidiyor?
+- Tarayıcı kendi DoH çözümleyicisini mi zorluyor?
+- Kurumsal split DNS kullanılıyorsa iç alan adları çalışıyor mu?
+
+## 2026 için önerilen yaklaşım
+
+Bireysel kullanıcı için en basit model, güvenilir VPN uygulamasının DNS yönetimini devralmasına izin vermektir. VPN kullanmadığınız zamanlarda işletim sisteminin güvenli DNS özelliğini açık tutmak mantıklıdır.
+
+Kurumsal ortamda ise split DNS, VPN routing ve endpoint politikalarının birlikte tasarlanması gerekir; tek bir ayarı körlemesine açmak doğru değildir.
+
+## Sonuç
+
+Şifreli DNS, DNS gizliliğini güçlendirir; VPN ise daha geniş ağ trafiğini korur ve çıkış IP’sini değiştirir. İki teknoloji rakip değil, doğru yapılandırıldığında tamamlayıcıdır.
+
+### Kaynaklar ve 2026 kontrol notu
+
+- Android Private DNS: https://support.google.com/android/answer/9654714
+- Android VPN geliştirici rehberi: https://developer.android.com/develop/connectivity/vpn
