@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { siteConfig } from "@/lib/site";
 import { GoogleAdsense } from "@/components/analytics/google-adsense";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { ThemeScript } from "@/components/theme/theme-script";
 import "./globals.css";
 
@@ -129,6 +130,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-foreground font-sans">
         {children}
+        <GoogleAnalytics />
       </body>
     </html>
   );
