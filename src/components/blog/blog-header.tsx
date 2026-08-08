@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Calendar, User } from "lucide-react";
+import { Clock, Calendar, Building2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import type { BlogPostFrontmatter } from "@/lib/blog";
 import type { Locale } from "@/lib/site";
@@ -12,14 +12,13 @@ type BlogHeaderProps = {
 export function BlogHeader({ post }: BlogHeaderProps) {
   const t = useTranslations("blog");
   const locale = useLocale() as Locale;
-  const dateLocale =
-    locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US";
-
+  const dateLocale = locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US";
   const publishedDate = new Intl.DateTimeFormat(dateLocale, {
     year: "numeric",
     month: "long",
     day: "numeric",
   }).format(new Date(post.publishedAt));
+  const publisherLabel = "VPN Advisor";
 
   return (
     <header className="space-y-4">
@@ -37,8 +36,8 @@ export function BlogHeader({ post }: BlogHeaderProps) {
 
       <div className="flex flex-wrap items-center gap-4 text-sm text-ink-subtle">
         <div className="flex items-center gap-1.5">
-          <User className="size-4" />
-          <span>{post.author}</span>
+          <Building2 className="size-4" />
+          <span>{publisherLabel}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <Calendar className="size-4" />
