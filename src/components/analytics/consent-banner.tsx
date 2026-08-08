@@ -1,11 +1,35 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 
 // Onay tercihi localStorage'da saklanır. Değerler: "granted" | "denied".
 const CONSENT_KEY = "vpnadvisor:consent";
+
+const COPY = {
+  tr: {
+    title: "Çerez ve analitik tercihi",
+    text: "Site trafiğini ölçmek için Google Analytics kullanıyoruz. Analitik çerezler yalnızca onayınızla etkinleştirilir.",
+    learnMore: "Çerez politikası",
+    reject: "Reddet",
+    accept: "Kabul et",
+  },
+  en: {
+    title: "Cookie and analytics preference",
+    text: "We use Google Analytics to measure site traffic. Analytics cookies are enabled only with your consent.",
+    learnMore: "Cookie policy",
+    reject: "Reject",
+    accept: "Accept",
+  },
+  de: {
+    title: "Cookie- und Analyse-Einstellung",
+    text: "Wir verwenden Google Analytics zur Messung des Website-Traffics. Analyse-Cookies werden nur mit Ihrer Zustimmung aktiviert.",
+    learnMore: "Cookie-Richtlinie",
+    reject: "Ablehnen",
+    accept: "Akzeptieren",
+  },
+} as const;
 
 // useSyncExternalStore tabanlı mounted hook — "setState in effect" lint
 // kuralını tetiklemeden hydration mismatch'i önler (theme-toggle ile aynı).
@@ -27,7 +51,8 @@ function useMounted(): boolean {
  * henüz seçim yapmamış kullanıcıya banner gösterir.
  */
 export function ConsentBanner() {
-  const t = useTranslations("consent");
+  const locale = useLocale();
+  const copy = locale in COPY ? COPY[locale as keyof typeof COPY] : COPY.tr;
   const mounted = useMounted();
 
   // Lazy initializer — ilk render'dan önce localStorage'ı okur.
@@ -63,17 +88,17 @@ export function ConsentBanner() {
     <div
       role="dialog"
       aria-live="polite"
-      aria-label={t("title")}
+      aria-label={copy.title}
       className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface-base/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-surface-base/80"
     >
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="min-w-0 text-sm text-ink-muted">
-          {t("text")}{" "}
+          {copy.text}{" "}
           <Link
             href="/cerez-politikasi"
             className="font-medium text-brand-700 hover:underline"
           >
-            {t("learnMore")}
+            {copy.learnMore}
           </Link>
         </p>
         <div className="flex shrink-0 items-center gap-2">
@@ -82,14 +107,14 @@ export function ConsentBanner() {
             onClick={() => choose(false)}
             className="rounded-md border border-border px-4 py-2 text-sm font-medium text-ink-muted transition-colors hover:bg-surface-subtle hover:text-ink-strong"
           >
-            {t("reject")}
+            {copy.reject}
           </button>
           <button
             type="button"
             onClick={() => choose(true)}
             className="rounded-md bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
           >
-            {t("accept")}
+            {copy.accept}
           </button>
         </div>
       </div>
