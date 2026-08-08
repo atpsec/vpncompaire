@@ -29,11 +29,25 @@ const OG_LOCALE: Record<Locale, string> = {
 
 function blogAlternates(slug: string, locale: BlogLocale) {
   const entry = getBlogSlugEntry(slug, locale);
+  const canonical = absoluteUrl(`/blog/${slug}`, locale);
+
+  // Untranslated posts intentionally expose only the locale that actually exists.
+  // This prevents hreflang links from pointing to non-existent EN/DE pages.
+  if (!entry) {
+    return {
+      canonical,
+      languages: {
+        [locale]: canonical,
+        "x-default": canonical,
+      },
+    };
+  }
+
   const pathFor = (target: BlogLocale) =>
-    `/blog/${entry ? slugForLocale(entry, target) : slug}`;
+    `/blog/${slugForLocale(entry, target)}`;
 
   return {
-    canonical: absoluteUrl(`/blog/${slug}`, locale),
+    canonical,
     languages: {
       tr: absoluteUrl(pathFor("tr"), "tr"),
       en: absoluteUrl(pathFor("en"), "en"),

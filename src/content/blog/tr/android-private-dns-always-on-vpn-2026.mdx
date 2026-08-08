@@ -1,0 +1,51 @@
+---
+slug: "android-private-dns-always-on-vpn-2026"
+title: "Android'da Private DNS ve Always-on VPN: 2026 Kurulum ve Çakışma Rehberi"
+description: "Android Private DNS yalnızca DNS'i korur; Always-on VPN daha geniş trafik politikası uygular. 2026'da ikisini birlikte kullanırken nelere dikkat edilmeli?"
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "cihaz-platform"
+tags: ["android", "private-dns", "always-on-vpn", "vpn", "mobil", "2026"]
+readingTime: 7
+coverImage: "device-router"
+unsplashKeyword: "android phone network security"
+---
+
+Android’da **Private DNS** ve **Always-on VPN** yan yana bulunabildiği için aynı işi yaptıkları düşünülebilir. Aslında Private DNS yalnızca DNS sorgu ve cevaplarını korumaya odaklanırken VPN daha geniş IP trafiğini tüneller.
+
+Google’ın Android yardım sayfası Private DNS’in DNS soru ve cevaplarını güvenceye aldığını, diğer internet trafiğini korumadığını açıkça belirtir.
+
+## Private DNS ne zaman kullanılır?
+
+VPN kapalıyken DNS sorgularını şifreli bir çözümleyiciye göndermek istiyorsanız Private DNS yararlıdır. “Automatic” seçeneği çoğu kullanıcı için basit başlangıç noktasıdır. Özel sağlayıcı kullanacaksanız doğru hostname girmek gerekir.
+
+## Always-on VPN ne yapar?
+
+Android VPN altyapısı uygulamaların cihaz trafiğini tünellemesine izin verir. Always-on modu, VPN bağlantısının sürekli aktif kalmasını hedefler. Bazı cihazlarda “VPN olmadan bağlantıları engelle” seçeneği de bulunur; bu seçenek kill switch benzeri daha katı davranış sağlar.
+
+## Birlikte kullanınca ne olabilir?
+
+VPN istemcisi kendi DNS çözümleyicisini zorunlu kılıyorsa Private DNS ayarı beklediğiniz şekilde kullanılmayabilir. Tersine, tarayıcı kendi Secure DNS çözümleyicisini kullanıyorsa VPN sağlayıcısının DNS politikasıyla farklı sonuç çıkabilir.
+
+## 2026 test adımları
+
+1. VPN kapalıyken IP ve DNS adreslerini not edin.
+2. Private DNS açıkken DNS testini tekrarlayın.
+3. VPN’i açın ve IP/DNS sonuçlarını yeniden kontrol edin.
+4. Wi‑Fi ve mobil veri üzerinde ayrı test yapın.
+5. VPN düşürülünce trafiğin devam edip etmediğini kontrol edin.
+6. IPv6 adresinin tünel dışında görünmediğini doğrulayın.
+
+## Pil ve performans
+
+Always-on VPN sürekli ağ etkinliği oluşturur; modern protokoller genellikle mobil kullanım için optimize edilmiştir. Yine de zayıf kapsama alanında sık yeniden bağlantı pil tüketimini artırabilir. Sorun yaşarsanız yakın sunucu ve daha hafif protokol deneyin.
+
+## Sonuç
+
+Android’da Private DNS ve VPN rakip değildir. Private DNS DNS katmanını, VPN ise daha geniş bağlantıyı korur. Güvenilir sonuç için birlikte kullanımı IP, DNS ve IPv6 testleriyle doğrulayın.
+
+### Kaynaklar
+
+- Android Private DNS: https://support.google.com/android/answer/9654714
+- Android VPN: https://developer.android.com/develop/connectivity/vpn

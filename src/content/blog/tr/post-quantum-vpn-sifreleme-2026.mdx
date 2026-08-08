@@ -1,0 +1,52 @@
+---
+slug: "post-quantum-vpn-sifreleme-2026"
+title: "Post-Quantum VPN Şifreleme: 2026'da Gerçekten Gerekli mi?"
+description: "NIST post-kuantum standartları, ML-KEM ve VPN tünellerinde hibrit anahtar değişimi ne anlama geliyor? 2026 için pratik risk ve seçim rehberi."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "gizlilik-guvenlik"
+tags: ["post-quantum", "ml-kem", "şifreleme", "vpn", "nist", "2026"]
+readingTime: 8
+coverImage: "privacy-security"
+unsplashKeyword: "quantum encryption security"
+---
+
+Post-kuantum kriptografi 2026’da yalnızca laboratuvar konusu değil. NIST, 2024’te ilk üç temel post-kuantum standardını yayımladı ve FIPS 203 içindeki ML-KEM genel amaçlı anahtar kapsülleme standardı olarak öne çıktı. Bunun VPN kullanıcıları için anlamı, gelecekte kuantum bilgisayarların bugünkü bazı açık anahtar algoritmalarını zayıflatma riskine karşı geçişin başlamasıdır.
+
+## “Harvest now, decrypt later” riski nedir?
+
+Bir saldırgan bugün şifreli trafiği kaydedip yıllar sonra daha güçlü hesaplama kapasitesiyle çözmeye çalışabilir. Günlük video akışı için bu çoğu kullanıcı açısından kritik değildir; ancak uzun süre gizli kalması gereken kurumsal belgeler, hukuk dosyaları, araştırma verileri veya hassas iletişim için risk modeli farklıdır.
+
+## VPN’de post-kuantum koruma nasıl eklenir?
+
+Pratikte en güvenli geçiş modeli çoğunlukla hibrittir. Mevcut ve iyi test edilmiş klasik anahtar değişimi korunurken ML-KEM gibi post-kuantum bir mekanizma eklenir. Böylece yeni algoritmada beklenmeyen bir sorun çıkarsa klasik katman, klasik katmanda gelecekte bir zayıflık ortaya çıkarsa post-kuantum katman ek güvence sağlar.
+
+Apple’ın Ocak 2026 güvenlik dokümanları, iOS 26, iPadOS 26 ve macOS 26 veya daha yeni sürümlerde IKEv2/IPsec için ek ML-KEM anahtar değişimlerinin yapılandırılabildiğini belirtiyor. Bu, post-kuantum geçişinin ana akım platformlara girdiğinin önemli bir işareti.
+
+## Her VPN “post-quantum” diyorsa güvenilir mi?
+
+Hayır. Pazarlama ifadesinden önce şu sorulara bakın:
+
+- Hangi standart kullanılıyor: ML-KEM mi, özel bir algoritma mı?
+- Uygulama açıkça dokümante edilmiş mi?
+- Hibrit mi yoksa yalnızca deneysel post-kuantum mekanizması mı?
+- Protokol ve istemci bağımsız güvenlik incelemesinden geçmiş mi?
+- Anahtar değişimi mi korunuyor, yoksa sadece pazarlama dili mi kullanılıyor?
+
+## 2026’da kimler bunu önceliklendirmeli?
+
+Gazeteciler, hukuk ekipleri, araştırmacılar, kritik altyapı çalışanları ve uzun saklama süreli hassas veri taşıyan kurumlar post-kuantum yol haritasını daha erken dikkate almalı. Ortalama ev kullanıcısı için ise sağlayıcının no-logs politikası, güvenli protokol, kill switch, DNS/IPv6 koruması ve uygulama güvenliği hâlâ daha günlük ve ölçülebilir risklerdir.
+
+## Performans etkisi
+
+Post-kuantum anahtar materyali klasik sistemlerden daha büyük olabilir. Bu daha çok bağlantı kurulumu ve el sıkışma aşamasını etkiler; sürekli veri aktarımında kullanılan simetrik şifreleme aynı kalabilir. Bu nedenle performans değerlendirmesinde yalnızca Mbps değil, bağlantı kurulma süresi ve mobil ağ geçişleri de ölçülmelidir.
+
+## Sonuç
+
+2026’da post-kuantum VPN desteği anlamlı bir gelecek hazırlığıdır, ancak tek başına “daha güvenli VPN” etiketi değildir. Standart, uygulama biçimi, denetim ve mevcut klasik güvenlik katmanları birlikte değerlendirilmelidir.
+
+### Kaynaklar ve 2026 kontrol notu
+
+- NIST post-quantum standartları: https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards
+- Apple VPN security: https://support.apple.com/guide/security/virtual-private-network-vpn-security-sec802e8ab55/web
