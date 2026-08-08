@@ -4,12 +4,14 @@ import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { products } from "@/data/products";
+import { referenceProducts } from "@/data/products-reference-localized";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 
 export function Hero() {
   const locale = useLocale() as Locale;
   const copy = positioningFor(locale);
+  const catalogCount = products.length + referenceProducts.length;
   const auditCount = products.filter((p) => p.highlights.audits).length;
   const monthYear = new Intl.DateTimeFormat(locale, {
     year: "numeric",
@@ -63,7 +65,7 @@ export function Hero() {
           </div>
 
           <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-background/60 backdrop-blur shadow-sm">
-            <Stat value={products.length} label={copy.statProviders} />
+            <Stat value={catalogCount} label={copy.statProviders} />
             <Stat value={auditCount} label={copy.statAudits} />
             <Stat value="6" label={copy.statSources} />
           </dl>
