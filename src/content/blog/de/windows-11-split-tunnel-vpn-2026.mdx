@@ -1,0 +1,40 @@
+---
+slug: "windows-11-split-tunnel-vpn-2026"
+title: "Windows 11 Split Tunneling und VPN-Routing: Leitfaden 2026"
+description: "Windows 11 unterstützt integrierte und Hersteller-VPNs mit unterschiedlichen Routing-Regeln. So prüfen Sie Split Tunneling, DNS und Kill Switch."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Redaktion"
+category: "cihaz-platform"
+tags: ["windows-11", "split-tunnel", "routing", "vpn", "2026"]
+readingTime: 7
+coverImage: "device-router"
+unsplashKeyword: "windows laptop vpn network"
+---
+
+Windows 11 kann integrierte VPN-Profile und Drittanbieter-Clients verwenden. Das tatsächliche Routing hängt von Client, Protokoll und Split-Tunneling-Regeln ab.
+
+## Full und Split Routing
+
+Beim Full Tunnel läuft berechtigter Verkehr über die VPN-Standardroute. Beim Split Tunnel können ausgewählte Apps oder Netze die normale Internetverbindung nutzen.
+
+## DNS separat prüfen
+
+Auch bei korrekt sichtbarer IP kann DNS über einen anderen Adapter laufen. Prüfen Sie Resolver daher unabhängig vom öffentlichen IP-Test.
+
+## Hersteller-Clients
+
+Kommerzielle VPN-Apps implementieren oft eigene Regeln für App-Ausnahmen, Kill Switch und Protokolle. Windows-Einstellungen steuern nicht automatisch jede Herstellerfunktion.
+
+## Checkliste 2026
+
+- Routing-Tabelle vor/nach Verbindung
+- IPv4 und IPv6
+- ein- und ausgeschlossene Apps
+- Kill Switch
+- DNS-Resolver
+- Verhalten nach Standby und Netzwerkwechsel
+
+## Fazit
+
+Split Tunneling ist leistungsfähig, aber komplex. Eine kleine Ausnahmeliste und reale Routing-Tests sind sicherer als blindes Vertrauen in einen UI-Schalter.

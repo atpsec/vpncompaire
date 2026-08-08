@@ -1,0 +1,43 @@
+---
+slug: "ipv6-private-dns-vpn-sizinti-2026"
+title: "IPv6, Private DNS and VPN Leaks: 2026 Technical Checklist"
+description: "A VPN may protect IPv4 correctly while IPv6 or DNS takes another path. Use this checklist to test modern dual-stack networks for leaks and routing mistakes."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editorial Team"
+category: "teknik"
+tags: ["ipv6", "dns-leak", "private-dns", "vpn", "networking", "2026"]
+readingTime: 7
+coverImage: "vpn-protocols"
+unsplashKeyword: "ipv6 dns network"
+---
+
+Many home and mobile networks are dual-stack: they provide both IPv4 and IPv6. A VPN that only handles one path can create confusing results where some traffic appears protected and other traffic does not.
+
+## Test IPv4 and IPv6 separately
+
+After connecting to the VPN, check the visible IPv4 and IPv6 addresses. If the VPN does not support IPv6, it should clearly document whether IPv6 is blocked or handled another way.
+
+## DNS can follow another path
+
+Browsers, operating systems and VPN clients may each have secure DNS features. A DNS resolver outside the VPN tunnel is not automatically a vulnerability, but it can reveal a different trust relationship than the user expects.
+
+## Common causes of surprises
+
+- Browser-level DoH overrides
+- Android Private DNS settings
+- Split tunnelling rules
+- VPN clients that disable IPv6 instead of tunnelling it
+- Local network DNS for corporate resources
+
+## 2026 test sequence
+
+1. Record baseline IPv4, IPv6 and DNS.
+2. Connect the VPN.
+3. Repeat tests in the browser and a system-level tool.
+4. Enable and disable split tunnelling.
+5. Test after switching Wi-Fi to mobile data.
+
+## Bottom line
+
+Modern leak testing must include IPv6 and encrypted DNS, not just a single “what is my IP” page. The goal is to understand every active path and make routing intentional.

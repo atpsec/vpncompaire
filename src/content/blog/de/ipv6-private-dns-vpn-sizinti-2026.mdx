@@ -1,0 +1,35 @@
+---
+slug: "ipv6-private-dns-vpn-sizinti-2026"
+title: "IPv6, Private DNS und VPN-Leaks: Technische Checkliste 2026"
+description: "Ein VPN kann IPv4 korrekt schützen, während IPv6 oder DNS einen anderen Weg nimmt. So testen Sie Dual-Stack-Netze auf Leaks und Routing-Fehler."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Redaktion"
+category: "teknik"
+tags: ["ipv6", "dns-leak", "private-dns", "vpn", "netzwerk", "2026"]
+readingTime: 7
+coverImage: "vpn-protocols"
+unsplashKeyword: "ipv6 dns network"
+---
+
+Viele Heim- und Mobilnetze arbeiten gleichzeitig mit IPv4 und IPv6. Ein VPN, das nur einen Pfad sauber behandelt, kann dadurch unerwartete Ergebnisse erzeugen.
+
+## IPv4 und IPv6 getrennt testen
+
+Nach der VPN-Verbindung sollten beide sichtbaren Adressen geprüft werden. Unterstützt ein Anbieter kein IPv6, sollte dokumentiert sein, ob IPv6 blockiert oder anderweitig behandelt wird.
+
+## DNS kann separat laufen
+
+Browser, Betriebssystem und VPN-Client besitzen teils eigene Secure-DNS-Funktionen. Dadurch kann ein anderer Resolver genutzt werden als erwartet.
+
+## Häufige Ursachen
+
+- Browser-DoH
+- Android Private DNS
+- Split-Tunneling
+- deaktiviertes statt getunneltes IPv6
+- Unternehmens-DNS
+
+## Fazit
+
+Moderne Leak-Tests müssen IPv6 und verschlüsseltes DNS einschließen. Ziel ist ein bewusstes, nachvollziehbares Routing.
