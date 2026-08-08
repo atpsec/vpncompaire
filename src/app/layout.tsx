@@ -130,7 +130,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-foreground font-sans">
         {children}
-        <GoogleAnalytics />
+        <GoogleAnalytics locale={locale} />
       </body>
     </html>
   );
