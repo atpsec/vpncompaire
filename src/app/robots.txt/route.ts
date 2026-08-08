@@ -72,6 +72,7 @@ User-agent: YouBot
 Allow: /
 
 Sitemap: ${siteConfig.url}/sitemap.xml
+Sitemap: ${siteConfig.url}/sitemap-vpn-providers.xml
 `;
 
   return new Response(body, {

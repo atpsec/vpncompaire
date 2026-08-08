@@ -1,10 +1,12 @@
 import { siteConfig } from "@/lib/site";
 import { rankedProducts } from "@/data/products";
+import { referenceProducts } from "@/data/products-reference-localized";
 
 export const dynamic = "force-static";
 
 export function GET() {
-  const list = rankedProducts();
+  const core = rankedProducts();
+  const catalog = [...core, ...referenceProducts];
 
   const body = `# ${siteConfig.name}
 
@@ -13,6 +15,10 @@ export function GET() {
 ## Site amacı
 
 ${siteConfig.name}, VPN teknolojisi ve VPN sağlayıcıları hakkında kaynak temelli bilgi sunan bir karşılaştırma ve rehber sitesidir. Site bir test laboratuvarı değildir; doğrulanmamış hız, streaming veya kullanıcı puanı yayınlamaz. Sağlayıcıların resmi teknik belgeleri, gizlilik politikaları, hizmet şartları, fiyatlandırma sayfaları, bağımsız denetimler ve güvenilir standart/platform belgeleri ortak bir çerçevede düzenlenir.
+
+## Kapsam
+
+VPN Advisor dizininde toplam ${catalog.length} VPN sağlayıcı profili bulunur. İlk grup daha ayrıntılı yapılandırılmış veri içerirken, genişletilmiş dizindeki sağlayıcılar pazar kapsamını artırmak için kaynak-temelli referans profili olarak sunulur. Bu sayı bir kalite sıralaması değildir.
 
 ## Kaynak ve doğrulama yaklaşımı
 
@@ -26,11 +32,11 @@ Hakkımızda: ${siteConfig.url}/hakkimizda
 
 Aşağıdaki liste editoryal puan sıralaması değildir; sitede karşılaştırılan sağlayıcı profillerine erişim dizinidir.
 
-${list
-  .map(
-    (p) =>
-      `### ${p.brand}\n\n- **Konumlandırma:** ${p.positioning}\n- **Başlangıç fiyatı:** $${p.priceFromUsd.toFixed(2)}/ay\n- **Yargı yetkisi:** ${p.highlights.jurisdiction ?? "Belirtilmemiş"}\n- **Sunucu/ağ bilgisi:** ${p.highlights.servers ?? "Belirtilmemiş"}\n- **Bağımsız denetim bilgisi:** ${p.highlights.audits ?? "Belirtilmemiş"}\n- **Cihaz desteği:** ${p.highlights.devices ?? "Belirtilmemiş"}\n- **Sağlayıcı profili:** ${siteConfig.url}/inceleme/${p.slug}\n\n${p.summary}\n`,
-  )
+${catalog
+  .map((p) => {
+    const price = p.priceFromUsd > 0 ? `$${p.priceFromUsd.toFixed(2)}/ay` : "Resmi fiyat sayfasından doğrulanmalı";
+    return `### ${p.brand}\n\n- **Konumlandırma:** ${p.positioning}\n- **Fiyat:** ${price}\n- **Yargı yetkisi:** ${p.highlights.jurisdiction ?? "Belirtilmemiş"}\n- **Sunucu/ağ bilgisi:** ${p.highlights.servers ?? "Belirtilmemiş"}\n- **Bağımsız denetim bilgisi:** ${p.highlights.audits ?? "Belirtilmemiş"}\n- **Cihaz desteği:** ${p.highlights.devices ?? "Belirtilmemiş"}\n- **Sağlayıcı profili:** ${siteConfig.url}/inceleme/${p.slug}\n\n${p.summary}\n`;
+  })
   .join("\n")}
 
 ## Karşılaştırmalar

@@ -13,6 +13,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { localizedAlternates, absoluteUrl, type Locale } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
+import { referenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -25,6 +26,7 @@ const labels = {
     home: "Ana sayfa",
     hub: "VPN karşılaştırmaları",
     price: "Başlangıç fiyatı",
+    priceOfficial: "Resmi sitede kontrol et",
     jurisdiction: "Yargı yetkisi",
     refund: "İade süresi",
     days: "gün",
@@ -50,6 +52,7 @@ const labels = {
     home: "Home",
     hub: "VPN comparisons",
     price: "Starting price",
+    priceOfficial: "Check official site",
     jurisdiction: "Jurisdiction",
     refund: "Refund period",
     days: "days",
@@ -75,6 +78,7 @@ const labels = {
     home: "Startseite",
     hub: "VPN-Vergleiche",
     price: "Preis ab",
+    priceOfficial: "Auf offizieller Website prüfen",
     jurisdiction: "Rechtsraum",
     refund: "Erstattungsfrist",
     days: "Tage",
@@ -95,14 +99,21 @@ const labels = {
   },
 } as const;
 
+function resolveProduct(slug: string, locale: Locale): Product | undefined {
+  return getProduct(slug, locale === "tr" ? "tr" : "en") ?? getReferenceProduct(slug, locale);
+}
+
 export function generateStaticParams() {
-  return rawProducts.map((p) => ({ slug: p.slug }));
+  return [
+    ...rawProducts.map((p) => ({ slug: p.slug })),
+    ...referenceProducts.map((p) => ({ slug: p.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
-  const product = getProduct(slug, locale === "tr" ? "tr" : "en");
+  const product = resolveProduct(slug, locale);
   if (!product) return {};
   const l = labels[locale];
   return {
@@ -122,7 +133,7 @@ export default async function Page({ params }: Props) {
   const { locale: rawLocale, slug } = await params;
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   setRequestLocale(locale);
-  const product = getProduct(slug, locale === "tr" ? "tr" : "en");
+  const product = resolveProduct(slug, locale);
   if (!product) notFound();
 
   const providerSchema = {
@@ -145,6 +156,8 @@ export default async function Page({ params }: Props) {
 
 function ProviderView({ product, locale, providerSchema }: { product: Product; locale: Locale; providerSchema: Record<string, unknown> }) {
   const t = labels[locale];
+  const hasStructuredPricing = product.priceFromUsd > 0 && product.plans.length > 0;
+
   return (
     <>
       <JsonLd data={providerSchema} />
@@ -170,7 +183,7 @@ function ProviderView({ product, locale, providerSchema }: { product: Product; l
 
         <Card className="mt-8 p-6">
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-            <Stat label={t.price} value={`$${product.priceFromUsd.toFixed(2)}`} highlight />
+            <Stat label={t.price} value={hasStructuredPricing ? `$${product.priceFromUsd.toFixed(2)}` : t.priceOfficial} highlight />
             <Stat label={t.jurisdiction} value={product.highlights.jurisdiction ?? "—"} />
             <Stat label={t.refund} value={product.highlights.moneyBackDays ? `${product.highlights.moneyBackDays} ${t.days}` : "—"} />
           </dl>
@@ -178,7 +191,7 @@ function ProviderView({ product, locale, providerSchema }: { product: Product; l
             <h2 className="text-lg font-semibold text-ink-strong">{t.pricing}</h2>
             <p className="mt-1 text-sm text-ink-muted">{t.pricingIntro}</p>
             <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
-              <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} />
+              {hasStructuredPricing ? <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} /> : <div className="rounded-lg border border-border bg-surface-subtle/40 p-4 text-sm text-ink-muted">{t.priceOfficial}</div>}
               <div className="flex flex-col gap-2 sm:w-48"><Button asChild variant="primary"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t.official}<ExternalLink className="size-4" /></a></Button></div>
             </div>
           </div>
