@@ -12,7 +12,6 @@ import { ToolsCta } from "@/components/tools/ToolsCta";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipToContent } from "@/components/layout/skip-to-content";
-import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations({ locale: "tr", namespace: "tools.vpnTest" });
@@ -33,7 +32,6 @@ export default function Page() {
   return (
     <NextIntlClientProvider locale="tr" messages={trMessages}>
       <SkipToContent />
-      <GoogleAnalytics />
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
