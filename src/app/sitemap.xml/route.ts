@@ -20,9 +20,6 @@ import {
 
 export const revalidate = 3600;
 
-// NOT: rehber ve karşılaştırma DETAY sayfaları CONTENT_REGISTRY üzerinden
-// lokalize gruplar olarak üretilir (tr/en/de yerelleştirilmiş slug'larıyla);
-// burada statik liste tutulmaz.
 const useCaseSlugs = [
   "gizlilik",
   "streaming",
@@ -51,19 +48,13 @@ const toolPaths = [
 ];
 
 export async function GET() {
-  const today = new Date().toISOString().split("T")[0];
-
   const allLocales = siteConfig.locales as readonly BlogLocale[];
-  // Türkçe-only (içeriği yalnızca TR dilinde servis edilen) bölümler için
-  // yalnızca TR URL'i üret. EN/DE yanlış-dil varyantları proxy.ts tarafından
-  // 301'lendiği için sitemap'e ASLA girmemeli.
   const trOnly: BlogLocale[] = ["tr"];
 
   type Entry = {
     path: string;
     priority: number;
     changefreq: string;
-    /** Bu path'in sitemap'e girecek locale'leri. Verilmezse tüm diller. */
     locales?: BlogLocale[];
   };
 
@@ -71,9 +62,6 @@ export async function GET() {
     { path: "/", priority: 1.0, changefreq: "daily" },
     { path: "/en-iyi-vpn", priority: 0.95, changefreq: "weekly" },
     { path: "/en-iyi", priority: 0.8, changefreq: "weekly" },
-    // NOT: /karsilastir ve /rehber hub'ları SECTION_HUB_SERVED üzerinden
-    // yerelleştirilmiş slug'larıyla (örn. /en/comparison, /de/vergleich)
-    // aşağıda ayrıca üretilir; Türkçe-slug EN/DE varyantları 301'lenir.
     { path: "/cihazlar", priority: 0.8, changefreq: "weekly" },
     { path: "/blog", priority: 0.85, changefreq: "daily" },
     { path: "/metodoloji", priority: 0.8, changefreq: "monthly" },
@@ -92,7 +80,6 @@ export async function GET() {
     changefreq: "weekly",
   }));
 
-  // Türkçe-only use-case sayfaları (turkiye, yurt-disindaki-turkler) yalnızca TR.
   const trOnlyUseCases = new Set(["turkiye", "yurt-disindaki-turkler"]);
   const useCasePaths: Entry[] = useCaseSlugs.map((slug) => ({
     path: `/en-iyi/${slug}`,
@@ -121,8 +108,6 @@ export async function GET() {
     return `${siteConfig.url}${prefix}${normalized}`;
   }
 
-  // Build hreflang alternates per URL — SADECE bu path için servis edilen
-  // locale'leri içerir. TR default (prefix'siz); EN/DE prefix'li.
   function altLinks(path: string, pathLocales: readonly BlogLocale[]): string {
     const lines = pathLocales.map(
       (locale) =>
@@ -137,13 +122,14 @@ export async function GET() {
     return lines.join("\n");
   }
 
-  // Blog posts: TR/EN slugs differ; DE currently reuses EN slugs unless a DE slug exists.
   const [trPosts, enPosts, dePosts] = await Promise.all([
     getBlogPosts("tr"),
     getBlogPosts("en"),
     getBlogPosts("de"),
   ]);
 
+  // Do not emit a synthetic lastmod for evergreen/static routes. Search engines
+  // should only receive lastmod when we have a real content modification date.
   const sharedPathsXml = all
     .flatMap((u) => {
       const pathLocales = u.locales ?? allLocales;
@@ -152,7 +138,6 @@ export async function GET() {
           locale === siteConfig.defaultLocale ? u.priority : u.priority * 0.9;
         return `  <url>
     <loc>${localizedUrl(u.path, locale)}</loc>
-    <lastmod>${today}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${priority.toFixed(2)}</priority>
 ${altLinks(u.path, pathLocales)}
@@ -161,10 +146,6 @@ ${altLinks(u.path, pathLocales)}
     })
     .join("\n");
 
-  // Yerelleştirilmiş slug'lı gruplar: section hub'ları (SECTION_HUB_SERVED) ve
-  // CONTENT_REGISTRY'de birden çok dilde servis edilen içerikler. Her dilin
-  // KENDİ slug'lı URL'i üretilir (örn. /rehber, /en/guide); hreflang yalnızca
-  // servis edilen dilleri içerir.
   function localizedGroupXml(
     urlFor: (locale: AppLocale) => string,
     locales: readonly AppLocale[],
@@ -184,7 +165,6 @@ ${altLinks(u.path, pathLocales)}
       const p = locale === DEFAULT_LOCALE ? priority : priority * 0.9;
       return `  <url>
     <loc>${urlFor(locale)}</loc>
-    <lastmod>${today}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${p.toFixed(2)}</priority>
 ${alt}
@@ -233,7 +213,11 @@ ${alt}
     self: { slug: string; locale: BlogLocale },
   ): string {
     if (!entry) {
-      return `    <xhtml:link rel="alternate" hreflang="${self.locale}" href="${localizedUrl(`/blog/${self.slug}`, self.locale)}"/>`;
+      const selfUrl = localizedUrl(`/blog/${self.slug}`, self.locale);
+      return [
+        `    <xhtml:link rel="alternate" hreflang="${self.locale}" href="${selfUrl}"/>`,
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${selfUrl}"/>`,
+      ].join("\n");
     }
     const lines = allLocales.map(
       (locale) =>
