@@ -5,7 +5,7 @@ import { referenceProducts } from "@/data/products-reference-localized";
 export const dynamic = "force-static";
 
 export function GET() {
-  const core = rankedProducts();
+  const core = rankedProducts().filter((p) => p.slug !== "atlas-vpn");
   const catalog = [...core, ...referenceProducts];
 
   const body = `# ${siteConfig.name}
@@ -18,7 +18,7 @@ ${siteConfig.name}, VPN teknolojisi ve VPN sağlayıcıları hakkında kaynak te
 
 ## Kapsam
 
-VPN Advisor dizininde toplam ${catalog.length} VPN sağlayıcı profili bulunur. İlk grup daha ayrıntılı yapılandırılmış veri içerirken, genişletilmiş dizindeki sağlayıcılar pazar kapsamını artırmak için kaynak-temelli referans profili olarak sunulur. Bu sayı bir kalite sıralaması değildir.
+VPN Advisor aktif dizininde toplam ${catalog.length} VPN sağlayıcı profili bulunur. İlk grup daha ayrıntılı yapılandırılmış veri içerirken, genişletilmiş dizindeki sağlayıcılar pazar kapsamını artırmak için kaynak-temelli referans profili olarak sunulur. Bu sayı bir kalite sıralaması değildir. Hizmeti sonlandırılmış ürünler aktif sağlayıcı sayısına dahil edilmez.
 
 ## Kaynak ve doğrulama yaklaşımı
 
@@ -30,7 +30,7 @@ Hakkımızda: ${siteConfig.url}/hakkimizda
 
 ## VPN sağlayıcı profilleri
 
-Aşağıdaki liste editoryal puan sıralaması değildir; sitede karşılaştırılan sağlayıcı profillerine erişim dizinidir.
+Aşağıdaki liste editoryal puan sıralaması değildir; sitede karşılaştırılan aktif sağlayıcı profillerine erişim dizinidir.
 
 ${catalog
   .map((p) => {
