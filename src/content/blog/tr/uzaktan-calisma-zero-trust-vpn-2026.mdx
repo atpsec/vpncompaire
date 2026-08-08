@@ -1,0 +1,55 @@
+---
+slug: "uzaktan-calisma-zero-trust-vpn-2026"
+title: "Uzaktan Çalışmada Zero Trust ve VPN: 2026'da Birlikte Nasıl Kullanılır?"
+description: "Zero Trust VPN'in yerini tamamen alıyor mu? 2026 uzaktan çalışma mimarisinde cihaz güveni, kimlik, split tunneling ve özel ağ erişimini karşılaştırıyoruz."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "kullanim-senaryolari"
+tags: ["zero-trust", "uzaktan-çalışma", "kurumsal-vpn", "split-tunnel", "2026"]
+readingTime: 7
+coverImage: "remote-work"
+unsplashKeyword: "zero trust remote work"
+---
+
+Zero Trust yaklaşımı “ağın içindeysen güvenilirsin” varsayımını reddeder. Kullanıcı, cihaz, uygulama ve oturum bağlamı sürekli değerlendirilir. Bu nedenle “Zero Trust geldi, VPN bitti” cümlesi fazla basittir.
+
+## VPN neyi iyi yapar?
+
+VPN bir cihazı veya kullanıcıyı özel ağa güvenli tünelle bağlar. Eski kurumsal yapılarda kullanıcı tünele girdikten sonra geniş ağ erişimi alabilir. Sorun, bu erişimin gereğinden fazla olabilmesidir.
+
+## Zero Trust ne ekler?
+
+Zero Trust Network Access çözümleri kullanıcıya tüm ağı değil, yalnızca yetkili olduğu uygulamayı açmayı hedefler. Kimlik sağlayıcı, cihaz durumu, MFA, konum ve risk sinyalleri erişim kararına katılabilir.
+
+## İkisi birlikte kullanılabilir mi?
+
+Evet. Kurumlar şu hibrit modeli kullanabilir:
+
+- eski iç ağ ve yönetim servisleri için VPN,
+- web uygulamaları için uygulama bazlı Zero Trust erişimi,
+- SaaS için doğrudan internet çıkışı,
+- güvenlik politikasıyla yönetilen split tunneling.
+
+Microsoft’un Windows VPN dokümanları da force tunnel ve split tunnel arasında açık bir mimari seçimi yapılmasını öneriyor. Split tunnel kapasite ve gecikmeyi iyileştirebilir ama hangi trafiğin fiziksel arayüzden çıkacağı güvenlik politikasıyla tanımlanmalıdır.
+
+## Ev çalışanı için pratik sonuç
+
+Çalışan açısından hedef, aynı anda iki VPN açmak değil; şirketin verdiği istemci ve erişim politikasını doğru kullanmaktır. Kişisel VPN, kurumsal VPN veya ZTNA istemcisiyle çakışabilir. DNS, rota ve kill switch sorunları yaşanabilir.
+
+## 2026 mimari kontrol listesi
+
+1. Uygulama bazlı erişim mümkün mü?
+2. Cihaz uyumluluğu erişim kararına katılıyor mu?
+3. Passkey veya phishing’e dayanıklı MFA destekleniyor mu?
+4. Split tunnel listesi belgelenmiş mi?
+5. IPv6 ve DNS rotaları test edilmiş mi?
+6. Eski ağ segmentlerine erişim minimumda mı?
+
+## Sonuç
+
+Zero Trust VPN’i sihirli biçimde ortadan kaldırmaz; erişimi daha dar ve bağlama duyarlı hale getirir. 2026’da güçlü uzaktan çalışma mimarisi, kimlik merkezli erişim ile gerektiğinde kullanılan güvenli tüneli birlikte tasarlar.
+
+### Kaynak
+
+- Microsoft VPN routing decisions: https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/vpn/vpn-routing
