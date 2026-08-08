@@ -1,0 +1,42 @@
+---
+slug: "split-tunnel-force-tunnel-routing-2026"
+title: "Split Tunnelling vs Full Tunnelling: How to Choose in 2026"
+description: "Split tunnelling sends selected traffic outside the VPN; full tunnelling sends everything through it. Learn the security, speed and routing trade-offs."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editorial Team"
+category: "secim-rehberi"
+tags: ["split-tunnel", "full-tunnel", "routing", "vpn", "2026"]
+readingTime: 7
+coverImage: "choosing-vpn"
+unsplashKeyword: "network routing split tunnel"
+---
+
+Split tunnelling is convenient because it lets some apps or destinations bypass the VPN. Full tunnelling is simpler because all eligible traffic follows the same protected route.
+
+## Split tunnelling advantages
+
+Local printers, high-bandwidth streaming or latency-sensitive apps can stay outside the tunnel. It can also reduce load on a corporate VPN gateway.
+
+## Split tunnelling risks
+
+The security model becomes more complex. An application excluded from the tunnel may expose the normal public IP address or use a different DNS path. Malware on an excluded path can also bypass network controls that exist inside the VPN.
+
+## Full tunnelling advantages
+
+Routing is easier to reason about. Security teams can apply consistent inspection, DNS and access policy to traffic that passes through the tunnel.
+
+## What should you choose?
+
+For personal use, split tunnelling is useful when you understand exactly which apps are excluded. For corporate systems, follow the organization's policy because device posture and access controls may depend on predictable routing.
+
+## Checklist
+
+- Test IPv4 and IPv6 on both included and excluded apps.
+- Check DNS behavior.
+- Verify kill-switch behavior.
+- Re-test after app or OS updates.
+
+## Bottom line
+
+Split tunnelling is a routing optimization, not a universal security improvement. Use it deliberately and keep the exception list as small as possible.

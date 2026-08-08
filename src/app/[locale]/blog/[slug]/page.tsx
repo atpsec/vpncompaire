@@ -10,6 +10,7 @@ import { SocialShare } from "@/components/blog/social-share";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import { absoluteUrl, siteConfig, type Locale } from "@/lib/site";
+import { LOCALIZED_REFRESH_SLUGS } from "@/lib/blog-localized-refresh";
 import {
   getBlogSlugEntry,
   slugForLocale,
@@ -31,8 +32,21 @@ function blogAlternates(slug: string, locale: BlogLocale) {
   const entry = getBlogSlugEntry(slug, locale);
   const canonical = absoluteUrl(`/blog/${slug}`, locale);
 
-  // Untranslated posts intentionally expose only the locale that actually exists.
-  // This prevents hreflang links from pointing to non-existent EN/DE pages.
+  // The August 2026 refresh uses stable, shared slugs across TR/EN/DE.
+  // Keep older translated articles on BLOG_SLUG_MAP and keep genuinely
+  // untranslated posts self-referencing only.
+  if (!entry && LOCALIZED_REFRESH_SLUGS.has(slug)) {
+    return {
+      canonical,
+      languages: {
+        tr: absoluteUrl(`/blog/${slug}`, "tr"),
+        en: absoluteUrl(`/blog/${slug}`, "en"),
+        de: absoluteUrl(`/blog/${slug}`, "de"),
+        "x-default": absoluteUrl(`/blog/${slug}`, "tr"),
+      },
+    };
+  }
+
   if (!entry) {
     return {
       canonical,
