@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 
 type IconData = { title: string; hex: string; path: string };
 
-// Brand marks via simple-icons (CC0-licensed) for the major brands.
 const BRANDS: Record<string, { icon: IconData; tile: string }> = {
   nordvpn: { icon: siNordvpn, tile: "#4687FF" },
   surfshark: { icon: siSurfshark, tile: "#1EBFBF" },
@@ -30,86 +29,20 @@ type LetterMark = {
   ariaLabel: string;
 };
 
-// Letter-tile fallback for brands not in simple-icons.
 const LETTER_MARKS: Record<string, LetterMark> = {
-  ipvanish: {
-    text: "IP",
-    tile: "#FFA300",
-    fg: "#1a1300",
-    ariaLabel: "IPVanish logo",
-  },
-  windscribe: {
-    text: "W",
-    tile: "#1AC8DB",
-    fg: "#06222a",
-    ariaLabel: "Windscribe logo",
-  },
-  tunnelbear: {
-    text: "T",
-    tile: "#A47148",
-    fg: "#ffffff",
-    ariaLabel: "TunnelBear logo",
-  },
-  "atlas-vpn": {
-    text: "A",
-    tile: "#2563EB",
-    fg: "#ffffff",
-    ariaLabel: "Atlas VPN logo",
-  },
-  purevpn: {
-    text: "P",
-    tile: "#F97316",
-    fg: "#1a0a00",
-    ariaLabel: "PureVPN logo",
-  },
-  vyprvpn: {
-    text: "V",
-    tile: "#0D9488",
-    fg: "#ffffff",
-    ariaLabel: "VyprVPN logo",
-  },
-  ivpn: {
-    text: "IV",
-    tile: "#1E293B",
-    fg: "#ffffff",
-    ariaLabel: "IVPN logo",
-  },
-  hideme: {
-    text: "H",
-    tile: "#059669",
-    fg: "#ffffff",
-    ariaLabel: "hide.me logo",
-  },
-  "privado-vpn": {
-    text: "Pr",
-    tile: "#7C3AED",
-    fg: "#ffffff",
-    ariaLabel: "PrivadoVPN logo",
-  },
-  "hotspot-shield": {
-    text: "HS",
-    tile: "#EF4444",
-    fg: "#ffffff",
-    ariaLabel: "Hotspot Shield logo",
-  },
-  strongvpn: {
-    text: "S",
-    tile: "#0369A1",
-    fg: "#ffffff",
-    ariaLabel: "StrongVPN logo",
-  },
-  zoogvpn: {
-    text: "Z",
-    tile: "#DB2777",
-    fg: "#ffffff",
-    ariaLabel: "ZoogVPN logo",
-  },
-  "norton-vpn": {
-    text: "N",
-    tile: "#FBBF24",
-    fg: "#1a1300",
-    ariaLabel: "Norton VPN logo",
-  },
+  ipvanish: { text: "IP", tile: "#FFA300", fg: "#1a1300", ariaLabel: "IPVanish logo" },
+  windscribe: { text: "W", tile: "#1AC8DB", fg: "#06222a", ariaLabel: "Windscribe logo" },
+  tunnelbear: { text: "T", tile: "#A47148", fg: "#ffffff", ariaLabel: "TunnelBear logo" },
+  "atlas-vpn": { text: "A", tile: "#2563EB", fg: "#ffffff", ariaLabel: "Atlas VPN logo" },
+  purevpn: { text: "P", tile: "#F97316", fg: "#1a0a00", ariaLabel: "PureVPN logo" },
+  vyprvpn: { text: "V", tile: "#0D9488", fg: "#ffffff", ariaLabel: "VyprVPN logo" },
+  ivpn: { text: "IV", tile: "#1E293B", fg: "#ffffff", ariaLabel: "IVPN logo" },
+  hideme: { text: "H", tile: "#059669", fg: "#ffffff", ariaLabel: "hide.me logo" },
+  "privado-vpn": { text: "Pr", tile: "#7C3AED", fg: "#ffffff", ariaLabel: "PrivadoVPN logo" },
+  "hotspot-shield": { text: "HS", tile: "#EF4444", fg: "#ffffff", ariaLabel: "Hotspot Shield logo" },
+  strongvpn: { text: "S", tile: "#0369A1", fg: "#ffffff", ariaLabel: "StrongVPN logo" },
+  zoogvpn: { text: "Z", tile: "#DB2777", fg: "#ffffff", ariaLabel: "ZoogVPN logo" },
+  "norton-vpn": { text: "N", tile: "#FBBF24", fg: "#1a1300", ariaLabel: "Norton VPN logo" },
 };
 
 type Props = {
@@ -117,6 +50,22 @@ type Props = {
   size?: number;
   className?: string;
 };
+
+function fallbackMark(slug: string): LetterMark {
+  const parts = slug
+    .replace(/-vpn$/i, "")
+    .split("-")
+    .filter(Boolean);
+  const text = (parts.length > 1 ? parts.map((part) => part[0]).join("") : parts[0]?.slice(0, 2) ?? "V")
+    .slice(0, 2)
+    .toUpperCase();
+  return {
+    text,
+    tile: "#EEF2FF",
+    fg: "#3730A3",
+    ariaLabel: `${slug.replace(/-/g, " ")} mark`,
+  };
+}
 
 export function VPNLogo({ slug, size = 48, className }: Props) {
   if (slug === "cyberghost") {
@@ -129,7 +78,9 @@ export function VPNLogo({ slug, size = 48, className }: Props) {
   }
 
   const brand = BRANDS[slug];
-  if (!brand) return null;
+  if (!brand) {
+    return <LetterTile size={size} mark={fallbackMark(slug)} className={className} />;
+  }
 
   const radius = Math.round(size * 0.22);
   const padding = Math.round(size * 0.22);
@@ -145,15 +96,7 @@ export function VPNLogo({ slug, size = 48, className }: Props) {
       className={cn("shrink-0", className)}
       style={{ display: "block" }}
     >
-      <rect
-        x="0"
-        y="0"
-        width={size}
-        height={size}
-        rx={radius}
-        ry={radius}
-        fill={brand.tile}
-      />
+      <rect x="0" y="0" width={size} height={size} rx={radius} ry={radius} fill={brand.tile} />
       <rect
         x="0.5"
         y="0.5"
@@ -172,15 +115,7 @@ export function VPNLogo({ slug, size = 48, className }: Props) {
   );
 }
 
-function LetterTile({
-  size,
-  mark,
-  className,
-}: {
-  size: number;
-  mark: LetterMark;
-  className?: string;
-}) {
+function LetterTile({ size, mark, className }: { size: number; mark: LetterMark; className?: string }) {
   const radius = Math.round(size * 0.22);
   const fontSize = Math.round(size * (mark.text.length > 1 ? 0.36 : 0.5));
   return (
@@ -193,15 +128,7 @@ function LetterTile({
       className={cn("shrink-0", className)}
       style={{ display: "block" }}
     >
-      <rect
-        x="0"
-        y="0"
-        width={size}
-        height={size}
-        rx={radius}
-        ry={radius}
-        fill={mark.tile}
-      />
+      <rect x="0" y="0" width={size} height={size} rx={radius} ry={radius} fill={mark.tile} />
       <rect
         x="0.5"
         y="0.5"
@@ -230,13 +157,7 @@ function LetterTile({
   );
 }
 
-function CyberGhostMark({
-  size,
-  className,
-}: {
-  size: number;
-  className?: string;
-}) {
+function CyberGhostMark({ size, className }: { size: number; className?: string }) {
   const radius = Math.round(size * 0.22);
   const padding = Math.round(size * 0.18);
   const iconSize = size - padding * 2;

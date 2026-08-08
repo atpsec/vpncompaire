@@ -15,7 +15,7 @@ export function TopVPNList() {
   const tCommon = useTranslations("common");
   const locale = useLocale() as Locale;
   const copy = positioningFor(locale);
-  const list = topRankedProducts(locale);
+  const list = topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn");
   const featured = list[0];
   const next = list.slice(1, 10);
   const extended = list.slice(10);

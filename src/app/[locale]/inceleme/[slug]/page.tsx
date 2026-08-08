@@ -14,6 +14,7 @@ import { breadcrumbSchema } from "@/lib/seo";
 import { localizedAlternates, absoluteUrl, type Locale } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
 import { referenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
+import { getArchivedProduct } from "@/data/products-current";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -100,7 +101,7 @@ const labels = {
 } as const;
 
 function resolveProduct(slug: string, locale: Locale): Product | undefined {
-  return getProduct(slug, locale === "tr" ? "tr" : "en") ?? getReferenceProduct(slug, locale);
+  return getArchivedProduct(slug) ?? getProduct(slug, locale === "tr" ? "tr" : "en") ?? getReferenceProduct(slug, locale);
 }
 
 export function generateStaticParams() {
@@ -116,10 +117,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = resolveProduct(slug, locale);
   if (!product) return {};
   const l = labels[locale];
+  const isArchived = slug === "atlas-vpn";
   return {
-    title: `${product.brand} — ${l.metaSuffix}`,
+    title: isArchived ? `${product.brand} — discontinued service archive` : `${product.brand} — ${l.metaSuffix}`,
     description: `${product.brand}: ${product.summary} ${l.intro}`,
     alternates: localizedAlternates(`/inceleme/${product.slug}`, locale),
+    robots: isArchived ? { index: false, follow: true } : undefined,
     openGraph: {
       title: `${product.brand} — ${l.profile}`,
       description: product.summary,

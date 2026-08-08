@@ -12,19 +12,19 @@ import type { Locale } from "@/lib/site";
 const labels = {
   tr: {
     kicker: "Genişletilmiş sağlayıcı dizini",
-    title: "30 ek VPN sağlayıcı profili",
+    title: (count: number) => `${count} ek VPN sağlayıcı profili`,
     intro: "Aşağıdaki sağlayıcılar sıralama değildir. Küresel VPN pazarını daha geniş kapsamak için aynı kaynak-temelli profil yapısına eklenmiştir.",
     open: "Profili aç",
   },
   en: {
     kicker: "Extended provider directory",
-    title: "30 additional VPN provider profiles",
+    title: (count: number) => `${count} additional VPN provider profiles`,
     intro: "The providers below are not a ranking. They extend market coverage using the same source-based provider-profile structure.",
     open: "Open profile",
   },
   de: {
     kicker: "Erweitertes Anbieterverzeichnis",
-    title: "30 weitere VPN-Anbieterprofile",
+    title: (count: number) => `${count} weitere VPN-Anbieterprofile`,
     intro: "Die folgenden Anbieter sind keine Rangliste. Sie erweitern die Marktabdeckung mit derselben quellenbasierten Profilstruktur.",
     open: "Profil öffnen",
   },
@@ -43,7 +43,7 @@ export function ReferenceVPNDirectory() {
             {t.kicker}
           </span>
           <h2 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            {t.title}
+            {t.title(referenceProducts.length)}
           </h2>
           <p className="mt-3 text-sm sm:text-base text-ink-muted">{t.intro}</p>
         </div>
