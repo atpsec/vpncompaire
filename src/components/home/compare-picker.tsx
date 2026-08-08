@@ -18,7 +18,7 @@ const MAX = 4;
 export function ComparePicker() {
   const t = useTranslations("homeBlocks.comparePicker");
   const locale = useLocale() as Locale;
-  const all = topRankedProducts(locale);
+  const all = topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn");
   const [selected, setSelected] = useState<string[]>(() => all.slice(0, 2).map((p) => p.slug));
 
   const toggle = (slug: string) => {
