@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useSyncExternalStore } from "react";
-import { useLocale } from "next-intl";
-import { Link } from "@/i18n/routing";
 
 // Onay tercihi localStorage'da saklanır. Değerler: "granted" | "denied".
 const CONSENT_KEY = "vpnadvisor:consent";
+
+type SupportedLocale = "tr" | "en" | "de";
 
 const COPY = {
   tr: {
@@ -45,15 +45,14 @@ function useMounted(): boolean {
 /**
  * Çerez onay banner'ı (Google Consent Mode v2).
  *
- * Önceki onay (granted/denied) varsa banner gösterilmez. "granted" durumunda
- * GA'ya analitik onayı google-analytics.tsx içindeki inline script tarafından
- * (sayfa yüklenirken localStorage okunarak) zaten iletilir. Bu bileşen yalnızca
- * henüz seçim yapmamış kullanıcıya banner gösterir.
+ * Root layout seviyesinde render edildiği için herhangi bir next-intl client
+ * context'ine bağımlı değildir; locale sunucu layout'undan prop olarak gelir.
  */
-export function ConsentBanner() {
-  const locale = useLocale();
-  const copy = locale in COPY ? COPY[locale as keyof typeof COPY] : COPY.tr;
+export function ConsentBanner({ locale }: { locale: SupportedLocale }) {
+  const copy = COPY[locale];
   const mounted = useMounted();
+  const cookiePolicyHref =
+    locale === "tr" ? "/cerez-politikasi" : `/${locale}/cerez-politikasi`;
 
   // Lazy initializer — ilk render'dan önce localStorage'ı okur.
   const [decided, setDecided] = useState<boolean>(() => {
@@ -94,12 +93,12 @@ export function ConsentBanner() {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="min-w-0 text-sm text-ink-muted">
           {copy.text}{" "}
-          <Link
-            href="/cerez-politikasi"
+          <a
+            href={cookiePolicyHref}
             className="font-medium text-brand-700 hover:underline"
           >
             {copy.learnMore}
-          </Link>
+          </a>
         </p>
         <div className="flex shrink-0 items-center gap-2">
           <button
