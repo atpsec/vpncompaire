@@ -1,13 +1,15 @@
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { products } from "@/data/products";
+import { positioningFor } from "@/lib/editorial-positioning";
+import type { Locale } from "@/lib/site";
 
 export function Hero() {
-  const t = useTranslations("home.hero");
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
+  const copy = positioningFor(locale);
   const auditCount = products.filter((p) => p.highlights.audits).length;
   const monthYear = new Intl.DateTimeFormat(locale, {
     year: "numeric",
@@ -16,7 +18,6 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      {/* Soft, layered background — radial spotlights + subtle grid */}
       <div
         aria-hidden="true"
         className="absolute inset-0 -z-10"
@@ -38,34 +39,33 @@ export function Hero() {
       <Container>
         <div className="mx-auto max-w-4xl pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-200/70 bg-background/70 px-3 py-1 text-xs font-medium text-brand-800 shadow-sm backdrop-blur">
-            <Sparkles className="size-3.5 text-accent-500" /> {monthYear} · {t("methodologyTag")}
+            <Sparkles className="size-3.5 text-accent-500" /> {monthYear} · {copy.methodologyTag}
           </span>
 
           <h1 className="mt-5 text-[2rem] sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-strong text-balance leading-[1.08]">
-            {t("h1")}
+            {copy.heroTitle}
           </h1>
 
           <p className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-ink-muted text-balance leading-relaxed">
-            {t("subtitle")}
+            {copy.heroSubtitle}
           </p>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild variant="primary" size="md">
               <Link href="/en-iyi-vpn">
-                {t("ctaPrimary")}
+                {copy.primaryCta}
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
             <Button asChild variant="secondary" size="md">
-              <Link href="/metodoloji">{t("ctaSecondary")}</Link>
+              <Link href="/metodoloji">{copy.secondaryCta}</Link>
             </Button>
           </div>
 
-          {/* Stat strip — compact, editorial */}
           <dl className="mx-auto mt-7 grid max-w-xl grid-cols-3 divide-x divide-border rounded-xl border border-border bg-background/60 backdrop-blur shadow-sm">
-            <Stat value={products.length} label={t("trust.tested")} />
-            <Stat value={auditCount} label={t("trust.audits")} />
-            <Stat value="312" label={t("trust.hours")} />
+            <Stat value={products.length} label={copy.statProviders} />
+            <Stat value={auditCount} label={copy.statAudits} />
+            <Stat value="6" label={copy.statSources} />
           </dl>
         </div>
       </Container>
