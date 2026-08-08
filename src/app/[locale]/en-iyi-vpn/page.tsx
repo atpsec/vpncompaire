@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { TopVPNList } from "@/components/home/top-vpn-list";
+import { ReferenceVPNDirectory } from "@/components/provider/reference-vpn-directory";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
 import { topRankedProducts } from "@/data/products";
+import { referenceProducts } from "@/data/products-reference-localized";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
@@ -12,29 +14,29 @@ type Props = { params: Promise<{ locale: string }> };
 
 const copy = {
   tr: {
-    title: "VPN Karşılaştırması 2026 — Fiyat, Gizlilik, Denetim ve Özellikler",
-    description: "VPN sağlayıcılarını puan yerine doğrulanabilir özelliklerle karşılaştırın: fiyat, gizlilik politikası, bağımsız denetim, protokoller, cihaz desteği ve yargı yetkisi.",
+    title: "50 VPN Sağlayıcı Karşılaştırması 2026 — Gizlilik, Özellikler ve Kaynaklar",
+    description: "50 VPN sağlayıcı profilini puan yerine doğrulanabilir özelliklerle araştırın: gizlilik politikası, bağımsız denetim, protokoller, cihaz desteği, ağ bilgisi ve resmi kaynaklar.",
     breadcrumb: "VPN karşılaştırma rehberi",
-    h1: "VPN sağlayıcılarını özelliklerine göre karşılaştırın",
-    intro: "Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. Sağlayıcıları aynı bilgi alanlarında yan yana göstererek ihtiyacınıza uygun seçeneği araştırmanızı kolaylaştırır.",
+    h1: "50 VPN sağlayıcısını özelliklerine göre araştırın",
+    intro: "Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. 50 sağlayıcıyı aynı bilgi mimarisinde göstererek ihtiyaçlarınıza uygun seçenekleri kaynaklar üzerinden araştırmanızı kolaylaştırır.",
     home: "Ana sayfa",
     here: "VPN karşılaştırmaları",
   },
   en: {
-    title: "VPN Comparison 2026 — Pricing, Privacy, Audits and Features",
-    description: "Compare VPN providers using verifiable features instead of editorial scores: pricing, privacy policies, independent audits, protocols, device support and jurisdiction.",
+    title: "50 VPN Provider Comparison 2026 — Privacy, Features and Sources",
+    description: "Research 50 VPN provider profiles using verifiable information instead of editorial scores: privacy policies, audits, protocols, device support, network data and primary sources.",
     breadcrumb: "VPN comparison guide",
-    h1: "Compare VPN providers by verifiable features",
-    intro: "This is not a laboratory ranking of the 'best VPN'. Providers are shown side by side using consistent information fields so you can research the option that fits your needs.",
+    h1: "Research 50 VPN providers by verifiable features",
+    intro: "This is not a laboratory ranking of the 'best VPN'. It places 50 providers in a consistent information architecture so you can research options using source-based evidence.",
     home: "Home",
     here: "VPN comparisons",
   },
   de: {
-    title: "VPN-Vergleich 2026 — Preise, Datenschutz, Audits und Funktionen",
-    description: "VPN-Anbieter anhand überprüfbarer Merkmale statt redaktioneller Punktzahlen vergleichen: Preise, Datenschutz, unabhängige Audits, Protokolle, Geräte und Rechtsraum.",
+    title: "50 VPN-Anbieter im Vergleich 2026 — Datenschutz, Funktionen und Quellen",
+    description: "50 VPN-Anbieterprofile anhand überprüfbarer Informationen statt Punktzahlen recherchieren: Datenschutz, Audits, Protokolle, Geräte, Netzwerkdaten und Primärquellen.",
     breadcrumb: "VPN-Vergleichsratgeber",
-    h1: "VPN-Anbieter anhand überprüfbarer Merkmale vergleichen",
-    intro: "Dies ist keine Labor-Rangliste des 'besten VPN'. Anbieter werden anhand einheitlicher Informationsfelder gegenübergestellt, damit Sie die passende Option recherchieren können.",
+    h1: "50 VPN-Anbieter anhand überprüfbarer Merkmale recherchieren",
+    intro: "Dies ist keine Labor-Rangliste des 'besten VPN'. 50 Anbieter werden in einer einheitlichen Informationsstruktur dargestellt, damit Sie Optionen anhand von Quellen recherchieren können.",
     home: "Startseite",
     here: "VPN-Vergleiche",
   },
@@ -57,10 +59,11 @@ export default async function Page({ params }: Props) {
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   setRequestLocale(locale);
   const t = copy[locale];
+  const catalogForSchema = [...topRankedProducts(locale), ...referenceProducts];
 
   return (
     <>
-      <JsonLd data={itemListSchema(topRankedProducts(locale), locale)} />
+      <JsonLd data={itemListSchema(catalogForSchema, locale)} />
       <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.here, path: "/en-iyi-vpn" }], locale)} />
       <Container className="pt-12 sm:pt-16">
         <header className="max-w-3xl">
@@ -71,6 +74,7 @@ export default async function Page({ params }: Props) {
         <DataDisclaimer />
       </Container>
       <TopVPNList />
+      <ReferenceVPNDirectory />
     </>
   );
 }
