@@ -12,7 +12,6 @@ const themeInitScript = `(function(){try{var t=localStorage.getItem('vpnadvisor-
 export function ThemeScript() {
   return (
     <script
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: themeInitScript }}
     />
   );

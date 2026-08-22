@@ -197,18 +197,26 @@ export default async function Page({ params }: Props) {
         <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
           <p className="text-sm text-ink-muted">{c.relatedLabel}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            {c.relatedLinks.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-              >
-                {link.text}
-                {i === c.relatedLinks.length - 1 ? (
-                  <ArrowRight className="size-3" />
-                ) : null}
-              </Link>
-            ))}
+            {c.relatedLinks.map((link, i) => {
+              const content = (
+                <>
+                  {link.text}
+                  {i === c.relatedLinks.length - 1 ? (
+                    <ArrowRight className="size-3" />
+                  ) : null}
+                </>
+              );
+              return link.href === "/en-iyi/turkiye" ||
+                link.href === "/en-iyi/yurt-disindaki-turkler" ? (
+                <a key={link.href} href={link.href} className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">
+                  {content}
+                </a>
+              ) : (
+                <Link key={link.href} href={link.href} className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">
+                  {content}
+                </Link>
+              );
+            })}
           </div>
         </section>
       </Container>

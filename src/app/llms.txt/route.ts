@@ -1,10 +1,33 @@
 import { siteConfig } from "@/lib/site";
 import { rankedProducts } from "@/data/products";
+import { getBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
-export function GET() {
+export async function GET() {
   const list = rankedProducts();
+  const blogPosts = await Promise.all([
+    getBlogPosts("tr"),
+    getBlogPosts("en"),
+    getBlogPosts("de"),
+  ]);
+  const blogLocales = ["tr", "en", "de"] as const;
+  const latestBlogUpdate = blogPosts
+    .flat()
+    .map((post) => post.updatedAt)
+    .sort()
+    .at(-1);
+  const blogIndex = blogPosts
+    .map(
+      (posts, index) =>
+        `### ${blogLocales[index].toUpperCase()} blog yazıları\n\n${posts
+          .map(
+            (post) =>
+              `- [${post.title}](${siteConfig.url}${blogLocales[index] === "tr" ? "" : `/${blogLocales[index]}`}/blog/${post.slug}) — ${post.description}`,
+          )
+          .join("\n")}`,
+    )
+    .join("\n\n");
 
   const body = `# ${siteConfig.name}
 
@@ -54,6 +77,12 @@ ${list
 - [Ücretsiz vs Ücretli VPN](${siteConfig.url}/rehber/ucretsiz-vs-ucretli-vpn) — Karar matrisi
 - [VPN güvenlik kontrol listesi](${siteConfig.url}/rehber/vpn-guvenlik-kontrol-listesi) — 12 madde
 
+## Blog ve güncel içerik dizini
+
+Bu bölüm, içerik keşfi için kanonik blog URL'lerini ve kısa özetlerini listeler. Ayrıntılı iddialar, kaynaklar ve güncellik bilgisi ilgili sayfalarda yer alır.
+
+${blogIndex}
+
 ## Önemli Sayfalar
 
 - Ana sayfa: ${siteConfig.url}/
@@ -64,6 +93,13 @@ ${list
 - İletişim: ${siteConfig.url}/iletisim
 - Gizlilik Politikası: ${siteConfig.url}/gizlilik
 - Kullanım Şartları: ${siteConfig.url}/sartlar
+
+## Güncellik ve yöntem
+
+- Son blog güncellemesi: ${latestBlogUpdate ?? "Belirtilmemiş"}
+- Test metodolojisi: ${siteConfig.url}/metodoloji
+- Veri güncelliği ve editoryal açıklamalar: ${siteConfig.url}/reklam-aciklamasi
+- Dil girişleri: ${siteConfig.url}/, ${siteConfig.url}/en, ${siteConfig.url}/de
 `;
 
   return new Response(body, {

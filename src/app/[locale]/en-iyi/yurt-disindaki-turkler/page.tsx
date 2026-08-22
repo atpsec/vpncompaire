@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { ArrowRight, Globe2, Tv, CreditCard, Flag } from "lucide-react";
 import { Link } from "@/i18n/routing";
+import NextLink from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -247,12 +248,12 @@ export default async function Page({ params }: Props) {
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
           <p className="text-sm text-ink-muted">İlgili sayfalar</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            <Link
+            <NextLink
               href="/en-iyi/turkiye"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               <Flag className="size-3" /> Türkiye için
-            </Link>
+            </NextLink>
             <Link
               href="/en-iyi/streaming"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"

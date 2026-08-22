@@ -31,6 +31,8 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -57,7 +59,7 @@ export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  return <MethodologyView />;
+  return <MethodologyView locale={locale} />;
 }
 
 const TOOLS: ReadonlyArray<{ name: string; url: string }> = [
@@ -106,11 +108,22 @@ const SCORING_DIMENSIONS: ReadonlyArray<{
   { key: "pricing", Icon: Tag },
 ];
 
-function MethodologyView() {
+function MethodologyView({ locale }: { locale: string }) {
   const t = useTranslations("methodology");
+  const tNav = useTranslations("nav");
 
   return (
-    <Container size="md" className="py-12 sm:py-16 lg:py-20">
+    <>
+      <JsonLd
+        data={breadcrumbSchema(
+          [
+            { name: tNav("home"), path: "/" },
+            { name: t("h1"), path: "/metodoloji" },
+          ],
+          locale as "tr" | "en" | "de",
+        )}
+      />
+      <Container size="md" className="py-12 sm:py-16 lg:py-20">
       {/* HEADER */}
       <header className="min-w-0">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
@@ -374,7 +387,8 @@ function MethodologyView() {
           })}
         </p>
       </section>
-    </Container>
+      </Container>
+    </>
   );
 }
 

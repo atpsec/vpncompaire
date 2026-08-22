@@ -75,6 +75,27 @@ export function localizedAlternates(path = "", locale?: string) {
 }
 
 /**
+ * TR/EN içerik taşıyan sayfalar için alternates. DE isteği, ilgili sayfanın
+ * gerçek veri diline göre verilen fallback locale'e canonical edilir; böylece
+ * Almanca URL için sahte bir hreflang üretilmez.
+ */
+export function bilingualAlternates(
+  path = "",
+  locale: string,
+  fallbackLocale: "tr" | "en",
+) {
+  const activeLocale = locale === "tr" || locale === "en" ? locale : fallbackLocale;
+  return {
+    canonical: absoluteUrl(path, activeLocale),
+    languages: {
+      tr: absoluteUrl(path, "tr"),
+      en: absoluteUrl(path, "en"),
+      "x-default": absoluteUrl(path, "tr"),
+    },
+  };
+}
+
+/**
  * İçeriği yalnızca varsayılan dilde (TR) servis edilen sayfalar için alternates.
  * Canonical ve x-default daima TR URL'sini işaret eder; sahte EN/DE hreflang
  * üretmez. Bu sayfalarda EN/DE istekleri proxy.ts ile TR'ye 301'lenir.

@@ -7,7 +7,11 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
 import { topRankedProducts } from "@/data/products";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
-import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
+import {
+  absoluteUrl,
+  bilingualAlternates,
+  type Locale,
+} from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -19,7 +23,8 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/en-iyi-vpn", locale),
+    alternates: bilingualAlternates("/en-iyi-vpn", locale, "en"),
+    robots: locale === "de" ? { index: false, follow: true } : undefined,
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),

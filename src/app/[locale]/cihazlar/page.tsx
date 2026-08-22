@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { devices } from "@/data/devices";
 import { devicesEn } from "@/data/devices.en";
-import { absoluteUrl, localizedAlternates } from "@/lib/site";
+import { absoluteUrl, bilingualAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/cihazlar", locale),
+    alternates: bilingualAlternates("/cihazlar", locale, "tr"),
+    robots: locale === "de" ? { index: false, follow: true } : undefined,
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),

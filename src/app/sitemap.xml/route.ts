@@ -51,8 +51,6 @@ const toolPaths = [
 ];
 
 export async function GET() {
-  const today = new Date().toISOString().split("T")[0];
-
   const allLocales = siteConfig.locales as readonly BlogLocale[];
   // Türkçe-only (içeriği yalnızca TR dilinde servis edilen) bölümler için
   // yalnızca TR URL'i üret. EN/DE yanlış-dil varyantları proxy.ts tarafından
@@ -69,12 +67,12 @@ export async function GET() {
 
   const staticPaths: Entry[] = [
     { path: "/", priority: 1.0, changefreq: "daily" },
-    { path: "/en-iyi-vpn", priority: 0.95, changefreq: "weekly" },
+    { path: "/en-iyi-vpn", priority: 0.95, changefreq: "weekly", locales: ["tr", "en"] },
     { path: "/en-iyi", priority: 0.8, changefreq: "weekly" },
     // NOT: /karsilastir ve /rehber hub'ları SECTION_HUB_SERVED üzerinden
     // yerelleştirilmiş slug'larıyla (örn. /en/comparison, /de/vergleich)
     // aşağıda ayrıca üretilir; Türkçe-slug EN/DE varyantları 301'lenir.
-    { path: "/cihazlar", priority: 0.8, changefreq: "weekly" },
+    { path: "/cihazlar", priority: 0.8, changefreq: "weekly", locales: ["tr", "en"] },
     { path: "/blog", priority: 0.85, changefreq: "daily" },
     { path: "/metodoloji", priority: 0.8, changefreq: "monthly" },
     { path: "/hakkimizda", priority: 0.5, changefreq: "monthly" },
@@ -90,6 +88,7 @@ export async function GET() {
     path: `/inceleme/${p.slug}`,
     priority: 0.85,
     changefreq: "weekly",
+    locales: ["tr", "en"],
   }));
 
   // Türkçe-only use-case sayfaları (turkiye, yurt-disindaki-turkler) yalnızca TR.
@@ -105,6 +104,7 @@ export async function GET() {
     path: `/cihazlar/${slug}`,
     priority: 0.8,
     changefreq: "monthly",
+    locales: ["tr", "en"],
   }));
 
   const all: Entry[] = [
@@ -137,6 +137,10 @@ export async function GET() {
     return lines.join("\n");
   }
 
+  function lastmodXml(lastmod?: string): string {
+    return lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : "";
+  }
+
   // Blog posts: TR/EN slugs differ; DE currently reuses EN slugs unless a DE slug exists.
   const [trPosts, enPosts, dePosts] = await Promise.all([
     getBlogPosts("tr"),
@@ -152,7 +156,7 @@ export async function GET() {
           locale === siteConfig.defaultLocale ? u.priority : u.priority * 0.9;
         return `  <url>
     <loc>${localizedUrl(u.path, locale)}</loc>
-    <lastmod>${today}</lastmod>
+${lastmodXml()}
     <changefreq>${u.changefreq}</changefreq>
     <priority>${priority.toFixed(2)}</priority>
 ${altLinks(u.path, pathLocales)}
@@ -184,7 +188,7 @@ ${altLinks(u.path, pathLocales)}
       const p = locale === DEFAULT_LOCALE ? priority : priority * 0.9;
       return `  <url>
     <loc>${urlFor(locale)}</loc>
-    <lastmod>${today}</lastmod>
+${lastmodXml()}
     <changefreq>${changefreq}</changefreq>
     <priority>${p.toFixed(2)}</priority>
 ${alt}
@@ -228,6 +232,12 @@ ${alt}
     return localizedUrl(`/blog/${slugForLocale(entry, locale)}`, locale);
   }
 
+  const blogSlugsByLocale: Record<BlogLocale, Set<string>> = {
+    tr: new Set(trPosts.map((post) => post.slug)),
+    en: new Set(enPosts.map((post) => post.slug)),
+    de: new Set(dePosts.map((post) => post.slug)),
+  };
+
   function blogAltLinks(
     entry: BlogSlugEntry | null,
     self: { slug: string; locale: BlogLocale },
@@ -235,12 +245,21 @@ ${alt}
     if (!entry) {
       return `    <xhtml:link rel="alternate" hreflang="${self.locale}" href="${localizedUrl(`/blog/${self.slug}`, self.locale)}"/>`;
     }
-    const lines = allLocales.map(
+    const servedLocales = allLocales.filter((locale) =>
+      blogSlugsByLocale[locale].has(slugForLocale(entry, locale)),
+    );
+    const lines = servedLocales.map(
       (locale) =>
         `    <xhtml:link rel="alternate" hreflang="${locale}" href="${blogUrl(entry, locale)}"/>`,
     );
+    if (lines.length === 0) {
+      return `    <xhtml:link rel="alternate" hreflang="${self.locale}" href="${localizedUrl(`/blog/${self.slug}`, self.locale)}"/>`;
+    }
+    const xDefaultLocale = servedLocales.includes(siteConfig.defaultLocale)
+      ? siteConfig.defaultLocale
+      : servedLocales[0];
     lines.push(
-      `    <xhtml:link rel="alternate" hreflang="x-default" href="${blogUrl(entry, siteConfig.defaultLocale)}"/>`,
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${blogUrl(entry, xDefaultLocale)}"/>`,
     );
     return lines.join("\n");
   }
@@ -250,7 +269,7 @@ ${alt}
       const entry = getBlogSlugEntry(p.slug, "tr");
       return `  <url>
     <loc>${siteConfig.url}/blog/${p.slug}</loc>
-    <lastmod>${p.updatedAt}</lastmod>
+${lastmodXml(p.updatedAt)}
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
 ${blogAltLinks(entry, { slug: p.slug, locale: "tr" })}
@@ -260,7 +279,7 @@ ${blogAltLinks(entry, { slug: p.slug, locale: "tr" })}
       const entry = getBlogSlugEntry(p.slug, "en");
       return `  <url>
     <loc>${siteConfig.url}/en/blog/${p.slug}</loc>
-    <lastmod>${p.updatedAt}</lastmod>
+${lastmodXml(p.updatedAt)}
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
 ${blogAltLinks(entry, { slug: p.slug, locale: "en" })}
@@ -270,7 +289,7 @@ ${blogAltLinks(entry, { slug: p.slug, locale: "en" })}
       const entry = getBlogSlugEntry(p.slug, "de");
       return `  <url>
     <loc>${siteConfig.url}/de/blog/${p.slug}</loc>
-    <lastmod>${p.updatedAt}</lastmod>
+${lastmodXml(p.updatedAt)}
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
 ${blogAltLinks(entry, { slug: p.slug, locale: "de" })}

@@ -59,6 +59,14 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     applicationName: siteConfig.name,
     authors: [{ name: siteConfig.author.name }],
+    creator: siteConfig.author.name,
+    publisher: siteConfig.name,
+    category: "technology",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
     icons: {
       icon: [
         { url: "/favicon.svg", type: "image/svg+xml" },
@@ -83,11 +91,20 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       siteName: siteConfig.name,
       alternateLocale: ALTERNATE_OG_LOCALES[locale],
+      images: [
+        {
+          url: siteConfig.ogImage,
+          width: 1200,
+          height: 630,
+          alt: TITLE_SHORT[locale],
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: TITLE_SHORT[locale],
       description,
+      images: [siteConfig.ogImage],
     },
     robots: {
       index: true,

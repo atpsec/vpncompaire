@@ -11,6 +11,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import type { Locale } from "@/lib/site";
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
 export type UseCasePick = {
   slug: string;
@@ -177,15 +178,35 @@ export function UseCasePage({
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
           <p className="text-sm text-ink-muted">{t("relatedHeading")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
-            {relatedLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-              >
-                {l.label}
-              </Link>
-            ))}
+            {relatedLinks.map((l) => {
+              const isTrOnly =
+                l.href === "/en-iyi/turkiye" ||
+                l.href === "/en-iyi/yurt-disindaki-turkler";
+              const href = l.href.startsWith("/karsilastir/")
+                ? getLocalizedLinkHref({
+                    locale: locale as AppLocale,
+                    section: "comparison",
+                    contentId: l.href.split("/").pop(),
+                  })
+                : l.href;
+              return isTrOnly ? (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+                >
+                  {l.label}
+                </a>
+              ) : (
+                <Link
+                  key={l.href}
+                  href={href}
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
           </div>
         </section>
       </Container>

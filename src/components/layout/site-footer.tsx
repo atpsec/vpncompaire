@@ -1,13 +1,17 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ShieldCheck, Info } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 import { SocialLinks, SOCIAL_LINKS_ENABLED } from "@/components/layout/social-links";
 
 export function SiteFooter() {
   const t = useTranslations("footer");
   const tNav = useTranslations("nav");
   const tDisclosure = useTranslations("disclosure");
+  const locale = useLocale() as AppLocale;
+  const comparisonHref = getLocalizedLinkHref({ locale, section: "comparison" });
+  const guideHref = getLocalizedLinkHref({ locale, section: "guide" });
   const year = new Date().getFullYear();
 
   return (
@@ -56,7 +60,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/karsilastir"
+                  href={comparisonHref}
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("compare")}
@@ -72,7 +76,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/rehber"
+                  href={guideHref}
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("guides")}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -9,20 +9,21 @@ import { Button } from "@/components/ui/button";
 import { SocialLinks } from "@/components/layout/social-links";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
-
-const navItems = [
-  { href: "/en-iyi-vpn", labelKey: "reviews" },
-  { href: "/karsilastir", labelKey: "compare" },
-  { href: "/blog", labelKey: "blog" },
-  { href: "/sana-uygun-vpn", labelKey: "quiz" },
-  { href: "/cihazlar", labelKey: "devices" },
-  { href: "/araclar", labelKey: "tools" },
-  { href: "/rehber", labelKey: "guides" },
-] as const;
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
 export function SiteHeader() {
   const t = useTranslations("nav");
+  const locale = useLocale() as AppLocale;
   const [open, setOpen] = useState(false);
+  const navItems = [
+    { href: "/en-iyi-vpn", labelKey: "reviews" },
+    { href: getLocalizedLinkHref({ locale, section: "comparison" }), labelKey: "compare" },
+    { href: "/blog", labelKey: "blog" },
+    { href: "/sana-uygun-vpn", labelKey: "quiz" },
+    { href: "/cihazlar", labelKey: "devices" },
+    { href: "/araclar", labelKey: "tools" },
+    { href: getLocalizedLinkHref({ locale, section: "guide" }), labelKey: "guides" },
+  ] as const;
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">

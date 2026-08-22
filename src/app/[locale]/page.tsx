@@ -30,7 +30,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={organizationSchema()} />
+      <JsonLd data={organizationSchema(locale)} />
       <JsonLd data={websiteSchema(locale)} />
       <JsonLd data={itemListSchema(topRankedProducts(locale), locale)} />
       <JsonLd data={faqSchema(homeFaqs(locale))} />

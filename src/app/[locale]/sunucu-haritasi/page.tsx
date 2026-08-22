@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { FeatureFilter } from "@/components/filter/feature-filter";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -100,6 +101,10 @@ export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const comparisonHref = getLocalizedLinkHref({
+    locale: locale as AppLocale,
+    section: "comparison",
+  });
 
   return (
     <>
@@ -151,7 +156,7 @@ export default async function Page({ params }: Props) {
             {c.related.map((r) => (
               <Link
                 key={r.href}
-                href={r.href}
+                href={r.href === "/karsilastir" ? comparisonHref : r.href}
                 className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
               >
                 {r.label}

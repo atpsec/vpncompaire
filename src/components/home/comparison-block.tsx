@@ -4,7 +4,12 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
-import { SECTION_SLUGS, DEFAULT_LOCALE, type AppLocale } from "@/lib/i18n-paths";
+import {
+  getLocalizedLinkHref,
+  SECTION_SLUGS,
+  DEFAULT_LOCALE,
+  type AppLocale,
+} from "@/lib/i18n-paths";
 
 const COMPARISONS = [
   {
@@ -56,10 +61,18 @@ export function ComparisonBlock() {
 
         <div className="grid sm:grid-cols-2 gap-4">
           {COMPARISONS.map((c) => {
+            const href =
+              c.slug === "ucretsiz-vs-ucretli-vpn"
+                ? getLocalizedLinkHref({
+                    locale,
+                    section: "guide",
+                    contentId: "free-vs-paid-vpn",
+                  })
+                : `${comparisonBase}/${c.slug}`;
             return (
               <Link
                 key={c.slug}
-                href={`${comparisonBase}/${c.slug}`}
+                href={href}
                 className="group"
               >
                 <Card className="p-5 hover:border-brand-300 hover:shadow-md transition-all h-full">

@@ -688,11 +688,42 @@ export function localizePathname(pathname: string, targetLocale: AppLocale): str
   const segments = normalized.split("/").filter(Boolean);
   if (segments.length === 0) return normalized;
 
-  const sectionSlug = segments[0];
-  const section = sectionForSlug(sectionSlug);
-  if (!section) return normalized;
+  // Accept both the locale-prefixed public form (/en/...) and the
+  // locale-neutral form used by next-intl links (/...).
+  const sourceLocale =
+    segments[0] === "en" || segments[0] === "de"
+      ? (segments[0] as AppLocale)
+      : DEFAULT_LOCALE;
+  const pathSegments = sourceLocale === DEFAULT_LOCALE ? segments : segments.slice(1);
+  const localeNeutralPath = `/${pathSegments.join("/")}`;
 
-  if (segments.length === 1) {
+  if (pathSegments.length === 0) {
+    return targetLocale === DEFAULT_LOCALE ? "/" : `/${targetLocale}`;
+  }
+
+  const sectionSlug = pathSegments[0];
+  const section = sectionForSlug(sectionSlug);
+  if (!section) {
+    // Product and device data currently have TR/EN source content only. Keep
+    // German links on the real English page instead of creating a German URL
+    // whose visible data is not German.
+    if (
+      targetLocale === "de" &&
+      (pathSegments[0] === "inceleme" || pathSegments[0] === "cihazlar")
+    ) {
+      return `/en${localeNeutralPath}`;
+    }
+    // Generic locale-aware routes (reviews, tools, legal pages, etc.) do not
+    // have translated slugs, so only the locale prefix changes.
+    if (TR_ONLY_EXACT_PATHS.has(pathSegments.join("/"))) {
+      return localeNeutralPath;
+    }
+    return targetLocale === DEFAULT_LOCALE
+      ? localeNeutralPath
+      : `/${targetLocale}${localeNeutralPath}`;
+  }
+
+  if (pathSegments.length === 1) {
     const hubLocales = SECTION_HUB_SERVED[section];
     if (hubLocales?.includes(targetLocale)) {
       return getLocalizedSectionPath(targetLocale, section);
@@ -700,7 +731,7 @@ export function localizePathname(pathname: string, targetLocale: AppLocale): str
     return normalized;
   }
 
-  const pageSlug = segments[1];
+  const pageSlug = pathSegments[1];
   const found = findContentBySlug(section, pageSlug);
   if (found) {
     const served = availableLocales(found.contentId);
@@ -709,10 +740,12 @@ export function localizePathname(pathname: string, targetLocale: AppLocale): str
       : DEFAULT_LOCALE;
     const canonical = canonicalServedPath(found.contentId, effectiveLocale);
     if (canonical) {
-      const extra = segments.slice(2);
+      const extra = pathSegments.slice(2);
       return extra.length > 0 ? `${canonical}/${extra.join("/")}` : canonical;
     }
   }
 
-  return normalized;
+  return targetLocale === DEFAULT_LOCALE
+    ? localeNeutralPath
+    : `/${targetLocale}${localeNeutralPath}`;
 }

@@ -10,13 +10,15 @@ function inLanguageOf(locale: Locale): string {
   return "tr-TR";
 }
 
-export function organizationSchema(): JsonLdObject {
+export function organizationSchema(locale: Locale = "tr"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
     url: siteConfig.url,
-    description: siteConfig.description.tr,
+    description: siteConfig.description[locale],
+    inLanguage: inLanguageOf(locale),
     logo: {
       "@type": "ImageObject",
       url: absoluteUrl("/favicon.svg"),
@@ -29,11 +31,13 @@ export function websiteSchema(locale: Locale = "tr"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${absoluteUrl("", locale)}/#website`,
     name: siteConfig.name,
-    url: siteConfig.url,
+    url: absoluteUrl("", locale),
     inLanguage: inLanguageOf(locale),
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
     },
   };
@@ -61,6 +65,8 @@ export function itemListSchema(
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    numberOfItems: items.length,
     itemListElement: items.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -103,6 +109,8 @@ export function articleSchema(post: {
   author: string;
   imageUrl: string;
   locale: Locale;
+  category?: string;
+  tags?: string[];
 }): JsonLdObject {
   const localePath = post.locale === "tr" ? "" : `/${post.locale}`;
   const articleUrl = absoluteUrl(`${localePath}/blog/${post.slug}`);
@@ -110,11 +118,14 @@ export function articleSchema(post: {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${articleUrl}#article`,
     headline: post.title,
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
     inLanguage: inLanguageOf(post.locale),
+    articleSection: post.category,
+    keywords: post.tags,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
@@ -122,9 +133,11 @@ export function articleSchema(post: {
     author: {
       "@type": "Person",
       name: post.author,
+      url: absoluteUrl("/hakkimizda"),
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
       logo: {
@@ -139,6 +152,10 @@ export function articleSchema(post: {
       height: 630,
     },
     url: articleUrl,
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": `${absoluteUrl("", post.locale)}/#website`,
+    },
   };
 }
 

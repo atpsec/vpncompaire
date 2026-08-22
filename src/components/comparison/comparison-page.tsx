@@ -13,6 +13,7 @@ import { getProduct } from "@/data/products";
 import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
+import { getLocalizedLinkHref, getLocalizedPath, type AppLocale } from "@/lib/i18n-paths";
 
 export type ComparisonCategory = {
   name: string;
@@ -53,6 +54,14 @@ export async function ComparisonPage({
   const b = getProduct(productSlugB, locale as "tr" | "en");
   if (!a || !b) return null;
   const t = await getTranslations({ locale, namespace: "comparison" });
+  const appLocale = locale as AppLocale;
+  const hubPath = getLocalizedPath({ locale: appLocale, section: "comparison" });
+  const detailPath = getLocalizedPath({
+    locale: appLocale,
+    section: "comparison",
+    contentId: slug,
+  });
+  const hubHref = getLocalizedLinkHref({ locale: appLocale, section: "comparison" });
 
   const title = `${a.brand} vs ${b.brand}`;
 
@@ -62,8 +71,8 @@ export async function ComparisonPage({
         data={breadcrumbSchema(
           [
             { name: t("breadcrumbHome"), path: "/" },
-            { name: t("breadcrumbHub"), path: "/karsilastir" },
-            { name: title, path: `/karsilastir/${slug}` },
+            { name: t("breadcrumbHub"), path: hubPath },
+            { name: title, path: detailPath },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -76,7 +85,7 @@ export async function ComparisonPage({
             {t("breadcrumbHome")}
           </Link>{" "}
           ›{" "}
-          <Link href="/karsilastir" className="hover:text-ink">
+          <Link href={hubHref} className="hover:text-ink">
             {t("breadcrumbHub")}
           </Link>{" "}
           › <span className="text-ink-strong">{title}</span>

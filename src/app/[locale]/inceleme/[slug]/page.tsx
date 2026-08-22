@@ -13,7 +13,7 @@ import { PricingPlans } from "@/components/product/pricing-plans";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { localizedAlternates } from "@/lib/site";
+import { absoluteUrl, bilingualAlternates } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
@@ -63,7 +63,8 @@ export async function generateMetadata({
       positioning: product.positioning,
     }),
     description: product.summary,
-    alternates: localizedAlternates(`/inceleme/${product.slug}`, locale),
+    alternates: bilingualAlternates(`/inceleme/${product.slug}`, locale, "en"),
+    robots: locale === "de" ? { index: false, follow: true } : undefined,
   };
 }
 
@@ -93,7 +94,9 @@ export default async function Page({ params }: Props) {
     },
     name: `${product.brand} Review (2026)`,
     reviewBody: product.summary,
-    datePublished: "2026-05-01",
+    datePublished: product.lastTestedAt,
+    dateModified: product.pricingVerifiedAt,
+    url: absoluteUrl(`/inceleme/${product.slug}`, locale as "tr" | "en" | "de"),
   };
 
   return (
