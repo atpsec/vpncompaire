@@ -11,7 +11,8 @@
     "start": "next start",
     "start:hostinger": "next start -p ${PORT:-3000}",
     "lint": "eslint",
-    "audit:i18n": "node scripts/audit-i18n.mjs"
+    "audit:i18n": "node scripts/audit-i18n.mjs",
+    "audit:seo": "node scripts/audit-seo.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -52,3 +53,4 @@
     "typescript": "^5"
   }
 }
+

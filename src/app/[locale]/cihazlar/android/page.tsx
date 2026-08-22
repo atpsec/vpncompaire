@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { DevicePage } from "@/components/device/device-page";
 import { getDevice } from "@/data/devices";
-import { localizedAlternates } from "@/lib/site";
+import { bilingualAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -14,7 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: device.metaTitle,
     description: device.metaDescription,
-    alternates: localizedAlternates("/cihazlar/android", locale),
+    alternates: bilingualAlternates("/cihazlar/android", locale, "tr"),
+    robots: locale === "de" ? { index: false, follow: true } : undefined,
   };
 }
 
@@ -25,3 +26,4 @@ export default async function Page({ params }: Props) {
   if (!device) notFound();
   return <DevicePage device={device} locale={locale} />;
 }
+

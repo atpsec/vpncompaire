@@ -90,8 +90,8 @@ function UseCaseHubView() {
         </header>
 
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {USE_CASES.map(({ slug, Icon, tone }) => (
-            <Link key={slug} href={`/en-iyi/${slug}`} className="group">
+          {USE_CASES.map(({ slug, Icon, tone }) => {
+            const card = (
               <Card className="p-5 hover:border-brand-300 hover:shadow-md transition-all h-full">
                 <div
                   className={
@@ -113,10 +113,21 @@ function UseCaseHubView() {
                   {t("cardCta")} <ArrowRight className="ml-1 size-3" />
                 </div>
               </Card>
-            </Link>
-          ))}
+            );
+            const href = `/en-iyi/${slug}`;
+            return slug === "turkiye" || slug === "yurt-disindaki-turkler" ? (
+              <a key={slug} href={href} className="group">
+                {card}
+              </a>
+            ) : (
+              <Link key={slug} href={href} className="group">
+                {card}
+              </Link>
+            );
+          })}
         </div>
       </Container>
     </>
   );
 }
+

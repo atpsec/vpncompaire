@@ -3,6 +3,8 @@ import { setRequestLocale } from "next-intl/server";
 import { ShieldCheck, FileSearch, Scale, RefreshCw, Eye, ListChecks, CalendarDays, ExternalLink, AlertTriangle, BookOpen, Database, Link2 } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -109,7 +111,9 @@ export default async function Page({ params }: Props) {
   const date = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date("2026-08-08"));
 
   return (
-    <Container size="md" className="py-12 sm:py-16 lg:py-20">
+    <>
+      <JsonLd data={breadcrumbSchema([{ name: locale === "tr" ? "Ana sayfa" : locale === "de" ? "Startseite" : "Home", path: "/" }, { name: t.h1, path: "/metodoloji" }], locale)} />
+      <Container size="md" className="py-12 sm:py-16 lg:py-20">
       <header className="min-w-0">
         <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700"><ShieldCheck className="size-3.5" /> {t.badge}</span>
         <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-strong break-words">{t.h1}</h1>
@@ -129,10 +133,12 @@ export default async function Page({ params }: Props) {
       <section id="s5" className="mt-14 scroll-mt-24"><Heading icon={<Eye className="size-5" />} title={t.limitsTitle} /><div className="mt-6 rounded-xl border border-border bg-surface-base p-5 dark:bg-surface-subtle"><ul className="space-y-3 text-sm text-ink">{t.limits.map((item) => <li key={item} className="flex items-start gap-2"><AlertTriangle className="size-4 text-amber-600 shrink-0 mt-0.5" /><span className="leading-relaxed">{item}</span></li>)}</ul><Link href="/reklam-aciklamasi" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 underline">{t.disclosure}<ExternalLink className="size-3.5" /></Link></div></section>
 
       <section className="mt-14 rounded-xl border border-border bg-brand-50/40 p-5 sm:p-6"><div className="flex items-start gap-3"><BookOpen className="size-5 text-brand-700 shrink-0 mt-0.5" /><p className="text-sm text-ink leading-relaxed">{locale === "tr" ? "Referans yaklaşımımızın temel ilkesi basittir: kaynağı göster, bilgiyi sınıflandır, belirsizliği saklama ve test etmediğin şeyi test edilmiş gibi sunma." : locale === "de" ? "Unser Referenzprinzip ist einfach: Quelle zeigen, Information einordnen, Unsicherheit offenlegen und nichts als getestet darstellen, was nicht getestet wurde." : "Our reference principle is simple: show the source, classify the information, disclose uncertainty, and never present something as tested when it was not tested."}</p></div></section>
-    </Container>
+      </Container>
+    </>
   );
 }
 
 function Heading({ icon, title }: { icon: React.ReactNode; title: string }) {
   return <h2 className="flex items-center gap-2 text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">{icon}{title}</h2>;
 }
+

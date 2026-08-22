@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { getProduct } from "@/data/products";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/seo";
 import { contentAlternates, type Locale } from "@/lib/site";
 import { FactualComparison } from "@/components/comparison/factual-comparison";
 
@@ -29,5 +31,7 @@ export default async function Page({ params }: Props) {
   const left = getProduct("proton-vpn", productLocale)!;
   const right = getProduct("mullvad", productLocale)!;
   const t = copy[locale];
-  return <FactualComparison locale={locale} title={t.title} description={t.description} left={left} right={right} />;
+  const alternates = contentAlternates(CONTENT_ID, locale);
+  return <><JsonLd data={breadcrumbSchema([{ name: locale === "tr" ? "Ana sayfa" : locale === "de" ? "Startseite" : "Home", path: "/" }, { name: t.title, path: alternates.canonical }], locale)} /><FactualComparison locale={locale} title={t.title} description={t.description} left={left} right={right} /></>;
 }
+

@@ -12,6 +12,7 @@ import type { LucideIcon } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
 type Tool = {
   name: string;
@@ -612,6 +613,23 @@ export function getSecurityContent(locale: string) {
 
 export function SecurityToolsBody({ locale }: { locale: string }) {
   const { strings, categories } = getSecurityContent(locale);
+  const nextLinks = strings.nextLinks.map((link) => ({
+    ...link,
+    href:
+      link.href === "/rehber/vpn-nedir"
+        ? getLocalizedLinkHref({
+            locale: locale as AppLocale,
+            section: "guide",
+            contentId: "what-is-vpn",
+          })
+        : link.href === "/rehber/vpn-guvenlik-kontrol-listesi"
+          ? getLocalizedLinkHref({
+              locale: locale as AppLocale,
+              section: "guide",
+              contentId: "vpn-security-checklist",
+            })
+          : link.href,
+  }));
   return (
     <>
       <p className="text-sm text-ink-muted">
@@ -737,7 +755,7 @@ export function SecurityToolsBody({ locale }: { locale: string }) {
       <section className="mt-12 rounded-xl border border-border bg-brand-50/30 p-6 text-center">
         <p className="text-sm text-ink-muted">{strings.nextStep}</p>
         <div className="mt-3 flex flex-wrap gap-2 justify-center">
-          {strings.nextLinks.map((l) => (
+          {nextLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
@@ -751,3 +769,4 @@ export function SecurityToolsBody({ locale }: { locale: string }) {
     </>
   );
 }
+

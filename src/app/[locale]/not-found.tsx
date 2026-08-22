@@ -1,12 +1,16 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Search, Home } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
 export default function NotFoundPage() {
   const t = useTranslations("errors.notFound");
+  const locale = useLocale() as AppLocale;
+  const comparisonHref = getLocalizedLinkHref({ locale, section: "comparison" });
+  const guideHref = getLocalizedLinkHref({ locale, section: "guide" });
   return (
     <Container size="md" className="py-20 sm:py-32">
       <div className="text-center">
@@ -51,7 +55,7 @@ export default function NotFoundPage() {
             {t("cards.compare.desc")}
           </p>
           <Link
-            href="/karsilastir"
+            href={comparisonHref}
             className="mt-2 inline-block text-sm font-medium text-brand-700 hover:underline"
           >
             {t("cards.compare.link")}
@@ -63,7 +67,7 @@ export default function NotFoundPage() {
             {t("cards.guides.desc")}
           </p>
           <Link
-            href="/rehber"
+            href={guideHref}
             className="mt-2 inline-block text-sm font-medium text-brand-700 hover:underline"
           >
             {t("cards.guides.link")}
@@ -73,3 +77,4 @@ export default function NotFoundPage() {
     </Container>
   );
 }
+

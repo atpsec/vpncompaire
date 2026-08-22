@@ -155,6 +155,8 @@ export default async function BlogPostPage({ params }: Props) {
     author: frontmatter.author,
     imageUrl: heroImage.url,
     locale,
+    category: frontmatter.category,
+    tags: frontmatter.tags,
   });
 
   const homeName =
@@ -219,3 +221,4 @@ export default async function BlogPostPage({ params }: Props) {
     </article>
   );
 }
+

@@ -327,6 +327,12 @@ export function getRefundContent(locale: string) {
 }
 
 export function RefundBody({ locale }: { locale: string }) {
+  const freeVsPaidHref =
+    locale === "en"
+      ? "/guide/free-vs-paid-vpn"
+      : locale === "de"
+        ? "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn"
+        : "/rehber/ucretsiz-vs-ucretli-vpn";
   const products = rankedProducts(locale as "tr" | "en");
   const { strings, cancelInfo, faqs } = getRefundContent(locale);
 
@@ -481,7 +487,7 @@ export function RefundBody({ locale }: { locale: string }) {
             {strings.relatedCalculator}
           </Link>
           <Link
-            href="/rehber/ucretsiz-vs-ucretli-vpn"
+            href={freeVsPaidHref}
             className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {strings.relatedFreeVsPaid}
@@ -497,3 +503,4 @@ export function RefundBody({ locale }: { locale: string }) {
     </>
   );
 }
+

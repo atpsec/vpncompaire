@@ -1,12 +1,17 @@
 import { siteConfig } from "@/lib/site";
 import { rankedProducts } from "@/data/products";
 import { referenceProducts } from "@/data/products-reference-localized";
+import { getBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
-export function GET() {
+export async function GET() {
   const core = rankedProducts().filter((p) => p.slug !== "atlas-vpn");
   const catalog = [...core, ...referenceProducts];
+  const blogPosts = await Promise.all([getBlogPosts("tr"), getBlogPosts("en"), getBlogPosts("de")]);
+  const blogLocales = ["tr", "en", "de"] as const;
+  const latestBlogUpdate = blogPosts.flat().map((post) => post.updatedAt).sort().at(-1);
+  const blogIndex = blogPosts.map((posts, index) => `### ${blogLocales[index].toUpperCase()} blog yazıları\n\n${posts.map((post) => `- [${post.title}](${siteConfig.url}${blogLocales[index] === "tr" ? "" : `/${blogLocales[index]}`}/blog/${post.slug}) — ${post.description}`).join("\n")}`).join("\n\n");
 
   const body = `# ${siteConfig.name}
 
@@ -53,6 +58,10 @@ ${catalog
 - [VPN güvenlik kontrol listesi](${siteConfig.url}/rehber/vpn-guvenlik-kontrol-listesi)
 - [Blog ve güncel teknik açıklamalar](${siteConfig.url}/blog)
 
+## Blog ve güncel içerik dizini
+
+${blogIndex}
+
 ## Temel karşılaştırma alanları
 
 - Gizlilik politikası ve veri toplama kapsamı
@@ -78,9 +87,16 @@ ${catalog
 ## Dil sürümleri
 
 Türkçe ana sürümdür. İngilizce içerik /en, Almanca içerik /de altında sunulur. Sayfalarda canonical ve hreflang ilişkileri içerik gerçekten mevcut olduğunda yayınlanır.
+
+## Güncellik
+
+- Son blog güncellemesi: ${latestBlogUpdate ?? "Belirtilmemiş"}
+- Metodoloji: ${siteConfig.url}/metodoloji
+- Reklam ve gelir açıklaması: ${siteConfig.url}/reklam-aciklamasi
 `;
 
   return new Response(body, {
     headers: { "Content-Type": "text/plain; charset=utf-8" },
   });
 }
+

@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { CostCalculator } from "@/components/calc/cost-calculator";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -40,6 +41,10 @@ function CalculatorPageView() {
   const t = useTranslations("calculator");
   const tNav = useTranslations("nav");
   const locale = useLocale();
+  const comparisonHref = getLocalizedLinkHref({
+    locale: locale as AppLocale,
+    section: "comparison",
+  });
 
   return (
     <>
@@ -120,7 +125,7 @@ function CalculatorPageView() {
               {t("altLinks.quiz")}
             </Link>
             <Link
-              href="/karsilastir"
+              href={comparisonHref}
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.compare")}
@@ -137,3 +142,4 @@ function CalculatorPageView() {
     </>
   );
 }
+

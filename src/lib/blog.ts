@@ -3,6 +3,10 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import type { Locale } from "@/lib/site";
+import {
+  localizePathname,
+  type AppLocale,
+} from "@/lib/i18n-paths";
 
 export type BlogPostFrontmatter = {
   slug: string;
@@ -25,7 +29,51 @@ export type BlogPost = BlogPostFrontmatter & {
 // Slug eşleme tablosu ve karşılık fonksiyonu Edge-safe `./blog-slugs`
 // modülüne taşındı (proxy.ts oradan import ediyor). Mevcut importerlar
 // için buradan re-export ediliyor.
+import {
+  getBlogSlugEntry,
+  slugForLocale,
+} from "./blog-slugs";
+
 export { BLOG_SLUG_MAP, getCounterpartSlug } from "./blog-slugs";
+
+function splitHref(href: string): { path: string; suffix: string } {
+  const match = href.match(/^([^?#]*)([?#].*)?$/);
+  return { path: match?.[1] ?? href, suffix: match?.[2] ?? "" };
+}
+
+function findBlogEntry(slug: string) {
+  return (
+    getBlogSlugEntry(slug, "tr") ??
+    getBlogSlugEntry(slug, "en") ??
+    getBlogSlugEntry(slug, "de")
+  );
+}
+
+function localizeMarkdownLinks(source: string, locale: AppLocale): string {
+  return source.replace(/(\]\()((?:\/[^\s)]+))/g, (full, prefix, href) => {
+    const { path: hrefPath, suffix } = splitHref(href);
+    if (!hrefPath || hrefPath.startsWith("//")) return full;
+
+    const segments = hrefPath.split("/").filter(Boolean);
+    const sourceLocale =
+      segments[0] === "en" || segments[0] === "de"
+        ? (segments[0] as AppLocale)
+        : "tr";
+    const pathSegments = sourceLocale === "tr" ? segments : segments.slice(1);
+
+    if (pathSegments[0] === "blog" && pathSegments[1]) {
+      const entry = findBlogEntry(pathSegments[1]);
+      if (entry) {
+        const slug = slugForLocale(entry, locale);
+        const localized = locale === "tr" ? `/blog/${slug}` : `/${locale}/blog/${slug}`;
+        return `${prefix}${localized}${pathSegments.length > 2 ? `/${pathSegments.slice(2).join("/")}` : ""}${suffix}`;
+      }
+    }
+
+    const localized = localizePathname(hrefPath, locale);
+    return `${prefix}${localized}${suffix}`;
+  });
+}
 
 export const getBlogPosts = cache(async function getBlogPosts(
   locale: Locale,
@@ -114,7 +162,8 @@ export const getBlogPost = cache(async function getBlogPost(
   const source = fs.readFileSync(filePath, "utf-8");
   const { data, content: rawContent } = matter(source);
 
-  const { first, second } = splitMarkdownContent(rawContent);
+  const localizedContent = localizeMarkdownLinks(rawContent, locale as AppLocale);
+  const { first, second } = splitMarkdownContent(localizedContent);
   const [{ compileMDX }, { default: remarkGfm }] = await Promise.all([
     import("next-mdx-remote/rsc"),
     import("remark-gfm"),

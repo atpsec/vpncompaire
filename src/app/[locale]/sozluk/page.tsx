@@ -10,6 +10,7 @@ import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { getGlossary, getCategories } from "@/data/glossary";
 import { GlossarySearch } from "@/components/glossary/glossary-search";
+import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -42,6 +43,16 @@ function GlossaryPageView() {
   const tNav = useTranslations("nav");
   const locale = useLocale();
   const localeKey = locale as "tr" | "en";
+  const guideWhatIsVpnHref = getLocalizedLinkHref({
+    locale: locale as AppLocale,
+    section: "guide",
+    contentId: "what-is-vpn",
+  });
+  const guideChecklistHref = getLocalizedLinkHref({
+    locale: locale as AppLocale,
+    section: "guide",
+    contentId: "vpn-security-checklist",
+  });
   const glossary = getGlossary(localeKey);
   const categories = getCategories(localeKey);
 
@@ -123,13 +134,13 @@ function GlossaryPageView() {
           <p className="text-sm text-ink-muted">{t("relatedPagesHeading")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
-              href="/rehber/vpn-nedir"
+              href={guideWhatIsVpnHref}
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("relatedLinks.whatIsVpn")}
             </Link>
             <Link
-              href="/rehber/vpn-guvenlik-kontrol-listesi"
+              href={guideChecklistHref}
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("relatedLinks.checklist")}
@@ -146,3 +157,4 @@ function GlossaryPageView() {
     </>
   );
 }
+

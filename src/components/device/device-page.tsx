@@ -235,13 +235,24 @@ export async function DevicePage({
           <p className="text-sm text-ink-muted">{t("relatedTitle")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             {device.relatedLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
-              >
-                {l.label}
-              </Link>
+              l.href === "/en-iyi/turkiye" ||
+              l.href === "/en-iyi/yurt-disindaki-turkler" ? (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+                >
+                  {l.label}
+                </a>
+              ) : (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
+                >
+                  {l.label}
+                </Link>
+              )
             ))}
           </div>
         </section>
@@ -249,3 +260,4 @@ export async function DevicePage({
     </>
   );
 }
+

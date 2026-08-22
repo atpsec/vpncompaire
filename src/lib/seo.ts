@@ -10,17 +10,15 @@ function inLanguageOf(locale: Locale): string {
   return "tr-TR";
 }
 
-export function organizationSchema(): JsonLdObject {
+export function organizationSchema(locale: Locale = "tr"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
     url: siteConfig.url,
-    description: siteConfig.description.tr,
-    logo: {
-      "@type": "ImageObject",
-      url: absoluteUrl("/favicon.svg"),
-    },
+    description: siteConfig.description[locale],
+    inLanguage: inLanguageOf(locale),
     knowsAbout: [
       "Virtual private networks",
       "VPN protocols",
@@ -29,6 +27,10 @@ export function organizationSchema(): JsonLdObject {
       "Independent security audits",
       "VPN pricing and subscription terms",
     ],
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/favicon.svg"),
+    },
     sameAs: [siteConfig.social.twitter, siteConfig.social.github].filter(Boolean),
   };
 }
@@ -37,12 +39,14 @@ export function websiteSchema(locale: Locale = "tr"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${absoluteUrl("", locale)}/#website`,
     name: siteConfig.name,
-    url: siteConfig.url,
+    url: absoluteUrl("", locale),
     description: siteConfig.description[locale],
     inLanguage: inLanguageOf(locale),
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
     },
@@ -78,6 +82,7 @@ export function itemListSchema(
           ? "VPN-Anbieterprofile"
           : "VPN provider profiles",
     itemListOrder: "https://schema.org/ItemListUnordered",
+    numberOfItems: items.length,
     itemListElement: items.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -88,6 +93,10 @@ export function itemListSchema(
 }
 
 function breadcrumbItemUrl(path: string, locale?: Locale): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+  // getLocalizedPath() zaten /en/... veya /de/... prefix'i içerir; tekrar ekleme.
   if (path.startsWith("/en/") || path.startsWith("/de/")) {
     return absoluteUrl(path);
   }
@@ -119,6 +128,8 @@ export function articleSchema(post: {
   author: string;
   imageUrl: string;
   locale: Locale;
+  category?: string;
+  tags?: string[];
 }): JsonLdObject {
   const localePath = post.locale === "tr" ? "" : `/${post.locale}`;
   const articleUrl = absoluteUrl(`${localePath}/blog/${post.slug}`);
@@ -126,22 +137,26 @@ export function articleSchema(post: {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${articleUrl}#article`,
     headline: post.title,
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt,
     inLanguage: inLanguageOf(post.locale),
+    articleSection: post.category,
+    keywords: post.tags,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
     },
     author: {
-      "@type": "Organization",
-      name: siteConfig.name,
-      url: siteConfig.url,
+      "@type": "Person",
+      name: post.author,
+      url: absoluteUrl("/hakkimizda"),
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
       logo: {
@@ -156,6 +171,10 @@ export function articleSchema(post: {
       height: 630,
     },
     url: articleUrl,
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": `${absoluteUrl("", post.locale)}/#website`,
+    },
   };
 }
 
@@ -180,7 +199,6 @@ export function blogCollectionSchema(params: {
     },
     mainEntity: {
       "@type": "ItemList",
-      itemListOrder: "https://schema.org/ItemListUnordered",
       itemListElement: params.posts.map((post, i) => ({
         "@type": "ListItem",
         position: i + 1,
@@ -190,3 +208,4 @@ export function blogCollectionSchema(params: {
     },
   };
 }
+

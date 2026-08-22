@@ -40,32 +40,41 @@ export function UseCaseGrid() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {useCases.map(({ slug, key, Icon, tone }) => (
-            <Link
-              key={slug}
-              href={`/en-iyi/${slug}`}
-              className="group rounded-xl border border-border bg-surface-base p-4 hover:border-brand-300 hover:shadow-md transition-all dark:bg-surface-subtle"
-            >
-              <div
-                className={
-                  "inline-flex items-center justify-center size-10 rounded-lg " +
-                  (tone === "accent"
-                    ? "bg-accent-50 text-accent-600"
-                    : "bg-brand-50 text-brand-600")
-                }
-              >
-                <Icon className="size-5" aria-hidden="true" />
+          {useCases.map(({ slug, key, Icon, tone }) => {
+            const content = (
+              <div className="group rounded-xl border border-border bg-surface-base p-4 hover:border-brand-300 hover:shadow-md transition-all dark:bg-surface-subtle">
+                <div
+                  className={
+                    "inline-flex items-center justify-center size-10 rounded-lg " +
+                    (tone === "accent"
+                      ? "bg-accent-50 text-accent-600"
+                      : "bg-brand-50 text-brand-600")
+                  }
+                >
+                  <Icon className="size-5" aria-hidden="true" />
+                </div>
+                <div className="mt-3 font-semibold text-ink-strong text-sm">
+                  {t(key)}
+                </div>
+                <div className="mt-1 flex items-center text-xs text-ink-muted group-hover:text-brand-700">
+                  {blockT("review")} <ArrowRight className="ml-1 size-3" />
+                </div>
               </div>
-              <div className="mt-3 font-semibold text-ink-strong text-sm">
-                {t(key)}
-              </div>
-              <div className="mt-1 flex items-center text-xs text-ink-muted group-hover:text-brand-700">
-                {blockT("review")} <ArrowRight className="ml-1 size-3" />
-              </div>
-            </Link>
-          ))}
+            );
+            const href = `/en-iyi/${slug}`;
+            return slug === "turkiye" || slug === "yurt-disindaki-turkler" ? (
+              <a key={slug} href={href}>
+                {content}
+              </a>
+            ) : (
+              <Link key={slug} href={href}>
+                {content}
+              </Link>
+            );
+          })}
         </div>
       </Container>
     </section>
   );
 }
+

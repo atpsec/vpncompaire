@@ -11,7 +11,7 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { localizedAlternates, absoluteUrl, type Locale } from "@/lib/site";
+import { localizedAlternates, bilingualAlternates, absoluteUrl, type Locale } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
 import { referenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
 import { getArchivedProduct } from "@/data/products-current";
@@ -118,15 +118,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return {};
   const l = labels[locale];
   const isArchived = slug === "atlas-vpn";
+  const hasFullLocaleContent = referenceProducts.some((p) => p.slug === slug);
+  const canonicalLocale = hasFullLocaleContent ? locale : locale === "de" ? "en" : locale;
   return {
     title: isArchived ? `${product.brand} — discontinued service archive` : `${product.brand} — ${l.metaSuffix}`,
     description: `${product.brand}: ${product.summary} ${l.intro}`,
-    alternates: localizedAlternates(`/inceleme/${product.slug}`, locale),
-    robots: isArchived ? { index: false, follow: true } : undefined,
+    alternates: hasFullLocaleContent
+      ? localizedAlternates(`/inceleme/${product.slug}`, locale)
+      : bilingualAlternates(`/inceleme/${product.slug}`, locale, "en"),
+    robots: isArchived || !hasFullLocaleContent && locale === "de" ? { index: false, follow: true } : undefined,
     openGraph: {
       title: `${product.brand} — ${l.profile}`,
       description: product.summary,
-      url: absoluteUrl(`/inceleme/${product.slug}`, locale),
+      url: absoluteUrl(`/inceleme/${product.slug}`, canonicalLocale),
       type: "website",
     },
   };
@@ -138,13 +142,15 @@ export default async function Page({ params }: Props) {
   setRequestLocale(locale);
   const product = resolveProduct(slug, locale);
   if (!product) notFound();
+  const hasFullLocaleContent = referenceProducts.some((p) => p.slug === slug);
+  const canonicalLocale = hasFullLocaleContent ? locale : locale === "de" ? "en" : locale;
 
   const providerSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: `${product.brand} ${labels[locale].profile}`,
     description: product.summary,
-    url: absoluteUrl(`/inceleme/${product.slug}`, locale),
+    url: absoluteUrl(`/inceleme/${product.slug}`, canonicalLocale),
     about: {
       "@type": "SoftwareApplication",
       name: product.brand,
@@ -226,3 +232,4 @@ function Stat({ label, value, highlight = false }: { label: string; value: strin
 function Row({ label, value }: { label: string; value: string }) {
   return <div className="grid grid-cols-2 px-4 py-3 text-sm"><dt className="text-ink-muted">{label}</dt><dd className="text-ink-strong font-medium">{value}</dd></div>;
 }
+

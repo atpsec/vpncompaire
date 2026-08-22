@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { siteConfig, absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
+import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -110,3 +110,4 @@ export default async function Page({ params }: Props) {
     </>
   );
 }
+

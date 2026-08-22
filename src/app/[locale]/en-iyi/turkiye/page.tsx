@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import {
-  Check,
-  X,
-  ArrowRight,
-  ShieldCheck,
-  Flag,
-  Tv,
-  Lock,
-} from "lucide-react";
+import { ArrowRight, ShieldCheck, Flag, Tv, Lock } from "lucide-react";
 import { Link } from "@/i18n/routing";
+import NextLink from "next/link";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -249,15 +242,16 @@ export default async function Page({ params }: Props) {
             >
               <Tv className="size-3" /> Streaming için
             </Link>
-            <Link
+            <NextLink
               href="/en-iyi/yurt-disindaki-turkler"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Yurt dışındaki Türkler için
-            </Link>
+            </NextLink>
           </div>
         </section>
       </Container>
     </>
   );
 }
+
