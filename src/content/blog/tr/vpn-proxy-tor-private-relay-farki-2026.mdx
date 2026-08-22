@@ -1,0 +1,59 @@
+---
+slug: "vpn-proxy-tor-private-relay-farki-2026"
+title: "VPN, Proxy, Tor ve iCloud Private Relay Farkı: 2026 Rehberi"
+description: "VPN, proxy, Tor ve iCloud Private Relay aynı şey değil. 2026 itibarıyla hangi teknoloji IP adresini, DNS trafiğini ve uygulama bağlantılarını nasıl koruyor?"
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "temel-bilgiler"
+tags: ["vpn", "proxy", "tor", "private-relay", "gizlilik", "2026"]
+readingTime: 7
+coverImage: "vpn-basics"
+unsplashKeyword: "privacy network routing"
+---
+
+VPN, proxy, Tor ve iCloud Private Relay sık sık aynı cümlede geçiyor ama korudukları alan aynı değil. Doğru seçim için önce “hangi trafiği kimden gizlemek istiyorum?” sorusuna cevap vermek gerekir.
+
+## Kısa cevap
+
+- **VPN** cihazınızın veya seçtiğiniz uygulamaların internet trafiğini şifreli bir tünelden geçirir ve dışarıya VPN sunucusunun IP adresini gösterir.
+- **Proxy** çoğunlukla belirli bir uygulamanın trafiğini başka bir sunucu üzerinden yönlendirir; şifreleme garanti değildir.
+- **Tor** trafiği birden fazla gönüllü düğüm üzerinden geçirerek kaynağı ve hedefi birbirinden ayırmaya çalışır; hız ve bazı servis uyumlulukları daha düşüktür.
+- **iCloud Private Relay** Safari odaklı bir gizlilik katmanıdır. Apple’a göre trafik iki ayrı relay üzerinden geçirilir; ağ sağlayıcısı ile hedef site aynı anda hem kimliği hem de ziyaret edilen adresi göremez.
+
+## VPN ne zaman daha mantıklı?
+
+Tüm cihaz trafiğini veya çok sayıda uygulamayı tek noktadan korumak, halka açık Wi‑Fi’da yerel ağ riskini azaltmak ya da IP adresini uygulama seviyesinde değiştirmek istiyorsanız VPN daha genel amaçlıdır. İyi bir VPN’de kill switch, DNS sızıntı koruması, IPv6 desteği ve güvenilir protokoller önemlidir.
+
+VPN’in önemli sınırı şudur: tarayıcı oturumunuz, giriş yaptığınız hesaplar, çerezler ve cihaz parmak izi sizi yine tanımlayabilir. VPN anonimlik sihri değildir.
+
+## Proxy ne zaman yeterli olabilir?
+
+Bir geliştirme aracını, test tarayıcısını veya tek bir uygulamayı farklı bir çıkış IP’sinden çalıştırmak istiyorsanız proxy pratik olabilir. Ancak proxy’nin HTTPS dışındaki trafiği nasıl işlediğini, DNS çözümlemesini nerede yaptığını ve günlük tutup tutmadığını bilmeden onu VPN eşdeğeri saymamak gerekir.
+
+## Tor’un güçlü ve zayıf tarafı
+
+Tor, tek bir VPN sağlayıcısına güvenmek istemeyen ve trafik korelasyonunu zorlaştırmayı hedefleyen kullanıcılar için farklı bir model sunar. Buna karşılık video, oyun, büyük dosya ve düşük gecikme gerektiren işler için çoğu zaman uygun değildir. Bazı siteler Tor çıkış düğümlerini ek doğrulamaya tabi tutabilir.
+
+## Private Relay neden VPN değildir?
+
+Apple, Private Relay’in Safari trafiğinde IP adresini ve gezinme bilgisini ayırmayı hedeflediğini açıklıyor. Ancak bu özellik tüm uygulamaları kapsayan genel amaçlı bir VPN değildir. Ayrıca ülke ve bölge kullanılabilirliği değişebilir.
+
+## 2026 için seçim tablosu
+
+| İhtiyaç | Daha uygun başlangıç noktası |
+|---|---|
+| Tüm cihaz trafiğini koruma | VPN |
+| Tek uygulamayı farklı IP’den çıkarma | Proxy |
+| Yüksek anonimlik hedefi | Tor |
+| Apple ekosisteminde Safari gizliliği | Private Relay |
+| Oyun ve düşük gecikme | VPN veya doğrudan bağlantı |
+
+## Sonuç
+
+En iyi araç “en gizli” görünen değil, tehdit modelinize uyan araçtır. Günlük kullanımda VPN en geniş kapsama sahip seçenektir; Tor daha özel anonimlik senaryolarına, Private Relay ise Apple ekosistemindeki Safari gizliliğine odaklanır.
+
+### Kaynaklar ve 2026 kontrol notu
+
+- Apple iCloud Private Relay: https://support.apple.com/guide/icloud/use-icloud-private-relay-mm8010d8daf3/icloud
+- Tor Project: https://www.torproject.org/about/history/

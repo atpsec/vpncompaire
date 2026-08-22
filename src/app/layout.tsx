@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { siteConfig } from "@/lib/site";
 import { GoogleAdsense } from "@/components/analytics/google-adsense";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { ThemeScript } from "@/components/theme/theme-script";
 import "./globals.css";
 
@@ -58,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     applicationName: siteConfig.name,
-    authors: [{ name: siteConfig.author.name }],
+    authors: [{ name: siteConfig.author.name, url: siteConfig.author.url }],
     creator: siteConfig.author.name,
     publisher: siteConfig.name,
     category: "technology",
@@ -114,6 +115,7 @@ export async function generateMetadata(): Promise<Metadata> {
         follow: true,
         "max-image-preview": "large",
         "max-snippet": -1,
+        "max-video-preview": -1,
       },
     },
   };
@@ -146,6 +148,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-screen bg-background text-foreground font-sans">
         {children}
+        <GoogleAnalytics locale={locale} />
       </body>
     </html>
   );

@@ -1,0 +1,55 @@
+---
+slug: "passkey-mfa-vpn-katmanli-guvenlik-2026"
+title: "Passkey, MFA ve VPN: 2026'da Katmanlı Hesap Güvenliği"
+description: "VPN hesabınızı phishing'den tek başına korumaz. Passkey, MFA ve VPN'in 2026'da hangi saldırılara karşı hangi katmanı güçlendirdiğini açıklıyoruz."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "gizlilik-guvenlik"
+tags: ["passkey", "mfa", "phishing", "vpn", "hesap-güvenliği", "2026"]
+readingTime: 7
+coverImage: "privacy-security"
+unsplashKeyword: "passkey authentication security"
+---
+
+VPN, passkey ve MFA birbirinin alternatifi değildir. VPN ağ katmanını, passkey ve MFA ise hesap kimlik doğrulamasını güçlendirir. 2026’da phishing saldırıları daha ikna edici hale gelirken bu ayrımı bilmek özellikle önemlidir.
+
+## VPN hangi saldırıyı çözmez?
+
+Bir sahte giriş sayfasına kullanıcı adı ve parolanızı yazarsanız VPN bu bilgilerin doğru siteye gitmesini sağlayamaz. Bağlantınız şifreli olsa bile yanlış hedefe güvenli biçimde bağlanmış olabilirsiniz. Bu nedenle phishing'e karşı temel kontrol, kimlik doğrulama yöntemidir.
+
+## Passkey neden farklı?
+
+FIDO Alliance, passkey’lerin alan adına bağlı kriptografik kimlik bilgileri kullandığını ve phishing’e dayanıklı olacak şekilde tasarlandığını belirtiyor. Kullanıcı gizli anahtarı siteye yazmaz; cihazdaki anahtar biyometri, PIN veya güvenlik anahtarıyla kullanılır.
+
+OpenAI de 2026 itibarıyla desteklenen hesaplarda passkey ile giriş veya ek doğrulama sunuyor. Bu yaklaşım, parola + SMS kodu gibi phishable akışlara göre daha güçlü bir temel sağlar.
+
+## MFA hâlâ gerekli mi?
+
+Evet, özellikle passkey kullanılamayan servislerde. Ancak MFA yöntemi önemlidir. SMS veya tek kullanımlık kodlar hesap ele geçirme riskini azaltır ama sahte siteye girilebilir. Donanım güvenlik anahtarı veya passkey gibi FIDO tabanlı yöntemler phishing direnci açısından daha güçlüdür.
+
+## VPN bu yapıya ne ekler?
+
+VPN özellikle güvenilmeyen ağlarda ağ gözlemleme riskini azaltır, DNS ve IP trafiğini tüneller ve yerel ağ saldırı yüzeyini küçültür. Yani passkey hesabı, VPN bağlantıyı korur.
+
+## Önerilen 2026 güvenlik sırası
+
+1. Kritik hesaplarda passkey etkinleştirin.
+2. İkinci bir kurtarma yöntemi tanımlayın.
+3. Kurtarma e-postasını ve telefon numarasını güncel tutun.
+4. Halka açık veya ortak ağlarda güvenilir VPN kullanın.
+5. Tarayıcı ve işletim sistemini güncel tutun.
+6. Hesap oturumlarını ve bağlı cihazları düzenli kontrol edin.
+
+## VPN hesabının kendisini de koruyun
+
+VPN hesabı e-posta/parola ile korunuyorsa saldırgan aboneliğinize erişebilir, cihaz limitini tüketebilir veya yapılandırmaları değiştirebilir. Sağlayıcı passkey veya güçlü MFA destekliyorsa etkinleştirmek mantıklıdır. API anahtarları veya kurumsal VPN kimlik bilgileri kullanılıyorsa bunları parola yöneticisinde veya kurumsal secret vault içinde saklayın.
+
+## Sonuç
+
+2026 için basit formül: **passkey kimliğinizi, VPN ağ trafiğinizi, güncellemeler cihazınızı korur.** Tek bir kontrol yerine bu katmanları birlikte kullanmak daha gerçekçi güvenlik sağlar.
+
+### Kaynaklar ve 2026 kontrol notu
+
+- FIDO passkeys: https://fidoalliance.org/passkeys/
+- OpenAI passkeys: https://help.openai.com/en/articles/20001039-passkeys-to-secure-your-openai-account

@@ -1,0 +1,35 @@
+---
+slug: "android-private-dns-always-on-vpn-2026"
+title: "Android Private DNS und Always-on VPN: Konfiguration 2026"
+description: "Android kombiniert Private DNS, Always-on VPN und Blockieren ohne VPN. So vermeiden Sie DNS-Konflikte und testen WLAN-/Mobilfunkwechsel sauber."
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Redaktion"
+category: "cihaz-platform"
+tags: ["android", "private-dns", "always-on-vpn", "vpn", "2026"]
+readingTime: 7
+coverImage: "device-router"
+unsplashKeyword: "android phone network security"
+---
+
+Android bietet Private DNS und Always-on VPN als getrennte Funktionen. Zusammen können sie eine starke Basis bilden, aber überlappende DNS-Einstellungen verursachen manchmal Probleme.
+
+## Private DNS
+
+Private DNS verschlüsselt die Namensauflösung mit einem kompatiblen Resolver. Es tunnelt nicht automatisch den gesamten App-Verkehr.
+
+## Always-on VPN
+
+Android kann ein VPN automatisch aktiv halten und optional Verkehr blockieren, wenn der Tunnel nicht verfügbar ist.
+
+## Typische Konflikte
+
+Ein VPN kann seinen eigenen DNS-Resolver erwarten, während Android einen anderen Private-DNS-Anbieter erzwingt. Captive Portals können dadurch ebenfalls schwer erreichbar sein.
+
+## Testablauf
+
+Private DNS einzeln testen, VPN verbinden, DNS/IP prüfen, Always-on aktivieren und danach WLAN-/Mobilfunkwechsel testen.
+
+## Fazit
+
+Die sicherste Konfiguration ist die, bei der Resolver und Ausfallverhalten bewusst bekannt sind.

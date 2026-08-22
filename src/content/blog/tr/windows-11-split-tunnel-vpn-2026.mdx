@@ -1,0 +1,59 @@
+---
+slug: "windows-11-split-tunnel-vpn-2026"
+title: "Windows 11'de Split Tunneling ve VPN Routing: 2026 Rehberi"
+description: "Windows 11'de split tunnel, force tunnel, route ve DNS davranışını 2026 için açıklıyoruz. Hangi uygulama VPN'den geçiyor, nasıl test edilir?"
+publishedAt: "2026-08-08"
+updatedAt: "2026-08-08"
+author: "VPN Advisor Editör Ekibi"
+category: "cihaz-platform"
+tags: ["windows-11", "split-tunnel", "routing", "vpn", "dns", "2026"]
+readingTime: 7
+coverImage: "device-router"
+unsplashKeyword: "windows laptop network vpn"
+---
+
+Windows 11’de VPN bağlantısı kurmak kolaydır; zor olan hangi trafiğin hangi arayüzden çıktığını doğrulamaktır. Özellikle split tunneling kullanan sistemlerde uygulama, DNS ve IPv6 rotaları birlikte test edilmelidir.
+
+## Force tunnel nedir?
+
+Microsoft dokümanlarına göre force tunnel yapılandırmasında tüm trafik varsayılan olarak VPN üzerinden gider. IPv4 ve IPv6 default route’ları VPN arayüzüne yönlendirilir; daha özel bir route yoksa trafik tüneli kullanır.
+
+Bu model güvenlik açısından basittir ama Microsoft 365, video görüşme veya büyük dosya trafiğinde kurumsal VPN gateway’e ek yük getirebilir.
+
+## Split tunnel nedir?
+
+Split tunnel, yalnızca tanımlanan ağların veya uygulamaların VPN üzerinden gitmesini sağlar. Diğer trafik fiziksel Wi‑Fi/Ethernet bağlantısını kullanır. Kurumsal yapılarda Windows VPNv2 CSP ve Intune üzerinden route listeleri yapılandırılabilir.
+
+Tüketici VPN uygulamalarında ise split tunneling çoğu zaman uygulama seçimiyle sunulur.
+
+## Hangi uygulama hangi IP’yi kullanıyor?
+
+Test için önce VPN kapalıyken genel IP’nizi not edin. VPN’i açıp tarayıcıdan yeniden kontrol edin. Sonra split tunnel dışında bıraktığınız uygulamanın ağ davranışını ayrı test edin.
+
+PowerShell’de route tablosunu incelemek için `Get-NetRoute` ve ağ arayüzlerini görmek için `Get-NetIPInterface` komutları yararlıdır. Kurumsal cihazda ayar değiştirmeden önce IT politikasına uyun.
+
+## DNS ve IPv6 kontrolü
+
+Split tunneling düzgün görünse bile DNS sorguları beklenmeyen arayüzden çıkabilir. Ayrıca yalnızca IPv4 route’u tanımlanmışsa IPv6 farklı yol izleyebilir.
+
+Kontrol listesi:
+
+- IPv4 default route
+- IPv6 default route
+- DNS sunucusu
+- split dışı uygulamanın public IP’si
+- tünel içi uygulamanın public IP’si
+- VPN düşerken kill switch davranışı
+
+## Video toplantıları
+
+Microsoft, bazı kurumsal senaryolarda Microsoft 365 trafiğini optimize etmek için kontrollü split tunneling yaklaşımını dokümante ediyor. Bunun amacı güvenlik politikasını kaldırmak değil, belirli güvenilir SaaS trafiğine daha doğrudan rota sağlamaktır.
+
+## Sonuç
+
+Windows 11’de split tunneling bir performans özelliği kadar routing politikasıdır. 2026’da güvenli yapılandırma, uygulama listesinden çok IPv4, IPv6 ve DNS rotalarının birlikte doğrulanmasına dayanır.
+
+### Kaynaklar
+
+- Microsoft VPN routing: https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/vpn/vpn-routing
+- Microsoft VPN technical guide: https://learn.microsoft.com/en-us/windows/security/operating-system-security/network-security/vpn/vpn-guide

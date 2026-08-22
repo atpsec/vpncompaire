@@ -67,7 +67,7 @@ export async function GET() {
 
   const staticPaths: Entry[] = [
     { path: "/", priority: 1.0, changefreq: "daily" },
-    { path: "/en-iyi-vpn", priority: 0.95, changefreq: "weekly", locales: ["tr", "en"] },
+    { path: "/en-iyi-vpn", priority: 0.95, changefreq: "weekly" },
     { path: "/en-iyi", priority: 0.8, changefreq: "weekly" },
     // NOT: /karsilastir ve /rehber hub'ları SECTION_HUB_SERVED üzerinden
     // yerelleştirilmiş slug'larıyla (örn. /en/comparison, /de/vergleich)

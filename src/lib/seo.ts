@@ -19,6 +19,14 @@ export function organizationSchema(locale: Locale = "tr"): JsonLdObject {
     url: siteConfig.url,
     description: siteConfig.description[locale],
     inLanguage: inLanguageOf(locale),
+    knowsAbout: [
+      "Virtual private networks",
+      "VPN protocols",
+      "Digital privacy",
+      "Network security",
+      "Independent security audits",
+      "VPN pricing and subscription terms",
+    ],
     logo: {
       "@type": "ImageObject",
       url: absoluteUrl("/favicon.svg"),
@@ -34,11 +42,13 @@ export function websiteSchema(locale: Locale = "tr"): JsonLdObject {
     "@id": `${absoluteUrl("", locale)}/#website`,
     name: siteConfig.name,
     url: absoluteUrl("", locale),
+    description: siteConfig.description[locale],
     inLanguage: inLanguageOf(locale),
     publisher: {
       "@type": "Organization",
       "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
+      url: siteConfig.url,
     },
   };
 }
@@ -59,13 +69,19 @@ export function faqSchema(items: FAQ[]): JsonLdObject {
 }
 
 export function itemListSchema(
-  items: { slug: string; brand: string; score: number }[],
+  items: { slug: string; brand: string }[],
   locale: Locale = "tr",
 ): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    name:
+      locale === "tr"
+        ? "VPN sağlayıcı profilleri"
+        : locale === "de"
+          ? "VPN-Anbieterprofile"
+          : "VPN provider profiles",
+    itemListOrder: "https://schema.org/ItemListUnordered",
     numberOfItems: items.length,
     itemListElement: items.map((p, i) => ({
       "@type": "ListItem",
@@ -77,6 +93,9 @@ export function itemListSchema(
 }
 
 function breadcrumbItemUrl(path: string, locale?: Locale): string {
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
   // getLocalizedPath() zaten /en/... veya /de/... prefix'i içerir; tekrar ekleme.
   if (path.startsWith("/en/") || path.startsWith("/de/")) {
     return absoluteUrl(path);

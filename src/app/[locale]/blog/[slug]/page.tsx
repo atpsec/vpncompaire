@@ -10,6 +10,7 @@ import { SocialShare } from "@/components/blog/social-share";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import { absoluteUrl, siteConfig, type Locale } from "@/lib/site";
+import { LOCALIZED_REFRESH_SLUGS } from "@/lib/blog-localized-refresh";
 import {
   getBlogSlugEntry,
   slugForLocale,
@@ -29,11 +30,38 @@ const OG_LOCALE: Record<Locale, string> = {
 
 function blogAlternates(slug: string, locale: BlogLocale) {
   const entry = getBlogSlugEntry(slug, locale);
+  const canonical = absoluteUrl(`/blog/${slug}`, locale);
+
+  // The August 2026 refresh uses stable, shared slugs across TR/EN/DE.
+  // Keep older translated articles on BLOG_SLUG_MAP and keep genuinely
+  // untranslated posts self-referencing only.
+  if (!entry && LOCALIZED_REFRESH_SLUGS.has(slug)) {
+    return {
+      canonical,
+      languages: {
+        tr: absoluteUrl(`/blog/${slug}`, "tr"),
+        en: absoluteUrl(`/blog/${slug}`, "en"),
+        de: absoluteUrl(`/blog/${slug}`, "de"),
+        "x-default": absoluteUrl(`/blog/${slug}`, "tr"),
+      },
+    };
+  }
+
+  if (!entry) {
+    return {
+      canonical,
+      languages: {
+        [locale]: canonical,
+        "x-default": canonical,
+      },
+    };
+  }
+
   const pathFor = (target: BlogLocale) =>
-    `/blog/${entry ? slugForLocale(entry, target) : slug}`;
+    `/blog/${slugForLocale(entry, target)}`;
 
   return {
-    canonical: absoluteUrl(`/blog/${slug}`, locale),
+    canonical,
     languages: {
       tr: absoluteUrl(pathFor("tr"), "tr"),
       en: absoluteUrl(pathFor("en"), "en"),
