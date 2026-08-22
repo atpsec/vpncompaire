@@ -29,6 +29,7 @@ function ProviderCard({ product, featured }: { product: Product; featured: boole
   const locale = useLocale() as Locale;
   const copy = positioningFor(locale);
   const bestPlan = product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
+  const priceLabel = locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site";
 
   return (
     <article className={cn("relative h-full overflow-hidden rounded-2xl border bg-surface-base shadow-sm", featured ? "border-brand-300 shadow-md ring-1 ring-brand-200/50" : "border-border")}>
@@ -46,8 +47,8 @@ function ProviderCard({ product, featured }: { product: Product; featured: boole
           <p className="mt-1 text-xs text-ink-subtle">{product.positioning}</p>
         </div>
         <div className="mt-4 flex items-baseline justify-center gap-1">
-          <span className="text-2xl font-bold text-ink-strong tabular-nums">${bestPlan.monthlyPriceUsd.toFixed(2)}</span>
-          <span className="text-xs text-ink-subtle">{t("perMonthStart")}</span>
+          <span className="text-2xl font-bold text-ink-strong tabular-nums">{product.pricingVerifiedAt && bestPlan ? `${product.priceCurrency === "EUR" ? "€" : "$"}${bestPlan.monthlyPriceUsd.toFixed(2)}` : priceLabel}</span>
+          {product.pricingVerifiedAt && bestPlan ? <span className="text-xs text-ink-subtle">{t("perMonthStart")}</span> : null}
         </div>
         <div className="mt-5 flex flex-col gap-2">
           <Button asChild variant="primary" size="md" className="w-full"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t("ctaOfficial")}<ArrowRight className="size-4" /></a></Button>

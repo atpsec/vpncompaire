@@ -11,6 +11,7 @@ import { breadcrumbSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import { sectionHubAlternates, type Locale } from "@/lib/site";
 import { getLocalizedSectionPath, SECTION_SLUGS, DEFAULT_LOCALE, type AppLocale } from "@/lib/i18n-paths";
+import { formatProductPriceShort } from "@/lib/product-price";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -68,7 +69,7 @@ export default async function Page({ params }: Props) {
                   {a && b ? <div className="flex items-center -space-x-2 shrink-0"><VPNLogo slug={a.slug} size={44} className="ring-2 ring-white" /><VPNLogo slug={b.slug} size={44} className="ring-2 ring-white" /></div> : null}
                   <div className="flex-1 min-w-0"><div className="flex items-center justify-between gap-2 flex-wrap"><h2 className="text-lg font-semibold text-ink-strong group-hover:text-brand-700">{c.title}</h2><Badge variant={c.available ? "brand" : "neutral"}>{c.tag}</Badge></div></div>
                 </div>
-                {a && b ? <dl className="mt-4 grid grid-cols-2 gap-3 text-xs"><FactCell brand={a.brand} price={a.priceFromUsd} audit={a.highlights.audits} priceLabel={t.price} auditLabel={t.audit} /><FactCell brand={b.brand} price={b.priceFromUsd} audit={b.highlights.audits} priceLabel={t.price} auditLabel={t.audit} /></dl> : null}
+                {a && b ? <dl className="mt-4 grid grid-cols-2 gap-3 text-xs"><FactCell brand={a.brand} price={a.priceFromUsd} currency={a.priceCurrency} pricingVerifiedAt={a.pricingVerifiedAt} audit={a.highlights.audits} priceLabel={t.price} auditLabel={t.audit} official={locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site"} /><FactCell brand={b.brand} price={b.priceFromUsd} currency={b.priceCurrency} pricingVerifiedAt={b.pricingVerifiedAt} audit={b.highlights.audits} priceLabel={t.price} auditLabel={t.audit} official={locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site"} /></dl> : null}
                 {c.available && <div className="mt-4 inline-flex items-center text-xs font-medium text-brand-700">{t.read} <ArrowRight className="ml-1 size-3" /></div>}
               </Card>
             );
@@ -82,6 +83,6 @@ export default async function Page({ params }: Props) {
   );
 }
 
-function FactCell({ brand, price, audit, priceLabel, auditLabel }: { brand: string; price: number; audit?: string; priceLabel: string; auditLabel: string }) {
-  return <div className="rounded-md bg-surface-subtle/60 px-3 py-2"><div className="text-[10px] uppercase tracking-wider text-ink-subtle font-medium line-clamp-1">{brand}</div><div className="mt-1 text-sm font-semibold text-ink-strong">{priceLabel}: ${price.toFixed(2)}</div><div className="mt-1 text-[11px] text-ink-muted line-clamp-2">{auditLabel}: {audit ?? "—"}</div></div>;
+function FactCell({ brand, price, currency, pricingVerifiedAt, audit, priceLabel, auditLabel, official }: { brand: string; price: number; currency: "USD" | "EUR"; pricingVerifiedAt: string; audit?: string; priceLabel: string; auditLabel: string; official: string }) {
+  return <div className="rounded-md bg-surface-subtle/60 px-3 py-2"><div className="text-[10px] uppercase tracking-wider text-ink-subtle font-medium line-clamp-1">{brand}</div><div className="mt-1 text-sm font-semibold text-ink-strong">{priceLabel}: {pricingVerifiedAt ? formatProductPriceShort(price, currency) : official}</div><div className="mt-1 text-[11px] text-ink-muted line-clamp-2">{auditLabel}: {audit ?? "—"}</div></div>;
 }

@@ -32,6 +32,8 @@ export type PricingPlan = {
   isBestValue?: boolean;
 };
 
+export type PriceCurrency = "USD" | "EUR";
+
 export type TestEnvironment = {
   testerLocation: string;
   vpnVersion: string;
@@ -45,6 +47,7 @@ export type RawProduct = {
   summary: LocText;
   score: number;
   priceFromUsd: number;
+  priceCurrency?: PriceCurrency;
   rank: number;
   pros: LocText[];
   cons: LocText[];
@@ -65,6 +68,7 @@ export type Product = {
   summary: string;
   score: number;
   priceFromUsd: number;
+  priceCurrency: PriceCurrency;
   rank: number;
   pros: string[];
   cons: string[];
@@ -85,7 +89,7 @@ export type Product = {
   editorNotes: string;
 };
 
-const VERIFIED = "2026-05-25";
+const VERIFIED = "2026-08-22";
 
 const L = (tr: string, en: string): LocText => ({ tr, en });
 
@@ -98,8 +102,8 @@ export const rawProducts: RawProduct[] = [
       "A balanced choice for general use",
     ),
     summary: L(
-      "Geniş sunucu ağı, tekrarlanan bağımsız denetim geçmişi ve testlerimizde tutarlı streaming uyumluluğu ile genel kullanım için sıkça önerilen seçeneklerden biri.",
-      "A wide server network, a repeated track record of independent audits and consistent streaming compatibility in our tests make this one of the most commonly recommended general-purpose picks.",
+      "Geniş sunucu ağı, tekrarlanan bağımsız denetim geçmişi ve sağlayıcının açıkladığı streaming desteği ile genel kullanım için değerlendirilebilecek seçeneklerden biri.",
+      "A wide server network, a repeated track record of independent audits and provider-documented streaming support make this worth considering for general use.",
     ),
     score: 9.6,
     priceFromUsd: 3.39,
@@ -114,8 +118,8 @@ export const rawProducts: RawProduct[] = [
         "Per provider data, 6,400+ servers across 110+ countries",
       ),
       L(
-        "Testlerimizde başlıca streaming platformlarında uyumlu çalıştığı gözlendi",
-        "Worked reliably on major streaming platforms in our tests",
+        "Sağlayıcının belgelerinde başlıca streaming platformu desteği belirtiliyor; uyumluluk zamanla değişebilir",
+        "The provider documents support for major streaming platforms; compatibility can change over time",
       ),
       L(
         "Threat Protection özelliği reklam/zararlı yazılım engelleme sunar",
@@ -146,24 +150,23 @@ export const rawProducts: RawProduct[] = [
     hasAffiliate: true,
     pricingUrl: "https://nordvpn.com/tr/pricing/",
     pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-28",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v9.2.1",
-      testDuration: "21 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Yeni Threat Protection Pro özelliğini test ettik; Türkiye sunucularında ortalama 45 ms ping ve 4K streaming sırasında stabil bağlantı ölçtük.",
-      "We tested the new Threat Protection Pro feature and measured an average 45 ms ping on Türkiye servers with a stable connection during 4K streaming.",
+      "Threat Protection Pro sağlayıcının sunduğu bir özelliktir; ping ve streaming performansı ağ koşullarına göre değişir. Bu profil için laboratuvar ölçümü yapılmamıştır.",
+      "Threat Protection Pro is a provider-documented feature; ping and streaming performance vary by network conditions. No laboratory measurement was performed for this profile.",
     ),
     plans: [
       {
-        name: L("2 yıllık + 3 ay bedava", "2-year + 3 months free"),
-        durationMonths: 27,
+        name: L("2 yıllık", "2-year"),
+        durationMonths: 24,
         monthlyPriceUsd: 3.39,
-        totalPriceUsd: 91.53,
-        savingsPercent: 74,
-        campaign: L("+3 ay bedava", "+3 months free"),
+        totalPriceUsd: 81.36,
+        savingsPercent: 70,
         isBestValue: true,
       },
       {
@@ -186,7 +189,7 @@ export const rawProducts: RawProduct[] = [
       "Unlimited simultaneous devices and accessible pricing make this a sensible option for budget-conscious users who want to cover many devices.",
     ),
     score: 9.3,
-    priceFromUsd: 2.19,
+    priceFromUsd: 2.49,
     rank: 2,
     pros: [
       L(
@@ -230,23 +233,23 @@ export const rawProducts: RawProduct[] = [
     hasAffiliate: true,
     pricingUrl: "https://surfshark.com/pricing",
     pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-25",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v4.18.0",
-      testDuration: "14 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Sınırsız cihaz iddiasını 12 farklı cihazda test ettik; CleanWeb aktifken sayfa yükleme süresinde belirgin kazanç gözledik, ancak yoğun saatlerde Almanya sunucularında %15'e kadar hız düşüşü vardı.",
-      "We tested the unlimited-device claim across 12 devices and observed a clear page-load improvement with CleanWeb active, though peak-hour Germany servers showed up to 15% speed loss.",
+      "Sağlayıcının sınırsız cihaz ve CleanWeb özellikleri sunduğu belirtiliyor; gerçek hız ve sayfa yükleme davranışı cihaz, sunucu ve ağ koşullarına göre değişir.",
+      "The provider documents unlimited devices and CleanWeb; real-world speed and page-load behaviour vary by device, server and network conditions.",
     ),
     plans: [
       {
         name: L("2 yıllık + 3 ay bedava", "2-year + 3 months free"),
         durationMonths: 27,
-        monthlyPriceUsd: 1.99,
-        totalPriceUsd: 53.73,
-        savingsPercent: 87,
+        monthlyPriceUsd: 2.49,
+        totalPriceUsd: 67.23,
+        savingsPercent: 76,
         campaign: L(
           "Starter paketi, +3 ay bedava",
           "Starter bundle, +3 months free",
@@ -269,16 +272,16 @@ export const rawProducts: RawProduct[] = [
       "Premium focus with a polished interface",
     ),
     summary: L(
-      "Sade arayüz, testlerimizde kararlı hız ve sağlayıcının açıkladığı TrustedServer (RAM-only) mimarisi ile premium fiyat seviyesinde değerlendirilebilecek bir seçenek.",
-      "A clean interface, steady speed in our tests and the provider's TrustedServer (RAM-only) architecture make this worth considering at premium price points.",
+      "Sade arayüz ve sağlayıcının açıkladığı TrustedServer (RAM-only) mimarisi ile premium fiyat seviyesinde değerlendirilebilecek bir seçenek; performans ağ koşullarına bağlıdır.",
+      "A clean interface and the provider's documented TrustedServer (RAM-only) architecture make this worth considering at premium price points; performance depends on network conditions.",
     ),
     score: 9.1,
-    priceFromUsd: 6.67,
+    priceFromUsd: 2.99,
     rank: 3,
     pros: [
       L(
-        "Lightway protokolü testlerimizde hızlı bağlantı kurulumu sağladı",
-        "The Lightway protocol delivered fast connection setup in our tests",
+        "Lightway protokolü hızlı bağlantı kurulumu için tasarlanmıştır; gerçek süre ağ koşullarına bağlıdır",
+        "The Lightway protocol is designed for fast connection setup; actual times depend on network conditions",
       ),
       L(
         "Sağlayıcının açıkladığına göre TrustedServer (RAM-only) altyapısı",
@@ -314,24 +317,24 @@ export const rawProducts: RawProduct[] = [
     hasAffiliate: true,
     pricingUrl: "https://www.expressvpn.com/order",
     pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-22",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v12.86.0",
-      testDuration: "14 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Lightway protokolünde bağlantı kurulumunu ortalama 1.2 saniyede ölçtük; testlerimizde Türkiye'den Hollanda sunucusuna 500 Mbit/s hattın %88'ini koruyabildik.",
-      "We measured Lightway connection setup at ~1.2 seconds on average; in our tests we retained 88% of a 500 Mbit/s line from Türkiye to a Netherlands server.",
+      "Lightway protokolü bağlantı kurulumunu hızlandırmayı amaçlar; ping ve throughput için sabit bir editoryal ölçüm sunmuyoruz. Sonuçlar ağ, sunucu ve protokole göre değişir.",
+      "Lightway is designed to speed up connection setup; we do not publish a fixed editorial ping or throughput measurement. Results vary by network, server and protocol.",
     ),
     plans: [
       {
-        name: L("15 ay (12 + 3 bedava)", "15 months (12 + 3 free)"),
-        durationMonths: 15,
-        monthlyPriceUsd: 6.67,
-        totalPriceUsd: 99.95,
-        savingsPercent: 49,
-        campaign: L("+3 ay bedava", "+3 months free"),
+        name: L("2 yıllık + 4 ay bedava", "2-year + 4 months free"),
+        durationMonths: 28,
+        monthlyPriceUsd: 2.99,
+        totalPriceUsd: 83.72,
+        savingsPercent: 77,
+        campaign: L("+4 ay bedava", "+4 months free"),
         isBestValue: true,
       },
       {
@@ -401,16 +404,16 @@ export const rawProducts: RawProduct[] = [
     },
     hasAffiliate: true,
     pricingUrl: "https://protonvpn.com/pricing",
-    pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-20",
+    pricingVerifiedAt: "",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v4.5.2",
-      testDuration: "21 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Secure Core üzerinden çift-hop bağlantıyı test ettik; gizlilik kazancına karşılık testlerimizde ortalama %22 hız düşüşü ölçtük, ücretsiz plandaki hız limiti ise beklenenden tutarlıydı.",
-      "We tested the Secure Core double-hop and observed roughly a 22% average speed loss in exchange for the privacy gain; the free-plan throughput was more consistent than we expected.",
+      "Secure Core, sağlayıcının açıkladığı çift-hop mimarisidir; ek yönlendirme performansı etkileyebilir. Bu profil için laboratuvar hız ölçümü yapılmamıştır.",
+      "Secure Core is the provider-documented double-hop architecture; the additional routing can affect performance. No laboratory speed measurement was performed for this profile.",
     ),
     plans: [
       {
@@ -483,15 +486,15 @@ export const rawProducts: RawProduct[] = [
     hasAffiliate: true,
     pricingUrl: "https://www.privateinternetaccess.com/buy-vpn-online",
     pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-18",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v3.5.3",
-      testDuration: "14 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "MACE reklam engelleyici ve OpenVPN/WireGuard arasında geçişleri test ettik; gelişmiş ayar paneli kıdemli kullanıcılara hitap ediyor, fakat varsayılan profil yeni başlayanlar için yoğun kalıyor.",
-      "We tested the MACE ad blocker and toggled between OpenVPN and WireGuard; the granular settings panel suits power users, but the default profile feels dense for newcomers.",
+      "MACE reklam engelleyici ve OpenVPN/WireGuard seçenekleri sağlayıcı tarafından sunuluyor; gelişmiş ayar paneli teknik kullanıcılar için daha uygun, varsayılan profil yeni başlayanlara yoğun gelebilir.",
+      "MACE and OpenVPN/WireGuard options are documented provider features; the granular settings panel suits technical users, while the default profile may feel dense for newcomers.",
     ),
     plans: [
       {
@@ -523,7 +526,7 @@ export const rawProducts: RawProduct[] = [
       "Use-case optimised servers and a 45-day refund window make this a reasonable option for newcomers, per the provider's reports.",
     ),
     score: 8.5,
-    priceFromUsd: 2.03,
+    priceFromUsd: 2.19,
     rank: 6,
     pros: [
       L(
@@ -563,24 +566,24 @@ export const rawProducts: RawProduct[] = [
     hasAffiliate: true,
     pricingUrl: "https://www.cyberghostvpn.com/en_US/plans",
     pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-15",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v8.4.1",
-      testDuration: "14 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Streaming-optimize sunuculardan Netflix US, Disney+ ve BluTV'yi test ettik; çoğu profil ilk denemede çalıştı, ancak bazı oyun sunucularında ping testlerimizde 80 ms'nin üzerine çıktı.",
-      "We tested Netflix US, Disney+ and BluTV from the streaming-optimised servers; most profiles worked on the first try, although some gaming servers showed pings above 80 ms in our tests.",
+      "Sağlayıcı streaming-optimize sunucular sunduğunu belirtiyor; Netflix, Disney+, BluTV ve oyun sunucularındaki sonuçlar bölge, IP havuzu ve ağ koşullarına göre değişebilir.",
+      "The provider documents streaming-optimised servers; Netflix, Disney+, BluTV and gaming-server results can vary by region, IP pool and network conditions.",
     ),
     plans: [
       {
-        name: L("2 yıllık + 4 ay bedava", "2-year + 4 months free"),
-        durationMonths: 28,
-        monthlyPriceUsd: 2.03,
+        name: L("2 yıllık + 2 ay bedava", "2-year + 2 months free"),
+        durationMonths: 26,
+        monthlyPriceUsd: 2.19,
         totalPriceUsd: 56.94,
         savingsPercent: 84,
-        campaign: L("+4 ay bedava", "+4 months free"),
+        campaign: L("+2 ay bedava", "+2 months free"),
         isBestValue: true,
       },
       {
@@ -653,16 +656,16 @@ export const rawProducts: RawProduct[] = [
     },
     hasAffiliate: true,
     pricingUrl: "https://www.ipvanish.com/buy/",
-    pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-12",
+    pricingVerifiedAt: "",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v4.2.0",
-      testDuration: "14 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Sağlayıcının kendi sunucu donanımı iddiasını ABD ve Almanya konumlarında test ettik; ana torrent senaryosunda hız tutarlıydı, ancak Netflix US testlerimizde sunucu rotasyonu gerekti.",
-      "We tested the provider's self-owned hardware claim across US and Germany endpoints; speed was consistent for torrenting, but Netflix US required server rotation during our tests.",
+      "Sağlayıcı kendi sunucu donanımı kullandığını belirtiyor; torrent ve streaming performansı seçilen sunucu, IP havuzu ve ağ koşullarına göre değişebilir.",
+      "The provider documents the use of its own server hardware; torrenting and streaming performance can vary by server, IP pool and network conditions.",
     ),
     plans: [
       {
@@ -735,15 +738,15 @@ export const rawProducts: RawProduct[] = [
     hasAffiliate: true,
     pricingUrl: "https://windscribe.com/upgrade",
     pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-10",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v2.10.0",
-      testDuration: "14 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "10 GB ücretsiz planı ve R.O.B.E.R.T. reklam engelleyiciyi test ettik; Build-a-Plan ile tek tek ülke seçimi esnek geldi, ancak yalnızca 3 günlük iade süresi denemeyi planlayanlar için sınırlı.",
-      "We tested the 10 GB free tier and the R.O.B.E.R.T. ad blocker; Build-a-Plan's per-country picking felt flexible, but the 3-day refund window is limiting for anyone wanting a longer trial.",
+      "10 GB ücretsiz plan, R.O.B.E.R.T. reklam engelleyici ve Build-a-Plan seçenekleri sağlayıcı belgelerinde yer alıyor; iade koşulları satın almadan önce resmi sayfada kontrol edilmelidir.",
+      "The 10 GB free tier, R.O.B.E.R.T. blocker and Build-a-Plan options are documented by the provider; refund terms should be checked on the official site before purchase.",
     ),
     plans: [
       {
@@ -829,15 +832,15 @@ export const rawProducts: RawProduct[] = [
     hasAffiliate: true,
     pricingUrl: "https://www.tunnelbear.com/pricing",
     pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-08",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v5.0.4",
-      testDuration: "14 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Yeni başlayan dostu arayüzü ve 2 GB ücretsiz planı test ettik; günlük gezinme için basit ve hızlı, ancak streaming testlerimizde başlıca platformların hiçbiri ilk denemede çalışmadı.",
-      "We tested the beginner-friendly UI and the 2 GB free tier; it is simple and fast for daily browsing, but none of the major streaming platforms worked on the first try in our tests.",
+      "Yeni başlayan dostu arayüz ve 2 GB ücretsiz plan sunuluyor; günlük kullanım ve streaming deneyimi cihaz, bölge, ağ ve hizmet politikalarına göre değişir.",
+      "A beginner-friendly interface and 2 GB free tier are documented; daily-use and streaming experience varies by device, region, network and service policy.",
     ),
     plans: [
       {
@@ -916,16 +919,17 @@ export const rawProducts: RawProduct[] = [
     },
     hasAffiliate: false,
     pricingUrl: "https://mullvad.net/en/account/create",
-    pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-05-05",
+    priceCurrency: "EUR",
+    pricingVerifiedAt: "",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "v2024.6",
-      testDuration: "21 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
-      "Anonim hesap numarasıyla kayıt ve nakit posta ödemesi akışını test ettik; gizlilik tarafında sektördeki en katı kurulum, ancak küçük sunucu ağı testlerimizde streaming için sınırlı geldi.",
-      "We tested the anonymous account-number signup and the cash-by-mail payment flow; it is the strictest privacy setup we reviewed, though the small server network felt limiting for streaming in our tests.",
+      "Anonim hesap numarasıyla kayıt ve nakit posta ödeme seçenekleri sağlayıcı tarafından açıklanıyor; küçük ağ yapısı ve streaming uyumluluğu resmi kaynaklardan ayrıca kontrol edilmelidir.",
+      "Anonymous account-number signup and cash-by-mail options are documented by the provider; the smaller network and streaming compatibility should be checked against current official sources.",
     ),
     plans: [
       {
@@ -960,6 +964,7 @@ function resolveProduct(p: RawProduct, locale: Locale): Product {
     summary: pick(p.summary, locale) as string,
     score: p.score,
     priceFromUsd: p.priceFromUsd,
+    priceCurrency: p.priceCurrency ?? "USD",
     rank: p.rank,
     pros: p.pros.map((t) => pick(t, locale) as string),
     cons: p.cons.map((t) => pick(t, locale) as string),

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import type { BlogPost } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/blog-card";
@@ -14,6 +14,14 @@ type BlogFilterProps = {
 export function BlogFilter({ posts, locale }: BlogFilterProps) {
   const t = useTranslations("blog");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [visibleCount, setVisibleCount] = useState(18);
+  const [visibleCategory, setVisibleCategory] = useState<string | null>(null);
+
+  const selectCategory = (category: string | null) => {
+    setSelectedCategory(category);
+    setVisibleCategory(category);
+    setVisibleCount(18);
+  };
 
   // Build category list with counts
   const categories = useMemo(() => {
@@ -32,6 +40,10 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
     return posts.filter((post) => post.category === selectedCategory);
   }, [posts, selectedCategory]);
 
+  const effectiveVisibleCount = visibleCategory === selectedCategory ? visibleCount : 18;
+  const visiblePosts = filteredPosts.slice(0, effectiveVisibleCount);
+  const hasMorePosts = effectiveVisibleCount < filteredPosts.length;
+
   const allLabel =
     locale === "tr" ? "Tümü" : locale === "de" ? "Alle" : "All";
 
@@ -41,7 +53,7 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
       <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
         <button
           type="button"
-          onClick={() => setSelectedCategory(null)}
+          onClick={() => selectCategory(null)}
           className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
             selectedCategory === null
               ? "border-accent-500 bg-accent-500 text-white"
@@ -66,7 +78,7 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
             <button
               key={category.name}
               type="button"
-              onClick={() => setSelectedCategory(category.name)}
+              onClick={() => selectCategory(category.name)}
               className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                 isSelected
                   ? "border-accent-500 bg-accent-500 text-white"
@@ -90,11 +102,34 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
 
       {/* Filtered posts grid */}
       {filteredPosts.length > 0 ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredPosts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
+        <>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {visiblePosts.map((post, index) => (
+            <BlogCard key={post.slug} post={post} imageIndex={index} />
           ))}
-        </div>
+          </div>
+          {hasMorePosts ? (
+            <div className="mt-10 flex justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  setVisibleCategory(selectedCategory);
+                  setVisibleCount((count) => (visibleCategory === selectedCategory ? count + 18 : 36));
+                }}
+                className="inline-flex items-center rounded-full border border-border bg-surface-base px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:border-accent-300 hover:bg-accent-50 hover:text-accent-700"
+              >
+                {locale === "tr"
+                  ? "Daha fazla yazı göster"
+                  : locale === "de"
+                    ? "Weitere Beiträge anzeigen"
+                    : "Show more posts"}
+                <span className="ml-2 text-xs font-medium text-ink-subtle">
+                  {filteredPosts.length - visiblePosts.length}
+                </span>
+              </button>
+            </div>
+          ) : null}
+        </>
       ) : (
         <div className="text-center py-12">
           <p className="text-ink-muted">

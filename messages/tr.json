@@ -2,7 +2,7 @@
   "metadata": {
     "siteName": "VPN Advisor",
     "defaultTitle": "VPN Advisor — Bağımsız VPN Karşılaştırmaları (2026)",
-    "defaultDescription": "Bağımsız test metodolojisine dayalı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik için doğru VPN'i bul."
+    "defaultDescription": "Resmi belgeler, bağımsız denetimler ve güncel fiyat kaynaklarıyla hazırlanan VPN incelemeleri ve karşılaştırmaları."
   },
   "nav": {
     "home": "Ana sayfa",
@@ -17,7 +17,7 @@
     "devices": "Cihazlar",
     "guides": "Rehberler",
     "tools": "Araçlar",
-    "methodology": "Test Metodolojimiz",
+    "methodology": "Kaynak metodolojimiz",
     "about": "Hakkımızda",
     "search": "Ara",
     "menu": "Menü",
@@ -38,6 +38,7 @@
     "score": "Puan",
     "from": "şuradan başlıyor",
     "perMonth": "ay",
+    "officialPricing": "Resmi fiyat sayfası",
     "pros": "Artıları",
     "cons": "Eksileri",
     "verifiedAudit": "Bağımsız denetim",
@@ -51,20 +52,20 @@
   "home": {
     "hero": {
       "h1": "Gönüllü, bağımsız VPN karşılaştırmaları",
-      "subtitle": "Gizlilik, streaming, seyahat ve günlük güvenlik için bağımsız metodolojiyle test edilmiş VPN'ler.",
+      "subtitle": "Gizlilik, streaming, seyahat ve günlük güvenlik için resmi kaynaklarla karşılaştırılan VPN profilleri.",
       "ctaPrimary": "En İyi 20 VPN'i Gör",
-      "ctaSecondary": "Nasıl Test Ediyoruz",
-      "methodologyTag": "Bağımsız test metodolojisi",
+      "ctaSecondary": "Kaynak yaklaşımımız",
+      "methodologyTag": "Kaynak temelli metodoloji",
       "trust": {
-        "tested": "VPN test edildi",
+        "tested": "VPN profili",
         "audits": "bağımsız denetim incelendi",
-        "hours": "saat test",
+        "hours": "kaynak kontrolü",
         "updated": "Son güncelleme"
       }
     },
     "topVPNs": {
       "title": "2026'nın En İyi 20 VPN'i",
-      "subtitle": "Bağımsız denetimler, gerçek hız testleri ve şeffaf fiyat analizi ile sıralanmış.",
+      "subtitle": "Bağımsız denetimler, doğrulanabilir özellik kaynakları ve şeffaf fiyat analiziyle düzenlenmiş.",
       "extendedKicker": "Sıra 11–20",
       "extendedTitle": "Genişletilmiş inceleme havuzu",
       "extendedSubtitle": "İlk 10 sıralama dışında değerlendirdiğimiz alternatifler — bütçe, niş özellik veya ikinci seçenek arayanlar için."
@@ -83,7 +84,7 @@
       "title": "Kafa Kafaya Karşılaştırmalar"
     },
     "methodology": {
-      "title": "Nasıl Test Ediyoruz",
+    "title": "Kaynakları nasıl değerlendiriyoruz",
       "body": "Sitedeki her VPN aynı 6 kritere göre değerlendirilir: gizlilik politikası ve hukuki yetki alanı, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı ve kullanım kolaylığı. Reklam geliri sıralamayı etkilemez.",
       "cta": "Tam metodolojiyi oku"
     },
@@ -97,14 +98,15 @@
     "ipBanner": {
       "ariaLabel": "IP güvenliği bildirimi",
       "kicker": "Güvenlik bildirimi",
-      "title": "Bağlantınız korunmuyor",
-      "subtitle": "IP'niz ve konumunuz dış sunuculara görünür durumda — VPN ile bu bilgileri gizleyebilirsiniz.",
+      "title": "Bağlantı bilgilerinizi kontrol edin",
+      "subtitle": "Aşağıdaki konum yaklaşık olarak gösterilir ve IP adresi gizlilik için maskelenir. VPN kullanıp kullanmamak size bağlıdır.",
       "locationKicker": "Konum",
-      "ipKicker": "IP adresi",
+      "ipKicker": "Maskelenmiş IP",
       "timeKicker": "Yerel saat",
       "locationFallback": "Yaklaşık konum",
       "compareLink": "VPN'leri karşılaştır",
-      "dismissLabel": "Bildirimi kapat"
+      "dismissLabel": "Bildirimi kapat",
+      "maskedIpNote": "tam adres gösterilmez"
     }
   },
   "footer": {
@@ -149,8 +151,8 @@
     "accept": "Tamam"
   },
   "methodology": {
-    "metaTitle": "Test Metodolojimiz — Nasıl Değerlendiriyoruz",
-    "metaDescription": "VPN Advisor'in VPN test süreci: bağımsızlık beyanı, hız ölçümleri, sızıntı testleri, streaming doğrulaması, no-logs denetim incelemesi, puanlama sistemi ve şeffaflık standartları.",
+    "metaTitle": "VPN Karşılaştırma Metodolojisi — Kaynaklar ve Kriterler",
+    "metaDescription": "VPN Advisor'ın kaynak temelli karşılaştırma yaklaşımı: resmi belgeler, bağımsız denetimler, fiyat, gizlilik, güncellik ve sınırlamalar.",
     "badge": "Şeffaf metodoloji",
     "h1": "VPN Test Metodolojimiz",
     "intro": "Sitedeki her VPN beş ayrı test alanı üzerinden, aynı standart prosedürle değerlendirilir. Reklam geliri sıralamayı veya puanları etkilemez — bu sayfa, her bir testi nasıl yürüttüğümüzü, hangi araçları kullandığımızı ve hangi varsayımlarla puanladığımızı detaylı biçimde açıklar.",
@@ -184,7 +186,7 @@
       "title": "2. Test Metodolojisi",
       "intro": "Her VPN, beş ayrı kategoride aynı prosedürle test edilir. Aşağıda her kategorinin detaylı protokolünü bulabilirsiniz.",
       "speed": {
-        "title": "a) Hız testi",
+        "title": "a) Performans koşulları",
         "summary": "Aynı baz hat üzerinden, sabit donanım ve sabit ISP koşullarında, üç farklı coğrafi bölgede ölçüm.",
         "toolsLabel": "Kullanılan araçlar",
         "tools": "Ookla Speedtest CLI, Cloudflare speed.cloudflare.com (çapraz doğrulama), fast.com (CDN bazlı sağlık kontrolü).",
@@ -303,7 +305,7 @@
       "intro": "VPN piyasası hızla değişir. Bir bağımsız audit bugün güçlü bir kanıt olabilir; iki yıl sonra ise eskimiş sayılır. Bu yüzden test verilerimizi düzenli yenileyip her sayfada şeffaf biçimde gösteriyoruz.",
       "items": {
         "0": "Her VPN, yılda en az iki kez tam test sürecinden yeniden geçirilir.",
-        "1": "Her inceleme sayfasının üst kısmında 'Son test edildi: GG/AY/YYYY' tarihi açıkça görünür.",
+        "1": "Her inceleme sayfasında kaynak ve fiyat kontrol tarihleri açıkça gösterilir.",
         "2": "Major bir olay yaşandığında (ihlal, ownership değişikliği, yeni audit, kritik özellik) ek olarak acil yeniden test yapılır.",
         "3": "Fiyat verileri ayrı bir 'pricingVerifiedAt' alanı ile takip edilir; piyasa fiyat değişikliklerine 30 gün içinde adapte oluruz."
       }
@@ -319,7 +321,7 @@
       },
       "limitsTitle": "Sınırlamaları açıkça beyan ederiz",
       "limitsItems": {
-        "0": "Hız testleri belirli bir ISP ve konuma özgüdür; sizin coğrafyanızda sonuçlar farklı olabilir.",
+        "0": "Performans, ISP, rota, sunucu yükü ve cihaz koşullarına göre değişir; sabit laboratuvar sonucu yayınlamıyoruz.",
         "1": "Streaming başarı oranı zaman içinde değişir — platformlar VPN tespitini sürekli günceller.",
         "2": "Bazı testler synthetic'tir (kontrollü ortam); gerçek kullanım koşullarında ufak sapmalar olabilir.",
         "3": "Bağımsız bir sertifikasyon kuruluşunun bizi denetlemediğini açıkça belirtiriz; metodolojimizi şeffaf yayımlamak en güçlü kalite güvencemizdir.",
@@ -343,7 +345,7 @@
       },
       "speed": {
         "title": "Hız",
-        "body": "Aynı baz hat üzerinden farklı sunucu mesafelerinde gerçek hız testleri yapıyoruz."
+        "body": "Performans iddialarını resmi teknik belgeler, protokol tasarımları ve açık sınırlamalarla birlikte değerlendiriyoruz."
       },
       "streaming": {
         "title": "Streaming uyumluluğu",
@@ -360,11 +362,11 @@
     }
   },
   "reviewsHub": {
-    "metaTitle": "2026'da En İyi 20 VPN — Karşılaştırma ve Editör Sıralaması",
-    "metaDescription": "Bağımsız denetim raporları, kendi hız testlerimiz ve fiyat şeffaflığı kriterleri ile 2026 için editör sıralamamız. Sıralama bilgi amaçlıdır; kullanıcı kendi önceliklerine göre değerlendirmelidir.",
+    "metaTitle": "2026 VPN Karşılaştırmaları — Kaynak Temelli Sağlayıcı Profilleri",
+    "metaDescription": "VPN sağlayıcılarını resmi belgeler, bağımsız denetimler, gizlilik politikaları, özellikler ve fiyat kaynakları üzerinden karşılaştırın.",
     "breadcrumb": "Ana sayfa › En İyi VPN'ler",
     "h1": "2026'da En İyi 20 VPN — Editör Sıralaması",
-    "intro": "On VPN'i altı kritere göre değerlendirdik. Aşağıdaki sıralama bağımsız denetim raporları, hız testlerimiz ve fiyat şeffaflığına dayalı editör değerlendirmesidir. Kullanıcılar kendi önceliklerine göre değerlendirme yapmalıdır."
+    "intro": "VPN profillerini altı bilgi alanında karşılaştırıyoruz. Aşağıdaki görünüm bağımsız denetim raporları, resmi özellik belgeleri ve fiyat şeffaflığına dayalı kaynak temelli editoryal çerçevedir. Kullanıcılar kendi önceliklerine göre değerlendirme yapmalıdır."
   },
   "useCaseHub": {
     "metaTitle": "Kullanım Amacına Göre En İyi VPN'ler",
@@ -508,7 +510,7 @@
         "options": {
           "0": "Bağımsız denetim geçmişi",
           "1": "Açık kaynak istemci",
-          "2": "Mahkemede test edilmiş no-logs",
+          "2": "Mahkeme belgelerinde raporlanan no-logs",
           "3": "Marka tanınırlığı yeterli"
         }
       },
@@ -610,7 +612,7 @@
     "relatedLinks": {
       "whatIsVpn": "VPN nedir?",
       "checklist": "Güvenlik kontrol listesi",
-      "methodology": "Test metodolojimiz"
+      "methodology": "Kaynak metodolojimiz"
     },
     "search": {
       "placeholder": "Terim ara… (Ctrl+K)",
@@ -930,7 +932,7 @@
       "criteria": {
         "privacy": "Gizlilik politikası ve yargı yetkisi",
         "audits": "Bağımsız denetimler",
-        "speed": "Hız (gerçek dünya testleri)",
+        "speed": "Performans kanıtı",
         "streaming": "Streaming uyumluluğu",
         "pricing": "Fiyat şeffaflığı",
         "usability": "Kullanım kolaylığı"
@@ -958,6 +960,7 @@
       "bestValueLabel": "En iyi değer",
       "perMonth": "/ay",
       "monthlyLabel": "Aylık:",
+      "officialSite": "Resmi fiyat sayfası",
       "ctaDeal": "Fırsata git",
       "ctaOfficial": "Resmi siteye git",
       "readReview": "İncelemeyi oku"
@@ -981,6 +984,7 @@
   },
   "pricingPlans": {
     "verifiedAt": "Fiyatlar {date} tarihinde doğrulandı.",
+    "verifyOnOfficialSite": "Güncel fiyatı resmi sitede kontrol edin.",
     "bestValue": "En iyi değer",
     "perMonth": "/ay",
     "discount": "%{percent} indirim",
@@ -1017,7 +1021,7 @@
     "alt": "VPN Advisor — Bağımsız VPN Karşılaştırmaları",
     "h1": "Bağımsız VPN Karşılaştırmaları",
     "subtitle": "Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız değerlendirmeler.",
-    "trust1": "20 VPN test edildi",
+    "trust1": "20 VPN profili",
     "trust2": "Bağımsız denetimler",
     "trust3": "Şeffaf metodoloji"
   },
@@ -1103,7 +1107,7 @@
       "loading": "Test ediliyor...",
       "privacyNote": "Sonuçlar yalnızca tarayıcınızda gösterilir, sunucumuza kaydedilmez.",
       "ctaTitle": "VPN ile gerçek koruma istiyor musunuz?",
-      "ctaBody": "Bağımsız metodolojimizle test edilmiş en iyi VPN'leri karşılaştırın.",
+      "ctaBody": "Resmi kaynakları ve bağımsız denetimleri karşılaştıran VPN profillerini inceleyin.",
       "ctaButton": "En iyi VPN'leri gör"
     },
     "ip": {

@@ -260,4 +260,3 @@ export async function DevicePage({
     </>
   );
 }
-

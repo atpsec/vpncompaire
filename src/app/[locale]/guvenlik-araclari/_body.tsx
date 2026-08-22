@@ -769,4 +769,3 @@ export function SecurityToolsBody({ locale }: { locale: string }) {
     </>
   );
 }
-

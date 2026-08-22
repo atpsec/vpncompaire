@@ -39,7 +39,9 @@ Aşağıdaki liste editoryal puan sıralaması değildir; sitede karşılaştır
 
 ${catalog
   .map((p) => {
-    const price = p.priceFromUsd > 0 ? `$${p.priceFromUsd.toFixed(2)}/ay` : "Resmi fiyat sayfasından doğrulanmalı";
+    const price = p.pricingVerifiedAt && p.priceFromUsd > 0
+      ? `${p.priceCurrency === "EUR" ? "€" : "$"}${p.priceFromUsd.toFixed(2)}/ay`
+      : "Resmi fiyat sayfasından doğrulanmalı";
     return `### ${p.brand}\n\n- **Konumlandırma:** ${p.positioning}\n- **Fiyat:** ${price}\n- **Yargı yetkisi:** ${p.highlights.jurisdiction ?? "Belirtilmemiş"}\n- **Sunucu/ağ bilgisi:** ${p.highlights.servers ?? "Belirtilmemiş"}\n- **Bağımsız denetim bilgisi:** ${p.highlights.audits ?? "Belirtilmemiş"}\n- **Cihaz desteği:** ${p.highlights.devices ?? "Belirtilmemiş"}\n- **Sağlayıcı profili:** ${siteConfig.url}/inceleme/${p.slug}\n\n${p.summary}\n`;
   })
   .join("\n")}
@@ -99,4 +101,3 @@ Türkçe ana sürümdür. İngilizce içerik /en, Almanca içerik /de altında s
     headers: { "Content-Type": "text/plain; charset=utf-8" },
   });
 }
-

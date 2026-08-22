@@ -8,6 +8,7 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import type { Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
+import { formatProductPrice } from "@/lib/product-price";
 
 const labels = {
   tr: {
@@ -53,7 +54,7 @@ type Props = {
 export function FactualComparison({ locale, title, description, left, right }: Props) {
   const t = labels[locale];
   const rows = [
-    [t.price, `$${left.priceFromUsd.toFixed(2)}`, `$${right.priceFromUsd.toFixed(2)}`],
+    [t.price, left.pricingVerifiedAt ? formatProductPrice(left.priceFromUsd, left.priceCurrency, locale) : t.official, right.pricingVerifiedAt ? formatProductPrice(right.priceFromUsd, right.priceCurrency, locale) : t.official],
     [t.jurisdiction, left.highlights.jurisdiction ?? "—", right.highlights.jurisdiction ?? "—"],
     [t.audits, left.highlights.audits ?? "—", right.highlights.audits ?? "—"],
     [t.servers, left.highlights.servers ?? "—", right.highlights.servers ?? "—"],

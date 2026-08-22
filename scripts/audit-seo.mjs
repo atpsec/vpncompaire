@@ -211,4 +211,3 @@ for (const message of warnings) console.log(`  WARN  ${message}`);
 for (const message of errors) console.log(`  FAIL  ${message}`);
 console.log(`\nÖzet: ${passes.length} geçti, ${warnings.length} uyarı, ${errors.length} hata`);
 process.exitCode = errors.length > 0 ? 1 : 0;
-

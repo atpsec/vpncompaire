@@ -99,4 +99,3 @@ Sitemap: ${siteConfig.url}/sitemap-vpn-providers.xml
     headers: { "Content-Type": "text/plain; charset=utf-8" },
   });
 }
-

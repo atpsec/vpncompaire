@@ -3,11 +3,14 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 import type { PricingPlan } from "@/data/products";
+import type { PriceCurrency } from "@/data/products";
 import { cn } from "@/lib/utils";
+import { formatProductPrice } from "@/lib/product-price";
 
 type Props = {
   plans: PricingPlan[];
   verifiedAt: string;
+  currency?: PriceCurrency;
   variant?: "compact" | "default";
   className?: string;
 };
@@ -15,6 +18,7 @@ type Props = {
 export function PricingPlans({
   plans,
   verifiedAt,
+  currency = "USD",
   variant = "default",
   className,
 }: Props) {
@@ -25,7 +29,7 @@ export function PricingPlans({
     month: "long",
     day: "numeric",
   });
-  const verifiedDate = formatter.format(new Date(verifiedAt));
+  const verifiedDate = verifiedAt ? formatter.format(new Date(verifiedAt)) : null;
 
   return (
     <div className={cn("space-y-2", className)}>
@@ -35,13 +39,17 @@ export function PricingPlans({
           variant === "compact" ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2",
         )}
       >
-        {plans.map((plan) => (
-          <PlanCard key={plan.name} plan={plan} variant={variant} />
-        ))}
+        {verifiedAt
+          ? plans.map((plan) => (
+              <PlanCard key={plan.name} plan={plan} currency={currency} variant={variant} />
+            ))
+          : null}
       </div>
       <p className="text-[11px] text-ink-faint flex items-center gap-1">
         <Check className="size-3 text-success-600" />
-        {t("verifiedAt", { date: verifiedDate })}
+        {verifiedDate
+          ? t("verifiedAt", { date: verifiedDate })
+          : t("verifyOnOfficialSite")}
       </p>
     </div>
   );
@@ -49,9 +57,11 @@ export function PricingPlans({
 
 function PlanCard({
   plan,
+  currency,
   variant,
 }: {
   plan: PricingPlan;
+  currency: PriceCurrency;
   variant: "compact" | "default";
 }) {
   const t = useTranslations("pricingPlans");
@@ -81,7 +91,7 @@ function PlanCard({
             variant === "compact" ? "text-base" : "text-lg",
           )}
         >
-          ${plan.monthlyPriceUsd.toFixed(2)}
+          {formatProductPrice(plan.monthlyPriceUsd, currency)}
         </span>
         <span className="text-[11px] text-ink-subtle">{t("perMonth")}</span>
       </div>
@@ -96,7 +106,7 @@ function PlanCard({
         </div>
       ) : null}
       <div className="mt-1 text-[10px] text-ink-faint tabular-nums">
-        {t("totalLabel")} ${plan.totalPriceUsd.toFixed(2)}
+        {t("totalLabel")} {formatProductPrice(plan.totalPriceUsd, currency)}
         {plan.durationMonths > 1
           ? ` · ${plan.durationMonths} ${t("monthsSuffix")}`
           : ""}

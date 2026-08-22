@@ -2,7 +2,7 @@
   "metadata": {
     "siteName": "VPN Advisor",
     "defaultTitle": "VPN Advisor - Unabhängige VPN-Vergleiche (2026)",
-    "defaultDescription": "Unabhängige VPN-Tests, Vergleiche und Ratgeber für Datenschutz, Streaming, Reisen und Sicherheit im Alltag."
+    "defaultDescription": "VPN-Vergleiche und Ratgeber auf Basis offizieller Dokumentation, unabhängiger Audits und aktueller Preisquellen."
   },
   "nav": {
     "home": "Startseite",
@@ -17,7 +17,7 @@
     "devices": "Geräte",
     "guides": "Ratgeber",
     "tools": "Tools",
-    "methodology": "Methodik",
+    "methodology": "Quellenmethodik",
     "about": "Über uns",
     "search": "Suchen",
     "menu": "Menü",
@@ -38,6 +38,7 @@
     "score": "Bewertung",
     "from": "ab",
     "perMonth": "Monat",
+    "officialPricing": "Offizielle Preise",
     "pros": "Vorteile",
     "cons": "Nachteile",
     "verifiedAudit": "Unabhängiges Audit",
@@ -51,20 +52,20 @@
   "home": {
     "hero": {
       "h1": "Freiwillige, unabhängige VPN-Vergleiche",
-      "subtitle": "VPNs bewertet nach einer transparenten Methodik für Datenschutz, Streaming, Reisen und Sicherheit im Alltag.",
+      "subtitle": "VPN-Anbieterprofile anhand offizieller Quellen für Datenschutz, Streaming, Reisen und Sicherheit im Alltag.",
       "ctaPrimary": "Top 20 VPNs ansehen",
-      "ctaSecondary": "So testen wir",
-      "methodologyTag": "Unabhängige Testmethodik",
+      "ctaSecondary": "Unser Quellenansatz",
+      "methodologyTag": "Quellenbasierte Methodik",
       "trust": {
-        "tested": "VPNs getestet",
+        "tested": "VPN-Profile",
         "audits": "unabhängige Audits geprüft",
-        "hours": "Teststunden",
+        "hours": "Quellenprüfungen",
         "updated": "Aktualisiert"
       }
     },
     "topVPNs": {
       "title": "Die Top 20 VPNs 2026",
-      "subtitle": "Unabhängige Audits, echte Speedtests und transparente Preisanalyse.",
+      "subtitle": "Unabhängige Audits, überprüfbare Funktionsquellen und transparente Preisanalyse.",
       "extendedKicker": "Rang 11–20",
       "extendedTitle": "Erweiterter Review-Pool",
       "extendedSubtitle": "Alternativen außerhalb der Top 20 — für Budget, Nischenfeatures oder eine zweite Option."
@@ -97,14 +98,15 @@
     "ipBanner": {
       "ariaLabel": "IP-Sicherheitshinweis",
       "kicker": "Sicherheitshinweis",
-      "title": "Ihre Verbindung ist ungeschützt",
-      "subtitle": "Ihre IP-Adresse und Ihr Standort sind für externe Server sichtbar - ein VPN verbirgt diese Informationen.",
+      "title": "Verbindungsdaten prüfen",
+      "subtitle": "Der Standort ist nur ungefähr und die IP-Adresse wird aus Datenschutzgründen maskiert. Ob Sie ein VPN verwenden, entscheiden Sie selbst.",
       "locationKicker": "Standort",
-      "ipKicker": "IP-Adresse",
+      "ipKicker": "Maskierte IP",
       "timeKicker": "Lokale Zeit",
       "locationFallback": "Ungefährer Standort",
       "compareLink": "VPNs vergleichen",
-      "dismissLabel": "Hinweis ausblenden"
+      "dismissLabel": "Hinweis ausblenden",
+      "maskedIpNote": "vollständige Adresse verborgen"
     }
   },
   "footer": {
@@ -153,8 +155,8 @@
     "accept": "OK"
   },
   "methodology": {
-    "metaTitle": "Unsere Testmethodik - So bewerten wir VPNs",
-    "metaDescription": "Die VPN-Testmethodik von VPN Advisor: Unabhängigkeit, Geschwindigkeit, Leak-Tests, Streaming, No-Logs-Audits, Bewertungssystem und Transparenz.",
+    "metaTitle": "VPN-Vergleichsmethodik — Quellen und Kriterien",
+    "metaDescription": "Die quellenbasierte Vergleichsmethodik von VPN Advisor: offizielle Dokumente, unabhängige Audits, Preise, Datenschutz, Aktualität und Grenzen.",
     "badge": "Transparente Methodik",
     "h1": "Unsere VPN-Testmethodik",
     "intro": "Jedes VPN wird in mehreren Testbereichen nach derselben standardisierten Methode bewertet. Werbeeinnahmen beeinflussen weder Rankings noch Bewertungen.",
@@ -186,7 +188,7 @@
     },
     "tests": {
       "title": "2. Testing Methodology",
-      "intro": "Every VPN is tested in five categories using the same procedure. The detailed protocol for each category is below.",
+      "intro": "Jedes Anbieterprofil wird anhand derselben Quellenstruktur in fünf Informationsbereichen eingeordnet. Die Kriterien stehen unten.",
       "speed": {
         "title": "a) Speed test",
         "summary": "Measurements over the same baseline, with fixed hardware and ISP, across three geographic regions.",
@@ -214,7 +216,7 @@
         "checks": {
           "0": "IPv4 leak: whether the real IP is exposed while the VPN is active.",
           "1": "IPv6 leak: many home connections have IPv6 enabled; does the provider block it?",
-          "2": "WebRTC leak: tested separately in Chrome, Firefox, Edge and Safari.",
+          "2": "WebRTC-Leak: relevante Browser- und Plattformgrenzen werden getrennt dokumentiert.",
           "3": "DNS leak: do queries go to the VPN's own resolver or to the ISP? Verified via the extended test across 6 different resolvers.",
           "4": "Kill switch: the VPN process is forcefully killed during an active connection (Task Manager / kill -9) and we verify that internet access is actually severed."
         },
@@ -224,12 +226,12 @@
       "streaming": {
         "title": "c) Streaming test",
         "summary": "How reliable is access to geo-restricted platforms?",
-        "platformsLabel": "Platforms tested",
+        "platformsLabel": "Abgedeckte Plattformen",
         "platforms": "Netflix (US, UK, JP, TR libraries), Disney+, BBC iPlayer, YouTube TV, Amazon Prime Video, BluTV and Exxen.",
         "methodLabel": "Procedure",
         "methodSteps": {
           "0": "We log into each platform with our own paid subscription via parallel browser sessions.",
-          "1": "Every target region is tested across 3 different servers (e.g. US East, US West, US Central).",
+          "1": "Anbieterangaben zu regionaler Abdeckung und Servern werden anhand aktueller offizieller Dokumentation geprüft.",
           "2": "For providers that offer Smart DNS, obfuscated or streaming-optimised servers, standard and special servers are reported separately.",
           "3": "We also record video quality (480p / 1080p / 4K) and buffer time during the test."
         },
@@ -307,7 +309,7 @@
       "intro": "The VPN market changes quickly. An independent audit may be strong evidence today and stale in two years. That is why we refresh our data regularly and display it transparently on every page.",
       "items": {
         "0": "Every VPN goes through the full test pipeline at least twice per year.",
-        "1": "Each review page shows 'Last tested: DD/MM/YYYY' clearly at the top.",
+        "1": "Jede Profilseite zeigt das relevante Quellen- und Preisprüfdatum deutlich an.",
         "2": "If a major event occurs (breach, ownership change, new audit, critical feature) we run an emergency re-test.",
         "3": "Pricing is tracked via a separate 'pricingVerifiedAt' field; we adapt to market price changes within 30 days."
       }
@@ -323,9 +325,9 @@
       },
       "limitsTitle": "We disclose our limitations openly",
       "limitsItems": {
-        "0": "Speed tests are specific to one ISP and location; results may differ in your geography.",
+        "0": "Die Leistung hängt von ISP, Route, Serverlast und Gerät ab; feste Laborergebnisse veröffentlichen wir nicht.",
         "1": "Streaming success rates change over time — platforms continuously update their VPN detection.",
-        "2": "Some tests are synthetic (controlled environments); real-world conditions may diverge slightly.",
+        "2": "Anbieterangaben und unabhängige Belege haben unterschiedliche Reichweiten; die Praxis kann abweichen.",
         "3": "We state explicitly that no independent certification body audits us; publishing our methodology openly is our strongest quality safeguard.",
         "4": "Users should make the final call based on their own priorities (privacy vs speed vs streaming)."
       },
@@ -347,7 +349,7 @@
       },
       "speed": {
         "title": "Speed",
-        "body": "We run real speed tests against the same baseline at near, medium and far server distances."
+        "body": "Leistungsangaben werden anhand offizieller Technikdokumentation, Protokolldesigns und klarer Einschränkungen eingeordnet."
       },
       "streaming": {
         "title": "Streaming compatibility",
@@ -364,8 +366,8 @@
     }
   },
   "reviewsHub": {
-    "metaTitle": "VPN Tests 2026",
-    "metaDescription": "Unabhängige VPN-Tests mit Datenschutz, Geschwindigkeit, Streaming, Preisen und Bedienbarkeit im Vergleich.",
+    "metaTitle": "VPN-Vergleiche 2026 — Quellenbasierte Anbieterprofile",
+    "metaDescription": "VPN-Anbieter anhand offizieller Dokumente, unabhängiger Audits, Datenschutzrichtlinien, Funktionen und aktueller Preisquellen vergleichen.",
     "breadcrumb": "Home › Top VPNs",
     "h1": "VPN Tests",
     "intro": "Detaillierte Bewertungen der wichtigsten VPN-Anbieter."
@@ -729,7 +731,7 @@
     },
     "approach": {
       "h2": "Our approach",
-      "body": "We try to make it easier to find clear, independent, methodology-driven information when choosing a VPN. Our assessments come from independent audit reports, public sources and our own test observations — not marketing copy. No recommendation is a hard guarantee; the final decision is always yours."
+      "body": "Wir möchten klare, unabhängige und quellenbasierte Informationen zur VPN-Auswahl zugänglich machen. Unsere Einordnungen beruhen auf unabhängigen Auditberichten, öffentlichen Quellen und offizieller Dokumentation — nicht auf Marketingtexten. Keine Empfehlung ist eine Garantie; die Entscheidung bleibt bei Ihnen."
     },
     "principlesH2": "Our three core principles",
     "principles": {
@@ -871,7 +873,7 @@
     "relatedTitle": "Other pages"
   },
   "lastTested": {
-    "label": "Zuletzt getestet",
+    "label": "Quellen geprüft",
     "environment": "Test Environment",
     "testerLocation": "Location",
     "vpnVersion": "VPN Version",
@@ -949,7 +951,7 @@
       "criteria": {
         "privacy": "Privacy policy and jurisdiction",
         "audits": "Independent audits",
-        "speed": "Speed (real-world tests)",
+    "speed": "Speed evidence",
         "streaming": "Streaming compatibility",
         "pricing": "Pricing transparency",
         "usability": "Ease of use"
@@ -977,6 +979,7 @@
       "bestValueLabel": "Best value",
       "perMonth": "/mo",
       "monthlyLabel": "Monthly:",
+      "officialSite": "Offizielle Preisseite",
       "ctaDeal": "Get deal",
       "ctaOfficial": "Visit official site",
       "readReview": "Read review"
@@ -1000,6 +1003,7 @@
   },
   "pricingPlans": {
     "verifiedAt": "Prices verified on {date}.",
+    "verifyOnOfficialSite": "Aktuelle Preise auf der offiziellen Website prüfen.",
     "bestValue": "Bester Wert",
     "perMonth": "pro Monat",
     "discount": "{percent}% off",
@@ -1038,7 +1042,7 @@
     "alt": "VPN Advisor - Unabhängige VPN-Vergleiche",
     "h1": "Unabhängige VPN-Vergleiche",
     "subtitle": "Freiwilliges Review-Projekt - Transparente Methodik - Unabhängige Bewertungen.",
-    "trust1": "20 VPNs getestet",
+    "trust1": "20 VPN-Profile",
     "trust2": "Unabhängige Audits",
     "trust3": "Transparente Methodik"
   },

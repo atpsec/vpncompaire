@@ -34,6 +34,8 @@ export function LastTestedBadge({
   const t = useTranslations("lastTested");
   const [open, setOpen] = useState(false);
 
+  if (!lastTestedAt) return null;
+
   const formatter = new Intl.DateTimeFormat(
     locale === "en" ? "en-US" : "tr-TR",
     { year: "numeric", month: "long", day: "numeric" },

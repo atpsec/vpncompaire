@@ -155,7 +155,7 @@ export function VPNQuiz() {
               {t("result.monthlyLabel")}
             </span>
             <span className="text-2xl font-bold">
-              ${bestPlan.monthlyPriceUsd.toFixed(2)}
+              {product.pricingVerifiedAt ? `${product.priceCurrency === "EUR" ? "€" : "$"}${bestPlan.monthlyPriceUsd.toFixed(2)}` : locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site"}
             </span>
             <span className="text-sm text-ink-muted">
               ({bestPlan.name})

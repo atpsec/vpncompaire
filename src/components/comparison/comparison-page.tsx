@@ -101,20 +101,22 @@ export async function ComparisonPage({
 
         <DataDisclaimer verifiedAt={a.pricingVerifiedAt} />
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <LastTestedBadge
-            lastTestedAt={a.lastTestedAt}
-            testEnvironment={a.testEnvironment}
-            editorNotes={a.editorNotes}
-            className="mt-0"
-          />
-          <LastTestedBadge
-            lastTestedAt={b.lastTestedAt}
-            testEnvironment={b.testEnvironment}
-            editorNotes={b.editorNotes}
-            className="mt-0"
-          />
-        </div>
+        {(a.lastTestedAt || b.lastTestedAt) && (
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <LastTestedBadge
+              lastTestedAt={a.lastTestedAt}
+              testEnvironment={a.testEnvironment}
+              editorNotes={a.editorNotes}
+              className="mt-0"
+            />
+            <LastTestedBadge
+              lastTestedAt={b.lastTestedAt}
+              testEnvironment={b.testEnvironment}
+              editorNotes={b.editorNotes}
+              className="mt-0"
+            />
+          </div>
+        )}
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           <Card className="p-6">
@@ -316,4 +318,3 @@ function WinnerBadge({
     </Badge>
   );
 }
-

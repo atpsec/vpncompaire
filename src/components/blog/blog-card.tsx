@@ -7,11 +7,12 @@ import { useTranslations } from "next-intl";
 
 type BlogCardProps = {
   post: BlogPost;
+  imageIndex?: number;
 };
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, imageIndex }: BlogCardProps) {
   const t = useTranslations("blog");
-  const image = getBlogImage(post.coverImage, "hero");
+  const image = getBlogImage(post.coverImage, "hero", post.slug, imageIndex);
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-base shadow-sm transition-shadow hover:shadow-md">

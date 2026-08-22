@@ -749,4 +749,3 @@ export function localizePathname(pathname: string, targetLocale: AppLocale): str
     ? localeNeutralPath
     : `/${targetLocale}${localeNeutralPath}`;
 }
-

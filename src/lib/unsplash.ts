@@ -1224,14 +1224,50 @@ const aliases: Record<string, string> = {
 
 const FALLBACK_IMAGES: BlogImageSet = imageDatabase["vpn-basics"];
 
+const ALL_BLOG_IMAGES = Array.from(
+  new Map(
+    Object.values(imageDatabase)
+      .flatMap((set) => [set.hero, set.mid, set.end])
+      .map((image) => [image.url, image] as const),
+  ).values(),
+);
+
+function seedHash(seed: string): number {
+  let hash = 2166136261;
+  for (let index = 0; index < seed.length; index += 1) {
+    hash ^= seed.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
 export function getBlogImages(coverImage: string): BlogImageSet {
   const key = aliases[coverImage] || coverImage;
   return imageDatabase[key] || FALLBACK_IMAGES;
 }
 
-export function getBlogImage(coverImage: string, position: "hero" | "mid" | "end"): UnsplashImage {
+export function getBlogImage(
+  coverImage: string,
+  position: "hero" | "mid" | "end",
+  seed?: string,
+  sequence?: number,
+): UnsplashImage {
   const set = getBlogImages(coverImage);
-  return set[position];
+  if (!seed) return set[position];
+
+  if (sequence !== undefined && position === "hero") {
+    const baseIndex = seedHash("vpn-advisor-blog-gallery") % ALL_BLOG_IMAGES.length;
+    return ALL_BLOG_IMAGES[(baseIndex + sequence) % ALL_BLOG_IMAGES.length] ?? set[position];
+  }
+
+  const preferred = [set[position], set.hero, set.mid, set.end];
+  const candidates = [
+    ...preferred,
+    ...ALL_BLOG_IMAGES.filter(
+      (image) => !preferred.some((item) => item.url === image.url),
+    ),
+  ];
+  return candidates[seedHash(`${coverImage}:${position}:${seed}`) % candidates.length] ?? set[position];
 }
 
 export function getUnsplashImageUrl(coverImage: string): string {

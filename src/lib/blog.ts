@@ -219,4 +219,3 @@ export async function getRelatedPosts(
     .filter((post) => post.slug !== currentSlug && post.category === category)
     .slice(0, limit);
 }
-

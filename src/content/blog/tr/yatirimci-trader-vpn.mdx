@@ -48,7 +48,7 @@ Trader VPN ihtiyacı streaming veya gezinmeden farklıdır. Aktif işlem için l
 
 Somut sayılar: Binance.com ana matching engine'i AWS Tokyo ve AWS Frankfurt'ta. Türkiye'den:
 
-- Doğrudan bağlantı: Frankfurt'a 65-90ms, Tokyo'ya 220-260ms
+- Doğrudan bağlantı gecikmesi rotaya ve ISP'ye göre değişir; Frankfurt genellikle Tokyo'dan daha yakın bir örnektir.
 - Almanya VPN düğümü üzerinden WireGuard: Frankfurt'a 75-100ms
 - Aynı yolda OpenVPN: Frankfurt'a 110-140ms
 
@@ -90,7 +90,7 @@ Trading paterninizin loglanmasını istemezsiniz. Sağlayıcının no-logs polit
 
 ### 4. Default WireGuard
 
-Trader için pazarlık konusu değil. OpenVPN sıradan gezinme için sorun değil ama 30-50ms ek latency getirir. WireGuard bunu yarıya indirir.
+Trader için rota ve protokol davranışını kendi bağlantınızda ölçmek önemlidir. OpenVPN veya WireGuard için sabit ek gecikme varsaymayın; sonuçlar sunucu, ISP ve cihaz koşullarına göre değişir.
 
 ### 5. Multi-hop / Double VPN (Opsiyonel)
 

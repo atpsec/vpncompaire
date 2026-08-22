@@ -503,4 +503,3 @@ export function RefundBody({ locale }: { locale: string }) {
     </>
   );
 }
-

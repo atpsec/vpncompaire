@@ -34,4 +34,3 @@ export default async function Page({ params }: Props) {
   const alternates = contentAlternates(CONTENT_ID, locale);
   return <><JsonLd data={breadcrumbSchema([{ name: locale === "tr" ? "Ana sayfa" : locale === "de" ? "Startseite" : "Home", path: "/" }, { name: t.title, path: alternates.canonical }], locale)} /><FactualComparison locale={locale} title={t.title} description={t.description} left={left} right={right} /></>;
 }
-

@@ -26,4 +26,3 @@ export default async function Page({ params }: Props) {
   if (!device) notFound();
   return <DevicePage device={device} locale={locale} />;
 }
-

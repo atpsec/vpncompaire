@@ -165,7 +165,7 @@ export default async function Page({ params }: Props) {
 
 function ProviderView({ product, locale, providerSchema }: { product: Product; locale: Locale; providerSchema: Record<string, unknown> }) {
   const t = labels[locale];
-  const hasStructuredPricing = product.priceFromUsd > 0 && product.plans.length > 0;
+  const hasStructuredPricing = Boolean(product.pricingVerifiedAt) && product.priceFromUsd > 0 && product.plans.length > 0;
 
   return (
     <>
@@ -192,7 +192,7 @@ function ProviderView({ product, locale, providerSchema }: { product: Product; l
 
         <Card className="mt-8 p-6">
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-            <Stat label={t.price} value={hasStructuredPricing ? `$${product.priceFromUsd.toFixed(2)}` : t.priceOfficial} highlight />
+            <Stat label={t.price} value={hasStructuredPricing ? `${product.priceCurrency === "EUR" ? "€" : "$"}${product.priceFromUsd.toFixed(2)}` : t.priceOfficial} highlight />
             <Stat label={t.jurisdiction} value={product.highlights.jurisdiction ?? "—"} />
             <Stat label={t.refund} value={product.highlights.moneyBackDays ? `${product.highlights.moneyBackDays} ${t.days}` : "—"} />
           </dl>
@@ -200,7 +200,7 @@ function ProviderView({ product, locale, providerSchema }: { product: Product; l
             <h2 className="text-lg font-semibold text-ink-strong">{t.pricing}</h2>
             <p className="mt-1 text-sm text-ink-muted">{t.pricingIntro}</p>
             <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
-              {hasStructuredPricing ? <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} /> : <div className="rounded-lg border border-border bg-surface-subtle/40 p-4 text-sm text-ink-muted">{t.priceOfficial}</div>}
+              {hasStructuredPricing ? <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} /> : <div className="rounded-lg border border-border bg-surface-subtle/40 p-4 text-sm text-ink-muted">{t.priceOfficial}</div>}
               <div className="flex flex-col gap-2 sm:w-48"><Button asChild variant="primary"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t.official}<ExternalLink className="size-4" /></a></Button></div>
             </div>
           </div>
@@ -232,4 +232,3 @@ function Stat({ label, value, highlight = false }: { label: string; value: strin
 function Row({ label, value }: { label: string; value: string }) {
   return <div className="grid grid-cols-2 px-4 py-3 text-sm"><dt className="text-ink-muted">{label}</dt><dd className="text-ink-strong font-medium">{value}</dd></div>;
 }
-

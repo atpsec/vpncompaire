@@ -87,4 +87,3 @@ export function UseCasePage({ slug, title, tagline, summary, Icon, badgeLabel, p
     </>
   );
 }
-

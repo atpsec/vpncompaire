@@ -101,7 +101,7 @@ function FeaturedCard({ product, tCommon, label, profileLabel }: { product: Prod
         </div>
 
         <div className="flex flex-col gap-3 lg:w-72 lg:justify-center lg:border-l lg:border-border lg:pl-7">
-          <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} />
+          <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} />
           <Button asChild variant="primary" size="md">
             <a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{tCommon("visitSite")}<ArrowRight className="size-4" /></a>
           </Button>
@@ -128,7 +128,7 @@ function ProviderRow({ product, tCommon, profileLabel }: { product: Product; tCo
           </dl>
         </div>
         <div className="flex flex-col gap-3 lg:w-64 lg:justify-center lg:border-l lg:border-border lg:pl-6">
-          <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} variant="compact" />
+          <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} variant="compact" />
           <Button asChild variant="primary" size="md"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{tCommon("visitSite")}<ArrowRight className="size-4" /></a></Button>
           <Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button>
         </div>
@@ -146,7 +146,7 @@ function CompactRow({ product, tCommon }: { product: Product; tCommon: ReturnTyp
           <div className="flex flex-wrap items-center gap-2"><h3 className="text-base font-semibold text-ink-strong">{product.brand}</h3><Badge variant={product.hasAffiliate ? "brand" : "outline"}>{product.positioning}</Badge></div>
           <p className="mt-1 text-xs text-ink-muted line-clamp-1">{product.summary}</p>
         </div>
-        <div className="text-right"><div className="text-xs text-ink-subtle">${product.priceFromUsd.toFixed(2)}/{tCommon("perMonth")}</div></div>
+        <div className="text-right"><div className="text-xs text-ink-subtle">{product.pricingVerifiedAt ? `${product.priceCurrency === "EUR" ? "€" : "$"}${product.priceFromUsd.toFixed(2)}/${tCommon("perMonth")}` : tCommon("officialPricing")}</div></div>
         <ArrowRight className="size-4 text-ink-subtle" />
       </Link>
     </Card>

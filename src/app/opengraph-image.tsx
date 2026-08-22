@@ -15,20 +15,20 @@ const CONTENT: Record<
     title: "Bağımsız VPN karşılaştırmaları",
     subtitle:
       "Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız değerlendirmeler.",
-    signals: ["20 VPN test edildi", "Bağımsız denetimler", "Şeffaf metodoloji"],
+    signals: ["Kaynak temelli profiller", "Bağımsız denetimler", "Şeffaf metodoloji"],
   },
   en: {
     title: "Independent VPN comparisons",
     subtitle:
       "Volunteer review project · Transparent methodology · Independent assessments.",
-    signals: ["20 VPNs tested", "Independent audits", "Transparent methodology"],
+    signals: ["Source-based profiles", "Independent audits", "Transparent methodology"],
   },
   de: {
     title: "Unabhängige VPN-Vergleiche",
     subtitle:
       "Freiwilliges Review-Projekt · Transparente Methodik · Unabhängige Bewertungen.",
     signals: [
-      "20 VPNs getestet",
+      "Quellenbasierte Profile",
       "Unabhängige Audits",
       "Transparente Methodik",
     ],

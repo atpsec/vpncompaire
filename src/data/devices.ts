@@ -97,7 +97,7 @@ export const devices: DeviceContent[] = [
       {
         slug: "expressvpn",
         bestFor: "Konum gizliliğine en çok önem verenler",
-        why: "Lightway protokolü mobil ağ değişimlerinde (Wi-Fi → 4G geçişi) hızlı yeniden bağlanır, böylece kısa süreliğine bile olsa IP sızıntısı olmaz. Android'de tutarlı en yüksek hızı ölçtük.",
+        why: "Lightway protokolü mobil ağ değişimlerinde (Wi-Fi → 4G geçişi) yeniden bağlanmayı hedefler. Gerçek bağlantı ve IP davranışı cihaz, ağ ve uygulama ayarlarına göre değişir; Android için sabit bir editoryal hız ölçümü sunmuyoruz.",
       },
     ],
     pitfalls: [
@@ -298,7 +298,7 @@ export const devices: DeviceContent[] = [
       {
         slug: "nordvpn",
         bestFor: "Streaming ve bölgesel kütüphane",
-        why: "iPad'de en güvenilir streaming sağlayıcısı. ABD Netflix, BBC iPlayer, Disney+ regional vb. için %95+ başarı oranı ölçtük. Türkiye virtual sunucusu BluTV ve Exxen ile sorunsuz.",
+        why: "iPad'de streaming için değerlendirilebilecek seçeneklerden biri. ABD Netflix, BBC iPlayer, Disney+ ve Türkiye sanal sunucusu gibi kullanım senaryolarında uyumluluk bölge, IP havuzu ve platform politikalarına göre değişir.",
       },
       {
         slug: "expressvpn",

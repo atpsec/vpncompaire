@@ -141,4 +141,3 @@ export default async function Page({ params }: Props) {
 function Heading({ icon, title }: { icon: React.ReactNode; title: string }) {
   return <h2 className="flex items-center gap-2 text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">{icon}{title}</h2>;
 }
-
