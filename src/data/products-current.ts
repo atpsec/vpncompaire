@@ -1,7 +1,5 @@
 import type { Product } from "./products";
 
-const VERIFIED = "2026-08-09";
-
 export const currentSupplementProducts: Product[] = [
   {
     slug: "mysterium-vpn",
@@ -11,6 +9,7 @@ export const currentSupplementProducts: Product[] = [
       "Mysterium VPN, merkeziyetsiz node ağı üzerinden residential IP erişimi sunan WireGuard tabanlı bir VPN hizmetidir. Sağlayıcının güncel belgelerine göre 100+ ülkede 7.500+ residential IP ve 15 eşzamanlı cihaz desteği sunar.",
     score: 0,
     priceFromUsd: 0,
+    priceCurrency: "USD",
     rank: 51,
     pros: [
       "Sağlayıcı verisine göre 100+ ülkede 7.500+ residential IP",
@@ -28,7 +27,7 @@ export const currentSupplementProducts: Product[] = [
     },
     hasAffiliate: false,
     pricingUrl: "https://www.mysteriumvpn.com/",
-    pricingVerifiedAt: VERIFIED,
+    pricingVerifiedAt: "",
     plans: [],
     lastTestedAt: "",
     testEnvironment: { testerLocation: "", vpnVersion: "", testDuration: "" },
@@ -46,6 +45,7 @@ export const archivedProducts: Product[] = [
       "Atlas VPN hizmeti 24 Nisan 2024 itibarıyla kalıcı olarak kapatıldı. Bu sayfa yalnızca tarihsel referans amacıyla korunur; Atlas VPN yeni abonelik veya aktif VPN hizmeti sunmamaktadır.",
     score: 0,
     priceFromUsd: 0,
+    priceCurrency: "USD",
     rank: 999,
     pros: [
       "Eski kullanıcılar için kapanış ve geçiş bilgileri resmi Atlas VPN kaynaklarında yayımlandı",
@@ -61,7 +61,7 @@ export const archivedProducts: Product[] = [
     },
     hasAffiliate: false,
     pricingUrl: "https://atlasvpn.com/",
-    pricingVerifiedAt: VERIFIED,
+    pricingVerifiedAt: "",
     plans: [],
     lastTestedAt: "",
     testEnvironment: { testerLocation: "", vpnVersion: "", testDuration: "" },

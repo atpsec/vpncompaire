@@ -48,7 +48,7 @@ Trader VPN need is different from streaming or browsing. For active trading, lat
 
 Concrete numbers: Binance.com main matching engine sits in AWS Tokyo and AWS Frankfurt. From Turkey:
 
-- Direct connection: 65-90ms to Frankfurt, 220-260ms to Tokyo
+- Direct latency depends on the route and ISP; Frankfurt is generally a nearer example than Tokyo for many European users.
 - WireGuard via German VPN node: 75-100ms to Frankfurt
 - OpenVPN on the same path: 110-140ms to Frankfurt
 
@@ -90,7 +90,7 @@ You don't want trading patterns logged. The provider's no-logs policy must be ve
 
 ### 4. WireGuard Default
 
-For traders this is non-negotiable. OpenVPN is fine for general browsing but adds 30-50ms latency. WireGuard halves that.
+For traders, measure route and protocol behaviour on your own connection. Do not assume a fixed added latency for OpenVPN or WireGuard; results depend on the server, ISP and device.
 
 ### 5. Multi-hop / Double VPN (Optional)
 

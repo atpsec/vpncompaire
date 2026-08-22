@@ -56,7 +56,7 @@ const tr: VpnForStudentsContent = {
     "Kampüs Wi-Fi, akademik veritabanı erişimi ve öğrenci indirimleri için en iyi VPN önerileri.",
   badge: "Öğrenciler",
   h1: "Öğrenciler için en iyi VPN",
-  lede: "Kampüs Wi-Fi güvenliği, yurt dışı staj/değişim, akademik kaynak erişimi ve öğrenci bütçesine uygun en iyi 3 VPN — bağımsız test sonuçlarımıza dayalı.",
+  lede: "Kampüs Wi-Fi güvenliği, yurt dışı staj/değişim, akademik kaynak erişimi ve öğrenci bütçesi için 3 VPN profili — resmi kaynaklar ve özellik karşılaştırmasına dayalı.",
   breadcrumb: {
     home: "Ana sayfa",
     guides: "Rehberler",
@@ -76,7 +76,7 @@ const tr: VpnForStudentsContent = {
       slug: "nordvpn",
       label: "Türkiye sunucusu + hız",
       reason:
-        "Sağlayıcı verisine göre Türkiye sunucusu mevcut; Erasmus/değişimde Türk bankacılığı ve BluTV erişimi için değerlendirilebilir. Testlerimizde kampüs Wi-Fi koşullarında tutarlı hız gözlendi.",
+        "Sağlayıcı verisine göre Türkiye sunucusu mevcut; Erasmus/değişimde Türk bankacılığı ve BluTV erişimi için değerlendirilebilir. Kampüs Wi-Fi performansı ağ yöneticisi, rota ve sunucu yüküne göre değişir.",
     },
     {
       slug: "proton-vpn",

@@ -5,7 +5,6 @@
  */
 import type { RawProduct } from "./products";
 
-const VERIFIED = "2026-06-16";
 const L = (tr: string, en: string) => ({ tr, en });
 
 function extendedVpn(
@@ -38,8 +37,8 @@ function extendedVpn(
         "Broad or niche-focused server network per provider data",
       ),
       L(
-        "Testlerimizde günlük kullanım için kararlı bağlantı",
-        "Stable connection for daily use in our tests",
+        "Sağlayıcı belgelerine göre günlük kullanım özellikleri",
+        "Provider-documented features for daily use",
       ),
       L(
         "Fiyatlandırma sayfası şeffaf; plan seçenekleri net",
@@ -52,8 +51,8 @@ function extendedVpn(
         "More limited audit history or transparency vs top-10 picks",
       ),
       L(
-        "Streaming veya hız testlerinde tutarsız sonuçlar görülebilir",
-        "Streaming or speed tests may show inconsistent results",
+        "Streaming ve performans, bölge, ağ ve sağlayıcı politikalarına göre değişebilir",
+        "Streaming and performance can vary by region, network and provider policy",
       ),
     ],
     highlights: {
@@ -65,12 +64,12 @@ function extendedVpn(
     },
     hasAffiliate,
     pricingUrl,
-    pricingVerifiedAt: VERIFIED,
-    lastTestedAt: "2026-06-10",
+    pricingVerifiedAt: "",
+    lastTestedAt: "",
     testEnvironment: {
-      testerLocation: "Türkiye, İstanbul",
-      vpnVersion: "2026.x",
-      testDuration: "7 gün",
+      testerLocation: "",
+      vpnVersion: "",
+      testDuration: "",
     },
     editorNotes: L(
       "Genişletilmiş inceleme havuzunda değerlendirildi; genel kullanım için alternatif, ancak editör En İyi 20 listesindeki seçenekler daha dengeli profil sunuyor.",

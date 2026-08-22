@@ -33,6 +33,7 @@ export function CostCalculator() {
   const horizonMonths = horizon * 12;
 
   const rows = rankedProducts(locale)
+    .filter((product) => product.priceCurrency === "USD" && product.pricingVerifiedAt && product.plans.length > 0)
     .map((product) => {
       const bestPlan =
         product.plans.find((p) => p.isBestValue) ?? product.plans[0];

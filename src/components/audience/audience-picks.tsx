@@ -110,12 +110,7 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
                 <span className="text-xs text-ink-muted">
                   {t("monthlyLabel")}
                 </span>
-                <span className="text-lg font-bold">
-                  ${bestPlan.monthlyPriceUsd.toFixed(2)}
-                </span>
-                <span className="text-xs text-ink-muted">
-                  ({bestPlan.name})
-                </span>
+                {product.pricingVerifiedAt && bestPlan ? <><span className="text-lg font-bold">{product.priceCurrency === "EUR" ? "€" : "$"}{bestPlan.monthlyPriceUsd.toFixed(2)}</span><span className="text-xs text-ink-muted">({bestPlan.name})</span></> : <span className="text-sm font-medium">{locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site"}</span>}
               </div>
 
               <div className="mt-auto pt-5 flex flex-col gap-2">

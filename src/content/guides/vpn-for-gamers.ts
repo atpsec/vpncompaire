@@ -76,7 +76,7 @@ const tr: GamersContent = {
   },
   badge: "Gaming",
   h1: "Gamerlar için en iyi VPN",
-  lede: "Düşük ping, DDoS koruması ve bölge bypass için en iyi 3 VPN. Valorant, CS2, League of Legends, Fortnite testlerimize göre.",
+  lede: "Düşük ping hedefi, DDoS koruması ve bölge seçenekleri için 3 VPN profili. Valorant, CS2, League of Legends ve Fortnite gibi senaryolarda karar verirken ağ koşullarını ayrıca değerlendirin.",
   picks: {
     heading: "Gamerlar için en iyi 3 VPN",
     subheading: "Ping etkisi, DDoS koruması ve istikrara göre.",
@@ -85,13 +85,13 @@ const tr: GamersContent = {
         slug: "nordvpn",
         label: "Düşük ping etkisi gözlenenlerden",
         reason:
-          "Testlerimizde NordLynx protokolü düşük ping etkisi gösteren protokoller arasında öne çıktı — Türkiye-Almanya rotasında ortalama %3-5 ping artışı gözlendi. Threat Protection DDoS koruma katmanı ekler.",
+          "NordLynx, WireGuard tabanlı bir protokol olarak düşük gecikme hedefleyen oyuncular için değerlendirilebilir. Gerçek ping artışı rota, sunucu yükü ve ISP'ye göre değişir. Threat Protection ek bir güvenlik katmanı sunar.",
       },
       {
         slug: "expressvpn",
-        label: "Testlerimizde istikrarlı bağlantı",
+        label: "Düşük gecikme hedefleyen protokol",
         reason:
-          "Testlerimizde Lightway protokolü oyun sırasında tutarlı bağlantı sundu. Sağlayıcı verisine göre 105+ ülkede sunucu — Pazifik veya Asya sunucularına bağlanırken değerlendirilebilir.",
+          "Lightway protokolü hızlı bağlantı kurulumu hedefler. Sağlayıcı verisine göre 105+ ülkede sunucu bulunur; Pazifik veya Asya sunucularına bağlanırken rota ve gecikme ayrıca kontrol edilmelidir.",
       },
       {
         slug: "pia",
@@ -149,7 +149,7 @@ const tr: GamersContent = {
   pingImpact: {
     h2: "Ping etkisi — ortalama VPN performansı",
     intro:
-      "Türkiye'den (İstanbul) farklı oyun sunucularına bağlanırken VPN ping etkisi (testlerimize göre, Nisan-Mayıs 2026):",
+      "Türkiye'den farklı oyun sunucularına bağlanırken VPN ping etkisini değerlendirirken bakılacak başlıklar:",
     headers: ["Oyun sunucusu", "VPN'siz ping", "NordVPN", "ExpressVPN", "Surfshark"],
     rows: [
       ["Frankfurt (EU)", "45ms", "52ms", "54ms", "58ms"],
@@ -159,7 +159,7 @@ const tr: GamersContent = {
     ],
     resultBold: "Sonuç:",
     resultText:
-      " Testlerimizde yakın sunucularda %10-15 ping artışı, uzak sunucularda %5-8 gözlendi. NordVPN ve ExpressVPN bu kategoride düşük etki gözlenenler arasında yer aldı. Sonuçlar test tarihindeki gözlemlerimizi yansıtır; senin kendi ağ koşullarında farklılık gösterebilir.",
+      " Sabit bir ping sıralaması yayınlamıyoruz: yakınlık, sunucu yükü, protokol ve ISP rotası sonucu belirler. NordVPN ve ExpressVPN bu kullanım amacı için incelenebilir; kendi oyun sunucuna bağlanıp ping ve paket kaybını kontrol etmen gerekir.",
   },
   ddos: {
     h2: "DDoS koruması — gerçek koruma seviyesi",

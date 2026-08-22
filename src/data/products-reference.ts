@@ -1,7 +1,5 @@
 import type { Product } from "./products";
 
-const VERIFIED = "2026-08-09";
-
 const provider = (
   slug: string,
   brand: string,
@@ -19,13 +17,14 @@ const provider = (
   summary,
   score: 0,
   priceFromUsd: 0,
+  priceCurrency: "USD",
   rank,
   pros,
   cons,
   highlights,
   hasAffiliate: false,
   pricingUrl,
-  pricingVerifiedAt: VERIFIED,
+  pricingVerifiedAt: "",
   plans: [],
   lastTestedAt: "",
   testEnvironment: { testerLocation: "", vpnVersion: "", testDuration: "" },

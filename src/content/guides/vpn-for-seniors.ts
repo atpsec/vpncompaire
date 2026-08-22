@@ -98,7 +98,7 @@ const tr: SeniorsContent = {
         slug: "expressvpn",
         label: "Maksimum İstikrar",
         reason:
-          "Testlerimizde tutarlı bağlantı gözlenen sağlayıcılardan. Sağlayıcı politikasına göre 7/24 canlı sohbet desteği mevcut (Türkçe destek bulunmamaktadır). Premium fiyat seviyesinde değerlendirme gerektirebilir.",
+          "Sade uygulama ve sağlayıcı politikasına göre 7/24 canlı sohbet desteği sunan seçeneklerden. Türkçe destek bulunmayabilir; premium fiyat seviyesinde değerlendirme gerektirebilir.",
       },
     ],
   },

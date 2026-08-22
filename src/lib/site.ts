@@ -21,9 +21,9 @@ export const siteConfig = {
   adsenseClientId:
     env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-8715861903175610",
   description: {
-    tr: "Bağımsız test metodolojisine dayalı, ayrıntılı VPN incelemeleri ve karşılaştırmaları. Gizlilik, streaming, seyahat ve günlük güvenlik senaryolarını değerlendirir. Gönüllü inceleme projesidir; resmi bir kuruluş değildir.",
-    en: "Independent, methodology-driven VPN reviews and comparisons. Covers privacy, streaming, travel and everyday-security scenarios. A volunteer review project — not an official organisation.",
-    de: "Unabhängige, methodisch geprüfte VPN-Tests und Vergleiche. Mit Fokus auf Datenschutz, Streaming, Reisen und Sicherheit im Alltag. Ein freiwilliges Review-Projekt — keine offizielle Organisation.",
+    tr: "VPN sağlayıcılarını resmi belgeler, bağımsız denetimler ve güncel fiyat kaynaklarıyla karşılaştıran kaynak temelli rehber.",
+    en: "A source-based guide comparing VPN providers through official documentation, independent audits and current pricing sources.",
+    de: "Ein quellenbasierter Ratgeber, der VPN-Anbieter anhand offizieller Dokumente, unabhängiger Audits und aktueller Preisquellen vergleicht.",
   },
   author: {
     name: "VPN Advisor Editör Ekibi",

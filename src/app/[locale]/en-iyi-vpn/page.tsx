@@ -14,8 +14,8 @@ type Props = { params: Promise<{ locale: string }> };
 
 const copy = {
   tr: {
-    title: "50 VPN Sağlayıcı Karşılaştırması 2026 — Gizlilik, Özellikler ve Kaynaklar",
-    description: "50 aktif VPN sağlayıcı profilini puan yerine doğrulanabilir özelliklerle araştırın: gizlilik politikası, bağımsız denetim, protokoller, cihaz desteği, ağ bilgisi ve resmi kaynaklar.",
+    title: "50 VPN Sağlayıcı Karşılaştırması 2026 — Kaynaklar ve Özellikler",
+    description: "50 aktif VPN sağlayıcısını resmi belgeler, bağımsız denetimler, gizlilik politikaları, protokoller ve fiyat kaynaklarıyla karşılaştırın.",
     breadcrumb: "VPN karşılaştırma rehberi",
     h1: "50 aktif VPN sağlayıcısını özelliklerine göre araştırın",
     intro: "Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. 50 aktif sağlayıcıyı aynı bilgi mimarisinde göstererek ihtiyaçlarınıza uygun seçenekleri kaynaklar üzerinden araştırmanızı kolaylaştırır.",
@@ -23,8 +23,8 @@ const copy = {
     here: "VPN karşılaştırmaları",
   },
   en: {
-    title: "50 Active VPN Provider Comparison 2026 — Privacy, Features and Sources",
-    description: "Research 50 active VPN provider profiles using verifiable information instead of editorial scores: privacy policies, audits, protocols, device support, network data and primary sources.",
+    title: "50 VPN Provider Comparison 2026 — Sources and Features",
+    description: "Compare 50 active VPN providers through official documentation, independent audits, privacy policies, protocols and pricing sources.",
     breadcrumb: "VPN comparison guide",
     h1: "Research 50 active VPN providers by verifiable features",
     intro: "This is not a laboratory ranking of the 'best VPN'. It places 50 active providers in a consistent information architecture so you can research options using source-based evidence.",
@@ -32,8 +32,8 @@ const copy = {
     here: "VPN comparisons",
   },
   de: {
-    title: "50 aktive VPN-Anbieter im Vergleich 2026 — Datenschutz, Funktionen und Quellen",
-    description: "50 aktive VPN-Anbieterprofile anhand überprüfbarer Informationen statt Punktzahlen recherchieren: Datenschutz, Audits, Protokolle, Geräte, Netzwerkdaten und Primärquellen.",
+    title: "50 VPN-Anbieter im Vergleich 2026 — Quellen und Funktionen",
+    description: "50 aktive VPN-Anbieter anhand offizieller Dokumente, unabhängiger Audits, Datenschutz, Protokollen und Preisquellen vergleichen.",
     breadcrumb: "VPN-Vergleichsratgeber",
     h1: "50 aktive VPN-Anbieter anhand überprüfbarer Merkmale recherchieren",
     intro: "Dies ist keine Labor-Rangliste des 'besten VPN'. 50 aktive Anbieter werden in einer einheitlichen Informationsstruktur dargestellt, damit Sie Optionen anhand von Quellen recherchieren können.",

@@ -24,6 +24,18 @@ function resolveCountryName(code: string, locale: string): string {
   }
 }
 
+function maskIpAddress(ip: string | null): string {
+  if (!ip) return "••••••••";
+  if (ip.includes(":")) {
+    const groups = ip.split(":").filter(Boolean);
+    if (groups.length < 2) return "••••••••";
+    return `${groups.slice(0, 2).join(":")}::••••`;
+  }
+
+  const octets = ip.split(".");
+  return octets.length === 4 ? `${octets[0]}.${octets[1]}.••.••` : "••••••••";
+}
+
 export async function IpSecurityBanner() {
   const h = await headers();
   const geo = await resolveRequestGeo(h);
@@ -40,6 +52,7 @@ export async function IpSecurityBanner() {
   const countryName = resolveCountryName(geo.countryCode, locale);
   const timezone = geo.timezone;
   const ipVersion = ip && ip.includes(":") ? "IPv6" : "IPv4";
+  const maskedIp = maskIpAddress(ip);
   const initialIso = new Date().toISOString();
 
   return (
@@ -115,10 +128,10 @@ export async function IpSecurityBanner() {
                     </dt>
                     <dd className="mt-2 min-w-0">
                       <p className="break-all font-mono text-sm font-bold leading-tight tabular-nums text-ink-strong sm:text-base lg:text-lg">
-                        {ip}
+                        {maskedIp}
                       </p>
                       <p className="text-xs leading-tight text-ink-subtle">
-                        {ipVersion}
+                        {ipVersion} · {t("maskedIpNote")}
                       </p>
                     </dd>
                   </div>

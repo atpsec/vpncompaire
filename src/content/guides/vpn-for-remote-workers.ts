@@ -87,15 +87,15 @@ const tr: RemoteWorkersContent = {
     items: [
       {
         slug: "expressvpn",
-        label: "Testlerimizde tutarlı bağlantı",
+        label: "Zayıf Wi-Fi için değerlendirilebilir",
         reason:
-          "Sağlayıcının Lightway protokolü zayıf Wi-Fi koşullarında testlerimizde bağlantıyı koruma açısından iyi sonuç verdi. Sağlayıcı verisine göre 105+ ülkede sunucu. Kill switch davranışı testlerimizde güvenilir gözlendi.",
+          "Sağlayıcının Lightway protokolü bağlantı geçişlerini yönetmek üzere tasarlanmıştır. Sağlayıcı verisine göre 105+ ülkede sunucu bulunur; kill switch davranışı işletim sistemi ve uygulama sürümüne göre kontrol edilmelidir.",
       },
       {
         slug: "nordvpn",
         label: "Hız + Threat Protection",
         reason:
-          "Testlerimizde NordLynx hızlı throughput sundu. Threat Protection DNS'te bilinen zararlı yazılım dağıtan siteleri engellediğini sağlayıcı belirtmektedir — müşteri dosyası indirirken ek koruma katmanı sayılabilir.",
+          "NordLynx, WireGuard tabanlı bir protokol olarak throughput için değerlendirilebilir. Threat Protection'ın DNS'te bilinen zararlı yazılım sitelerini engellediğini sağlayıcı belirtmektedir; müşteri dosyaları için ek güvenlik katmanı olarak düşünülebilir.",
       },
       {
         slug: "mullvad",
@@ -206,7 +206,7 @@ const tr: RemoteWorkersContent = {
     },
     {
       q: "Hangi VPN seyahatte istikrarlı çalışıyor?",
-      a: "Testlerimizde ExpressVPN Lightway protokolü kötü Wi-Fi koşullarında tutarlı bağlantı sundu; NordVPN NordLynx (WireGuard tabanlı) benzer kategoride yer aldı. Bazı otel Wi-Fi'leri VPN trafiğini engelleyebilir; bu durumda sağlayıcının obfuscation/scrambling özelliği (Surfshark NoBorders, NordVPN obfuscated servers) değerlendirilebilir. Sonuçlar test koşullarımızı yansıtır.",
+      a: "ExpressVPN Lightway ve NordVPN NordLynx (WireGuard tabanlı) zayıf ağ koşullarında değerlendirilebilecek protokollerdir. Bazı otel Wi-Fi'leri VPN trafiğini engelleyebilir; bu durumda sağlayıcının obfuscation/scrambling özelliği (Surfshark NoBorders, NordVPN obfuscated servers) incelenebilir. Gerçek davranış ağ ve cihaz koşullarına bağlıdır.",
     },
     {
       q: "Müşteri dosyalarını paylaşırken VPN şart mı?",
