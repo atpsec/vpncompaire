@@ -24,7 +24,7 @@ const CONTENT = {
     breadcrumbHere: "Özellik filtresi",
     badge: "Filtre aracı",
     h1: "VPN özellik filtresi",
-    lede: "Aradığın özellikleri seç — 20 VPN'den hangileri tüm kriterlerini karşılıyor anında gör. Türkiye sunucusu, port forwarding, multi-hop, ücretsiz plan ve daha fazlası.",
+    lede: "Aradığın özellikleri seç — listelenen VPN'lerden hangilerinin tüm kriterlerini karşıladığını gör. Türkiye sunucusu, port forwarding, multi-hop, ücretsiz plan ve daha fazlası.",
     explanationsH2: "Özellik açıklamaları",
     explanations: [
       { bold: "Türkiye sunucusu:", body: " BluTV, Exxen, Türk bankacılığı ve e-Devlet erişimi için gerekli." },
@@ -57,7 +57,7 @@ const CONTENT = {
     breadcrumbHere: "Feature filter",
     badge: "Filter tool",
     h1: "VPN feature filter",
-    lede: "Pick the features you need — see at a glance which of the 20 VPNs meet all your criteria. Turkey server, port forwarding, multi-hop, free plan and more.",
+    lede: "Pick the features you need and see which listed VPNs meet all your criteria. Türkiye server, port forwarding, multi-hop, free plan and more.",
     explanationsH2: "What the features mean",
     explanations: [
       { bold: "Turkey server:", body: " Required for BluTV, Exxen, Turkish banking and e-Devlet access." },

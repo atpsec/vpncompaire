@@ -38,80 +38,80 @@ const tr: VpnSecurityChecklistContent = {
       title: "1. Yargı yetkisi (Jurisdiction)",
       question: "VPN sağlayıcı hangi ülke yasalarına tabi?",
       answer:
-        "Beş/Dokuz/On Dört Göz ittifaklarının dışı (Panama, İsviçre, Romanya, BVI) genelde daha güçlü gizlilik koruması sağlar. ABD veya UK merkezli sağlayıcılar — no-logs uygulasa bile — yasal baskıya daha açık.",
+        "Merkez ülkenin veri saklama, hukuki talep ve şirket şeffaflığı kurallarını incele. İstihbarat ittifakları bağlam sağlar; tek başına daha iyi gizlilik veya no-logs uygulaması kanıtlamaz.",
     },
     {
       title: "2. Bağımsız denetim kanıtı",
       question: "No-logs iddiası üçüncü taraf tarafından doğrulanmış mı?",
       answer:
-        "Deloitte, KPMG, Cure53, Securitum veya Assured AB gibi tanınmış denetim firmalarının raporu olmalı. Tek seferlik denetim yetersiz — tekrarlanan denetimler tercih edilir. NordVPN'in 6x Deloitte örneği referans.",
+        "Tanınmış bir üçüncü tarafın raporunu, tarihini ve kapsamını ara. Tek seferlik inceleme yalnız o dönemi ve kapsamı gösterir; düzenli tekrarlanan denetimler güncel uygulama hakkında daha güçlü sinyal sağlar.",
     },
     {
       title: "3. No-logs politikası",
       question: "Sağlayıcı ne tür log tutuyor?",
       answer:
-        "İdeal: ziyaret edilen siteler, IP adresleri, bağlantı zaman damgaları, kullanılan bant genişliği — hiçbiri tutulmamalı. Sadece hesap için gereken minimum bilgi (e-posta, ödeme).",
+        "Politikada kaynak IP, hedef, bağlantı zaman damgası, bant genişliği ve hesap verilerinin ayrı ayrı nasıl işlendiğini kontrol et. Pazarlama başlığı yerine saklama süresi, amaç ve üçüncü taraf paylaşım maddelerini oku.",
     },
     {
       title: "4. Şifreleme standardı",
       question: "Hangi şifreleme algoritması ve anahtar uzunluğu?",
       answer:
-        "AES-256-GCM endüstri standardı. WireGuard ChaCha20-Poly1305 kullanır (daha hızlı, modern). Eski PPTP veya L2TP/IPsec'i kullanan sağlayıcılardan kaçın.",
+        "Güncel uygulamanın kullandığı şifre paketini ve protokol yapılandırmasını sağlayıcı belgeleriyle denetim raporlarından doğrula. PPTP gibi eski ve zayıf seçenekleri varsayılan olarak kullanan hizmetlerden kaçın.",
     },
     {
       title: "5. Protokol seçenekleri",
       question: "Hangi VPN protokollerini destekliyor?",
       answer:
-        "Minimum: WireGuard veya WireGuard tabanlı (NordLynx). OpenVPN seçeneği olsa iyi (esneklik için). Sadece eski protokol sunanları (PPTP, L2TP) eleyin.",
+        "WireGuard veya güncel bir WireGuard türevi ile gerektiğinde OpenVPN gibi olgun bir alternatif esneklik sağlar. Protokol adı kadar uygulamanın güncelleme ve güvenlik denetimi geçmişini de kontrol et.",
     },
     {
       title: "6. DNS sızıntı koruması",
       question: "VPN aktifken DNS sorguları nereye gidiyor?",
       answer:
-        "VPN sağlayıcısının kendi DNS sunucularına gitmeli. ISS'nin DNS sunucusuna sızıntı olursa, ISS hangi siteleri ziyaret ettiğini görür. Sızıntı testi: dnsleaktest.com.",
+        "DNS sorgularının beklenen şifreli tünel ve çözümleyici üzerinden gittiğini kontrol et. Tünel dışına çıkan sorgular alan adı etkinliği hakkında bilgi açığa çıkarabilir; farklı ağ ve uygulamalarda sızıntı testi yap.",
     },
     {
       title: "7. Kill switch (öldürme anahtarı)",
       question: "VPN bağlantısı koparsa ne olur?",
       answer:
-        "Kill switch, VPN bağlantısı koptuğunda tüm internet trafiğini otomatik keser — gerçek IP'nin sızmasını engeller. Sistem geneli (system-wide) kill switch tercih edilir, sadece uygulama bazlı değil.",
+        "Kill switch, tünel koptuğunda trafiği durdurarak IP açığa çıkma riskini azaltmak için tasarlanır. Sistem geneli ve uygulama bazlı kapsamı, yeniden bağlanma davranışını ve split-tunneling istisnalarını kullandığın platformda doğrula.",
     },
     {
       title: "8. RAM-only sunucu altyapısı",
       question: "Sunucular nasıl çalışıyor?",
       answer:
-        "Modern üst seviye sağlayıcılar (NordVPN, ExpressVPN, Surfshark) yalnızca RAM üzerinde çalışan sunucular kullanır. Yeniden başlatıldığında tüm veri silinir — kalıcı log fiziksel olarak imkânsız.",
+        "RAM-only tasarım yerel diskte kalıcılığı azaltabilir ve yeniden başlatmada belleği temizler. Ancak merkezi log aktarımını veya hatalı yapılandırmayı tek başına engellemez; mimari beyanını bağımsız denetimle birlikte değerlendir.",
     },
     {
       title: "9. Açık kaynak istemciler",
       question: "VPN uygulamasının kodu kamuya açık mı?",
       answer:
-        "Açık kaynak istemciler, bağımsız güvenlik araştırmacılarının kodu incelemesine izin verir — arka kapı veya zafiyet tespit edilebilir. Proton VPN, Mullvad, PIA tüm istemcileri açık kaynak; ExpressVPN Lightway protokolünü açtı.",
+        "Açık kaynak, araştırmacıların kodu incelemesini ve sorun bildirmesini kolaylaştırır. Tek başına arka kapı bulunmadığını veya dağıtılan uygulamanın kaynakla bire bir eşleştiğini garanti etmez; derleme doğrulaması ve denetim geçmişini de ara.",
     },
     {
       title: "10. Cihaz sayısı sınırı",
       question: "Aynı abonelikten kaç cihazda kullanabilirsin?",
       answer:
-        "Aile veya çoklu cihaz senaryolarında 5+ cihaz minimum gereksinim. Surfshark sınırsız sunar; NordVPN 10, ExpressVPN 8 cihaz. Mullvad'da 5 cihaz limiti var.",
+        "Kendi eşzamanlı cihaz ihtiyacını belirle; sağlayıcının güncel bağlantı sınırını, yönlendirici kullanımını ve adil kullanım koşullarını resmi plan sayfasından doğrula. Bu rakamlar zamanla değişebilir.",
     },
     {
-      title: "11. Mahkeme kanıtı (varsa)",
+      title: "11. Kamuya açık hukuki kayıt (varsa)",
       question: "No-logs iddiası bir hukuki davada test edildi mi?",
       answer:
-        "Çok az sağlayıcı bu test geçmişine sahip. PIA, 2016 ve 2018 federal davalarında no-logs iddiasını mahkemede doğruladı. ExpressVPN, 2017'de Türkiye'de sunucusuna el konulmasına rağmen veri ifşası yapamadı. Bu, en güçlü kanıt seviyesidir.",
+        "Geçmiş davalar veya sunucu el koyma olayları, sağlayıcının belirli bir tarihte talebe nasıl yanıt verdiğine dair ek veri sunabilir. Bunlar güncel politikanın tek başına kanıtı ya da geleceğe dönük garanti değildir; karar ve haber kayıtlarını doğrudan doğrula.",
     },
     {
       title: "12. Fiyatlandırma şeffaflığı",
       question: "Yenileme fiyatı belli mi?",
       answer:
-        "Çoğu sağlayıcı 'ilk dönem ucuz, yenileme pahalı' modeli kullanır. Bunu önceden bilmek önemli — sürpriz yüksek fişle karşılaşmamak için. Mullvad sabit fiyat sunar, indirim/yenileme tuzağı yok.",
+        "İlk dönem toplamını, otomatik yenileme fiyatını, vergiyi, para birimini, uygulama mağazası istisnalarını ve iade koşullarını ödeme öncesinde kontrol et. Kampanya başlığı tek başına toplam maliyeti göstermez.",
     },
   ],
   howToUse: {
     h2: "Bu listeyi nasıl kullan?",
     before:
-      "Bir VPN seçerken bu 12 maddeyi sağlayıcının kendi sitesinde, denetim raporlarında ve bağımsız incelemelerde doğrula. İncelemelerimiz zaten bu kriterleri kullanıyor — kendi sıralamamızı görmek için ",
-    linkText: "en iyi 20 VPN",
+      "Bir VPN seçerken bu 12 maddeyi sağlayıcının kendi sitesinde, denetim raporlarında ve bağımsız incelemelerde doğrula. Kaynak-temelli karşılaştırma çerçevemiz bu kriterleri sağlayıcı belgeleri ve güncel koşullarla birlikte ele alır — profilleri karşılaştırmak için ",
+    linkText: "VPN karşılaştırmaları",
     after: " sayfasını ziyaret edebilirsin.",
   },
   relatedLabel: "İlgili sayfalar",
@@ -121,7 +121,7 @@ const tr: VpnSecurityChecklistContent = {
       href: "/rehber/ucretsiz-vs-ucretli-vpn",
       text: "Ücretsiz vs Ücretli VPN",
     },
-    { href: "/metodoloji", text: "Test metodolojimiz" },
+    { href: "/metodoloji", text: "Kaynak-temelli metodoloji" },
   ],
 };
 
@@ -143,80 +143,80 @@ const en: VpnSecurityChecklistContent = {
       title: "1. Jurisdiction",
       question: "Which country's laws is the VPN provider subject to?",
       answer:
-        "Being outside the Five/Nine/Fourteen Eyes alliances (Panama, Switzerland, Romania, BVI) generally means stronger privacy protection. US- or UK-based providers — even with a no-logs policy — are more exposed to legal pressure.",
+        "Review the home country's data-retention, legal-request and corporate-transparency rules. Intelligence alliances add context; they do not by themselves prove better privacy or no-logs implementation.",
     },
     {
       title: "2. Proof of independent audits",
       question: "Has the no-logs claim been verified by a third party?",
       answer:
-        "There should be a report from a recognized audit firm such as Deloitte, KPMG, Cure53, Securitum or Assured AB. A one-off audit isn't enough — repeated audits are preferable. NordVPN's six Deloitte audits are the reference point.",
+        "Look for a report from a recognized third party, including its date and scope. A one-off review covers only that period and scope; regular repeated audits provide a stronger signal about current implementation.",
     },
     {
       title: "3. No-logs policy",
       question: "What kind of logs does the provider keep?",
       answer:
-        "Ideally: visited sites, IP addresses, connection timestamps, bandwidth used — none of it should be stored. Only the minimum needed for your account (email, payment).",
+        "Check how the policy treats source IPs, destinations, connection timestamps, bandwidth and account data separately. Read retention periods, purposes and third-party sharing terms instead of relying on the marketing headline.",
     },
     {
       title: "4. Encryption standard",
       question: "Which encryption algorithm and key length?",
       answer:
-        "AES-256-GCM is the industry standard. WireGuard uses ChaCha20-Poly1305 (faster, modern). Avoid providers still using legacy PPTP or L2TP/IPsec.",
+        "Verify the current app's cipher suite and protocol configuration in provider documentation and audit reports. Avoid services that default to obsolete, weak options such as PPTP.",
     },
     {
       title: "5. Protocol options",
       question: "Which VPN protocols does it support?",
       answer:
-        "Minimum: WireGuard or WireGuard-based (NordLynx). An OpenVPN option is nice to have (for flexibility). Rule out anyone offering only legacy protocols (PPTP, L2TP).",
+        "WireGuard or a current WireGuard derivative plus a mature alternative such as OpenVPN can provide flexibility. Check the implementation's update and security-audit history as well as the protocol name.",
     },
     {
       title: "6. DNS leak protection",
       question: "Where do DNS queries go while the VPN is active?",
       answer:
-        "They should go to the VPN provider's own DNS servers. If they leak to your ISP's DNS server, your ISP sees which sites you visit. Leak test: dnsleaktest.com.",
+        "Confirm that DNS queries use the expected encrypted tunnel and resolver. Queries leaving the tunnel can expose domain activity; test for leaks across the networks and applications you use.",
     },
     {
       title: "7. Kill switch",
       question: "What happens if the VPN connection drops?",
       answer:
-        "A kill switch automatically cuts all internet traffic when the VPN connection drops — preventing your real IP from leaking. A system-wide kill switch is preferable, not just a per-app one.",
+        "A kill switch is designed to stop traffic when the tunnel drops, reducing IP-exposure risk. Verify system-wide versus per-app coverage, reconnect behavior and split-tunneling exceptions on your platform.",
     },
     {
       title: "8. RAM-only server infrastructure",
       question: "How do the servers run?",
       answer:
-        "Modern top-tier providers (NordVPN, ExpressVPN, Surfshark) use servers that run entirely in RAM. On reboot all data is wiped — persistent logs are physically impossible.",
+        "A RAM-only design can reduce local-disk persistence and clears memory on reboot. It does not by itself prevent centralized logging or misconfiguration, so assess the architecture claim alongside independent audits.",
     },
     {
       title: "9. Open-source clients",
       question: "Is the VPN app's code public?",
       answer:
-        "Open-source clients let independent security researchers review the code — backdoors or vulnerabilities can be spotted. Proton VPN, Mullvad and PIA open-source all their clients; ExpressVPN has opened its Lightway protocol.",
+        "Open source makes code review and vulnerability reporting easier. It does not by itself guarantee the absence of backdoors or that the distributed binary matches the source; look for reproducible builds and audit history too.",
     },
     {
       title: "10. Device limit",
       question: "How many devices can you use on one subscription?",
       answer:
-        "For families or multi-device setups, 5+ devices is the minimum requirement. Surfshark offers unlimited; NordVPN 10, ExpressVPN 8 devices. Mullvad has a 5-device limit.",
+        "Estimate your simultaneous-device needs, then verify the provider's current connection cap, router rules and fair-use terms on the official plan page. These limits can change.",
     },
     {
-      title: "11. Court evidence (if any)",
+      title: "11. Public legal record (if any)",
       question: "Has the no-logs claim been tested in a legal case?",
       answer:
-        "Very few providers have this track record. PIA proved its no-logs claim in court in 2016 and 2018 federal cases. ExpressVPN couldn't disclose any data even when its server in Türkiye was seized in 2017. This is the strongest level of evidence.",
+        "Past cases or server-seizure reports can show how a provider responded to a request at a specific time. They are not standalone proof of the current policy or a future guarantee; verify the underlying decisions and reports directly.",
     },
     {
       title: "12. Pricing transparency",
       question: "Is the renewal price clear?",
       answer:
-        "Most providers use a 'cheap intro period, expensive renewal' model. Knowing this up front matters — so you don't get hit with a surprise bill. Mullvad offers a flat price with no discount/renewal trap.",
+        "Before paying, check the introductory total, automatic-renewal price, tax, currency, app-store exceptions and refund terms. A promotional headline does not show the full cost.",
     },
   ],
   howToUse: {
     h2: "How to use this list",
     before:
-      "When picking a VPN, verify these 12 points on the provider's own site, in audit reports and in independent reviews. Our reviews already apply these criteria — to see our own ranking, visit the ",
-    linkText: "top 20 VPNs",
+      "When picking a VPN, verify these 12 points on the provider's own site, in audit reports and in independent reviews. Our source-based comparison framework evaluates these criteria alongside provider documentation and current terms — to compare profiles, visit the ",
+    linkText: "VPN comparisons",
     after: " page.",
   },
   relatedLabel: "Related pages",
@@ -226,7 +226,7 @@ const en: VpnSecurityChecklistContent = {
       href: "/guide/free-vs-paid-vpn",
       text: "Free vs paid VPN",
     },
-    { href: "/metodoloji", text: "Our test methodology" },
+    { href: "/metodoloji", text: "Source-based methodology" },
   ],
 };
 
@@ -248,13 +248,13 @@ const de: VpnSecurityChecklistContent = {
       title: "1. Gerichtsbarkeit",
       question: "Welchem Landesrecht unterliegt der VPN-Anbieter?",
       answer:
-        "Außerhalb der Five/Nine/Fourteen-Eyes-Allianzen (Panama, Schweiz, Rumänien, BVI) bedeutet in der Regel stärkeren Datenschutz. Anbieter mit Sitz in den USA oder UK sind — selbst mit No-Logs-Richtlinie — rechtlichem Druck stärker ausgesetzt.",
+        "Prüfe die Regeln des Sitzlandes zu Datenspeicherung, Behördenanfragen und Unternehmenstransparenz. Nachrichtendienst-Allianzen liefern Kontext, beweisen aber allein weder besseren Datenschutz noch eine No-Logs-Umsetzung.",
     },
     {
       title: "2. Nachweis unabhängiger Audits",
       question: "Wurde die No-Logs-Behauptung von Dritten geprüft?",
       answer:
-        "Es sollte ein Bericht einer anerkannten Prüfungsfirma wie Deloitte, KPMG, Cure53, Securitum oder Assured AB vorliegen. Ein einmaliges Audit reicht nicht — wiederholte Audits sind vorzuziehen. NordVPNs sechs Deloitte-Audits sind die Referenz.",
+        "Suche nach Bericht, Datum und Umfang eines anerkannten unabhängigen Prüfers. Eine einmalige Prüfung gilt nur für diesen Zeitraum und Umfang; regelmäßige Wiederholungen sind ein stärkeres Signal für die aktuelle Umsetzung.",
     },
     {
       title: "3. No-Logs-Richtlinie",
@@ -284,44 +284,44 @@ const de: VpnSecurityChecklistContent = {
       title: "7. Kill Switch (Notausschalter)",
       question: "Was passiert, wenn die VPN-Verbindung abbricht?",
       answer:
-        "Ein Kill Switch kappt bei einem VPN-Abbruch automatisch den gesamten Internetverkehr — und verhindert so, dass deine echte IP durchsickert. Ein systemweiter Kill Switch ist vorzuziehen, nicht nur ein App-basierter.",
+        "Ein Kill Switch soll bei Tunnelabbruch den Verkehr stoppen und so das Risiko einer IP-Offenlegung verringern. Prüfe systemweite und App-Abdeckung, Wiederverbindung und Split-Tunneling-Ausnahmen auf deiner Plattform.",
     },
     {
       title: "8. RAM-only-Serverinfrastruktur",
       question: "Wie laufen die Server?",
       answer:
-        "Moderne Top-Anbieter (NordVPN, ExpressVPN, Surfshark) nutzen Server, die ausschließlich im RAM laufen. Beim Neustart werden alle Daten gelöscht — dauerhafte Logs sind physisch unmöglich.",
+        "RAM-only kann lokale Festplattenpersistenz verringern und leert den Speicher beim Neustart. Zentrale Protokollierung oder Fehlkonfiguration werden dadurch nicht allein verhindert; prüfe die Architekturaussage zusammen mit unabhängigen Audits.",
     },
     {
       title: "9. Open-Source-Clients",
       question: "Ist der Code der VPN-App öffentlich?",
       answer:
-        "Open-Source-Clients erlauben unabhängigen Sicherheitsforschern, den Code zu prüfen — Hintertüren oder Schwachstellen können entdeckt werden. Proton VPN, Mullvad und PIA legen alle Clients offen; ExpressVPN hat sein Lightway-Protokoll geöffnet.",
+        "Open Source erleichtert Codeprüfung und Schwachstellenmeldungen. Es garantiert weder die Abwesenheit von Hintertüren noch die Übereinstimmung der ausgelieferten App mit dem Quellcode; prüfe auch reproduzierbare Builds und Audit-Historie.",
     },
     {
       title: "10. Gerätelimit",
       question: "Auf wie vielen Geräten kannst du dasselbe Abo nutzen?",
       answer:
-        "Für Familien oder Mehrgeräte-Szenarien sind 5+ Geräte das Minimum. Surfshark bietet unbegrenzt viele; NordVPN 10, ExpressVPN 8 Geräte. Bei Mullvad gilt ein Limit von 5 Geräten.",
+        "Ermittle deinen Bedarf an gleichzeitigen Geräten und prüfe das aktuelle Verbindungslimit, Router-Regeln und Fair-Use-Bedingungen auf der offiziellen Tarifseite. Diese Grenzen können sich ändern.",
     },
     {
-      title: "11. Gerichtsnachweis (falls vorhanden)",
+      title: "11. Öffentliche Rechtshistorie (falls vorhanden)",
       question: "Wurde die No-Logs-Behauptung in einem Gerichtsverfahren getestet?",
       answer:
-        "Nur sehr wenige Anbieter haben diese Historie. PIA bestätigte seine No-Logs-Behauptung 2016 und 2018 in US-Bundesverfahren vor Gericht. ExpressVPN konnte 2017 trotz Beschlagnahmung seines Servers in der Türkei keine Daten preisgeben. Das ist die stärkste Beweisstufe.",
+        "Frühere Verfahren oder Berichte über Serverbeschlagnahmen können zeigen, wie ein Anbieter zu einem bestimmten Zeitpunkt reagierte. Sie sind weder alleiniger Nachweis der heutigen Richtlinie noch Zukunftsgarantie; prüfe Originalentscheidungen und Berichte.",
     },
     {
       title: "12. Preistransparenz",
       question: "Ist der Verlängerungspreis bekannt?",
       answer:
-        "Die meisten Anbieter nutzen das Modell 'günstiger Einstieg, teure Verlängerung'. Das vorab zu wissen ist wichtig — damit dich keine überraschend hohe Rechnung trifft. Mullvad bietet einen Festpreis, ohne Rabatt- und Verlängerungsfalle.",
+        "Prüfe vor der Zahlung Einstiegsgesamtpreis, automatische Verlängerung, Steuern, Währung, App-Store-Ausnahmen und Erstattungsbedingungen. Eine Aktionsüberschrift zeigt nicht die Gesamtkosten.",
     },
   ],
   howToUse: {
     h2: "Wie nutzt du diese Liste?",
     before:
-      "Prüfe diese 12 Punkte bei der VPN-Wahl auf der Website des Anbieters, in Audit-Berichten und in unabhängigen Tests. Unsere Tests wenden genau diese Kriterien an — unser eigenes Ranking findest du auf der Seite ",
-    linkText: "Top 20 VPNs",
+      "Prüfe diese 12 Punkte bei der VPN-Wahl auf der Website des Anbieters, in Audit-Berichten und in unabhängigen Bewertungen. Unser quellenbasierter Vergleichsrahmen betrachtet diese Kriterien zusammen mit Anbieterdokumentation und aktuellen Bedingungen — Profile vergleichst du auf der Seite ",
+    linkText: "VPN-Vergleiche",
     after: ".",
   },
   relatedLabel: "Verwandte Seiten",
@@ -331,7 +331,7 @@ const de: VpnSecurityChecklistContent = {
       href: "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn",
       text: "Kostenlos vs. kostenpflichtig",
     },
-    { href: "/metodoloji", text: "Unsere Testmethodik" },
+    { href: "/metodoloji", text: "Quellenbasierte Methodik" },
   ],
 };
 

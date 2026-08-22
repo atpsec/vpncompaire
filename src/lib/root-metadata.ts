@@ -1,55 +1,38 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
-import { getLocale } from "next-intl/server";
-import { siteConfig } from "@/lib/site";
-import { GoogleAdsense } from "@/components/analytics/google-adsense";
-import { GoogleAnalytics } from "@/components/analytics/google-analytics";
-import { ThemeScript } from "@/components/theme/theme-script";
-import "./globals.css";
+import { siteConfig, type Locale } from "@/lib/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-type SupportedLocale = "tr" | "en" | "de";
-
-const isSupported = (l: string): l is SupportedLocale =>
-  l === "tr" || l === "en" || l === "de";
-
-const TITLES: Record<SupportedLocale, string> = {
+const TITLES: Record<Locale, string> = {
   tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları (2026)`,
   en: `${siteConfig.name} — Independent VPN Comparisons (2026)`,
   de: `${siteConfig.name} — Unabhängige VPN-Vergleiche (2026)`,
 };
 
-const TITLE_SHORT: Record<SupportedLocale, string> = {
+const TITLE_SHORT: Record<Locale, string> = {
   tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları`,
   en: `${siteConfig.name} — Independent VPN Comparisons`,
   de: `${siteConfig.name} — Unabhängige VPN-Vergleiche`,
 };
 
-const OG_LOCALE: Record<SupportedLocale, string> = {
+const OG_LOCALE: Record<Locale, string> = {
   tr: "tr_TR",
   en: "en_US",
   de: "de_DE",
 };
 
-const ALTERNATE_OG_LOCALES: Record<SupportedLocale, string[]> = {
-  tr: ["en_US", "de_DE"],
-  en: ["tr_TR", "de_DE"],
+const ALTERNATE_OG_LOCALES: Record<Locale, string[]> = {
+  tr: ["en_US"],
+  en: ["tr_TR"],
   de: ["tr_TR", "en_US"],
 };
 
-export async function generateMetadata(): Promise<Metadata> {
-  const raw = await getLocale();
-  const locale = isSupported(raw) ? raw : "tr";
+export function buildRootMetadata(locale: Locale): Metadata {
   const description = siteConfig.description[locale];
+  const canonicalLocale = locale === "de" ? "en" : locale;
+  const socialImage = `${siteConfig.ogImage}?locale=${locale}`;
   const url =
-    locale === siteConfig.defaultLocale
+    canonicalLocale === siteConfig.defaultLocale
       ? siteConfig.url
-      : `${siteConfig.url}/${locale}`;
+      : `${siteConfig.url}/${canonicalLocale}`;
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -80,7 +63,6 @@ export async function generateMetadata(): Promise<Metadata> {
       languages: {
         tr: siteConfig.url,
         en: `${siteConfig.url}/en`,
-        de: `${siteConfig.url}/de`,
         "x-default": siteConfig.url,
       },
     },
@@ -94,7 +76,7 @@ export async function generateMetadata(): Promise<Metadata> {
       alternateLocale: ALTERNATE_OG_LOCALES[locale],
       images: [
         {
-          url: siteConfig.ogImage,
+          url: socialImage,
           width: 1200,
           height: 630,
           alt: TITLE_SHORT[locale],
@@ -105,7 +87,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: TITLE_SHORT[locale],
       description,
-      images: [siteConfig.ogImage],
+      images: [socialImage],
     },
     robots: {
       index: true,
@@ -121,7 +103,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = {
+export const rootViewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
     { media: "(prefers-color-scheme: dark)", color: "#0c0a09" },
@@ -129,27 +111,3 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
-
-export default async function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  const raw = await getLocale();
-  const locale = isSupported(raw) ? raw : "tr";
-
-  return (
-    <html
-      lang={locale}
-      className={`${geistSans.variable} antialiased`}
-      suppressHydrationWarning
-    >
-      <head>
-        <ThemeScript />
-        <GoogleAdsense />
-      </head>
-      <body className="min-h-screen bg-background text-foreground font-sans">
-        {children}
-        <GoogleAnalytics locale={locale} />
-      </body>
-    </html>
-  );
-}

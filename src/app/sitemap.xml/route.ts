@@ -1,12 +1,17 @@
-import { siteConfig } from "@/lib/site";
+import {
+  isSeoLocale,
+  SEO_LOCALES,
+  siteConfig,
+  type SeoLocale,
+} from "@/lib/site";
 import { products } from "@/data/products";
 import { getBlogPosts } from "@/lib/blog";
 import {
   getBlogSlugEntry,
   slugForLocale,
-  type BlogLocale,
   type BlogSlugEntry,
 } from "@/lib/blog-slugs";
+import { LOCALIZED_REFRESH_SLUGS } from "@/lib/blog-localized-refresh";
 import {
   CONTENT_REGISTRY,
   SECTION_HUB_SERVED,
@@ -34,6 +39,9 @@ const useCaseSlugs = [
 
 const deviceSlugs = ["android", "iphone", "ipad", "smart-tv"];
 
+// Hukuki inceleme tamamlanana kadar görünür fakat indexlenmeyen içerikler.
+const NOINDEX_CONTENT_IDS = new Set(["is-vpn-legal-in-turkey"]);
+
 const toolPaths = [
   { path: "/araclar", priority: 0.85, changefreq: "weekly" },
   { path: "/araclar/email-guvenlik-kontrolu", priority: 0.82, changefreq: "monthly" },
@@ -51,18 +59,18 @@ const toolPaths = [
 ];
 
 export async function GET() {
-  const allLocales = siteConfig.locales as readonly BlogLocale[];
+  const allLocales = SEO_LOCALES;
   // Türkçe-only (içeriği yalnızca TR dilinde servis edilen) bölümler için
   // yalnızca TR URL'i üret. EN/DE yanlış-dil varyantları proxy.ts tarafından
   // 301'lendiği için sitemap'e ASLA girmemeli.
-  const trOnly: BlogLocale[] = ["tr"];
+  const trOnly: SeoLocale[] = ["tr"];
 
   type Entry = {
     path: string;
     priority: number;
     changefreq: string;
     /** Bu path'in sitemap'e girecek locale'leri. Verilmezse tüm diller. */
-    locales?: BlogLocale[];
+    locales?: SeoLocale[];
   };
 
   const staticPaths: Entry[] = [
@@ -115,7 +123,7 @@ export async function GET() {
     ...toolPaths,
   ];
 
-  function localizedUrl(path: string, locale: BlogLocale): string {
+  function localizedUrl(path: string, locale: SeoLocale): string {
     const prefix = locale === siteConfig.defaultLocale ? "" : `/${locale}`;
     const normalized = path === "/" ? "" : path;
     return `${siteConfig.url}${prefix}${normalized}`;
@@ -123,7 +131,7 @@ export async function GET() {
 
   // Build hreflang alternates per URL — SADECE bu path için servis edilen
   // locale'leri içerir. TR default (prefix'siz); EN/DE prefix'li.
-  function altLinks(path: string, pathLocales: readonly BlogLocale[]): string {
+  function altLinks(path: string, pathLocales: readonly SeoLocale[]): string {
     const lines = pathLocales.map(
       (locale) =>
         `    <xhtml:link rel="alternate" hreflang="${locale}" href="${localizedUrl(path, locale)}"/>`,
@@ -142,10 +150,9 @@ export async function GET() {
   }
 
   // Blog posts: TR/EN slugs differ; DE currently reuses EN slugs unless a DE slug exists.
-  const [trPosts, enPosts, dePosts] = await Promise.all([
+  const [trPosts, enPosts] = await Promise.all([
     getBlogPosts("tr"),
     getBlogPosts("en"),
-    getBlogPosts("de"),
   ]);
 
   const sharedPathsXml = all
@@ -171,7 +178,7 @@ ${altLinks(u.path, pathLocales)}
   // servis edilen dilleri içerir.
   function localizedGroupXml(
     urlFor: (locale: AppLocale) => string,
-    locales: readonly AppLocale[],
+    locales: readonly SeoLocale[],
     priority: number,
     changefreq: string,
   ): string[] {
@@ -181,7 +188,7 @@ ${altLinks(u.path, pathLocales)}
           `    <xhtml:link rel="alternate" hreflang="${l}" href="${urlFor(l)}"/>`,
       ),
       `    <xhtml:link rel="alternate" hreflang="x-default" href="${urlFor(
-        locales.includes(DEFAULT_LOCALE) ? DEFAULT_LOCALE : locales[0],
+        locales.includes("tr") ? "tr" : locales[0],
       )}"/>`,
     ].join("\n");
     return locales.map((locale) => {
@@ -205,13 +212,14 @@ ${alt}
     ...hubGroups.flatMap((g) =>
       localizedGroupXml(
         (l) => `${siteConfig.url}${getLocalizedSectionPath(l, g.section)}`,
-        SECTION_HUB_SERVED[g.section] ?? [DEFAULT_LOCALE],
+        (SECTION_HUB_SERVED[g.section] ?? [DEFAULT_LOCALE]).filter(isSeoLocale),
         g.priority,
         g.changefreq,
       ),
     ),
     ...Object.values(CONTENT_REGISTRY).flatMap((entry) => {
-      const served = availableLocales(entry.id);
+      if (NOINDEX_CONTENT_IDS.has(entry.id)) return [];
+      const served = availableLocales(entry.id).filter(isSeoLocale);
       const section = entry.translations[DEFAULT_LOCALE]?.section;
       if (!section || served.length === 0) return [];
       const meta =
@@ -228,21 +236,38 @@ ${alt}
     }),
   ].join("\n");
 
-  function blogUrl(entry: BlogSlugEntry, locale: BlogLocale): string {
+  function blogUrl(entry: BlogSlugEntry, locale: SeoLocale): string {
     return localizedUrl(`/blog/${slugForLocale(entry, locale)}`, locale);
   }
 
-  const blogSlugsByLocale: Record<BlogLocale, Set<string>> = {
-    tr: new Set(trPosts.map((post) => post.slug)),
-    en: new Set(enPosts.map((post) => post.slug)),
-    de: new Set(dePosts.map((post) => post.slug)),
+  const blogSlugsByLocale: Record<SeoLocale, Set<string>> = {
+    tr: new Set(trPosts.filter((post) => post.indexable).map((post) => post.slug)),
+    en: new Set(enPosts.filter((post) => post.indexable).map((post) => post.slug)),
   };
 
   function blogAltLinks(
     entry: BlogSlugEntry | null,
-    self: { slug: string; locale: BlogLocale },
+    self: { slug: string; locale: SeoLocale },
   ): string {
     if (!entry) {
+      if (LOCALIZED_REFRESH_SLUGS.has(self.slug)) {
+        const servedLocales = allLocales.filter((locale) =>
+          blogSlugsByLocale[locale].has(self.slug),
+        );
+        if (servedLocales.length > 0) {
+          const lines = servedLocales.map(
+            (locale) =>
+              `    <xhtml:link rel="alternate" hreflang="${locale}" href="${localizedUrl(`/blog/${self.slug}`, locale)}"/>`,
+          );
+          const xDefaultLocale = servedLocales.includes("tr")
+            ? "tr"
+            : servedLocales[0];
+          lines.push(
+            `    <xhtml:link rel="alternate" hreflang="x-default" href="${localizedUrl(`/blog/${self.slug}`, xDefaultLocale)}"/>`,
+          );
+          return lines.join("\n");
+        }
+      }
       return `    <xhtml:link rel="alternate" hreflang="${self.locale}" href="${localizedUrl(`/blog/${self.slug}`, self.locale)}"/>`;
     }
     const servedLocales = allLocales.filter((locale) =>
@@ -265,7 +290,7 @@ ${alt}
   }
 
   const blogXml = [
-    ...trPosts.map((p) => {
+    ...trPosts.filter((post) => post.indexable).map((p) => {
       const entry = getBlogSlugEntry(p.slug, "tr");
       return `  <url>
     <loc>${siteConfig.url}/blog/${p.slug}</loc>
@@ -275,7 +300,7 @@ ${lastmodXml(p.updatedAt)}
 ${blogAltLinks(entry, { slug: p.slug, locale: "tr" })}
   </url>`;
     }),
-    ...enPosts.map((p) => {
+    ...enPosts.filter((post) => post.indexable).map((p) => {
       const entry = getBlogSlugEntry(p.slug, "en");
       return `  <url>
     <loc>${siteConfig.url}/en/blog/${p.slug}</loc>
@@ -283,16 +308,6 @@ ${lastmodXml(p.updatedAt)}
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
 ${blogAltLinks(entry, { slug: p.slug, locale: "en" })}
-  </url>`;
-    }),
-    ...dePosts.map((p) => {
-      const entry = getBlogSlugEntry(p.slug, "de");
-      return `  <url>
-    <loc>${siteConfig.url}/de/blog/${p.slug}</loc>
-${lastmodXml(p.updatedAt)}
-    <changefreq>monthly</changefreq>
-    <priority>0.65</priority>
-${blogAltLinks(entry, { slug: p.slug, locale: "de" })}
   </url>`;
     }),
   ].join("\n");

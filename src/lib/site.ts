@@ -33,11 +33,22 @@ export const siteConfig = {
     twitter: "",
     github: "",
   },
-  /** Next.js file-based OG (`src/app/opengraph-image.tsx`) */
-  ogImage: "/opengraph-image",
+  /** Locale-aware social sharing image route. */
+  ogImage: `${env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/og/default`,
 } as const;
 
 export type Locale = (typeof siteConfig.locales)[number];
+
+/**
+ * Search'te yayınlanmaya hazır diller. Almanca sürüm kullanıcılar için
+ * erişilebilir kalır; editoryal çeviri tamamlanana kadar noindex tutulur.
+ */
+export const SEO_LOCALES = ["tr", "en"] as const;
+export type SeoLocale = (typeof SEO_LOCALES)[number];
+
+export function isSeoLocale(locale: string): locale is SeoLocale {
+  return locale === "tr" || locale === "en";
+}
 
 /**
  * Mutlak URL üretir. `locale` verilir ve default locale değilse
@@ -63,12 +74,12 @@ export function absoluteUrl(path = "", locale?: string): string {
  * halde EN/DE hreflang'leri 301'lenen/var olmayan URL'leri işaret eder.
  */
 export function localizedAlternates(path = "", locale?: string) {
+  const canonicalLocale = locale === "de" ? "en" : locale;
   return {
-    canonical: absoluteUrl(path, locale),
+    canonical: absoluteUrl(path, canonicalLocale),
     languages: {
       tr: absoluteUrl(path, "tr"),
       en: absoluteUrl(path, "en"),
-      de: absoluteUrl(path, "de"),
       "x-default": absoluteUrl(path, siteConfig.defaultLocale),
     },
   };
@@ -119,10 +130,12 @@ export function defaultLocaleAlternates(path = "") {
  */
 export function contentAlternates(contentId: string, locale: string) {
   const entry = CONTENT_REGISTRY[contentId];
-  const served = availableLocales(contentId);
-  const activeLocale: AppLocale = served.includes(locale as AppLocale)
-    ? (locale as AppLocale)
-    : DEFAULT_LOCALE;
+  const served = availableLocales(contentId).filter(isSeoLocale);
+  const activeLocale: AppLocale = served.includes(locale as SeoLocale)
+    ? (locale as SeoLocale)
+    : served.includes("en")
+      ? "en"
+      : DEFAULT_LOCALE;
   const section = entry.translations[DEFAULT_LOCALE]!.section;
 
   const pathFor = (l: AppLocale) =>
@@ -144,10 +157,14 @@ export function contentAlternates(contentId: string, locale: string) {
  * hreflang yalnızca SECTION_HUB_SERVED'daki dilleri içerir.
  */
 export function sectionHubAlternates(section: SectionKey, locale: string) {
-  const served = SECTION_HUB_SERVED[section] ?? [DEFAULT_LOCALE];
-  const activeLocale: AppLocale = served.includes(locale as AppLocale)
-    ? (locale as AppLocale)
-    : DEFAULT_LOCALE;
+  const served = (SECTION_HUB_SERVED[section] ?? [DEFAULT_LOCALE]).filter(
+    isSeoLocale,
+  );
+  const activeLocale: AppLocale = served.includes(locale as SeoLocale)
+    ? (locale as SeoLocale)
+    : served.includes("en")
+      ? "en"
+      : DEFAULT_LOCALE;
 
   const pathFor = (l: AppLocale) =>
     absoluteUrl(getLocalizedSectionPath(l, section));

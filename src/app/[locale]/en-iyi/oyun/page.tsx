@@ -15,37 +15,37 @@ const CONTENT = {
     tagline:
       "Düşük gecikme, DDoS koruması ve bölgesel sunucu erişimi — oyuncular için en iyi seçimler.",
     summary:
-      "Oyun için VPN seçerken üç şey kritik: düşük gecikme (yakın sunucu + modern protokol), DDoS koruması (gerçek IP gizleme) ve bölgesel oyun sunucusu erişimi. ExpressVPN gecikme, NordVPN hız, PIA port forwarding ile öne çıkıyor.",
+      "Oyun için VPN seçerken gecikme, rota kararlılığı, IP gizleme ve oyun kuralları birlikte değerlendirilmelidir. Burada doğrudan karşılaştırılabilir bir laboratuvar ölçümü sunmuyoruz; en sağlıklı seçim, aynı cihaz ve oyun sunucusunda VPN'siz ve VPN'li sonuçları karşılaştırmaktır.",
     badgeLabel: "Oyun",
     picks: [
       {
         slug: "expressvpn",
-        bestFor: "En düşük gecikme + premium istikrar",
-        why: "Lightway protokolünün hızlı bağlantı kurulumu ve düşük gecikmesi, gerçek zamanlı oyunlarda en az dezavantaj sağlıyor. 105 ülkede sunucu — istediğin oyun bölgesine genelde yakın bir sunucu bulabiliyorsun.",
+        bestFor: "Lightway + yakın sunucu seçenekleri",
+        why: "Lightway, oyun için denenebilecek modern protokol seçeneklerinden biri. Gerçek gecikme ve rota kararlılığı konuma, ISS'ye, sunucu yüküne ve oyun sunucusuna göre değişir; yakın birkaç sunucuyu aynı koşullarda karşılaştırın.",
       },
       {
         slug: "nordvpn",
-        bestFor: "Geniş sunucu + güçlü throughput",
-        why: "NordLynx protokolü ile yüksek bant genişliği — Steam indirme veya büyük güncellemeler için hız kaybı minimum. Meshnet özelliği ise arkadaşlarınla özel şifreli ağ kurmana izin veriyor (LAN parti tarzı).",
+        bestFor: "NordLynx + geniş sunucu seçimi",
+        why: "NordLynx, indirme ve oyun rotalarında karşılaştırılabilecek WireGuard tabanlı bir seçenektir. Throughput için doğrudan karşılaştırılabilir laboratuvar ölçümümüz yoktur; Meshnet'in uygunluğu da oyun ve platform desteğine göre kontrol edilmelidir.",
       },
       {
         slug: "pia",
         bestFor: "Port forwarding + ileri konfigürasyon",
-        why: "Port forwarding, host olduğun multiplayer oyunlar için (Minecraft, ARK vb.) kritik özellik. PIA bu özelliği hâlâ sunan az sayıdaki üst seviye VPN'den biri.",
+        why: "Port yönlendirme, bazı kendi sunucunu barındırma senaryolarında yararlı olabilir. Kullanılabilirlik sunucu bölgesine, platforma ve sağlayıcının güncel desteğine bağlı olduğundan kurulumdan önce belgeleri kontrol edin.",
       },
     ],
     considerations: [
       {
         title: "Gecikme (latency / ping)",
-        body: "VPN, trafiği ek bir sunucudan geçirir — bu doğal olarak gecikme ekler. Yakın bir VPN sunucusu seçmek bu eki minimuma indirir. 50 ms üzeri ek gecikme, rekabetçi FPS oyunlarda hissedilir.",
+        body: "VPN, trafiği ek bir sunucudan geçirir ve gecikmeyi değiştirebilir. Etki rota ve sunucu yüküne bağlıdır. Yakın birkaç sunucuda temel ping, VPN ping'i, jitter ve paket kaybını aynı oyun bölgesine karşı ölçün.",
       },
       {
         title: "DDoS koruması",
-        body: "Twitch yayıncıları veya rekabetçi oyuncular DDoS saldırılarına maruz kalabilir. VPN, gerçek IP'ni gizleyerek bu saldırılara karşı bir koruma sağlar — saldırı VPN sunucusuna yönlenir, VPN sağlayıcısı bunu filtreler.",
+        body: "Twitch yayıncıları veya rekabetçi oyuncular DDoS saldırılarına maruz kalabilir. VPN gerçek IP'yi oyun oturumundan gizleyerek riski azaltabilir; sağlayıcının DDoS filtreleme kapsamı ve sınırlamaları ayrıca doğrulanmalıdır.",
       },
       {
         title: "Bölgesel oyun sunucusu erişimi",
-        body: "Bazı oyunların ASYA, NA-East, EU-West gibi bölgesel sunucuları var. VPN ile farklı bir bölgeye bağlanarak o bölgenin sunucularına erişebilirsin (matchmaking veya geographic arbitrage).",
+        body: "Bazı oyunların ASYA, NA-East, EU-West gibi bölgesel sunucuları var. Farklı bir VPN bölgesi eşleştirmeyi etkileyebilir, ancak sonuç oyun politikalarına, hesap bölgesine ve sunucu tarafındaki kontrollerine bağlıdır.",
       },
       {
         title: "Oyun mağazalarında bölge fiyatlandırması",
@@ -55,11 +55,11 @@ const CONTENT = {
     faqs: [
       {
         q: "VPN oyun performansını düşürür mü?",
-        a: "Modern bir VPN ile %5-15 hız kaybı normaldir. Yakın sunucu seçtiğinde gecikme artışı 10-30 ms civarında kalır — çoğu oyunda hissedilmez. ExpressVPN'in Lightway ve NordVPN'in NordLynx protokolleri bu açıdan en iyi performansı sergiliyor.",
+        a: "VPN şifreleme ve ek rota nedeniyle hız ile gecikmeyi değiştirebilir; bazen farklı yönlendirme daha iyi sonuç da verebilir. Bu sayfada doğrudan karşılaştırılabilir bir laboratuvar ölçümü yoktur. Aynı cihaz, oyun bölgesi ve saat aralığında VPN'siz temel değerleri; ardından yakın sunucularda ping, jitter, paket kaybı ve indirme hızını karşılaştırın.",
       },
       {
         q: "Hangi protokolü kullanmalıyım?",
-        a: "WireGuard veya WireGuard tabanlı protokoller (NordLynx) düşük gecikme için en iyisi. OpenVPN daha eski ve daha yavaş; günümüzde tercih edilmez.",
+        a: "Önce WireGuard veya WireGuard tabanlı bir seçeneği deneyin; sorun yaşarsanız IKEv2 ya da OpenVPN UDP ile aynı koşullarda karşılaştırın. En iyi sonuç cihaz, ağ ve rotaya göre değişir.",
       },
       {
         q: "VPN ile DDoS koruması nasıl çalışır?",
@@ -84,37 +84,37 @@ const CONTENT = {
     tagline:
       "Low latency, DDoS protection and regional server access — the best picks for gamers.",
     summary:
-      "Three things matter when picking a VPN for gaming: low latency (a nearby server + a modern protocol), DDoS protection (hiding your real IP) and access to regional game servers. ExpressVPN leads on latency, NordVPN on raw speed, PIA on port forwarding.",
+      "When choosing a VPN for gaming, consider latency, route consistency, IP exposure and the game's rules together. We do not publish directly comparable lab measurements here; compare the VPN-off baseline with VPN-on results on the same device and game server.",
     badgeLabel: "Gaming",
     picks: [
       {
         slug: "expressvpn",
-        bestFor: "Lowest latency + premium stability",
-        why: "Lightway's fast connection setup and low latency keep the penalty in real-time games to a minimum. Servers in 105 countries — you can usually find one close to the game region you want.",
+        bestFor: "Lightway + nearby server options",
+        why: "Lightway is one modern protocol option worth testing for gaming. Actual latency and route consistency depend on location, ISP, server load and the game server, so compare several nearby servers under the same conditions.",
       },
       {
         slug: "nordvpn",
-        bestFor: "Big network + strong throughput",
-        why: "NordLynx delivers high bandwidth — minimal speed loss for Steam downloads or large updates. Meshnet lets you build an encrypted private network with friends (LAN-party style).",
+        bestFor: "NordLynx + broad server choice",
+        why: "NordLynx is a WireGuard-based option to compare for downloads and game routes. We do not have directly comparable lab throughput measurements; also check whether Meshnet fits the game and platform you use.",
       },
       {
         slug: "pia",
         bestFor: "Port forwarding + advanced config",
-        why: "Port forwarding matters when you host multiplayer (Minecraft, ARK, etc.). PIA is one of the few top-tier VPNs that still supports it.",
+        why: "Port forwarding can help in some self-hosted multiplayer scenarios. Availability depends on server region, platform and the provider's current support, so verify the documentation before setup.",
       },
     ],
     considerations: [
       {
         title: "Latency / ping",
-        body: "A VPN routes traffic through one extra server — naturally adding some latency. Picking a nearby VPN server keeps that overhead minimal. Above ~50 ms of added latency you'll feel it in competitive FPS games.",
+        body: "A VPN routes traffic through an extra server and can change latency. The impact depends on routing and server load. Measure baseline ping, VPN ping, jitter and packet loss against the same game region on several nearby servers.",
       },
       {
         title: "DDoS protection",
-        body: "Twitch streamers and competitive players sometimes get DDoS'd. A VPN hides your real IP, redirecting any attack to the VPN server, where the provider can filter it.",
+        body: "Twitch streamers and competitive players can face DDoS attacks. A VPN may reduce exposure by hiding the real IP from the game session; verify the provider's DDoS filtering scope and limitations separately.",
       },
       {
         title: "Regional game-server access",
-        body: "Some games have regional servers (ASIA, NA-East, EU-West). With a VPN you can connect to a different region and reach those servers (matchmaking or geographic arbitrage).",
+        body: "Some games have regional servers (ASIA, NA-East, EU-West). A different VPN region may affect matchmaking, but the outcome depends on game rules, account region and server-side checks.",
       },
       {
         title: "Regional pricing on game stores",
@@ -124,11 +124,11 @@ const CONTENT = {
     faqs: [
       {
         q: "Does a VPN hurt gaming performance?",
-        a: "With a modern VPN, 5-15% speed loss is normal. Pick a nearby server and added latency stays in the 10-30 ms range — unnoticeable in most games. ExpressVPN's Lightway and NordVPN's NordLynx lead on this.",
+        a: "Encryption and an extra route can change speed and latency, though different routing can occasionally improve a poor path. We do not publish directly comparable lab measurements here. On the same device, game region and time window, compare the VPN-off baseline with ping, jitter, packet loss and download speed across nearby VPN servers.",
       },
       {
         q: "Which protocol should I use?",
-        a: "WireGuard or WireGuard-based protocols (NordLynx) are best for low latency. OpenVPN is older and slower; not preferred today.",
+        a: "Try WireGuard or a WireGuard-based option first, then compare IKEv2 or OpenVPN UDP under the same conditions if needed. The best result depends on the device, network and route.",
       },
       {
         q: "How does DDoS protection via VPN work?",

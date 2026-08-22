@@ -2,7 +2,7 @@ import type { DeviceContent } from "./devices";
 
 const COMMON_RELATED = [
   { label: "Compare all VPNs", href: "/en-iyi-vpn" },
-  { label: "Our test methodology", href: "/metodoloji" },
+  { label: "Comparison methodology and sources", href: "/metodoloji" },
 ];
 
 const DIFFICULTY = {
@@ -20,13 +20,13 @@ export const devicesEn: DeviceContent[] = [
     metaDescription:
       "Why you need a VPN on Android phones and tablets, how to set it up and which provider fits best. Kill switch, split tunneling and Play Store picks.",
     tagline:
-      "Get out of Google's data-collection ecosystem and stay safe on public Wi-Fi — on Android, a VPN is essential.",
+      "Reduce network-level exposure on public Wi-Fi and limit how directly activity is tied to your IP — on Android, a VPN can be a useful privacy layer.",
     summary:
       "Android is the most widely used mobile OS in the world and also has the broadest VPN-client compatibility. One-click installs from the Play Store, support for WireGuard and OpenVPN, kill switch and per-app split tunneling have all matured in the major VPN providers over the years. The real question isn't which one you pick — it's whether you configure it correctly.",
     whyMatters: [
       "On public Wi-Fi (cafés, hotels, airports), data can leak from apps that don't use HTTPS — a VPN wraps that traffic.",
       "Google and app developers collect ad IDs and location data; a VPN alone can't stop that, but it severs the link with your IP.",
-      "Your ISP sees, as metadata, which apps you connect to and when on mobile data; a VPN closes that visibility entirely.",
+      "On mobile data, a VPN can reduce what your ISP learns from destination traffic, although connection timing, data volume and the VPN endpoint may remain visible.",
       "Some Android apps (especially free games and low-profile utilities) phone home to tracker networks in the background; with per-app tunneling you can send only the ones you choose through the VPN.",
     ],
     setupMethods: [
@@ -50,7 +50,7 @@ export const devicesEn: DeviceContent[] = [
         name: "Router-level VPN",
         difficulty: DIFFICULTY.advanced,
         description:
-          "When you put the VPN on the router, your phone and tablet are protected automatically — no per-device app needed. The trade-off: you can't turn the VPN off for a single device.",
+          "When you put the VPN on the router, supported phone and tablet traffic can be routed through it without a per-device app. Coverage and per-device exclusions depend on the router configuration, so verify them on your own network.",
         whenToUse:
           "If you have a child's tablet, an older family member's phone or smart TVs that can't run a VPN app of their own.",
       },
@@ -59,24 +59,24 @@ export const devicesEn: DeviceContent[] = [
       {
         slug: "nordvpn",
         bestFor: "General use",
-        why: "The Android app is mature: kill switch, split tunneling, auto-connect and Threat Protection (ad/malware blocking) are all included. Stable across multiple 5G carriers.",
+        why: "NordVPN's Android documentation lists kill switch, split tunneling, auto-connect and Threat Protection features. Availability can vary by app version; confirm the current feature list and test connection stability on your own carrier.",
       },
       {
         slug: "surfshark",
         bestFor: "Multi-device households",
-        why: "Unlimited simultaneous devices — phone, tablet, your partner's phone, the kid's tablet and a laptop on top, all on one account. CleanWeb ad blocking is a bonus.",
+        why: "Surfshark currently advertises unlimited simultaneous device connections and a CleanWeb filtering feature. Check the latest plan terms and confirm that each device and app version you use is supported.",
       },
       {
         slug: "expressvpn",
         bestFor: "Maximum location privacy",
-        why: "The Lightway protocol reconnects within a second or two when you switch between Wi-Fi and 4G/5G, so even brief IP leaks are avoided. We measured the most consistent peak speeds on Android.",
+        why: "ExpressVPN describes Lightway as designed for quick network changes. Reconnection time, leak protection and speed vary by phone, carrier and server; enable the kill switch and verify Wi-Fi-to-mobile handoffs on your own device.",
       },
     ],
     pitfalls: [
       {
         title: "Always enable the kill switch",
         body:
-          "Two settings work together to stop traffic when the VPN drops: the provider's in-app kill switch plus Android's system-level 'Always-on VPN' + 'Block connections without VPN'. Turn both on — the first won't save you if the app crashes; the second will.",
+          "Android's system-level 'Always-on VPN' and 'Block connections without VPN' can complement a provider's in-app kill switch. Support and failure behaviour vary by app and Android version, so enable the available controls and verify them with a permitted leak test.",
       },
       {
         title: "Keep banking and government apps separate",
@@ -86,13 +86,13 @@ export const devicesEn: DeviceContent[] = [
       {
         title: "Mind the battery",
         body:
-          "WireGuard and Lightway use noticeably less battery in the background than OpenVPN. Older OpenVPN connections keep the device warm and drain the battery faster. Switch to a WireGuard-based protocol when you can.",
+          "Modern lightweight protocols such as WireGuard and Lightway may use less battery than OpenVPN, but the result depends on the app, signal quality and device. Compare battery use on your own phone before choosing a default.",
       },
     ],
     faqs: [
       {
         q: "Are the free VPN apps on the Play Store safe to use?",
-        a: "Generally, no. Academic studies between 2023-2025 (CSIRO, University of Sydney) found that a meaningful share of free VPN apps on the Play Store leaked data to third-party trackers, asked for unnecessary permissions or behaved like outright malware. If you want a free tier, Proton VPN's free plan is the safest pick — it's a real company with annual audits and a transparent revenue model.",
+        a: "Treat free VPN apps cautiously: a store listing alone does not establish safe data handling. Review the developer, privacy policy, permissions, business model and recent independent audit reports. Proton VPN publishes information about its free tier and audits, but verify the current scope and terms before relying on it.",
       },
       {
         q: "Some apps stop working when I enable the VPN on Android — what do I do?",
@@ -100,15 +100,15 @@ export const devicesEn: DeviceContent[] = [
       },
       {
         q: "Can I use the same app on Android TV?",
-        a: "Yes — NordVPN, Surfshark, ExpressVPN, CyberGhost and PIA all ship an official Android TV app. Mullvad doesn't have an Android TV build but can be sideloaded as an APK. See our Smart TV guide for the details.",
+        a: "Several major providers publish Android TV apps, but store availability and device support can change. Check your TV's Play Store and the provider's current compatibility page before subscribing; see our Smart TV guide for alternative setup methods.",
       },
       {
         q: "Should I use WireGuard or OpenVPN?",
-        a: "Mostly WireGuard. Faster, less battery, less code (= smaller attack surface). Use OpenVPN only on networks where WireGuard is blocked (some corporate Wi-Fi, some restrictive countries) — obfuscated OpenVPN over TCP 443 gets through.",
+        a: "WireGuard is often a good first option because of its compact design and typical performance profile. On networks that restrict it, an obfuscated or TCP-based mode may help, but access is not guaranteed. Follow the network's rules and test the available protocols on your own connection.",
       },
       {
         q: "Does Android's built-in 'Private DNS' replace a VPN?",
-        a: "No. Private DNS (DNS-over-TLS) only encrypts DNS queries — it makes it harder for the ISP to see which site you're asking about, but all your IP traffic still goes through the ISP and is visible. You need a full VPN tunnel to actually hide that.",
+        a: "No. Private DNS encrypts DNS lookups but is not a device-wide traffic tunnel. A VPN changes what the local network and ISP can observe, while shifting trust to the VPN provider; destination IPs and connection metadata can still be exposed in some conditions.",
       },
     ],
     relatedLinks: [
@@ -126,13 +126,13 @@ export const devicesEn: DeviceContent[] = [
     metaDescription:
       "Why you need a VPN on iPhone, App Store apps, conflicts with iCloud Private Relay and the best picks for everyday use.",
     tagline:
-      "Apple has a strong privacy brand, but that doesn't hide your IP or your traffic — on iPhone, a VPN still has a clear job.",
+      "Apple's privacy features are not a device-wide VPN; a VPN can still reduce network-level exposure on an iPhone when it is configured and verified correctly.",
     summary:
-      "Features like App Tracking Transparency and Mail Privacy Protection reduce in-app tracking, but they only cut signals inside the Apple ecosystem. The ISP still sees which servers you connect to, and the operator of any public Wi-Fi still sees traffic metadata. A VPN is the only tool that closes that visibility.",
+      "Features like App Tracking Transparency and Mail Privacy Protection reduce some tracking signals, but they are not a device-wide VPN. A VPN can reduce network-level visibility on public Wi-Fi and at the ISP, while shifting trust to the VPN provider rather than eliminating metadata entirely.",
     whyMatters: [
-      "iCloud Private Relay only covers Safari traffic — other apps (third-party browsers, games, social media, finance apps) are exposed.",
-      "A meaningful portion of App Store apps embed ad SDKs that build location/behaviour profiles tied to the device's IP; a VPN breaks the key link.",
-      "When you join public Wi-Fi, iOS starts background traffic for iCloud Drive sync, App Store checks and push channels — all encrypted, all leaking metadata; a VPN wraps it.",
+      "iCloud Private Relay is not a general-purpose, device-wide VPN; check Apple's current documentation to understand which traffic it covers.",
+      "Some App Store apps embed advertising SDKs that can use IP-derived location signals; a VPN can change the visible IP but does not stop SDK or account-based tracking.",
+      "When you join public Wi-Fi, iOS services generate background traffic. A VPN can tunnel supported IP traffic, but it does not remove every form of connection metadata or app telemetry.",
       "Some banking and government apps block foreign IPs. Since iOS split tunneling is limited, the provider's 'trusted networks' / 'exclude apps' feature really matters.",
     ],
     setupMethods: [
@@ -165,24 +165,24 @@ export const devicesEn: DeviceContent[] = [
       {
         slug: "expressvpn",
         bestFor: "The smoothest daily driver",
-        why: "The iOS app has the cleanest, fastest setup. The Lightway protocol reconnects in 1-2 seconds when switching between Wi-Fi and 5G, so the user doesn't even notice the drop. There's an Apple TV app too — the ecosystem feels coherent.",
+        why: "ExpressVPN documents Lightway support on iOS and currently lists an Apple TV app. Setup experience and reconnection time vary by device, network and app version, so test Wi-Fi-to-cellular handoffs and confirm current platform support.",
       },
       {
         slug: "proton-vpn",
         bestFor: "Privacy-first iPhone users",
-        why: "Swiss jurisdiction, open-source iOS client (auditable on GitHub), annual no-logs audits and unlimited bandwidth even on the free plan — the best match for the iPhone's 'privacy brand' positioning.",
+        why: "Proton VPN publishes its iOS source code, audit material and free-plan terms. Check the latest audit scope and plan limits in the provider's official documentation before deciding whether those attributes match your privacy needs.",
       },
       {
         slug: "nordvpn",
         bestFor: "Streaming and a Turkish server",
-        why: "Virtual Turkish server, and the most reliable provider for BluTV / Netflix TR plus other Netflix regions. Threat Protection works on iOS too as an ad/tracker filter.",
+        why: "NordVPN currently documents Turkish server access and iOS filtering features. Streaming compatibility changes as services update their controls, so verify each service on your own iPhone and network before subscribing.",
       },
     ],
     pitfalls: [
       {
         title: "Conflicts with iCloud Private Relay",
         body:
-          "If you have iCloud+, Private Relay may be active. When you turn the VPN on, Safari traffic goes through two layers (Private Relay + VPN) — performance drops and some server checks get confused. Turn off Private Relay in Settings > Apple ID > iCloud > Private Relay while using the VPN, or set Private Relay to only turn on when joining unknown networks.",
+          "If you have iCloud+, Private Relay may be active. Using it alongside a VPN can affect routing, performance or site checks depending on the current iOS and provider implementation. Review Apple and provider guidance, then compare both settings on your own connection before disabling either feature.",
       },
       {
         title: "Turn on 'Connect On Demand'",
@@ -192,17 +192,17 @@ export const devicesEn: DeviceContent[] = [
       {
         title: "In-app purchase vs. the provider's site",
         body:
-          "If you buy your VPN subscription through the App Store, the price is higher because Apple takes a 30% cut. Buy on the provider's website and then sign in to the app — same subscription, lower price. (Our affiliate links go directly to the provider's site.)",
+          "App Store and provider-site prices, renewal terms, refunds and included features can differ. Compare the current checkout totals and terms in both places before buying; confirm that a website subscription can be used in the iOS app. (Our affiliate links go directly to the provider's site.)",
       },
     ],
     faqs: [
       {
         q: "Does the built-in iPhone VPN come from Apple?",
-        a: "No. The Settings > General > VPN & Device Management section is just a configuration shell for third-party VPN providers. Apple doesn't offer its own VPN service — Private Relay is a two-hop proxy for Safari only, not a full VPN.",
+        a: "No. Settings > General > VPN & Device Management configures compatible third-party or managed VPN services. Apple's Private Relay is not a general-purpose, device-wide VPN; check Apple's current documentation for its traffic coverage.",
       },
       {
         q: "Can I trust the free VPN apps on the App Store?",
-        a: "Be skeptical. Apple's review is stricter than Google's, but more than 100 apps were pulled between 2022-2025 for sending user data to servers in China or Russia. If you want a free pick, Proton VPN is the only one with independent audits and a real company behind it.",
+        a: "Be skeptical: App Store review does not independently verify every privacy claim. Check the developer, permissions, privacy policy, business model and recent audit reports. Proton VPN publishes audit and free-tier information, making it one option to assess rather than a universal guarantee.",
       },
       {
         q: "Will FaceTime or iMessage break when the VPN is on?",
@@ -210,11 +210,11 @@ export const devicesEn: DeviceContent[] = [
       },
       {
         q: "Does the same subscription work on my iPad?",
-        a: "Yes — every provider has an iPadOS app and you just sign in with the same account. Our iPad guide covers iPad-specific settings (Stage Manager, keeping the VPN running in split-screen).",
+        a: "Many providers offer iPadOS apps and allow the same account across devices, but app availability and connection limits vary. Confirm your provider's current device list and plan terms; our iPad guide covers iPad-specific settings.",
       },
       {
         q: "Do I need a separate VPN for Apple Watch?",
-        a: "No. Apple Watch routes all its traffic through the paired iPhone (even on cellular models, most traffic still flows via the phone), so if the VPN is on the iPhone, the watch's traffic is already covered — installing a separate VPN on the watch isn't supported.",
+        a: "Apple Watch does not offer the same general VPN-app setup as iPhone, and its traffic path can vary with Wi-Fi, cellular and the paired phone. Check Apple and provider documentation for your model; do not assume every watch connection is covered solely because the iPhone VPN is active.",
       },
     ],
     relatedLinks: [
@@ -237,16 +237,16 @@ export const devicesEn: DeviceContent[] = [
       "How you use an iPad differs from an iPhone: you work from a café, watch a series on a plane, hand it to a kid for YouTube, pay a bill. With Stage Manager and Split View, you have 2-3 apps open at once. That usage profile changes what you need from a VPN — split tunneling, streaming compatibility and quiet background connectivity become the priorities.",
     whyMatters: [
       "A lot of iPad use happens on public Wi-Fi (café, library, university campus, hotel) — not as nomadic as a laptop, not as cellular as a phone; right in the middle.",
-      "Streaming apps (Netflix, BluTV, Disney+, BBC iPlayer) are one of the main iPad use cases — VPN performance decides how well you can reach regional libraries while travelling.",
+      "Streaming apps are a common iPad use case, but VPN speed and regional-library compatibility vary by service, server, location and account. Verify the services you use on your own network.",
       "On iPads kids use, an ad/tracker-blocking VPN layer reduces what the free App Store games can collect about them.",
-      "Stage Manager (iPadOS 17+) means apps run in many windows; the VPN needs to stay stable in the background — older providers' apps drop the connection when multitasking.",
+      "Stage Manager means apps can run in several windows, so background tunnel behaviour matters. It varies by iPadOS and VPN app version; test multitasking and reconnection on your own iPad.",
     ],
     setupMethods: [
       {
         name: "App Store app",
         difficulty: DIFFICULTY.easy,
         description:
-          "Install the same app on iPad that you use on iPhone. Account sync via iCloud is automatic; once connected, it keeps running even in Stage Manager when sent to the background.",
+          "Install the provider's iPad app and sign in with an eligible account. Settings sync and background behaviour vary by provider and iPadOS version, so confirm both after setup.",
         whenToUse: "The default choice for everyone.",
       },
       {
@@ -261,26 +261,26 @@ export const devicesEn: DeviceContent[] = [
         name: "Router-level VPN",
         difficulty: DIFFICULTY.advanced,
         description:
-          "Put the VPN on your home Wi-Fi router and the iPad is protected the moment it joins. The downside: take the iPad out of the house and the protection is gone.",
+          "Put the VPN on your home Wi-Fi router to route configured iPad traffic through the tunnel while it is on that network. Verify DNS, IPv6 and policy-routing behaviour; away from home, the iPad needs its own VPN setup.",
         whenToUse:
-          "When a child's iPad stays at home, or an older family member uses theirs only at home — the easiest way to route all traffic through the VPN without per-device setup.",
+          "When an iPad stays at home and you want configured internet traffic routed through the VPN without per-device setup.",
       },
     ],
     picks: [
       {
         slug: "nordvpn",
         bestFor: "Streaming and regional libraries",
-        why: "The most reliable streaming provider on iPad. We measured >95% success on US Netflix, BBC iPlayer and regional Disney+. The virtual Turkish server keeps BluTV and Exxen working smoothly.",
+        why: "NordVPN documents iPadOS support, streaming-oriented features and Turkish server availability. Access can change by service, server, account region and network, so verify each required app on your own iPad before committing to a plan.",
       },
       {
         slug: "expressvpn",
         bestFor: "A premium iPad experience",
-        why: "A single account covers Apple TV and Mac apps too — the whole ecosystem in one place. Lightway leaves enough headroom for 4K streaming on iPad and behaves well in the background.",
+        why: "ExpressVPN currently documents apps for iPad, Mac and Apple TV plus its Lightway protocol. Device limits, 4K headroom and background behaviour depend on the current plan and connection, so confirm them with your own devices and network.",
       },
       {
         slug: "surfshark",
         bestFor: "Many devices on one account",
-        why: "iPad + iPhone + laptop + Apple TV + your partner's and kids' devices… unlimited simultaneous connections on a single subscription. Best price-to-value for family and student setups.",
+        why: "Surfshark currently advertises unlimited simultaneous connections, which may suit multi-device households. Compare current price, renewal terms, platform support and performance on your own network before judging value.",
       },
     ],
     pitfalls: [
@@ -292,7 +292,7 @@ export const devicesEn: DeviceContent[] = [
       {
         title: "VPN dropping when backgrounded in Split View",
         body:
-          "Older OpenVPN-based apps used to drop the connection when sent to the background in Stage Manager / Split View. WireGuard and Lightway protocols fixed this — pick providers that use those modern protocols on iPad.",
+          "Background connections can behave differently across iPadOS, app and protocol versions. WireGuard- or Lightway-based modes may improve handoffs, but do not guarantee them; test Split View, Stage Manager and sleep/wake behaviour with the kill switch enabled.",
       },
       {
         title: "Setting up VPN on a child profile",
@@ -307,19 +307,19 @@ export const devicesEn: DeviceContent[] = [
       },
       {
         q: "Does the VPN work the same way on cellular (eSIM)?",
-        a: "Yes. The only difference is that on cellular you may have brief drops as 5G/4G/3G switch — turn on 'Auto-connect' and 'Always-On VPN' and the reconnect happens before you notice.",
+        a: "A VPN can work over cellular, but handoffs among Wi-Fi, 5G and 4G may interrupt the tunnel. Auto-connect and supported always-on controls can reduce gaps; verify the behaviour and leak protection on your own iPad and carrier.",
       },
       {
         q: "Is plain Wi-Fi safe on my iPad without a VPN?",
-        a: "After HTTPS became universal, snooping attacks dropped, but they didn't disappear: rogue Wi-Fi access points, DNS hijack, HSTS bypass, fake captive portals are all still real. A VPN closes nearly all of those vectors. If you often use hotel / airport / café Wi-Fi, yes — it's worth it.",
+        a: "HTTPS already protects much web content, while a VPN can reduce local-network visibility and some DNS exposure. It does not prevent phishing, malicious captive portals, unsafe apps or an untrusted VPN provider, so keep HTTPS and device updates in place and assess the network you use.",
       },
       {
         q: "Which VPN protocol should I pick on iPad?",
-        a: "Use WireGuard or Lightway if the provider supports them. IKEv2 is a good fallback — built into iOS and connects quickly. You don't really need OpenVPN (slow, more battery) — only on networks where the others are blocked.",
+        a: "WireGuard or a provider's lightweight protocol is often a practical first choice; IKEv2 can be a useful fallback. OpenVPN may trade speed or battery life for compatibility, but results vary, so compare supported modes on your own iPad and network.",
       },
       {
         q: "My school's iPad Wi-Fi blocks the VPN, what do I do?",
-        a: "Most schools and campus networks block UDP (WireGuard's default) but allow TCP 443 (so HTTPS works). Turn on the provider's 'obfuscation' or 'stealth' mode — traffic looks like HTTPS and gets through.",
+        a: "Some school or campus networks restrict UDP or VPN traffic. A provider's obfuscation, stealth or TCP mode may help, but access is not guaranteed and attempting to bypass controls may violate network policy. Ask the administrator and test only where permitted.",
       },
     ],
     relatedLinks: [
@@ -339,19 +339,19 @@ export const devicesEn: DeviceContent[] = [
     tagline:
       "Most smart TVs can't run a VPN app — the right answer is to put the VPN on the network, not the TV.",
     summary:
-      "On smart TVs, the biggest hurdle is the app store. Samsung Tizen and LG webOS stores don't carry VPN apps. Apple TV can install iOS-style apps (officially from tvOS 17+). Only the Android TV ecosystem (Google TV, NVIDIA Shield, Xiaomi, TCL) supports VPN apps directly. For everything else there are two approaches: a router-level VPN or Smart DNS — which is right for you, just below.",
+      "On smart TVs, the biggest hurdle is app availability: it varies by operating system, model, region and provider. Android TV/Google TV and tvOS support third-party VPN apps, while some Samsung Tizen and LG webOS models may need a router-level VPN or Smart DNS. Check the current TV app store and provider compatibility page first.",
     whyMatters: [
-      "Smart-TV makers (Samsung, Vizio, LG) collect tracking data — documented in NSF/IEEE research. Automatic Content Recognition (ACR) analyses what's on your screen. A VPN wraps that metadata stream on its way back to the manufacturer.",
-      "Your ISP throttles traffic to Netflix/YouTube at certain hours — VPN traffic looks like generic encrypted traffic and can't be classified, so streaming speeds can noticeably improve.",
-      "Regional catalogue differences: US Netflix, BBC iPlayer, country-specific Disney+ libraries, MLB.tv blackouts — a VPN gets around them on the TV. (Watch the legal and ToS angles in your country; some platforms reserve the right to suspend accounts.)",
-      "Guests/kids in the house use apps on the TV you can't control individually — a router-level VPN wraps all their traffic in one go.",
+      "Published academic research has documented Automatic Content Recognition and smart-TV telemetry. A VPN can encrypt supported network traffic in transit but does not stop the TV from collecting or sending telemetry, so also review the device's privacy settings and current research.",
+      "If an ISP applies service-specific traffic management, a VPN may change classification, but encryption overhead can also reduce speed. Compare baseline and VPN results on your own connection before drawing a conclusion.",
+      "Streaming catalogues vary by region, and some services restrict VPN use. Compatibility changes frequently, so check current service terms and test the exact TV app, account and server you plan to use.",
+      "A router-level VPN can tunnel traffic from configured household devices, but exclusions, IPv6, DNS and local-network traffic depend on the router setup and should be verified.",
     ],
     setupMethods: [
       {
         name: "Android TV / Google TV official app",
         difficulty: DIFFICULTY.easy,
         description:
-          "Install the provider's official Android TV app from the Play Store. NordVPN, Surfshark, ExpressVPN, CyberGhost and PIA all support it. Works like the phone app.",
+          "Install a provider's official Android TV app from the Play Store when it is available for your model and region. Check the current store listing and provider compatibility page because TV features can differ from the phone app.",
         whenToUse:
           "Easiest path if your TV runs Android TV (NVIDIA Shield, Xiaomi Mi Box, TCL/Sony, Chromecast with Google TV, etc.).",
       },
@@ -359,53 +359,53 @@ export const devicesEn: DeviceContent[] = [
         name: "Apple TV tvOS app (tvOS 17+)",
         difficulty: DIFFICULTY.easy,
         description:
-          "Apple opened VPN-app support in tvOS 17. NordVPN, ExpressVPN, Proton VPN and others have tvOS builds in the App Store. Requires Apple TV 4K (2nd gen or later).",
-        whenToUse: "If you have an Apple TV 4K with tvOS 17+ installed.",
+          "Apple added third-party VPN-app support in tvOS 17, and several providers publish tvOS apps. Check the provider's current App Store listing and Apple's compatibility information for your exact Apple TV model.",
+        whenToUse: "If your Apple TV model runs a supported tvOS version and the provider app is available in your region.",
       },
       {
         name: "Router-level VPN (covers everything)",
         difficulty: DIFFICULTY.advanced,
         description:
-          "Install a VPN client on your Wi-Fi router (DD-WRT, OpenWrt, FlashRouters preconfigured devices, or ExpressVPN's Aircove). Every device on the network — TV, phone, console, smart fridge — is protected automatically.",
+          "Install a supported VPN client on your Wi-Fi router. Devices routed through that client can use the tunnel, but guest networks, IPv6, DNS and policy-based exclusions may behave differently; verify coverage on each device.",
         whenToUse:
-          "Since Samsung and LG smart TVs have no official VPN app, router-level VPN is the official way around that limit.",
+          "If your Samsung or LG TV store has no compatible VPN app, a supported router setup is one alternative; confirm current app availability and router compatibility first.",
       },
       {
-        name: "Smart DNS (NO encryption — region bypass only)",
+        name: "Smart DNS (no VPN encryption)",
         difficulty: DIFFICULTY.medium,
         description:
-          "Some providers offer a Smart DNS service (NordVPN SmartPlay, Surfshark SmartDNS, ExpressVPN MediaStreamer). You enter their DNS addresses on the TV and get geo-restriction bypass. Upside: easy setup, no speed cost. Downside: traffic isn't encrypted — your IP isn't hidden, only the geography is spoofed.",
+          "Some providers document Smart DNS services for compatible TVs. These change DNS routing without encrypting traffic or hiding the public IP, and neither regional access nor unchanged speed is guaranteed. Check current service support and test the TV app you use.",
         whenToUse:
-          "When all you want is access to regional content like US Netflix and you're not actually after privacy.",
+          "When a currently supported regional-content feature is the goal and you understand that Smart DNS does not provide VPN privacy.",
       },
     ],
     picks: [
       {
         slug: "expressvpn",
         bestFor: "Apple TV and router users",
-        why: "The tvOS app is the most polished. They also sell an Aircove preconfigured router — plug it in and it works. MediaStreamer Smart DNS is ideal for geo-bypass on TVs that can't run an app.",
+        why: "ExpressVPN currently documents a tvOS app, Aircove router options and MediaStreamer Smart DNS. Confirm model support, setup requirements and current streaming compatibility on your own TV and network.",
       },
       {
         slug: "nordvpn",
         bestFor: "Android TV streaming",
-        why: "The most stable Android TV app. SmartPlay (DNS-based) is bundled with every subscription — you get geo-bypass on the TV without any setup. Manual router documentation for DD-WRT, OpenWrt and AsusWRT is detailed.",
+        why: "NordVPN publishes Android TV, SmartPlay and router setup documentation. Feature availability and streaming access can change, so check the current plan details and test the exact TV app and network you use.",
       },
       {
         slug: "surfshark",
         bestFor: "Budget + Smart DNS",
-        why: "Smart DNS is included with every plan and is the easiest to activate. Unlimited devices means a single subscription covers the TV plus every other device at home. The Android TV app is simple but does the job.",
+        why: "Surfshark currently advertises Smart DNS, an Android TV app and unlimited simultaneous connections. Verify current plan inclusion, device compatibility and setup behaviour before purchase.",
       },
     ],
     pitfalls: [
       {
         title: "Smart DNS isn't privacy — it just unlocks regions",
         body:
-          "Be clear that Smart DNS isn't a VPN: your traffic isn't encrypted and your IP is still the Turkish IP the ISP sees. Only the provider's DNS server changes which region Netflix routes you to. It can't bypass ISP throttling and gives you no privacy. Don't treat it as 'enough for streaming privacy' — only use it for region bypass.",
+          "Smart DNS isn't a VPN: it does not encrypt the connection or hide the public IP. DNS routing may affect how a supported service determines region, but compatibility can change and it should not be presented as a privacy tool.",
       },
       {
-        title: "Router VPN gives every device the same IP",
+        title: "Router-routed devices may share one VPN IP",
         body:
-          "With a router-level VPN, every device exits via the same server — so when you open your bank app on the phone you're using the same foreign IP, and the bank gets suspicious. Set policy-based routing on the router (exclude some devices from the VPN), or leave the banking device off Wi-Fi while you sign in.",
+          "Devices routed through the same VPN server may share its public IP, which can trigger extra verification in some banking apps. Use policy-based routing where supported, or exclude the banking device after checking your router and bank guidance.",
       },
       {
         title: "Smart-home traffic can clash with the VPN",
@@ -416,19 +416,19 @@ export const devicesEn: DeviceContent[] = [
     faqs: [
       {
         q: "Can I install a VPN directly on a Samsung or LG TV?",
-        a: "No. Samsung Tizen and LG webOS don't carry VPN apps and don't officially open their APIs to them. You have three options: (1) a router-level VPN, (2) Smart DNS in the TV's DNS settings, (3) plug an Android TV / Apple TV / Fire TV stick into HDMI and put the VPN on that, treating the TV as a screen.",
+        a: "Direct VPN-app availability on Samsung Tizen and LG webOS is limited and can change by model or region. Check the TV's current app store first; alternatives include a compatible router, Smart DNS without VPN encryption, or a supported streaming device connected by HDMI.",
       },
       {
         q: "Which VPNs can I install on an Apple TV?",
-        a: "For Apple TV 4K (2nd gen or later) on tvOS 17+: NordVPN, ExpressVPN, Proton VPN, Surfshark and PIA all have official tvOS apps. For older Apple TV models (HD, older 4K) you're back to router-level VPN.",
+        a: "Several providers publish tvOS apps, but the list, regional availability and model requirements change. Check your Apple TV's App Store, the provider's compatibility page and Apple's supported-tvOS list before choosing a setup.",
       },
       {
         q: "Does putting a VPN on the router void warranty or hurt performance?",
-        a: "Flashing the firmware (DD-WRT, OpenWrt) usually voids the manufacturer's warranty and risks bricking the device. If you don't want that, get a preconfigured router like ExpressVPN's Aircove, or pick brands like Asus or GL.iNet that support VPN out of the box. On performance: encryption taxes the consumer-grade router's CPU and you can lose 30-50%. If you have a gigabit line, look at Aircove or enterprise-grade hardware.",
+        a: "Third-party firmware can risk device failure or affect warranty coverage, so check the manufacturer's terms before flashing. VPN encryption also adds CPU load, but the speed impact varies widely by router, protocol and connection. Benchmark your own setup or choose hardware with documented VPN throughput.",
       },
       {
         q: "Netflix on the TV still blocks the VPN — what now?",
-        a: "Netflix aggressively blocks VPN-server IP ranges. Options: (1) switch providers — NordVPN/ExpressVPN are ahead on this; (2) try a different server; (3) use a full VPN instead of Smart DNS; (4) wait — providers rotate IP pools, what doesn't work in the morning may work in the evening. On ToS, Netflix reserves the right to suspend accounts but does so rarely in practice.",
+        a: "Streaming services can block or limit known VPN endpoints. Check the service's current terms and provider support page, then try a provider-recommended server or contact support. A result on one server or day does not guarantee future access.",
       },
       {
         q: "Do I need a different method for Chromecast?",

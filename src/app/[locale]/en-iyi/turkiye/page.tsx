@@ -13,9 +13,9 @@ import { getProduct } from "@/data/products";
 import { defaultLocaleAlternates } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Türkiye İçin En İyi VPN'ler (2026)",
+  title: "Türkiye İçin VPN Seçim Rehberi (2026)",
   description:
-    "Türkiye'de yasalı, hızlı ve güvenilir VPN seçimi. TR sunucusu, DPI bypass, BluTV/Exxen erişimi ve gizlilik için 2026'nın en iyi seçimleri.",
+    "Türkiye için VPN seçerken güncel sunucu dizini, gizlilik belgeleri, obfuscation seçenekleri ve bağımsız denetim kaynaklarını nasıl kontrol edeceğinizi öğrenin.",
   // İçerik yalnızca Türkçe servis ediliyor; EN/DE istekleri middleware 301'ler.
   alternates: defaultLocaleAlternates("/en-iyi/turkiye"),
 };
@@ -26,43 +26,43 @@ const picks = [
   {
     slug: "surfshark",
     why:
-      "Türkiye'de aktif sunucusu olan ve Camouflage Mode (DPI bypass) sunan tek üst-seviye sağlayıcı. Sınırsız cihaz desteğiyle aile/iş ihtiyaçlarını tek abonelikten karşılıyor.",
-    bestFor: "Türkiye'deki çoğu kullanıcı için en dengeli seçim",
+      "Sağlayıcı belgelerinde Türkiye konumu, Camouflage Mode ve sınırsız eşzamanlı bağlantı yer alıyor. Sunucu konumunu ve özelliğin kullandığınız platformdaki güncel durumunu resmi uygulamada doğrulayın.",
+    bestFor: "Türkiye konumu ve çoklu cihaz desteğini birlikte arayanlar",
   },
   {
     slug: "nordvpn",
     why:
-      "Geniş sunucu ağı, NordLynx hızı ve altı kez Deloitte denetimi. Türkiye sunucusu yok ama yakın Avrupa lokasyonlarıyla düşük gecikme.",
-    bestFor: "Streaming ve genel kullanım için maksimum istikrar isteyenler",
+      "NordLynx protokolü, bağımsız denetim kayıtları ve geniş sunucu dizini belgeleniyor. Türkiye konumu ile yakın Avrupa seçeneklerini güncel sunucu listesinde kontrol edip kendi bağlantınızda gecikmeyi ölçün.",
+    bestFor: "Protokol ve denetim belgelerini önceliklendirenler",
   },
   {
     slug: "expressvpn",
     why:
-      "Lightway protokolünün obfuscation özelliği, Türkiye'deki ISP filtreleme girişimlerine karşı dirençli. 2017'de Türk yetkililerinin sunucu el koyma denemesine rağmen no-logs politikası kanıtlandı.",
-    bestFor: "Premium deneyim arayanlar; teknik konfigürasyon istemeyenler",
+      "Sağlayıcı Lightway protokolünü ve farklı platformlar için bağlantı seçeneklerini belgeliyor. Türkiye konumu, gizleme davranışı ve ağınızdaki uyumluluk satın almadan önce resmi kaynaklardan ve iade süresi içinde doğrulanmalı.",
+    bestFor: "Basit kurulum ve geniş platform desteği arayanlar",
   },
 ];
 
 const faqs = [
   {
     q: "Türkiye'de VPN kullanmak yasal mı?",
-    a: "Evet, VPN kullanımı Türkiye'de yasal bir teknolojidir. VPN'in kendisi yasaklı değil; yasal sorumluluk, VPN üzerinden yapılan eylemin niteliğine bağlıdır.",
+    a: "VPN teknolojisi, erişim kısıtları ve VPN üzerinden yapılan eylemler aynı hukuki konu değildir. Mevzuat ve uygulama değişebileceğinden güncel resmi kaynakları kontrol edin; bu sayfa hukuki danışmanlık değildir.",
   },
   {
     q: "Türkiye için en iyi VPN sunucusu hangisi?",
-    a: "Türkiye'de aktif sunucusu olan üst-seviye sağlayıcılar arasında en dengeli olanı Surfshark. NordVPN ve ExpressVPN Türkiye sunucusu sunmuyor ama yakın Avrupa lokasyonlarıyla yeterli performans veriyor.",
+    a: "Tek bir sunucu herkes için en iyi sonucu vermez. Fiziksel mesafe, sunucu yükü, protokol ve internet sağlayıcınız gecikmeyi etkiler; güncel Türkiye ve yakın Avrupa konumlarını kendi bağlantınızda karşılaştırın.",
   },
   {
     q: "VPN, ISP'min beni izlemesini engeller mi?",
-    a: "Evet. VPN aktifken ISP yalnızca şifreli trafiğin VPN sunucusuna gittiğini görür; hangi siteleri ziyaret ettiğin, ne aradığın gibi içerik bilgileri şifrelidir.",
+    a: "VPN, cihazınız ile VPN sunucusu arasındaki trafiği şifreler ve ziyaret ettiğiniz hedefleri ISP'den önemli ölçüde gizleyebilir. ISP yine VPN sunucusuna bağlandığınızı, zamanlamayı ve veri hacmini görebilir; hesaplar, çerezler ve cihaz takibi ayrıca değerlendirilmelidir.",
   },
   {
     q: "BluTV ve Exxen'i yurt dışından izleyebilir miyim?",
-    a: "Evet. Türkiye sunucusu sunan bir VPN (Surfshark gibi) ile yurt dışındaki konumundan Türkiye'ye bağlanarak BluTV, Exxen ve diğer Türk streaming platformlarına erişebilirsin.",
+    a: "Türkiye konumu IP sinyalini değiştirebilir; ancak yayın platformları VPN trafiğini engelleyebilir ve erişim hesap bölgesi, lisans koşulları veya hizmet şartlarına göre değişebilir. Hiçbir sağlayıcı için kesintisiz erişim garantisi vermiyoruz.",
   },
   {
     q: "Camouflage Mode veya obfuscation nedir?",
-    a: "VPN trafiğini, sıradan HTTPS trafiği gibi görünmesini sağlayan teknik. Türkiye gibi VPN engelleme girişimlerinin olduğu ülkelerde, ISP'lerin DPI (Deep Packet Inspection) tespitini bypass etmek için kullanılır.",
+    a: "Obfuscation, VPN trafiğinin kolayca sınıflandırılmasını zorlaştırmayı amaçlayan tekniklerin genel adıdır. Davranış protokole, uygulamaya ve ağa göre değişir; sağlayıcının platform belgelerini kontrol edin.",
   },
 ];
 
@@ -98,12 +98,12 @@ export default async function Page({ params }: Props) {
             <Flag className="size-3" /> Türkiye odaklı
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            Türkiye İçin En İyi VPN&apos;ler (2026)
+            Türkiye İçin VPN Seçim Rehberi (2026)
           </h1>
           <p className="mt-4 text-lg text-ink-muted">
-            Türkiye&apos;de güvenilir performans, TR sunucusu, DPI bypass ve
-            yasal çerçeveye uygun kullanım için 2026&apos;da öne çıkan üç
-            seçim — gerçek kullanım senaryolarına göre değerlendirildi.
+            TR sunucusu, gizleme seçenekleri, bağımsız denetimler ve platform
+            desteği için üç sağlayıcı profili — resmi belgeler ve doğrulanabilir
+            kaynaklar üzerinden değerlendirildi.
           </p>
         </header>
 
@@ -112,12 +112,10 @@ export default async function Page({ params }: Props) {
             <ShieldCheck className="size-5 text-brand-600" /> Hızlı özet
           </h2>
           <p className="mt-3 text-ink leading-relaxed">
-            Türkiye&apos;de VPN kullanmak yasal. Pratik öncelikler:{" "}
-            <strong>TR sunucusu</strong> (yurt dışından TR içeriklerine
-            erişim için), <strong>obfuscation</strong> (ISP&apos;lerin DPI
-            engellemelerini bypass etmek için) ve{" "}
-            <strong>bağımsız denetim geçmişi</strong> (güven için). Bu üç
-            kriteri en dengeli şekilde Surfshark karşılıyor.
+            Pratik kontrol listesi: <strong>güncel sunucu konumları</strong>,{" "}
+            <strong>obfuscation belgeleri</strong>, bağımsız denetimin kapsamı
+            ve tarihi ile iade koşulları. Performans ve servis erişimini kendi
+            ağınızda doğrulamadan kesin sonuç varsaymayın.
           </p>
         </Card>
 
@@ -163,15 +161,6 @@ export default async function Page({ params }: Props) {
                         </Button>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs text-ink-subtle">Puan</div>
-                      <div className="text-2xl font-bold text-brand-700">
-                        {product.score.toFixed(1)}
-                        <span className="text-xs text-ink-subtle font-normal">
-                          /10
-                        </span>
-                      </div>
-                    </div>
                   </div>
                 </Card>
               );
@@ -185,33 +174,33 @@ export default async function Page({ params }: Props) {
           <h3>1. TR sunucusu</h3>
           <p>
             Yurt dışında yaşayan Türkler veya geçici olarak yurt dışındayken
-            BluTV, Exxen, TRT World gibi platformlara erişmek isteyenler için
-            <strong> Türkiye lokasyonlu bir sunucu kritik</strong>. Listelenen
-            üç sağlayıcı arasında yalnızca Surfshark&apos;ın Türkiye
-            sunucusu var.
+            BluTV, Exxen ve TRT gibi platformlarda Türkiye IP sinyalini
+            değerlendirmek isteyenler için <strong>Türkiye lokasyonu ilgili
+            bir kriterdir</strong>. Sunucu dizinleri değişebildiğinden mevcut
+            konumu doğrudan sağlayıcının resmi listesinde doğrulayın.
           </p>
 
           <h3>2. DPI bypass (obfuscation)</h3>
           <p>
-            Bazı Türk ISP&apos;ler zaman zaman VPN trafiğini Deep Packet
-            Inspection (DPI) ile tespit edip yavaşlatmaya veya engellemeye
-            çalışıyor. Surfshark&apos;ın <strong>Camouflage Mode</strong>{" "}
-            özelliği veya ExpressVPN&apos;in Lightway protokolü gibi
-            obfuscation seçenekleri bu durumlara karşı koruma sağlıyor.
+            Normal VPN bağlantısı bir ağda çalışmıyorsa sağlayıcının
+            <strong> obfuscation</strong> veya gizlenmiş sunucu seçeneği
+            değerlendirilebilir. Özelliğin hangi protokol ve platformlarda
+            bulunduğunu resmi destek sayfasından kontrol edin.
           </p>
 
           <h3>3. Bağımsız denetim geçmişi</h3>
           <p>
-            VPN&apos;in &quot;no-logs&quot; iddiasının gerçek olduğunu
-            doğrulamak için üçüncü taraf denetimleri kritik. NordVPN (6x
-            Deloitte), Surfshark (Cure53 + Deloitte) ve ExpressVPN (KPMG +
-            Cure53) bu açıdan kanıtlı seçimler.
+            VPN&apos;in &quot;no-logs&quot; iddiasını değerlendirirken bağımsız
+            denetimin tarihine, kapsamına ve raporun erişilebilirliğine bakın.
+            Denetim sayıları ve kapsamları değişebildiğinden güncel raporu
+            sağlayıcının resmi güven merkezi üzerinden açın.
           </p>
 
           <h3>4. Yasal çerçeve</h3>
           <p>
-            Türkiye&apos;de VPN kullanımı yasal — ancak yasal sorumluluk VPN
-            üzerinden yapılan eylemin niteliğine bağlı. Detaylar için{" "}
+            VPN teknolojisi, erişim kısıtları ve kullanım amacı farklı hukuki
+            değerlendirmeler gerektirebilir. Bu sayfa hukuki danışmanlık
+            değildir. Güncel çerçeve için{" "}
             <Link href="/rehber/turkiye-de-vpn-yasal-mi">
               Türkiye&apos;de VPN Yasal mı? rehberimizi
             </Link>{" "}

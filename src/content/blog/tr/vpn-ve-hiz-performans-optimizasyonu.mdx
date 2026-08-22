@@ -12,7 +12,7 @@ coverImage: "vpn-speed"
 unsplashKeyword: "speed fast internet connection fiber"
 ---
 
-"VPN kullanınca internetim yavaşlıyor" - Bu en yaygın VPN şikayetidir. Gerçekten de VPN, şifreleme ve yönlendirme nedeniyle hızınızı düşürür. Ancak doğru ayarlarla bu kayıp minimize edilebilir. İşte VPN hızınızı maksimize etmenin yolları.
+"VPN kullanınca internetim yavaşlıyor" yaygın bir VPN şikayetidir. Şifreleme ve ek yönlendirme performansı değiştirebilir; etki cihaz, ISS, rota, protokol ve sunucu yüküne göre değişir. Aşağıdaki adımlar sabit bir sonuç vaat etmek yerine kendi bağlantınızda tutarlı karşılaştırma yapmanıza yardımcı olur.
 
 ## VPN Neden Yavaşlatır?
 
@@ -21,9 +21,9 @@ VPN'in hızı düşürmesinin teknik nedenleri:
 ### 1. Şifreleme Overhead
 
 Verileriniz şifrelenir ve şifresi çözülür. Bu işlem CPU gücü gerektirir:
-- AES-256 şifreleme: ~5-10% yavaşlama
-- Zayıf cihazlarda daha fazla etki
-- Modern işlemcilerde (AES-NI desteği) minimal etki
+- düşük güçlü cihazlarda işlemci darboğazı oluşabilir
+- donanım hızlandırma desteği işlem yükünü azaltabilir
+- etkiyi ayırmak için aynı sunucuda VPN açık/kapalı ölçüm gerekir
 
 ### 2. Ekstra Yönlendirme
 
@@ -35,57 +35,51 @@ Ekstra adım = ekstra gecikme (latency)
 ### 3. Sunucu Mesafesi
 
 Fiziksel mesafe, gecikmeyi artırır:
-- Türkiye → Almanya: ~50ms
-- Türkiye → ABD Doğu: ~150ms
-- Türkiye → ABD Batı: ~200ms
-- Türkiye → Avustralya: ~300ms
+- yakın sunucular genellikle daha kısa bir rota sunar
+- kıtalar arası rota daha fazla ağ geçidi ve değişkenlik içerebilir
+- gerçek gecikme coğrafyadan çok ISS peering'i ve sunucu rotasıyla da değişebilir
+
+Bu rotalar için doğrudan karşılaştırılabilir laboratuvar ölçümümüz yoktur; hedef hizmete ping, jitter ve paket kaybını kendi bağlantınızda kaydedin.
 
 ### 4. Sunucu Yükü
 
 Aşırı yüklenmiş sunucular yavaştır:
-- 1000 kullanıcı → 1 Gbps sunucu = Yavaş
-- 100 kullanıcı → 10 Gbps sunucu = Hızlı
+- kullanıcı sayısı tek başına kapasiteyi göstermez
+- sunucu donanımı, uplink, eşzamanlı iş yükü ve sağlayıcının kapasite yönetimi birlikte önemlidir
+- uygulama yük göstergesi varsa aynı bölgedeki birkaç sunucuyu karşılaştırın
 
 ### 5. ISP Throttling
 
 Bazı ISP'ler VPN trafiğini yavaşlatır (throttling). Paradoksal olarak, VPN bazen hızı artırabilir çünkü ISP'nin throttling'ini aşar.
 
-## Gerçekçi Hız Beklentileri
+## Gerçekçi Hız Beklentisi Nasıl Kurulur?
 
-### Hız Kaybı Oranları
+### Kendi Temel Değerinizi Oluşturun
 
-**İyi VPN (WireGuard):**
-- 100 Mbps bağlantı → 85-90 Mbps
-- %10-15 kayıp
+VPN Advisor bu senaryolar için doğrudan karşılaştırılabilir laboratuvar hız ölçümü yayımlamıyor. Aynı cihaz, aynı test sunucusu ve aynı saat aralığında şu değerleri kaydedin:
 
-**Ortalama VPN (OpenVPN):**
-- 100 Mbps bağlantı → 60-70 Mbps
-- %30-40 kayıp
+| Kontrol | VPN kapalı | VPN açık |
+|---|---|---|
+| İndirme/yükleme | Temel değer | Protokol ve sunucu adıyla sonuç |
+| Ping/jitter | Temel rota | VPN rotası |
+| Paket kaybı | Temel değer | VPN sonucu |
+| Uygulama deneyimi | Başlama/takılma notu | Aynı işlemdeki not |
 
-**Kötü VPN (Ücretsiz):**
-- 100 Mbps bağlantı → 5-15 Mbps
-- %85-95 kayıp
+### Aktiviteye Göre Gereksinim
 
-### Aktiviteye Göre Gerekli Hız
-
-- **Web browsing**: 5-10 Mbps yeterli
-- **HD video (1080p)**: 5-8 Mbps
-- **4K video**: 25 Mbps
-- **Video konferans**: 3-5 Mbps
-- **Online oyun**: 3-6 Mbps (ping önemli)
-- **Büyük dosya indirme**: Ne kadar hızlı o kadar iyi
+Web, yayın, görüntülü görüşme ve oyun gereksinimleri hizmete, çözünürlüğe, codec'e ve eşzamanlı cihaz sayısına göre değişir. Sabit bir eşik yerine kullandığınız hizmetin güncel resmi gereksinimini kontrol edin; oyun için bant genişliğinin yanında ping, jitter ve paket kaybını da izleyin.
 
 ## 10 Hız Optimizasyon İpucu
 
 ### 1. Doğru Protokolü Seçin
 
-**En Hızlı → En Yavaş:**
+**Test için başlangıç sırası:**
 
-1. **WireGuard**: En hızlı, modern
-2. **IKEv2**: Hızlı, mobilde iyi
-3. **OpenVPN UDP**: Orta hız
-4. **OpenVPN TCP**: Yavaş ama güvenilir
-5. **L2TP/IPSec**: Yavaş, kaçının
+1. **WireGuard**: Modern ve düşük ek yük hedefli
+2. **IKEv2**: Mobil ağ geçişleri için değerlendirilebilir
+3. **OpenVPN UDP**: Uyumluluk ve UDP seçeneği
+4. **OpenVPN TCP**: Kısıtlı ağlarda denenebilir
+5. **L2TP/IPSec**: Yalnız eski sistem gereksinimi varsa
 
 **Tavsiye**: WireGuard kullanın. Yoksa IKEv2 veya OpenVPN UDP. Hız ve güvenlik dengesini ikisi arasında kıyaslamak için [WireGuard vs OpenVPN karşılaştırması](/blog/wireguard-vs-openvpn-karsilastirma) yazımıza göz atın.
 
@@ -104,19 +98,16 @@ Fiziksel mesafe = Gecikme
 3. Almanya, Hollanda
 4. İngiltere, Fransa
 
-**Uzak Sunucular (Kaçının):**
-- Avustralya: +300ms
-- Güney Amerika: +250ms
-- Asya-Pasifik: +200ms
+**Uzak Sunucular:** Avustralya, Güney Amerika veya Asya-Pasifik gibi uzak bölgeler daha uzun rota oluşturabilir. Bir ülke zorunlu değilse yakın seçeneklerle aynı hedefe ölçüm yapın.
 
 **İstisna**: Streaming için belirli ülke gerekiyorsa (örn. Netflix ABD), hız kaybını kabul edin. Düşük gecikme kritikse [canlı spor yayınları için VPN](/blog/canli-spor-yayinlari-vpn) yazımızda spesifik sunucu önerileri var.
 
 ### 3. Daha Az Yoğun Sunucu Seçin
 
 VPN uygulamaları genellikle sunucu yükünü gösterir:
-- %20-50 yük: İyi
-- %50-80 yük: Orta
-- %80-100 yük: Kötü, kaçının
+- göstergeyi yalnızca aynı sağlayıcı içindeki göreli bir sinyal olarak kullanın
+- yük yüzdesinin nasıl hesaplandığı sağlayıcıya göre değişebilir
+- düşük görünen yük, sizin rotanızda daha iyi performansı garanti etmez
 
 **İpucu**: Aynı ülkede birden fazla sunucu varsa, en az yüklü olanı seçin.
 
@@ -128,9 +119,7 @@ Wi-Fi, ethernet'e göre daha yavaştır:
 - **Wi-Fi 5**: Orta
 - **Wi-Fi 4**: Yavaş
 
-**Hız Farkı:**
-- Ethernet: 100 Mbps → 85 Mbps (VPN ile)
-- Wi-Fi: 100 Mbps → 60 Mbps (VPN ile)
+Ethernet ve Wi-Fi için doğrudan karşılaştırılabilir ölçümümüz yoktur. Aynı cihazda önce kablolu, sonra aynı konumda Wi-Fi testi yaparak yerel ağ darboğazını ayırın.
 
 **Tavsiye**: Masaüstü bilgisayarda ethernet kullanın. Laptop'ta mümkünse USB-C ethernet adaptörü.
 
@@ -154,9 +143,9 @@ VPN Ayarları → Split Tunneling → Uygulamaları Seç
 ### 6. VPN Sunucusunu Değiştirin
 
 Aynı ülkede birden fazla sunucu varsa, hepsini deneyin:
-- Sunucu 1: 50 Mbps
-- Sunucu 2: 80 Mbps
-- Sunucu 3: 70 Mbps
+- aynı test hedefini ve protokolü kullanın
+- sonuçlarla birlikte saat, sunucu ve cihazı not edin
+- tek ölçüm yerine tekrarlanan sonuçların tutarlılığına bakın
 
 **Neden Fark Var?**
 - Farklı veri merkezleri
@@ -219,7 +208,7 @@ VPN'siz hızınız zaten düşükse, VPN ile daha da düşer:
 2. Aynı testi tekrarlayın
 3. Karşılaştırın
 
-**Beklenen**: VPN ile %10-30 kayıp normal.
+Sabit bir “normal kayıp” oranı yoktur. Fark belirginse yakın sunucu, farklı protokol ve kablolu bağlantı deneyerek darboğazı ayrı ayrı kontrol edin.
 
 ## Gelişmiş Optimizasyon
 
@@ -227,17 +216,18 @@ VPN'siz hızınız zaten düşükse, VPN ile daha da düşer:
 
 MTU (Maximum Transmission Unit), paket boyutunu belirler. Yanlış MTU, hızı düşürür.
 
-**Optimal MTU Bulma (Windows):**
+**MTU Kontrolü için örnek hesap (Windows):**
+
+Aşağıdaki sayılar yalnızca IPv4 ICMP başlık hesabını göstermek için kullanılan açıklayıcı girdilerdir; evrensel veya önerilen VPN MTU değeri değildir:
+
 ```bash
 ping -f -l 1472 google.com
 ```
 
-Paket kaybı yoksa, MTU = 1472 + 28 = 1500 (ideal)
+Bu örnekte yanıt alınırsa `1472 + 28 = 1500` yalnızca test edilen yol için bir üst sınır sinyali verir. Sonucu doğrudan VPN ayarına kopyalamayın; sağlayıcının ve router üreticisinin belgesini izleyin, daha düşük paket girdileriyle kontrollü test yapın.
 
 **VPN MTU Ayarı:**
-```
-VPN Ayarları → Gelişmiş → MTU → 1400-1500
-```
+`VPN Ayarları → Gelişmiş → MTU` yolunda yalnızca sağlayıcının önerdiği değeri kullanın ve değişiklik öncesi değeri kaydedin.
 
 ### QoS (Quality of Service)
 
@@ -327,37 +317,21 @@ Sistem Tercihleri → Ağ → Gelişmiş → TCP/IP → IPv6: Kapalı
 3. Daha hızlı VPN'e geç (ExpressVPN, NordVPN)
 4. Video kalitesini düşür (4K → 1080p)
 
-## En Hızlı VPN'ler (2026)
+## Sağlayıcı Performansını Nasıl Karşılaştırmalı?
 
-### 1. ExpressVPN
-- **Hız**: ⭐⭐⭐⭐⭐
-- **Protokol**: Lightway (özel, hızlı)
-- **Sunucu**: 3000+ sunucu, 105 ülke
-- **Fiyat**: Premium
+Burada sağlayıcıları sabit bir hız sıralamasına koymuyoruz; doğrudan karşılaştırılabilir laboratuvar ölçümümüz yoktur ve sonuçlar konuma göre değişir. Aday sağlayıcılarda:
 
-Hangi protokolün hızı neden etkilediğini derinlemesine merak ediyorsanız [VPN protokolleri karşılaştırması](/blog/vpn-protokolleri-karsilastirmasi) yazımız iyi bir başlangıç.
+- aynı cihaz ve bağlantıyı kullanın
+- aynı hedef ülke ve test sunucusunu seçin
+- mevcut modern protokolleri ayrı ayrı deneyin
+- indirme/yükleme yanında ping, jitter, paket kaybı ve kopma notu tutun
+- deneme veya iade koşullarını sağlayıcının güncel belgesinden doğrulayın
 
-### 2. NordVPN
-- **Hız**: ⭐⭐⭐⭐⭐
-- **Protokol**: NordLynx (WireGuard tabanlı)
-- **Sunucu**: 6000+ sunucu, 111 ülke
-- **Fiyat**: Orta-Premium
-
-### 3. Surfshark
-- **Hız**: ⭐⭐⭐⭐
-- **Protokol**: WireGuard
-- **Sunucu**: 3200+ sunucu, 100 ülke
-- **Fiyat**: Bütçe dostu
-
-### 4. Mullvad
-- **Hız**: ⭐⭐⭐⭐⭐
-- **Protokol**: WireGuard
-- **Sunucu**: 900+ sunucu, 45 ülke
-- **Fiyat**: Sabit 5 euro/ay
+Protokolün sonucu neden etkileyebildiğini anlamak için [VPN protokolleri karşılaştırması](/blog/vpn-protokolleri-karsilastirmasi) yazımız iyi bir başlangıçtır.
 
 ## Sonuç
 
-VPN hız kaybı kaçınılmazdır ama minimize edilebilir. Doğru protokol, sunucu seçimi ve ayarlarla, hız kaybını %10-15'e düşürebilirsiniz.
+VPN'in performans etkisi bağlantıya göre değişir ve sabit bir kayıp oranı garanti edilemez. Yakın sunucu, uygun protokol ve kontrollü karşılaştırma ile kendi kurulumunuzdaki darboğazı azaltabilirsiniz.
 
 **Hızlı VPN İçin Kontrol Listesi:**
 - [ ] WireGuard protokolü kullan
@@ -368,4 +342,4 @@ VPN hız kaybı kaçınılmazdır ama minimize edilebilir. Doğru protokol, sunu
 - [ ] Arka plan uygulamalarını kapat
 - [ ] Kaliteli VPN kullan (ücretsiz değil)
 
-Unutmayın: Hız önemliyse, gizlilikten ödün vermeyin. Hem hızlı hem güvenli VPN'ler mevcut. Doğru seçim ve ayarlarla, VPN kullanırken hız kaybını fark etmezsiniz.
+Unutmayın: Hız önemliyse gizlilikten ödün vermeyin. İyi bir kurulum performans etkisini azaltabilir, ancak farkın hissedilmeyeceği garanti edilemez; sonucu kendi bağlantınızda doğrulayın.

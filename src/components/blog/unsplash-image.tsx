@@ -8,7 +8,7 @@ type UnsplashImageProps = {
   seed?: string;
   alt?: string;
   className?: string;
-  priority?: boolean;
+  preload?: boolean;
 };
 
 export async function UnsplashImage({
@@ -17,7 +17,7 @@ export async function UnsplashImage({
   seed,
   alt,
   className = "",
-  priority = false,
+  preload = false,
 }: UnsplashImageProps) {
   const t = await getTranslations("blog");
   const image = getBlogImage(coverImage, position, seed);
@@ -35,8 +35,8 @@ export async function UnsplashImage({
           height={height}
           className="h-auto w-full object-cover"
           sizes={isHero ? "(max-width: 768px) 100vw, 1200px" : "(max-width: 768px) 100vw, 800px"}
-          priority={priority}
-          loading={priority ? undefined : "lazy"}
+          preload={preload}
+          loading={preload ? undefined : "lazy"}
         />
       </div>
       <figcaption className="mt-2 text-xs text-ink-subtle">

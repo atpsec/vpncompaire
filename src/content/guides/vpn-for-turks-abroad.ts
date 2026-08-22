@@ -57,17 +57,17 @@ const tr: VpnForTurksAbroadContent = {
   ],
   ogTitle: "Yurt Dışındaki Türkler İçin En İyi VPN (2026)",
   ogDescription:
-    "BluTV, Exxen, Türk bankacılığı için Türkiye sunucusu olan en iyi VPN'ler.",
+    "BluTV, Exxen ve Türk bankacılığı senaryoları için Türkiye sunucusu belgeleyen VPN profilleri.",
   badge: "Diaspora",
   h1: "Yurt dışındaki Türkler için VPN",
-  lede: "Almanya, ABD, İngiltere, Hollanda'da yaşayan Türklerin BluTV, Exxen, TRT, Türk bankacılığı ve e-Devlet'e sorunsuz erişebilmesi için Türkiye sunucusu olan en iyi VPN'ler.",
+  lede: "Almanya, ABD, İngiltere ve Hollanda'dan Türkiye bağlantısı arayanlar için sağlayıcıların belgelediği Türkiye sunucularını inceliyoruz. BluTV, Exxen, TRT, bankacılık ve e-Devlet uyumluluğunu kullanmadan önce kendi hesabınızla kontrol edin.",
   breadcrumb: {
     home: "Ana sayfa",
     guides: "Rehberler",
     current: "Yurt dışındaki Türkler",
   },
   picksHeading: "Yurt dışındaki Türkler için en iyi 3 VPN",
-  picksSubheading: "Türkiye sunucusu, hız ve streaming bypass'ına göre.",
+  picksSubheading: "Sağlayıcıların belgelediği Türkiye konumu, protokol ve cihaz politikalarına göre.",
   picks: [
     {
       slug: "nordvpn",
@@ -91,7 +91,7 @@ const tr: VpnForTurksAbroadContent = {
   scenariosH2: "Yurt dışından Türkiye'ye bağlanma senaryoları",
   scenario1: {
     h3: "1. Türk dizilerini izlemek",
-    p: "BluTV, Exxen, GAİN, TabiiGo, TRT — hepsi coğrafi kısıtlı. Türkiye dışındaki IP'den eriştiğinde içerik kataloğu kısalır veya tamamen engellenir. Türkiye sunucusu olan VPN bu engeli kaldırır.",
+    p: "BluTV, Exxen, GAİN, TabiiGo ve TRT katalogları yayın haklarına ve bölgeye göre değişebilir. Türkiye konumu sunan bir VPN farklı bir IP sağlayabilir; ancak platformlar VPN IP'lerini engelleyebildiği için erişim garanti değildir. Güncel koşulları resmi hizmet sayfasından ve kendi hesabınızla kontrol edin.",
   },
   scenario2: {
     h3: "2. Türk bankacılığı",
@@ -103,7 +103,7 @@ const tr: VpnForTurksAbroadContent = {
   },
   scenario3: {
     h3: "3. e-Devlet ve resmi servisler",
-    p: "e-Devlet portalı yabancı IP'den çoğu zaman açılır ama bazı işlemler (vekalet, askerlik) için ek doğrulama isteyebilir. Türkiye sunucusu sürtüşmeyi sıfıra indirir.",
+    p: "e-Devlet portalı yabancı IP'den açılabilir; bazı işlemler ek doğrulama isteyebilir. Türkiye sunucusu bağlantı koşullarını değiştirebilir, ancak erişim veya doğrulama sonucu garanti etmez.",
   },
   scenario4: {
     h3: "4. WhatsApp/Telegram/sosyal medya kısıtlamaları",
@@ -116,18 +116,22 @@ const tr: VpnForTurksAbroadContent = {
       [
         "Almanya, Avusturya, Hollanda",
         "NordVPN",
-        "En düşük gecikme — Türkiye sunucuları Avrupa'da dağıtık",
+        "Sağlayıcı Türkiye sanal konumu ve NordLynx desteği belgeliyor; gecikmeyi kendi hattında ölç",
       ],
-      ["İngiltere, İrlanda", "ExpressVPN", "Lightway istikrarı + Türkiye bağlantısı"],
+      [
+        "İngiltere, İrlanda",
+        "ExpressVPN",
+        "Sağlayıcı Lightway ve Türkiye konumu belgeliyor; rotayı kendi bağlantında kontrol et",
+      ],
       [
         "ABD, Kanada",
         "ExpressVPN veya NordVPN",
-        "Atlantik geçişi için optimize edilmiş sunucular",
+        "Her iki sağlayıcı da Türkiye konumu belgeliyor; Atlantik rotası ve gecikme kullanıcıya göre değişir",
       ],
       [
         "Körfez (BAE, Suudi Arabistan)",
         "Surfshark + NoBorders modu",
-        "VPN tespit engelleme özelliği güçlü",
+        "Sağlayıcı NoBorders ve Türkiye konumu belgeliyor; erişim sonucunu ayrıca kontrol et",
       ],
       [
         "Bütçe öncelikli (her yerden)",
@@ -138,36 +142,37 @@ const tr: VpnForTurksAbroadContent = {
   },
   turkeyServers: {
     h2: "Türkiye sunucusu olan VPN'ler",
-    intro: "İncelediğimiz sağlayıcı profilleri içinde Türkiye sunucusu belgeleyen örnekler:",
+    intro:
+      "Mevcut sağlayıcı sunucu dizinleri ve profillerinde Türkiye konumu belgeleyen örnekler aşağıdadır. Dizinler ve sanal konumlar değişebileceği için abone olmadan önce sağlayıcının güncel listesini kontrol edin:",
     items: [
       {
         href: "/inceleme/nordvpn",
         linkText: "NordVPN",
-        text: " — Sanal Türkiye sunucuları (fiziksel sunucu yok, IP Türkiye'ye atanmış)",
+        text: " — sağlayıcının güncel dizininde sanal Türkiye konumu listeleniyor",
       },
       {
         href: "/inceleme/expressvpn",
         linkText: "ExpressVPN",
-        text: " — Sanal Türkiye sunucuları, çok istikrarlı",
+        text: " — sağlayıcının sunucu dizininde sanal Türkiye konumu listeleniyor",
       },
       {
         href: "/inceleme/surfshark",
         linkText: "Surfshark",
-        text: " — Sanal Türkiye sunucuları, sınırsız cihaz",
+        text: " — sağlayıcı Türkiye konumu ve sınırsız eşzamanlı cihaz politikasını belgeliyor",
       },
       {
         href: "/inceleme/cyberghost",
         linkText: "CyberGhost",
-        text: " — Streaming için optimize edilmiş Türkiye sunucuları",
+        text: " — sağlayıcının sunucu dizininde Türkiye konumu listeleniyor",
       },
       {
         href: "/inceleme/pia",
         linkText: "PIA",
-        text: " — Türkiye sunucusu var, port forwarding destekli",
+        text: " — sağlayıcının dizininde Türkiye konumu listeleniyor; port forwarding kapsamını ayrıca doğrulayın",
       },
     ],
     outro:
-      "Mullvad, Proton VPN ve TunnelBear Türkiye sunucusu sunmaz; bu sayfanın kullanım senaryosuna uygun değildir.",
+      "Sunucu dizinleri zamanla değişir. Listede olmayan bir sağlayıcı için de güncel resmi sunucu dizinini ve Türkiye konumunun fiziksel mi sanal mı olduğunu kontrol edin.",
   },
   faqHeading: "Sıkça sorulan sorular",
   faqs: [
@@ -185,11 +190,11 @@ const tr: VpnForTurksAbroadContent = {
     },
     {
       q: "TRT canlı yayın yurt dışından çalışır mı?",
-      a: "TRT'nin web sitesi çoğu içerik için Türkiye'den erişim ister. Türkiye sunucusu olan bir VPN ile sorun olmadan izleyebilirsiniz. TRT İzle uygulaması mobilde daha güvenilir çalışır.",
+      a: "TRT içeriğinin kullanılabilirliği yayın haklarına, bölgeye ve güncel IP politikalarına göre değişebilir. Türkiye konumu sunan bir VPN erişim seçeneği sağlayabilir, ancak sonucu garanti etmez; resmi TRT sayfasını ve kendi hesabınızı kontrol edin.",
     },
     {
       q: "e-Devlet'e yurt dışından VPN'le bağlanmak yasal mı?",
-      a: "Evet. Türk vatandaşının kendi devlet portalına erişmek için kullandığı VPN tamamen yasaldır — yasaklı bir aktivite değil, sadece coğrafi bypass.",
+      a: "Hukuki ve teknik durum bulunduğun ülkeye, güncel kurallara ve e-Devlet'in güvenlik politikalarına bağlıdır. Resmi erişim yöntemlerini kullan, güncel koşulları kontrol et ve gerekirse hukuki görüş al; bu rehber hukuki tavsiye değildir.",
     },
   ],
   cards: [
@@ -222,13 +227,13 @@ const en: VpnForTurksAbroadContent = {
   ],
   ogTitle: "Best VPN for Turks Abroad (2026)",
   ogDescription:
-    "The best VPNs with Türkiye servers for BluTV, Exxen and Turkish banking.",
+    "VPN profiles documenting Türkiye servers for BluTV, Exxen and Turkish banking scenarios.",
   badge: "Diaspora",
   h1: "VPN for Turks abroad",
-  lede: "The best VPNs with a Türkiye server so Turks living in Germany, the US, the UK and the Netherlands can access BluTV, Exxen, TRT, Turkish banking and e-Devlet without friction.",
+  lede: "A review of provider-documented Türkiye server options for people connecting from Germany, the US, the UK and the Netherlands. Check BluTV, Exxen, TRT, banking and e-Devlet compatibility with your own account before use.",
   breadcrumb: { home: "Home", guides: "Guides", current: "Turks abroad" },
   picksHeading: "The 3 best VPNs for Turks abroad",
-  picksSubheading: "Based on Türkiye servers, speed and streaming bypass.",
+  picksSubheading: "Based on provider-documented Türkiye locations, protocols and device policies.",
   picks: [
     {
       slug: "nordvpn",
@@ -238,7 +243,7 @@ const en: VpnForTurksAbroadContent = {
     },
     {
       slug: "expressvpn",
-      label: "Consistent connection in our tests",
+      label: "Türkiye location to evaluate",
       reason:
         "The provider documents Lightway as a fast-setup protocol. Türkiye coverage and platform compatibility depend on the current IP pool, route and network; its premium price point may require consideration.",
     },
@@ -252,7 +257,7 @@ const en: VpnForTurksAbroadContent = {
   scenariosH2: "Scenarios for connecting to Türkiye from abroad",
   scenario1: {
     h3: "1. Watching Turkish series",
-    p: "BluTV, Exxen, GAİN, TabiiGo, TRT — all geo-restricted. When you access them from an IP outside Türkiye, the content catalog shrinks or is blocked entirely. A VPN with a Türkiye server removes that block.",
+    p: "BluTV, Exxen, GAİN, TabiiGo and TRT catalogs can vary by licensing rights and region. A VPN offering a Türkiye location can provide a different IP, but platforms may block VPN addresses, so access is not guaranteed. Check the service's current terms and your own account before subscribing.",
   },
   scenario2: {
     h3: "2. Turkish banking",
@@ -264,7 +269,7 @@ const en: VpnForTurksAbroadContent = {
   },
   scenario3: {
     h3: "3. e-Devlet and official services",
-    p: "The e-Devlet portal usually opens from a foreign IP, but some transactions (powers of attorney, military service paperwork) may require extra verification. A Türkiye server brings that friction down to zero.",
+    p: "The e-Devlet portal may open from a foreign IP, while some transactions can require extra verification. A Türkiye server changes the connection route but does not guarantee access or the verification outcome.",
   },
   scenario4: {
     h3: "4. WhatsApp/Telegram/social media restrictions",
@@ -277,18 +282,22 @@ const en: VpnForTurksAbroadContent = {
       [
         "Germany, Austria, Netherlands",
         "NordVPN",
-        "Lowest latency — Türkiye servers distributed across Europe",
+        "The provider documents a virtual Türkiye location and NordLynx; measure latency on your own line",
       ],
-      ["UK, Ireland", "ExpressVPN", "Lightway stability + Türkiye connection"],
+      [
+        "UK, Ireland",
+        "ExpressVPN",
+        "The provider documents Lightway and a Türkiye location; check the route on your own connection",
+      ],
       [
         "US, Canada",
         "ExpressVPN or NordVPN",
-        "Servers optimized for the Atlantic crossing",
+        "Both providers document a Türkiye location; transatlantic routing and latency vary by user",
       ],
       [
         "Gulf (UAE, Saudi Arabia)",
         "Surfshark + NoBorders mode",
-        "Strong VPN-detection avoidance feature",
+        "The provider documents NoBorders and a Türkiye location; verify the current access result",
       ],
       [
         "Budget first (from anywhere)",
@@ -299,42 +308,43 @@ const en: VpnForTurksAbroadContent = {
   },
   turkeyServers: {
     h2: "VPNs with a Türkiye server",
-    intro: "Of the 20 VPNs we've reviewed, these offer a Türkiye server:",
+    intro:
+      "The current provider server directories and profiles below document a Türkiye location. Directories and virtual locations can change, so verify the provider's latest list before subscribing:",
     items: [
       {
         href: "/inceleme/nordvpn",
         linkText: "NordVPN",
-        text: " — virtual Türkiye servers (no physical server; the IP is assigned to Türkiye)",
+        text: " — the provider's current directory lists a virtual Türkiye location",
       },
       {
         href: "/inceleme/expressvpn",
         linkText: "ExpressVPN",
-        text: " — virtual Türkiye servers, very stable",
+        text: " — the provider's server directory lists a virtual Türkiye location",
       },
       {
         href: "/inceleme/surfshark",
         linkText: "Surfshark",
-        text: " — virtual Türkiye servers, unlimited devices",
+        text: " — the provider documents a Türkiye location and unlimited simultaneous devices",
       },
       {
         href: "/inceleme/cyberghost",
         linkText: "CyberGhost",
-        text: " — Türkiye servers optimized for streaming",
+        text: " — the provider's server directory lists a Türkiye location",
       },
       {
         href: "/inceleme/pia",
         linkText: "PIA",
-        text: " — has a Türkiye server, with port forwarding support",
+        text: " — the provider's directory lists a Türkiye location; verify port-forwarding coverage separately",
       },
     ],
     outro:
-      "Mullvad, Proton VPN and TunnelBear don't offer a Türkiye server; they're not a fit for this page's use case.",
+      "Server directories change over time. For any unlisted provider, check its current official directory and whether the Türkiye location is physical or virtual.",
   },
   faqHeading: "Frequently asked questions",
   faqs: [
     {
       q: "Can I watch BluTV from Germany?",
-      a: "Yes, with a VPN that has a Türkiye server. NordVPN, ExpressVPN and Surfshark offer virtual Türkiye servers, and the BluTV bypass worked successfully in our tests.",
+      a: "A VPN with a Türkiye location may be an option. NordVPN, ExpressVPN and Surfshark document Türkiye locations, but BluTV compatibility changes with IP pools and platform policy; check the official service and your own account before subscribing.",
     },
     {
       q: "Don't Turkish banks block logins from foreign IPs?",
@@ -346,11 +356,11 @@ const en: VpnForTurksAbroadContent = {
     },
     {
       q: "Does TRT live streaming work from abroad?",
-      a: "TRT's website requires access from Türkiye for most content. With a VPN that has a Türkiye server you can watch without issues. The TRT İzle app works more reliably on mobile.",
+      a: "TRT availability can vary by licensing rights, region and current IP policy. A VPN offering a Türkiye location may provide an access option, but it cannot guarantee the result; check the official TRT service and your own account.",
     },
     {
       q: "Is it legal to connect to e-Devlet from abroad with a VPN?",
-      a: "Yes. A VPN used by a Turkish citizen to access their own government portal is completely legal — it's not a banned activity, just a geographic bypass.",
+      a: "The legal and technical position depends on your location, current rules and e-Devlet security policy. Use official access methods, check current conditions and seek legal advice when needed; this guide is not legal advice.",
     },
   ],
   cards: [
@@ -370,7 +380,7 @@ const de: VpnForTurksAbroadContent = {
   metaTitle:
     "Das beste VPN für Türken im Ausland (2026) — BluTV, Exxen, Banking",
   metaDescription:
-    "Die besten VPNs mit Türkei-Servern für den Zugriff auf BluTV, Exxen, TRT, türkisches Banking und Behördendienste aus dem Ausland. Getestet aus Deutschland, den USA und Großbritannien.",
+    "Anbieterprofile mit dokumentierten Türkei-Servern für BluTV, Exxen, TRT, türkisches Banking und Behördendienste aus dem Ausland. Aktuelle Kompatibilität selbst prüfen.",
   keywords: [
     "türkei vpn aus dem ausland",
     "deutschland türkei vpn",
@@ -381,29 +391,29 @@ const de: VpnForTurksAbroadContent = {
   ],
   ogTitle: "Das beste VPN für Türken im Ausland (2026)",
   ogDescription:
-    "Die besten VPNs mit Türkei-Server für BluTV, Exxen und türkisches Banking.",
+    "VPN-Profile mit dokumentiertem Türkei-Standort für BluTV, Exxen und türkische Banking-Szenarien.",
   badge: "Diaspora",
   h1: "VPN für Türken im Ausland",
-  lede: "Die besten VPNs mit Türkei-Server, damit Türken in Deutschland, den USA, Großbritannien und den Niederlanden reibungslos auf BluTV, Exxen, TRT, türkisches Banking und e-Devlet zugreifen können.",
+  lede: "Ein Überblick über von Anbietern dokumentierte Türkei-Server für Verbindungen aus Deutschland, den USA, Großbritannien und den Niederlanden. Prüfe die aktuelle Kompatibilität mit BluTV, Exxen, TRT, Banking und e-Devlet vor der Nutzung selbst.",
   breadcrumb: {
     home: "Startseite",
     guides: "Ratgeber",
     current: "Türken im Ausland",
   },
   picksHeading: "Die 3 besten VPNs für Türken im Ausland",
-  picksSubheading: "Nach Türkei-Server, Tempo und Streaming-Bypass.",
+  picksSubheading: "Nach dokumentiertem Türkei-Standort, Protokollen und Geräterichtlinien der Anbieter.",
   picks: [
     {
       slug: "nordvpn",
       label: "Kandidat für den Alltag",
       reason:
-        "Laut Anbieterdaten ist ein virtueller Türkei-Server verfügbar + das NordLynx-Protokoll. In unseren Tests funktionierte der Zugriff auf BluTV, Exxen und TRT in den von uns getesteten Szenarien. Die Streaming-Kompatibilität kann sich mit der Zeit ändern.",
+        "Laut Anbieterdaten sind ein virtueller Türkei-Standort und NordLynx verfügbar. Die Kompatibilität mit BluTV, Exxen und TRT hängt vom aktuellen IP-Pool und der Plattformrichtlinie ab; prüfe den Dienst vor dem Abschluss selbst.",
     },
-    {
-      slug: "expressvpn",
-      label: "Konstante Verbindung in unseren Tests",
-      reason:
-        "Mit dem Lightway-Protokoll des Anbieters ist der Verbindungsaufbau schnell. Auf dem Türkei-Server zeigte sich in unseren Tests konstanter Zugriff. Das Premium-Preisniveau will abgewogen sein.",
+      {
+        slug: "expressvpn",
+        label: "Zu prüfender Türkei-Standort",
+        reason:
+          "Der Anbieter beschreibt Lightway als Protokoll für schnellen Verbindungsaufbau. Türkei-Abdeckung und Plattformkompatibilität hängen vom aktuellen IP-Pool, der Route und dem Netz ab; das Premium-Preisniveau will abgewogen sein.",
     },
     {
       slug: "surfshark",
@@ -415,7 +425,7 @@ const de: VpnForTurksAbroadContent = {
   scenariosH2: "Szenarien für die Verbindung in die Türkei aus dem Ausland",
   scenario1: {
     h3: "1. Türkische Serien schauen",
-    p: "BluTV, Exxen, GAİN, TabiiGo, TRT — alle geo-beschränkt. Greifst du von einer IP außerhalb der Türkei zu, schrumpft der Katalog oder wird komplett gesperrt. Ein VPN mit Türkei-Server hebt diese Sperre auf.",
+    p: "Die Kataloge von BluTV, Exxen, GAİN, TabiiGo und TRT können je nach Lizenzrechten und Region variieren. Ein VPN mit Türkei-Standort kann eine andere IP bereitstellen; Plattformen können VPN-Adressen jedoch sperren, daher ist der Zugriff nicht garantiert. Prüfe vor dem Abo die aktuellen Dienstbedingungen und dein eigenes Konto.",
   },
   scenario2: {
     h3: "2. Türkisches Banking",
@@ -427,7 +437,7 @@ const de: VpnForTurksAbroadContent = {
   },
   scenario3: {
     h3: "3. e-Devlet und offizielle Dienste",
-    p: "Das e-Devlet-Portal öffnet sich von einer ausländischen IP meistens, aber manche Vorgänge (Vollmacht, Wehrdienst) können zusätzliche Verifizierung verlangen. Ein Türkei-Server senkt die Reibung auf null.",
+    p: "Das e-Devlet-Portal kann sich von einer ausländischen IP öffnen; manche Vorgänge verlangen zusätzliche Verifizierung. Ein Türkei-Server ändert die Verbindungsroute, garantiert aber weder den Zugriff noch das Verifizierungsergebnis.",
   },
   scenario4: {
     h3: "4. WhatsApp/Telegram/Social-Media-Einschränkungen",
@@ -440,22 +450,22 @@ const de: VpnForTurksAbroadContent = {
       [
         "Deutschland, Österreich, Niederlande",
         "NordVPN",
-        "Niedrigste Latenz — Türkei-Server über Europa verteilt",
+        "Der Anbieter dokumentiert einen virtuellen Türkei-Standort und NordLynx; miss die Latenz auf deiner eigenen Leitung",
       ],
       [
         "Großbritannien, Irland",
         "ExpressVPN",
-        "Lightway-Stabilität + Türkei-Verbindung",
+        "Der Anbieter dokumentiert Lightway und einen Türkei-Standort; prüfe die Route mit deiner eigenen Verbindung",
       ],
       [
         "USA, Kanada",
         "ExpressVPN oder NordVPN",
-        "Für die Atlantik-Strecke optimierte Server",
+        "Beide Anbieter dokumentieren einen Türkei-Standort; Atlantik-Route und Latenz variieren je nach Nutzer",
       ],
       [
         "Golf (VAE, Saudi-Arabien)",
         "Surfshark + NoBorders-Modus",
-        "Starke Funktion gegen VPN-Erkennung",
+        "Der Anbieter dokumentiert NoBorders und einen Türkei-Standort; prüfe das aktuelle Zugriffsergebnis",
       ],
       [
         "Budget zuerst (von überall)",
@@ -467,42 +477,42 @@ const de: VpnForTurksAbroadContent = {
   turkeyServers: {
     h2: "VPNs mit Türkei-Server",
     intro:
-      "Von den 20 VPNs, die wir getestet haben, bieten diese einen Türkei-Server:",
+      "Die folgenden aktuellen Serververzeichnisse und Anbieterprofile dokumentieren einen Türkei-Standort. Verzeichnisse und virtuelle Standorte können sich ändern; prüfe vor dem Abo die neueste Anbieterliste:",
     items: [
       {
         href: "/inceleme/nordvpn",
         linkText: "NordVPN",
-        text: " — virtuelle Türkei-Server (kein physischer Server, die IP ist der Türkei zugewiesen)",
+        text: " — das aktuelle Anbieterverzeichnis listet einen virtuellen Türkei-Standort",
       },
       {
         href: "/inceleme/expressvpn",
         linkText: "ExpressVPN",
-        text: " — virtuelle Türkei-Server, sehr stabil",
+        text: " — das Serververzeichnis des Anbieters listet einen virtuellen Türkei-Standort",
       },
       {
         href: "/inceleme/surfshark",
         linkText: "Surfshark",
-        text: " — virtuelle Türkei-Server, unbegrenzte Geräte",
+        text: " — der Anbieter dokumentiert einen Türkei-Standort und unbegrenzt viele gleichzeitige Geräte",
       },
       {
         href: "/inceleme/cyberghost",
         linkText: "CyberGhost",
-        text: " — für Streaming optimierte Türkei-Server",
+        text: " — das Serververzeichnis des Anbieters listet einen Türkei-Standort",
       },
       {
         href: "/inceleme/pia",
         linkText: "PIA",
-        text: " — Türkei-Server vorhanden, mit Port-Forwarding-Support",
+        text: " — das Anbieterverzeichnis listet einen Türkei-Standort; Port-Forwarding-Abdeckung separat prüfen",
       },
     ],
     outro:
-      "Mullvad, Proton VPN und TunnelBear bieten keinen Türkei-Server; sie passen nicht zum Anwendungsfall dieser Seite.",
+      "Serververzeichnisse ändern sich. Prüfe bei jedem nicht aufgeführten Anbieter das aktuelle offizielle Verzeichnis und ob der Türkei-Standort physisch oder virtuell ist.",
   },
   faqHeading: "Häufig gestellte Fragen",
   faqs: [
     {
       q: "Kann ich BluTV aus Deutschland schauen?",
-      a: "Ja, mit einem VPN, das einen Türkei-Server hat. NordVPN, ExpressVPN und Surfshark bieten virtuelle Türkei-Server, und der BluTV-Bypass funktionierte in unseren Tests erfolgreich.",
+      a: "Ein VPN mit Türkei-Standort kann eine Option sein. NordVPN, ExpressVPN und Surfshark dokumentieren Türkei-Standorte; die BluTV-Kompatibilität ändert sich jedoch mit IP-Pools und Plattformrichtlinien. Prüfe vor dem Abo den offiziellen Dienst und dein eigenes Konto.",
     },
     {
       q: "Blockieren türkische Banken den Login von ausländischen IPs nicht?",
@@ -514,7 +524,7 @@ const de: VpnForTurksAbroadContent = {
     },
     {
       q: "Funktioniert der TRT-Livestream aus dem Ausland?",
-      a: "Die Website von TRT verlangt für die meisten Inhalte einen Zugriff aus der Türkei. Mit einem VPN mit Türkei-Server kannst du problemlos schauen. Die App TRT İzle läuft auf dem Handy zuverlässiger.",
+      a: "Die TRT-Verfügbarkeit kann je nach Lizenzrechten, Region und aktueller IP-Richtlinie variieren. Ein VPN mit Türkei-Standort kann eine Zugriffsoption bieten, garantiert das Ergebnis aber nicht; prüfe den offiziellen TRT-Dienst und dein eigenes Konto.",
     },
     {
       q: "Ist es legal, sich aus dem Ausland per VPN mit e-Devlet zu verbinden?",

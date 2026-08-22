@@ -41,11 +41,11 @@ const CONTENT = {
       },
       {
         title: "Bağımsız denetim kanıtı",
-        body: "No-logs iddiası tek başına bir pazarlama ifadesidir. Üçüncü taraf denetim (Deloitte, KPMG, Cure53, Securitum) veya mahkeme kanıtı (PIA 2016/2018), bu iddiayı objektif olarak doğrular.",
+        body: "No-logs iddiası tek başına bir pazarlama ifadesidir. Üçüncü taraf denetim (Deloitte, KPMG, Cure53, Securitum) veya geçmiş mahkeme kayıtları (PIA 2016/2018), incelenen dönem ve kapsam için bağımsız kanıt sunar; gelecekteki davranışı garanti etmez.",
       },
       {
         title: "Açık kaynak istemciler",
-        body: "Sağlayıcının uygulamasının kodu kamuya açık ise, bağımsız güvenlik araştırmacıları kodu inceleyebilir ve zafiyetleri raporlayabilir. Bu, \"arka kapı yok\" iddiasının teknik garantisi.",
+        body: "Sağlayıcının uygulama kodu kamuya açıksa, bağımsız güvenlik araştırmacıları kodu inceleyebilir ve zafiyetleri raporlayabilir. Bu şeffaflık arka kapı riskini değerlendirmeyi kolaylaştırır; tek başına arka kapı olmadığını veya dağıtılan uygulamanın yayımlanan kaynakla aynı olduğunu garanti etmez. Denetimler ve yeniden üretilebilir derlemeler ek kanıt sağlar.",
       },
     ],
     faqs: [
@@ -55,7 +55,7 @@ const CONTENT = {
       },
       {
         q: "Bağımsız denetim ile mahkeme kararı arasında ne fark var?",
-        a: "Denetim, sağlayıcının iddialarını üçüncü bir taraf bağımsız olarak inceler. Mahkeme kararı, no-logs iddiasının gerçek bir hukuki talep karşısında nasıl çalıştığını test eder. PIA'nın 2016 ve 2018 davalarında doğrulandığı gibi.",
+        a: "Denetim, sağlayıcının iddialarını belirli bir kapsam ve tarihte üçüncü tarafın incelemesidir. Geçmiş bir mahkeme kaydı ise sağlayıcının belirli bir hukuki talebe nasıl yanıt verdiğine dair olay-temelli kanıt sunar; ikisi de gelecekteki tüm uygulamalar için garanti değildir.",
       },
       {
         q: "Açık kaynak VPN'ler diğerlerinden daha güvenli mi?",
@@ -106,11 +106,11 @@ const CONTENT = {
       },
       {
         title: "Independent audit evidence",
-        body: "A no-logs claim on its own is marketing copy. A third-party audit (Deloitte, KPMG, Cure53, Securitum) or court evidence (PIA 2016/2018) objectively verifies the claim.",
+        body: "A no-logs claim on its own is marketing copy. A third-party audit (Deloitte, KPMG, Cure53, Securitum) or historical court record (PIA 2016/2018) provides independent evidence for the period and scope examined; it does not guarantee future behavior.",
       },
       {
         title: "Open-source clients",
-        body: "If the provider's app code is public, independent security researchers can inspect it and report vulnerabilities. That's the technical guarantee behind the \"no backdoors\" claim.",
+        body: "If the provider's app code is public, independent security researchers can inspect it and report vulnerabilities. That transparency makes backdoor risk easier to assess, but does not by itself prove that no backdoor exists or that the distributed app matches the published source. Audits and reproducible builds provide additional evidence.",
       },
     ],
     faqs: [
@@ -120,7 +120,7 @@ const CONTENT = {
       },
       {
         q: "What's the difference between an independent audit and a court ruling?",
-        a: "An audit is a third party independently inspecting the provider's claims. A court ruling tests how a no-logs claim holds up against a real legal request — as PIA's 2016 and 2018 cases demonstrated.",
+        a: "An audit is a third party examining a provider's claims at a defined time and scope. A historical court record provides event-specific evidence about how the provider responded to one legal request; neither guarantees every future implementation.",
       },
       {
         q: "Are open-source VPNs more secure than the others?",

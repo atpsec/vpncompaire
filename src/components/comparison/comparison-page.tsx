@@ -126,9 +126,6 @@ export async function ComparisonPage({
                 <h2 className="text-xl font-bold text-ink-strong">{a.brand}</h2>
                 <p className="text-sm text-ink-muted">{a.positioning}</p>
               </div>
-              <span className="text-2xl font-bold text-brand-700 tabular-nums">
-                {a.score}
-              </span>
             </div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{a.summary}</p>
             <Button asChild variant="primary" className="mt-4 w-full">
@@ -150,9 +147,6 @@ export async function ComparisonPage({
                 <h2 className="text-xl font-bold text-ink-strong">{b.brand}</h2>
                 <p className="text-sm text-ink-muted">{b.positioning}</p>
               </div>
-              <span className="text-2xl font-bold text-brand-700 tabular-nums">
-                {b.score}
-              </span>
             </div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{b.summary}</p>
             <Button asChild variant="primary" className="mt-4 w-full">

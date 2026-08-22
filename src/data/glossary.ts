@@ -374,8 +374,8 @@ const rawGlossary: RawTerm[] = [
       en: "A server that runs only in RAM and cannot persist logs",
     },
     long: {
-      tr: "Sunucu yeniden başlatıldığında tüm veriyi kaybeden, sabit disk olmadan RAM üzerinde çalışan VPN sunucusu. Kalıcı log fiziksel olarak imkânsız hale gelir; fiziksel el koymada veri elde edilemez. NordVPN, ExpressVPN, Surfshark tüm altyapısını RAM-only'e geçirmiştir.",
-      en: "A VPN server with no disk that runs only in RAM — every reboot wipes all data, making persistent logs physically impossible and rendering physical seizure useless. NordVPN, ExpressVPN and Surfshark have moved their entire infrastructure to RAM-only.",
+      tr: "Yerel veriyi sabit diskte kalıcılaştırmak yerine RAM üzerinde çalışan ve yeniden başlatmada belleği temizleyen VPN sunucu tasarımı. Disk kalıcılığı riskini azaltır; merkezi log aktarımını veya yanlış yapılandırmayı tek başına engellemez.",
+      en: "A VPN server design that runs local state in RAM instead of persisting it to disk and clears memory on reboot. It reduces disk-persistence risk but does not by itself prevent centralized logging or misconfiguration.",
     },
     category: "infrastructure",
     related: ["no-logs"],

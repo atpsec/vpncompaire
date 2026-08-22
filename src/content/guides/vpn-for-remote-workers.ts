@@ -61,7 +61,7 @@ const tr: RemoteWorkersContent = {
   metaTitle:
     "Uzaktan Çalışanlar İçin En İyi VPN (2026) — Otel, Kafe, Co-working Güvenliği",
   metaDescription:
-    "Uzaktan çalışanlar için VPN seçimi: halka açık Wi-Fi koruması, hassas dosya güvenliği, şirket VPN'i farkı ve seyahatte istikrarlı bağlantı için en iyi 3 VPN.",
+    "Uzaktan çalışanlar için VPN seçimi: halka açık Wi-Fi koruması, hassas dosya güvenliği, şirket VPN'i farkı ve seyahat bağlantısı özellikleriyle en iyi 3 VPN.",
   keywords: [
     "uzaktan çalışan vpn",
     "remote work vpn",
@@ -80,22 +80,22 @@ const tr: RemoteWorkersContent = {
   },
   badge: "Remote work",
   h1: "Uzaktan çalışanlar için VPN",
-  lede: "Otel, kafe, co-working alanında halka açık Wi-Fi güvenliği, müşteri dosyası koruması ve seyahatte istikrarlı bağlantı için en iyi 3 VPN.",
+  lede: "Otel, kafe, co-working alanında halka açık Wi-Fi güvenliği, müşteri dosyası koruması ve seyahat bağlantısı özellikleri için en iyi 3 VPN.",
   picks: {
     heading: "Uzaktan çalışanlar için en iyi 3 VPN",
-    subheading: "İstikrar, hız ve seyahat senaryolarına göre.",
+    subheading: "Protokol özellikleri, güvenlik araçları ve seyahat senaryolarına göre.",
     items: [
       {
         slug: "expressvpn",
         label: "Zayıf Wi-Fi için değerlendirilebilir",
         reason:
-          "Sağlayıcının Lightway protokolü bağlantı geçişlerini yönetmek üzere tasarlanmıştır. Sağlayıcı verisine göre 105+ ülkede sunucu bulunur; kill switch davranışı işletim sistemi ve uygulama sürümüne göre kontrol edilmelidir.",
+          "Sağlayıcının Lightway protokolü bağlantı geçişlerini yönetmek üzere tasarlanmıştır. Sağlayıcı verisine göre 105+ ülkede sunucu bulunur; güncel konum listesini ve kill switch davranışını işletim sistemi ile uygulama sürümünde kontrol et.",
       },
       {
         slug: "nordvpn",
-        label: "Hız + Threat Protection",
+        label: "NordLynx + Threat Protection",
         reason:
-          "NordLynx, WireGuard tabanlı bir protokol olarak throughput için değerlendirilebilir. Threat Protection'ın DNS'te bilinen zararlı yazılım sitelerini engellediğini sağlayıcı belirtmektedir; müşteri dosyaları için ek güvenlik katmanı olarak düşünülebilir.",
+          "NordLynx, WireGuard tabanlı hafif bir tünel seçeneğidir. Threat Protection'ın bilinen zararlı alan adlarını filtrelediğini sağlayıcı belirtmektedir; plan kapsamını kontrol et ve throughput'u kendi rota ve cihazında ölç.",
       },
       {
         slug: "mullvad",
@@ -107,7 +107,7 @@ const tr: RemoteWorkersContent = {
   },
   whyVital: {
     h2: "Uzaktan çalışırken VPN neden hayati?",
-    p: "Halka açık Wi-Fi (otel, kafe, havaalanı, co-working) güvenli değildir. Aynı ağdaki herhangi bir kişi temel araçlarla (Wireshark) şifrelenmemiş trafiği görebilir. 2024 Verizon Data Breach Report: uzaktan çalışan ihlallerinin %43'ü halka açık Wi-Fi'den kaynaklandı.",
+    p: "Otel, kafe, havaalanı ve co-working ağları yanlış yapılandırılmış veya güvenilmeyen cihazlarla paylaşılmış olabilir. HTTPS içerik şifrelemesi sağlar; bir VPN ise cihaz ile VPN sunucusu arasına ek bir şifreli tünel koyar. DNS, kill switch ve otomatik bağlantı davranışını kullandığın ağda ve cihazda ayrıca doğrula.",
   },
   dataAtRisk: {
     h3: "Hangi veriler risk altında?",
@@ -138,15 +138,15 @@ const tr: RemoteWorkersContent = {
     h2: "Şirket VPN'i vs ticari VPN — fark ne?",
     headers: ["Özellik", "Şirket VPN'i", "Ticari VPN"],
     rows: [
-      ["Amaç", "Şirket içi sistemlere uzaktan erişim", "Tüm internet trafiğini şifreleme"],
-      ["Şifreleme", "Şirkete giden trafik", "Tüm trafik"],
+      ["Amaç", "Şirket içi sistemlere uzaktan erişim", "Ayarlarda kapsanan internet trafiğini tünelleme"],
+      ["Şifreleme", "Şirkete giden trafik", "Uygulama ayarının kapsadığı trafik"],
       ["İzleme", "İşveren görebilir", "Sağlayıcıya bağlı (no-logs ideali)"],
       ["Kişisel kullanım uygunluğu", "Genelde yasak (politika)", "Tamamen senin trafiğin"],
-      ["Halka açık Wi-Fi koruması", "Sadece şirket trafiği için", "Tüm cihaz için"],
+      ["Halka açık Wi-Fi kapsamı", "Genellikle şirket trafiği", "Sağlayıcı ve split-tunneling ayarına bağlı"],
     ],
     adviceBold: "Tavsiye:",
     adviceText:
-      " İdeal kombinasyon — şirket VPN'i şirket sistemleri için, ticari VPN kişisel trafik ve Wi-Fi koruması için. İkisi aynı anda çalışabilir (split tunneling ile veya birinden diğerine geçerek).",
+      " Şirket VPN'ini işveren politikasına göre şirket sistemleri için kullan. Kişisel trafik için ikinci bir VPN düşünüyorsan iki istemcinin birlikte çalışmasının garanti olmadığını unutma; split-tunneling ve uyumluluğu işveren belgelerinde ve kendi cihazında doğrula.",
   },
   nomadChecklist: {
     h2: "Digital nomad için özellik kontrol listesi",
@@ -157,11 +157,11 @@ const tr: RemoteWorkersContent = {
       },
       {
         bold: "Obfuscation/scrambling:",
-        text: " Çin, BAE, İran gibi VPN engellenen ülkelerde çalışırsan şart.",
+        text: " VPN trafiğinin kısıtlandığı ağlarda değerlendirilebilir; sağlayıcı desteğini, yerel kuralları ve özelliğin kendi ağındaki davranışını kontrol et.",
       },
       {
         bold: "Kill switch:",
-        text: " Bağlantı koparsa gerçek IP sızıntısı olmasın.",
+        text: " Sağlayıcının belgelerine göre tünel kesildiğinde trafiği durdurmak üzere tasarlanır; işletim sistemi ve uygulama sürümündeki davranışı test et.",
       },
       {
         bold: "Split tunneling:",
@@ -181,7 +181,7 @@ const tr: RemoteWorkersContent = {
     h2: "Belirli senaryolar",
     travel: {
       h3: "Yurt dışı seyahat + Türk müşterisi",
-      p: "Türkiye sunucusu olan bir VPN (NordVPN, ExpressVPN, Surfshark) kullan. Türk bankacılığı, e-fatura portalı, e-Devlet daha sorunsuz.",
+      p: "Sağlayıcının güncel sunucu listesinde Türkiye konumu bulunması, Türk IP'si gerektiren hizmetlerde değerlendirilebilir. Banka, e-fatura ve e-Devlet kendi güvenlik kontrollerini uygulayabilir; hesabınla uyumluluğu ve hizmet koşullarını seyahatten önce doğrula.",
     },
     privacy: {
       h3: "Yüksek gizlilik (hukuk, medikal, gazetecilik)",
@@ -189,20 +189,20 @@ const tr: RemoteWorkersContent = {
       sep: " veya ",
       link2: { href: "/inceleme/proton-vpn", text: "Proton VPN" },
       after:
-        ". Anonim hesap, açık kaynak istemci, en sıkı no-logs politikaları.",
+        ". Sağlayıcıların hesap, açık kaynak istemci ve kayıt tutma açıklamalarını; güncel bağımsız denetim raporlarıyla birlikte kontrol et.",
     },
     budget: {
       h3: "Bütçe öncelikli freelancer",
       link: { href: "/inceleme/surfshark", text: "Surfshark" },
       after:
-        " $2.19/ay — sınırsız cihaz, kullanılabilir teknik özellikler, makul hız.",
+        " sağlayıcının sınırsız eşzamanlı cihaz politikasını sunuyor. Güncel fiyatı, hesap paylaşım koşullarını ve hız davranışını satın almadan önce kendi bağlantında doğrula.",
     },
   },
   faqHeading: "Sıkça sorulan sorular",
   faqs: [
     {
       q: "Şirket VPN'i varken ticari VPN'e gerek var mı?",
-      a: "İki farklı amaca hizmet ederler. Şirket VPN'i (Cisco AnyConnect, OpenVPN Access Server vb.) sadece şirket içi kaynaklara erişim için. Ticari VPN ise tüm internet trafiğini şifreler — kişisel bankacılık, e-posta, sosyal medya. Otel/kafe Wi-Fi'sinde her ikisi de gerekli olabilir.",
+      a: "İki farklı amaca hizmet ederler. Şirket VPN'i şirket içi kaynaklara erişim sağlar; ticari VPN ise uygulama ve split-tunneling ayarlarının kapsadığı trafiği VPN sunucusuna kadar şifreler. İki istemciyi birlikte kullanmadan önce işveren politikasını ve cihaz uyumluluğunu doğrula.",
     },
     {
       q: "Hangi VPN seyahatte istikrarlı çalışıyor?",
@@ -210,7 +210,7 @@ const tr: RemoteWorkersContent = {
     },
     {
       q: "Müşteri dosyalarını paylaşırken VPN şart mı?",
-      a: "Halka açık Wi-Fi'de evet, kesinlikle. KDV beyannamesi, müşteri sözleşmesi, finansal tablo gibi hassas dosyaları açık ağda göndermek profesyonel hata. VPN bu trafiği şifreler — aynı ağdaki kötü niyetli kullanıcılar göremez.",
+      a: "Hassas dosyalarda VPN, cihaz ile VPN sunucusu arasındaki trafiğe ek şifreleme sağlar; ancak dosya paylaşım servisinin uçtan uca güvenliğini, erişim izinlerini veya cihaz güvenliğini garanti etmez. Kurum politikanı izle ve DNS/kill switch davranışını kullandığın ağda doğrula.",
     },
     {
       q: "Hangi ülke sunucusu freelance ödeme almak için en iyi?",
@@ -218,13 +218,13 @@ const tr: RemoteWorkersContent = {
     },
     {
       q: "Slack, Zoom gibi araçlar VPN üzerinden çalışır mı?",
-      a: "Evet, sorunsuz. Hatta bazı şirketler Zoom DDoS saldırılarına karşı VPN üzerinden kullanılmasını önerir. Hız etkisi %5-10 — anlamlı bir fark yok.",
+      a: "Slack ve Zoom standart VPN tünelleri üzerinden genellikle çalışabilir; gecikme, MTU, güvenlik duvarı ve şirket politikası sonucu değiştirebilir. Uygulama belgelerindeki ağ gereksinimlerini kontrol et ve toplantı öncesi kendi bağlantınla ses, video ve ekran paylaşımını dene.",
     },
   ],
   cards: [
-    { title: "Kafe & co-working", desc: "Halka açık Wi-Fi'de güvenli." },
-    { title: "Müşteri dosyaları", desc: "Hassas dosya transferi şifreli." },
-    { title: "Seyahat", desc: "Otel Wi-Fi engellerini aş." },
+    { title: "Kafe & co-working", desc: "Halka açık Wi-Fi için şifreli tünel." },
+    { title: "Müşteri dosyaları", desc: "Hassas transferler için şifreli tünel." },
+    { title: "Seyahat", desc: "Ağ ve hesap uyumluluğunu önceden kontrol et." },
   ],
   related: {
     label: "İlgili sayfalar",
@@ -243,7 +243,7 @@ const en: RemoteWorkersContent = {
   metaTitle:
     "Best VPN for Remote Workers (2026) — Hotel, Café & Co-working Security",
   metaDescription:
-    "Choosing a VPN as a remote worker: public Wi-Fi protection, sensitive file security, how it differs from a corporate VPN, and the top 3 VPNs for a stable connection while traveling.",
+    "Choosing a VPN as a remote worker: public Wi-Fi protection, sensitive file security, corporate VPN differences and travel-connectivity features in the top 3 VPNs.",
   keywords: [
     "remote worker vpn",
     "remote work vpn",
@@ -262,22 +262,22 @@ const en: RemoteWorkersContent = {
   },
   badge: "Remote work",
   h1: "VPN for remote workers",
-  lede: "The top 3 VPNs for public Wi-Fi security in hotels, cafés and co-working spaces, protecting client files and staying reliably connected while traveling.",
+  lede: "Three VPN profiles for public Wi-Fi in hotels, cafés and co-working spaces, client-file workflows and travel connectivity.",
   picks: {
     heading: "Top 3 VPNs for remote workers",
-    subheading: "Ranked by stability, speed and travel scenarios.",
+    subheading: "Compared by protocol features, security tools and travel scenarios.",
     items: [
       {
         slug: "expressvpn",
-        label: "Consistent connection in our tests",
+        label: "Option for changing networks",
         reason:
-          "The provider's Lightway protocol performed well at keeping the connection alive under weak Wi-Fi conditions in our tests. Servers in 105+ countries according to provider data. Kill switch behavior proved reliable in our testing.",
+          "The provider documents Lightway as a protocol designed to handle network changes. Provider data lists servers in 105+ countries; confirm the current locations and test reconnection and kill-switch behavior on your own operating system and Wi-Fi.",
       },
       {
         slug: "nordvpn",
-        label: "Speed + Threat Protection",
+        label: "NordLynx + Threat Protection",
         reason:
-          "In our tests NordLynx delivered fast throughput. The provider states that Threat Protection blocks known malware-distributing sites at the DNS level — an extra layer of protection when downloading client files.",
+          "NordLynx is based on WireGuard and is designed as a lightweight tunneling option. The provider says Threat Protection filters known malicious domains; verify availability for your plan and measure throughput on your own route and device.",
       },
       {
         slug: "mullvad",
@@ -289,7 +289,7 @@ const en: RemoteWorkersContent = {
   },
   whyVital: {
     h2: "Why is a VPN vital when working remotely?",
-    p: "Public Wi-Fi (hotels, cafés, airports, co-working spaces) is not secure. Anyone on the same network can see unencrypted traffic with basic tools (Wireshark). 2024 Verizon Data Breach Report: 43% of remote-worker breaches originated from public Wi-Fi.",
+    p: "Hotel, café, airport and co-working networks can be misconfigured or shared with untrusted devices. HTTPS encrypts content, while a VPN adds an encrypted tunnel between the device and VPN server. Verify DNS, kill-switch and auto-connect behavior on the network and device you actually use.",
   },
   dataAtRisk: {
     h3: "Which data is at risk?",
@@ -320,15 +320,15 @@ const en: RemoteWorkersContent = {
     h2: "Corporate VPN vs commercial VPN — what's the difference?",
     headers: ["Feature", "Corporate VPN", "Commercial VPN"],
     rows: [
-      ["Purpose", "Remote access to internal company systems", "Encrypting all internet traffic"],
-      ["Encryption", "Traffic to the company", "All traffic"],
+      ["Purpose", "Remote access to internal company systems", "Tunneling internet traffic covered by app settings"],
+      ["Encryption", "Traffic to the company", "Traffic covered by the app's settings"],
       ["Monitoring", "Employer can see it", "Depends on the provider (no-logs is the ideal)"],
       ["Suitability for personal use", "Usually prohibited (policy)", "Entirely your own traffic"],
-      ["Public Wi-Fi protection", "Only for company traffic", "For the whole device"],
+      ["Public Wi-Fi scope", "Usually company traffic", "Depends on provider and split-tunneling settings"],
     ],
     adviceBold: "Our advice:",
     adviceText:
-      " The ideal combination — the corporate VPN for company systems, a commercial VPN for personal traffic and Wi-Fi protection. Both can run at the same time (via split tunneling or by switching between them).",
+      " Use the corporate VPN for company systems according to employer policy. If you consider a second VPN for personal traffic, do not assume both clients will work together; confirm split-tunneling and compatibility in employer documentation and on your device.",
   },
   nomadChecklist: {
     h2: "Feature checklist for digital nomads",
@@ -339,11 +339,11 @@ const en: RemoteWorkersContent = {
       },
       {
         bold: "Obfuscation/scrambling:",
-        text: " Essential if you work from countries that block VPNs, like China, the UAE or Iran.",
+        text: " Worth considering on networks that restrict VPN traffic; check provider support, local rules and behavior on your own network.",
       },
       {
         bold: "Kill switch:",
-        text: " No real-IP leak if the connection drops.",
+        text: " Provider documentation describes it as stopping traffic when the tunnel drops; test the behavior on your operating system and app version.",
       },
       {
         bold: "Split tunneling:",
@@ -363,7 +363,7 @@ const en: RemoteWorkersContent = {
     h2: "Specific scenarios",
     travel: {
       h3: "Traveling abroad + Turkish clients",
-      p: "Use a VPN with servers in Türkiye (NordVPN, ExpressVPN, Surfshark). Turkish banking, the e-invoice portal and e-Devlet work more smoothly.",
+      p: "A Türkiye location in the provider's current server list may be useful for services that expect a Turkish IP. Banks, e-invoice services and e-Devlet can apply their own security checks; verify account compatibility and terms before traveling.",
     },
     privacy: {
       h3: "High privacy (legal, medical, journalism)",
@@ -371,28 +371,28 @@ const en: RemoteWorkersContent = {
       sep: " or ",
       link2: { href: "/inceleme/proton-vpn", text: "Proton VPN" },
       after:
-        ". Anonymous accounts, open-source clients, the strictest no-logs policies.",
+        ". Review each provider's account, open-source client and logging statements together with its latest independent audit reports.",
     },
     budget: {
       h3: "Budget-first freelancer",
       link: { href: "/inceleme/surfshark", text: "Surfshark" },
       after:
-        " $2.19/mo — unlimited devices, usable technical features, reasonable speed.",
+        " advertises unlimited simultaneous devices. Check current pricing, account-sharing terms and performance on your own connection before subscribing.",
     },
   },
   faqHeading: "Frequently asked questions",
   faqs: [
     {
       q: "Do I need a commercial VPN if I already have a corporate VPN?",
-      a: "They serve two different purposes. A corporate VPN (Cisco AnyConnect, OpenVPN Access Server, etc.) is only for accessing internal company resources. A commercial VPN encrypts all of your internet traffic — personal banking, email, social media. On hotel or café Wi-Fi you may well need both.",
+      a: "They serve different purposes. A corporate VPN provides access to internal resources; a commercial VPN encrypts traffic covered by its app and split-tunneling settings up to the VPN server. Before running both clients, verify employer policy and compatibility on your device.",
     },
     {
       q: "Which VPN works reliably while traveling?",
-      a: "In our tests, ExpressVPN's Lightway protocol delivered a consistent connection under poor Wi-Fi conditions; NordVPN's NordLynx (WireGuard-based) was in the same category. Some hotel Wi-Fi networks may block VPN traffic; in that case the provider's obfuscation/scrambling feature (Surfshark NoBorders, NordVPN obfuscated servers) is worth considering. Results reflect our test conditions.",
+      a: "ExpressVPN documents Lightway as handling network changes, while NordVPN describes NordLynx as its WireGuard-based protocol. Some hotel networks may block VPN traffic, so review provider documentation for obfuscation features and test connection, reconnection and kill-switch behavior on your own device and network.",
     },
     {
       q: "Is a VPN a must when sharing client files?",
-      a: "On public Wi-Fi, yes, absolutely. Sending sensitive files like VAT returns, client contracts or financial statements over an open network is a professional mistake. A VPN encrypts this traffic — malicious users on the same network cannot see it.",
+      a: "A VPN adds encryption between your device and the VPN server, but it does not guarantee the file-sharing service's end-to-end security, access permissions or endpoint safety. Follow company policy and verify DNS and kill-switch behavior on the network you use.",
     },
     {
       q: "Which country's server is best for receiving freelance payments?",
@@ -400,13 +400,13 @@ const en: RemoteWorkersContent = {
     },
     {
       q: "Do tools like Slack and Zoom work over a VPN?",
-      a: "Yes, without issues. Some companies even recommend using Zoom over a VPN as protection against DDoS attacks. The speed impact is 5–10% — not a meaningful difference.",
+      a: "Slack and Zoom can generally operate through standard VPN tunnels, but latency, MTU, firewall rules and company policy can change the result. Check the apps' network requirements and test audio, video and screen sharing on your own connection before a meeting.",
     },
   ],
   cards: [
-    { title: "Cafés & co-working", desc: "Stay safe on public Wi-Fi." },
-    { title: "Client files", desc: "Sensitive file transfers, encrypted." },
-    { title: "Travel", desc: "Get past hotel Wi-Fi restrictions." },
+    { title: "Cafés & co-working", desc: "Add an encrypted tunnel on public Wi-Fi." },
+    { title: "Client files", desc: "An encrypted tunnel for sensitive transfers." },
+    { title: "Travel", desc: "Check network and account compatibility in advance." },
   ],
   related: {
     label: "Related pages",
@@ -425,7 +425,7 @@ const de: RemoteWorkersContent = {
   metaTitle:
     "Das beste VPN für Remote-Arbeit (2026) — Sicherheit in Hotel, Café & Co-working",
   metaDescription:
-    "VPN-Wahl für Remote-Arbeitende: Schutz im öffentlichen WLAN, Sicherheit für sensible Dateien, der Unterschied zum Firmen-VPN und die 3 besten VPNs für stabile Verbindungen auf Reisen.",
+    "VPN-Wahl für Remote-Arbeitende: Schutz im öffentlichen WLAN, sensible Dateien, Unterschiede zum Firmen-VPN und Reiseverbindungs-Funktionen der 3 besten VPNs.",
   keywords: [
     "vpn remote arbeit",
     "remote work vpn",
@@ -444,22 +444,22 @@ const de: RemoteWorkersContent = {
   },
   badge: "Remote Work",
   h1: "VPN für Remote-Arbeit",
-  lede: "Die 3 besten VPNs für sicheres öffentliches WLAN in Hotel, Café und Co-working-Space, den Schutz von Kundendateien und stabile Verbindungen auf Reisen.",
+  lede: "Die 3 besten VPNs für öffentliches WLAN in Hotel, Café und Co-working-Space, Kundendateien und Reiseverbindungs-Funktionen.",
   picks: {
     heading: "Die 3 besten VPNs für Remote-Arbeitende",
-    subheading: "Bewertet nach Stabilität, Geschwindigkeit und Reise-Szenarien.",
+    subheading: "Verglichen nach Protokollmerkmalen, Sicherheitstools und Reise-Szenarien.",
     items: [
       {
         slug: "expressvpn",
-        label: "Konstante Verbindung in unseren Tests",
+        label: "Option bei wechselnden Netzwerken",
         reason:
-          "Das Lightway-Protokoll des Anbieters hielt die Verbindung in unseren Tests auch bei schwachem WLAN zuverlässig aufrecht. Laut Anbieterangaben Server in 105+ Ländern. Das Kill-Switch-Verhalten erwies sich in unseren Tests als zuverlässig.",
+          "Der Anbieter beschreibt Lightway als Protokoll für den Umgang mit Netzwerkwechseln. Laut Anbieterangaben gibt es Server in 105+ Ländern; prüfe die aktuelle Standortliste sowie Wiederverbindung und Kill Switch auf deinem Betriebssystem und WLAN.",
       },
       {
         slug: "nordvpn",
-        label: "Tempo + Threat Protection",
+        label: "NordLynx + Threat Protection",
         reason:
-          "In unseren Tests lieferte NordLynx hohen Durchsatz. Laut Anbieter blockiert Threat Protection bekannte Malware-Seiten auf DNS-Ebene — eine zusätzliche Schutzschicht beim Herunterladen von Kundendateien.",
+          "NordLynx basiert auf WireGuard und ist als leichtgewichtige Tunneloption konzipiert. Laut Anbieter filtert Threat Protection bekannte schädliche Domains; prüfe die Verfügbarkeit in deinem Tarif und miss den Durchsatz auf deiner eigenen Route und deinem Gerät.",
       },
       {
         slug: "mullvad",
@@ -471,7 +471,7 @@ const de: RemoteWorkersContent = {
   },
   whyVital: {
     h2: "Warum ist ein VPN bei Remote-Arbeit so wichtig?",
-    p: "Öffentliches WLAN (Hotel, Café, Flughafen, Co-working) ist nicht sicher. Jede Person im selben Netzwerk kann unverschlüsselten Datenverkehr mit einfachen Tools (Wireshark) mitlesen. 2024 Verizon Data Breach Report: 43 % der Sicherheitsvorfälle bei Remote-Arbeitenden gingen auf öffentliches WLAN zurück.",
+    p: "Netze in Hotels, Cafés, Flughäfen und Co-working-Spaces können falsch konfiguriert oder mit nicht vertrauenswürdigen Geräten geteilt sein. HTTPS verschlüsselt Inhalte; ein VPN ergänzt einen verschlüsselten Tunnel zwischen Gerät und VPN-Server. Prüfe DNS, Kill Switch und Auto-Verbindung im tatsächlich genutzten Netz und auf deinem Gerät.",
   },
   dataAtRisk: {
     h3: "Welche Daten sind gefährdet?",
@@ -502,15 +502,15 @@ const de: RemoteWorkersContent = {
     h2: "Firmen-VPN vs. kommerzielles VPN — was ist der Unterschied?",
     headers: ["Merkmal", "Firmen-VPN", "Kommerzielles VPN"],
     rows: [
-      ["Zweck", "Fernzugriff auf interne Firmensysteme", "Verschlüsselung des gesamten Internetverkehrs"],
-      ["Verschlüsselung", "Verkehr zur Firma", "Gesamter Verkehr"],
+      ["Zweck", "Fernzugriff auf interne Firmensysteme", "Tunneln des von App-Einstellungen erfassten Verkehrs"],
+      ["Verschlüsselung", "Verkehr zur Firma", "Von den App-Einstellungen erfasster Verkehr"],
       ["Überwachung", "Arbeitgeber kann mitsehen", "Vom Anbieter abhängig (No-Logs ist das Ideal)"],
       ["Eignung für private Nutzung", "Meist verboten (Richtlinie)", "Komplett dein eigener Verkehr"],
-      ["Schutz im öffentlichen WLAN", "Nur für Firmenverkehr", "Für das ganze Gerät"],
+      ["Umfang im öffentlichen WLAN", "Meist Firmenverkehr", "Abhängig von Anbieter und Split-Tunneling"],
     ],
     adviceBold: "Unsere Empfehlung:",
     adviceText:
-      " Die ideale Kombination — das Firmen-VPN für Firmensysteme, ein kommerzielles VPN für privaten Verkehr und WLAN-Schutz. Beide können gleichzeitig laufen (per Split-Tunneling oder durch Umschalten).",
+      " Nutze das Firmen-VPN gemäß Arbeitgeberrichtlinie für Firmensysteme. Bei einem zweiten VPN für privaten Verkehr ist ein paralleler Betrieb nicht garantiert; prüfe Split-Tunneling und Kompatibilität in der Arbeitgeberdokumentation und auf deinem Gerät.",
   },
   nomadChecklist: {
     h2: "Feature-Checkliste für digitale Nomaden",
@@ -521,11 +521,11 @@ const de: RemoteWorkersContent = {
       },
       {
         bold: "Obfuscation/Scrambling:",
-        text: " Pflicht, wenn du aus Ländern arbeitest, die VPNs blockieren, etwa China, VAE oder Iran.",
+        text: " Bei Netzen mit VPN-Sperren erwägenswert; prüfe Anbieterunterstützung, lokale Regeln und das Verhalten in deinem eigenen Netz.",
       },
       {
         bold: "Kill Switch:",
-        text: " Kein Leak deiner echten IP, wenn die Verbindung abreißt.",
+        text: " Laut Anbieterdokumentation soll er bei Tunnelabbruch den Verkehr stoppen; teste das Verhalten mit deinem Betriebssystem und deiner App-Version.",
       },
       {
         bold: "Split-Tunneling:",
@@ -545,7 +545,7 @@ const de: RemoteWorkersContent = {
     h2: "Konkrete Szenarien",
     travel: {
       h3: "Auslandsreise + türkische Kundschaft",
-      p: "Nutze ein VPN mit Servern in der Türkei (NordVPN, ExpressVPN, Surfshark). Türkisches Banking, das E-Rechnungsportal und e-Devlet laufen damit reibungsloser.",
+      p: "Ein Türkei-Standort in der aktuellen Serverliste kann für Dienste nützlich sein, die eine türkische IP erwarten. Banken, E-Rechnungsdienste und e-Devlet können eigene Sicherheitsprüfungen einsetzen; prüfe Kontokompatibilität und Bedingungen vor der Reise.",
     },
     privacy: {
       h3: "Hoher Datenschutz (Recht, Medizin, Journalismus)",
@@ -553,28 +553,28 @@ const de: RemoteWorkersContent = {
       sep: " oder ",
       link2: { href: "/inceleme/proton-vpn", text: "Proton VPN" },
       after:
-        ". Anonyme Konten, Open-Source-Clients, die strengsten No-Logs-Richtlinien.",
+        ". Prüfe Konto-, Open-Source-Client- und Protokollierungsangaben der Anbieter zusammen mit den neuesten unabhängigen Prüfberichten.",
     },
     budget: {
       h3: "Freelancer mit knappem Budget",
       link: { href: "/inceleme/surfshark", text: "Surfshark" },
       after:
-        " $2.19/Monat — unbegrenzte Geräte, brauchbare technische Features, vernünftiges Tempo.",
+        " wirbt mit unbegrenzt vielen gleichzeitigen Geräten. Prüfe aktuelle Preise, Regeln zur Kontonutzung und Leistung vor dem Abschluss in deinem eigenen Netz.",
     },
   },
   faqHeading: "Häufig gestellte Fragen",
   faqs: [
     {
       q: "Brauche ich ein kommerzielles VPN, wenn ich schon ein Firmen-VPN habe?",
-      a: "Sie dienen zwei verschiedenen Zwecken. Das Firmen-VPN (Cisco AnyConnect, OpenVPN Access Server usw.) ist nur für den Zugriff auf interne Firmenressourcen da. Ein kommerzielles VPN verschlüsselt deinen gesamten Internetverkehr — privates Banking, E-Mail, Social Media. Im Hotel- oder Café-WLAN kann beides nötig sein.",
+      a: "Sie dienen verschiedenen Zwecken. Das Firmen-VPN ermöglicht Zugriff auf interne Ressourcen; ein kommerzielles VPN verschlüsselt den von App- und Split-Tunneling-Einstellungen erfassten Verkehr bis zum VPN-Server. Prüfe Arbeitgeberrichtlinie und Gerätekompatibilität, bevor beide Clients laufen.",
     },
     {
       q: "Welches VPN läuft auf Reisen stabil?",
-      a: "In unseren Tests lieferte das Lightway-Protokoll von ExpressVPN auch bei schlechtem WLAN eine konstante Verbindung; NordVPNs NordLynx (WireGuard-basiert) lag in derselben Kategorie. Manche Hotel-WLANs blockieren VPN-Verkehr; in dem Fall lohnt ein Blick auf die Obfuscation-/Scrambling-Funktion des Anbieters (Surfshark NoBorders, NordVPN Obfuscated Servers). Die Ergebnisse spiegeln unsere Testbedingungen wider.",
+      a: "ExpressVPN beschreibt Lightway als Protokoll für Netzwerkwechsel; NordVPN dokumentiert NordLynx als WireGuard-basierte Option. Manche Hotel-WLANs blockieren VPN-Verkehr. Prüfe daher die Anbieterdokumentation zu Verschleierung und teste Verbindung, Wiederverbindung und Kill Switch in deinem eigenen Netz.",
     },
     {
       q: "Ist ein VPN beim Teilen von Kundendateien Pflicht?",
-      a: "Im öffentlichen WLAN: ja, unbedingt. Sensible Dateien wie Umsatzsteuererklärungen, Kundenverträge oder Finanzberichte über ein offenes Netz zu verschicken ist ein professioneller Fehler. Ein VPN verschlüsselt diesen Verkehr — böswillige Nutzer im selben Netz sehen nichts.",
+      a: "Ein VPN ergänzt die Verschlüsselung zwischen Gerät und VPN-Server, garantiert aber weder Ende-zu-Ende-Sicherheit des Dateidienstes noch korrekte Zugriffsrechte oder Endgeräteschutz. Befolge die Firmenrichtlinie und prüfe DNS sowie Kill Switch im verwendeten Netz.",
     },
     {
       q: "Welcher Länderserver ist für Freelance-Zahlungen am besten?",
@@ -582,13 +582,13 @@ const de: RemoteWorkersContent = {
     },
     {
       q: "Funktionieren Tools wie Slack und Zoom über ein VPN?",
-      a: "Ja, problemlos. Manche Firmen empfehlen sogar, Zoom über ein VPN zu nutzen — als Schutz vor DDoS-Angriffen. Der Geschwindigkeitseffekt liegt bei 5–10 % — kein spürbarer Unterschied.",
+      a: "Slack und Zoom können grundsätzlich über Standard-VPN-Tunnel laufen; Latenz, MTU, Firewall-Regeln und Firmenrichtlinien können das Ergebnis verändern. Prüfe die Netzwerkanforderungen und teste Audio, Video und Bildschirmfreigabe vor einem Termin in deinem eigenen Netz.",
     },
   ],
   cards: [
-    { title: "Café & Co-working", desc: "Sicher im öffentlichen WLAN." },
-    { title: "Kundendateien", desc: "Sensible Dateitransfers, verschlüsselt." },
-    { title: "Reisen", desc: "Hotel-WLAN-Sperren umgehen." },
+    { title: "Café & Co-working", desc: "Verschlüsselter Tunnel im öffentlichen WLAN." },
+    { title: "Kundendateien", desc: "Verschlüsselter Tunnel für sensible Transfers." },
+    { title: "Reisen", desc: "Netz- und Kontokompatibilität vorab prüfen." },
   ],
   related: {
     label: "Verwandte Seiten",

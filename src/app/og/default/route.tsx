@@ -1,9 +1,8 @@
 import { ImageResponse } from "next/og";
-import { getLocale } from "next-intl/server";
 
-export const alt = "VPN Advisor — Independent VPN comparisons";
-export const size = { width: 1200, height: 630 };
+export const runtime = "nodejs";
 export const contentType = "image/png";
+export const size = { width: 1200, height: 630 };
 
 type OgLocale = "tr" | "en" | "de";
 
@@ -14,36 +13,31 @@ const CONTENT: Record<
   tr: {
     title: "Bağımsız VPN karşılaştırmaları",
     subtitle:
-      "Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız değerlendirmeler.",
-    signals: ["Kaynak temelli profiller", "Bağımsız denetimler", "Şeffaf metodoloji"],
+      "Resmi kaynaklar · Bağımsız denetim kayıtları · Şeffaf metodoloji.",
+    signals: ["Kaynak temelli profiller", "Denetim kayıtları", "Şeffaf metodoloji"],
   },
   en: {
     title: "Independent VPN comparisons",
     subtitle:
-      "Volunteer review project · Transparent methodology · Independent assessments.",
-    signals: ["Source-based profiles", "Independent audits", "Transparent methodology"],
+      "Official sources · Independent audit records · Transparent methodology.",
+    signals: ["Source-based profiles", "Audit records", "Transparent methodology"],
   },
   de: {
     title: "Unabhängige VPN-Vergleiche",
     subtitle:
-      "Freiwilliges Review-Projekt · Transparente Methodik · Unabhängige Bewertungen.",
-    signals: [
-      "Quellenbasierte Profile",
-      "Unabhängige Audits",
-      "Transparente Methodik",
-    ],
+      "Offizielle Quellen · Unabhängige Prüfberichte · Transparente Methodik.",
+    signals: ["Quellenbasierte Profile", "Prüfberichte", "Transparente Methodik"],
   },
 };
 
-function asOgLocale(raw: string): OgLocale {
+function asOgLocale(raw: string | null): OgLocale {
   if (raw === "en" || raw === "de") return raw;
   return "tr";
 }
 
-export default async function OGImage() {
-  const raw = await getLocale();
-  const locale = asOgLocale(raw);
-  const c = CONTENT[locale];
+export async function GET(request: Request) {
+  const locale = asOgLocale(new URL(request.url).searchParams.get("locale"));
+  const content = CONTENT[locale];
 
   return new ImageResponse(
     (
@@ -61,13 +55,7 @@ export default async function OGImage() {
           color: "white",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-          }}
-        >
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div
             style={{
               width: 56,
@@ -106,7 +94,7 @@ export default async function OGImage() {
               maxWidth: 900,
             }}
           >
-            {c.title}
+            {content.title}
           </div>
           <div
             style={{
@@ -116,7 +104,7 @@ export default async function OGImage() {
               maxWidth: 900,
             }}
           >
-            {c.subtitle}
+            {content.subtitle}
           </div>
 
           <div
@@ -129,12 +117,21 @@ export default async function OGImage() {
               alignItems: "center",
             }}
           >
-            {c.signals.map((signal) => (
+            {content.signals.map((signal) => (
               <span
                 key={signal}
                 style={{ display: "flex", alignItems: "center", gap: 8 }}
               >
-                ✓ {signal}
+                <span
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 999,
+                    background: "#fbbf24",
+                    display: "flex",
+                  }}
+                />
+                {signal}
               </span>
             ))}
           </div>
@@ -157,6 +154,6 @@ export default async function OGImage() {
         </div>
       </div>
     ),
-    { ...size },
+    size,
   );
 }

@@ -12,31 +12,37 @@ import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
+const EVALUATED_PROFILE_COUNT = topRankedProducts("tr").filter(
+  (product) => product.slug !== "atlas-vpn",
+).length;
+const REFERENCE_RECORD_COUNT = referenceProducts.length;
+const TOTAL_RECORD_COUNT = EVALUATED_PROFILE_COUNT + REFERENCE_RECORD_COUNT;
+
 const copy = {
   tr: {
-    title: "50 VPN Sağlayıcı Karşılaştırması 2026 — Kaynaklar ve Özellikler",
-    description: "50 aktif VPN sağlayıcısını resmi belgeler, bağımsız denetimler, gizlilik politikaları, protokoller ve fiyat kaynaklarıyla karşılaştırın.",
+    title: `${TOTAL_RECORD_COUNT} VPN Kaydı (2026): ${EVALUATED_PROFILE_COUNT} Ayrıntılı Profil + ${REFERENCE_RECORD_COUNT} Referans`,
+    description: `${EVALUATED_PROFILE_COUNT} kaynakları değerlendirilmiş, indekslenebilir VPN profili ile ${REFERENCE_RECORD_COUNT} referans kaydını ayrı kapsamlarla araştırın.`,
     breadcrumb: "VPN karşılaştırma rehberi",
-    h1: "50 aktif VPN sağlayıcısını özelliklerine göre araştırın",
-    intro: "Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. 50 aktif sağlayıcıyı aynı bilgi mimarisinde göstererek ihtiyaçlarınıza uygun seçenekleri kaynaklar üzerinden araştırmanızı kolaylaştırır.",
+    h1: `${TOTAL_RECORD_COUNT} sağlayıcı kaydı: ${EVALUATED_PROFILE_COUNT} ayrıntılı profil, ${REFERENCE_RECORD_COUNT} referans`,
+    intro: `Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. İlk ${EVALUATED_PROFILE_COUNT} sağlayıcı kaynakları ayrı ayrı değerlendirilmiş ve arama dizinine dahil edilen ayrıntılı profillerdir. Diğer ${REFERENCE_RECORD_COUNT} kayıt yalnızca pazar referansıdır; ayrıntılı öneri veya indekslenebilir profil değildir.`,
     home: "Ana sayfa",
     here: "VPN karşılaştırmaları",
   },
   en: {
-    title: "50 VPN Provider Comparison 2026 — Sources and Features",
-    description: "Compare 50 active VPN providers through official documentation, independent audits, privacy policies, protocols and pricing sources.",
+    title: `${TOTAL_RECORD_COUNT} VPN Records (2026): ${EVALUATED_PROFILE_COUNT} Evaluated Profiles + ${REFERENCE_RECORD_COUNT} References`,
+    description: `Research ${EVALUATED_PROFILE_COUNT} source-reviewed, indexable VPN profiles separately from ${REFERENCE_RECORD_COUNT} reference-only market records.`,
     breadcrumb: "VPN comparison guide",
-    h1: "Research 50 active VPN providers by verifiable features",
-    intro: "This is not a laboratory ranking of the 'best VPN'. It places 50 active providers in a consistent information architecture so you can research options using source-based evidence.",
+    h1: `${TOTAL_RECORD_COUNT} provider records: ${EVALUATED_PROFILE_COUNT} evaluated profiles and ${REFERENCE_RECORD_COUNT} references`,
+    intro: `This is not a laboratory ranking of the 'best VPN'. The first ${EVALUATED_PROFILE_COUNT} providers are source-reviewed profiles included in the search index. The other ${REFERENCE_RECORD_COUNT} entries are market references only, not detailed recommendations or indexable profiles.`,
     home: "Home",
     here: "VPN comparisons",
   },
   de: {
-    title: "50 VPN-Anbieter im Vergleich 2026 — Quellen und Funktionen",
-    description: "50 aktive VPN-Anbieter anhand offizieller Dokumente, unabhängiger Audits, Datenschutz, Protokollen und Preisquellen vergleichen.",
+    title: `${TOTAL_RECORD_COUNT} VPN-Einträge (2026): ${EVALUATED_PROFILE_COUNT} Profile + ${REFERENCE_RECORD_COUNT} Referenzen`,
+    description: `${EVALUATED_PROFILE_COUNT} quellengeprüfte, indexierbare VPN-Profile getrennt von ${REFERENCE_RECORD_COUNT} reinen Referenzeinträgen recherchieren.`,
     breadcrumb: "VPN-Vergleichsratgeber",
-    h1: "50 aktive VPN-Anbieter anhand überprüfbarer Merkmale recherchieren",
-    intro: "Dies ist keine Labor-Rangliste des 'besten VPN'. 50 aktive Anbieter werden in einer einheitlichen Informationsstruktur dargestellt, damit Sie Optionen anhand von Quellen recherchieren können.",
+    h1: `${TOTAL_RECORD_COUNT} Anbietereinträge: ${EVALUATED_PROFILE_COUNT} geprüfte Profile und ${REFERENCE_RECORD_COUNT} Referenzen`,
+    intro: `Dies ist keine Labor-Rangliste des 'besten VPN'. Die ersten ${EVALUATED_PROFILE_COUNT} Anbieter sind quellengeprüfte Profile im Suchindex. Die weiteren ${REFERENCE_RECORD_COUNT} Einträge dienen nur als Marktreferenz und sind weder ausführliche Empfehlungen noch indexierbare Profile.`,
     home: "Startseite",
     here: "VPN-Vergleiche",
   },
@@ -59,12 +65,11 @@ export default async function Page({ params }: Props) {
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   setRequestLocale(locale);
   const t = copy[locale];
-  const activeCore = topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn");
-  const catalogForSchema = [...activeCore, ...referenceProducts];
+  const evaluatedProfiles = topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn");
 
   return (
     <>
-      <JsonLd data={itemListSchema(catalogForSchema, locale)} />
+      <JsonLd data={itemListSchema(evaluatedProfiles, locale)} />
       <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.here, path: "/en-iyi-vpn" }], locale)} />
       <Container className="pt-12 sm:pt-16">
         <header className="max-w-3xl">

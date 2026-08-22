@@ -2,12 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import type { BlogPost } from "@/lib/blog";
+import type { BlogPostCardData } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/blog-card";
 import type { Locale } from "@/lib/site";
 
 type BlogFilterProps = {
-  posts: BlogPost[];
+  posts: BlogPostCardData[];
   locale: Locale;
 };
 
@@ -104,8 +104,8 @@ export function BlogFilter({ posts, locale }: BlogFilterProps) {
       {filteredPosts.length > 0 ? (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {visiblePosts.map((post, index) => (
-            <BlogCard key={post.slug} post={post} imageIndex={index} />
+          {visiblePosts.map((post) => (
+            <BlogCard key={post.slug} post={post} />
           ))}
           </div>
           {hasMorePosts ? (

@@ -56,7 +56,7 @@ const tr: GamersContent = {
   metaTitle:
     "Gamerlar İçin En İyi VPN (2026) — Düşük Ping, DDoS Koruması, Bölge Atlama",
   metaDescription:
-    "Oyuncular için VPN: ping/jitter testleri, DDoS koruması, oyun sunucusu bölge değişimi (Valorant, CS2, LoL). 2026'da en iyi gaming VPN'leri.",
+    "Oyuncular için VPN: ping/jitter öz-kontrolü, DDoS koruması, oyun sunucusu bölge değişimi (Valorant, CS2, LoL). 2026 gaming VPN rehberi.",
   keywords: [
     "gaming vpn",
     "oyun vpn",
@@ -79,11 +79,11 @@ const tr: GamersContent = {
   lede: "Düşük ping hedefi, DDoS koruması ve bölge seçenekleri için 3 VPN profili. Valorant, CS2, League of Legends ve Fortnite gibi senaryolarda karar verirken ağ koşullarını ayrıca değerlendirin.",
   picks: {
     heading: "Gamerlar için en iyi 3 VPN",
-    subheading: "Ping etkisi, DDoS koruması ve istikrara göre.",
+    subheading: "Sağlayıcı belgeleri, protokol özellikleri ve öz-test ölçütlerine göre.",
     items: [
       {
         slug: "nordvpn",
-        label: "Düşük ping etkisi gözlenenlerden",
+        label: "Düşük gecikme hedefleyen protokol",
         reason:
           "NordLynx, WireGuard tabanlı bir protokol olarak düşük gecikme hedefleyen oyuncular için değerlendirilebilir. Gerçek ping artışı rota, sunucu yükü ve ISP'ye göre değişir. Threat Protection ek bir güvenlik katmanı sunar.",
       },
@@ -147,19 +147,35 @@ const tr: GamersContent = {
     },
   },
   pingImpact: {
-    h2: "Ping etkisi — ortalama VPN performansı",
+    h2: "Ping etkisi — kendi bağlantında nasıl kontrol edilir?",
     intro:
-      "Türkiye'den farklı oyun sunucularına bağlanırken VPN ping etkisini değerlendirirken bakılacak başlıklar:",
-    headers: ["Oyun sunucusu", "VPN'siz ping", "NordVPN", "ExpressVPN", "Surfshark"],
+      "Aynı cihaz, bağlantı türü ve oyun sunucusunda VPN kapalı ve açık ölçümleri art arda karşılaştırın; sonuçları farklı saatlerde tekrarlayın:",
+    headers: ["Kontrol", "Nasıl ölçülür?", "Ne aranır?"],
     rows: [
-      ["Frankfurt (EU)", "45ms", "52ms", "54ms", "58ms"],
-      ["Londra (EU West)", "62ms", "68ms", "71ms", "75ms"],
-      ["New York (NA East)", "115ms", "124ms", "122ms", "132ms"],
-      ["Tokyo (Asia)", "230ms", "245ms", "242ms", "258ms"],
+      [
+        "Baz ping (VPN kapalı)",
+        "Aynı oyun sunucusunda birkaç tekrar yapın; saat ve bağlantı türünü not edin.",
+        "VPN ölçümleri için kararlı bir referans oluşturun.",
+      ],
+      [
+        "VPN ping'i",
+        "Aynı koşullarda en yakın ve hedef bölgedeki VPN sunucularını ayrı ayrı deneyin.",
+        "Baz değere göre değişimi ve tekrarlar arasındaki tutarlılığı karşılaştırın.",
+      ],
+      [
+        "Jitter",
+        "Tek bir anlık değer yerine art arda örnekler alın.",
+        "Daha az dalgalanma, oyun sırasında daha istikrarlı gecikmeye işaret eder.",
+      ],
+      [
+        "Paket kaybı / rota tutarlılığı",
+        "Paket kaybını ve farklı saatlerde rotanın değişip değişmediğini kontrol edin.",
+        "Paket kaybı olmayan, tekrar edilebilir bir rota tercih edin.",
+      ],
     ],
     resultBold: "Sonuç:",
     resultText:
-      " Sabit bir ping sıralaması yayınlamıyoruz: yakınlık, sunucu yükü, protokol ve ISP rotası sonucu belirler. NordVPN ve ExpressVPN bu kullanım amacı için incelenebilir; kendi oyun sunucuna bağlanıp ping ve paket kaybını kontrol etmen gerekir.",
+      " Sağlayıcı belgeleri tek başına ping sıralaması kanıtlamaz. Yakınlık, sunucu yükü, protokol ve ISP rotası sonucu değiştirir; karar vermeden önce kendi oyun sunucunuzda ping, jitter ve paket kaybını karşılaştırın.",
   },
   ddos: {
     h2: "DDoS koruması — gerçek koruma seviyesi",
@@ -220,7 +236,7 @@ const tr: GamersContent = {
   faqs: [
     {
       q: "VPN oyunda ping'i düşürür mü yoksa yükseltir mi?",
-      a: "Genelde yükseltir — ek hop eklendiği için. Ama bazı senaryolarda düşürür: ISP'nin yavaş peering yaptığı oyun sunucusuna VPN kestirme rota sunabilir. ExpressVPN ve NordVPN bu konuda en iyi sonuç verir; deneme süresi içinde kendi bağlantını test et.",
+      a: "Genelde ek bir hop eklediği için yükseltir. ISP'nin kötü yönlendirme yaptığı bazı rotalarda farklı bir VPN rotası daha iyi sonuç verebilir; ancak bunu sağlayıcı adına genellemek mümkün değildir. Deneme süresi içinde aynı oyun sunucusunda kendi bağlantınızı karşılaştırın.",
     },
     {
       q: "VPN kullanmak yasak mı? Hesap banlanır mı?",
@@ -261,7 +277,7 @@ const en: GamersContent = {
   metaTitle:
     "Best VPN for Gamers (2026) — Low Ping, DDoS Protection, Region Hopping",
   metaDescription:
-    "VPNs for gamers: ping/jitter tests, DDoS protection, switching game server regions (Valorant, CS2, LoL). The best gaming VPNs of 2026.",
+    "VPNs for gamers: self-checking ping and jitter, DDoS protection and switching game server regions (Valorant, CS2, LoL). A 2026 gaming VPN guide.",
   keywords: [
     "gaming vpn",
     "vpn for games",
@@ -281,22 +297,22 @@ const en: GamersContent = {
   },
   badge: "Gaming",
   h1: "Best VPN for gamers",
-  lede: "The top 3 VPNs for low ping, DDoS protection and region bypass. Based on our Valorant, CS2, League of Legends and Fortnite tests.",
+  lede: "Three VPN profiles to consider for latency, DDoS protection and region options. Compare them against your own route and game-server conditions.",
   picks: {
     heading: "Top 3 VPNs for gamers",
-    subheading: "Ranked by ping impact, DDoS protection and stability.",
+    subheading: "Selected using provider documentation, protocol features and self-test criteria.",
     items: [
       {
         slug: "nordvpn",
-        label: "Among the lowest ping impact observed",
+        label: "Protocol designed for low overhead",
         reason:
-          "In our tests, the NordLynx protocol stood out among protocols with low ping impact — an average 3–5% ping increase was observed on the Türkiye–Germany route. Threat Protection adds a DDoS protection layer.",
+          "NordLynx is documented as a WireGuard-based protocol and can be considered when minimizing protocol overhead matters. Actual latency depends on the route, server load and ISP; compare it on your own game server.",
       },
       {
         slug: "expressvpn",
-        label: "Stable connection in our tests",
+        label: "Protocol designed for fast setup",
         reason:
-          "In our tests, the Lightway protocol delivered a consistent connection during gameplay. Servers in 105+ countries according to provider data — worth considering when connecting to Pacific or Asian servers.",
+          "The provider documents Lightway as a protocol designed for fast connection setup. Its directory lists servers in 105+ countries; route quality and latency still need to be checked on your own connection.",
       },
       {
         slug: "pia",
@@ -352,19 +368,35 @@ const en: GamersContent = {
     },
   },
   pingImpact: {
-    h2: "Ping impact — average VPN performance",
+    h2: "Ping impact — how to self-test your connection",
     intro:
-      "VPN ping impact when connecting from Türkiye (Istanbul) to various game servers (based on our tests, April–May 2026):",
-    headers: ["Game server", "Ping without VPN", "NordVPN", "ExpressVPN", "Surfshark"],
+      "Compare VPN-off and VPN-on measurements back to back on the same device, connection type and game server, then repeat at different times:",
+    headers: ["Check", "How to measure", "What to look for"],
     rows: [
-      ["Frankfurt (EU)", "45ms", "52ms", "54ms", "58ms"],
-      ["London (EU West)", "62ms", "68ms", "71ms", "75ms"],
-      ["New York (NA East)", "115ms", "124ms", "122ms", "132ms"],
-      ["Tokyo (Asia)", "230ms", "245ms", "242ms", "258ms"],
+      [
+        "Baseline ping (VPN off)",
+        "Run several checks on the same game server; note the time and connection type.",
+        "Create a stable reference for the VPN measurements.",
+      ],
+      [
+        "VPN ping",
+        "Under the same conditions, test the nearest VPN server and the target-region server separately.",
+        "Compare the change from baseline and consistency across repeats.",
+      ],
+      [
+        "Jitter",
+        "Collect consecutive samples instead of relying on one instant reading.",
+        "Lower variation indicates more consistent latency during play.",
+      ],
+      [
+        "Packet loss / route consistency",
+        "Check packet loss and whether the route changes at different times.",
+        "Prefer a repeatable route without packet loss.",
+      ],
     ],
     resultBold: "Bottom line:",
     resultText:
-      " In our tests we observed a 10–15% ping increase on nearby servers and 5–8% on distant ones. NordVPN and ExpressVPN were among the lowest-impact options in this category. Results reflect our observations on the test dates; they may differ under your own network conditions.",
+      " Provider documentation alone cannot prove a ping ranking. Distance, server load, protocol and ISP routing change the result; compare ping, jitter and packet loss on your own game server before deciding.",
   },
   ddos: {
     h2: "DDoS protection — the real level of protection",
@@ -426,7 +458,7 @@ const en: GamersContent = {
   faqs: [
     {
       q: "Does a VPN lower or raise ping in games?",
-      a: "It usually raises it — because of the extra hop. But in some scenarios it lowers it: a VPN can offer a shortcut route to a game server where your ISP has slow peering. ExpressVPN and NordVPN deliver the best results here; test your own connection during the trial period.",
+      a: "It usually raises it because it adds another hop. On a route where the ISP has poor peering, a different VPN route may perform better, but that cannot be generalized to one provider. Compare the same game server on your own connection during the trial period.",
     },
     {
       q: "Is using a VPN against the rules? Will I get banned?",
@@ -467,7 +499,7 @@ const de: GamersContent = {
   metaTitle:
     "Das beste VPN für Gamer (2026) — Niedriger Ping, DDoS-Schutz, Region wechseln",
   metaDescription:
-    "VPN für Gamer: Ping-/Jitter-Tests, DDoS-Schutz, Wechsel der Spielserver-Region (Valorant, CS2, LoL). Die besten Gaming-VPNs 2026.",
+    "VPN für Gamer: Ping und Jitter selbst prüfen, DDoS-Schutz und Wechsel der Spielserver-Region (Valorant, CS2, LoL). Gaming-VPN-Ratgeber 2026.",
   keywords: [
     "gaming vpn",
     "vpn für spiele",
@@ -487,22 +519,22 @@ const de: GamersContent = {
   },
   badge: "Gaming",
   h1: "Das beste VPN für Gamer",
-  lede: "Die 3 besten VPNs für niedrigen Ping, DDoS-Schutz und Region-Bypass. Basierend auf unseren Tests mit Valorant, CS2, League of Legends und Fortnite.",
+  lede: "Drei VPN-Profile für Latenz, DDoS-Schutz und Regionsoptionen. Vergleiche sie mit deiner eigenen Route und den Bedingungen deines Spielservers.",
   picks: {
     heading: "Die 3 besten VPNs für Gamer",
-    subheading: "Bewertet nach Ping-Einfluss, DDoS-Schutz und Stabilität.",
+    subheading: "Ausgewählt nach Anbieterdokumentation, Protokollmerkmalen und Selbsttest-Kriterien.",
     items: [
       {
         slug: "nordvpn",
-        label: "Unter den niedrigsten Ping-Auswirkungen",
+        label: "Protokoll mit geringem Overhead als Ziel",
         reason:
-          "In unseren Tests stach das NordLynx-Protokoll unter den Protokollen mit geringem Ping-Einfluss hervor — auf der Route Türkei–Deutschland wurde im Schnitt ein Ping-Anstieg von 3–5 % beobachtet. Threat Protection ergänzt eine DDoS-Schutzschicht.",
+          "NordLynx ist laut Anbieter ein WireGuard-basiertes Protokoll und kommt infrage, wenn geringer Protokoll-Overhead wichtig ist. Die tatsächliche Latenz hängt von Route, Serverlast und ISP ab; prüfe sie auf deinem eigenen Spielserver.",
       },
       {
         slug: "expressvpn",
-        label: "Stabile Verbindung in unseren Tests",
+        label: "Protokoll für schnellen Verbindungsaufbau",
         reason:
-          "In unseren Tests lieferte das Lightway-Protokoll während des Spielens eine konstante Verbindung. Laut Anbieterangaben Server in 105+ Ländern — eine Überlegung wert, wenn du dich mit Pazifik- oder Asien-Servern verbindest.",
+          "Der Anbieter beschreibt Lightway als Protokoll für einen schnellen Verbindungsaufbau. Das Verzeichnis nennt Server in mehr als 105 Ländern; Routenqualität und Latenz musst du dennoch mit deiner eigenen Verbindung prüfen.",
       },
       {
         slug: "pia",
@@ -558,19 +590,35 @@ const de: GamersContent = {
     },
   },
   pingImpact: {
-    h2: "Ping-Einfluss — durchschnittliche VPN-Performance",
+    h2: "Ping-Einfluss — die eigene Verbindung prüfen",
     intro:
-      "VPN-Ping-Einfluss bei Verbindungen aus der Türkei (Istanbul) zu verschiedenen Spielservern (laut unseren Tests, April–Mai 2026):",
-    headers: ["Spielserver", "Ping ohne VPN", "NordVPN", "ExpressVPN", "Surfshark"],
+      "Vergleiche Messungen mit und ohne VPN direkt nacheinander auf demselben Gerät, Verbindungstyp und Spielserver und wiederhole sie zu verschiedenen Zeiten:",
+    headers: ["Prüfung", "So misst du", "Worauf du achtest"],
     rows: [
-      ["Frankfurt (EU)", "45ms", "52ms", "54ms", "58ms"],
-      ["London (EU West)", "62ms", "68ms", "71ms", "75ms"],
-      ["New York (NA East)", "115ms", "124ms", "122ms", "132ms"],
-      ["Tokio (Asia)", "230ms", "245ms", "242ms", "258ms"],
+      [
+        "Basis-Ping (VPN aus)",
+        "Führe mehrere Prüfungen auf demselben Spielserver durch und notiere Uhrzeit sowie Verbindungstyp.",
+        "Erstelle eine stabile Referenz für die VPN-Messungen.",
+      ],
+      [
+        "VPN-Ping",
+        "Teste unter denselben Bedingungen den nächstgelegenen und den Zielregions-VPN-Server getrennt.",
+        "Vergleiche die Änderung zur Basis und die Konstanz der Wiederholungen.",
+      ],
+      [
+        "Jitter",
+        "Sammle mehrere aufeinanderfolgende Werte statt nur einer Momentaufnahme.",
+        "Geringere Schwankungen deuten auf eine gleichmäßigere Latenz beim Spielen hin.",
+      ],
+      [
+        "Paketverlust / Routenkonstanz",
+        "Prüfe Paketverlust und ob sich die Route zu verschiedenen Zeiten ändert.",
+        "Bevorzuge eine wiederholbare Route ohne Paketverlust.",
+      ],
     ],
     resultBold: "Fazit:",
     resultText:
-      " In unseren Tests beobachteten wir bei nahen Servern einen Ping-Anstieg von 10–15 %, bei entfernten 5–8 %. NordVPN und ExpressVPN gehörten in dieser Kategorie zu den Optionen mit geringem Einfluss. Die Ergebnisse spiegeln unsere Beobachtungen zum Testzeitpunkt wider; unter deinen eigenen Netzwerkbedingungen kann es abweichen.",
+      " Anbieterdokumentation allein belegt keine Ping-Rangfolge. Entfernung, Serverlast, Protokoll und ISP-Routing verändern das Ergebnis; vergleiche vor der Entscheidung Ping, Jitter und Paketverlust auf deinem eigenen Spielserver.",
   },
   ddos: {
     h2: "DDoS-Schutz — das tatsächliche Schutzniveau",
@@ -632,7 +680,7 @@ const de: GamersContent = {
   faqs: [
     {
       q: "Senkt oder erhöht ein VPN den Ping im Spiel?",
-      a: "Meist erhöht es ihn — wegen des zusätzlichen Hops. In manchen Szenarien senkt es ihn aber: Zu einem Spielserver, bei dem dein ISP schlechtes Peering hat, kann das VPN eine Abkürzungsroute bieten. ExpressVPN und NordVPN liefern hier die besten Ergebnisse; teste deine eigene Verbindung innerhalb der Testphase.",
+      a: "Meist erhöht es ihn wegen des zusätzlichen Hops. Bei schlechtem Peering des ISP kann eine andere VPN-Route besser abschneiden; das lässt sich jedoch nicht pauschal einem Anbieter zuschreiben. Vergleiche denselben Spielserver während der Testphase mit deiner eigenen Verbindung.",
     },
     {
       q: "Ist die VPN-Nutzung verboten? Wird mein Konto gebannt?",

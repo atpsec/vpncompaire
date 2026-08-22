@@ -1,25 +1,22 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
-import type { BlogPost } from "@/lib/blog";
-import { getBlogImage } from "@/lib/unsplash";
+import type { BlogPostCardData } from "@/lib/blog";
 import { useTranslations } from "next-intl";
 
 type BlogCardProps = {
-  post: BlogPost;
-  imageIndex?: number;
+  post: BlogPostCardData;
 };
 
-export function BlogCard({ post, imageIndex }: BlogCardProps) {
+export function BlogCard({ post }: BlogCardProps) {
   const t = useTranslations("blog");
-  const image = getBlogImage(post.coverImage, "hero", post.slug, imageIndex);
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-base shadow-sm transition-shadow hover:shadow-md">
       <Link href={`/blog/${post.slug}`} className="block">
         <div className="relative aspect-[16/9] overflow-hidden bg-surface-subtle">
           <Image
-            src={image.url}
+            src={post.imageUrl}
             alt={post.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"

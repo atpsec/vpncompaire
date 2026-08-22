@@ -9,8 +9,13 @@ import { RelatedPosts } from "@/components/blog/related-posts";
 import { SocialShare } from "@/components/blog/social-share";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
-import { absoluteUrl, siteConfig, type Locale } from "@/lib/site";
-import { LOCALIZED_REFRESH_SLUGS } from "@/lib/blog-localized-refresh";
+import {
+  absoluteUrl,
+  SEO_LOCALES,
+  siteConfig,
+  type Locale,
+  type SeoLocale,
+} from "@/lib/site";
 import {
   getBlogSlugEntry,
   slugForLocale,
@@ -28,46 +33,56 @@ const OG_LOCALE: Record<Locale, string> = {
   de: "de_DE",
 };
 
-function blogAlternates(slug: string, locale: BlogLocale) {
+async function blogAlternates(slug: string, locale: BlogLocale) {
   const entry = getBlogSlugEntry(slug, locale);
-  const canonical = absoluteUrl(`/blog/${slug}`, locale);
+  const selfCanonical = absoluteUrl(`/blog/${slug}`, locale);
 
-  // The August 2026 refresh uses stable, shared slugs across TR/EN/DE.
-  // Keep older translated articles on BLOG_SLUG_MAP and keep genuinely
-  // untranslated posts self-referencing only.
-  if (!entry && LOCALIZED_REFRESH_SLUGS.has(slug)) {
-    return {
-      canonical,
-      languages: {
-        tr: absoluteUrl(`/blog/${slug}`, "tr"),
-        en: absoluteUrl(`/blog/${slug}`, "en"),
-        de: absoluteUrl(`/blog/${slug}`, "de"),
-        "x-default": absoluteUrl(`/blog/${slug}`, "tr"),
-      },
-    };
+  const [trPosts, enPosts] = await Promise.all([
+    getBlogPosts("tr"),
+    getBlogPosts("en"),
+  ]);
+  const indexableSlugs: Record<SeoLocale, Set<string>> = {
+    tr: new Set(trPosts.filter((post) => post.indexable).map((post) => post.slug)),
+    en: new Set(enPosts.filter((post) => post.indexable).map((post) => post.slug)),
+  };
+  const existingSlugs: Record<SeoLocale, Set<string>> = {
+    tr: new Set(trPosts.map((post) => post.slug)),
+    en: new Set(enPosts.map((post) => post.slug)),
+  };
+  const counterpartSlug = (targetLocale: SeoLocale): string | null => {
+    const candidate = entry ? slugForLocale(entry, targetLocale) : slug;
+    return existingSlugs[targetLocale].has(candidate) ? candidate : null;
+  };
+  const languages: Record<string, string> = {};
+
+  for (const targetLocale of SEO_LOCALES) {
+    const targetSlug = counterpartSlug(targetLocale);
+
+    if (targetSlug && indexableSlugs[targetLocale].has(targetSlug)) {
+      languages[targetLocale] = absoluteUrl(`/blog/${targetSlug}`, targetLocale);
+    }
   }
 
-  if (!entry) {
-    return {
-      canonical,
-      languages: {
-        [locale]: canonical,
-        "x-default": canonical,
-      },
-    };
+  const enCounterpart = counterpartSlug("en");
+  const trCounterpart = counterpartSlug("tr");
+  const canonical =
+    locale === "de"
+      ? enCounterpart && indexableSlugs.en.has(enCounterpart)
+        ? absoluteUrl(`/blog/${enCounterpart}`, "en")
+        : trCounterpart && indexableSlugs.tr.has(trCounterpart)
+          ? absoluteUrl(`/blog/${trCounterpart}`, "tr")
+          : selfCanonical
+      : selfCanonical;
+
+  if (Object.keys(languages).length === 0) {
+    return { canonical };
   }
 
-  const pathFor = (target: BlogLocale) =>
-    `/blog/${slugForLocale(entry, target)}`;
+  languages["x-default"] = languages.tr ?? languages.en;
 
   return {
     canonical,
-    languages: {
-      tr: absoluteUrl(pathFor("tr"), "tr"),
-      en: absoluteUrl(pathFor("en"), "en"),
-      de: absoluteUrl(pathFor("de"), "de"),
-      "x-default": absoluteUrl(pathFor("tr"), "tr"),
-    },
+    languages,
   };
 }
 
@@ -95,17 +110,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const { frontmatter } = result;
-  const canonical = absoluteUrl(`/blog/${frontmatter.slug}`, locale);
+  const alternates = await blogAlternates(frontmatter.slug, locale);
   const ogImage = absoluteUrl(`/og/blog/${frontmatter.slug}?locale=${locale}`);
 
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    alternates: blogAlternates(frontmatter.slug, locale),
+    alternates,
+    robots:
+      !frontmatter.indexable || locale === "de"
+        ? { index: false, follow: true }
+        : undefined,
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
-      url: canonical,
+      url: alternates.canonical,
       type: "article",
       publishedTime: frontmatter.publishedAt,
       modifiedTime: frontmatter.updatedAt,
@@ -198,7 +217,7 @@ export default async function BlogPostPage({ params }: Props) {
           seed={frontmatter.slug}
           alt={frontmatter.title}
           className="my-8"
-          priority
+          preload
         />
 
         <BlogContent content={contentParts.first} />

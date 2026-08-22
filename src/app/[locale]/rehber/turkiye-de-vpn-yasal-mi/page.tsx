@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
-import { absoluteUrl, contentAlternates } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site";
 import {
   getLocalizedPath,
   getLocalizedSectionPath,
@@ -27,22 +27,26 @@ function asAppLocale(locale: string): AppLocale {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const c = getIsVpnLegalInTurkeyContent(locale);
+  const canonicalPath = getLocalizedPath({
+    locale: asAppLocale(locale),
+    section: "guide",
+    contentId: "is-vpn-legal-in-turkey",
+  });
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    // Canonical aktif dilin yerelleştirilmiş URL'si; hreflang yalnızca gerçekten
-    // servis edilen dilleri işaret eder (bkz. CONTENT_REGISTRY.served).
-    alternates: contentAlternates("is-vpn-legal-in-turkey", locale),
+    // Hukuki içerik güncel mevzuat ve uzman incelemesi tamamlanana kadar
+    // kullanıcıya açık kalır; arama dizinine ve hreflang kümesine girmez.
+    alternates: { canonical: absoluteUrl(canonicalPath) },
+    robots: {
+      index: false,
+      follow: true,
+      googleBot: { index: false, follow: true },
+    },
     openGraph: {
       title: c.metaTitle,
       description: c.metaDescription,
-      url: absoluteUrl(
-        getLocalizedPath({
-          locale: asAppLocale(locale),
-          section: "guide",
-          contentId: "is-vpn-legal-in-turkey",
-        }),
-      ),
+      url: absoluteUrl(canonicalPath),
       type: "article",
     },
   };

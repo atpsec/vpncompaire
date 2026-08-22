@@ -20,10 +20,19 @@ export type BlogPostFrontmatter = {
   readingTime: number;
   coverImage: string;
   unsplashKeyword: string;
+  indexing?: "index" | "noindex";
+  wordCount: number;
+  indexable: boolean;
 };
 
 export type BlogPost = BlogPostFrontmatter & {
   content: string;
+};
+
+export type BlogPostSummary = BlogPostFrontmatter;
+
+export type BlogPostCardData = BlogPostSummary & {
+  imageUrl: string;
 };
 
 // Slug eşleme tablosu ve karşılık fonksiyonu Edge-safe `./blog-slugs`
@@ -35,6 +44,37 @@ import {
 } from "./blog-slugs";
 
 export { BLOG_SLUG_MAP, getCounterpartSlug } from "./blog-slugs";
+
+/**
+ * Editoryal yayın eşiği; bir Google "kelime sayısı kuralı" değildir.
+ * Kısa taslakların yeni bir alan adında toplu olarak indexlenmesini önler.
+ * Frontmatter'daki `indexing` alanı editöre bilinçli override imkânı verir.
+ */
+export const MIN_INDEXABLE_BLOG_WORDS = 500;
+
+export function countEditorialWords(content: string): number {
+  return content
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[#>*_`~|=\-]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+function indexingState(
+  content: string,
+  indexing?: "index" | "noindex",
+): { wordCount: number; indexable: boolean } {
+  const wordCount = countEditorialWords(content);
+  return {
+    wordCount,
+    indexable:
+      indexing === "index" ||
+      (indexing !== "noindex" && wordCount >= MIN_INDEXABLE_BLOG_WORDS),
+  };
+}
 
 function splitHref(href: string): { path: string; suffix: string } {
   const match = href.match(/^([^?#]*)([?#].*)?$/);
@@ -91,6 +131,8 @@ export const getBlogPosts = cache(async function getBlogPosts(
     const source = fs.readFileSync(filePath, "utf-8");
     const { data, content } = matter(source);
 
+    const indexing = data.indexing as "index" | "noindex" | undefined;
+
     return {
       slug: data.slug,
       title: data.title,
@@ -103,6 +145,8 @@ export const getBlogPosts = cache(async function getBlogPosts(
       readingTime: data.readingTime,
       coverImage: data.coverImage,
       unsplashKeyword: data.unsplashKeyword,
+      indexing,
+      ...indexingState(content, indexing),
       content,
     };
   });
@@ -112,6 +156,45 @@ export const getBlogPosts = cache(async function getBlogPosts(
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
 });
+
+export async function getIndexableBlogPosts(
+  locale: Locale,
+): Promise<BlogPost[]> {
+  return (await getBlogPosts(locale)).filter((post) => post.indexable);
+}
+
+/** Almanca koleksiyon noindex olsa da mevcut kullanıcılar için görünür kalır. */
+export async function getVisibleBlogPosts(locale: Locale): Promise<BlogPost[]> {
+  return locale === "de"
+    ? getBlogPosts(locale)
+    : getIndexableBlogPosts(locale);
+}
+
+function toBlogPostSummary(post: BlogPost): BlogPostSummary {
+  return {
+    slug: post.slug,
+    title: post.title,
+    description: post.description,
+    publishedAt: post.publishedAt,
+    updatedAt: post.updatedAt,
+    author: post.author,
+    category: post.category,
+    tags: post.tags,
+    readingTime: post.readingTime,
+    coverImage: post.coverImage,
+    unsplashKeyword: post.unsplashKeyword,
+    indexing: post.indexing,
+    wordCount: post.wordCount,
+    indexable: post.indexable,
+  };
+}
+
+/** Client bileşenlerine MDX gövdesini taşımadan kart verisi üretir. */
+export async function getVisibleBlogPostSummaries(
+  locale: Locale,
+): Promise<BlogPostSummary[]> {
+  return (await getVisibleBlogPosts(locale)).map(toBlogPostSummary);
+}
 
 function splitMarkdownContent(content: string): { first: string; second: string } {
   const lines = content.split("\n");
@@ -161,6 +244,7 @@ export const getBlogPost = cache(async function getBlogPost(
 
   const source = fs.readFileSync(filePath, "utf-8");
   const { data, content: rawContent } = matter(source);
+  const indexing = data.indexing as "index" | "noindex" | undefined;
 
   const localizedContent = localizeMarkdownLinks(rawContent, locale as AppLocale);
   const { first, second } = splitMarkdownContent(localizedContent);
@@ -199,6 +283,8 @@ export const getBlogPost = cache(async function getBlogPost(
       readingTime: data.readingTime,
       coverImage: data.coverImage,
       unsplashKeyword: data.unsplashKeyword,
+      indexing,
+      ...indexingState(rawContent, indexing),
     },
     contentParts: {
       first: firstResult.content,
@@ -213,7 +299,7 @@ export async function getRelatedPosts(
   locale: Locale,
   limit = 3
 ): Promise<BlogPost[]> {
-  const allPosts = await getBlogPosts(locale);
+  const allPosts = await getVisibleBlogPosts(locale);
 
   return allPosts
     .filter((post) => post.slug !== currentSlug && post.category === category)

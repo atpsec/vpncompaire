@@ -177,17 +177,6 @@ export async function DevicePage({
                         </Button>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs text-ink-subtle">
-                        {t("picks.scoreLabel")}
-                      </div>
-                      <div className="text-2xl font-bold text-brand-700">
-                        {product.score.toFixed(1)}
-                        <span className="text-xs text-ink-subtle font-normal">
-                          /10
-                        </span>
-                      </div>
-                    </div>
                   </div>
                 </Card>
               );

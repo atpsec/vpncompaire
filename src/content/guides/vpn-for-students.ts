@@ -74,7 +74,7 @@ const tr: VpnForStudentsContent = {
     },
     {
       slug: "nordvpn",
-      label: "Türkiye sunucusu + hız",
+      label: "Türkiye konumu + protokol seçenekleri",
       reason:
         "Sağlayıcı verisine göre Türkiye sunucusu mevcut; Erasmus/değişimde Türk bankacılığı ve BluTV erişimi için değerlendirilebilir. Kampüs Wi-Fi performansı ağ yöneticisi, rota ve sunucu yüküne göre değişir.",
     },
@@ -87,7 +87,7 @@ const tr: VpnForStudentsContent = {
   ],
   whyNeed: {
     h2: "Öğrenci olarak neden VPN'e ihtiyacın var?",
-    p: "Üniversite hayatı, gizlilik açısından özellikle riskli bir dönemdir. Yurt, kampüs ve kütüphane Wi-Fi ağları açık veya zayıf şifrelidir; aynı ağdaki diğer kullanıcılar trafiği pasif olarak dinleyebilir. 2025 EDUCAUSE araştırmasına göre kampüs ağlarında yapılan ortalama siber saldırı sayısı, kurumsal ağlara göre %38 daha yüksek.",
+    p: "Yurt, kampüs ve kütüphane Wi-Fi ağları çok sayıda cihaz tarafından paylaşılır ve ağ yapılandırması kurumdan kuruma değişir. VPN, cihaz ile VPN sunucusu arasındaki trafiğe şifreli bir tünel ekleyebilir; DNS, kill switch ve otomatik bağlantı davranışını kendi kampüs ağında ve cihazında doğrulamalısın.",
   },
   scenarios: {
     h3: "Tipik öğrenci senaryoları",
@@ -102,11 +102,11 @@ const tr: VpnForStudentsContent = {
       },
       {
         bold: "Yurt dışı staj/Erasmus:",
-        text: " Türkiye'deki banka, BluTV, Exxen, TRT erişimi için Türkiye sunucusu şart.",
+        text: " Sağlayıcının güncel Türkiye konumu bazı hizmetlerde değerlendirilebilir; banka ve yayın servisleri ek konum, hesap ve VPN kontrolleri uygulayabilir.",
       },
       {
         bold: "VPN engellenen ağlarda:",
-        text: " Bazı kampüs ağları belli siteleri engeller — VPN bu kısıtlamaları aşmana yardımcı olur.",
+        text: " Bazı kampüs ağları siteleri veya VPN protokollerini kısıtlar. Kurum politikasını ve sağlayıcının obfuscation desteğini kontrol edip bağlantıyı kendi ağında dene.",
       },
     ],
   },
@@ -127,7 +127,7 @@ const tr: VpnForStudentsContent = {
     },
     p2: {
       bold: "VPN yapar:",
-      text: ' Üniversitenin sunduğu kurumsal VPN\'e (genelde "OpenVPN" veya "Pulse Secure") bağlanırsan kampüs IP\'si gibi davranır ve erişim açılır. Ticari VPN ise hızlı, güvenli ama akademik abonelik yerine geçmez.',
+      text: " Üniversitenin kurumsal VPN'i, kütüphane belgelerinde bu amaçla yapılandırılmışsa kampüs IP'si üzerinden abonelik erişimi sağlayabilir. Ticari VPN akademik abonelik vermez; hesap yetkini ve kurulum adımlarını üniversitenin resmi belgelerinde doğrula.",
     },
   },
   abroad: {
@@ -136,15 +136,15 @@ const tr: VpnForStudentsContent = {
     items: [
       {
         bold: "Türk bankacılığı:",
-        text: " Bazı bankalar yabancı IP'den giriş izin vermez. Türkiye sunucusu olan bir VPN şart.",
+        text: " Bankalar yabancı veya VPN IP'lerinde ek doğrulama isteyebilir. Türkiye konumunun hesabınla çalışacağını varsayma; bankanın güvenlik politikasını ve kendi hesabındaki davranışı doğrula.",
       },
       {
         bold: "BluTV, Exxen, TRT:",
-        text: " Coğrafi kısıtlı — Türkiye sunucusundan bağlanırsan erişim açılır.",
+        text: " Türkiye konumu bölgesel erişimde değerlendirilebilir; sağlayıcının konum listesini, yayın servisinin koşullarını ve hesabınla uyumluluğu kontrol et.",
       },
       {
         bold: "WhatsApp/Telegram engeli:",
-        text: " Bazı ülkelerde (Çin, BAE) engelliyse VPN ile bypass yapabilirsin.",
+        text: " Bazı ağlarda VPN protokolleri de engellenebilir. Sağlayıcının obfuscation belgelerini, yerel kuralları ve bağlantıyı kendi ağında kontrol et.",
       },
     ],
   },
@@ -152,7 +152,7 @@ const tr: VpnForStudentsContent = {
   howToSteps: [
     {
       name: "Bütçeni belirle",
-      text: "Aylık 50 TL altı için 2-3 yıllık plan al; aylık plan öğrenci bütçesi için çok pahalı.",
+      text: "Uzun dönem planın toplam maliyetini, iptal süresini ve yenileme fiyatını sağlayıcının ödeme ekranında karşılaştır; düşük tanıtım fiyatını sabit fiyat olarak varsayma.",
     },
     {
       name: "Cihaz sayını say",
@@ -160,11 +160,11 @@ const tr: VpnForStudentsContent = {
     },
     {
       name: "Yurt dışına gidecek misin kontrol et",
-      text: "Erasmus, staj, değişim programında Türkiye sunucusu şart. NordVPN ve Surfshark sunuyor.",
+      text: "Erasmus, staj veya değişim öncesinde sağlayıcının güncel Türkiye konumunu ve kullanacağın banka/yayın hesaplarıyla uyumluluğunu doğrula.",
     },
     {
       name: "Otomatik yenilemeyi kapat",
-      text: "Yenileme dönemi fiyatı 2-3 katına çıkıyor. İlk dönem bitince elle yenile veya başka sağlayıcıya geç.",
+      text: "Tanıtım ve yenileme fiyatları farklı olabilir. Güncel yenileme tutarını sağlayıcının resmi hesabında kontrol et ve hatırlatıcı kur.",
     },
   ],
   faqHeading: "Sıkça sorulan sorular",
@@ -179,15 +179,15 @@ const tr: VpnForStudentsContent = {
     },
     {
       q: "Kampüs Wi-Fi'de VPN kullanmam gerekir mi?",
-      a: "Evet. Kampüs ve yurt ağları açık veya zayıf şifrelidir; aynı ağdaki diğer kullanıcılar trafiğinizi pasif olarak dinleyebilir. VPN, login bilgilerinizi ve gezinti geçmişinizi şifreler.",
+      a: "Bu, ağın yapılandırmasına ve tehdit modeline bağlıdır. VPN cihaz ile VPN sunucusu arasındaki trafiği şifreleyebilir; kimlik avı, zararlı yazılım veya yanlış hesap izinlerini çözmez. Kurum politikasını kontrol et ve DNS/kill switch davranışını kendi ağında doğrula.",
     },
     {
       q: "Ücretsiz VPN öğrenci için yeterli mi?",
-      a: "Çoğu ücretsiz VPN gelirini veri satışından sağlar — öğrenci kimliği gibi hassas bilgilerinizin ele geçirildiği ağlarda bu risk artar. Proton VPN'in ücretsiz planı istisnadır; sınırlı (3 ülke, tek cihaz) ama güvenlidir.",
+      a: "Ücretsiz planların veri kullanımı, hız, konum ve cihaz sınırları sağlayıcıya göre değişir. Proton VPN ücretsiz planı için sağlayıcının güncel gizlilik politikasını, açık kaynak istemci bilgisini ve resmi limitleri kontrol et; hiçbir planı yalnızca ücretsiz olduğu için güvenli veya güvensiz sayma.",
     },
     {
       q: "Yurt dışı staj/değişim programında VPN gerekli mi?",
-      a: "Evet — Türkiye'deki bankacılık, TRT, BluTV gibi servislere yurt dışından erişmek için Türkiye sunucusu olan bir VPN şart. NordVPN, Surfshark ve ExpressVPN Türkiye sanal sunucusu sunar.",
+      a: "Türkiye konumu bazı banka ve yayın hizmetlerinde değerlendirilebilir, ancak erişim garantisi vermez. Sağlayıcının güncel sunucu listesini, hizmet koşullarını ve kendi hesabındaki ek doğrulama davranışını seyahatten önce kontrol et.",
     },
   ],
   cards: [
@@ -196,7 +196,7 @@ const tr: VpnForStudentsContent = {
       title: "Yurt dışı erişim",
       desc: "Erasmus'ta Türkiye bankacılığı ve BluTV.",
     },
-    { title: "Kişisel veri", desc: "ISP tarama geçmişini görmesin." },
+    { title: "Kişisel veri", desc: "Trafiği ISP ile VPN sunucusu arasında tünelle." },
   ],
   relatedLabel: "İlgili rehberler",
   relatedLinks: [
@@ -223,7 +223,7 @@ const en: VpnForStudentsContent = {
     "The best VPN picks for campus Wi-Fi, academic database access and student discounts.",
   badge: "Students",
   h1: "The best VPN for students",
-  lede: "Campus Wi-Fi security, internships and exchanges abroad, academic resource access and the 3 best VPNs for a student budget — based on our independent test results.",
+  lede: "Three VPN profiles for campus Wi-Fi, internships and exchanges abroad, academic resource access and a student budget — based on official features and policy comparisons.",
   breadcrumb: { home: "Home", guides: "Guides", current: "VPN for students" },
   howToName: "How to choose a VPN as a student",
   picksHeading: "The 3 best VPNs for students",
@@ -237,9 +237,9 @@ const en: VpnForStudentsContent = {
     },
     {
       slug: "nordvpn",
-      label: "Türkiye server + speed",
+      label: "Türkiye location + protocol options",
       reason:
-        "According to provider data, a Türkiye server is available; worth considering for Turkish banking and BluTV access during Erasmus/exchange. In our tests we observed consistent speeds under campus Wi-Fi conditions.",
+        "Provider data lists a Türkiye location, which may be worth considering for Turkish banking and BluTV during an exchange. Campus performance varies with network policy, route and server load; verify the location and test it on your own network and accounts.",
     },
     {
       slug: "proton-vpn",
@@ -250,7 +250,7 @@ const en: VpnForStudentsContent = {
   ],
   whyNeed: {
     h2: "Why do you need a VPN as a student?",
-    p: "University life is a particularly risky period for privacy. Dorm, campus and library Wi-Fi networks are open or weakly encrypted; other users on the same network can passively monitor traffic. According to a 2025 EDUCAUSE study, the average number of cyberattacks on campus networks is 38% higher than on corporate networks.",
+    p: "Dorm, campus and library Wi-Fi networks are shared by many devices, and their configuration varies by institution. A VPN can add an encrypted tunnel between your device and the VPN server; verify DNS, kill-switch and auto-connect behavior on your own campus network and device.",
   },
   scenarios: {
     h3: "Typical student scenarios",
@@ -265,11 +265,11 @@ const en: VpnForStudentsContent = {
       },
       {
         bold: "Internship/Erasmus abroad:",
-        text: " A Türkiye server is a must for accessing banks in Türkiye, BluTV, Exxen and TRT.",
+        text: " A current Türkiye location may be worth considering, but banks and streaming services can apply additional location, account and VPN checks.",
       },
       {
         bold: "On networks with blocks:",
-        text: " Some campus networks block certain sites — a VPN helps you get around these restrictions.",
+        text: " Some campus networks restrict sites or VPN protocols. Check institutional policy and provider obfuscation support, then test the connection on your own network.",
       },
     ],
   },
@@ -290,7 +290,7 @@ const en: VpnForStudentsContent = {
     },
     p2: {
       bold: "A VPN can:",
-      text: ' If you connect to your university\'s institutional VPN (usually "OpenVPN" or "Pulse Secure"), you appear with a campus IP and access opens up. A commercial VPN is fast and secure, but it is no substitute for an academic subscription.',
+      text: " Your university's institutional VPN may provide access through a campus IP when the library documents it for that purpose. A commercial VPN does not grant an academic subscription; verify your entitlement and setup in official university documentation.",
     },
   },
   abroad: {
@@ -299,15 +299,15 @@ const en: VpnForStudentsContent = {
     items: [
       {
         bold: "Turkish banking:",
-        text: " Some banks don't allow logins from foreign IPs. A VPN with a Türkiye server is a must.",
+        text: " Banks may request extra verification for foreign or VPN IPs. Do not assume a Türkiye location will work with your account; check the bank's security policy and test your own account.",
       },
       {
         bold: "BluTV, Exxen, TRT:",
-        text: " Geo-restricted — connect through a Türkiye server and access opens up.",
+        text: " A Türkiye location may be relevant to regional access; check the provider's location list, the service terms and compatibility with your account.",
       },
       {
         bold: "WhatsApp/Telegram blocks:",
-        text: " If they're blocked in some countries (China, UAE), you can bypass the block with a VPN.",
+        text: " Some networks also block VPN protocols. Review the provider's obfuscation documentation, local rules and connection behavior on your own network.",
       },
     ],
   },
@@ -315,7 +315,7 @@ const en: VpnForStudentsContent = {
   howToSteps: [
     {
       name: "Set your budget",
-      text: "For under 50 TL a month, get a 2-3 year plan; the monthly plan is far too expensive for a student budget.",
+      text: "Compare the total cost, cancellation window and renewal price on the provider's checkout page; do not treat an introductory monthly equivalent as a fixed price.",
     },
     {
       name: "Count your devices",
@@ -323,11 +323,11 @@ const en: VpnForStudentsContent = {
     },
     {
       name: "Check whether you're going abroad",
-      text: "On Erasmus, an internship or an exchange program a Türkiye server is a must. NordVPN and Surfshark offer one.",
+      text: "Before an exchange or internship, verify the provider's current Türkiye location and compatibility with the banking or streaming accounts you plan to use.",
     },
     {
       name: "Turn off auto-renewal",
-      text: "The renewal price climbs to 2-3x. When the first term ends, renew manually or switch to another provider.",
+      text: "Introductory and renewal prices can differ. Check the current renewal amount in the provider's official account area and set a reminder.",
     },
   ],
   faqHeading: "Frequently asked questions",
@@ -342,15 +342,15 @@ const en: VpnForStudentsContent = {
     },
     {
       q: "Do I need to use a VPN on campus Wi-Fi?",
-      a: "Yes. Campus and dorm networks are open or weakly encrypted; other users on the same network can passively monitor your traffic. A VPN encrypts your login details and browsing history.",
+      a: "It depends on the network configuration and your threat model. A VPN can encrypt traffic between your device and the VPN server, but it does not solve phishing, malware or incorrect account permissions. Check campus policy and verify DNS and kill-switch behavior on your network.",
     },
     {
       q: "Is a free VPN enough for a student?",
-      a: "Most free VPNs make their money by selling data — on networks where sensitive information like your student credentials can be intercepted, that risk grows. Proton VPN's free plan is the exception; it's limited (3 countries, one device) but safe.",
+      a: "Data practices, speed, locations and device limits vary among free plans. For Proton VPN's free plan, review the provider's current privacy policy, open-source client information and official limits; do not treat any plan as safe or unsafe solely because it is free.",
     },
     {
       q: "Do I need a VPN for an internship/exchange program abroad?",
-      a: "Yes — to access services in Türkiye like banking, TRT and BluTV from abroad, a VPN with a Türkiye server is a must. NordVPN, Surfshark and ExpressVPN offer virtual Türkiye servers.",
+      a: "A Türkiye location may be useful for some banking or streaming services, but it does not guarantee access. Before traveling, check the provider's current server list, service terms and any extra verification on your own account.",
     },
   ],
   cards: [
@@ -364,7 +364,7 @@ const en: VpnForStudentsContent = {
     },
     {
       title: "Personal data",
-      desc: "Keep your ISP from seeing your browsing history.",
+      desc: "Tunnel traffic between your ISP and the VPN server.",
     },
   ],
   relatedLabel: "Related guides",
@@ -393,7 +393,7 @@ const de: VpnForStudentsContent = {
     "Die besten VPN-Empfehlungen für Campus-WLAN, akademische Datenbanken und Studentenrabatte.",
   badge: "Studenten",
   h1: "Das beste VPN für Studenten",
-  lede: "Campus-WLAN-Sicherheit, Auslandspraktikum und Austausch, Zugriff auf akademische Quellen und die 3 besten VPNs fürs Studentenbudget — basierend auf unseren unabhängigen Testergebnissen.",
+  lede: "Drei VPN-Profile für Campus-WLAN, Auslandspraktikum und Austausch, akademische Quellen und das Studentenbudget — auf Basis offizieller Funktionen und Richtlinien.",
   breadcrumb: {
     home: "Startseite",
     guides: "Ratgeber",
@@ -411,9 +411,9 @@ const de: VpnForStudentsContent = {
     },
     {
       slug: "nordvpn",
-      label: "Türkei-Server + Tempo",
+      label: "Türkei-Standort + Protokolloptionen",
       reason:
-        "Laut Anbieterdaten ist ein Türkei-Server verfügbar; für türkisches Banking und BluTV-Zugriff während Erasmus/Austausch eine Überlegung wert. In unseren Tests zeigte sich unter Campus-WLAN-Bedingungen konstantes Tempo.",
+        "Laut Anbieterdaten ist ein Türkei-Standort verfügbar; für türkisches Banking und BluTV während Erasmus oder Austausch kann er relevant sein. Die Campus-Leistung hängt von Netzregeln, Route und Serverlast ab; prüfe Standort und Verhalten im eigenen Netz und Konto.",
     },
     {
       slug: "proton-vpn",
@@ -424,7 +424,7 @@ const de: VpnForStudentsContent = {
   ],
   whyNeed: {
     h2: "Warum brauchst du als Student ein VPN?",
-    p: "Das Unileben ist in Sachen Privatsphäre eine besonders riskante Zeit. WLAN-Netze in Wohnheim, Campus und Bibliothek sind offen oder schwach verschlüsselt; andere Nutzer im selben Netz können den Datenverkehr passiv mitlesen. Laut einer EDUCAUSE-Studie von 2025 liegt die durchschnittliche Zahl der Cyberangriffe auf Campus-Netze um 38 % höher als bei Unternehmensnetzen.",
+    p: "WLAN-Netze in Wohnheim, Campus und Bibliothek werden von vielen Geräten geteilt und sind je nach Einrichtung unterschiedlich konfiguriert. Ein VPN kann einen verschlüsselten Tunnel zwischen Gerät und VPN-Server ergänzen; prüfe DNS, Kill Switch und Auto-Verbindung in deinem Campus-Netz und auf deinem Gerät.",
   },
   scenarios: {
     h3: "Typische Studenten-Szenarien",
@@ -439,11 +439,11 @@ const de: VpnForStudentsContent = {
       },
       {
         bold: "Auslandspraktikum/Erasmus:",
-        text: " Für den Zugriff auf Banken in der Türkei, BluTV, Exxen und TRT ist ein Türkei-Server Pflicht.",
+        text: " Ein aktueller Türkei-Standort kann relevant sein; Banken und Streamingdienste können zusätzliche Standort-, Konto- und VPN-Prüfungen einsetzen.",
       },
       {
         bold: "In Netzwerken mit Sperren:",
-        text: " Manche Campus-Netze blockieren bestimmte Seiten — ein VPN hilft dir, diese Einschränkungen zu umgehen.",
+        text: " Manche Campus-Netze sperren Seiten oder VPN-Protokolle. Prüfe Hochschulrichtlinie und Verschleierungsunterstützung des Anbieters und teste die Verbindung im eigenen Netz.",
       },
     ],
   },
@@ -464,7 +464,7 @@ const de: VpnForStudentsContent = {
     },
     p2: {
       bold: "Ein VPN kann:",
-      text: " Wenn du dich mit dem institutionellen VPN deiner Uni verbindest (meist \u201eOpenVPN\u201c oder \u201ePulse Secure\u201c), trittst du mit einer Campus-IP auf und der Zugriff öffnet sich. Ein kommerzielles VPN ist schnell und sicher, ersetzt aber kein akademisches Abo.",
+      text: " Das institutionelle VPN deiner Universität kann über eine Campus-IP Zugriff bieten, wenn die Bibliothek es dafür dokumentiert. Ein kommerzielles VPN gewährt kein akademisches Abo; prüfe Berechtigung und Einrichtung in der offiziellen Uni-Dokumentation.",
     },
   },
   abroad: {
@@ -474,15 +474,15 @@ const de: VpnForStudentsContent = {
     items: [
       {
         bold: "Türkisches Banking:",
-        text: " Manche Banken erlauben keinen Login von ausländischen IPs. Ein VPN mit Türkei-Server ist Pflicht.",
+        text: " Banken können bei ausländischen oder VPN-IPs zusätzliche Prüfungen verlangen. Setze nicht voraus, dass ein Türkei-Standort mit deinem Konto funktioniert; prüfe Bankrichtlinie und Konto selbst.",
       },
       {
         bold: "BluTV, Exxen, TRT:",
-        text: " Geo-beschränkt — verbinde dich über einen Türkei-Server und der Zugriff öffnet sich.",
+        text: " Ein Türkei-Standort kann für regionalen Zugriff relevant sein; prüfe Standortliste, Nutzungsbedingungen und Kompatibilität mit deinem Konto.",
       },
       {
         bold: "WhatsApp/Telegram-Sperren:",
-        text: " Sind sie in manchen Ländern (China, VAE) blockiert, kannst du die Sperre per VPN umgehen.",
+        text: " Manche Netze blockieren auch VPN-Protokolle. Prüfe Verschleierungsdokumentation, lokale Regeln und das Verhalten in deinem eigenen Netz.",
       },
     ],
   },
@@ -490,7 +490,7 @@ const de: VpnForStudentsContent = {
   howToSteps: [
     {
       name: "Lege dein Budget fest",
-      text: "Für unter 50 TL im Monat nimm einen 2-3-Jahres-Plan; der Monatsplan ist fürs Studentenbudget viel zu teuer.",
+      text: "Vergleiche Gesamtkosten, Widerrufsfrist und Verlängerungspreis auf der Zahlungsseite des Anbieters; behandle einen Einführungspreis nicht als festen Monatspreis.",
     },
     {
       name: "Zähle deine Geräte",
@@ -498,11 +498,11 @@ const de: VpnForStudentsContent = {
     },
     {
       name: "Prüfe, ob du ins Ausland gehst",
-      text: "Bei Erasmus, Praktikum oder Austauschprogramm ist ein Türkei-Server Pflicht. NordVPN und Surfshark bieten ihn an.",
+      text: "Prüfe vor Erasmus, Praktikum oder Austausch den aktuellen Türkei-Standort des Anbieters und die Kompatibilität mit deinen Bank- und Streamingkonten.",
     },
     {
       name: "Schalte die automatische Verlängerung aus",
-      text: "Der Verlängerungspreis steigt auf das 2-3-Fache. Verlängere nach der ersten Laufzeit manuell oder wechsle zu einem anderen Anbieter.",
+      text: "Einführungs- und Verlängerungspreis können abweichen. Prüfe den aktuellen Betrag im offiziellen Kundenkonto und setze eine Erinnerung.",
     },
   ],
   faqHeading: "Häufig gestellte Fragen",
@@ -517,15 +517,15 @@ const de: VpnForStudentsContent = {
     },
     {
       q: "Brauche ich im Campus-WLAN ein VPN?",
-      a: "Ja. Campus- und Wohnheimnetze sind offen oder schwach verschlüsselt; andere Nutzer im selben Netz können deinen Verkehr passiv mitlesen. Ein VPN verschlüsselt deine Login-Daten und deinen Browserverlauf.",
+      a: "Das hängt von Netzkonfiguration und Bedrohungsmodell ab. Ein VPN kann den Verkehr zwischen Gerät und VPN-Server verschlüsseln, löst aber weder Phishing noch Malware oder falsche Kontorechte. Prüfe Campus-Richtlinie sowie DNS und Kill Switch in deinem Netz.",
     },
     {
       q: "Reicht ein kostenloses VPN für Studenten?",
-      a: "Die meisten kostenlosen VPNs verdienen ihr Geld mit Datenverkauf — in Netzen, in denen sensible Daten wie deine Studienzugänge abgegriffen werden können, steigt dieses Risiko. Der kostenlose Tarif von Proton VPN ist die Ausnahme; er ist begrenzt (3 Länder, ein Gerät), aber sicher.",
+      a: "Datenpraxis, Tempo, Standorte und Gerätelimits unterscheiden sich bei kostenlosen Tarifen. Prüfe für Proton VPN die aktuelle Datenschutzrichtlinie, Angaben zum Open-Source-Client und offizielle Limits; bewerte keinen Tarif allein wegen seines Preises als sicher oder unsicher.",
     },
     {
       q: "Brauche ich für Auslandspraktikum/Austausch ein VPN?",
-      a: "Ja — um aus dem Ausland auf Dienste in der Türkei wie Banking, TRT und BluTV zuzugreifen, ist ein VPN mit Türkei-Server Pflicht. NordVPN, Surfshark und ExpressVPN bieten virtuelle Türkei-Server.",
+      a: "Ein Türkei-Standort kann bei manchen Bank- oder Streamingdiensten nützlich sein, garantiert aber keinen Zugriff. Prüfe vor der Reise die aktuelle Serverliste, Nutzungsbedingungen und zusätzliche Verifizierung in deinem Konto.",
     },
   ],
   cards: [
@@ -539,7 +539,7 @@ const de: VpnForStudentsContent = {
     },
     {
       title: "Persönliche Daten",
-      desc: "Dein ISP soll deinen Verlauf nicht sehen.",
+      desc: "Tunnel den Verkehr zwischen ISP und VPN-Server.",
     },
   ],
   relatedLabel: "Verwandte Ratgeber",

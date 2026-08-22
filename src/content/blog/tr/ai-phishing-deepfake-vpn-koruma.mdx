@@ -40,17 +40,17 @@ Görsel deepfake (Midjourney bu konuda değil, daha çok Stable Diffusion + LoRA
 
 VPN bu saldırıların hepsini engelleyemez — phishing e-postası gelmesine VPN'in etkisi yok. Ama VPN şu üç boyutta korumaya katkıda bulunuyor:
 
-### 1. IP ve Lokasyon Sızıntısını Önleme
+### 1. IP ve Lokasyon Görünürlüğünü Azaltma
 
-Saldırganlar hedef seçerken IP, lokasyon ve ISP bilgisini kullanıyor. Halka açık Wi-Fi'larda yapılan trafik analizi (kim hangi siteye bağlanıyor) profil çıkarmak için yem. VPN bu görünürlüğü kapatıyor. [VPN gizlilik ve güvenlik yazımız](/blog/vpn-gizlilik-ve-guvenlik) detaylı.
+Saldırganlar hedef seçerken IP, yaklaşık konum ve ISS bilgisinden yararlanabilir. Doğru yapılandırılmış bir VPN, halka açık Wi-Fi ve ISS tarafının gördüğü hedef IP/DNS metadatasını azaltır ve sitelere VPN çıkış IP'sini gösterir. Ancak giriş yaptığınız hizmetler, tarayıcı parmak izi ve trafik örüntüleri üzerinden profil çıkarılması devam edebilir. [VPN gizlilik ve güvenlik yazımız](/blog/vpn-gizlilik-ve-guvenlik) detaylı.
 
 ### 2. DNS Hijack ve Sahte Site Yönlendirme
 
-Bazı saldırılar DNS seviyesinde gerçekleşiyor — sahte DNS cevabı ile bankanızın sahtesine yönlendirme. VPN'iniz kendi DNS'ini kullanıyorsa bu vektör kapanıyor. [DNS leak testi yazımız](/blog/dns-leak-test-vpn) durumu nasıl kontrol edeceğinizi gösteriyor.
+Bazı saldırılar sahte DNS cevaplarıyla kullanıcıyı taklit bir siteye yönlendirmeyi dener. VPN'in DNS sorgularını tünel içindeki güvenilir bir çözümleyiciye yönlendirmesi, yerel ağdaki DNS manipülasyonu riskini azaltabilir; DNS sızıntısı, yanlış yapılandırma veya zararlı uç nokta varsa koruma eksik kalır. Ayrıca DNS yönlendirmesi sitenin meşru olduğunu doğrulamaz. [DNS leak testi yazımız](/blog/dns-leak-test-vpn) kendi bağlantınızda yönlendirmeyi kontrol etmeyi gösteriyor.
 
 ### 3. Halka Açık Wi-Fi'da MITM
 
-Kafede, havalimanında AI destekli MITM saldırıları artıyor — sahte Wi-Fi noktalarında trafik analizi, oturum çerezi çalma. VPN tüneli bu saldırıyı şifreleme katmanıyla önlüyor. [Seyahatte VPN kullanımı yazımız](/blog/seyahatte-vpn-kullanimi) bu senaryoyu işliyor.
+Kafe veya havalimanındaki güvenilmeyen ağlarda sahte erişim noktaları, pasif trafik izleme ve yerel ağ manipülasyonu riski vardır. VPN tüneli, cihaz ile VPN sunucusu arasındaki trafiğin okunması veya değiştirilmesi riskini azaltır; zararlı captive portal'ı, ele geçirilmiş cihazı, phishing sitesini ya da daha önce çalınmış oturum çerezini düzeltmez. [Seyahatte VPN kullanımı yazımız](/blog/seyahatte-vpn-kullanimi) bu sınırları işliyor.
 
 ## VPN'in Çözmediği Şeyler
 
@@ -67,17 +67,17 @@ Bu yüzden çok katmanlı savunma şart.
 
 Tavsiye edilen yığın:
 
-1. **VPN (no-logs, audited)**: Trafik şifreleme + DNS güvenliği. Seçim için [VPN seçim rehberi](/blog/vpn-secerken-dikkat-edilmesi-gerekenler).
+1. **VPN (no-logs iddiası denetlenmiş)**: Cihaz ile VPN sunucusu arasında trafik şifreleme ve doğru yapılandırılırsa DNS yönlendirmesi. Denetimin tarihini ve kapsamını kontrol edin; no-logs veya sızıntısız çalışma garantisi değildir. Seçim için [VPN seçim rehberi](/blog/vpn-secerken-dikkat-edilmesi-gerekenler).
 2. **Donanım anahtarı (YubiKey, Titan)**: 2FA için. SMS 2FA artık güvensiz (SIM swap saldırılarına karşı zayıf).
-3. **Şifre yöneticisi**: 1Password, Bitwarden, Proton Pass. Sahte sitelerde otomatik doldurma yapmaz — kendisi phishing tespit eder.
+3. **Şifre yöneticisi**: 1Password, Bitwarden, Proton Pass. Kaydedilmiş alan adıyla eşleşme kontrolü, benzer görünen sahte sitelerde otomatik doldurma riskini azaltabilir; yine de adresi kullanıcı doğrulamalıdır.
 4. **E-posta güvenlik tarayıcısı**: Modern Gmail/Outlook AI taraması yapıyor ama kurumsal hesaplarda ek katman gerek.
 5. **Aile kod kelimesi**: Sesli deepfake saldırılara karşı: ailenizle önceden bir doğrulama sözcüğü belirleyin. "Acil ödeme" çağrısı geldiğinde sözcük sorulur.
 
 ## AI Araçları Kullanırken Kişisel Güvenlik
 
 ChatGPT, Claude, Perplexity'ye hassas bilgi yazarken:
-- VPN açık olsun (IP gizleme)
-- "Veriyi eğitim için kullanma" seçeneğini aç (tüm büyük modellerde mevcut)
+- VPN kullanıyorsanız hizmete VPN çıkış IP'si görünür; bu, oturum açmış hesabınızı veya yazdığınız içeriği hizmetten gizlemez
+- Hizmetin güncel veri kullanımı ve eğitim kontrollerini hesabınızda inceleyin; seçenekler plan ve ürüne göre değişebilir
 - Şirket sırrı, müşteri verisi, kişisel SSN/TC yazma — kurumsal versiyon kullan
 - Sohbet geçmişini düzenli temizle
 
@@ -111,13 +111,13 @@ Hayır. VPN sadece IP/lokasyon ve trafik şifreleme katmanı. E-posta filtreleme
 Anormal aciliyet, alışılmadık ödeme yöntemi (kripto, hediye kartı), görüntülü görüşmeyi reddetme — kırmızı bayraklar. Aile kod kelimesi en pratik koruma.
 
 **Ücretsiz VPN bu işleri görür mü?**
-Hayır. Ücretsiz VPN'lerin çoğu trafik analizi yapıyor — yani aradığınız korumanın tersi. [Ücretsiz vs ücretli VPN karşılaştırmamız](/blog/ucretsiz-vs-ucretli-vpn) detaylı.
+Ücretsiz olması tek başına güvenli veya güvensiz olduğunu göstermez. İş modelini, veri toplama politikasını, uygulama izinlerini ve güncel bağımsız denetimleri kontrol edin; belirsiz sağlayıcılardan kaçının. [Ücretsiz vs ücretli VPN karşılaştırmamız](/blog/ucretsiz-vs-ucretli-vpn) değerlendirme ölçütlerini açıklar.
 
 **ChatGPT, Claude'un kendisi phishing yazıyor mu?**
 Resmi olarak hayır — guardrail'leri var. Ama jailbreak'le veya yerel açık kaynak modellerle (Llama, Mistral) saldırganlar bu sınırı aşabiliyor.
 
 ## Sonuç
 
-AI destekli phishing ve deepfake çağı geldi. VPN, çok katmanlı savunmanın temel bir bileşeni — ama tek başına yeterli değil. No-logs sertifikalı, kill switch'li, DNS leak korumalı bir VPN + donanım 2FA + şifre yöneticisi + eğitim üçlüsü gerçek korumayı sağlar.
+AI destekli phishing ve deepfake riskleri çok katmanlı savunma gerektirir. Denetim kapsamı güncel bir VPN, doğrulanmış kill switch/DNS ayarları, donanım tabanlı MFA, şifre yöneticisi ve eğitim birlikte riski azaltabilir; hiçbiri phishing veya deepfake saldırılarını tamamen engellemez. VPN'in DNS ve kill switch davranışını kendi cihazınızda test edin.
 
 Doğru VPN seçimi için [karşılaştırma sayfamızı](/karsilastir) ve [gizlilik odaklı en iyi VPN listemizi](/en-iyi/gizlilik) inceleyin.

@@ -1,6 +1,6 @@
 ﻿/**
- * Rank 11–20 VPN'ler: En İyi 20 listesinde gösterilmez; /inceleme, özellik filtresi ve
- * ilerideki genişletilmiş inceleme havuzu için. Sıralama popüler karşılaştırma
+ * Ana ürün grubunu tamamlayan sağlayıcılar: /inceleme, özellik filtresi ve
+ * genişletilmiş karşılaştırma havuzu için. Sıralama popüler karşılaştırma
  * sitelerindeki yaygın isimlerle uyumlu seçildi (PCMag, TechRadar, VPNMentor vb.).
  */
 import type { RawProduct } from "./products";
@@ -72,8 +72,8 @@ function extendedVpn(
       testDuration: "",
     },
     editorNotes: L(
-      "Genişletilmiş inceleme havuzunda değerlendirildi; genel kullanım için alternatif, ancak editör En İyi 20 listesindeki seçenekler daha dengeli profil sunuyor.",
-      "Evaluated in our extended review pool; viable alternative, though editor top-10 picks offer a more balanced profile.",
+      "Genişletilmiş sağlayıcı havuzunda kaynak temelli profil; genel kullanım için daha kapsamlı kanıt sunan çekirdek profillerle birlikte değerlendirin.",
+      "Source-based profile in the extended provider pool; compare it with core profiles that offer more comprehensive evidence.",
     ),
     plans: [
       {
@@ -95,34 +95,6 @@ function extendedVpn(
 }
 
 export const extendedRawProducts: RawProduct[] = [
-  extendedVpn(
-    "atlas-vpn",
-    "Atlas VPN",
-    11,
-    7.5,
-    1.99,
-    {
-      tr: "Ücretsiz katman ve bütçe odaklı giriş",
-      en: "Free tier and budget-friendly entry",
-    },
-    {
-      tr: "Nord Security bünyesindeki Atlas VPN, ücretsiz plan ve uygun fiyatlı uzun dönem paketleriyle giriş seviyesinde sık görülen bir seçenek.",
-      en: "Part of Nord Security, Atlas VPN is a common entry-level pick with a free tier and affordable long-term bundles.",
-    },
-    { tr: "Amerika Birleşik Devletleri", en: "United States" },
-    {
-      tr: "750+ sunucu · 40+ ülke (resmi rakam)",
-      en: "750+ servers · 40+ countries (official figure)",
-    },
-    { tr: "Sınırsız (Premium)", en: "Unlimited (Premium)" },
-    {
-      tr: "Sağlayıcı beyanı; bağımsız denetim geçmişi sınırlı",
-      en: "Provider claims; limited independent audit history",
-    },
-    "https://atlasvpn.com/pricing",
-    true,
-    30,
-  ),
   extendedVpn(
     "purevpn",
     "PureVPN",

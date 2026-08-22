@@ -97,7 +97,7 @@ function breadcrumbItemUrl(path: string, locale?: Locale): string {
     return path;
   }
   // getLocalizedPath() zaten /en/... veya /de/... prefix'i içerir; tekrar ekleme.
-  if (path.startsWith("/en/") || path.startsWith("/de/")) {
+  if (/^\/(?:en|de)(?:\/|$)/.test(path)) {
     return absoluteUrl(path);
   }
   return absoluteUrl(path, locale);
@@ -152,7 +152,7 @@ export function articleSchema(post: {
     author: {
       "@type": "Person",
       name: post.author,
-      url: absoluteUrl("/hakkimizda"),
+      url: absoluteUrl("/hakkimizda", post.locale),
     },
     publisher: {
       "@type": "Organization",

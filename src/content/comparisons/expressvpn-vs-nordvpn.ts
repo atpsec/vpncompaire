@@ -49,7 +49,7 @@ const tr: ExpressvpnVsNordvpnContent = {
   badge: "Yan yana karşılaştırma",
   h1: "ExpressVPN vs NordVPN: 2026 Karşılaştırması",
   tagline:
-    "İki premium devin yan yana karşılaştırması — sürtünmesiz deneyim ile altı kez denetlenmiş istikrarın karşılaşması.",
+    "İki premium sağlayıcının özellik, denetim geçmişi ve kullanım koşulları üzerinden kaynak temelli karşılaştırması.",
   ctaOfficial: {
     a: "ExpressVPN sitesini ziyaret et",
     b: "NordVPN sitesini ziyaret et",
@@ -66,49 +66,44 @@ const tr: ExpressvpnVsNordvpnContent = {
   categories: [
     {
       name: "Gizlilik ve yargı yetkisi",
-      winner: "a",
+      winner: "tie",
       aDetail:
-        "İngiliz Virjin Adaları — 14 Eyes dışı, mahkemede kanıtlanmış no-logs (2017 Türkiye olayı)",
-      bDetail: "Panama — 14 Eyes dışı, zorunlu veri saklama yok",
+        "İngiliz Virjin Adaları merkezli; 2017 sunucu olayı kamuya yansıyan tarihsel bir veri noktasıdır",
+      bDetail: "Panama merkezli; sağlayıcı no-logs politikası ve denetim raporları yayımlar",
       reasoning:
-        "İkisi de güçlü yargı yetkilerinde. ExpressVPN'in 2017'de Türk yetkililerinin sunucu el koymasına rağmen kayıt ifşa edememesi, gerçek dünyada kanıtlanmış no-logs için sektördeki en güçlü örneklerden biri.",
+        "Bir merkez ülke veya geçmiş olay, güncel veri uygulamasını tek başına kanıtlamaz. Karar verirken güncel gizlilik politikası, bağımsız denetim kapsamı ve veri talebi şeffaflığı birlikte incelenmelidir.",
     },
     {
       name: "Bağımsız denetimler",
       winner: "b",
       aDetail: "KPMG + Cure53 + PWC denetimleri",
-      bDetail:
-        "Deloitte no-logs (6 defa, son: 2025) + Cure53 istemci denetimleri (3x)",
+      bDetail: "Tekrarlanan Deloitte no-logs incelemeleri + Cure53 istemci denetimleri",
       reasoning:
-        "NordVPN'in tekrarlanan altı kez Deloitte denetimi, sektörün ulaşabildiği en kapsamlı no-logs ispat serisi. ExpressVPN'in audit portföyü de güçlü ama sıklık açısından NordVPN önde.",
+        "NordVPN yayımlanmış tekrarlı no-logs incelemelerinin sıklığıyla öne çıkıyor. Denetimlerin tarihini, kapsamını ve rapora erişim koşullarını sağlayıcıların güncel şeffaflık sayfalarından doğrulayın.",
     },
     {
       name: "Hız performansı",
       winner: "tie",
-      aDetail:
-        "Lightway protokolü — %90-95 yakın, %75-82 uzak; en hızlı bağlantı kurulumu",
-      bDetail:
-        "NordLynx (WireGuard) — %91-96 yakın, %72-80 uzak; en yüksek throughput",
+      aDetail: "Lightway protokolü — açık kaynak; sonuçlar ağ ve cihaza göre değişir",
+      bDetail: "NordLynx — WireGuard tabanlı; sonuçlar ağ ve cihaza göre değişir",
       reasoning:
-        "Lightway hızlı bağlantı kurulumunda, NordLynx ham throughput'ta önde. Pratikte fark günlük kullanımda hissedilmiyor. İkisi de sektörün üst dilimi.",
+        "VPN Advisor doğrudan karşılaştırılabilir laboratuvar ölçümü yayımlamadığı için sayısal bir hız kazananı ilan etmiyor. Kendi rota, cihaz ve ISP koşullarınızda deneme yapın.",
     },
     {
       name: "Streaming uyumluluğu",
       winner: "tie",
-      aDetail:
-        "Netflix US/UK/JP/TR/BR/DE, Disney+, BBC iPlayer, BluTV, Exxen — sektörün en stabili",
-      bDetail:
-        "Netflix US/UK/JP/TR, Disney+, BBC iPlayer, BluTV, Exxen — stabil",
+      aDetail: "Sağlayıcının destek belgelerinde çeşitli streaming senaryoları ve MediaStreamer açıklanır",
+      bDetail: "Sağlayıcının destek belgelerinde çeşitli streaming senaryoları ve SmartPlay açıklanır",
       reasoning:
-        "ExpressVPN'in MediaStreamer DNS özelliği akıllı TV/konsolda VPN olmadan bölge bypass'ı sunuyor — önemli bir nüans. NordVPN bunu sunmuyor ama IP havuzu daha geniş.",
+        "Platformların VPN ve DNS politikaları değişebilir; hiçbir servis için sürekli erişim garanti edilemez. Güncel cihaz ve hizmet desteğini satın almadan önce kontrol edin.",
     },
     {
       name: "Fiyat (uzun dönem)",
-      winner: "b",
-      aDetail: "12 aylık + 3 ay ücretsiz: etkin ~$4.99/ay",
-      bDetail: "2 yıllık plan: ~$3.39/ay",
+      winner: "tie",
+      aDetail: "Plan, kampanya, para birimi ve yenileme fiyatını resmi ödeme ekranında kontrol edin",
+      bDetail: "Plan, kampanya, para birimi ve yenileme fiyatını resmi ödeme ekranında kontrol edin",
       reasoning:
-        "NordVPN, ExpressVPN'den %30-40 daha ucuz uzun dönem planlarında. ExpressVPN'in premium fiyatı, sunduğu ekstra özelliklerle (MediaStreamer, Lightway, müşteri desteği) gerekçelendiriliyor.",
+        "Fiyatlar pazara, kampanyaya, vergiye ve abonelik dönemine göre değişir. İlk dönem fiyatıyla otomatik yenileme fiyatını ayrı karşılaştırın.",
     },
     {
       name: "Sahiplik şeffaflığı",
@@ -125,7 +120,7 @@ const tr: ExpressvpnVsNordvpnContent = {
       "Premium fiyat kabul edilebilir; sürtünmesiz deneyim önemli",
       "Akıllı TV / konsol kullanıyorsun (MediaStreamer DNS için)",
       "Lightway protokolünün hızlı bağlantı kurulumunu istiyorsun",
-      "2017 Türkiye olayı gibi gerçek dünya no-logs kanıtı senin için belirleyici",
+      "2017 Türkiye sunucu olayı gibi kamuya açık tarihsel kayıtları önemsiyorsun",
       "Sürekli sık ülke değiştiriyorsan (seyahat)",
     ],
     cta: "ExpressVPN'i incele",
@@ -133,8 +128,8 @@ const tr: ExpressvpnVsNordvpnContent = {
   whyB: {
     title: "NordVPN'i seç eğer...",
     bullets: [
-      "Bütçe önemli — NordVPN %30-40 daha ucuz",
-      "Düzenli/tekrarlanan denetimler kritik (6x Deloitte)",
+      "Güncel resmi ödeme ekranında NordVPN bütçene daha uygun görünüyor",
+      "Düzenli ve tekrarlanan denetim geçmişi kritik",
       "Threat Protection, Meshnet, Onion over VPN gibi ek özellikler değerli",
       "10 cihaz limiti yeterli",
       "Maksimum throughput (büyük dosya indirme, 4K streaming)",
@@ -145,19 +140,19 @@ const tr: ExpressvpnVsNordvpnContent = {
   faqs: [
     {
       q: "ExpressVPN mi NordVPN mi daha iyi?",
-      a: "Bütçe önemliyse ve denetim sürekliliği kritikse NordVPN. Premium deneyim, akıllı TV/konsol kullanımı veya kanıtlanmış no-logs senin için belirleyiciyse ExpressVPN. İkisi de sektörün üst dilimi.",
+      a: "Bütçe ve denetim sürekliliği önemliyse NordVPN'in güncel koşullarını; MediaStreamer ve Lightway gibi özellikler önemliyse ExpressVPN'in güncel koşullarını karşılaştırın. Tek bir seçenek herkes için daha iyi değildir.",
     },
     {
       q: "İki VPN'in hızı arasında ne kadar fark var?",
-      a: "Gerçek dünya kullanımında çok küçük (%2-5 throughput farkı). ExpressVPN'in Lightway protokolü daha hızlı bağlantı kurar; NordVPN'in NordLynx'i daha yüksek pik throughput verir. Çoğu kullanıcı farkı hissetmez.",
+      a: "Doğrudan karşılaştırılabilir laboratuvar ölçümümüz olmadığı için güvenilir bir yüzde veremiyoruz. Sonuç; konum, ISP, cihaz, protokol ve sunucu yüküne göre değişir.",
     },
     {
       q: "İkisi de Türkiye'de çalışıyor mu?",
-      a: "Evet, ikisi de Türkiye'den erişilebilir ve obfuscation özelliklerine sahip. Hiçbiri Türkiye sunucusu sunmuyor — Türkiye sunucusu için Surfshark.",
+      a: "Erişilebilirlik ve ağ engelleri zamanla değişebilir. Sağlayıcıların güncel bağlantı ve obfuscation belgelerini kontrol edin; satın almadan önce kendi ağınızda deneme ve iade koşullarını değerlendirin.",
     },
     {
       q: "Kape Technologies vs Nord Security sahipliği — hangisi daha rahatsız edici?",
-      a: "Kape, 2019'da PIA'yı, sonra CyberGhost'u, ExpressVPN'i ve birçok VPN inceleme sitesini satın aldı — yoğunlaşma daha geniş. Nord Security ise NordVPN + Surfshark'tan oluşuyor. Hangisinin daha endişe verici olduğu kişisel değerlendirme; tekniksel olarak ikisi de operasyonel bağımsızlığı koruduğunu söylüyor.",
+      a: "Sahiplik yapısını tek başına güvenlik kanıtı olarak görmeyin. Güncel kurumsal açıklamalarla birlikte bağımsız denetimleri, gizlilik politikasını ve şeffaflık raporlarını değerlendirin.",
     },
   ],
   related: {
@@ -186,7 +181,7 @@ const en: ExpressvpnVsNordvpnContent = {
   badge: "Side-by-side comparison",
   h1: "ExpressVPN vs NordVPN: 2026 Comparison",
   tagline:
-    "Two premium giants compared side by side — a frictionless experience meets six-times-audited consistency.",
+    "A source-based comparison of two premium providers across features, audit history and subscription terms.",
   ctaOfficial: {
     a: "Visit ExpressVPN",
     b: "Visit NordVPN",
@@ -203,49 +198,44 @@ const en: ExpressvpnVsNordvpnContent = {
   categories: [
     {
       name: "Privacy and jurisdiction",
-      winner: "a",
+      winner: "tie",
       aDetail:
-        "British Virgin Islands — outside 14 Eyes, no-logs proven in court (2017 Turkey incident)",
-      bDetail: "Panama — outside 14 Eyes, no mandatory data retention",
+        "Based in the British Virgin Islands; the reported 2017 server incident is a historical data point",
+      bDetail: "Based in Panama; the provider publishes a no-logs policy and audit information",
       reasoning:
-        "Both sit in strong jurisdictions. ExpressVPN being unable to disclose logs even when Turkish authorities seized a server in 2017 is one of the industry's strongest examples of real-world-proven no-logs.",
+        "A jurisdiction or historical incident does not by itself prove current data practices. Review the current privacy policy, independent-audit scope and transparency around data requests together.",
     },
     {
       name: "Independent audits",
       winner: "b",
       aDetail: "KPMG + Cure53 + PWC audits",
-      bDetail:
-        "Deloitte no-logs (6 times, most recent: 2025) + Cure53 client audits (3x)",
+      bDetail: "Repeated Deloitte no-logs reviews + Cure53 client audits",
       reasoning:
-        "NordVPN's six repeated Deloitte audits are the most comprehensive no-logs proof series the industry has achieved. ExpressVPN's audit portfolio is strong too, but NordVPN leads on frequency.",
+        "NordVPN stands out for the frequency of its published no-logs reviews. Verify the latest date, scope and access conditions on each provider's current transparency pages.",
     },
     {
       name: "Speed performance",
       winner: "tie",
-      aDetail:
-        "Lightway protocol — 90-95% nearby, 75-82% long-distance; fastest connection setup",
-      bDetail:
-        "NordLynx (WireGuard) — 91-96% nearby, 72-80% long-distance; highest throughput",
+      aDetail: "Lightway protocol — open source; results vary by network and device",
+      bDetail: "NordLynx — WireGuard-based; results vary by network and device",
       reasoning:
-        "Lightway leads on connection setup speed, NordLynx on raw throughput. In practice the difference isn't noticeable in daily use. Both are in the industry's top tier.",
+        "VPN Advisor does not publish a directly comparable lab sample for these products, so we do not name a numerical speed winner. Test on your own route, device and ISP.",
     },
     {
       name: "Streaming compatibility",
       winner: "tie",
-      aDetail:
-        "Netflix US/UK/JP/TR/BR/DE, Disney+, BBC iPlayer, BluTV, Exxen — the most stable in the industry",
-      bDetail:
-        "Netflix US/UK/JP/TR, Disney+, BBC iPlayer, BluTV, Exxen — stable",
+      aDetail: "The provider's support documents describe several streaming scenarios and MediaStreamer",
+      bDetail: "The provider's support documents describe several streaming scenarios and SmartPlay",
       reasoning:
-        "ExpressVPN's MediaStreamer DNS feature offers region bypass on smart TVs/consoles without a VPN — an important nuance. NordVPN doesn't offer that, but its IP pool is larger.",
+        "Streaming services can change their VPN and DNS policies, so continuous access cannot be guaranteed. Check current device and service support before buying.",
     },
     {
       name: "Price (long term)",
-      winner: "b",
-      aDetail: "12 months + 3 free: effectively ~$4.99/mo",
-      bDetail: "2-year plan: ~$3.39/mo",
+      winner: "tie",
+      aDetail: "Check the term, promotion, currency and renewal price at the official checkout",
+      bDetail: "Check the term, promotion, currency and renewal price at the official checkout",
       reasoning:
-        "NordVPN is 30-40% cheaper than ExpressVPN on long-term plans. ExpressVPN justifies its premium price with the extras it offers (MediaStreamer, Lightway, customer support).",
+        "Prices vary by market, promotion, tax and subscription term. Compare the introductory total and the automatic-renewal price separately.",
     },
     {
       name: "Ownership transparency",
@@ -262,7 +252,7 @@ const en: ExpressvpnVsNordvpnContent = {
       "A premium price is acceptable and a frictionless experience matters to you",
       "You use a smart TV / console (for MediaStreamer DNS)",
       "You want the Lightway protocol's fast connection setup",
-      "Real-world no-logs proof like the 2017 Turkey incident is decisive for you",
+      "You value public historical records such as the reported 2017 Turkey server incident",
       "You constantly switch countries (travel)",
     ],
     cta: "Read the ExpressVPN review",
@@ -270,8 +260,8 @@ const en: ExpressvpnVsNordvpnContent = {
   whyB: {
     title: "Choose NordVPN if...",
     bullets: [
-      "Budget matters — NordVPN is 30-40% cheaper",
-      "Regular, repeated audits are critical (6x Deloitte)",
+      "NordVPN is the better fit at the price shown in your current official checkout",
+      "A history of regular, repeated audits is critical",
       "Extra features like Threat Protection, Meshnet and Onion over VPN are valuable to you",
       "A 10-device limit is enough",
       "You want maximum throughput (large downloads, 4K streaming)",
@@ -282,19 +272,19 @@ const en: ExpressvpnVsNordvpnContent = {
   faqs: [
     {
       q: "Is ExpressVPN or NordVPN better?",
-      a: "If budget matters and audit continuity is critical, NordVPN. If a premium experience, smart TV/console use or proven no-logs is decisive for you, ExpressVPN. Both are in the industry's top tier.",
+      a: "If budget and audit continuity matter, compare NordVPN's current terms; if MediaStreamer and Lightway matter, compare ExpressVPN's current terms. No single option is better for everyone.",
     },
     {
       q: "How big is the speed difference between the two VPNs?",
-      a: "Very small in real-world use (a 2-5% throughput difference). ExpressVPN's Lightway protocol connects faster; NordVPN's NordLynx delivers higher peak throughput. Most users won't feel the difference.",
+      a: "We do not have a directly comparable lab sample, so we cannot support a reliable percentage. Results vary by location, ISP, device, protocol and server load.",
     },
     {
       q: "Do both work in Turkey?",
-      a: "Yes, both are accessible from Turkey and offer obfuscation features. Neither offers a Türkiye server — for a Türkiye server, see Surfshark.",
+      a: "Availability and network blocking can change over time. Check each provider's current connection and obfuscation documentation, then consider testing on your own network under the refund terms.",
     },
     {
       q: "Kape Technologies vs Nord Security ownership — which is more concerning?",
-      a: "Kape acquired PIA in 2019, then CyberGhost, ExpressVPN and several VPN review sites — its concentration is broader. Nord Security consists of NordVPN + Surfshark. Which is more concerning is a personal judgment; technically, both say they maintain operational independence.",
+      a: "Do not treat ownership structure alone as proof of security. Review current corporate disclosures alongside independent audits, privacy policies and transparency reports.",
     },
   ],
   related: {
@@ -323,7 +313,7 @@ const de: ExpressvpnVsNordvpnContent = {
   badge: "Direktvergleich",
   h1: "ExpressVPN vs NordVPN: Vergleich 2026",
   tagline:
-    "Zwei Premium-Schwergewichte im Direktvergleich — reibungsloses Erlebnis trifft auf sechsfach auditierte Beständigkeit.",
+    "Ein quellenbasierter Vergleich zweier Premium-Anbieter nach Funktionen, Audit-Historie und Vertragsbedingungen.",
   ctaOfficial: {
     a: "Zur ExpressVPN-Website",
     b: "Zur NordVPN-Website",
@@ -340,50 +330,44 @@ const de: ExpressvpnVsNordvpnContent = {
   categories: [
     {
       name: "Datenschutz und Gerichtsbarkeit",
-      winner: "a",
+      winner: "tie",
       aDetail:
-        "Britische Jungferninseln — außerhalb der 14 Eyes, No-Logs vor Gericht bewiesen (Türkei-Vorfall 2017)",
-      bDetail:
-        "Panama — außerhalb der 14 Eyes, keine Vorratsdatenspeicherung",
+        "Sitz auf den Britischen Jungferninseln; der gemeldete Server-Vorfall von 2017 ist ein historischer Datenpunkt",
+      bDetail: "Sitz in Panama; der Anbieter veröffentlicht No-Logs- und Audit-Informationen",
       reasoning:
-        "Beide sitzen in starken Gerichtsbarkeiten. Dass ExpressVPN 2017 trotz Server-Beschlagnahmung durch türkische Behörden keine Logs offenlegen konnte, ist eines der stärksten Beispiele der Branche für in der Praxis bewiesenes No-Logs.",
+        "Ein Gerichtsstand oder historischer Vorfall beweist nicht allein die heutige Datenpraxis. Prüfe aktuelle Datenschutzrichtlinien, Audit-Umfang und Transparenz zu Behördenanfragen gemeinsam.",
     },
     {
       name: "Unabhängige Audits",
       winner: "b",
       aDetail: "KPMG- + Cure53- + PWC-Audits",
-      bDetail:
-        "Deloitte-No-Logs-Audit (6-mal, zuletzt: 2025) + Cure53-Client-Audits (3x)",
+      bDetail: "Wiederholte Deloitte-No-Logs-Prüfungen + Cure53-Client-Audits",
       reasoning:
-        "NordVPNs sechs wiederholte Deloitte-Audits sind die umfassendste No-Logs-Nachweisserie, die die Branche erreicht hat. ExpressVPNs Audit-Portfolio ist ebenfalls stark, aber bei der Häufigkeit liegt NordVPN vorn.",
+        "NordVPN fällt durch die Häufigkeit veröffentlichter No-Logs-Prüfungen auf. Datum, Umfang und Zugangsbedingungen sollten auf den aktuellen Transparenzseiten beider Anbieter geprüft werden.",
     },
     {
       name: "Geschwindigkeit",
       winner: "tie",
-      aDetail:
-        "Lightway-Protokoll — 90-95 % nah, 75-82 % fern; schnellster Verbindungsaufbau",
-      bDetail:
-        "NordLynx (WireGuard) — 91-96 % nah, 72-80 % fern; höchster Durchsatz",
+      aDetail: "Lightway-Protokoll — Open Source; Ergebnisse hängen von Netzwerk und Gerät ab",
+      bDetail: "NordLynx — WireGuard-basiert; Ergebnisse hängen von Netzwerk und Gerät ab",
       reasoning:
-        "Lightway liegt beim Verbindungsaufbau vorn, NordLynx beim reinen Durchsatz. In der Praxis ist der Unterschied im Alltag nicht spürbar. Beide gehören zur Spitzengruppe der Branche.",
+        "VPN Advisor veröffentlicht für diese Produkte keine direkt vergleichbare Labormessung und nennt daher keinen numerischen Geschwindigkeitssieger. Teste auf deiner eigenen Route und Verbindung.",
     },
     {
       name: "Streaming-Kompatibilität",
       winner: "tie",
-      aDetail:
-        "Netflix US/UK/JP/TR/BR/DE, Disney+, BBC iPlayer, BluTV, Exxen — das stabilste der Branche",
-      bDetail:
-        "Netflix US/UK/JP/TR, Disney+, BBC iPlayer, BluTV, Exxen — stabil",
+      aDetail: "Die Support-Dokumentation beschreibt verschiedene Streaming-Szenarien und MediaStreamer",
+      bDetail: "Die Support-Dokumentation beschreibt verschiedene Streaming-Szenarien und SmartPlay",
       reasoning:
-        "ExpressVPNs MediaStreamer-DNS-Funktion bietet Regions-Bypass auf Smart-TVs/Konsolen ganz ohne VPN — eine wichtige Nuance. NordVPN bietet das nicht, hat aber den größeren IP-Pool.",
+        "Streaming-Dienste können ihre VPN- und DNS-Regeln ändern; dauerhafter Zugriff ist nicht garantiert. Prüfe die aktuelle Geräte- und Dienstunterstützung vor dem Kauf.",
     },
     {
       name: "Preis (langfristig)",
-      winner: "b",
-      aDetail: "12 Monate + 3 gratis: effektiv ~$4.99/Monat",
-      bDetail: "2-Jahres-Plan: ~$3.39/Monat",
+      winner: "tie",
+      aDetail: "Laufzeit, Aktion, Währung und Verlängerungspreis im offiziellen Checkout prüfen",
+      bDetail: "Laufzeit, Aktion, Währung und Verlängerungspreis im offiziellen Checkout prüfen",
       reasoning:
-        "NordVPN ist bei langfristigen Tarifen 30-40 % günstiger als ExpressVPN. ExpressVPN rechtfertigt seinen Premium-Preis mit den gebotenen Extras (MediaStreamer, Lightway, Kundensupport).",
+        "Preise hängen von Markt, Aktion, Steuer und Laufzeit ab. Vergleiche Einstiegsgesamtpreis und automatische Verlängerung getrennt.",
     },
     {
       name: "Transparenz der Eigentümerstruktur",
@@ -401,7 +385,7 @@ const de: ExpressvpnVsNordvpnContent = {
       "ein Premium-Preis okay ist und dir ein reibungsloses Erlebnis wichtig ist",
       "du Smart-TV / Konsole nutzt (wegen MediaStreamer DNS)",
       "du den schnellen Verbindungsaufbau des Lightway-Protokolls willst",
-      "Praxisbeweise für No-Logs wie der Türkei-Vorfall 2017 für dich entscheidend sind",
+      "du öffentliche historische Hinweise wie den gemeldeten Türkei-Server-Vorfall 2017 wichtig findest",
       "du ständig das Land wechselst (Reisen)",
     ],
     cta: "Zum ExpressVPN-Test",
@@ -409,8 +393,8 @@ const de: ExpressvpnVsNordvpnContent = {
   whyB: {
     title: "Wähle NordVPN, wenn...",
     bullets: [
-      "das Budget zählt — NordVPN ist 30-40 % günstiger",
-      "regelmäßige, wiederholte Audits entscheidend sind (6x Deloitte)",
+      "NordVPN beim aktuell angezeigten offiziellen Checkout besser in dein Budget passt",
+      "eine regelmäßige, wiederholte Audit-Historie entscheidend ist",
       "Zusatzfunktionen wie Threat Protection, Meshnet und Onion over VPN wertvoll sind",
       "dir ein Limit von 10 Geräten reicht",
       "du maximalen Durchsatz willst (große Downloads, 4K-Streaming)",
@@ -421,19 +405,19 @@ const de: ExpressvpnVsNordvpnContent = {
   faqs: [
     {
       q: "Ist ExpressVPN oder NordVPN besser?",
-      a: "Wenn das Budget zählt und Audit-Kontinuität entscheidend ist: NordVPN. Wenn Premium-Erlebnis, Smart-TV/Konsolen-Nutzung oder bewiesenes No-Logs für dich ausschlaggebend sind: ExpressVPN. Beide gehören zur Spitzengruppe der Branche.",
+      a: "Wenn Budget und Audit-Kontinuität zählen, vergleiche NordVPNs aktuelle Bedingungen; wenn MediaStreamer und Lightway zählen, vergleiche ExpressVPNs aktuelle Bedingungen. Keine Option ist für alle besser.",
     },
     {
       q: "Wie groß ist der Geschwindigkeitsunterschied zwischen den beiden VPNs?",
-      a: "In der Praxis sehr klein (2-5 % Durchsatzunterschied). ExpressVPNs Lightway-Protokoll baut Verbindungen schneller auf; NordVPNs NordLynx liefert höheren Spitzendurchsatz. Die meisten Nutzer spüren den Unterschied nicht.",
+      a: "Uns fehlt eine direkt vergleichbare Laborstichprobe, daher nennen wir keinen belastbaren Prozentwert. Das Ergebnis hängt von Standort, ISP, Gerät, Protokoll und Serverlast ab.",
     },
     {
       q: "Funktionieren beide in der Türkei?",
-      a: "Ja, beide sind aus der Türkei erreichbar und bieten Obfuskations-Funktionen. Keines der beiden bietet einen Türkei-Server — für einen Türkei-Server: Surfshark.",
+      a: "Erreichbarkeit und Netzsperren können sich ändern. Prüfe die aktuellen Verbindungs- und Obfuskationshinweise beider Anbieter und teste nach Möglichkeit im Rahmen der Rückerstattungsbedingungen im eigenen Netz.",
     },
     {
       q: "Kape Technologies vs. Nord Security — welche Eigentümerstruktur ist bedenklicher?",
-      a: "Kape kaufte 2019 PIA, dann CyberGhost, ExpressVPN und mehrere VPN-Testseiten — die Konzentration ist breiter. Nord Security besteht aus NordVPN + Surfshark. Was bedenklicher ist, bleibt eine persönliche Einschätzung; technisch betonen beide ihre operative Unabhängigkeit.",
+      a: "Die Eigentümerstruktur allein ist kein Sicherheitsnachweis. Prüfe aktuelle Unternehmensangaben zusammen mit unabhängigen Audits, Datenschutzrichtlinien und Transparenzberichten.",
     },
   ],
   related: {

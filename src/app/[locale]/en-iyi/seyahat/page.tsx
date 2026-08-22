@@ -55,7 +55,7 @@ const CONTENT = {
     faqs: [
       {
         q: "Hangi ülkelerde VPN kullanmak yasak?",
-        a: "Çin, İran, Türkmenistan, Belarus ve Birleşik Arap Emirlikleri'nde VPN kullanımı sıkı şekilde düzenleniyor — bazılarında devlet onaylı VPN dışında yasak. Türkiye, AB, ABD, çoğu Asya ve Afrika ülkesinde VPN kullanımı yasal.",
+        a: "VPN kuralları ülkeye ve zamana göre hızla değişebilir; bazı ülkelerde yalnız onaylı hizmetlere izin verilir veya kullanım kısıtlanır. Seyahatten önce resmi güncel kaynakları ve gerekiyorsa yerel hukuk uzmanını kontrol edin; bu sayfa hukuki tavsiye değildir.",
       },
       {
         q: "Otelde VPN gerçekten gerekli mi?",
@@ -124,7 +124,7 @@ const CONTENT = {
     faqs: [
       {
         q: "Where is VPN use banned?",
-        a: "VPN use is heavily regulated in China, Iran, Turkmenistan, Belarus and the UAE — in some, only state-approved VPNs are allowed. In Türkiye, the EU, the US and most of Asia and Africa, VPN use is legal.",
+        a: "VPN rules can change quickly by country; some jurisdictions restrict use or allow only approved services. Before travel, check current official sources and, where needed, local legal advice. This page is not legal advice.",
       },
       {
         q: "Is a VPN really necessary at a hotel?",

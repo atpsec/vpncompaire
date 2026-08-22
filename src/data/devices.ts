@@ -36,7 +36,7 @@ export type DeviceContent = {
 
 const COMMON_RELATED = [
   { label: "Tüm VPN'leri karşılaştır", href: "/en-iyi-vpn" },
-  { label: "Test metodolojimiz", href: "/metodoloji" },
+  { label: "Karşılaştırma metodolojisi ve kaynaklar", href: "/metodoloji" },
 ];
 
 export const devices: DeviceContent[] = [
@@ -48,23 +48,23 @@ export const devices: DeviceContent[] = [
     metaDescription:
       "Android telefon ve tablette VPN neden gerekli, nasıl kurulur, hangi sağlayıcı en uygun? Kill switch, split tunneling ve Play Store önerileri.",
     tagline:
-      "Google'ın veri toplama ekosisteminden çıkmak ve halka açık Wi-Fi'da güvenlik için Android'de VPN şart.",
+      "Halka açık Wi-Fi'da ağ düzeyindeki görünürlüğü azaltmak ve etkinliğin IP adresiyle doğrudan ilişkilendirilmesini sınırlamak için VPN, Android'de yararlı bir gizlilik katmanı olabilir.",
     summary:
-      "Android, dünyada en yaygın mobil işletim sistemi ve aynı zamanda en geniş VPN istemci uyumluluğuna sahip platform. Play Store'daki tek tıklık kurulum, WireGuard ve OpenVPN protokol desteği, kill switch ile uygulama bazlı bölünmüş tünelleme (split tunneling) — bunların hepsi büyük VPN sağlayıcılarında yıllardır olgunlaştı. Asıl mesele hangisini seçtiğin değil, doğru ayarları yapıp yapmadığın.",
+      "Android geniş VPN istemci uyumluluğu sunar. Play Store kurulumu, WireGuard veya OpenVPN desteği, kill switch ve uygulama bazlı bölünmüş tünelleme gibi özellikler sağlayıcıya, plana, uygulama sürümüne ve cihaza göre değişir. Seçimden sonra ayarları kendi cihazında ve ağında doğrulamak önemlidir.",
     whyMatters: [
-      "Halka açık Wi-Fi (kafe, otel, havalimanı) ortamında HTTPS olmayan uygulamalardan veri sızabilir — VPN bu trafiği sarar.",
-      "Google ve uygulama geliştiricileri reklam ID'si ve konum verisi topluyor; VPN tek başına bunu engellemez ama IP bağlantısını koparır.",
-      "ISP, mobil veride hangi uygulamalara hangi saatlerde bağlandığını metaveri olarak görüyor; VPN bu görünürlüğü tamamen keser.",
-      "Bazı Android uygulamaları (özellikle ücretsiz oyunlar ve düşük profilli yardımcı uygulamalar) arka planda izleyici ağlarına bağlanıyor; uygulama bazlı tünelleme ile yalnızca seçtiklerini VPN üzerinden geçirebilirsin.",
+      "Halka açık Wi-Fi'da VPN, desteklenen IP trafiğini tünelden geçirerek yerel ağın görebileceği bilgileri azaltabilir; HTTPS ve güncel cihaz güvenliği yine gereklidir.",
+      "Uygulamalar reklam kimliği, hesap ve konum sinyalleri kullanabilir. VPN görünen IP adresini değiştirebilir ancak SDK, hesap veya cihaz düzeyindeki takibi tek başına durdurmaz.",
+      "Mobil veride VPN, internet sağlayıcısının hedef trafik hakkında öğrenebileceği bilgileri azaltabilir; bağlantı zamanı, veri hacmi ve VPN uç noktası görünür kalabilir.",
+      "Sağlayıcı ve Android sürümü destekliyorsa uygulama bazlı tünelleme ile seçili uygulamaların hangi bağlantıyı kullanacağını düzenleyebilirsin; sonucu kendi cihazında doğrula.",
     ],
     setupMethods: [
       {
         name: "Play Store uygulaması",
         difficulty: "Kolay",
         description:
-          "Sağlayıcının resmi uygulamasını Play Store'dan indir, hesabınla giriş yap, tek tıkla bağlan. Bağlanırken Android sistem uyarısı çıkar (VPN sertifikası onayı), tamam dediğinde her şey otomatik ayarlanır.",
+          "Sağlayıcının resmi uygulamasını Play Store'dan indir, hesabınla giriş yap ve Android'in VPN bağlantısı onayını dikkatle incele. Bağlandıktan sonra IP, DNS ve yeniden bağlanma davranışını kendi cihazında kontrol et.",
         whenToUse:
-          "Çoğu kullanıcı için doğru seçim. Otomatik güncellemeler, kill switch ve split tunneling buradan yönetilir.",
+          "Çoğu kullanıcı için başlangıç seçeneği. Uygulama sürümünün sunduğu otomatik güncelleme, kill switch ve split tunneling kontrollerini buradan inceleyebilirsin.",
       },
       {
         name: "WireGuard / OpenVPN manuel",
@@ -78,7 +78,7 @@ export const devices: DeviceContent[] = [
         name: "Router seviyesinde VPN",
         difficulty: "İleri düzey",
         description:
-          "Tüm ev ağını VPN'e bağladığında telefon ve tablet otomatik olarak korunur — ayrı uygulama gerekmez. Cihaz başına ayar yok, dezavantaj da bu: VPN'i tek bir cihaz için kapatamazsın.",
+          "VPN'i router'a kurduğunda desteklenen telefon ve tablet trafiği cihaz başına uygulama olmadan tünelden yönlendirilebilir. Kapsama, IPv6, DNS ve cihaz bazlı istisnalar router yapılandırmasına bağlıdır; her cihazda doğrula.",
         whenToUse:
           "Çocuk tabletleri, geriatrik aile üyelerinin telefonları ya da uygulama yüklenemeyen Smart TV'leriniz varsa.",
       },
@@ -87,56 +87,56 @@ export const devices: DeviceContent[] = [
       {
         slug: "nordvpn",
         bestFor: "Genel kullanım",
-        why: "Android uygulaması olgun: kill switch, split tunneling, otomatik bağlanma, Threat Protection ile reklam/zararlı yazılım engelleme dahil. Birden fazla 5G operatöründe stabil davranır.",
+        why: "NordVPN'in Android belgeleri kill switch, split tunneling, otomatik bağlanma ve Threat Protection özelliklerini listeliyor. Kullanılabilirlik uygulama sürümüne göre değişebilir; güncel özellik listesini ve kendi operatöründeki bağlantı davranışını doğrula.",
       },
       {
         slug: "surfshark",
         bestFor: "Çok cihazlı haneler",
-        why: "Sınırsız eşzamanlı cihaz desteği — telefon, tablet, eşinin telefonu, çocuğun tableti ve sonra da bilgisayar… hepsi tek hesapta. CleanWeb reklam engelleme cabası.",
+        why: "Surfshark şu anda sınırsız eşzamanlı bağlantı ve CleanWeb filtreleme özelliği sunduğunu belirtiyor. Güncel plan koşullarını kontrol et; kullandığın cihaz ve uygulama sürümlerinin desteklendiğini doğrula.",
       },
       {
         slug: "expressvpn",
         bestFor: "Konum gizliliğine en çok önem verenler",
-        why: "Lightway protokolü mobil ağ değişimlerinde (Wi-Fi → 4G geçişi) yeniden bağlanmayı hedefler. Gerçek bağlantı ve IP davranışı cihaz, ağ ve uygulama ayarlarına göre değişir; Android için sabit bir editoryal hız ölçümü sunmuyoruz.",
+        why: "ExpressVPN, Lightway'i hızlı ağ değişimleri için tasarlanmış bir protokol olarak tanımlıyor. Yeniden bağlanma süresi, sızıntı koruması ve hız telefon, operatör ve sunucuya göre değişir; kill switch'i açıp Wi-Fi ile mobil veri geçişlerini kendi cihazında test et.",
       },
     ],
     pitfalls: [
       {
-        title: "Kill switch'i mutlaka aç",
+        title: "Kill switch kontrollerini aç ve doğrula",
         body:
-          "Android'de VPN bağlantısı koptuğunda sistem trafiğine devam etmesini engelleyen iki ayar var: sağlayıcının uygulama içi kill switch'i + Android'in sistem ayarlarındaki 'Always-on VPN' + 'Block connections without VPN' seçeneği. İkisini birden aç — birincisi uygulama kilitlenirse seni korumaz, ikincisi korur.",
+          "Android'in sistem düzeyindeki 'Always-on VPN' ve 'Block connections without VPN' seçenekleri, sağlayıcının uygulama içi kill switch'ini tamamlayabilir. Destek ve hata anındaki davranış uygulama ile Android sürümüne göre değişir; mevcut kontrolleri aç ve izin verilen bir sızıntı testiyle doğrula.",
       },
       {
         title: "Banka ve devlet uygulamalarını ayırın",
         body:
-          "Türkiye'deki bazı banka, e-Devlet ve PTT uygulamaları yurt dışı IP'den girişi tehdit olarak görüp hesabını geçici kilitleyebilir. Split tunneling ile bu uygulamaları VPN dışında bırak; bankacılık trafiği Türk IP'sinden çıksın, kalan trafik VPN'den.",
+          "Bazı banka ve kamu uygulamaları yabancı IP nedeniyle ek doğrulama isteyebilir veya erişim sorunu çıkarabilir. Sağlayıcın destekliyorsa bu uygulamaları split tunneling ile VPN dışında bırakmayı değerlendir; bankanın güvenlik yönlendirmelerini izleyip sonucu kendi hesabında doğrula.",
       },
       {
         title: "Pil tüketimine dikkat",
         body:
-          "WireGuard ve Lightway protokolleri arka planda OpenVPN'e göre belirgin biçimde daha az pil tüketir. Eski OpenVPN bağlantıları cihazı sıcakta tutar, batarya çabuk biter. Mümkünse WireGuard tabanlı protokole geç.",
+          "WireGuard ve Lightway gibi hafif protokoller bazı cihazlarda OpenVPN'den daha az pil kullanabilir; sonuç uygulama, sinyal kalitesi, sunucu ve telefona bağlıdır. Varsayılan protokolü seçmeden önce kendi cihazında pil ve bağlantı davranışını karşılaştır.",
       },
     ],
     faqs: [
       {
         q: "Play Store'daki ücretsiz VPN uygulamalarını kullanmak güvenli mi?",
-        a: "Genel olarak hayır. 2023-2025 arasında yapılan akademik çalışmalar (CSIRO, Univ. of Sydney) Play Store'daki ücretsiz VPN uygulamalarının önemli bir kısmında üçüncü taraf izleyicilere veri sızdırma, gereksiz izin talebi ve hatta zararlı yazılım davranışı tespit etti. Ücretsiz olmasını istiyorsan Proton VPN'in ücretsiz planı en güvenli seçimdir — gerçek bir şirket, yıllık denetim ve şeffaf gelir modeli var.",
+        a: "Ücretsiz VPN uygulamalarına temkinli yaklaş: mağazada listelenmek güvenli veri işleme kanıtı değildir. Geliştiriciyi, izinleri, gizlilik politikasını, gelir modelini ve güncel bağımsız denetimleri incele. Proton VPN ücretsiz planı ve denetimleri hakkında bilgi yayımlıyor; yine de kapsamı ve güncel koşulları resmi belgelerden doğrula.",
       },
       {
         q: "Android'de VPN açıkken bazı uygulamalar çalışmıyor, ne yapmalıyım?",
-        a: "İki yaygın sebep var: (1) Uygulama yurt dışı IP'yi engelliyor (Türk bankacılığı, Trendyol Wallet, BluTV bazen) — bu uygulamaları split tunneling ile VPN dışına al. (2) Uygulama IPv6 üzerinden konuşmaya çalışıyor ve VPN sadece IPv4 destekliyor — sağlayıcının ayarlarından IPv6 sızıntı engelini aç veya IPv6'yı kapat.",
+        a: "Uygulama yabancı veya paylaşılan IP'yi sınırlıyor ya da VPN'in IPv6/DNS desteği cihazın bağlantısıyla uyuşmuyor olabilir. Sağlayıcı belgelerini kontrol et; destekleniyorsa uygulamayı split tunneling ile ayırıp IPv6 ve DNS sızıntı ayarlarını kendi ağında test et.",
       },
       {
         q: "Android TV'de aynı uygulamayı kullanabilir miyim?",
-        a: "Evet — NordVPN, Surfshark, ExpressVPN, CyberGhost ve PIA Android TV mağazasında resmi uygulamaya sahip. Mullvad'in Android TV uygulaması yok ama APK olarak yüklenebilir. Smart TV rehberimizde detaylı anlatıldı.",
+        a: "Bazı büyük sağlayıcılar Android TV uygulaması yayımlıyor ancak mağaza bulunabilirliği ve cihaz desteği değişebilir. Abone olmadan önce TV'nin Play Store'unu ve sağlayıcının güncel uyumluluk sayfasını kontrol et; alternatif kurulumlar için Smart TV rehberimize bak.",
       },
       {
         q: "WireGuard mı OpenVPN mı kullanmalıyım?",
-        a: "Çoğu durumda WireGuard. Daha hızlı, daha az pil, daha az kod (=daha küçük saldırı yüzeyi). OpenVPN'i sadece WireGuard'ın engellendiği ağlarda (bazı kurumsal Wi-Fi, bazı kısıtlayıcı ülkeler) tercih et — TCP 443 üzerinden çalışan obfuscated OpenVPN engellemeleri aşar.",
+        a: "WireGuard, kompakt tasarımı ve tipik performans profili nedeniyle çoğu cihazda değerlendirilebilecek ilk seçeneklerden biridir. Onu kısıtlayan ağlarda obfuscation veya TCP tabanlı bir mod yardımcı olabilir ancak erişim garanti değildir. Ağ kurallarına uy ve desteklenen protokolleri kendi bağlantında karşılaştır.",
       },
       {
         q: "Android'in yerleşik 'Private DNS' özelliği VPN ihtiyacımı karşılar mı?",
-        a: "Hayır. Private DNS (DNS-over-TLS) sadece DNS sorgularını şifreler — ISP'nin hangi siteyle konuştuğunu öğrenmesini zorlaştırır ama hâlâ ISP üzerinden geçen tüm IP trafiğin görünür. Trafiğini gerçekten kapatmak için tam VPN tüneline ihtiyacın var.",
+        a: "Hayır. Private DNS, DNS sorgularını şifreler fakat cihaz genelinde trafik tüneli değildir. VPN yerel ağın ve internet sağlayıcısının görebileceği bilgileri azaltırken güveni VPN sağlayıcısına taşır; bazı koşullarda hedef IP ve bağlantı metaverisi yine görünür kalabilir.",
       },
     ],
     relatedLinks: [
@@ -154,23 +154,23 @@ export const devices: DeviceContent[] = [
     metaDescription:
       "iPhone'da VPN neden gerekli, App Store uygulamaları, iCloud Private Relay ile çakışmalar ve günlük kullanım için en iyi seçimler.",
     tagline:
-      "Apple güçlü gizlilik markası taşır ama bu IP adresini ve trafiği kapatmaz — iPhone'da da VPN'in yeri farklı.",
+      "Apple'ın gizlilik özellikleri cihaz genelinde bir VPN değildir; doğru yapılandırılmış bir VPN iPhone'da ağ düzeyindeki görünürlüğü azaltabilir.",
     summary:
-      "iPhone'un App Tracking Transparency ve Mail Privacy Protection gibi özellikleri uygulama içi takibi azaltır, ama bunlar sadece Apple ekosistemi içindeki sinyalleri keser. ISP hâlâ hangi sunuculara bağlandığını, halka açık Wi-Fi sahibi hâlâ trafik metaverini görüyor. VPN bu görünürlüğü kapatan tek araç.",
+      "App Tracking Transparency ve Mail Privacy Protection bazı takip sinyallerini azaltır ancak cihaz genelinde bir VPN değildir. VPN halka açık Wi-Fi ve internet sağlayıcısı düzeyindeki görünürlüğü azaltabilir; metaveriyi bütünüyle yok etmek yerine güveni VPN sağlayıcısına taşır.",
     whyMatters: [
-      "iCloud Private Relay yalnızca Safari trafiğini koruyor — diğer uygulamalar (üçüncü taraf tarayıcılar, oyunlar, sosyal medya, finans uygulamaları) açıkta kalıyor.",
-      "App Store'daki uygulamaların önemli bir kısmı reklam SDK'ları içeriyor ve cihazın IP adresi üzerinden konum/davranış profili çıkarıyor; VPN bu zincirin temel halkasını kırar.",
-      "Halka açık Wi-Fi'ya bağlandığında iOS arka planda iCloud Drive sync, App Store kontrolü, push notification kanalları gibi şifreli ama metaveri sızdıran trafiği başlatır — VPN bunu sarar.",
-      "Bazı bankacılık ve devlet uygulamaları yurt dışı IP'yi bloklar; iPhone'da split tunneling sınırlı olduğu için sağlayıcının 'trusted networks' / 'exclude apps' özelliği önem kazanır.",
+      "iCloud Private Relay genel amaçlı, cihaz genelinde bir VPN değildir; kapsadığı trafiği Apple'ın güncel belgelerinden kontrol et.",
+      "Bazı App Store uygulamaları IP tabanlı konum sinyallerini kullanabilen reklam SDK'ları içerir. VPN görünen IP'yi değiştirebilir ancak SDK veya hesap tabanlı takibi durdurmaz.",
+      "Halka açık Wi-Fi'ya bağlanınca iOS servisleri arka plan trafiği üretir. VPN desteklenen IP trafiğini tünelleyebilir fakat her bağlantı metaverisini veya uygulama telemetrisini ortadan kaldırmaz.",
+      "Bazı bankacılık ve devlet uygulamaları yabancı IP nedeniyle ek doğrulama isteyebilir veya erişimi sınırlayabilir. iOS'taki split tunneling seçenekleri sağlayıcıya göre değiştiği için güncel 'trusted networks' ya da uygulama istisnası desteğini kontrol et.",
     ],
     setupMethods: [
       {
         name: "App Store uygulaması",
         difficulty: "Kolay",
         description:
-          "Sağlayıcının resmi uygulamasını App Store'dan yükle, açtığında iOS senden VPN konfigürasyonu ekleme izni ister, onayla — uygulama gerisini halleder.",
+          "Sağlayıcının resmi uygulamasını App Store'dan yükle, iOS'un VPN konfigürasyonu ekleme isteğini inceleyip onayla ve uygulamadaki kurulum adımlarını tamamla. Sonrasında IP, DNS ve yeniden bağlanma davranışını doğrula.",
         whenToUse:
-          "Hemen hemen herkes için. iCloud üzerinden iPhone, iPad ve Mac arasında ayar senkronu da bu yolla.",
+          "Çoğu kullanıcı için. Hesap ve ayar senkronu sağlayıcıya ve uygulama sürümüne göre değişebileceğinden kullandığın cihazlarda kontrol et.",
       },
       {
         name: "IKEv2 manuel profil",
@@ -184,7 +184,7 @@ export const devices: DeviceContent[] = [
         name: "WireGuard resmi uygulama",
         difficulty: "Orta",
         description:
-          "App Store'daki resmi WireGuard uygulamasına sağlayıcının .conf'unu yükleyebilirsin. Pil dostu, hızlı, açık kaynak.",
+          "App Store'daki resmi WireGuard uygulamasına sağlayıcının .conf dosyasını yükleyebilirsin. İstemci açık kaynaklıdır; hız ve pil kullanımı cihaz, ağ ve yapılandırmaya göre değişir.",
         whenToUse:
           "Mullvad gibi minimal sağlayıcılarla veya birden fazla sağlayıcıyı tek uygulamada yönetmek için.",
       },
@@ -192,57 +192,57 @@ export const devices: DeviceContent[] = [
     picks: [
       {
         slug: "expressvpn",
-        bestFor: "En akıcı günlük kullanım",
-        why: "iOS uygulaması en sade ve hızlı kuruluma sahip. Lightway protokolü Wi-Fi/5G geçişlerinde 1-2 saniyede yeniden bağlanıyor, kullanıcı kopuşu fark etmiyor. Apple TV uygulaması da var — ekosistem tutarlı.",
+        bestFor: "Günlük iOS kullanımı",
+        why: "ExpressVPN, iOS'ta Lightway desteğini ve Apple TV uygulamasını resmi belgelerinde listeliyor. Kurulum deneyimi ve yeniden bağlanma süresi cihaz, ağ ve uygulama sürümüne göre değişir; Wi-Fi ile hücresel veri geçişini kendi cihazında test et.",
       },
       {
         slug: "proton-vpn",
         bestFor: "Gizlilik öncelikli iPhone kullanıcısı",
-        why: "İsviçre yasal yetkisi, açık kaynak iOS istemcisi (GitHub'da denetlenebilir), yıllık no-logs denetimleri ve ücretsiz planı bile sınırsız bant genişliği sunması iPhone'un 'gizlilik markası' söylemine en uyumlu eşleşme.",
+        why: "Proton VPN, iOS kaynak kodu, denetim materyali ve ücretsiz plan koşulları yayımlıyor. Bu özelliklerin ihtiyacına uygunluğunu değerlendirirken güncel denetim kapsamını ve plan sınırlarını sağlayıcının resmi belgelerinden doğrula.",
       },
       {
         slug: "nordvpn",
         bestFor: "Streaming ve Türkiye sunucusu",
-        why: "Türkiye virtual sunucusu, BluTV/Netflix TR ve yurt dışı Netflix bölgeleri için en istikrarlı çalışan sağlayıcı. Threat Protection iOS'ta da reklam ve izleyici filtresi kuruyor.",
+        why: "NordVPN, Türkiye sunucu erişimini ve iOS filtreleme özelliklerini resmi belgelerinde listeliyor. Streaming uyumluluğu servislerin kontrolleri değiştikçe farklılaşır; gereken her servisi kendi iPhone'un ve ağında doğrula.",
       },
     ],
     pitfalls: [
       {
         title: "iCloud Private Relay ile çakışma",
         body:
-          "iCloud+ aboneliğin varsa Private Relay aktif olabilir. VPN açtığında Safari trafiği iki katmandan geçer (Private Relay + VPN) — bu performansı düşürür ve bazı sunucu doğrulamalarını kafaya çevirir. VPN kullanırken Ayarlar > Apple ID > iCloud > Private Relay'i kapat ya da Private Relay'i sadece bilinmeyen ağlarda aç.",
+          "iCloud+ aboneliğin varsa Private Relay etkin olabilir. VPN ile birlikte kullanım, güncel iOS ve sağlayıcı uygulamasına bağlı olarak yönlendirmeyi, performansı veya site kontrollerini etkileyebilir. Herhangi bir özelliği kapatmadan önce Apple ve sağlayıcı belgelerini incele, iki ayarı da kendi bağlantında karşılaştır.",
       },
       {
         title: "'Connect On Demand' özelliğini aktif et",
         body:
-          "iOS'ta uygulama kill switch'i Android kadar agresif değil. Sağlayıcının ayarlarından 'Connect On Demand' veya 'Auto-connect on untrusted Wi-Fi' özelliğini aç — Wi-Fi'a bağlanırken VPN otomatik kurulur, manuel başlatmayı unutsan da korunursun.",
+          "Sağlayıcın destekliyorsa 'Connect On Demand' veya 'Auto-connect on untrusted Wi-Fi' özelliğini aç. Bu ayar Wi-Fi'a katılırken bağlantıyı otomatik başlatmayı deneyebilir; uyku/uyanma ve ağ geçişlerindeki olası boşlukları kendi cihazında test et.",
       },
       {
         title: "App Store içi ödeme vs. sağlayıcı sitesi",
         body:
-          "VPN aboneliğini App Store üzerinden alırsan Apple %30 komisyon aldığı için fiyat daha yüksek olur. Sağlayıcının sitesinden satın al, sonra uygulamaya hesabınla giriş yap — aynı abonelik, daha ucuz. (Bizim affiliate linklerimiz zaten doğrudan sağlayıcı sitesine gider.)",
+          "App Store ile sağlayıcının sitesindeki fiyat, yenileme koşulu, iade ve dahil özellikler farklı olabilir. Satın almadan önce iki ödeme ekranındaki güncel toplam ve koşulları karşılaştır; web aboneliğinin iOS uygulamasında kullanılabildiğini doğrula. Affiliate bağlantılarımız doğrudan sağlayıcının sitesine gider.",
       },
     ],
     faqs: [
       {
         q: "iPhone'un yerleşik VPN'i Apple'dan mı geliyor?",
-        a: "Hayır. Ayarlar > Genel > VPN ve Cihaz Yönetimi altındaki bölüm yalnızca üçüncü taraf VPN sağlayıcıları için bir konfigürasyon kabuğu. Apple kendi VPN hizmetini sunmuyor — Private Relay sadece Safari için bir 'iki katmanlı proxy' ve tam VPN değil.",
+        a: "Hayır. Ayarlar > Genel > VPN ve Cihaz Yönetimi bölümü uyumlu üçüncü taraf veya yönetilen VPN hizmetlerini yapılandırır. Private Relay genel amaçlı, cihaz genelinde bir VPN değildir; trafik kapsamını Apple'ın güncel belgelerinden kontrol et.",
       },
       {
         q: "App Store ücretsiz VPN uygulamalarına güvenebilir miyim?",
-        a: "Şüpheyle bak. Apple Android'e göre daha sıkı inceleme yapsa da, 2022-2025'te kaldırılan 100+ uygulama kullanıcı verisini Çin/Rusya kökenli sunuculara gönderdiği için kaldırıldı. Ücretsiz arıyorsan Proton VPN — bağımsız denetimi olan, gerçek bir şirket arkasında olan tek seçim.",
+        a: "Şüpheyle yaklaş: App Store incelemesi her gizlilik iddiasını bağımsız olarak doğrulamaz. Geliştiriciyi, izinleri, gizlilik politikasını, gelir modelini ve güncel denetimleri kontrol et. Proton VPN denetim ve ücretsiz plan bilgileri yayımlayan seçeneklerden biridir; bunu evrensel bir güvenlik garantisi sayma.",
       },
       {
         q: "iPhone'da VPN açıkken FaceTime veya iMessage çalışmaz mı?",
-        a: "Genelde sorun yok, ama Apple bazı oturum açma adımlarında IP/konum konsistanlığı bekler. Eğer FaceTime kayıt sırasında hata verirse VPN'i geçici kapatıp tekrar dene; aktivasyondan sonra VPN ile kullanmaya devam edebilirsin.",
+        a: "Çoğu yapılandırmada çalışabilir; ancak oturum açma veya aktivasyon sırasında ağ ve IP değişiklikleri ek doğrulama ya da hata doğurabilir. Sorun olursa Apple ve sağlayıcı belgelerini kontrol et, farklı sunucu/protokolü kendi cihazında dene ve VPN'i yalnızca riskini kabul ediyorsan geçici olarak kapat.",
       },
       {
         q: "iPad'imde aynı abonelik çalışır mı?",
-        a: "Evet — her sağlayıcının iPadOS uygulaması da var ve aynı hesapla giriş yaparsın. iPad rehberimizde iPad'e özgü ayarları (Stage Manager, split-screen ile VPN arka planda) anlattık.",
+        a: "Birçok sağlayıcı iPadOS uygulaması ve cihazlar arasında aynı hesapla kullanım sunuyor; uygulama bulunabilirliği ile eşzamanlı bağlantı sınırı plana göre değişir. Sağlayıcının güncel cihaz listesini ve koşullarını doğrula; iPad'e özgü ayarlar için rehberimize bak.",
       },
       {
         q: "Apple Watch için ayrı bir VPN gerekiyor mu?",
-        a: "Hayır. Apple Watch tüm trafiğini eşleştirildiği iPhone üzerinden yapıyor (cellular modelde bile çoğu trafik telefon üzerinden), dolayısıyla iPhone'da VPN açıksa saatin trafiği de korunmuş olur — saatte ayrı VPN kurmak desteklenmiyor zaten.",
+        a: "Apple Watch, iPhone ile aynı genel VPN uygulaması kurulumunu sunmaz; trafik yolu Wi-Fi, hücresel bağlantı ve eşleştirilmiş telefona göre değişebilir. Modelin için Apple ve sağlayıcı belgelerini kontrol et; iPhone VPN'i açık diye saatin her bağlantısının tünellendiğini varsayma.",
       },
     ],
     relatedLinks: [
@@ -262,20 +262,20 @@ export const devices: DeviceContent[] = [
     tagline:
       "Büyük ekran, daha fazla streaming, daha çok genel ağ kullanımı — iPad'in saldırı yüzeyi telefondan farklı.",
     summary:
-      "iPad'i nasıl kullandığın iPhone'dan farklı: kafede çalışıyorsun, uçakta dizi izliyorsun, çocuğa YouTube açıyorsun, faturayı ödüyorsun. Stage Manager ve Split View ile aynı anda 2-3 uygulama açık. Bu kullanım profili VPN ihtiyacını da farklılaştırıyor — split tunneling, streaming uyumluluğu ve sessiz arka plan bağlantısı öncelikli.",
+      "iPad'i kafede çalışmak, seyahatte içerik izlemek veya aynı anda birden fazla uygulama kullanmak için tercih edebilirsin. Bu kullanım profili split tunneling, streaming uyumluluğu ve arka plan bağlantısını önemli hâle getirir; her özelliği kendi iPadOS sürümünde ve ağında doğrulamak gerekir.",
     whyMatters: [
-      "iPad'in günlük kullanım süresinin büyük kısmı genelde halka açık Wi-Fi ortamında geçiyor (kafe, kütüphane, üniversite kampüsü, otel) — laptop kadar mobil değil, telefon kadar 4G de değil; tam ortada.",
-      "Streaming uygulamaları (Netflix, BluTV, Disney+, BBC iPlayer) iPad'in ana kullanım amaçlarından — bölgesel kütüphaneler ve seyahatte içerik erişimi için VPN performansı belirleyici.",
-      "Çocukların kullandığı iPad'ler için reklam/izleyici engelleyen VPN katmanı, App Store'daki ücretsiz oyunların veri toplama davranışını azaltıyor.",
-      "iPadOS 17+ ile birlikte gelen 'Stage Manager' çok pencereli kullanım VPN'i arka planda istikrarlı tutmak istiyor — eski sağlayıcıların uygulamaları multitasking'de bağlantı düşürebiliyor.",
+      "iPad'i kafe, kütüphane, kampüs veya otel Wi-Fi'ında kullanıyorsan VPN yerel ağ görünürlüğünü azaltabilir; HTTPS, güncellemeler ve ağın güvenilirliğini değerlendirmek yine gereklidir.",
+      "Streaming hızı ve bölgesel katalog uyumluluğu servis, sunucu, konum, hesap ve bağlantıya göre değişir. Kullandığın uygulamaları kendi ağında doğrula.",
+      "Reklam veya izleyici filtreleme özelliği bazı bağlantıları azaltabilir ancak çocuk profili, uygulama izinleri ve ebeveyn denetimlerinin yerini almaz; sağlayıcının kapsamını kontrol et.",
+      "Stage Manager ve Split View kullanırken arka plan tüneli uygulama ile iPadOS sürümüne göre farklı davranabilir; çoklu görev, uyku/uyanma ve yeniden bağlanmayı kendi iPad'inde test et.",
     ],
     setupMethods: [
       {
         name: "App Store uygulaması",
         difficulty: "Kolay",
         description:
-          "iPhone ile aynı uygulamayı App Store'dan iPad'e yükle. iCloud üzerinden hesap senkronu otomatiktir, bağlandıktan sonra Stage Manager'da arka plana attığında çalışmaya devam eder.",
-        whenToUse: "Her kullanıcı için varsayılan seçim.",
+          "Sağlayıcının iPad uygulamasını App Store'dan yükleyip uygun hesabınla giriş yap. Ayar senkronu ve arka plan davranışı sağlayıcı ile iPadOS sürümüne göre değişir; kurulumdan sonra ikisini de doğrula.",
+        whenToUse: "Çoğu kullanıcı için başlangıç seçeneği.",
       },
       {
         name: "Apple Configurator ile profil yükleme",
@@ -283,49 +283,49 @@ export const devices: DeviceContent[] = [
         description:
           "Birden fazla iPad'i tek profille yönetmek istiyorsan Apple Configurator (Mac) ile .mobileconfig dosyasını toplu yükleyebilirsin. Eğitim kurumları, küçük şirketler için.",
         whenToUse:
-          "Aile veya küçük bir işletmede 3+ iPad varsa, manuel kurulumdan daha hızlı.",
+          "Aile veya küçük bir işletmede birden fazla iPad'i aynı doğrulanmış profille yönetmek istiyorsan.",
       },
       {
         name: "Router seviyesinde VPN",
         difficulty: "İleri düzey",
         description:
-          "Evdeki Wi-Fi router'ına VPN yüklersen iPad'e ek bir şey yapmana gerek yok — bağlandığı an korunur. Yalnız iPad'i evden çıkarınca koruma kalmaz.",
+          "Ev router'ında VPN yapılandırıldığında seçilen iPad trafiği ev ağındayken tünelden yönlendirilebilir. DNS, IPv6 ve politika tabanlı yönlendirmeyi doğrula; ev dışında iPad'in kendi VPN yapılandırması gerekir.",
         whenToUse:
-          "Çocuk iPad'i ev içinde kalıyorsa veya yaşlı aile bireyinin iPad'i evde kullanılıyorsa ekstra ayar yapmadan tüm trafiği VPN'e almanın en kolay yolu.",
+          "iPad çoğunlukla evde kalıyorsa ve desteklenen internet trafiğini cihaz başına kurulum olmadan tünelden yönlendirmek istiyorsan.",
       },
     ],
     picks: [
       {
         slug: "nordvpn",
         bestFor: "Streaming ve bölgesel kütüphane",
-        why: "iPad'de streaming için değerlendirilebilecek seçeneklerden biri. ABD Netflix, BBC iPlayer, Disney+ ve Türkiye sanal sunucusu gibi kullanım senaryolarında uyumluluk bölge, IP havuzu ve platform politikalarına göre değişir.",
+        why: "NordVPN, iPadOS desteğini, streaming odaklı özellikleri ve Türkiye sunucu erişimini resmi belgelerinde listeliyor. Erişim servis, sunucu, hesap bölgesi ve ağa göre değişebilir; gerekli her uygulamayı kendi iPad'inde doğrula.",
       },
       {
         slug: "expressvpn",
         bestFor: "Premium iPad deneyimi",
-        why: "Apple TV ve Mac uygulamalarıyla birlikte tek hesap tüm ekosistemi kapsar. Lightway hızı iPad'de 4K stream için yeterli marjı bırakır, arka planda iyi davranır.",
+        why: "ExpressVPN şu anda iPad, Mac ve Apple TV uygulamalarını ve Lightway protokolünü resmi belgelerinde listeliyor. Cihaz sınırı, 4K için gereken hız ve arka plan davranışı güncel plana ve bağlantıya bağlıdır; kendi cihazlarınla doğrula.",
       },
       {
         slug: "surfshark",
         bestFor: "Tek hesapta çok cihaz",
-        why: "iPad + iPhone + laptop + Apple TV + eşin/çocuğun cihazları… sınırsız eşzamanlı bağlantı tek bir abonelikte. Aile/öğrenci kullanımı için fiyat-değer dengesi en iyi.",
+        why: "Surfshark şu anda sınırsız eşzamanlı bağlantı sunduğunu belirtiyor; bu, çok cihazlı haneler için uygun olabilir. Değer kararından önce güncel fiyatı, yenileme koşullarını, platform desteğini ve kendi ağındaki performansı karşılaştır.",
       },
     ],
     pitfalls: [
       {
         title: "Sertifika güvenmiyor hatası",
         body:
-          "Bazen iPadOS güncellemelerinden sonra VPN sağlayıcısının yüklediği konfigürasyon sertifikasını otomatik onaylamaz. Ayarlar > VPN ve Cihaz Yönetimi > sağlayıcı profili > 'Sertifikaya Güven' adımını manuel yapmak gerekir. Bu yapılmazsa bağlantı kuruluyor görünür ama trafik VPN'den geçmez.",
+          "iPadOS bir VPN profili veya sertifikası için güven uyarısı gösterirse kaynağını doğrulamadan onaylama. Sağlayıcının ve Apple'ın güncel kurulum belgelerindeki profil adı ile imza ayrıntılarını karşılaştır; ardından IP ve DNS davranışını izin verilen bir testle kontrol et.",
       },
       {
         title: "Split View'da VPN arka plana atıldığında düşmesi",
         body:
-          "Eski OpenVPN tabanlı uygulamalar Stage Manager / Split View'da arka plana atıldığında bağlantıyı kaybediyordu. WireGuard veya Lightway tabanlı protokoller bu sorunu çözdü — iPad'de mutlaka bu modern protokolleri seçen sağlayıcılarda kal.",
+          "Arka plan bağlantısı iPadOS, uygulama ve protokol sürümüne göre farklı davranabilir. WireGuard veya Lightway tabanlı modlar geçişleri iyileştirebilir ancak bunu garanti etmez; kill switch açıkken Split View, Stage Manager ve uyku/uyanma davranışını test et.",
       },
       {
         title: "Çocuk profili Wi-Fi'ya bağlanırken VPN kuruluyor mu?",
         body:
-          "Apple'ın Çocuk Hesabı (Family Sharing) altındaki iPad'de VPN konfigürasyonu yüklerken yetişkin onayı gerekir. Çocuk hesabı kendi başına VPN yükleyemez. Aile yöneticisi olarak baştan kurulum yap, sonra çocuk hesabıyla giriş yap.",
+          "Çocuk hesabındaki VPN profili kurulumu, Family Sharing, Screen Time veya MDM kısıtlamalarına göre yetişkin ya da yönetici onayı gerektirebilir. Modelin ve iPadOS sürümün için Apple'ın güncel belgelerini izle; profili aile yöneticisi hesabından doğrula.",
       },
     ],
     faqs: [
@@ -335,19 +335,19 @@ export const devices: DeviceContent[] = [
       },
       {
         q: "Mobil veri (eSIM) ile bağlandığımda VPN aynı şekilde çalışır mı?",
-        a: "Evet. Tek fark, mobil verinde 5G/4G/3G geçişlerinde kısa kopuşlar olabilir — sağlayıcının 'Auto-connect' ve 'Always-On VPN' özelliklerini aktif edersen kullanıcı fark etmeden yeniden bağlanır.",
+        a: "VPN hücresel bağlantıda çalışabilir ancak Wi-Fi, 5G ve 4G arasındaki geçişler tüneli kesintiye uğratabilir. Desteklenen otomatik bağlanma ve always-on kontrolleri boşlukları azaltabilir; davranışı ve sızıntı korumasını kendi iPad'in ve operatöründe doğrula.",
       },
       {
         q: "iPad'imde tek başına Wi-Fi'a güvenli mi bağlanırım, VPN şart mı?",
-        a: "HTTPS yaygınlaşması sonrası 'snoop saldırıları' azaldı ama kaybolmadı: rogue Wi-Fi noktası, DNS hijack, HSTS bypass, captive portal sahteleri hâlâ tehdit. VPN bu vektörlerin neredeyse hepsini kapatır. Sıkça otel/havalimanı/kafe Wi-Fi kullanan biriysen evet, şart.",
+        a: "HTTPS web içeriğinin önemli bölümünü korur; VPN ise yerel ağ görünürlüğünü ve bazı DNS risklerini azaltabilir. Kimlik avını, kötü niyetli giriş portallarını, güvensiz uygulamaları veya güvenilmeyen VPN sağlayıcısını engellemez. HTTPS ve güncellemeleri koru, kullandığın ağı ayrıca değerlendir.",
       },
       {
         q: "iPad'de hangi VPN protokolünü seçmeliyim?",
-        a: "Sağlayıcı destekliyorsa öncelik: WireGuard veya Lightway. Yedek olarak IKEv2 — iOS yerleşik desteği var, çok hızlı bağlanır. OpenVPN'e ihtiyacın yok (yavaş, daha çok pil) — yalnızca diğerlerinin engellendiği ağlarda.",
+        a: "WireGuard veya sağlayıcının hafif protokolü çoğu durumda değerlendirilebilecek ilk seçeneklerdir; IKEv2 yararlı bir yedek olabilir. OpenVPN hız ve pil karşılığında farklı uyumluluk sunabilir. Desteklenen modları kendi iPad'in ve ağında karşılaştır.",
       },
       {
         q: "iPad'de eğitim kurumumun Wi-Fi'sı VPN'i engelliyor, ne yapmalıyım?",
-        a: "Çoğu okul/kampüs Wi-Fi'sı UDP'yi (WireGuard varsayılan) bloklar ama TCP 443'ü açar (HTTPS sandığı için). Sağlayıcının 'obfuscation' veya 'stealth' modunu aç — trafik HTTPS gibi görünür ve geçer.",
+        a: "Bazı okul veya kampüs ağları UDP ya da VPN trafiğini kısıtlar. Sağlayıcının obfuscation, stealth veya TCP modu yardımcı olabilir ancak erişim garanti değildir ve kontrolleri aşmak ağ politikasını ihlal edebilir. Yöneticiden izin al ve yalnızca izin verilen bağlantılarda test et.",
       },
     ],
     relatedLinks: [
@@ -365,102 +365,103 @@ export const devices: DeviceContent[] = [
     metaDescription:
       "Samsung Tizen ve LG webOS'a VPN nasıl yüklenir? Router seviyesinde VPN, Smart DNS, Android TV ve Apple TV (tvOS 17+) için detaylı rehber.",
     tagline:
-      "Akıllı TV'lerin çoğu VPN uygulaması yüklenemez — doğru çözüm cihaza değil, ağa kurmaktan geçer.",
+      "Akıllı TV'de VPN uygulaması desteği platforma, modele ve bölgeye göre değişir; bazı cihazlarda router veya Smart DNS kurulumu gerekebilir.",
     summary:
-      "Smart TV'lerde VPN'in en büyük zorluğu app store kısıtlamaları. Samsung Tizen ve LG webOS mağazalarında VPN uygulaması yok. Apple TV'ye iOS uygulamaları yüklenebiliyor (tvOS 17+ ile resmen). Sadece Android TV ekosistemi (Google TV, NVIDIA Shield, Xiaomi, TCL) doğrudan VPN app desteği veriyor. Diğerleri için iki yaklaşım var: router VPN ya da Smart DNS — hangisi senin için doğru, biraz aşağıda netleştirelim.",
+      "Smart TV'de temel konu uygulama bulunabilirliğidir; işletim sistemi, model, bölge ve sağlayıcıya göre değişir. Android TV/Google TV ve desteklenen tvOS sürümlerinde üçüncü taraf VPN uygulamaları bulunabilir; bazı Samsung Tizen ve LG webOS modellerinde router VPN ya da şifreleme sağlamayan Smart DNS gerekebilir. Önce TV mağazasını ve sağlayıcının güncel uyumluluk sayfasını kontrol et.",
     whyMatters: [
-      "Smart TV üreticilerinin (Samsung, Vizio, LG) izleme verisi topladığı NSF/IEEE araştırmalarıyla belgelendi — TV görüntü tanıma (ACR) ile ekrandan ne izlediğini analiz ediyorlar. VPN bu metadata akışını sağlayıcı sunucularına gönderirken sarar.",
-      "ISP, Netflix/YouTube gibi servislere giden trafiği saatlere göre throttle (yavaşlatma) yapıyor — VPN trafiği jenerik şifreli sandığı için ayrım yapamıyor, dolayısıyla streaming hızı belirgin biçimde iyileşebiliyor.",
-      "Bölgesel kütüphane farkları: Netflix ABD, BBC iPlayer, Disney+ ülke katalogları, MLB.tv blackout — TV'de VPN ile aşılır. (Hukuki ve ToS açısından ülkene bak; bazı platformlar bunu hesap askıya almaya gerekçe sayabilir.)",
-      "Eve gelen misafir/çocuk evdeki TV'de kontrol edemediğin uygulamalara giriyor — router seviyesinde VPN tek tıkla tüm trafiği saracaktır.",
+      "Yayımlanmış akademik çalışmalar ACR ve Smart TV telemetrisi kullanımını belgelemiştir. VPN desteklenen ağ trafiğini aktarım sırasında şifreleyebilir ancak TV'nin telemetri toplamasını veya göndermesini durdurmaz; cihaz gizlilik ayarlarını ve güncel araştırmaları da incele.",
+      "İnternet sağlayıcısı servise özgü trafik yönetimi uyguluyorsa VPN sınıflandırmayı değiştirebilir; şifreleme yükü hızı da azaltabilir. Sonuç çıkarmadan önce kendi bağlantındaki temel ve VPN'li sonuçları karşılaştır.",
+      "Streaming katalogları bölgeye göre değişir ve bazı servisler VPN kullanımını sınırlar. Uyumluluk sık değiştiği için güncel hizmet koşullarını kontrol et; kullanacağın TV uygulaması, hesap ve sunucuyu kendin test et.",
+      "Router düzeyindeki VPN yapılandırılmış cihaz trafiğini tünelleyebilir; istisnalar, IPv6, DNS ve yerel ağ trafiği router ayarına bağlıdır ve her cihazda doğrulanmalıdır.",
     ],
     setupMethods: [
       {
         name: "Android TV / Google TV resmi uygulaması",
         difficulty: "Kolay",
         description:
-          "Google Play Store'dan sağlayıcının resmi Android TV uygulamasını yükle. NordVPN, Surfshark, ExpressVPN, CyberGhost, PIA hepsi destekliyor. Telefon uygulaması gibi kullanılıyor.",
+          "Modelin ve bölgen için mevcutsa sağlayıcının resmi Android TV uygulamasını Play Store'dan yükle. Mağaza listesini ve güncel uyumluluk sayfasını kontrol et; TV özellikleri telefon uygulamasından farklı olabilir.",
         whenToUse:
-          "TV'n Android TV (NVIDIA Shield, Xiaomi Mi Box, TCL/Sony, Chromecast with Google TV vs.) ise en kolay yol.",
+          "TV'n uyumlu bir Android TV veya Google TV sürümü çalıştırıyorsa doğrudan uygulama seçeneği olarak.",
       },
       {
         name: "Apple TV tvOS uygulaması (tvOS 17+)",
         difficulty: "Kolay",
         description:
-          "Apple, tvOS 17 ile birlikte VPN uygulama desteğini açtı. NordVPN, ExpressVPN, Proton VPN gibi sağlayıcıların App Store'da tvOS sürümü var. Apple TV 4K (2. nesil ve üzeri) gerekiyor.",
-        whenToUse: "Apple TV 4K kullanıyorsan ve tvOS 17+ yüklüyse.",
+          "Apple tvOS 17'de üçüncü taraf VPN uygulaması desteğini ekledi ve bazı sağlayıcılar tvOS uygulaması yayımlıyor. Tam modelin için sağlayıcının güncel App Store listesini ve Apple'ın uyumluluk bilgisini kontrol et.",
+        whenToUse:
+          "Apple TV modelin desteklenen bir tvOS sürümünü çalıştırıyor ve sağlayıcı uygulaması bölgendeki mağazada bulunuyorsa.",
       },
       {
-        name: "Router seviyesinde VPN (tüm cihazları kapsar)",
+        name: "Router seviyesinde VPN",
         difficulty: "İleri düzey",
         description:
-          "Wi-Fi router'ına VPN istemcisi kurarsın (DD-WRT, OpenWrt, FlashRouters önceden yapılandırılmış cihazlar veya ExpressVPN Aircove). Tüm ev ağı tek bağlantıdan geçer — TV, telefon, oyun konsolu, akıllı buzdolabı hepsi otomatik korumalı.",
+          "Desteklenen bir VPN istemcisini Wi-Fi router'ına kurarsın. Bu istemci üzerinden yönlendirilen cihazlar tüneli kullanabilir; konuk ağı, IPv6, DNS ve politika tabanlı istisnalar farklı davranabileceğinden her cihazda kapsamı doğrula.",
         whenToUse:
-          "Samsung/LG Smart TV'yi resmen destekleyen VPN uygulaması yok. Router seviyesinde VPN bu sınırı aşmanın resmi yolu.",
+          "Samsung veya LG TV mağazanda uyumlu VPN uygulaması yoksa desteklenen bir router kurulumu alternatif olabilir; önce güncel uygulama ve router uyumluluğunu kontrol et.",
       },
       {
-        name: "Smart DNS (Şifreleme YOK — sadece bölge bypass)",
+        name: "Smart DNS (VPN şifrelemesi yok)",
         difficulty: "Orta",
         description:
-          "Bazı sağlayıcılar (NordVPN SmartPlay, Surfshark SmartDNS, ExpressVPN MediaStreamer) Smart DNS hizmeti sunar. TV'nin DNS ayarına özel adresler girer ve geo-restriction bypass elde edersin. Avantaj: kurulum kolay, hız kaybı yok. Dezavantaj: trafiğin şifrelenmiyor — IP gizli değil, sadece coğrafya kandırılıyor.",
+          "Bazı sağlayıcılar uyumlu TV'ler için Smart DNS hizmeti belgeliyor. Bu yöntem DNS yönlendirmesini değiştirir; trafiği şifrelemez ve genel IP'yi gizlemez. Bölgesel erişim ile değişmeyen hız garanti değildir; güncel servis desteğini kontrol edip kullandığın TV uygulamasında test et.",
         whenToUse:
-          "Tek amacın ABD Netflix gibi bölgesel içerik açmaksa ve gerçek gizlilik aramıyorsan.",
+          "Güncel olarak desteklenen bölgesel içerik özelliğini denemek istiyor ve Smart DNS'in VPN gizliliği sağlamadığını anlıyorsan.",
       },
     ],
     picks: [
       {
         slug: "expressvpn",
         bestFor: "Apple TV ve router kullananlar",
-        why: "tvOS uygulaması en olgun. Aircove markalı önceden yapılandırılmış router'ı satıyor — kutudan çıkar, takarsın, çalışır. MediaStreamer Smart DNS hizmeti uygulamasızdır TV'lerin geo-bypass'ı için ideal.",
+        why: "ExpressVPN şu anda tvOS uygulaması, Aircove router seçenekleri ve MediaStreamer Smart DNS için resmi belgeler yayımlıyor. Model desteğini, kurulum gereksinimlerini ve güncel streaming uyumluluğunu kendi TV ve ağında doğrula.",
       },
       {
         slug: "nordvpn",
         bestFor: "Android TV streaming",
-        why: "Android TV uygulaması en stabili. SmartPlay (DNS tabanlı) hizmeti tüm aboneliklerde dahil — kurulum yapmadan TV'de geo-bypass'ı elde edersin. Manuel router kurulum dokümantasyonu DD-WRT, OpenWrt, AsusWRT için detaylı.",
+        why: "NordVPN Android TV, SmartPlay ve router kurulumu için resmi belgeler yayımlıyor. Özellik bulunabilirliği ve streaming erişimi değişebilir; güncel plan ayrıntılarını kontrol edip kullandığın TV uygulaması ile ağda test et.",
       },
       {
         slug: "surfshark",
         bestFor: "Bütçe + Smart DNS",
-        why: "Smart DNS hizmeti her abonelikle gelir ve aktivasyonu en kolay. Sınırsız cihaz desteği TV + tüm ev cihazlarıyla beraber tek hesabın yeterli olduğu anlamına gelir. Android TV uygulaması basit ama işlevsel.",
+        why: "Surfshark şu anda Smart DNS, Android TV uygulaması ve sınırsız eşzamanlı bağlantı sunduğunu belirtiyor. Satın almadan önce güncel plana dahil olup olmadığını, cihaz uyumluluğunu ve kurulum davranışını doğrula.",
       },
     ],
     pitfalls: [
       {
-        title: "Smart DNS gizlilik vermiyor — sadece bölge açıyor",
+        title: "Smart DNS bir gizlilik aracı değildir",
         body:
-          "Smart DNS hizmetinin VPN olmadığını netleştirelim: trafiğin şifrelenmiyor, IP'n hâlâ ISP'nin gördüğü Türkiye IP'si. Sadece sağlayıcının DNS sunucusu Netflix'in hangi bölge sunucusuna yönlendireceğini etkiliyor. ISP throttling'i aşamaz, gizlilik sağlamaz. 'Streaming için yeterli' düşünme — sadece coğrafya bypass için kullan.",
+          "Smart DNS bir VPN değildir: bağlantıyı şifrelemez veya genel IP'yi gizlemez. DNS yönlendirmesi desteklenen bir servisin bölge belirleme biçimini etkileyebilir ancak uyumluluk değişebilir; bunu gizlilik veya erişim garantisi olarak sunma.",
       },
       {
-        title: "Router VPN tüm cihazlara aynı IP veriyor",
+        title: "Router üzerinden yönlenen cihazlar aynı VPN IP'sini paylaşabilir",
         body:
-          "Router seviyesinde VPN kurduğunda tüm ev cihazları aynı sunucudan çıkıyor — telefonundan bankaya girerken aynı yurt dışı IP'sini kullanıyorsun, banka şüpheleniyor. Çözüm: router'da policy-based routing kur (bazı cihazları VPN dışında tut) veya banka cihazı için Wi-Fi'a girmeden VPN'den çıkar.",
+          "Aynı VPN sunucusu üzerinden yönlendirilen cihazlar genel IP'yi paylaşabilir ve bu bazı banka uygulamalarında ek doğrulama tetikleyebilir. Router destekliyorsa politika tabanlı yönlendirme kullan veya banka ve router belgelerini kontrol ettikten sonra ilgili cihazı tünel dışında bırak.",
       },
       {
         title: "TV'nin kendi smart-home trafiği VPN ile çakışabilir",
         body:
-          "Samsung SmartThings, LG ThinQ, Google Home gibi servisler TV'nin yerel IP'sini bekliyor — bazen yurt dışı IP'den gelen bağlantıyı reddediyor. Sorun çıkarsa router'da 'split tunnel': akıllı ev trafiği yerelden, streaming trafiği VPN'den çıksın.",
+          "SmartThings, ThinQ veya Google Home gibi servisler yerel ağ keşfine ya da belirli bölge koşullarına bağlı çalışabilir. Sorun çıkarsa üretici ve router belgelerini kontrol et; destekleniyorsa akıllı ev trafiğini yerelde tutan politika tabanlı yönlendirmeyi kendi ağında dene.",
       },
     ],
     faqs: [
       {
         q: "Samsung veya LG TV'me doğrudan VPN yükleyebilir miyim?",
-        a: "Hayır. Samsung Tizen ve LG webOS mağazalarında VPN uygulaması yok ve resmi olarak bu platformlara API açılmıyor. Üç seçenek var: (1) router seviyesinde VPN, (2) Smart DNS hizmeti TV'nin DNS ayarına gir, (3) HDMI'a bir Android TV / Apple TV / Fire TV stick tak ve VPN'i ona kur, TV'yi sadece ekran olarak kullan.",
+        a: "Samsung Tizen ve LG webOS'ta doğrudan VPN uygulaması bulunabilirliği model ve bölgeye göre sınırlı olabilir. Önce TV'nin güncel mağazasını kontrol et; alternatifler arasında uyumlu router, VPN şifrelemesi sağlamayan Smart DNS veya HDMI ile bağlanan destekli bir streaming cihazı yer alır.",
       },
       {
         q: "Apple TV'me hangi VPN'i kurabilirim?",
-        a: "tvOS 17+ yüklü Apple TV 4K (2. nesil ve üzeri) için: NordVPN, ExpressVPN, Proton VPN, Surfshark, PIA App Store'da resmi uygulamaya sahip. Eski Apple TV (HD, eski 4K modeller) için router seviyesinde kurmaktan başka yol yok.",
+        a: "Bazı sağlayıcılar tvOS uygulaması yayımlıyor ancak liste, bölgesel bulunabilirlik ve model gereksinimleri değişir. Kurulum seçmeden önce Apple TV App Store'u, sağlayıcının uyumluluk sayfasını ve Apple'ın desteklenen tvOS listesini kontrol et.",
       },
       {
         q: "Router'ıma VPN kurmak garantiyi düşürür mü, performansı nasıl etkiler?",
-        a: "Firmware değişimi (DD-WRT, OpenWrt yükleme) üretici garantisini iptal eder ve cihazı bricklenme riski taşır. Bu istemiyorsan ExpressVPN Aircove gibi önceden yapılandırılmış router al ya da Asus, GL.iNet gibi stok firmware'de VPN desteği olan markaları seç. Performans: tüketici sınıfı router'larda VPN şifreleme CPU'yu yüklüyor, hız 30-50% düşebilir. Gigabit hatta sahipsen Aircove veya kurumsal sınıf router'a bak.",
+        a: "Üçüncü taraf firmware cihaz arızası riski doğurabilir veya garanti kapsamını etkileyebilir; yüklemeden önce üreticinin güncel koşullarını kontrol et. VPN şifrelemesi işlemci yükü ekler ancak hız etkisi router, protokol ve bağlantıya göre geniş ölçüde değişir. Kendi kurulumunu ölç veya belgelenmiş VPN aktarım hızına sahip donanım seç.",
       },
       {
         q: "Akıllı TV'mde VPN ile Netflix yine de blokluyorsa ne yapayım?",
-        a: "Netflix VPN sunucularının IP havuzlarını agresif şekilde blokluyor. Çözüm: (1) Sağlayıcıyı değiştir — NordVPN/ExpressVPN bu yarışta önde, (2) farklı bir sunucu dene, (3) Smart DNS yerine tam VPN'e geç, (4) bekleme — sağlayıcı IP havuzunu rotate ediyor, sabah olmayan akşam çalışıyor. ToS açısından dikkat: Netflix hesabını askıya alma hakkını saklı tutuyor ama uygulamada nadir gerçekleşir.",
+        a: "Streaming servisleri bilinen VPN uç noktalarını sınırlayabilir. Servisin güncel koşullarını ve sağlayıcının destek sayfasını kontrol et; ardından sağlayıcının önerdiği sunucuyu dene veya destek ekibiyle görüş. Bir sunucuda ya da belirli bir günde alınan sonuç gelecekteki erişimi garanti etmez.",
       },
       {
         q: "Chromecast'i VPN ile kullanmak için ayrı yöntem mi gerekiyor?",
-        a: "Chromecast (eski model, Google TV olmayan) doğrudan VPN uygulaması yüklenemez — Android TV uygulaması yok. Yöntem: (1) telefonda VPN aç, telefondan TV'ye yayın yap — TV ham içerik alır, telefon trafiği VPN'den geçer (ama TV'nin kendi telemetri trafiği gizli değil), ya da (2) router seviyesinde VPN. Yeni Chromecast with Google TV modelleri Android TV uygulaması destekler.",
+        a: "Google TV çalıştırmayan eski Chromecast modelleri doğrudan VPN uygulaması kurmayabilir. Yayın akışında içeriği telefon yerine Chromecast'in kendisi çekebileceğinden telefondaki VPN'in tüm trafiği kapsadığını varsayma. Modelinin Google belgelerini kontrol et; gerekirse uyumlu router kurulumu kullan ve IP/DNS davranışını TV'de doğrula.",
       },
     ],
     relatedLinks: [

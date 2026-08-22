@@ -4,57 +4,28 @@ import {
   createContext,
   useContext,
   useState,
-  useSyncExternalStore,
 } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const STORAGE_KEY = "vpnadvisor:ip-banner-dismissed-at";
-const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+const DISMISS_COOKIE = "vpnadvisor_ip_banner_dismissed";
+const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
 
 const DismissContext = createContext<(() => void) | null>(null);
-
-function readDismissedSnapshot(): boolean {
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return false;
-    const ts = Number(raw);
-    return Number.isFinite(ts) && Date.now() - ts < SEVEN_DAYS_MS;
-  } catch {
-    return false;
-  }
-}
-
-function readServerSnapshot(): boolean {
-  return false;
-}
-
-function subscribeToStorage(onChange: () => void): () => void {
-  window.addEventListener("storage", onChange);
-  return () => window.removeEventListener("storage", onChange);
-}
 
 export function IpSecurityBannerDismiss({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const dismissedFromStorage = useSyncExternalStore(
-    subscribeToStorage,
-    readDismissedSnapshot,
-    readServerSnapshot,
-  );
-  const [dismissedThisRender, setDismissedThisRender] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
 
-  if (dismissedFromStorage || dismissedThisRender) return null;
+  if (dismissed) return null;
 
   const dismiss = () => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, String(Date.now()));
-    } catch {
-      // storage blocked — fall back to per-session hide
-    }
-    setDismissedThisRender(true);
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${DISMISS_COOKIE}=1; Max-Age=${SEVEN_DAYS_SECONDS}; Path=/; SameSite=Lax${secure}`;
+    setDismissed(true);
   };
 
   return (

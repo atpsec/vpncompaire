@@ -100,8 +100,8 @@ export default function proxy(request: NextRequest) {
   // Türkçe-slug route'una rewrite et. URL değişmez; doğru locale içeriği
   // [locale] segmentinden gelir. (bkz. src/lib/i18n-paths.ts)
   // next-intl middleware'i bypass edildiği için locale header'ı
-  // (X-NEXT-INTL-LOCALE) elle kurulur — root layout'taki getLocale() ve
-  // <html lang> bunu okur.
+  // (X-NEXT-INTL-LOCALE) elle kurulur; next-intl request yapılandırması bunu
+  // okurken <html lang> doğrudan [locale] route parametresinden üretilir.
   const rewriteTarget = resolveInternalRewrite(pathname);
   if (rewriteTarget) {
     const url = request.nextUrl.clone();

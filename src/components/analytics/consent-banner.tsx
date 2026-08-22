@@ -85,7 +85,7 @@ export function ConsentBanner({ locale }: { locale: SupportedLocale }) {
 
   return (
     <div
-      role="dialog"
+      role="region"
       aria-live="polite"
       aria-label={copy.title}
       className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface-base/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-surface-base/80"

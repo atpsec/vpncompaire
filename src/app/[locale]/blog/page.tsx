@@ -1,6 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/container";
-import { getBlogPosts } from "@/lib/blog";
+import { getVisibleBlogPostSummaries } from "@/lib/blog";
 import { BlogFilter } from "@/components/blog/blog-filter";
 import { BlogStats } from "@/components/blog/blog-stats";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -9,6 +9,7 @@ import {
   breadcrumbSchema,
 } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates, siteConfig, type Locale } from "@/lib/site";
+import { getBlogImage } from "@/lib/unsplash";
 import type { Metadata } from "next";
 
 type Props = {
@@ -51,7 +52,11 @@ export default async function BlogPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations("blog");
-  const posts = await getBlogPosts(locale);
+  const posts = await getVisibleBlogPostSummaries(locale);
+  const postCards = posts.map((post, index) => ({
+    ...post,
+    imageUrl: getBlogImage(post.coverImage, "hero", post.slug, index).url,
+  }));
   const canonical = absoluteUrl("/blog", locale);
   const localePath = locale === "tr" ? "" : `/${locale}`;
   const homeName =
@@ -98,7 +103,7 @@ export default async function BlogPage({ params }: Props) {
         {posts.length > 0 ? (
           <>
             <h2 className="sr-only">{latestArticlesLabel}</h2>
-            <BlogFilter posts={posts} locale={locale} />
+            <BlogFilter posts={postCards} locale={locale} />
           </>
         ) : (
           <div className="text-center py-12">

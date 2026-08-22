@@ -42,20 +42,20 @@ Stok firmware ile gelen tüketici router'larının çoğunda VPN istemci özelli
 - Vilfo, FlashRouters önceden flashlanmış, kurulum ücretsiz destekli, yeni başlayanlar için
 - Privacy Hero, InvizBox tüketici dostu out-of-box çözümler
 
-ASUS modelleri, fiyat-performans ve kullanım kolaylığı açısından çoğu kullanıcı için en doğru seçenek. ASUS Merlin (resmi olmayan ama güvenli ASUS firmware fork'u) WireGuard performansı için ek optimizasyon getirir.
+ASUS modelleri bazı kullanıcılar için pratik bir seçenek olabilir; satın almadan önce tam modelin VPN istemcisi ve hedef protokol desteğini üretici belgesinden doğrulayın. ASUS Merlin üçüncü taraf bir firmware'dir; özellik, güvenlik ve performans sonucu sürüm ile donanıma bağlıdır.
 
 ## Firmware Karşılaştırması
 
 | Firmware | WireGuard | OpenVPN | UI Kolaylığı | Performans |
 |---|---|---|---|---|
-| ASUS Stok | Var | Var | Yüksek | İyi |
-| ASUS Merlin | Var | Var | Yüksek | Çok iyi |
-| DD-WRT | Var (yeni sürümlerde) | Var | Orta | Orta |
-| OpenWRT | Var | Var | Düşük (CLI) | Çok iyi |
-| Tomato/FreshTomato | Sınırlı | Var | Orta | İyi |
-| pfSense/OPNsense | Var | Var | Düşük | Mükemmel |
+| ASUS Stok | Modele/sürüme bağlı | Modele/sürüme bağlı | Görece kolay | Donanıma ve sürüme bağlı |
+| ASUS Merlin | Modele/sürüme bağlı | Modele/sürüme bağlı | Görece kolay | Donanıma ve ayara bağlı |
+| DD-WRT | Build'e bağlı | Build'e bağlı | Teknik bilgi gerekebilir | Donanıma ve build'e bağlı |
+| OpenWRT | Paketle eklenebilir | Paketle eklenebilir | CLI gerekebilir | Donanıma ve ayara bağlı |
+| Tomato/FreshTomato | Sürüme bağlı | Sürüme bağlı | Teknik bilgi gerekebilir | Donanıma ve sürüme bağlı |
+| pfSense/OPNsense | Sürüme/pakete bağlı | Sürüme/pakete bağlı | Teknik bilgi gerekebilir | Donanıma ve yapılandırmaya bağlı |
 
-Protokol seçimi router donanımına çok bağlı. Eski 800 MHz CPU'lu bir router OpenVPN ile 50 Mbps'i zor görür; modern ASUS RT-AX86U WireGuard ile 600+ Mbps verebilir. Detaylı protokol karşılaştırması için [WireGuard vs OpenVPN yazımızı](/blog/wireguard-vs-openvpn-karsilastirma) okuyun.
+Protokol seçimi router donanımına çok bağlıdır. Eski veya düşük güçlü bir router şifreleme sırasında darboğaz oluşturabilir; daha yeni donanım da sonuçları tek başına garanti etmez. Bu modeller için doğrudan karşılaştırılabilir laboratuvar ölçümümüz yoktur. Kurulumdan önce ve sonra aynı test sunucusunda ölçüm yapın; detaylı protokol karşılaştırması için [WireGuard vs OpenVPN yazımızı](/blog/wireguard-vs-openvpn-karsilastirma) okuyun.
 
 ## Adım Adım Kurulum: ASUS Stok Firmware
 
@@ -86,13 +86,15 @@ Kill switch için: VPN Client ayarlarında "Block routed clients if tunnel goes 
 
 Router seviyesinde VPN'in maliyeti hızdır. CPU şifreleme/şifre çözmeyi yapacağı için fiber bağlantınızın tamamını alamayabilirsiniz.
 
-Saha gözlemleri:
-- ASUS RT-AX58U + WireGuard: 400-500 Mbps
-- ASUS RT-AX86U + WireGuard: 700-900 Mbps
-- Netgear R7000 + DD-WRT + OpenVPN: 50-80 Mbps
-- pfSense + iX3050 (mini PC) + WireGuard: 1+ Gbps
+Bu router ve protokol kombinasyonları için doğrulanmış, doğrudan karşılaştırılabilir saha ölçümleri sunmuyoruz. Beklenti yerine şu kontrolü uygulayın:
 
-WireGuard genellikle OpenVPN'den 2-3 kat hızlıdır aynı donanımda. Eğer 1 Gbps fiber kullanıyorsanız ve VPN'i tüm trafikte istiyorsanız modern bir router veya küçük pfSense/OPNsense kutusu mantıklı.
+| Kontrol | VPN kapalı | VPN açık | Yorum |
+|---|---|---|---|
+| İndirme/yükleme | Aynı test sunucusunda temel değer | Aynı saatte tekrar | Büyük fark varsa CPU ve sunucu yükünü kontrol edin |
+| Ping/jitter | Hedef hizmete temel rota | Aynı hedefe VPN rotası | Yakındaki birkaç VPN sunucusunu karşılaştırın |
+| Router CPU | Boştaki kullanım | Aktarım sırasındaki kullanım | Sürekli yüksek kullanım donanım darboğazına işaret edebilir |
+
+WireGuard ve OpenVPN sonucu aynı donanımda bile firmware, şifre takımı ve sağlayıcı uygulamasına göre değişir. Fiber hattın tamamını tünelden geçirmek istiyorsanız satın almadan önce üretici belgelerini ve bağımsız, aynı koşullardaki testleri kontrol edin.
 
 ## Hangi Cihazlar Router VPN'inden Faydalanır?
 
@@ -129,13 +131,13 @@ Evet, router'a Wi-Fi veya Ethernet ile bağlı her cihazın trafiği VPN üzerin
 ASUS Merlin'in VPN Director'ı veya OpenWRT'nin policy routing'i ile evet. Belirli MAC adresleri veya IP aralıkları VPN dışında bırakılabilir.
 
 **Router VPN streaming için yeterli hız verir mi?**
-4K streaming 25 Mbps yeter. Modern bir router rahatlıkla 300+ Mbps verir, sorun olmaz. Sınırın üstünde fiber kullanıyorsanız donanım upgrade'i lazım olabilir.
+Gerekli hız yayın hizmetine, kaliteye ve sıkıştırmaya göre değişir. VPN açıkken aynı cihazda sürdürülebilir hızı ve takılmayı kontrol edin; router CPU'su sınıra ulaşıyorsa donanım yükseltmesi veya yalnız gerekli cihazları tünele alma düşünülebilir.
 
 **Çift VPN kullanabilir miyim — hem router hem cihaz?**
-Teknik olarak evet ama performans yarısına düşer ve gereksizdir. Birini seçin.
+Teknik olarak evet; ancak ek şifreleme ve yönlendirme performansı düşürebilir ve sorun gidermeyi zorlaştırır. Özel bir gereksinim yoksa tek tünel kullanın.
 
 ## Sonuç
 
-Router seviyesinde VPN, çoklu cihazlı haneler için en temiz çözüm. ASUS RT serisi giriş seviyesinde, GL.iNet portatif kullanım için, pfSense/OPNsense maksimum performans için en iyi seçenekler. WireGuard varsayılan protokol olmalı; sansürlü bölgelerde OpenVPN TCP 443 yedek olarak kalır.
+Router seviyesinde VPN, çoklu cihazlı haneler için merkezi bir seçenek olabilir. ASUS RT, GL.iNet ve pfSense/OPNsense farklı kullanım ve teknik bilgi düzeylerine hitap eder; uyumluluk ile performansı tam model üzerinde doğrulayın. WireGuard iyi bir başlangıç olabilir; bağlantı sorunu varsa sağlayıcının desteklediği OpenVPN seçeneklerini karşılaştırın.
 
 Hangi VPN sağlayıcısının router'ınızla en uyumlu olduğunu görmek için [VPN karşılaştırma sayfamıza](/karsilastir) göz atın. Cihaz başı kurulum yerine merkezi bir çözüm arıyorsanız router yatırımı uzun vadede en mantıklı seçim.

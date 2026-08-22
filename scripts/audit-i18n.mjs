@@ -42,7 +42,11 @@ const DEFAULT_LOCALE = "tr";
 // i18n-paths.ts CONTENT_REGISTRY ile senkron olmalı (bağımsız oracle kopyası).
 const G = "guide";
 const C = "comparison";
-const ALL = ["tr", "en", "de"];
+// İçerik/routing üç dilde çalışmaya devam eder. SEO keşfi ve hreflang ise
+// Almanca editoryal karantinadayken yalnızca TR + EN ile sınırlıdır.
+const CONTENT_LOCALES = ["tr", "en", "de"];
+const SEO_LOCALES = ["tr", "en"];
+const ALL = CONTENT_LOCALES;
 const REGISTRY = {
   "what-is-vpn": {
     tr: { section: G, slug: "vpn-nedir" },
@@ -171,19 +175,30 @@ for (const [input, expected] of pathCases) {
 if (pathOk) pass(`getLocalizedPath sözleşmesi (${pathCases.length} senaryo) geçti`);
 
 // ---------------------------------------------------------------------------
-// 2) hreflang üretimi: what-is-vpn yalnızca TR servis ediliyor → tr + x-default
+// 2) İçerik/routing kapsamı ile indexlenebilir hreflang kapsamını ayrı doğrula.
+//    DE rotaları çalışır, fakat noindex karantinasındayken hreflang'e girmez.
 // ---------------------------------------------------------------------------
 function servedLocales(contentId) {
   const e = REGISTRY[contentId];
   if (!e) return [];
-  const served = e.served ?? ["tr", "en", "de"];
-  return ["tr", "en", "de"].filter((l) => served.includes(l) && e[l]);
+  const served = e.served ?? CONTENT_LOCALES;
+  return CONTENT_LOCALES.filter((l) => served.includes(l) && e[l]);
 }
-const served = servedLocales("what-is-vpn");
-if (served.join(",") === "tr,en,de") {
-  pass('hreflang: "what-is-vpn" üç dilde de servis ediliyor (flagship lokalize içerik)');
+function seoServedLocales(contentId) {
+  const served = servedLocales(contentId);
+  return SEO_LOCALES.filter((locale) => served.includes(locale));
+}
+const contentServed = servedLocales("what-is-vpn");
+if (contentServed.join(",") === "tr,en,de") {
+  pass('İçerik/routing: "what-is-vpn" TR, EN ve DE dillerinde servis ediliyor');
 } else {
-  fail(`hreflang: "what-is-vpn" servis edilen diller beklenenden farklı: ${served.join(",")}`);
+  fail(`İçerik/routing: "what-is-vpn" servis edilen diller beklenenden farklı: ${contentServed.join(",")}`);
+}
+const seoServed = seoServedLocales("what-is-vpn");
+if (seoServed.join(",") === "tr,en") {
+  pass('SEO/hreflang: "what-is-vpn" yalnız TR + EN; DE noindex karantinasında');
+} else {
+  fail(`SEO/hreflang: "what-is-vpn" indexlenebilir dilleri beklenenden farklı: ${seoServed.join(",")}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -407,12 +422,29 @@ if (scanHits === 0) pass("Kaynak taraması: hardcoded yanlış-dil section URL'i
 //    kaldırıldı mı?
 // ---------------------------------------------------------------------------
 const sitemapSrc = readFileSync(join(SRC, "app", "sitemap.xml", "route.ts"), "utf8");
+const siteSrc = readFileSync(join(SRC, "lib", "site.ts"), "utf8");
+const localeLayoutSrc = readFileSync(join(SRC, "app", "[locale]", "layout.tsx"), "utf8");
+if (/export const SEO_LOCALES\s*=\s*\[\s*"tr"\s*,\s*"en"\s*\]\s*as const/.test(siteSrc)) {
+  pass("SEO locale politikası: yalnız TR + EN indexlenebilir");
+} else {
+  fail("SEO locale politikası: src/lib/site.ts içinde TR + EN SEO_LOCALES sözleşmesi bulunamadı");
+}
+if (/locale\s*!==\s*"de"/.test(localeLayoutSrc) && /index:\s*false/.test(localeLayoutSrc)) {
+  pass("DE locale layout'u noindex karantinasını uyguluyor");
+} else {
+  fail("DE locale layout'unda noindex karantinası bulunamadı");
+}
 if (/const guidePaths|const comparisonPaths|const guideSlugs|const comparisonSlugs/.test(sitemapSrc)) {
   fail("Sitemap: statik guide/comparison listeleri hâlâ mevcut (registry-driven olmalı)");
 } else if (sitemapSrc.includes("CONTENT_REGISTRY") && sitemapSrc.includes("SECTION_HUB_SERVED")) {
   pass("Sitemap: guide/comparison detayları + hub'lar registry-driven üretiliyor");
 } else {
   fail("Sitemap: CONTENT_REGISTRY/SECTION_HUB_SERVED tabanlı üretim bulunamadı");
+}
+if (sitemapSrc.includes("SEO_LOCALES") && /const allLocales\s*=\s*SEO_LOCALES/.test(sitemapSrc)) {
+  pass("Sitemap: yalnız SEO_LOCALES (TR + EN) URL'lerini yayımlıyor");
+} else {
+  fail("Sitemap: SEO_LOCALES tabanlı TR + EN filtresi bulunamadı");
 }
 if (/trOnlyUseCases/.test(sitemapSrc)) {
   pass("Sitemap: TR-only use-case sayfaları (turkiye, yurt-disindaki-turkler) TR-only");
@@ -434,6 +466,9 @@ async function checkLiveSitemap(url) {
     const xml = await res.text();
     const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const badPatterns = [
+      // DE kullanıcılar için erişilebilir, fakat noindex karantinasındayken
+      // sitemap/hreflang keşfine dahil edilmemeli.
+      /\/de(?:\/|$)/,
       /\/(en|de)\/rehber\//,
       /\/(en|de)\/karsilastir\//,
       /\/(en|de)\/kategori\//,
@@ -445,8 +480,8 @@ async function checkLiveSitemap(url) {
       /\/(en|de)\/en-iyi\/(turkiye|yurt-disindaki-turkler)$/,
     ];
     const bad = locs.filter((l) => badPatterns.some((re) => re.test(l)));
-    if (bad.length) bad.forEach((l) => fail(`Sitemap'te yanlış-dil URL: ${l}`));
-    else pass(`Canlı sitemap temiz (${locs.length} URL, yanlış-dil section yok)`);
+    if (bad.length) bad.forEach((l) => fail(`Sitemap'te yanlış-dil veya noindex URL: ${l}`));
+    else pass(`Canlı sitemap temiz (${locs.length} URL, yanlış-dil/noindex URL yok)`);
   } catch (e) {
     warn(`Canlı sitemap kontrolü atlandı: ${e.message}`);
   }
@@ -465,6 +500,11 @@ async function main() {
   console.log(
     `\n${passes.length} geçti, ${warnings.length} uyarı, ${errors.length} hata\n`,
   );
-  process.exit(errors.length > 0 ? 1 : 0);
+  // Let fetch keep-alive handles close naturally on Windows. A hard
+  // process.exit() can trip a libuv assertion after a successful live audit.
+  process.exitCode = errors.length > 0 ? 1 : 0;
 }
-main();
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

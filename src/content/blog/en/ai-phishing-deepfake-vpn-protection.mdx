@@ -40,17 +40,17 @@ Visual deepfakes (less Midjourney, more Stable Diffusion + LoRA-based tools) are
 
 VPN can't block all of these — VPN doesn't stop phishing emails arriving. But VPN contributes to defense in three dimensions:
 
-### 1. Preventing IP and Location Leakage
+### 1. Reducing IP and Location Exposure
 
-Attackers profile targets using IP, location, and ISP info. Public Wi-Fi traffic analysis (who connects where) feeds profiling. VPN closes that visibility. Detail in our [VPN privacy and security article](/en/blog/vpn-privacy-and-security).
+Attackers can use IP, approximate location, and ISP information when profiling targets. A correctly configured VPN reduces the destination IP and DNS metadata visible to the local Wi-Fi network or ISP, and sites see the VPN exit IP. Logged-in services, browser fingerprints, and traffic patterns can still support profiling. See our [VPN privacy and security article](/en/blog/vpn-privacy-and-security).
 
 ### 2. DNS Hijack and Fake Site Redirects
 
-Some attacks happen at DNS — fake DNS responses redirecting to fake bank sites. If your VPN uses its own DNS, this vector closes. Our [DNS leak test article](/en/blog/dns-leak-test-vpn) shows how to verify.
+Some attacks use forged DNS responses to redirect users to an imitation site. Routing DNS queries through a trusted resolver inside the VPN tunnel can reduce local-network DNS manipulation, but a DNS leak, misconfiguration, or compromised endpoint can leave gaps. DNS routing also does not prove that a destination is legitimate. Our [DNS leak test article](/en/blog/dns-leak-test-vpn) shows how to check routing on your own connection.
 
 ### 3. Public Wi-Fi MITM
 
-In cafes, airports, AI-driven MITM attacks rise — fake hotspots, traffic analysis, session cookie theft. VPN tunnel encryption blocks these. Our [VPN for travel article](/en/blog/vpn-for-travel) covers this scenario.
+Untrusted networks in cafes or airports can expose users to rogue access points, passive traffic observation, and local-network tampering. A VPN tunnel reduces the risk of traffic being read or altered between the device and VPN server; it does not fix a malicious captive portal, compromised device, phishing site, or session cookie stolen earlier. Our [VPN for travel article](/en/blog/vpn-for-travel) covers these boundaries.
 
 ## What VPN Doesn't Solve
 
@@ -67,17 +67,17 @@ Hence multi-layer defense.
 
 Recommended stack:
 
-1. **VPN (no-logs, audited)**: Traffic encryption + DNS security. Selection in our [VPN selection guide](/en/blog/how-to-choose-vpn).
+1. **VPN (no-logs claim audited)**: Traffic encryption between the device and VPN server, plus DNS routing when configured correctly. Check the audit date and scope; an audit is not a guarantee of no logging or zero leaks. See our [VPN selection guide](/en/blog/how-to-choose-vpn).
 2. **Hardware key (YubiKey, Titan)**: For 2FA. SMS 2FA is now insecure (SIM swap attacks).
-3. **Password manager**: 1Password, Bitwarden, Proton Pass. Won't auto-fill on fake sites — they detect phishing themselves.
+3. **Password manager**: 1Password, Bitwarden, Proton Pass. Origin matching can reduce autofill on lookalike sites, but the user should still verify the address.
 4. **Email security scanning**: Modern Gmail/Outlook AI scans, but corporate accounts need extra layer.
 5. **Family code word**: Defense against voice deepfake — agree on a verification word in advance. "Urgent payment" call asks for the word.
 
 ## Personal Security Using AI Tools
 
 When typing sensitive info into ChatGPT, Claude, Perplexity:
-- Keep VPN on (IP hiding)
-- Toggle off "use data for training" (available in all major models)
+- If you use a VPN, the service sees the VPN exit IP; this does not hide your signed-in account or prompt content from the service
+- Review the service's current data-use and training controls in your account; options can vary by product and plan
 - Don't type company secrets, customer data, SSN — use enterprise version
 - Clear chat history regularly
 
@@ -111,13 +111,13 @@ No. VPN only handles IP/location and traffic encryption. Without email filtering
 Unusual urgency, abnormal payment method (crypto, gift cards), refusing video — red flags. Family code word is the most practical defense.
 
 **Will a free VPN do?**
-No. Most free VPNs analyze your traffic — opposite of the protection you need. See our [free vs paid VPN article](/en/blog/free-vs-paid-vpn).
+Price alone does not establish whether a VPN is safe. Review the business model, data-collection policy, app permissions, and current independent audits, and avoid providers whose practices are unclear. See our [free vs paid VPN article](/en/blog/free-vs-paid-vpn) for evaluation criteria.
 
 **Do ChatGPT, Claude themselves write phishing?**
 Officially no — they have guardrails. But jailbreaks or local open-source models (Llama, Mistral) let attackers bypass them.
 
 ## Conclusion
 
-AI-powered phishing and deepfakes are here. VPN is an essential component of multi-layer defense — but not sufficient alone. No-logs audited VPN + hardware 2FA + password manager + training is the real protection trio.
+AI-powered phishing and deepfakes call for layered defenses. A VPN with a current, scoped audit, locally verified kill-switch and DNS behavior, hardware-backed MFA, a password manager, and training can reduce risk; none of them completely prevents phishing or deepfake attacks. Test the VPN's DNS and kill-switch behavior on your own device.
 
 For the right VPN, see our [comparison page](/en/karsilastir) and [privacy-focused best VPN list](/en/en-iyi/gizlilik).

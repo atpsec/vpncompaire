@@ -53,7 +53,7 @@
     "hero": {
       "h1": "Gönüllü, bağımsız VPN karşılaştırmaları",
       "subtitle": "Gizlilik, streaming, seyahat ve günlük güvenlik için resmi kaynaklarla karşılaştırılan VPN profilleri.",
-      "ctaPrimary": "En İyi 20 VPN'i Gör",
+      "ctaPrimary": "VPN Karşılaştırmalarını Gör",
       "ctaSecondary": "Kaynak yaklaşımımız",
       "methodologyTag": "Kaynak temelli metodoloji",
       "trust": {
@@ -64,9 +64,9 @@
       }
     },
     "topVPNs": {
-      "title": "2026'nın En İyi 20 VPN'i",
+      "title": "2026 VPN Sağlayıcı Karşılaştırmaları",
       "subtitle": "Bağımsız denetimler, doğrulanabilir özellik kaynakları ve şeffaf fiyat analiziyle düzenlenmiş.",
-      "extendedKicker": "Sıra 11–20",
+      "extendedKicker": "Ek sağlayıcı profilleri",
       "extendedTitle": "Genişletilmiş inceleme havuzu",
       "extendedSubtitle": "İlk 10 sıralama dışında değerlendirdiğimiz alternatifler — bütçe, niş özellik veya ikinci seçenek arayanlar için."
     },
@@ -365,7 +365,7 @@
     "metaTitle": "2026 VPN Karşılaştırmaları — Kaynak Temelli Sağlayıcı Profilleri",
     "metaDescription": "VPN sağlayıcılarını resmi belgeler, bağımsız denetimler, gizlilik politikaları, özellikler ve fiyat kaynakları üzerinden karşılaştırın.",
     "breadcrumb": "Ana sayfa › En İyi VPN'ler",
-    "h1": "2026'da En İyi 20 VPN — Editör Sıralaması",
+    "h1": "2026 VPN Sağlayıcıları — Kaynak Temelli Karşılaştırma",
     "intro": "VPN profillerini altı bilgi alanında karşılaştırıyoruz. Aşağıdaki görünüm bağımsız denetim raporları, resmi özellik belgeleri ve fiyat şeffaflığına dayalı kaynak temelli editoryal çerçevedir. Kullanıcılar kendi önceliklerine göre değerlendirme yapmalıdır."
   },
   "useCaseHub": {
@@ -452,7 +452,7 @@
     },
     "footerCta": {
       "kicker": "Tüm karşılaştırmaları gör",
-      "link": "En İyi 20 VPN sıralamasına dön"
+      "link": "VPN karşılaştırmalarına dön"
     }
   },
   "quiz": {
@@ -541,14 +541,14 @@
     "reset": "Sıfırla",
     "altDirectHeading": "Quiz yerine direkt seçim",
     "altLinks": {
-      "top": "En iyi 20 VPN sıralaması",
+      "top": "VPN sağlayıcı karşılaştırmaları",
       "compare": "İki VPN'i karşılaştır",
       "calculator": "Maliyet hesaplayıcı"
     }
   },
   "calculator": {
     "metaTitle": "VPN Toplam Maliyet Hesaplayıcı (2026) — Yenileme Dahil Gerçek Fiyat",
-    "metaDescription": "1, 2 veya 3 yıl için 20 VPN'in toplam maliyetini karşılaştır. İlk dönem indirimi + yenileme fiyatı dahil. Etkin aylık fiyat ve tasarruf hesabı.",
+    "metaDescription": "Listelenen VPN'lerin 1, 2 veya 3 yıllık toplam maliyetini karşılaştır. İlk dönem indirimi, yenileme fiyatı, etkin aylık fiyat ve tasarruf hesabı.",
     "ogTitle": "VPN Maliyet Hesaplayıcı",
     "ogDescription": "Yenileme dahil gerçek 3 yıllık VPN maliyetini hesapla.",
     "breadcrumb": "Maliyet hesaplayıcı",
@@ -632,7 +632,7 @@
       "cards": {
         "reviews": {
           "title": "İncelemeler",
-          "desc": "20 VPN'in detaylı incelemeleri.",
+          "desc": "VPN sağlayıcılarının detaylı profilleri.",
           "link": "İncelemelere git →"
         },
         "compare": {
@@ -818,7 +818,7 @@
     },
     "readComparison": "Karşılaştırmayı oku",
     "footerKicker": "Karşılaştırmadan önce, tüm VPN'lerin tek tek incelemesi",
-    "footerLink": "En İyi 20 VPN sıralamasına git"
+    "footerLink": "VPN karşılaştırmalarına git"
   },
   "deviceHub": {
     "metaTitle": "Cihazlara Göre VPN Rehberi — Android, iPhone, iPad, Smart TV",
@@ -833,10 +833,10 @@
     "notListedBody": "Windows ve macOS için her sağlayıcının doğrudan masaüstü uygulaması var; tek tıkla kurulum yeterli. Linux'ta WireGuard tabanlı bağlantı en yaygın olanı. Oyun konsolları (PS5, Xbox) ve akıllı ev cihazları için tek pratik yol router seviyesinde VPN — Smart TV rehberindeki router bölümü onlar için de geçerli."
   },
   "refundPage": {
-    "metaTitle": "VPN İptal ve İade Rehberi (2026) — 20 VPN için Adım Adım Talimatlar",
+    "metaTitle": "VPN İptal ve İade Rehberi (2026) — Sağlayıcılara Göre Adımlar",
     "metaDescription": "NordVPN, ExpressVPN, Surfshark ve diğer VPN sağlayıcılarında abonelik iptali ve para iade süreci. İade penceresi, yaygın tuzaklar ve adım adım talimatlar.",
     "ogTitle": "VPN İptal ve İade Rehberi",
-    "ogDescription": "20 VPN için iptal ve iade adımları, tek sayfada.",
+    "ogDescription": "Listelenen VPN sağlayıcıları için iptal ve iade adımları, tek sayfada.",
     "breadcrumbHome": "Ana sayfa",
     "breadcrumbHere": "İptal ve İade"
   },
@@ -896,7 +896,7 @@
     "resetWithCount": "Filtreleri sıfırla ({count} aktif)",
     "matchCount": "<strong>{count}</strong> VPN eşleşti",
     "activeCount": "Filtreler: {count}",
-    "allShown": "Tüm 20 VPN gösteriliyor",
+    "allShown": "Tüm VPN'ler gösteriliyor",
     "readReview": "İncelemeyi oku",
     "getDeal": "Fırsata git",
     "emptyTitle": "Eşleşen VPN yok",
@@ -1021,7 +1021,7 @@
     "alt": "VPN Advisor — Bağımsız VPN Karşılaştırmaları",
     "h1": "Bağımsız VPN Karşılaştırmaları",
     "subtitle": "Gönüllü inceleme projesi · Şeffaf metodoloji · Bağımsız değerlendirmeler.",
-    "trust1": "20 VPN profili",
+    "trust1": "VPN sağlayıcı profilleri",
     "trust2": "Bağımsız denetimler",
     "trust3": "Şeffaf metodoloji"
   },

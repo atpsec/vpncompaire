@@ -13,9 +13,9 @@ import { getProduct } from "@/data/products";
 import { defaultLocaleAlternates } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Yurt Dışındaki Türkler İçin En İyi VPN (2026)",
+  title: "Yurt Dışındaki Türkler İçin VPN Rehberi (2026)",
   description:
-    "BluTV, Exxen, Netflix TR, e-Devlet ve Türk bankacılık uygulamalarına yurt dışından erişim için 2026'nın en iyi VPN seçimleri ve pratik kullanım rehberi.",
+    "Yurt dışından Türkiye konumu gereken senaryolarda sunucu dizini, servis koşulları, bankacılık güvenliği ve VPN sınırlamalarını kontrol etme rehberi.",
   // İçerik yalnızca Türkçe servis ediliyor; EN/DE istekleri middleware 301'ler.
   alternates: defaultLocaleAlternates("/en-iyi/yurt-disindaki-turkler"),
 };
@@ -26,43 +26,43 @@ const picks = [
   {
     slug: "surfshark",
     why:
-      "Türkiye lokasyonlu sunucusu var — BluTV, Exxen, TRT, Netflix TR, e-Devlet ve Türk bankacılık uygulamaları için en doğal seçim. Sınırsız cihazla telefon, dizüstü, tablet, akıllı TV aynı abonelikten beslenebiliyor.",
-    bestFor: "Türk içeriklere erişmek isteyen yurt dışı Türkler",
+      "Sağlayıcının güncel dizininde Türkiye konumu ve sınırsız eşzamanlı bağlantı bilgisi bulunuyor. Bir Türkiye IP'si bazı konum senaryolarında yardımcı olabilir; servis erişimi ve uygulama uyumluluğu garanti değildir.",
+    bestFor: "Türkiye konumu ve çoklu cihaz desteğini arayanlar",
   },
   {
     slug: "nordvpn",
     why:
-      "Türkiye sunucusu yok ama Avrupa'daki yakın lokasyonlarla istikrarlı performans. Streaming geneli (özellikle Netflix US, UK, JP) için en kararlı sağlayıcılardan.",
-    bestFor: "TR + global streaming kombinasyonu isteyenler",
+      "Sağlayıcı NordLynx protokolünü, bağımsız denetim kayıtlarını ve geniş bir konum dizinini belgeliyor. Güncel Türkiye/Avrupa seçeneklerini resmi sunucu listesinde, gecikmeyi ise kendi ağınızda kontrol edin.",
+    bestFor: "Denetim ve protokol belgelerini önceliklendirenler",
   },
   {
     slug: "expressvpn",
     why:
-      "Lightway protokolünün hızlı bağlantı kurma özelliği, ülke değiştirme senaryolarında pratik. MediaStreamer DNS özelliği akıllı TV ve oyun konsollarında VPN olmadan bölge bypass'ı yapıyor.",
-    bestFor: "Akıllı TV/konsol kullanan ve premium istisin isteyenler",
+      "Sağlayıcı Lightway protokolünü ve MediaStreamer adlı Smart DNS seçeneğini belgeliyor. Smart DNS trafiği şifrelemez; konum ve servis uyumluluğu güncel resmi belgelerle ayrıca doğrulanmalıdır.",
+    bestFor: "Akıllı TV veya konsolda resmi kurulum seçeneği arayanlar",
   },
 ];
 
 const faqs = [
   {
     q: "Yurt dışından BluTV ve Exxen'i nasıl izlerim?",
-    a: "Türkiye lokasyonlu sunucusu olan bir VPN (örn. Surfshark) ile Türkiye'ye bağlandığında, BluTV ve Exxen seni Türkiye'den bağlanıyor olarak görür. Erişim sorunsuz çalışır.",
+    a: "Türkiye konumu IP sinyalini değiştirebilir, ancak BluTV ve Exxen VPN trafiğini engelleyebilir; hesap bölgesi, lisans ve hizmet şartları da sonucu etkiler. Güncel uyumluluğu kendi hesabınızda kontrol edin; kesintisiz erişim garantisi yoktur.",
   },
   {
     q: "e-Devlet'e yurt dışından girebilir miyim?",
-    a: "Evet — e-Devlet teknik olarak yurt dışından erişilebilir. Ancak bazı işlemler (özellikle SMS doğrulama gerektirenler) Türk SIM kartı gerektirebilir. VPN kullanmak girişi engellemez ama bazı banka uygulamaları VPN tespit ederse oturum açmana izin vermeyebilir.",
+    a: "e-Devlet'in güncel giriş ve doğrulama seçeneklerini resmi e-Devlet kanallarından kontrol edin. VPN gerekli olmayabilir; güvenlik kontrolleri, SMS veya diğer kimlik doğrulama adımları VPN'den bağımsızdır.",
   },
   {
     q: "Türk bankası uygulamasında VPN açık olabilir mi?",
-    a: "Çoğu Türk banka uygulaması güvenlik nedeniyle VPN tespit edip oturumu kapatabilir. Bankacılık işlemleri için VPN'i geçici olarak kapatman önerilir. Sonrasında tekrar bağlayabilirsin.",
+    a: "Banka uygulamalarının güvenlik politikaları değişir ve yabancı ya da VPN IP'lerinde ek doğrulama isteyebilir. Bankanızın resmi güvenlik yönlendirmesini izleyin; VPN'i kapatmanız gerekiyorsa güvenilir bir ağ kullanın.",
   },
   {
     q: "Netflix TR'yi yurt dışından izleyebilir miyim?",
-    a: "Evet — Türkiye sunucusu olan bir VPN ile Netflix TR kütüphanesine erişebilirsin. Surfshark bu senaryoda en stabil performansı veriyor.",
+    a: "Türkiye konumu katalog sinyalini etkileyebilir; fakat Netflix erişimi hesap, lisans, hizmet şartları ve VPN tespitine göre değişebilir. Belirli bir sağlayıcı için erişim veya istikrar garantisi vermiyoruz.",
   },
   {
     q: "Vatandaşlık veya konsolosluk işlemleri için VPN gerekir mi?",
-    a: "Konsolosluk web siteleri genellikle global erişilebilir. Ancak randevu sistemlerinde TR IP avantaj sağlayabilir; aksi durumda işlem aynıdır.",
+    a: "Resmi konsolosluk ve kamu hizmetleri için yalnızca kurumun yayımladığı giriş talimatlarını izleyin. VPN kullanmanın avantaj sağladığını varsaymayın; bağlantı sorunu varsa kurumun resmi destek kanalına başvurun.",
   },
 ];
 
@@ -105,12 +105,12 @@ export default async function Page({ params }: Props) {
             <Globe2 className="size-3" /> Expat odaklı
           </Badge>
           <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">
-            Yurt Dışındaki Türkler İçin En İyi VPN (2026)
+            Yurt Dışındaki Türkler İçin VPN Rehberi (2026)
           </h1>
           <p className="mt-4 text-lg text-ink-muted">
-            BluTV, Exxen, Netflix TR, e-Devlet veya sadece evden bir parça
-            uzakta olmadığını hissetmek için — TR sunucusu olan, hızlı ve
-            güvenilir VPN seçimleri.
+            Türkiye konumu, cihaz desteği ve doğrulanabilir sağlayıcı belgeleri
+            üzerinden üç VPN profilini karşılaştırın; servis erişimi ve resmi
+            işlemler için güncel koşulları ayrıca kontrol edin.
           </p>
         </header>
 
@@ -121,7 +121,7 @@ export default async function Page({ params }: Props) {
               Streaming
             </h3>
             <p className="mt-1 text-sm text-ink-muted">
-              BluTV, Exxen, Netflix TR, TRT World erişimi.
+              Konum sinyali, hesap koşulları ve güncel platform uyumluluğu.
             </p>
           </Card>
           <Card className="p-4">
@@ -139,7 +139,7 @@ export default async function Page({ params }: Props) {
               Yerel servisler
             </h3>
             <p className="mt-1 text-sm text-ink-muted">
-              Yemeksepeti, Trendyol, getir gibi servisler için bölge erişimi.
+              Yerel servislerin bölge ve hesap koşullarını kontrol etme.
             </p>
           </Card>
         </section>
@@ -185,15 +185,6 @@ export default async function Page({ params }: Props) {
                         </Button>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs text-ink-subtle">Puan</div>
-                      <div className="text-2xl font-bold text-brand-700">
-                        {product.score.toFixed(1)}
-                        <span className="text-xs text-ink-subtle font-normal">
-                          /10
-                        </span>
-                      </div>
-                    </div>
                   </div>
                 </Card>
               );
@@ -206,34 +197,31 @@ export default async function Page({ params }: Props) {
 
           <h3>BluTV / Exxen yurt dışından izleme</h3>
           <p>
-            Yurt dışındayken BluTV veya Exxen&apos;e girmeye çalıştığında
-            &quot;Bu hizmet bölgenizde kullanılamıyor&quot; mesajıyla
-            karşılaşırsın. VPN&apos;ini Türkiye sunucusuna bağladıktan sonra
-            sayfayı yenile — platform seni Türkiye&apos;den bağlanıyor olarak
-            görecek ve içeriklere erişeceksin.
+            Türkiye konumu, platforma Türkiye IP sinyali gönderebilir; ancak
+            hesap bölgesi, lisans koşulları ve VPN tespiti erişimi etkileyebilir.
+            Platformun hizmet şartlarını kontrol edin ve belirli bir VPN&apos;in
+            sürekli çalışacağını varsaymayın.
           </p>
 
           <h3>Bankacılık uygulamaları</h3>
           <p>
-            Türk bankaları (Garanti BBVA, Akbank, İş Bankası, Ziraat vb.)
-            uygulamalarında VPN tespit edildiğinde oturumun otomatik
-            kapanabilir veya yasal işlem yapılamayabilir. Pratik strateji:
-            <strong> bankacılık işlemleri için VPN&apos;i geçici olarak
-            kapat</strong>, ardından tekrar aç.
+            Banka uygulamaları yabancı veya VPN IP&apos;lerinde ek doğrulama
+            isteyebilir. Bankanızın resmi güvenlik talimatını izleyin; VPN&apos;i
+            kapatmanız istenirse işlemi yalnız güvenilir bir ağda yapın.
           </p>
 
           <h3>e-Devlet erişimi</h3>
           <p>
-            e-Devlet teknik olarak yurt dışından erişilebilir; VPN gerekli
-            değil. Ancak bazı işlemler için Türk telefon numarasıyla SMS
-            doğrulama gerekebilir — bu, VPN ile çözülen bir sorun değil.
+            Giriş ve kimlik doğrulama seçenekleri için resmi e-Devlet
+            yönlendirmelerini kullanın. SMS veya diğer kimlik doğrulama
+            adımları, IP konumundan ayrı gereksinimlerdir.
           </p>
 
           <h3>Yerel hizmetler (Yemeksepeti, Trendyol, getir)</h3>
           <p>
-            Bazı bu tip servisler yurt dışı IP&apos;leri kısıtlayabilir.
-            Hesabına ulaşamıyorsan veya servis sayfası açılmıyorsa,
-            VPN&apos;ini TR sunucusuna bağlamak çoğunlukla çözüyor.
+            Yerel hizmetlerin bölge, teslimat ve hesap politikaları farklıdır.
+            Türkiye IP&apos;si tek başına hizmet kullanılabilirliğini garanti etmez;
+            uygulamanın güncel koşullarını ve destek bilgisini kontrol edin.
           </p>
 
           <h2>Sıkça sorulan sorular</h2>

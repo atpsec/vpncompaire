@@ -1,15 +1,16 @@
-import { siteConfig } from "@/lib/site";
+import { SEO_LOCALES, siteConfig } from "@/lib/site";
 import { rankedProducts } from "@/data/products";
-import { referenceProducts } from "@/data/products-reference-localized";
-import { getBlogPosts } from "@/lib/blog";
+import { getIndexableBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
 
 export async function GET() {
   const core = rankedProducts().filter((p) => p.slug !== "atlas-vpn");
-  const catalog = [...core, ...referenceProducts];
-  const blogPosts = await Promise.all([getBlogPosts("tr"), getBlogPosts("en"), getBlogPosts("de")]);
-  const blogLocales = ["tr", "en", "de"] as const;
+  const catalog = core;
+  const blogLocales = SEO_LOCALES;
+  const blogPosts = await Promise.all(
+    blogLocales.map((locale) => getIndexableBlogPosts(locale)),
+  );
   const latestBlogUpdate = blogPosts.flat().map((post) => post.updatedAt).sort().at(-1);
   const blogIndex = blogPosts.map((posts, index) => `### ${blogLocales[index].toUpperCase()} blog yazıları\n\n${posts.map((post) => `- [${post.title}](${siteConfig.url}${blogLocales[index] === "tr" ? "" : `/${blogLocales[index]}`}/blog/${post.slug}) — ${post.description}`).join("\n")}`).join("\n\n");
 
@@ -23,7 +24,7 @@ ${siteConfig.name}, VPN teknolojisi ve VPN sağlayıcıları hakkında kaynak te
 
 ## Kapsam
 
-VPN Advisor aktif dizininde toplam ${catalog.length} VPN sağlayıcı profili bulunur. İlk grup daha ayrıntılı yapılandırılmış veri içerirken, genişletilmiş dizindeki sağlayıcılar pazar kapsamını artırmak için kaynak-temelli referans profili olarak sunulur. Bu sayı bir kalite sıralaması değildir. Hizmeti sonlandırılmış ürünler aktif sağlayıcı sayısına dahil edilmez.
+Bu dosyada ${catalog.length} ayrıntılı, indekslenebilir VPN sağlayıcı profili listelenir. Genişletilmiş referans dizini, ürün-özel kaynaklandırma ve çeviri çalışması tamamlanana kadar arama/LLM dizininden çıkarılmıştır. Bu sayı bir kalite puanı değildir. Hizmeti sonlandırılmış ürünler aktif sağlayıcı sayısına dahil edilmez.
 
 ## Kaynak ve doğrulama yaklaşımı
 
@@ -55,7 +56,6 @@ ${catalog
 ## Konu rehberleri
 
 - [VPN nedir?](${siteConfig.url}/rehber/vpn-nedir)
-- [Türkiye'de VPN yasal mı?](${siteConfig.url}/rehber/turkiye-de-vpn-yasal-mi)
 - [Ücretsiz vs ücretli VPN](${siteConfig.url}/rehber/ucretsiz-vs-ucretli-vpn)
 - [VPN güvenlik kontrol listesi](${siteConfig.url}/rehber/vpn-guvenlik-kontrol-listesi)
 - [Blog ve güncel teknik açıklamalar](${siteConfig.url}/blog)
@@ -88,7 +88,7 @@ ${blogIndex}
 
 ## Dil sürümleri
 
-Türkçe ana sürümdür. İngilizce içerik /en, Almanca içerik /de altında sunulur. Sayfalarda canonical ve hreflang ilişkileri içerik gerçekten mevcut olduğunda yayınlanır.
+Türkçe ana sürümdür; İngilizce içerik /en altında sunulur. Almanca sayfalar editoryal iyileştirme sürecinde kullanıcılar için erişilebilir kalabilir ancak indekslenebilir içerik dizinine dahil edilmez. Canonical ve hreflang ilişkileri yalnızca indekslenebilir sürümler için yayınlanır.
 
 ## Güncellik
 

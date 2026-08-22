@@ -1,8 +1,9 @@
+import Script from "next/script";
 import { siteConfig } from "@/lib/site";
 
 /**
  * Google AdSense (Auto Ads) — tek script, yerleşimi Google otomatik seçer.
- * Root layout <head> içinde render edilir (AdSense site doğrulaması bunu bekler).
+ * Root layout'ta hydration sonrasında yüklenir; ilk boya yolunu bloke etmez.
  *
  * Çerez davranışı: kişiselleştirilmiş reklam sinyalleri (ad_storage,
  * ad_user_data, ad_personalization) google-analytics.tsx'te "denied" default'la
@@ -12,8 +13,9 @@ export function GoogleAdsense() {
   const id = siteConfig.adsenseClientId;
 
   return (
-    <script
-      async
+    <Script
+      id="google-adsense"
+      strategy="afterInteractive"
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${id}`}
       crossOrigin="anonymous"
     />

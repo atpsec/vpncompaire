@@ -10,46 +10,46 @@ const CONTENT = {
   tr: {
     metaTitle: "Streaming İçin En İyi VPN'ler (2026)",
     metaDescription:
-      "Netflix, Disney+, BBC iPlayer, HBO Max, BluTV ve Exxen için en istikrarlı VPN seçimleri ve bölgesel kütüphane erişim rehberi.",
+      "Streaming için VPN seçerken sunucu konumu, cihaz desteği, hız ve değişebilen platform politikalarını kaynaklarla karşılaştırın.",
     title: "Streaming İçin En İyi VPN'ler",
     tagline:
-      "Netflix, Disney+, BBC iPlayer, BluTV, Exxen ve daha fazlası — istikrarlı erişim için en iyi seçimler.",
+      "Sunucu konumu, cihaz desteği ve sağlayıcı belgelerini karşılaştırın; sürekli platform erişimi garanti edilemez.",
     summary:
-      "Streaming için VPN seçerken üç şey kritik: IP havuzunun büyüklüğü (engellenmeye karşı dayanıklılık), istenen bölgelerde sunucu varlığı ve 4K-ready hız. NordVPN istikrar, ExpressVPN premium deneyim, Surfshark fiyat-performans ile öne çıkıyor.",
+      "Streaming için VPN seçerken kullanılacak bölgelerde sunucu varlığını, cihaz uygulamalarını, Smart DNS kapsamını ve kendi bağlantınızdaki performansı değerlendirin. Platformların VPN politikaları değişebildiği için sağlayıcı beyanı, gelecekteki erişim garantisi değildir.",
     badgeLabel: "Streaming",
     picks: [
       {
         slug: "nordvpn",
-        bestFor: "Genel en istikrarlı streaming",
-        why: "Geniş IP havuzu ve hızlı sunucu rotasyonu sayesinde Netflix (US/UK/JP/TR), Disney+, BBC iPlayer, BluTV ve Exxen'de tutarlı erişim. Streaming için \"optimize sunucu\" konsepti olmasa da, IP çeşitliliği avantajı sağlıyor.",
+        bestFor: "Geniş sunucu ve destek dokümantasyonu arayanlar",
+        why: "Sağlayıcı; sunucu ağı, SmartPlay ve çeşitli streaming kullanım senaryoları hakkında destek belgeleri yayımlar. Belirli bir platformun güncel uyumluluğunu kendi hesabınız ve ağınızda doğrulayın.",
       },
       {
         slug: "expressvpn",
         bestFor: "Premium kullanıcı + akıllı TV / konsol",
-        why: "Lightway protokolünün hızlı bağlantı kurulumu ve sektörün en az engellenen IP havuzlarından biri. MediaStreamer DNS, VPN desteklemeyen cihazlarda (akıllı TV, konsol) bölge bypass'ı yapıyor.",
+        why: "Sağlayıcı Lightway, cihaz uygulamaları ve MediaStreamer DNS hakkında resmi belgeler yayımlar. MediaStreamer tam VPN şifrelemesi sağlamaz; hizmet ve cihaz uyumluluğu değişebilir.",
       },
       {
         slug: "surfshark",
         bestFor: "Bütçe + Türkiye sunucusu",
-        why: "Aktif Türkiye sunucusu — yurt dışından BluTV/Exxen erişimi için en doğal seçim. Sınırsız cihazla aile içi tüm ekranları korur. Premium streaming kalitesinin altında ama fiyat-performans liderliği yapıyor.",
+        why: "Sağlayıcı ülke sunucuları ve çoklu cihaz politikası yayımlar. Türkiye konumunun ve kullandığınız platform desteğinin güncel envanterde bulunduğunu resmi sayfadan kontrol edin.",
       },
     ],
     considerations: [
       {
         title: "IP havuzunun büyüklüğü",
-        body: "Streaming sağlayıcıları bilinen VPN IP'lerini engelliyor. Geniş ve sık güncellenen IP havuzu olan sağlayıcılar (NordVPN, ExpressVPN) bu engellemeye karşı daha dayanıklı.",
+        body: "Streaming hizmetleri bilinen VPN çıkışlarını sınırlayabilir. Sağlayıcının ağ açıklamalarını kontrol edin; ham sunucu veya IP sayısı tek başına erişim garantisi değildir.",
       },
       {
         title: "Bölgesel sunucu çeşitliliği",
-        body: "Netflix US kütüphanesi için US sunucusu, BluTV için TR sunucusu gerekiyor. Sağlayıcının istediğin bölgelerde sunucu sunup sunmadığını kontrol et.",
+        body: "İhtiyaç duyduğunuz ülke konumlarının güncel sunucu listesinde bulunup bulunmadığını kontrol edin. Konum bulunması, platformun o IP'yi kabul edeceği anlamına gelmez.",
       },
       {
         title: "VPN dışı cihaz çözümü",
-        body: "Akıllı TV, oyun konsolu veya Apple TV gibi cihazlarda VPN uygulaması yüklenmez. ExpressVPN'in MediaStreamer DNS özelliği bu cihazlarda yalnızca DNS yönlendirmesi ile bölge bypass'ı sunar.",
+        body: "Uygulama desteği cihaz ve işletim sistemi sürümüne göre değişir. Smart DNS yalnız DNS yönlendirmesi yapar; VPN tüneli gibi trafiği şifrelemez veya genel IP'yi gizlemez.",
       },
       {
         title: "Hız",
-        body: "4K streaming için 25+ Mbps stabil bağlantı gerekir. Yakın bölge sunucularda çoğu üst-seviye VPN bu hızı sağlıyor; uzak mesafelerde (Türkiye → ABD batı) farklar açılıyor.",
+        body: "Kullandığınız platformun yayımladığı bant genişliği önerisini kontrol edin ve VPN açıkken yeterli pay bırakın. Sonuç rota, ISP, cihaz, protokol ve sunucu yüküne göre değişir.",
       },
     ],
     faqs: [
@@ -59,15 +59,15 @@ const CONTENT = {
       },
       {
         q: "Engellenmiş bir sunucuya denk geldim, ne yapmalıyım?",
-        a: "Aynı bölgede farklı bir sunucu seç. Üst seviye VPN'lerin geniş IP havuzu sayesinde 1-2 deneme ile çalışan bir sunucu bulursun. CyberGhost gibi 'streaming optimize' sunucu sunan sağlayıcılarda bu süreç daha hızlı.",
+        a: "Sağlayıcının güncel destek sayfasını kontrol et, aynı bölgede önerilen farklı bir sunucuyu dene ve gerekirse destek ekibine sor. Bir gün çalışan sunucu gelecekte aynı sonucu garanti etmez.",
       },
       {
         q: "VPN streaming için yasal mı?",
-        a: "Türkiye'de VPN kullanımı yasaldır. Streaming platformlarının kullanım koşulları bölgesel kısıtlamayı atlamayı yasaklayabilir — ancak bu sözleşme ihlalidir, yasal suç değildir.",
+        a: "VPN ve bölgesel erişim kuralları yargı alanına göre değişebilir; ayrıca platformun kullanım koşulları ayrı kısıtlamalar içerebilir. Güncel yerel kuralları ve hizmet şartlarını kontrol et; bu sayfa hukuki tavsiye değildir.",
       },
       {
         q: "BluTV ve Exxen yurt dışından nasıl izlenir?",
-        a: "Türkiye lokasyonlu sunucusu olan bir VPN (Surfshark TR sunucusu sunuyor) ile Türkiye'ye bağlanırsan, platform seni Türkiye'den bağlanıyor olarak görür ve içeriklere erişebilirsin.",
+        a: "Türkiye konumlu bir sunucu farklı bir çıkış IP'si sağlayabilir; ancak platformlar VPN IP'lerini engelleyebilir ve lisans koşulları değişebilir. Güncel sunucu, hesap ve hizmet şartlarını kontrol et; erişim garanti edilemez.",
       },
     ],
     relatedLinks: [
@@ -79,46 +79,46 @@ const CONTENT = {
   en: {
     metaTitle: "The Best VPNs for Streaming (2026)",
     metaDescription:
-      "The most reliable VPN picks for Netflix, Disney+, BBC iPlayer, HBO Max, BluTV and Exxen — plus a guide to regional library access.",
+      "Compare server location, device support, performance and changing platform policies when evaluating a VPN for streaming.",
     title: "The Best VPNs for Streaming",
     tagline:
-      "Netflix, Disney+, BBC iPlayer, BluTV, Exxen and more — the best picks for consistent access.",
+      "Compare server locations, device support and provider documentation; continuous platform access cannot be guaranteed.",
     summary:
-      "Three things matter when picking a VPN for streaming: the size of the IP pool (resilience against blocks), server coverage in the regions you want, and 4K-ready speed. NordVPN leads on stability, ExpressVPN on premium experience and Surfshark on price-performance.",
+      "When evaluating a VPN for streaming, consider servers in the regions you use, device apps, Smart DNS scope and performance on your own connection. Platform VPN policies change, so provider support claims are not a future-access guarantee.",
     badgeLabel: "Streaming",
     picks: [
       {
         slug: "nordvpn",
-        bestFor: "Most consistent streaming overall",
-        why: "A large IP pool and fast server rotation keep Netflix (US/UK/JP/TR), Disney+, BBC iPlayer, BluTV and Exxen reliably accessible. Even without dedicated \"streaming-optimised\" servers, the IP diversity is the advantage.",
+        bestFor: "Users seeking broad server and support documentation",
+        why: "The provider publishes documentation about its server network, SmartPlay and several streaming scenarios. Verify current compatibility for your platform, account and network.",
       },
       {
         slug: "expressvpn",
         bestFor: "Premium use + smart TVs / consoles",
-        why: "Lightway brings fast connection setup, and the IP pool is among the least-blocked in the industry. MediaStreamer DNS provides region bypass on devices that can't run a VPN app (smart TVs, consoles).",
+        why: "The provider publishes documentation for Lightway, device apps and MediaStreamer DNS. MediaStreamer is not a full encrypted VPN tunnel, and service or device compatibility can change.",
       },
       {
         slug: "surfshark",
         bestFor: "Budget + Turkish server",
-        why: "An active Turkish server — the most natural pick for BluTV/Exxen from abroad. Unlimited devices covers every screen in the household. Below the premium streaming bar, but the price-performance leader.",
+        why: "The provider publishes country-server and multi-device policies. Confirm that a Türkiye location and support for your platform remain in the current official documentation.",
       },
     ],
     considerations: [
       {
         title: "Size of the IP pool",
-        body: "Streaming services block known VPN IPs. Providers with a large, frequently rotated IP pool (NordVPN, ExpressVPN) hold up better against blocks.",
+        body: "Streaming services can restrict known VPN exits. Review provider network documentation; a raw server or IP count alone does not guarantee access.",
       },
       {
         title: "Regional server coverage",
-        body: "You need US servers for the US Netflix catalogue, Turkish servers for BluTV. Check that the provider covers the regions you actually want.",
+        body: "Check whether the countries you need appear in the current server inventory. A listed location does not mean a platform will accept every associated IP.",
       },
       {
         title: "Non-VPN devices",
-        body: "Smart TVs, game consoles and Apple TVs may not run a VPN app. ExpressVPN's MediaStreamer DNS provides region bypass on these devices via DNS routing only.",
+        body: "App support varies by device and operating-system version. Smart DNS changes DNS routing only; it does not encrypt traffic or hide the public IP like a VPN tunnel.",
       },
       {
         title: "Speed",
-        body: "4K streaming needs a stable 25+ Mbps connection. Most top-tier VPNs deliver this on nearby servers; the gap widens on distant routes (e.g. Turkey → US West).",
+        body: "Check your platform's published bandwidth recommendation and leave enough headroom with the VPN enabled. Results vary with route, ISP, device, protocol and server load.",
       },
     ],
     faqs: [
@@ -128,15 +128,15 @@ const CONTENT = {
       },
       {
         q: "I hit a blocked server, what should I do?",
-        a: "Pick a different server in the same region. With top-tier VPNs' large IP pools, a working server is usually 1-2 tries away. Providers offering 'streaming-optimised' servers (like CyberGhost) make the process quicker.",
+        a: "Check the provider's current support page, try another recommended server in the same region and contact support if needed. A server that works today may not produce the same result later.",
       },
       {
         q: "Is streaming over a VPN legal?",
-        a: "Using a VPN is legal in Türkiye. A streaming service's terms of use may prohibit region-hopping — but that's a contract issue, not a criminal offence.",
+        a: "VPN and regional-access rules vary by jurisdiction, and platform terms may impose separate restrictions. Check current local rules and service terms; this page is not legal advice.",
       },
       {
         q: "How do I watch BluTV and Exxen from abroad?",
-        a: "Use a VPN with Turkish servers (Surfshark offers TR) to connect to Turkey, and the platform will treat you as connecting from Türkiye, giving you access to the catalogue.",
+        a: "A Türkiye-located server may provide a different exit IP, but platforms can block VPN addresses and licensing terms can change. Check current server, account and service conditions; access is not guaranteed.",
       },
     ],
     relatedLinks: [
@@ -149,7 +149,7 @@ const CONTENT = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "tr" ? "tr" : "en"];
   return {
     title: c.metaTitle,
     description: c.metaDescription,
@@ -166,7 +166,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "tr" ? "tr" : "en"];
 
   return (
     <UseCasePage

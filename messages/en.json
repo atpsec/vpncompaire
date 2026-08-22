@@ -53,7 +53,7 @@
     "hero": {
       "h1": "Volunteer, independent VPN comparisons",
       "subtitle": "VPN provider profiles compared through official sources for privacy, streaming, travel and everyday security.",
-      "ctaPrimary": "See the top 20 VPNs",
+      "ctaPrimary": "View VPN comparisons",
       "ctaSecondary": "Our source approach",
       "methodologyTag": "Source-based methodology",
       "trust": {
@@ -64,9 +64,9 @@
       }
     },
     "topVPNs": {
-      "title": "The top 20 VPNs of 2026",
+      "title": "VPN provider comparisons for 2026",
       "subtitle": "Organised around independent audits, verifiable feature sources and transparent pricing analysis.",
-      "extendedKicker": "Ranks 11–20",
+      "extendedKicker": "Additional provider profiles",
       "extendedTitle": "Extended review pool",
       "extendedSubtitle": "Alternatives we evaluate beyond the top 10 — for budget picks, niche features, or a second option."
     },
@@ -365,7 +365,7 @@
     "metaTitle": "VPN Comparisons 2026 — Source-Based Provider Profiles",
     "metaDescription": "Compare VPN providers using official documentation, independent audits, privacy policies, features and current pricing sources.",
     "breadcrumb": "Home › Top VPNs",
-    "h1": "The Top 20 VPNs in 2026 — Editor's Ranking",
+    "h1": "VPN Providers in 2026 — Source-Based Comparison",
     "intro": "We compare provider profiles across six information areas. The view below is a source-based editorial framework using independent audit reports, official feature documentation and pricing transparency. Readers should weigh the criteria against their own priorities."
   },
   "useCaseHub": {
@@ -452,7 +452,7 @@
     },
     "footerCta": {
       "kicker": "See all comparisons",
-      "link": "Back to the Top 20 VPN ranking"
+      "link": "Back to VPN comparisons"
     }
   },
   "quiz": {
@@ -510,7 +510,7 @@
         "options": {
           "0": "Track record of independent audits",
           "1": "Open-source client",
-          "2": "Court-proven no-logs",
+          "2": "Documented response to a legal request",
           "3": "Brand recognition is enough"
         }
       },
@@ -541,14 +541,14 @@
     "reset": "Reset",
     "altDirectHeading": "Skip the quiz",
     "altLinks": {
-      "top": "Top 20 VPN ranking",
+      "top": "VPN provider comparisons",
       "compare": "Compare two VPNs",
       "calculator": "Cost calculator"
     }
   },
   "calculator": {
     "metaTitle": "VPN Total-Cost Calculator (2026) — Renewal-Aware Pricing",
-    "metaDescription": "Compare the true 1, 2 or 3-year total cost of 20 VPNs. First-term discount + renewal price included. Effective monthly price and savings.",
+    "metaDescription": "Compare the true 1, 2 or 3-year total cost of the listed VPNs, including introductory and renewal pricing, effective monthly cost and savings.",
     "ogTitle": "VPN Cost Calculator",
     "ogDescription": "Calculate the real 3-year VPN cost, renewal included.",
     "breadcrumb": "Cost calculator",
@@ -632,7 +632,7 @@
       "cards": {
         "reviews": {
           "title": "Reviews",
-          "desc": "Detailed reviews of 20 VPNs.",
+          "desc": "Detailed VPN provider profiles.",
           "link": "Go to reviews →"
         },
         "compare": {
@@ -818,7 +818,7 @@
     },
     "readComparison": "Read comparison",
     "footerKicker": "Before comparing, see each VPN's full review",
-    "footerLink": "Go to the Top 20 VPN ranking"
+    "footerLink": "Go to VPN comparisons"
   },
   "deviceHub": {
     "metaTitle": "VPN Guides by Device — Android, iPhone, iPad, Smart TV",
@@ -833,10 +833,10 @@
     "notListedBody": "Windows and macOS have native desktop apps from every provider; one-click install. On Linux, WireGuard-based setups are the most common. For game consoles (PS5, Xbox) and smart-home devices, router-level VPN is the only practical path — the router section of the Smart TV guide applies to them too."
   },
   "refundPage": {
-    "metaTitle": "VPN Cancellation & Refund Guide (2026) — Step-by-Step for 20 VPNs",
+    "metaTitle": "VPN Cancellation & Refund Guide (2026) — Steps by Provider",
     "metaDescription": "How to cancel and request a refund from NordVPN, ExpressVPN, Surfshark and other VPN providers. Refund window, common pitfalls and step-by-step instructions.",
     "ogTitle": "VPN Cancellation & Refund Guide",
-    "ogDescription": "Cancellation and refund steps for 20 VPNs, all on one page.",
+    "ogDescription": "Cancellation and refund steps for the listed VPN providers, all on one page.",
     "breadcrumbHome": "Home",
     "breadcrumbHere": "Cancellation & refund"
   },
@@ -896,7 +896,7 @@
     "resetWithCount": "Reset filters ({count} active)",
     "matchCount": "<strong>{count}</strong> VPNs matched",
     "activeCount": "Active filters: {count}",
-    "allShown": "Showing all 20 VPNs",
+    "allShown": "Showing all VPNs",
     "readReview": "Read review",
     "getDeal": "Get deal",
     "emptyTitle": "No matching VPNs",
@@ -1021,7 +1021,7 @@
     "alt": "VPN Advisor — Independent VPN comparisons",
     "h1": "Independent VPN comparisons",
     "subtitle": "Volunteer review project · Transparent methodology · Independent assessments.",
-    "trust1": "20 VPN profiles",
+    "trust1": "VPN provider profiles",
     "trust2": "Independent audits",
     "trust3": "Transparent methodology"
   },

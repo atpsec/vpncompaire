@@ -45,7 +45,7 @@ function VpnTestView({ locale }: { locale: string }) {
     "@type": "WebApplication",
     name: t("metaTitle"),
     description: t("metaDescription"),
-    url: absoluteUrl("/vpn-test"),
+    url: absoluteUrl("/vpn-test", locale as "tr" | "en" | "de"),
     applicationCategory: "SecurityApplication",
     operatingSystem: "Any",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

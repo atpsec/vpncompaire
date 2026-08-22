@@ -75,8 +75,8 @@ const tr: SeniorsContent = {
   h1: "Yaşlılar için en iyi VPN",
   lede: "Anne-baban veya büyüklerin için: basit kurulum, dolandırıcılık koruması, sade Türkçe arayüz. Tek tıklamayla bağlantı, otomatik başlatma.",
   statBox: {
-    title: "Önemli istatistik",
-    body: "Yaşlı bireyler, kamuya yansıyan araştırmalara göre siber dolandırıcılık vakalarının önemli bir kısmında risk grubundadır. VPN'in DNS düzeyinde içerik filtreleme özelliği bilinen sahte siteleri engelleme katmanı sunabilir; ancak tek başına bir koruma garantisi değildir. Bilinçli kullanım ve aile içi eğitim önerilir.",
+    title: "Risk ve koruma sınırı",
+    body: "Yaşlı kullanıcılar sahte banka, kargo ve destek mesajlarıyla hedef alınabilir. Bazı VPN sağlayıcıları, bilinen zararlı alan adlarını filtreleyen isteğe bağlı araçlar belgeler; bu araçlar her sahte siteyi veya sosyal mühendislik girişimini yakalama garantisi vermez. Özelliği etkinleştirip cihazda doğrulamak ve aile içi eğitimle desteklemek gerekir.",
   },
   picks: {
     heading: "Yaşlılar için en iyi 3 VPN",
@@ -96,7 +96,7 @@ const tr: SeniorsContent = {
       },
       {
         slug: "expressvpn",
-        label: "Maksimum İstikrar",
+        label: "Sade kullanım seçeneği",
         reason:
           "Sade uygulama ve sağlayıcı politikasına göre 7/24 canlı sohbet desteği sunan seçeneklerden. Türkçe destek bulunmayabilir; premium fiyat seviyesinde değerlendirme gerektirebilir.",
       },
@@ -106,33 +106,33 @@ const tr: SeniorsContent = {
     h2: "Yaşlılar için VPN'in en önemli özellikleri",
     oneClick: {
       h3: "1. Tek tıklamayla bağlantı",
-      p: 'Modern VPN uygulamaları artık "ülke seç, protokol seç, bağlan" ekranı değil. NordVPN, Surfshark ve ExpressVPN uygulamaları açılır açılmaz büyük bir "Bağlan" butonu gösterir. Tek dokunuş yeter.',
+      p: 'Sağlayıcıların resmi uygulama belgeleri NordVPN, Surfshark ve ExpressVPN için hızlı bağlantı düğmeleri gösterir. Arayüz cihaz ve sürüme göre değişebilir; satın almadan önce kullanılacak telefonda düğme boyutunu, ekran okuyucuyu ve bağlantı akışını dene.',
     },
     autoStart: {
       h3: "2. Otomatik başlatma",
-      p: "Telefon açılınca VPN'in otomatik bağlanması. Yaşlı kullanıcı manuel müdahale yapmaz; cihazı her açtığında zaten korunur durumda olur.",
+      p: "Sağlayıcı belgelerinde otomatik bağlantı, uygulamanın belirli ağlarda tüneli kendiliğinden başlatmasını sağlar. İşletim sistemi güncellemeleri ve pil ayarları davranışı etkileyebilir; telefonu yeniden başlatıp bağlantı göstergesini ve kill switch'i doğrula.",
     },
     phishing: {
       h3: "3. Dolandırıcılık/phishing koruması",
-      intro: "DNS düzeyinde bilinen sahte siteleri engelleme:",
+      intro: "Sağlayıcıların belgelediği DNS tabanlı filtreleme seçenekleri:",
       items: [
         {
           bold: "NordVPN Threat Protection:",
-          text: " Kötü amaçlı URL veritabanı sürekli güncellenir. Sahte banka, sahte kargo, sahte ödüllendirme linkleri engelli.",
+          text: " Sağlayıcı, bilinen zararlı alan adlarını kendi tehdit listesine göre filtrelediğini belirtir; özellik ve kapsam plana ve platforma göre kontrol edilmelidir.",
         },
         {
           bold: "Surfshark CleanWeb:",
-          text: " Reklam + phishing + malware engelleme.",
+          text: " Sağlayıcı belgelerine göre reklam, phishing ve zararlı alan adı filtreleme sunar; tüm tehditleri yakaladığı varsayılmamalıdır.",
         },
         {
           bold: "Proton VPN NetShield:",
-          text: " Aynı kategoride çalışır, açık kaynak doğrulanabilir.",
+          text: " Sağlayıcı, DNS tabanlı filtreleme sunduğunu belirtir; platform desteğini ve açık kaynak istemci bilgisini resmi belgelerde doğrula.",
         },
       ],
     },
     language: {
       h3: "4. Türkçe arayüz",
-      p: "NordVPN, Surfshark ve ExpressVPN uygulamaları Türkçe destekler. Proton VPN ve Mullvad Türkçe yok — bu sayfa için uygun değiller.",
+      p: "Dil seçenekleri uygulama ve sürüme göre değişebilir. Sağlayıcının güncel dil listesini kullanılacak cihazın uygulama mağazası sürümünde doğrula; gerekirse deneme veya iade süresinde arayüzü kullanıcıyla birlikte kontrol et.",
     },
   },
   scams: {
@@ -140,7 +140,7 @@ const tr: SeniorsContent = {
     items: [
       {
         bold: "Sahte banka SMS'leri:",
-        text: ' "Kart kullanım limitiniz aşıldı, bu linke tıklayın" — link sahte siteye gider. VPN bunu DNS\'te engeller.',
+        text: ' "Kart kullanım limitiniz aşıldı, bu linke tıklayın" — link sahte siteye gidebilir. Etkin bir DNS filtresi alan adını yalnızca tehdit listesinde bulunuyorsa engelleyebilir; SMS\'in kendisini doğrulamaz.',
       },
       {
         bold: "Kargo bildirimleri:",
@@ -152,12 +152,12 @@ const tr: SeniorsContent = {
       },
       {
         bold: "Romantizm dolandırıcılığı:",
-        text: ' Sosyal medyada tanışan "asker" veya "dul kadın" — burada VPN koruyamaz, eğitim/uyarı şart.',
+        text: ' Sosyal medyada tanışan "asker" veya "dul kadın" — VPN tüneli bu ikna yöntemini tespit etmez; eğitim, hesap gizliliği ve para göndermeden önce bağımsız doğrulama gerekir.',
       },
     ],
     limitBold: "VPN sınırı:",
     limitText:
-      " VPN sosyal mühendislik (ikna ederek bilgi alma) tabanlı dolandırıcılığa karşı koruyamaz. Aile içi eğitim ve şüpheci yaklaşım şart.",
+      " VPN, sosyal mühendislik yoluyla ikna edilip bilgi veya para paylaşılmasını önleyen bir garanti değildir. Aile içi eğitim, şüpheci yaklaşım ve banka/kurumla bağımsız doğrulama gerekir.",
   },
   setup: {
     h2: "Kurulum adımları (sevdiğin için sen yap)",
@@ -192,7 +192,7 @@ const tr: SeniorsContent = {
       {
         before: "Kullanıcıya ",
         bold: "tek bir şey öğret",
-        after: ': "Yeşil yazıyorsa güvendesin, gri ise bağlantı yok".',
+        after: ': "Yeşil gösterge yalnızca VPN tünelinin açık olduğunu söyler; linkin veya dosyanın güvenli olduğunu söylemez".',
       },
     ],
   },
@@ -200,28 +200,28 @@ const tr: SeniorsContent = {
   faqs: [
     {
       q: "Yaşlı biri VPN'i tek başına kullanabilir mi?",
-      a: "Modern VPN uygulamaları büyük 'Bağlan' butonu ile tasarlandı. NordVPN, Surfshark ve ExpressVPN tek tıklamayla bağlantı sunar. İlk kurulumu birinin yapması (öneririz: sen) ve otomatik başlatmayı açman yeterli.",
+      a: "Sağlayıcı belgelerine göre NordVPN, Surfshark ve ExpressVPN hızlı bağlantı düğmesi sunar. Ancak arayüz ve otomatik bağlantı davranışı cihaz ve sürüme göre değişebilir; ilk kurulumu birlikte yapıp yeniden başlatma, bağlantı kesilmesi ve güncelleme sonrasını doğrula.",
     },
     {
       q: "VPN sahte SMS ve dolandırıcılığı engelliyor mu?",
-      a: "Tamamen değil ama önemli yardım eder. NordVPN Threat Protection, Surfshark CleanWeb, Proton NetShield bilinen phishing ve dolandırıcılık sitelerini DNS düzeyinde engeller. 'banka mesajı' diye gelen sahte linke tıklasa bile, çoğu zaman site açılmaz.",
+      a: "VPN SMS'in sahte olup olmadığını belirlemez. Sağlayıcıların Threat Protection, CleanWeb ve NetShield belgeleri bilinen zararlı alan adları için filtreleme tanımlar; özellik açık olmalı ve alan adı tehdit listesinde bulunmalıdır. Kapsamı cihazda test et ve mesajı banka veya kurumun resmi kanalından ayrıca doğrula.",
     },
     {
       q: "Telefonda VPN yaşlılar için çok karmaşık değil mi?",
-      a: "Hayır. iPhone ve Android uygulamaları tek ekranlı: büyük bağlan butonu + ülke seçimi. Otomatik bağlantı özelliği açılırsa kullanıcı manuel müdahale yapmaz — sadece açtığında bağlı olur.",
+      a: "Karmaşıklık kullanıcıya, telefona ve uygulama sürümüne göre değişir. Sağlayıcının güncel ekranlarını cihazda dene; otomatik bağlantının yeniden başlatma ve Wi-Fi/mobil veri geçişinden sonra gerçekten etkin kaldığını doğrula.",
     },
     {
       q: "Yanlışlıkla bir tuşa basarsa zarar verir mi?",
-      a: "Hayır. VPN uygulamasında yanlış tuşa basmak en fazla bağlantıyı koparır — internet erişimi sürer (kill switch açık değilse). Veri kaybı veya finansal zarar mümkün değildir.",
+      a: "Bağlantı düğmesine yanlışlıkla dokunmak tüneli kapatabilir; kill switch ayarına göre internet durabilir veya trafik VPN dışında devam edebilir. Veri ya da finansal güvenlik için garanti verilemez; temel ayarları kilitle, bildirimleri açık tut ve bu iki durumu cihazda birlikte dene.",
     },
     {
       q: "Hangi VPN'i annem/babam için kuralım?",
-      a: "Surfshark veya NordVPN. Türkçe arayüz, büyük bağlan butonu, otomatik başlatma, içerik filtreleme. ExpressVPN de iyi ama daha pahalı; yaşlı kullanıcı için ek özellikler boşa gidiyor.",
+      a: "Surfshark ve NordVPN'in resmi belgelerinde hızlı bağlantı, otomatik bağlantı ve içerik filtreleme seçenekleri yer alır; ExpressVPN de sade kullanım odaklı değerlendirilebilir. Güncel Türkçe dil desteğini, plan kapsamını ve erişilebilirliği kullanılacak telefonda doğrula.",
     },
   ],
   cards: [
     { title: "Tek tıkla bağlan", desc: "Büyük buton, sade arayüz." },
-    { title: "Phishing engelleme", desc: "Sahte banka/kargo linkleri engelli." },
+    { title: "Phishing filtreleme", desc: "Bilinen zararlı alan adları için ek katman." },
     { title: "Türkçe destek", desc: "Anlaşılır arayüz, Türkçe metin." },
   ],
   related: {
@@ -259,8 +259,8 @@ const en: SeniorsContent = {
   h1: "Best VPN for seniors",
   lede: "For your parents or elders: simple setup, scam protection and a clean interface in Turkish. One-tap connection, automatic start-up.",
   statBox: {
-    title: "An important statistic",
-    body: "According to publicly reported research, older adults are an at-risk group in a significant share of cyber-fraud cases. A VPN's DNS-level content filtering can add a layer that blocks known fake sites; on its own, however, it is no guarantee of protection. Informed use and education within the family are recommended.",
+    title: "Risk and protection limits",
+    body: "Older users can be targeted by fake bank, delivery and support messages. Some VPN providers document optional tools that filter known malicious domains, but these tools do not guarantee detection of every fake site or social-engineering attempt. Enable and verify the feature on the device, and combine it with family guidance.",
   },
   picks: {
     heading: "Top 3 VPNs for seniors",
@@ -270,7 +270,7 @@ const en: SeniorsContent = {
         slug: "surfshark",
         label: "Clean-interface option",
         reason:
-          "The provider's app offers a simple single-screen interface and Turkish language support. The CleanWeb feature adds a layer that blocks known fake sites at the DNS level. The unlimited-devices policy makes one account worth considering for family use.",
+          "The provider documents a streamlined interface and Turkish language support. It describes CleanWeb as filtering known malicious domains; verify that the feature and language are available on the device and plan. The unlimited-devices policy may suit family use.",
       },
       {
         slug: "nordvpn",
@@ -280,9 +280,9 @@ const en: SeniorsContent = {
       },
       {
         slug: "expressvpn",
-        label: "Maximum stability",
+        label: "Simple-use option",
         reason:
-          "One of the providers with a consistent connection in our tests. According to provider policy, 24/7 live chat support is available (no Turkish-language support). Its premium price point may require weighing up.",
+          "The provider documents a streamlined app and 24/7 live chat. Turkish-language support may not be available, and the premium price point needs weighing; verify the current language and support options before subscribing.",
       },
     ],
   },
@@ -290,33 +290,33 @@ const en: SeniorsContent = {
     h2: "The features that matter most in a VPN for seniors",
     oneClick: {
       h3: "1. One-tap connection",
-      p: 'Modern VPN apps are no longer a "pick a country, pick a protocol, connect" screen. The NordVPN, Surfshark and ExpressVPN apps show a big "Connect" button the moment they open. One tap is enough.',
+      p: 'Official app documentation for NordVPN, Surfshark and ExpressVPN shows quick-connect controls. Interfaces vary by device and version; before subscribing, test button size, screen-reader behavior and the connection flow on the phone that will be used.',
     },
     autoStart: {
       h3: "2. Automatic start-up",
-      p: "The VPN connects automatically when the phone is switched on. The older user never has to intervene manually; every time they pick up the device, they are already protected.",
+      p: "Provider documentation describes auto-connect as starting the tunnel on selected networks. Operating-system updates and battery settings can affect it; restart the phone and verify the connection indicator and kill-switch behavior.",
     },
     phishing: {
       h3: "3. Scam/phishing protection",
-      intro: "Blocking known fake sites at the DNS level:",
+      intro: "Provider-documented DNS-based filtering options:",
       items: [
         {
           bold: "NordVPN Threat Protection:",
-          text: " A continuously updated database of malicious URLs. Fake bank, fake parcel-delivery and fake prize links are blocked.",
+          text: " The provider says it filters known malicious domains using its threat lists; feature availability and scope should be checked for the plan and platform.",
         },
         {
           bold: "Surfshark CleanWeb:",
-          text: " Ad + phishing + malware blocking.",
+          text: " Provider documentation describes ad, phishing and malicious-domain filtering; do not assume it catches every threat.",
         },
         {
           bold: "Proton VPN NetShield:",
-          text: " Works in the same category, open source and verifiable.",
+          text: " The provider describes DNS-based filtering; verify platform support and open-source client information in its official documentation.",
         },
       ],
     },
     language: {
       h3: "4. Turkish interface",
-      p: "The NordVPN, Surfshark and ExpressVPN apps support Turkish. Proton VPN and Mullvad have no Turkish — not suitable for this page.",
+      p: "Language options can vary by app and release. Verify the provider's current language list in the app-store version for the device, and review the interface with the user during any trial or refund period.",
     },
   },
   scams: {
@@ -324,7 +324,7 @@ const en: SeniorsContent = {
     items: [
       {
         bold: "Fake bank SMS messages:",
-        text: ' "Your card usage limit has been exceeded, click this link" — the link leads to a fake site. A VPN blocks it at the DNS level.',
+        text: ' "Your card usage limit has been exceeded, click this link" — the link may lead to a fake site. An enabled DNS filter can block the domain only if it is on the threat list; it does not verify the SMS itself.',
       },
       {
         bold: "Parcel notifications:",
@@ -336,12 +336,12 @@ const en: SeniorsContent = {
       },
       {
         bold: "Romance scams:",
-        text: ' A "soldier" or "widow" met on social media — a VPN cannot protect here; education and warnings are essential.',
+        text: ' A "soldier" or "widow" met on social media — a VPN tunnel does not detect this persuasion tactic; education, account privacy and independent verification before sending money are essential.',
       },
     ],
     limitBold: "The VPN's limit:",
     limitText:
-      " A VPN cannot protect against scams based on social engineering (extracting information through persuasion). Education within the family and a skeptical mindset are essential.",
+      " A VPN does not guarantee protection when someone is persuaded to share information or money. Family education, skepticism and independent verification with the bank or institution are still required.",
   },
   setup: {
     h2: "Setup steps (do it yourself, for your loved one)",
@@ -380,7 +380,7 @@ const en: SeniorsContent = {
         before: "Teach the user ",
         bold: "one single thing",
         after:
-          ': "If it says green, you\'re safe; if it\'s gray, there\'s no connection".',
+          ': "A green indicator only means the VPN tunnel is active; it does not mean a link or file is safe".',
       },
     ],
   },
@@ -388,28 +388,28 @@ const en: SeniorsContent = {
   faqs: [
     {
       q: "Can an older person use a VPN on their own?",
-      a: "Modern VPN apps are designed around a big 'Connect' button. NordVPN, Surfshark and ExpressVPN offer one-tap connection. It's enough for someone (we suggest: you) to do the initial setup and turn on automatic start-up.",
+      a: "Provider documentation for NordVPN, Surfshark and ExpressVPN shows quick-connect controls. The interface and auto-connect behavior can vary by device and release, so complete setup together and verify restart, disconnect and post-update behavior.",
     },
     {
       q: "Does a VPN block fake SMS messages and scams?",
-      a: "Not entirely, but it helps significantly. NordVPN Threat Protection, Surfshark CleanWeb and Proton NetShield block known phishing and scam sites at the DNS level. Even if they tap a fake link posing as a 'bank message', most of the time the site simply won't open.",
+      a: "A VPN does not determine whether an SMS is fake. Provider documentation for Threat Protection, CleanWeb and NetShield describes filtering of known malicious domains; the feature must be enabled and the domain must be on its list. Test the scope on the device and verify messages through the bank's or institution's official channel.",
     },
     {
       q: "Isn't a VPN on the phone too complicated for seniors?",
-      a: "No. The iPhone and Android apps are single-screen: a big connect button + country selection. With auto-connect turned on, the user never intervenes manually — it's simply connected whenever they turn the device on.",
+      a: "Complexity depends on the user, phone and app version. Try the current interface on the device, and verify that auto-connect remains active after restart and after switching between Wi-Fi and mobile data.",
     },
     {
       q: "Can they do any damage by pressing the wrong button?",
-      a: "No. Pressing the wrong button in a VPN app at worst drops the connection — internet access continues (unless the kill switch is on). Data loss or financial harm is not possible.",
+      a: "Accidentally pressing the connection control can close the tunnel; depending on kill-switch settings, internet access may stop or traffic may continue outside the VPN. No data or financial-safety guarantee is possible, so review the core settings, keep notifications on and test both states together.",
     },
     {
       q: "Which VPN should I set up for my mom/dad?",
-      a: "Surfshark or NordVPN. Turkish interface, big connect button, automatic start-up, content filtering. ExpressVPN is good too but pricier; the extra features go to waste for an older user.",
+      a: "Surfshark and NordVPN document quick connect, auto-connect and content-filtering options; ExpressVPN can also be considered for a streamlined interface. Verify current Turkish-language support, plan coverage and accessibility on the phone that will be used.",
     },
   ],
   cards: [
     { title: "One-tap connect", desc: "Big button, clean interface." },
-    { title: "Phishing blocking", desc: "Fake bank/parcel links blocked." },
+    { title: "Phishing filtering", desc: "An extra layer for known malicious domains." },
     { title: "Turkish support", desc: "Clear interface, text in Turkish." },
   ],
   related: {
@@ -447,8 +447,8 @@ const de: SeniorsContent = {
   h1: "Das beste VPN für Senioren",
   lede: "Für deine Eltern oder Großeltern: einfache Einrichtung, Betrugsschutz, schlichte türkischsprachige Oberfläche. Verbindung mit einem Tipp, automatischer Start.",
   statBox: {
-    title: "Eine wichtige Statistik",
-    body: "Laut öffentlich zugänglichen Studien gehören ältere Menschen in einem erheblichen Teil der Cyberbetrugsfälle zur Risikogruppe. Die DNS-basierte Inhaltsfilterung eines VPN kann eine Schutzschicht gegen bekannte Fake-Seiten bieten — allein ist sie jedoch keine Garantie. Bewusste Nutzung und Aufklärung in der Familie werden empfohlen.",
+    title: "Risiko und Schutzgrenzen",
+    body: "Ältere Nutzer können mit gefälschten Bank-, Paket- und Supportnachrichten angegriffen werden. Einige VPN-Anbieter dokumentieren optionale Filter für bekannte schädliche Domains; sie garantieren jedoch nicht, jede Fake-Seite oder jeden Social-Engineering-Versuch zu erkennen. Aktiviere und prüfe die Funktion auf dem Gerät und ergänze sie durch Aufklärung.",
   },
   picks: {
     heading: "Die 3 besten VPNs für Senioren",
@@ -458,7 +458,7 @@ const de: SeniorsContent = {
         slug: "surfshark",
         label: "Option mit schlichter Oberfläche",
         reason:
-          "Die App des Anbieters bietet eine schlichte Ein-Bildschirm-Oberfläche und türkische Sprachunterstützung. Die CleanWeb-Funktion blockiert bekannte Fake-Seiten auf DNS-Ebene. Dank der Unlimited-Geräte-Richtlinie ist ein einziges Konto für die Familiennutzung eine Überlegung wert.",
+          "Der Anbieter dokumentiert eine schlichte Oberfläche und türkische Sprachunterstützung. CleanWeb wird als Filter für bekannte schädliche Domains beschrieben; prüfe Funktion und Sprache auf Gerät und Tarif. Die Unlimited-Geräte-Richtlinie kann zur Familiennutzung passen.",
       },
       {
         slug: "nordvpn",
@@ -468,9 +468,9 @@ const de: SeniorsContent = {
       },
       {
         slug: "expressvpn",
-        label: "Maximale Stabilität",
+        label: "Option mit einfacher Bedienung",
         reason:
-          "Einer der Anbieter mit konstanter Verbindung in unseren Tests. Laut Anbieter-Richtlinie gibt es 24/7-Live-Chat-Support (kein Support auf Türkisch). Das Premium-Preisniveau will abgewogen sein.",
+          "Der Anbieter dokumentiert eine schlanke App und 24/7-Live-Chat. Türkischsprachiger Support ist möglicherweise nicht verfügbar und der Premiumpreis muss abgewogen werden; prüfe aktuelle Sprach- und Supportoptionen vor dem Abschluss.",
       },
     ],
   },
@@ -478,33 +478,33 @@ const de: SeniorsContent = {
     h2: "Die wichtigsten VPN-Funktionen für Senioren",
     oneClick: {
       h3: "1. Verbindung mit einem Tipp",
-      p: 'Moderne VPN-Apps sind längst kein "Land wählen, Protokoll wählen, verbinden"-Bildschirm mehr. Die Apps von NordVPN, Surfshark und ExpressVPN zeigen direkt nach dem Öffnen einen großen "Verbinden"-Button. Ein Tipp genügt.',
+      p: 'Die offizielle App-Dokumentation von NordVPN, Surfshark und ExpressVPN zeigt Schnellverbindungs-Schaltflächen. Oberfläche und Bedienung variieren nach Gerät und Version; teste vor dem Abschluss Schaltflächengröße, Screenreader und Verbindungsablauf auf dem verwendeten Smartphone.',
     },
     autoStart: {
       h3: "2. Automatischer Start",
-      p: "Das VPN verbindet sich automatisch, sobald das Smartphone eingeschaltet wird. Ältere Nutzer müssen nie manuell eingreifen; bei jedem Einschalten des Geräts sind sie bereits geschützt.",
+      p: "Laut Anbieterdokumentation startet die Auto-Verbindung den Tunnel in ausgewählten Netzen. Betriebssystem-Updates und Akku-Einstellungen können sie beeinflussen; starte das Smartphone neu und prüfe Verbindungsanzeige sowie Kill Switch.",
     },
     phishing: {
       h3: "3. Betrugs-/Phishing-Schutz",
-      intro: "Blockieren bekannter Fake-Seiten auf DNS-Ebene:",
+      intro: "Vom Anbieter dokumentierte DNS-basierte Filteroptionen:",
       items: [
         {
           bold: "NordVPN Threat Protection:",
-          text: " Eine laufend aktualisierte Datenbank bösartiger URLs. Gefälschte Bank-, Paket- und Gewinnspiel-Links werden blockiert.",
+          text: " Laut Anbieter werden bekannte schädliche Domains anhand eigener Bedrohungslisten gefiltert; Verfügbarkeit und Umfang sind für Tarif und Plattform zu prüfen.",
         },
         {
           bold: "Surfshark CleanWeb:",
-          text: " Werbe-, Phishing- und Malware-Blockierung.",
+          text: " Die Anbieterdokumentation beschreibt Werbe-, Phishing- und Schad-Domain-Filterung; nicht jede Bedrohung wird zwingend erkannt.",
         },
         {
           bold: "Proton VPN NetShield:",
-          text: " Arbeitet in derselben Kategorie, Open Source und überprüfbar.",
+          text: " Der Anbieter beschreibt DNS-basierte Filterung; prüfe Plattformunterstützung und Angaben zum Open-Source-Client in der offiziellen Dokumentation.",
         },
       ],
     },
     language: {
       h3: "4. Türkische Oberfläche",
-      p: "Die Apps von NordVPN, Surfshark und ExpressVPN unterstützen Türkisch. Proton VPN und Mullvad bieten kein Türkisch — für diese Seite nicht geeignet.",
+      p: "Sprachoptionen können je nach App und Version variieren. Prüfe die aktuelle Sprachliste in der App-Store-Version des verwendeten Geräts und teste die Oberfläche während einer Test- oder Erstattungsfrist gemeinsam mit dem Nutzer.",
     },
   },
   scams: {
@@ -512,7 +512,7 @@ const de: SeniorsContent = {
     items: [
       {
         bold: "Gefälschte Bank-SMS:",
-        text: ' "Ihr Kartenlimit wurde überschritten, klicken Sie auf diesen Link" — der Link führt auf eine Fake-Seite. Ein VPN blockiert das auf DNS-Ebene.',
+        text: ' "Ihr Kartenlimit wurde überschritten, klicken Sie auf diesen Link" — der Link kann zu einer Fake-Seite führen. Ein aktiver DNS-Filter kann die Domain nur sperren, wenn sie auf der Bedrohungsliste steht; die SMS selbst prüft er nicht.',
       },
       {
         bold: "Paketbenachrichtigungen:",
@@ -524,12 +524,12 @@ const de: SeniorsContent = {
       },
       {
         bold: "Romance Scams:",
-        text: ' Der "Soldat" oder die "Witwe" aus den sozialen Medien — hier kann ein VPN nicht schützen; Aufklärung und Warnungen sind Pflicht.',
+        text: ' Der "Soldat" oder die "Witwe" aus sozialen Medien — ein VPN-Tunnel erkennt diese Überredungstaktik nicht; Aufklärung, Kontodatenschutz und unabhängige Prüfung vor Geldzahlungen sind nötig.',
       },
     ],
     limitBold: "Die Grenze des VPN:",
     limitText:
-      " Ein VPN schützt nicht vor Betrug, der auf Social Engineering basiert (Informationen durch Überredung erschleichen). Aufklärung in der Familie und eine gesunde Skepsis sind Pflicht.",
+      " Ein VPN garantiert keinen Schutz, wenn jemand zur Weitergabe von Informationen oder Geld überredet wird. Aufklärung, Skepsis und unabhängige Prüfung bei Bank oder Institution bleiben erforderlich.",
   },
   setup: {
     h2: "Einrichtungsschritte (übernimm das für deine Liebsten)",
@@ -568,7 +568,7 @@ const de: SeniorsContent = {
         before: "Bring dem Nutzer ",
         bold: "eine einzige Sache",
         after:
-          ' bei: "Steht da Grün, bist du sicher; bei Grau gibt es keine Verbindung".',
+          ' bei: "Eine grüne Anzeige bedeutet nur, dass der VPN-Tunnel aktiv ist; sie bestätigt nicht, dass ein Link oder eine Datei sicher ist".',
       },
     ],
   },
@@ -576,28 +576,28 @@ const de: SeniorsContent = {
   faqs: [
     {
       q: "Kann ein älterer Mensch ein VPN allein bedienen?",
-      a: "Moderne VPN-Apps sind um einen großen 'Verbinden'-Button herum gestaltet. NordVPN, Surfshark und ExpressVPN verbinden mit einem Tipp. Es reicht, wenn jemand (unser Vorschlag: du) die Ersteinrichtung übernimmt und den automatischen Start aktiviert.",
+      a: "Die Anbieterdokumentation von NordVPN, Surfshark und ExpressVPN zeigt Schnellverbindungs-Schaltflächen. Oberfläche und Auto-Verbindung können je nach Gerät und Version variieren; richtet die App gemeinsam ein und prüft Neustart, Trennung und Verhalten nach Updates.",
     },
     {
       q: "Blockiert ein VPN gefälschte SMS und Betrug?",
-      a: "Nicht vollständig, aber es hilft erheblich. NordVPN Threat Protection, Surfshark CleanWeb und Proton NetShield blockieren bekannte Phishing- und Betrugsseiten auf DNS-Ebene. Selbst wenn jemand auf einen als 'Banknachricht' getarnten Fake-Link tippt, öffnet sich die Seite meist gar nicht erst.",
+      a: "Ein VPN erkennt nicht, ob eine SMS gefälscht ist. Die Anbieterdokumentation zu Threat Protection, CleanWeb und NetShield beschreibt Filter für bekannte schädliche Domains; die Funktion muss aktiv und die Domain gelistet sein. Teste den Umfang auf dem Gerät und bestätige Nachrichten über den offiziellen Kanal von Bank oder Institution.",
     },
     {
       q: "Ist ein VPN auf dem Smartphone für Senioren nicht zu kompliziert?",
-      a: "Nein. Die iPhone- und Android-Apps bestehen aus einem Bildschirm: großer Verbinden-Button + Länderauswahl. Ist die Auto-Verbindung aktiviert, muss der Nutzer nie manuell eingreifen — beim Einschalten ist er einfach verbunden.",
+      a: "Die Komplexität hängt von Nutzer, Smartphone und App-Version ab. Teste die aktuelle Oberfläche auf dem Gerät und prüfe, ob die Auto-Verbindung nach Neustart sowie beim Wechsel zwischen WLAN und Mobilfunk aktiv bleibt.",
     },
     {
       q: "Kann ein versehentlicher Tastendruck Schaden anrichten?",
-      a: "Nein. Ein falscher Tipp in der VPN-App trennt höchstens die Verbindung — der Internetzugang läuft weiter (sofern der Kill Switch nicht aktiv ist). Datenverlust oder finanzieller Schaden ist nicht möglich.",
+      a: "Ein versehentlicher Tipp kann den Tunnel schließen; je nach Kill-Switch-Einstellung stoppt das Internet oder der Verkehr läuft außerhalb des VPN weiter. Eine Daten- oder Finanzsicherheitsgarantie ist nicht möglich: Prüft die Grundeinstellungen, lasst Hinweise aktiv und testet beide Zustände gemeinsam.",
     },
     {
       q: "Welches VPN soll ich für meine Mutter/meinen Vater einrichten?",
-      a: "Surfshark oder NordVPN. Türkische Oberfläche, großer Verbinden-Button, automatischer Start, Inhaltsfilterung. ExpressVPN ist auch gut, aber teurer; die Zusatzfunktionen verpuffen bei älteren Nutzern.",
+      a: "Surfshark und NordVPN dokumentieren Schnellverbindung, Auto-Verbindung und Inhaltsfilter; ExpressVPN kann ebenfalls wegen seiner schlichten Oberfläche erwogen werden. Prüfe aktuelle türkische Sprachunterstützung, Tarifumfang und Barrierefreiheit auf dem verwendeten Smartphone.",
     },
   ],
   cards: [
     { title: "Mit einem Tipp verbinden", desc: "Großer Button, schlichte Oberfläche." },
-    { title: "Phishing-Blockierung", desc: "Gefälschte Bank-/Paket-Links blockiert." },
+    { title: "Phishing-Filterung", desc: "Zusätzliche Schicht für bekannte schädliche Domains." },
     { title: "Türkische Sprache", desc: "Verständliche Oberfläche, Texte auf Türkisch." },
   ],
   related: {

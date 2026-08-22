@@ -42,20 +42,20 @@ Most consumer routers shipped with stock firmware do not include a VPN client fe
 - Vilfo, FlashRouters preflashed, free setup support, beginner-friendly
 - Privacy Hero, InvizBox consumer-friendly out-of-box solutions
 
-ASUS models are the sweet spot for price and ease of use. ASUS Merlin (an unofficial but trusted ASUS firmware fork) brings extra optimization for WireGuard performance.
+ASUS models can be practical for some users, but verify that the exact model supports a VPN client and your target protocol in current vendor documentation. ASUS Merlin is third-party firmware; features, security and performance depend on version and hardware.
 
 ## Firmware Comparison
 
 | Firmware | WireGuard | OpenVPN | UI Friendliness | Performance |
 |---|---|---|---|---|
-| ASUS Stock | Yes | Yes | High | Good |
-| ASUS Merlin | Yes | Yes | High | Excellent |
-| DD-WRT | Yes (recent builds) | Yes | Medium | Medium |
-| OpenWRT | Yes | Yes | Low (CLI) | Excellent |
-| Tomato/FreshTomato | Limited | Yes | Medium | Good |
-| pfSense/OPNsense | Yes | Yes | Low | Outstanding |
+| ASUS Stock | Model/version dependent | Model/version dependent | Relatively easy | Hardware/version dependent |
+| ASUS Merlin | Model/version dependent | Model/version dependent | Relatively easy | Hardware/settings dependent |
+| DD-WRT | Build dependent | Build dependent | May require technical work | Hardware/build dependent |
+| OpenWRT | Available via packages | Available via packages | May require CLI | Hardware/settings dependent |
+| Tomato/FreshTomato | Version dependent | Version dependent | May require technical work | Hardware/version dependent |
+| pfSense/OPNsense | Version/package dependent | Version/package dependent | May require technical work | Hardware/configuration dependent |
 
-Protocol choice depends heavily on router hardware. An old 800 MHz CPU router struggles to push 50 Mbps over OpenVPN; a modern ASUS RT-AX86U delivers 600+ Mbps with WireGuard. For a deep protocol comparison see our [WireGuard vs OpenVPN guide](/en/blog/wireguard-vs-openvpn-comparison).
+Protocol choice depends heavily on router hardware. Older or low-powered routers can become an encryption bottleneck, while newer hardware does not guarantee a particular result. We do not have directly comparable lab measurements for these models. Test before and after setup against the same endpoint; for a deep protocol comparison see our [WireGuard vs OpenVPN guide](/en/blog/wireguard-vs-openvpn-comparison).
 
 ## Step-by-Step Setup: ASUS Stock Firmware
 
@@ -86,13 +86,15 @@ For the kill switch: enable "Block routed clients if tunnel goes down" in the VP
 
 Router-level VPN trades speed for coverage. The router CPU handles encryption and decryption, so you may not get your full fiber line.
 
-Field measurements:
-- ASUS RT-AX58U + WireGuard: 400-500 Mbps
-- ASUS RT-AX86U + WireGuard: 700-900 Mbps
-- Netgear R7000 + DD-WRT + OpenVPN: 50-80 Mbps
-- pfSense + iX3050 (mini PC) + WireGuard: 1+ Gbps
+We do not publish verified, directly comparable field measurements for these router and protocol combinations. Use this check instead of a fixed expectation:
 
-WireGuard is typically 2-3x faster than OpenVPN on the same hardware. If you have a 1 Gbps fiber line and want full VPN coverage, a modern router or small pfSense/OPNsense box is the right move.
+| Check | VPN off | VPN on | Interpretation |
+|---|---|---|---|
+| Download/upload | Baseline on the same test endpoint | Repeat in the same time window | A large gap can point to CPU or server load |
+| Ping/jitter | Baseline route to the target service | VPN route to the same target | Compare several nearby VPN servers |
+| Router CPU | Idle utilization | Utilization during transfer | Sustained high use can indicate a hardware bottleneck |
+
+WireGuard and OpenVPN results can differ on the same hardware because of firmware, cipher and provider implementation. If you want to tunnel a fast fiber connection, check vendor documentation and independent tests conducted under comparable conditions before buying hardware.
 
 ## Which Devices Benefit Most From Router VPN?
 
@@ -123,13 +125,13 @@ Yes, every device connected via Wi-Fi or Ethernet routes through the VPN. Phones
 Yes — ASUS Merlin's VPN Director or OpenWRT's policy routing can exempt specific MAC addresses or IP ranges.
 
 **Is router VPN fast enough for streaming?**
-4K streaming needs 25 Mbps. A modern router easily delivers 300+ Mbps over VPN. If your fiber is much faster, a hardware upgrade may be needed.
+Required speed varies by streaming service, quality and compression. Check sustained throughput and playback on the same device with the VPN enabled; if router CPU saturates, consider a hardware upgrade or route only the devices that need the tunnel.
 
 **Can I run double VPN — both router and device?**
-Technically yes but performance halves and it's pointless. Pick one.
+Technically yes, but additional encryption and routing can reduce performance and complicate troubleshooting. Use a single tunnel unless you have a specific requirement.
 
 ## Conclusion
 
-Router-level VPN is the cleanest solution for households with many devices. ASUS RT series for entry-level, GL.iNet for portable use, pfSense/OPNsense for maximum performance. WireGuard should be the default; OpenVPN TCP 443 stays as a fallback in censored regions.
+Router-level VPN can be a centralized option for households with many devices. ASUS RT, GL.iNet and pfSense/OPNsense suit different use cases and skill levels; verify compatibility and performance on the exact model. WireGuard is a sensible starting point, while supported OpenVPN modes can be compared if the connection has problems.
 
 To find which VPN provider works best with your router, check our [VPN comparison page](/en/karsilastir). If you want a centralized solution instead of per-device installation, the router investment pays off long-term.

@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ArrowRight, Clock, Globe2, MapPin, ShieldAlert } from "lucide-react";
@@ -11,9 +11,11 @@ import {
 } from "@/components/home/IpSecurityBannerDismiss";
 import { IpSecurityBannerClock } from "@/components/home/IpSecurityBannerClock";
 import {
+  geoFromHeaders,
   isPrivateOrLocal,
-  resolveRequestGeo,
 } from "@/lib/request-geo";
+
+const DISMISS_COOKIE = "vpnadvisor_ip_banner_dismissed";
 
 function resolveCountryName(code: string, locale: string): string {
   try {
@@ -37,8 +39,12 @@ function maskIpAddress(ip: string | null): string {
 }
 
 export async function IpSecurityBanner() {
+  const cookieStore = await cookies();
+  if (cookieStore.has(DISMISS_COOKIE)) return null;
+
   const h = await headers();
-  const geo = await resolveRequestGeo(h);
+  // Keep the homepage critical path independent of external geo services.
+  const geo = geoFromHeaders(h);
   const ip = geo.ip;
 
   if (!geo.countryCode || isPrivateOrLocal(ip)) return null;

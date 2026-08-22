@@ -200,7 +200,7 @@ const tr: FreeVsPaidVpnContent = {
       href: "/rehber/vpn-guvenlik-kontrol-listesi",
       text: "Güvenlik kontrol listesi",
     },
-    { href: "/en-iyi-vpn", text: "En iyi 20 VPN" },
+    { href: "/en-iyi-vpn", text: "VPN sağlayıcı karşılaştırmaları" },
   ],
 };
 
@@ -363,7 +363,7 @@ const en: FreeVsPaidVpnContent = {
       href: "/guide/vpn-security-checklist",
       text: "Security checklist",
     },
-    { href: "/en-iyi-vpn", text: "Top 20 VPNs" },
+    { href: "/en-iyi-vpn", text: "VPN provider comparisons" },
   ],
 };
 
@@ -526,7 +526,7 @@ const de: FreeVsPaidVpnContent = {
       href: "/ratgeber/vpn-sicherheits-checkliste",
       text: "Sicherheits-Checkliste",
     },
-    { href: "/en-iyi-vpn", text: "Top-20-VPNs" },
+    { href: "/en-iyi-vpn", text: "VPN-Anbietervergleich" },
   ],
 };
 

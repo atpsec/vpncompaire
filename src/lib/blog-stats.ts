@@ -1,4 +1,4 @@
-import { getBlogPosts } from "./blog";
+import { getVisibleBlogPosts } from "./blog";
 import type { Locale } from "@/lib/site";
 
 export type BlogStats = {
@@ -21,7 +21,7 @@ export type TagStat = {
 };
 
 export async function getBlogStats(locale: Locale): Promise<BlogStats> {
-  const posts = await getBlogPosts(locale);
+  const posts = await getVisibleBlogPosts(locale);
 
   const categoryMap = new Map<string, number>();
   const tagMap = new Map<string, number>();
@@ -52,9 +52,9 @@ export async function getBlogStats(locale: Locale): Promise<BlogStats> {
     .sort((a, b) => b.count - a.count);
 
   const [trPosts, enPosts, dePosts] = await Promise.all([
-    getBlogPosts("tr"),
-    getBlogPosts("en"),
-    getBlogPosts("de"),
+    getVisibleBlogPosts("tr"),
+    getVisibleBlogPosts("en"),
+    getVisibleBlogPosts("de"),
   ]);
 
   return {

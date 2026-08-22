@@ -2,6 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import type { BlogPost } from "@/lib/blog";
+import { getBlogImage } from "@/lib/unsplash";
 import { BlogCard } from "./blog-card";
 
 type RelatedPostsProps = {
@@ -22,9 +23,17 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
       </h2>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
-        ))}
+        {posts.map((post) => {
+          const imageUrl = getBlogImage(
+            post.coverImage,
+            "hero",
+            post.slug,
+          ).url;
+
+          return (
+            <BlogCard key={post.slug} post={{ ...post, imageUrl }} />
+          );
+        })}
       </div>
 
       <div className="mt-8 text-center">

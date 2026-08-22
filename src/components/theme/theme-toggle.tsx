@@ -1,11 +1,33 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { useLocale } from "next-intl";
 import { Moon, Sun, Monitor } from "lucide-react";
 
 type Theme = "light" | "dark" | "system";
 
 const STORAGE_KEY = "vpnadvisor-theme";
+
+const LABELS = {
+  tr: {
+    change: "Tema değiştir",
+    light: "Açık tema (tıkla: koyu)",
+    dark: "Koyu tema (tıkla: sistem)",
+    system: "Sistem teması (tıkla: açık)",
+  },
+  en: {
+    change: "Change theme",
+    light: "Light theme (click: dark)",
+    dark: "Dark theme (click: system)",
+    system: "System theme (click: light)",
+  },
+  de: {
+    change: "Theme ändern",
+    light: "Helles Theme (Klick: dunkel)",
+    dark: "Dunkles Theme (Klick: System)",
+    system: "System-Theme (Klick: hell)",
+  },
+} as const;
 
 function applyTheme(theme: Theme) {
   const root = document.documentElement;
@@ -36,6 +58,8 @@ function useMounted(): boolean {
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
   const mounted = useMounted();
+  const rawLocale = useLocale();
+  const labels = LABELS[rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr"];
 
   // Lazy initializer reads localStorage before first render
   const [theme, setTheme] = useState<Theme>(() => {
@@ -66,7 +90,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     return (
       <button
         type="button"
-        aria-label="Tema değiştir"
+        aria-label={labels.change}
         className={`inline-flex size-9 items-center justify-center rounded-md text-ink-muted hover:bg-surface-subtle hover:text-ink transition ${className}`}
       >
         <Monitor className="size-4" aria-hidden="true" />
@@ -77,10 +101,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const Icon = theme === "light" ? Sun : theme === "dark" ? Moon : Monitor;
   const label =
     theme === "light"
-      ? "Açık tema (tıkla: koyu)"
+      ? labels.light
       : theme === "dark"
-      ? "Koyu tema (tıkla: sistem)"
-      : "Sistem teması (tıkla: açık)";
+        ? labels.dark
+        : labels.system;
 
   return (
     <button

@@ -11,7 +11,7 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { localizedAlternates, bilingualAlternates, absoluteUrl, type Locale } from "@/lib/site";
+import { bilingualAlternates, absoluteUrl, type Locale } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
 import { referenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
 import { getArchivedProduct } from "@/data/products-current";
@@ -22,6 +22,7 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
 const labels = {
   tr: {
     profile: "VPN sağlayıcı profili",
+    archived: "Hizmeti sonlandırılmış servis arşivi",
     metaSuffix: "özellikler, fiyat ve kaynak özeti",
     intro: "Bu sayfa laboratuvar incelemesi veya kullanıcı yorumu değildir. Sağlayıcının yayınladığı bilgiler ve doğrulanabilir kaynaklar, karşılaştırmayı kolaylaştırmak için yapılandırılmıştır.",
     home: "Ana sayfa",
@@ -48,6 +49,7 @@ const labels = {
   },
   en: {
     profile: "VPN provider profile",
+    archived: "Discontinued service archive",
     metaSuffix: "features, pricing and source summary",
     intro: "This page is not a laboratory review or a user testimonial. Provider-published information and verifiable sources are structured to make comparison easier.",
     home: "Home",
@@ -74,6 +76,7 @@ const labels = {
   },
   de: {
     profile: "VPN-Anbieterprofil",
+    archived: "Archiv eines eingestellten Dienstes",
     metaSuffix: "Funktionen, Preise und Quellenübersicht",
     intro: "Diese Seite ist weder ein Labortest noch eine Nutzerbewertung. Anbieterangaben und überprüfbare Quellen werden strukturiert dargestellt, um Vergleiche zu erleichtern.",
     home: "Startseite",
@@ -117,20 +120,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = resolveProduct(slug, locale);
   if (!product) return {};
   const l = labels[locale];
-  const isArchived = slug === "atlas-vpn";
-  const hasFullLocaleContent = referenceProducts.some((p) => p.slug === slug);
-  const canonicalLocale = hasFullLocaleContent ? locale : locale === "de" ? "en" : locale;
+  const isArchived = Boolean(getArchivedProduct(slug));
+  const isReferenceOnly = referenceProducts.some((p) => p.slug === slug);
+  const canonicalLocale = isArchived ? "tr" : locale === "de" ? "en" : locale;
+  const canonical = absoluteUrl(`/inceleme/${product.slug}`, canonicalLocale);
+  const title = `${product.brand} — ${isArchived ? l.archived : l.metaSuffix}`;
   return {
-    title: isArchived ? `${product.brand} — discontinued service archive` : `${product.brand} — ${l.metaSuffix}`,
+    title,
     description: `${product.brand}: ${product.summary} ${l.intro}`,
-    alternates: hasFullLocaleContent
-      ? localizedAlternates(`/inceleme/${product.slug}`, locale)
+    alternates: isArchived || isReferenceOnly
+      ? { canonical }
       : bilingualAlternates(`/inceleme/${product.slug}`, locale, "en"),
-    robots: isArchived || !hasFullLocaleContent && locale === "de" ? { index: false, follow: true } : undefined,
+    robots:
+      isArchived || isReferenceOnly || locale === "de"
+        ? { index: false, follow: true }
+        : undefined,
     openGraph: {
-      title: `${product.brand} — ${l.profile}`,
+      title,
       description: product.summary,
-      url: absoluteUrl(`/inceleme/${product.slug}`, canonicalLocale),
+      url: canonical,
       type: "website",
     },
   };
@@ -142,35 +150,39 @@ export default async function Page({ params }: Props) {
   setRequestLocale(locale);
   const product = resolveProduct(slug, locale);
   if (!product) notFound();
-  const hasFullLocaleContent = referenceProducts.some((p) => p.slug === slug);
-  const canonicalLocale = hasFullLocaleContent ? locale : locale === "de" ? "en" : locale;
+  const isArchived = Boolean(getArchivedProduct(slug));
+  const canonicalLocale = isArchived ? "tr" : locale === "de" ? "en" : locale;
 
   const providerSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `${product.brand} ${labels[locale].profile}`,
+    name: `${product.brand} ${isArchived ? labels[locale].archived : labels[locale].profile}`,
     description: product.summary,
     url: absoluteUrl(`/inceleme/${product.slug}`, canonicalLocale),
-    about: {
-      "@type": "SoftwareApplication",
-      name: product.brand,
-      applicationCategory: "SecurityApplication",
-      operatingSystem: "Windows, macOS, Linux, iOS, Android",
-    },
+    ...(isArchived
+      ? {}
+      : {
+          about: {
+            "@type": "SoftwareApplication",
+            name: product.brand,
+            applicationCategory: "SecurityApplication",
+            operatingSystem: "Windows, macOS, Linux, iOS, Android",
+          },
+        }),
     isPartOf: { "@type": "WebSite", name: "VPN Advisor", url: absoluteUrl() },
   };
 
-  return <ProviderView product={product} locale={locale} providerSchema={providerSchema} />;
+  return <ProviderView product={product} locale={locale} providerSchema={providerSchema} isArchived={isArchived} />;
 }
 
-function ProviderView({ product, locale, providerSchema }: { product: Product; locale: Locale; providerSchema: Record<string, unknown> }) {
+function ProviderView({ product, locale, providerSchema, isArchived }: { product: Product; locale: Locale; providerSchema: Record<string, unknown>; isArchived: boolean }) {
   const t = labels[locale];
   const hasStructuredPricing = Boolean(product.pricingVerifiedAt) && product.priceFromUsd > 0 && product.plans.length > 0;
 
   return (
     <>
       <JsonLd data={providerSchema} />
-      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.hub, path: "/en-iyi-vpn" }, { name: product.brand, path: `/inceleme/${product.slug}` }], locale)} />
+      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.hub, path: "/en-iyi-vpn" }, { name: product.brand, path: `/inceleme/${product.slug}` }], isArchived ? "tr" : locale)} />
 
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t.home}</Link>{" "}›{" "}<Link href="/en-iyi-vpn" className="hover:text-ink">{t.hub}</Link>{" "}› <span className="text-ink-strong">{product.brand}</span></p>
@@ -178,7 +190,7 @@ function ProviderView({ product, locale, providerSchema }: { product: Product; l
         <header className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start">
           <VPNLogo slug={product.slug} size={72} className="sm:mt-2" />
           <div className="flex-1">
-            <Badge variant="brand">{t.profile}</Badge>
+            <Badge variant="brand">{isArchived ? t.archived : t.profile}</Badge>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{product.brand}</h1>
             <p className="mt-4 text-lg text-ink-muted">{product.summary}</p>
           </div>
@@ -188,23 +200,25 @@ function ProviderView({ product, locale, providerSchema }: { product: Product; l
           <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{t.intro}</p><Link href="/metodoloji" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>
         </Card>
 
-        <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />
+        {isArchived ? null : <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />}
 
-        <Card className="mt-8 p-6">
-          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
-            <Stat label={t.price} value={hasStructuredPricing ? `${product.priceCurrency === "EUR" ? "€" : "$"}${product.priceFromUsd.toFixed(2)}` : t.priceOfficial} highlight />
-            <Stat label={t.jurisdiction} value={product.highlights.jurisdiction ?? "—"} />
-            <Stat label={t.refund} value={product.highlights.moneyBackDays ? `${product.highlights.moneyBackDays} ${t.days}` : "—"} />
-          </dl>
-          <div className="mt-6 border-t border-border pt-6">
-            <h2 className="text-lg font-semibold text-ink-strong">{t.pricing}</h2>
-            <p className="mt-1 text-sm text-ink-muted">{t.pricingIntro}</p>
-            <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
-              {hasStructuredPricing ? <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} /> : <div className="rounded-lg border border-border bg-surface-subtle/40 p-4 text-sm text-ink-muted">{t.priceOfficial}</div>}
-              <div className="flex flex-col gap-2 sm:w-48"><Button asChild variant="primary"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t.official}<ExternalLink className="size-4" /></a></Button></div>
+        {isArchived ? null : (
+          <Card className="mt-8 p-6">
+            <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+              <Stat label={t.price} value={hasStructuredPricing ? `${product.priceCurrency === "EUR" ? "€" : "$"}${product.priceFromUsd.toFixed(2)}` : t.priceOfficial} highlight />
+              <Stat label={t.jurisdiction} value={product.highlights.jurisdiction ?? "—"} />
+              <Stat label={t.refund} value={product.highlights.moneyBackDays ? `${product.highlights.moneyBackDays} ${t.days}` : "—"} />
+            </dl>
+            <div className="mt-6 border-t border-border pt-6">
+              <h2 className="text-lg font-semibold text-ink-strong">{t.pricing}</h2>
+              <p className="mt-1 text-sm text-ink-muted">{t.pricingIntro}</p>
+              <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
+                {hasStructuredPricing ? <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} /> : <div className="rounded-lg border border-border bg-surface-subtle/40 p-4 text-sm text-ink-muted">{t.priceOfficial}</div>}
+                <div className="flex flex-col gap-2 sm:w-48"><Button asChild variant="primary"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t.official}<ExternalLink className="size-4" /></a></Button></div>
+              </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        )}
 
         <section className="mt-12 grid sm:grid-cols-2 gap-6">
           <Card className="p-6"><h2 className="text-lg font-semibold text-success-700 flex items-center gap-2"><Check className="size-5" /> {t.strengths}</h2><ul className="mt-3 space-y-2 text-sm text-ink">{product.pros.map((p, i) => <li key={i} className="flex items-start gap-2"><Check className="size-4 text-success-600 mt-0.5 shrink-0" /><span>{p}</span></li>)}</ul></Card>

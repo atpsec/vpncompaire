@@ -1,7 +1,7 @@
 ---
 slug: "ram-only-sunucu-vpn"
 title: "RAM-Only Sunucular: VPN'de Diskless Altyapı Önemi"
-description: "RAM-only diskless VPN sunucuları her yeniden başlatmada veriyi siler. ExpressVPN TrustedServer, NordVPN colocation, ProtonVPN mimarisi karşılaştırma."
+description: "RAM-only diskless VPN sunucuları yerel veri kalıcılığını nasıl azaltır? ExpressVPN TrustedServer, NordVPN colocation ve ProtonVPN mimarisi karşılaştırması."
 publishedAt: "2026-05-06"
 updatedAt: "2026-05-06"
 author: "VPN Advisor Editör Ekibi"
@@ -12,13 +12,13 @@ coverImage: "privacy-advanced-ram-servers-tr"
 unsplashKeyword: "server datacenter ram memory"
 ---
 
-Bir VPN sağlayıcısı "no-logs politikamız var" dediğinde bu sadece bir politik açıklamadır — sunucusunda kayıt tutmamayı seçtiğini söyler. Ama sunucu fiziksel olarak diske yazma yeteneğine sahipse politikanın kalıcılığı yöneticilerin disiplinine bağlıdır. Hata yapan bir sysadmin, sızdırılan bir konfigürasyon dosyası veya mahkeme zorlamasıyla canlı sunucuya log eklenmesi her şeyi değiştirebilir. RAM-only mimari bu güveni teknik bir garantiye dönüştürür: sunucu yazabileceği bir disk olmadığı için, kayıt tutmak isteseniz bile yapamazsınız.
+Bir VPN sağlayıcısının "no-logs" açıklaması, hangi veriyi ne kadar süreyle işlediğini anlatan bir politika iddiasıdır. Yerel disk bulunan sunucularda yanlış yapılandırma, geçici dosyalar veya sonradan eklenen kayıt mekanizmaları kalıcı iz bırakabilir. RAM-only mimari bu yerel kalıcılık yollarını azaltır; ancak RAM'de kayıt üretimini, canlı izlemeyi, merkezi sistemlere veri aktarımını veya kontrol düzlemi telemetrisini teknik olarak engellemez.
 
 ## RAM-Only Sunucu Nedir?
 
-RAM-only veya "diskless" sunucu, işletim sistemini ve uygulamaları yerel disk yerine yalnızca uçucu bellekte (RAM) çalıştıran sunucu tipidir. Sunucu açıldığında işletim sistemi imajı uzaktan (genelde sağlayıcının merkezi yapılandırma sunucularından) yüklenir, RAM'de çalışır ve hiçbir veri kalıcı medyaya yazılmaz.
+RAM-only veya "diskless" sunucu, işletim sistemini ve uygulamaları yerel disk yerine uçucu bellekte (RAM) çalıştırmak üzere tasarlanmış sunucu tipidir. Sunucu açıldığında işletim sistemi imajı genellikle merkezi yapılandırma altyapısından yüklenir. Bu düzen yerel diske yazmayı sınırlar; mimari dışında kalan merkezi log, izleme ve yönetim sistemleri ayrıca değerlendirilmelidir.
 
-Klasik mimaride sunucunun bir SSD veya HDD'si vardır; işletim sistemi, log dosyaları, geçici dosyalar ve uygulama state'i hep diske yazılır. RAM-only mimaride disk yoktur veya kullanılmaz. Sunucuyu yeniden başlatmak (reboot) tüm uçucu belleği sıfırlar — son kullanıcı oturumlarına dair hiçbir iz kalmaz.
+Klasik mimaride sunucunun bir SSD veya HDD'si vardır; işletim sistemi, log dosyaları, geçici dosyalar ve uygulama durumu diske yazılabilir. RAM-only mimaride yerel disk yoktur veya kullanılmaz. Yeniden başlatma uçucu yerel durumu normalde temizler, fakat kullanıcı verisinin başka bir sisteme aktarılmadığını ya da hiç toplanmadığını tek başına kanıtlamaz.
 
 ## Disk Tabanlı Sunucu Riski Nedir?
 
@@ -34,9 +34,9 @@ VPN sağlayıcısının no-logs politikası ne kadar katı olursa olsun, sunucul
 
 **Yapılandırma dosyaları**: VPN servisinin kendi config'leri, sertifikaları ve müşteri liste dosyaları diskte tutulur.
 
-**Olay kayıtları**: Cloudflare, fail2ban gibi savunma araçları saldırı tespiti için kayıt tutmak zorundadır.
+**Olay kayıtları**: Cloudflare, fail2ban gibi savunma araçları saldırı tespiti için kayıt üretebilir; saklama yeri ve süresi yapılandırmaya bağlıdır.
 
-Bu vektörlerin her biri, no-logs politikasını teorik olarak baltalama potansiyeline sahiptir. Disk olmayan bir sunucuda bu risklerin büyük kısmı fiziksel olarak imkansızdır.
+Bu vektörlerin her biri, no-logs politikasını teorik olarak baltalayabilir. Disk olmayan bir sunucu, yerel diskten sonradan veri kurtarma ve diskte kalıcı zararlı bırakma risklerini azaltır; merkezi kayıt, canlı bellek ve yönetim sistemi risklerini ortadan kaldırmaz.
 
 ## RAM-Only Mimari Nasıl Çalışır?
 
@@ -46,9 +46,9 @@ Diskless bir VPN sunucusunun tipik açılış süreci:
 2. **Yapılandırma sunucusuna bağlanır**: Sağlayıcının merkezi orchestration sistemi imzalı, doğrulanmış bir işletim sistemi imajı gönderir
 3. **RAM'e yüklenir**: Tüm OS ve VPN servisi belleğe açılır
 4. **Sertifika ve anahtarlar dağıtılır**: Sunucu özel anahtarlarını kısa-ömürlü olarak alır
-5. **Yeniden başlatma**: Reboot her şeyi sıfırlar, süreç baştan başlar
+5. **Yeniden başlatma**: Reboot uçucu yerel durumu temizler ve imajı yeniden yükler; uzaktaki kayıtlar bundan etkilenmez
 
-Bu mimaride sunucuyu fiziksel olarak çalan veya diskini çıkaran biri sadece boş bir donanım bulur. Anlamlı veri sadece çalışırken RAM'dedir ve güç kesildiğinde kaybolur.
+Bu mimaride fiziksel olarak ele geçirilen sunucuda incelenecek yerel bir veri diski bulunmaması, klasik disk adli analizinin değerini azaltır. Çalışan sistemin belleği, ağ üzerindeki izleme noktaları ve merkezi hizmetlerdeki veriler yine ayrı risk alanlarıdır.
 
 Bazı sağlayıcılar bu mimariyi daha da sertleştirir: signed kernel modüllerini zorunlu kılar, secure boot ile bootloader manipülasyonunu engeller, sunucu kimliğini cryptographic attestation ile doğrular.
 
@@ -58,7 +58,7 @@ Bazı sağlayıcılar bu mimariyi daha da sertleştirir: signed kernel modüller
 
 Sektörde RAM-only mimari'yi yaygınlaştıran ilk büyük sağlayıcı. 2019'da tüm sunucu filosunu TrustedServer altyapısına geçirdi. Her sunucu yeniden başlatıldığında imzalı bir OS imajı yükler ve bağımsız üçüncü taraflarca (PwC, KPMG, Cure53) defalarca denetlendi.
 
-TrustedServer'ın imzalı imaj zincirinin önemli bir avantajı vardır: bir sunucu compromised olsa bile, saldırgan kalıcı arka kapı bırakamaz çünkü her reboot orijinal imzalı imaja döner.
+TrustedServer'ın imzalı imaj zinciri, yeniden başlatma sonrasında yerel kalıcı değişikliklerin sürmesini zorlaştırmayı ve bilinen bir imaja dönmeyi amaçlar. Bu, çalışan sunucudaki saldırıları veya boot, imzalama ve merkezi yönetim zincirinin ele geçirilmesi riskini sıfırlamaz.
 
 ### NordVPN Colocated Servers
 
@@ -80,9 +80,9 @@ Sağlayıcı seçerken sadece "RAM-only sunucu kullanıyoruz" pazarlama mesajın
 
 ## RAM-Only Yetmez: No-Logs Denetimleri
 
-Diskless mimari önemli bir teknik garantidir ama tek başına yeterli değildir. Sunucu RAM'de bile log üretiyor olabilir, ve sağlayıcı bu RAM'i merkezi sisteme stream ediyor olabilir. RAM-only mimari kendi kendine no-logs anlamına gelmez.
+Diskless mimari önemli bir teknik önlemdir ama tek başına yeterli değildir. Sunucu RAM'de log üretebilir ve bu veriler merkezi bir sisteme aktarılabilir. RAM-only mimari kendi kendine no-logs anlamına gelmez.
 
-Asıl güven bağımsız üçüncü taraf denetimlerinden gelir. PwC, Deloitte, KPMG, Cure53 gibi firmalar VPN sağlayıcılarının sunucularına fiziksel ve dijital erişimi olur, çalıştığı süreçleri inceler ve no-logs iddialarını test eder.
+Bağımsız üçüncü taraf denetimleri ek kanıt sağlayabilir. PwC, Deloitte, KPMG ve Cure53 gibi firmaların raporları, erişebildikleri sistemleri belirli bir tarih ve kapsamda inceler; raporun tüm filoyu kapsayıp kapsamadığına ve bulguların güncelliğine bakılmalıdır.
 
 **Önemli denetim örnekleri**:
 
@@ -100,17 +100,17 @@ Tarihsel örnek: 2017'de Türk yetkilileri ExpressVPN sunucusuna el koyduğunda,
 
 Sağlayıcının yargı alanı RAM-only altyapı kadar önemlidir. ABD veya BK gibi 5/9/14-Eyes ülkelerinde gizlilik mahkeme kararıyla zorlanabilir.
 
-RAM-only mimari mahkeme zorlamasına karşı önemli bir kalkan oluşturur: hakim "müşteri X'in trafiğini ver" dese bile, sunucu o veriyi tutmuyorsa verecek hiçbir şey yoktur. Geçmiş veriyi kurtarmak imkansızdır çünkü ya hiç yazılmamıştır ya da güç kesintisinde silinmiştir.
+RAM-only mimari, gerçekten tutulmamış yerel geçmiş verinin sonradan diskten çıkarılması riskini azaltır. Ancak bunun sonucu no-logs politikasının fiilen uygulanmasına, merkezi sistemlerdeki verilere ve talebin kapsamına bağlıdır; yalnızca RAM kullanımı geçmiş verinin hiçbir yerde bulunmadığını garanti etmez.
 
-Yine de gelecekteki trafik için "live monitoring" emri verilebilir. Bu durumda sağlayıcı belirli bir kullanıcının trafiğini canlı kayda almak zorunda kalabilir. Bu vektöre karşı en iyi savunma [double VPN ve multi-hop](/blog/double-vpn-multihop) yapılandırmasıdır — tek bir sağlayıcı zorlansa bile zincir tamamen ifşa olmaz.
+Gelecekteki trafik için "live monitoring" emri veya teknik izleme uygulanması da mümkündür. [Double VPN ve multi-hop](/blog/double-vpn-multihop) tek bir sunucudaki gözlemi sınırlamaya yardımcı olabilir, ancak aynı sağlayıcının kontrol düzeyindeki izlemeyi veya hukuki zorlamayı otomatik olarak bertaraf etmez.
 
-Britanya Virjin Adaları (ExpressVPN), Panama (NordVPN), İsviçre (ProtonVPN), İzlanda (gizlilik dostu yargı alanları) gibi ülkelerde kurulu sağlayıcılar daha güçlü hukuki direnç sunar.
+Yargı alanları veri saklama, bildirim ve hukuki talep süreçlerinde farklılık gösterir. Sağlayıcının merkez ülkesini tek başına garanti kabul etmek yerine güncel yerel hukuku, şeffaflık raporlarını ve talep karşılama politikasını birlikte inceleyin.
 
 ## RAM-Only Olmadan VPN Kullanmak Güvenli mi?
 
-Disk tabanlı sunuculu sağlayıcılar otomatik olarak güvensiz değildir. Mullvad'ın eski filosunda diskli sunucular vardı ama firma 2010'dan beri tek bir veri sızıntısı yaşamadı çünkü politika ve denetim güçlüydü.
+Disk tabanlı sunucu kullanan sağlayıcılar otomatik olarak güvensiz değildir. Kalıcı depolamanın nasıl yapılandırıldığı, hangi verilerin toplandığı, denetim kapsamı ve yayımlanmış olay geçmişi birlikte değerlendirilmelidir.
 
-Ama 2026'da yeni bir VPN seçiyorsanız RAM-only mimari artık beklenen standarttır. Disk tabanlı sunucular kullanan sağlayıcılar ya kalıcı politika denetimine güveniyordur ya da maliyet kesiyordur — ikisi de [ücretsiz vs ücretli VPN tartışmasının](/blog/ucretsiz-vs-ucretli-vpn) odak noktalarındandır.
+Yeni bir VPN seçerken RAM-only mimariyi olumlu bir yerel veri minimizasyonu işareti olarak değerlendirebilirsiniz. Disk tabanlı bir tasarımın gerekçesini varsaymak yerine sağlayıcının teknik belgelerini, saklama ayarlarını ve bağımsız denetimlerini inceleyin. [Ücretsiz vs ücretli VPN tartışmamız](/blog/ucretsiz-vs-ucretli-vpn) diğer ölçütleri de ele alır.
 
 ## Kullanıcı Tarafında Doğrulama
 
@@ -125,24 +125,24 @@ Bir sağlayıcının "RAM-only" iddiasını doğrudan doğrulamanın kullanıcı
 ## Sıkça Sorulan Sorular
 
 **RAM-only sunucu VPN hızını etkiler mi?**
-Hayır. Modern RAM, SSD'den çok daha hızlıdır. Diskless çalışmak performansa katkı bile sağlayabilir.
+RAM-only olması tek başına belirleyici değildir. VPN hızı daha çok ağ kapasitesi, sunucu yükü, işlemci, protokol ve mesafeye bağlıdır; kendi bağlantınızda farklı saat ve sunucularla doğrulayın.
 
 **Tüm VPN sağlayıcıları RAM-only kullanmalı mı?**
-İdeal evet, ama maliyet ve kompleksite engelidir. Ücretsiz ve düşük fiyatlı sağlayıcıların büyük kısmı bu altyapıya yatırım yapamaz.
+Yerel veri kalıcılığını azaltmak için güçlü bir tasarım seçeneğidir, ancak maliyet ve operasyonel karmaşıklık getirir. Bir sağlayıcının gizliliğini yalnızca fiyatına veya RAM-only etiketine göre değerlendirmeyin.
 
 **Yeniden başlatılan sunucu bağlantımı kopartır mı?**
-Hayır. Aktif bağlantınız sunucu reboot olduğunda kopar ama otomatik yeniden bağlanma saniyeler içinde gerçekleşir. [Kill switch](/blog/kill-switch-nedir-vpn) bu kısa pencerede sızıntıyı engeller.
+Evet, aktif bağlantı kopabilir; yeniden bağlanma süresi uygulama, protokol ve ağa göre değişir. [Kill switch](/blog/kill-switch-nedir-vpn) bu pencerede normal ağ yolunu engellemeyi hedefler, ancak davranışı kendi cihazınızda test edilmelidir.
 
 **RAM-only sunucu sertifika değişikliği gerektirir mi?**
 Yapılandırmaya bağlı. Bazı sağlayıcılar her boot'ta yeni sertifika dağıtır, bazıları kalıcı sertifika kullanır.
 
 **Diskless sunucular siber saldırılara karşı daha mı güvenli?**
-Evet, kısmen. Persistent malware (kalıcı zararlı yazılım) RAM-only sunucuda imzalı imaj her boot'ta yeniden yüklendiği için var olamaz. Ama aktif çalışan sunucu hala saldırılabilir.
+Belirli risklerde. Doğrulanmış bir imajın her açılışta yeniden yüklenmesi, yerel kalıcı zararlının yeniden başlatma sonrasında sürmesini zorlaştırabilir. Çalışan sunucu, boot zinciri ve merkezi yönetim altyapısı yine saldırılabilir.
 
 ## Sonuç
 
-RAM-only sunucular, VPN gizliliğinin "söylenen" değil "yapılan" bir şey haline gelmesini sağlayan altyapı temelidir. Disk olmadan kayıt tutmak fiziksel olarak imkansızdır — bu, no-logs iddiasını teknik bir garantiye dönüştürür.
+RAM-only sunucular, yerel veri kalıcılığını azaltan somut bir altyapı önlemidir. Yerel diskin olmaması diskten geçmiş veri kurtarmayı ve kalıcı değişiklik bırakmayı zorlaştırır; no-logs iddiasını tek başına teknik bir garantiye dönüştürmez.
 
-Ama RAM-only tek başına yeterli değildir. Düzenli üçüncü taraf denetimleri, gizlilik dostu yargı alanı, güçlü no-logs politikası ve şeffaf altyapı bilgisi bu garantinin tam değerini oluşturan yapıtaşlarıdır. ExpressVPN'in TrustedServer'ı, NordVPN'in colocation modeli, ProtonVPN'in Secure Core sunucuları farklı yaklaşımlar ama hepsi aynı temel ilkeyi paylaşır: kullanıcı verisini sunucuda fiziksel olarak tutmamak.
+RAM-only tek başına yeterli değildir. Güncel ve kapsamı açık üçüncü taraf denetimleri, veri minimizasyonu politikası, şeffaf altyapı bilgisi ve hukuki bağlam birlikte değerlendirilmelidir. ExpressVPN'in TrustedServer'ı, NordVPN'in colocation modeli ve ProtonVPN'in Secure Core sunucuları farklı yaklaşımlar kullanır; her biri için sağlayıcı belgeleriyle denetim kapsamını kontrol edin.
 
-2026'da yeni bir VPN seçerken bu mimari özellikleri standart beklenti olarak görün. RAM-only altyapı, denetimli no-logs ve gizlilik dostu jurisdiction birlikte çalıştığında oluşan koruma katmanı, modern bir VPN'in sunması gereken minimumudur. Sağlayıcının altyapı tercihlerini detaylı karşılaştırmak için [VPN karşılaştırma sayfamıza](/karsilastir) göz atın — RAM-only desteği, denetim geçmişi ve no-logs politikası dahil tüm altyapı kriterlerini tek tabloda görebilirsiniz.
+Yeni bir VPN seçerken bu mimari özellikleri değerlendirme ölçütlerinden biri olarak kullanın. RAM-only altyapı, kapsamı belli denetimler ve veri minimizasyonu birlikte daha güçlü kanıt sunar; yine de sonuç sağlayıcının gerçek uygulamasına bağlıdır. Altyapı tercihlerini karşılaştırmak için [VPN karşılaştırma sayfamıza](/karsilastir) göz atın ve bilgileri güncel sağlayıcı belgeleriyle doğrulayın.

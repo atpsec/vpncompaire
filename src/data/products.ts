@@ -211,12 +211,12 @@ export const rawProducts: RawProduct[] = [
     ],
     cons: [
       L(
-        "Hız üst seviye rakiplere göre biraz daha düşük",
-        "Speed is slightly behind top-tier rivals",
+        "En düşük tanıtım fiyatı uzun dönemli abonelik gerektirir",
+        "The lowest introductory price requires a long-term subscription",
       ),
       L(
-        "Yoğun saatlerde bazı sunucularda gecikme",
-        "Latency on some servers during peak hours",
+        "Bazı gelişmiş özelliklerin platforma göre kullanılabilirliği değişir",
+        "Some advanced features vary by platform",
       ),
       L(
         "Mart 2022'de Nord Security ile birleşti",
@@ -379,12 +379,12 @@ export const rawProducts: RawProduct[] = [
     ],
     cons: [
       L(
-        "Sunucu ağı en büyük rakiplere göre küçük",
-        "Server network is smaller than the biggest rivals",
+        "Bazı gelişmiş özellikler yalnız ücretli planlarda bulunur",
+        "Some advanced features are available only on paid plans",
       ),
       L(
-        "Streaming uyumluluğu bazen sınırlı",
-        "Streaming compatibility is occasionally limited",
+        "Ücretsiz planda konum seçimi sınırlıdır",
+        "Location selection is limited on the free plan",
       ),
       L(
         "Yenileme fiyatı belirgin biçimde yükseliyor",
@@ -468,8 +468,8 @@ export const rawProducts: RawProduct[] = [
       L("ABD yargı yetkisi (5 Eyes ittifakı)", "US jurisdiction (5 Eyes)"),
       L("Arayüz yeni başlayanlar için karmaşık", "UI is dense for beginners"),
       L(
-        "Bazı bölgelerde streaming bypass'ı sorunlu",
-        "Streaming bypass is unreliable in some regions",
+        "Streaming uyumluluğu hizmete ve güncel IP havuzuna göre değişebilir",
+        "Streaming compatibility can vary by service and current IP pool",
       ),
     ],
     highlights: {
@@ -549,8 +549,8 @@ export const rawProducts: RawProduct[] = [
         "Transparency reports are published less frequently",
       ),
       L(
-        "Bazı sunucularda performans dalgalanması",
-        "Inconsistent performance on some servers",
+        "Optimize sunucu etiketleri konum ve platforma göre değişebilir",
+        "Optimised-server labels can vary by location and platform",
       ),
       L(
         "Gelişmiş güvenlik özellikleri sınırlı",
@@ -636,8 +636,8 @@ export const rawProducts: RawProduct[] = [
         "Renewal price climbs noticeably",
       ),
       L(
-        "Streaming uyumluluğu rakiplerinin gerisinde",
-        "Streaming compatibility lags behind rivals",
+        "Streaming uyumluluğu hizmete ve güncel IP havuzuna göre değişebilir",
+        "Streaming compatibility can vary by service and current IP pool",
       ),
       L(
         "Denetim sıklığı yılda bir değil, ad-hoc",
@@ -999,7 +999,7 @@ export function getProduct(slug: string, locale: Locale = "tr"): Product | undef
   return raw ? resolveProduct(raw, locale) : undefined;
 }
 
-/** Ana sıralama listesinde gösterilen VPN sayısı (UI “En İyi 20”). */
+/** Ana karşılaştırma listesinde gösterilecek azami sağlayıcı sayısı. */
 export const TOP_RANKED_LIMIT = 20;
 
 export function rankedProducts(locale: Locale = "tr"): Product[] {

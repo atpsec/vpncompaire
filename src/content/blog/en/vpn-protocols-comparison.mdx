@@ -32,29 +32,26 @@ Simple analogy: Protocol determines which language two people will speak. If the
 
 ### 1. WireGuard
 
-WireGuard is a modern, minimalist, and extremely fast protocol released in 2020.
+WireGuard is a modern, minimalist protocol released in 2020.
 
 #### Technical Features
 
 - **Lines of Code**: ~4,000 lines (1/100th of OpenVPN)
 - **Encryption**: ChaCha20, Poly1305, Curve25519
-- **Performance**: Fastest VPN protocol
+- **Performance**: Modern design intended to keep overhead low
 - **Platform**: Integrated into Linux kernel, available on all platforms
 
 #### Advantages
 
-**1. Exceptional Speed**
+**1. Efficient Design**
 
-WireGuard is 2-3 times faster than other protocols. Reasons:
+WireGuard's small codebase and modern cryptography can reduce processing overhead on some devices and networks. Results still depend on the operating system, VPN app, server, route and hardware. Design highlights include:
 - Minimal code base
 - Modern encryption algorithms
 - Kernel-level operation
 - Efficient packet processing
 
-**Speed Comparison (on 100 Mbps connection):**
-- WireGuard: ~85-90 Mbps
-- OpenVPN: ~60-70 Mbps
-- IKEv2: ~70-80 Mbps
+We do not publish directly comparable VPN Advisor lab measurements for these protocols. Record a VPN-off baseline, then compare download/upload speed, ping, jitter and packet loss on the same device, server and time window.
 
 **2. Security**
 
@@ -63,17 +60,17 @@ WireGuard is 2-3 times faster than other protocols. Reasons:
 - Regular security audits
 - Open source
 
-**3. Battery Friendly**
+**3. Mobile Use**
 
-Least battery-consuming protocol on mobile devices. Efficient code means minimal processor usage.
+An efficient implementation may reduce processing load on mobile, but battery use depends on the app, signal strength, always-on behavior and device. We do not have directly comparable battery measurements here.
 
 **4. Fast Connection**
 
-Connection setup time ~100ms. In OpenVPN, this can take 2-3 seconds.
+Connection setup can be quick in many implementations; actual time should be measured because the app, network and authentication flow all matter.
 
 **5. Roaming Support**
 
-When switching from Wi-Fi to mobile data, connection doesn't drop, continues smoothly.
+The tunnel can reconnect when moving between Wi-Fi and mobile data. Whether that transition feels seamless also depends on the VPN app's reconnect behavior.
 
 #### Disadvantages
 
@@ -92,7 +89,7 @@ Not as flexible as OpenVPN in hiding VPN traffic (obfuscation).
 #### When to Use?
 
 - If speed is priority
-- On mobile devices (battery saving)
+- On mobile devices (after checking network transitions and battery impact on your device)
 - For streaming
 - Daily use
 - On modern devices
@@ -112,7 +109,7 @@ OpenVPN is a proven and most widespread VPN protocol in use since 2001.
 
 **1. Proven Security**
 
-In use for 20+ years, tested millions of times. Security vulnerabilities are quickly patched.
+It is a mature, open-source protocol with a long review history. Confirm that the provider uses a current version and secure configuration.
 
 **2. High Customizability**
 
@@ -123,7 +120,7 @@ In use for 20+ years, tested millions of times. Security vulnerabilities are qui
 
 **3. Firewall Bypass**
 
-By using TCP port 443 (HTTPS), can bypass most firewalls and VPN blocks.
+Using TCP port 443 may help on some restricted networks, but it cannot guarantee bypass of advanced filtering.
 
 **4. Open Source**
 
@@ -135,21 +132,21 @@ All VPN providers support OpenVPN. Works on routers, NAS devices, old systems.
 
 #### Disadvantages
 
-**1. Slow**
+**1. Potentially Higher Processing Overhead**
 
-20-30% slower than WireGuard. Due to large code base and old algorithms.
+OpenVPN performance is sensitive to cipher choice, TCP/UDP mode, device and server configuration. We do not have directly comparable lab measurements against WireGuard.
 
 **2. Complex Setup**
 
 Manual setup difficult. Requires certificates, config files.
 
-**3. High Battery Consumption**
+**3. Variable Battery Impact**
 
-Consumes more battery than WireGuard on mobile devices.
+Some mobile implementations may impose more processing load, but the battery difference should not be generalized without testing on the same device and workload.
 
 **4. Connection Time**
 
-Takes 2-5 seconds to establish connection.
+Connection time varies with certificates, network conditions and app configuration.
 
 #### TCP vs UDP
 
@@ -195,11 +192,11 @@ Thanks to MOBIKE (Mobility and Multihoming) feature:
 - Wi-Fi → 4G transition smooth
 - Auto-connects after airplane mode
 
-**2. Fast and Stable**
+**2. Suited to Network Changes**
 
-- Not as fast as WireGuard but faster than OpenVPN
-- Connection drops very rare
-- Low latency
+- MOBIKE-capable setups can make reconnection after a network change easier
+- Stability and latency should be checked on the actual device, app, server and route
+- We do not have directly comparable lab measurements against the other protocols
 
 **3. Native Support**
 
@@ -232,14 +229,12 @@ Not as flexible as OpenVPN.
 
 ## Protocol Comparison Table
 
-| Feature | WireGuard | OpenVPN | IKEv2 | PPTP | L2TP |
-|---------|-----------|---------|-------|------|------|
-| **Speed** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
-| **Security** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐ | ⭐⭐ |
-| **Stability** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| **Mobile** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
-| **Bypass** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
-| **Setup** | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| Protocol | Typical strength | Important caveat | How to verify |
+|---------|------------------|------------------|---------------|
+| **WireGuard** | Small codebase and modern cryptography | Obfuscation and app behavior vary by provider | Compare speed, ping, jitter and battery on the same route |
+| **OpenVPN** | Mature ecosystem, flexible ports and TCP/UDP modes | Configuration and hardware load can change results | Test UDP and TCP separately on the same server |
+| **IKEv2/IPSec** | MOBIKE support for mobile network changes | Some networks block the required UDP ports | Check Wi-Fi/mobile transitions and reconnection |
+| **PPTP/L2TP** | Legacy-system compatibility | Not recommended for current security and performance expectations | Consider only for a mandatory legacy requirement |
 
 ## Which Protocol Should You Choose?
 
@@ -247,25 +242,25 @@ Not as flexible as OpenVPN.
 
 **Recommendation**: WireGuard
 
-Fast, secure, battery friendly. Best choice for most users.
+A sensible starting point on modern devices; compare speed and battery impact on your own connection.
 
 ### Streaming
 
 **Recommendation**: WireGuard
 
-Highest speed, low latency. Ideal for Netflix, Disney+.
+Try it on a nearby server; streaming quality depends on route, server load and platform checks.
 
 ### Gaming
 
 **Recommendation**: WireGuard or IKEv2
 
-Low ping, fast connection. Doesn't ruin gaming experience.
+Compare ping, jitter and packet loss with the VPN-off baseline; no protocol can guarantee zero impact.
 
 ### Mobile Devices
 
 **Recommendation**: WireGuard or IKEv2
 
-Battery saving, stability during network changes.
+Check reconnection behavior and battery impact on your own device.
 
 ### Maximum Security
 
@@ -277,7 +272,7 @@ Proven security, long-tested.
 
 **Recommendation**: OpenVPN (TCP 443) + Obfuscation
 
-Looks like HTTPS, bypasses most blocks.
+TCP 443 and obfuscation may help on some restricted networks; access is not guaranteed.
 
 ### Old Devices
 
@@ -293,11 +288,11 @@ Stability, centralized management, compliance.
 
 ## Conclusion
 
-VPN protocol directly affects your VPN experience. Right protocol selection:
-- Increases your speed
-- Strengthens your security
-- Extends battery life
-- Reduces connection issues
+VPN protocol directly affects your VPN experience. The right protocol:
+- can change performance overhead depending on route and hardware
+- supports your security goals when configured and maintained correctly
+- can affect battery use
+- may reduce some connection problems
 
 **General Advice**: Start with WireGuard. If you experience issues, switch to OpenVPN. Try IKEv2 on mobile. For a head-to-head between the two heavyweights, see [WireGuard vs OpenVPN comparison](/blog/wireguard-vs-openvpn-comparison); to route specific apps through specific protocols, check our [split tunneling explained](/blog/split-tunneling-vpn-explained) guide.
 

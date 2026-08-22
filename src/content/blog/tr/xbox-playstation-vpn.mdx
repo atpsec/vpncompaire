@@ -54,14 +54,14 @@ Dezavantaj: PC sürekli açık olmalı. Kurulum hata yapmaya açık. PC restart 
 
 ## Yöntem 3: Smart DNS
 
-Şifreleme yok ama hızlı ve oyun ping'ini artırmaz. Sadece bölge atlatma için yeterli.
+Smart DNS trafiği şifrelemez ve oyun trafiğini bir VPN tünelinden geçirmez. Bu nedenle VPN ek yükünü oluşturmaz; yine de DNS, ISS rotası ve hizmet kontrolleri nedeniyle ping veya bölgesel erişim sonucu garanti edilemez.
 
 1. VPN sağlayıcınızdan Smart DNS adreslerini alın (NordVPN, ExpressVPN, Surfshark sunar)
 2. Konsolda **Settings > Network > Custom > DNS Settings > Manual**
 3. Birincil ve ikincil DNS'leri girin
 4. Konsolu yeniden başlatın
 
-Avantaj: Ping etkilenmez, kurulum 2 dakika. Streaming ve regional store için yeterli.
+Avantaj: Tam VPN tüneli kurmadan DNS tabanlı yönlendirme denenebilir. Kurulum süresi ve streaming/regional store sonucu cihaz ile hizmete göre değişir.
 
 Dezavantaj: Şifreleme yok, gerçek IP'niz değişmiyor. PSN/Xbox Live hesap güvenliği için gerçek koruma sağlamaz.
 
@@ -69,24 +69,24 @@ Dezavantaj: Şifreleme yok, gerçek IP'niz değişmiyor. PSN/Xbox Live hesap gü
 
 | İhtiyaç | Önerilen | Sebep |
 |---|---|---|
-| Regional store erişimi | Smart DNS | Hızlı, ping etkilemez |
-| Oyun yayın bölgeleri | Smart DNS / Router | Geo-restriction atlatma |
-| Online oyun gecikmesi azaltma | Router (yakın sunucu) | ISS routing optimize |
-| DDoS koruması | Router | IP gizlenir |
+| Regional store erişimini kontrol etme | Smart DNS / Router | IP veya DNS sinyalini değiştirebilir; erişim garanti değildir |
+| Oyun yayın bölgeleri | Smart DNS / Router | Hizmetin hesap ve bölge kontrolleri ayrıca geçerlidir |
+| Online oyun rotasını karşılaştırma | Router (yakın sunucu) | Bazı ISS rotalarını değiştirebilir; ping'i ölçün |
+| DDoS riskini azaltma | Router | Gerçek IP'nin oyun oturumunda görünmesini azaltabilir |
 | Ev tüm cihazları korusun | Router | Tek noktadan kontrol |
 | Hesap güvenliği için VPN | Router | Tam tünel |
 
 ## VPN ve Oyun Gecikmesi
 
-VPN her zaman gecikmeyi artırır mı? Hayır — bazı durumlarda ISS routing'i kötü olduğunda VPN aslında ping'i düşürür. Coğrafi olarak yakın bir VPN sunucusu seçtiyseniz fark genelde 5-15ms'dir, kompetitif olmayan oyunlarda hissedilmez.
+VPN rotası çoğu bağlantıda ek işlem ve ağ yolu oluşturur; kötü bir ISS rotasını değiştirdiğinde daha iyi sonuç vermesi de mümkündür. Etki sunucu, ISS, oyun bölgesi ve saate göre değişir. Türkiye–Avrupa rotaları için doğrudan karşılaştırılabilir laboratuvar veya saha ölçümümüz yoktur.
 
-Saha gözlemleri (Türkiye-EU sunucularda):
-- VPN yok: 25-35 ms ping (Avrupa sunucularına)
-- WireGuard, Almanya sunucusu: 32-45 ms
-- OpenVPN UDP, Almanya: 40-55 ms
-- Smart DNS (gerçek IP korunur): 25-35 ms
+| Kontrol | VPN kapalı | VPN açık |
+|---|---|---|
+| Ping ve jitter | Aynı oyun bölgesinde temel değer | Aynı bölge ve saat aralığında tekrar |
+| Paket kaybı | Temel değer | Sunucu ve protokolle kaydet |
+| Rota kararlılığı | Kopma/ani sıçrama notu | Aynı maç türünde karşılaştır |
 
-Apex Legends, Call of Duty Warzone, Valorant gibi reflexsensitive oyunlarda 10ms ekstra ping fark edilebilir; FIFA, NBA 2K, MMORPG'lerde fark yok denecek kadar az.
+Rekabetçi ve refleks odaklı oyunlar gecikme değişimine daha duyarlı olabilir. Hissedilirlik için sabit bir eşik vermek yerine oyunun ağ istatistiğini ve kendi deneyiminizi birlikte değerlendirin.
 
 ## Regional Store ve Daha Ucuz Oyunlar
 
@@ -104,7 +104,7 @@ Spor yayını paketlerine bölgeye göre erişim için [canlı spor yayınları 
 
 **NAT Type Strict gösteriyor**: Router VPN'i çift NAT'a yol açabilir. UPnP'yi VPN destekliyorsa açın, açmıyorsa belirli portları manuel açın (PS5 için TCP 80, 443, 3478-3480, 3658, UDP 3074, 3478-3479).
 
-**Online maçlarda lag**: VPN sunucusunu coğrafi olarak yakın seçin. Aynı kıtada kalmak ping'i 50ms altında tutar.
+**Online maçlarda lag**: Coğrafi olarak yakın birkaç VPN sunucusunu deneyin; aynı kıta veya şehir etiketi tek başına belirli bir ping'i garanti etmez. Ping, jitter ve paket kaybını VPN'siz değerle karşılaştırın.
 
 **Yayın hizmetleri (Twitch, YouTube) açılmıyor**: Bazı yayın servisleri VPN tespitinde kararlı değil. Sunucu değiştirin, yardımcı olmazsa Smart DNS deneyin.
 
@@ -122,13 +122,13 @@ Tek başına VPN kullanmak ToS ihlali değil. Ancak fiyat manipülasyonu (ucuz b
 GeForce Now, Xbox Cloud Gaming gibi servisler ping'e çok hassas. VPN genelde önerilmez. Smart DNS bölge atlatma için daha uygun.
 
 **Hangi VPN konsol için en iyi?**
-Router uyumlu manuel konfigürasyon sunan, Smart DNS özelliği olan, ping'i düşük tutan sağlayıcılar. NordVPN, Surfshark, ExpressVPN, IPVanish öne çıkar.
+Router için güncel manuel yapılandırma belgesi ve gerekiyorsa Smart DNS sunan sağlayıcıları kısa listeye alın. Burada sağlayıcılar arasında doğrudan karşılaştırılabilir ping ölçümü yoktur; deneme/iade döneminde aynı oyun rotasında ölçüm yapın.
 
 **Switch için aynı yöntemler geçerli mi?**
 Evet. Switch'te de native VPN yok, router/PC paylaşımı/Smart DNS aynı şekilde çalışır.
 
 ## Sonuç
 
-Konsollarda VPN kurmak yumuşak değil ama imkansız da değil. En sağlam yol router seviyesi VPN; sadece store bölge atlatma için Smart DNS yeterli; PC paylaşımı geçici çözüm olarak kullanılabilir. Oyun gecikmesi konusunda yakın bir sunucu seçip WireGuard tercih ederseniz hissedilir bir fark yaşamazsınız.
+Konsollarda VPN ağ seviyesinde kurulabilir. Router VPN, Smart DNS ve PC paylaşımı farklı ihtiyaçlara hizmet eder; mağaza erişimi ve performans sonucu garanti değildir. Yakın bir sunucu ve modern protokol iyi bir başlangıç olabilir, ancak hissedilir gecikme olmayacağı varsayılmamalı; kendi oyun rotanızda ölçün.
 
 Konsolunuza uygun VPN'i seçmek için [karşılaştırma sayfamızı](/karsilastir) inceleyin. Tüm ev ağı için kurulum yapacaksanız [router VPN kurulumu](/blog/router-uzerinde-vpn-kurulum) en kapsamlı çözüm.
