@@ -25,6 +25,11 @@ const ALTERNATE_OG_LOCALES: Record<Locale, string[]> = {
   de: ["tr_TR", "en_US"],
 };
 
+// Google Search Console verification tokens are intentionally public and are
+// emitted as a harmless meta tag on every locale page.
+const GOOGLE_SEARCH_CONSOLE_TOKEN =
+  "61Ha0d7XNarVnj3244M0ghLOzvRnhJ5B_5JLWFIi8BI";
+
 export function buildRootMetadata(locale: Locale): Metadata {
   const description = siteConfig.description[locale];
   const canonicalLocale = locale === "de" ? "en" : locale;
@@ -46,6 +51,9 @@ export function buildRootMetadata(locale: Locale): Metadata {
     creator: siteConfig.author.name,
     publisher: siteConfig.name,
     category: "technology",
+    verification: {
+      google: GOOGLE_SEARCH_CONSOLE_TOKEN,
+    },
     formatDetection: {
       email: false,
       address: false,
