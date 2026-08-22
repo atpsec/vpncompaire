@@ -10,8 +10,9 @@ type SupportedLocale = "tr" | "en" | "de";
  *
  * Çerez davranışı: consent varsayılan olarak "denied". GA bu modda çerezsiz
  * ping gönderir, _ga çerezini YAZMAZ. Kullanıcı banner'dan onay verince
- * (ConsentBanner) analytics_storage "granted" olur ve normal GA devreye girer.
- * Bu yüzden onay öncesi hiçbir analitik çerez set edilmez (KVKK/GDPR uyumu).
+ * (ConsentBanner) yalnızca analytics_storage "granted" olur ve normal GA
+ * devreye girer. Reklam sinyalleri AdSense'in Google CMP mesajı tarafından
+ * ayrı yönetilir; analitik banner'ı reklam rızası yerine geçmez.
  */
 export function GoogleAnalytics({ locale }: { locale: SupportedLocale }) {
   const id = siteConfig.gaId;

@@ -1,6 +1,8 @@
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
+import { Card } from "@/components/ui/card";
+import { Link } from "@/i18n/routing";
 import { getBlogPost, getBlogPosts, getRelatedPosts } from "@/lib/blog";
 import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogContent } from "@/components/blog/blog-content";
@@ -32,6 +34,30 @@ const OG_LOCALE: Record<Locale, string> = {
   en: "en_US",
   de: "de_DE",
 };
+
+const NEXT_STEP_COPY = {
+  tr: {
+    title: "Karar vermeye hazırsan",
+    body: "Kaynak temelli sağlayıcı profillerini ve kullanım senaryolarına göre karşılaştırmaları incele.",
+    profiles: "VPN profillerini incele",
+    compare: "Karşılaştırmaları aç",
+    guide: "Başlangıç rehberine dön",
+  },
+  en: {
+    title: "Ready to make a decision?",
+    body: "Explore source-based provider profiles and comparisons organized by real-world use case.",
+    profiles: "Browse VPN profiles",
+    compare: "Open comparisons",
+    guide: "Read the starter guide",
+  },
+  de: {
+    title: "Bereit für die Entscheidung?",
+    body: "Entdecke quellenbasierte Anbieterprofile und Vergleiche nach praktischen Einsatzszenarien.",
+    profiles: "VPN-Profile ansehen",
+    compare: "Vergleiche öffnen",
+    guide: "Einsteigerleitfaden lesen",
+  },
+} as const;
 
 async function blogAlternates(slug: string, locale: BlogLocale) {
   const entry = getBlogSlugEntry(slug, locale);
@@ -154,6 +180,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const { frontmatter, contentParts } = result;
+  const nextSteps = NEXT_STEP_COPY[locale];
 
   const relatedPosts = await getRelatedPosts(
     frontmatter.slug,
@@ -237,6 +264,31 @@ export default async function BlogPostPage({ params }: Props) {
           seed={frontmatter.slug}
           className="my-10"
         />
+
+        <Card className="mt-12 border-brand-200 bg-brand-50/40 p-6">
+          <h2 className="text-xl font-semibold text-ink-strong">{nextSteps.title}</h2>
+          <p className="mt-2 text-sm leading-relaxed text-ink-muted">{nextSteps.body}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link
+              href="/en-iyi-vpn"
+              className="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
+            >
+              {nextSteps.profiles}
+            </Link>
+            <Link
+              href="/karsilastir"
+              className="rounded-full border border-border bg-surface-base px-4 py-2 text-sm font-semibold text-ink-strong transition-colors hover:border-brand-300"
+            >
+              {nextSteps.compare}
+            </Link>
+            <Link
+              href="/rehber/vpn-nedir"
+              className="rounded-full border border-border bg-surface-base px-4 py-2 text-sm font-semibold text-ink-strong transition-colors hover:border-brand-300"
+            >
+              {nextSteps.guide}
+            </Link>
+          </div>
+        </Card>
 
         <RelatedPosts posts={relatedPosts} />
       </Container>

@@ -9,22 +9,22 @@ type SupportedLocale = "tr" | "en" | "de";
 
 const COPY = {
   tr: {
-    title: "Çerez ve analitik tercihi",
-    text: "Site trafiğini ölçmek için Google Analytics kullanıyoruz. Analitik çerezler yalnızca onayınızla etkinleştirilir.",
+    title: "Analitik tercihi",
+    text: "Site trafiğini ölçmek için Google Analytics kullanıyoruz. Analitik depolama yalnızca onayınızla etkinleştirilir.",
     learnMore: "Çerez politikası",
     reject: "Reddet",
     accept: "Kabul et",
   },
   en: {
-    title: "Cookie and analytics preference",
-    text: "We use Google Analytics to measure site traffic. Analytics cookies are enabled only with your consent.",
+    title: "Analytics preference",
+    text: "We use Google Analytics to measure site traffic. Analytics storage is enabled only with your consent.",
     learnMore: "Cookie policy",
     reject: "Reject",
     accept: "Accept",
   },
   de: {
-    title: "Cookie- und Analyse-Einstellung",
-    text: "Wir verwenden Google Analytics zur Messung des Website-Traffics. Analyse-Cookies werden nur mit Ihrer Zustimmung aktiviert.",
+    title: "Analyse-Einstellung",
+    text: "Wir verwenden Google Analytics zur Messung des Website-Traffics. Die Analysespeicherung wird nur mit Ihrer Zustimmung aktiviert.",
     learnMore: "Cookie-Richtlinie",
     reject: "Ablehnen",
     accept: "Akzeptieren",
@@ -74,9 +74,6 @@ export function ConsentBanner({ locale }: { locale: SupportedLocale }) {
     const value = granted ? "granted" : "denied";
     window.gtag?.("consent", "update", {
       analytics_storage: value,
-      ad_storage: value,
-      ad_user_data: value,
-      ad_personalization: value,
     });
     setDecided(true);
   }

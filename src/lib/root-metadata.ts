@@ -54,6 +54,9 @@ export function buildRootMetadata(locale: Locale): Metadata {
     verification: {
       google: GOOGLE_SEARCH_CONSOLE_TOKEN,
     },
+    other: {
+      "google-adsense-account": siteConfig.adsenseClientId,
+    },
     formatDetection: {
       email: false,
       address: false,
