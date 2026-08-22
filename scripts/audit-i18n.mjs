@@ -142,6 +142,33 @@ const TR_ONLY_EXACT = new Set([
   "en-iyi/yurt-disindaki-turkler",
 ]);
 
+function resolveDuplicateLocaleRedirect(pathname) {
+  const segments = pathname.split("/").filter(Boolean);
+  const locale = segments[0];
+  if (!locale || !CONTENT_LOCALES.includes(locale) || segments[1] !== locale) {
+    return null;
+  }
+  const rest = segments.slice(2).join("/");
+  if (locale === DEFAULT_LOCALE) return rest ? `/${rest}` : "/";
+  return rest ? `/${locale}/${rest}` : `/${locale}`;
+}
+
+const duplicateLocaleCases = [
+  ["/de/de/sana-uygun-vpn", "/de/sana-uygun-vpn"],
+  ["/en/en/hesaplayici", "/en/hesaplayici"],
+  ["/tr/tr/blog", "/blog"],
+  ["/de/ratgeber/was-ist-ein-vpn", null],
+];
+let duplicateLocaleOk = true;
+for (const [input, expected] of duplicateLocaleCases) {
+  const got = resolveDuplicateLocaleRedirect(input);
+  if (got !== expected) {
+    duplicateLocaleOk = false;
+    fail(`duplicate locale redirect "${input}" = ${JSON.stringify(got)}, beklenen ${JSON.stringify(expected)}`);
+  }
+}
+if (duplicateLocaleOk) pass(`Çift locale URL temizleme (${duplicateLocaleCases.length} senaryo) geçti`);
+
 function prefix(locale) {
   return locale === DEFAULT_LOCALE ? "" : `/${locale}`;
 }

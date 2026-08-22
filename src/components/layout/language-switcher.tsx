@@ -38,7 +38,17 @@ export function LanguageSwitcher({ className }: Props) {
       const targetSlug = getLocalizedBlogSlug(blogMatch[1], locale, target);
       return targetSlug ? `/blog/${targetSlug}` : pathname;
     }
-    return localizePathname(pathname, target as AppLocale);
+
+    // `router.replace(..., { locale })` locale önekini kendisi ekler.
+    // localizePathname ise SEO/canonical üretimi için tam public yolu döndürür;
+    // burada o öneki tekrar vermek /de/de/... gibi bozuk URL üretirdi.
+    const localized = localizePathname(pathname, target as AppLocale);
+    const segments = localized.split("/").filter(Boolean);
+    if (segments[0] === "en" || segments[0] === "de") {
+      const neutral = segments.slice(1).join("/");
+      return neutral ? `/${neutral}` : "/";
+    }
+    return localized;
   }
 
   function switchTo(target: BlogLocale) {

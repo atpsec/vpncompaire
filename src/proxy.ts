@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import {
+  resolveDuplicateLocaleRedirect,
   resolveLocalizedRedirect,
   resolveInternalRewrite,
 } from "@/lib/i18n-paths";
@@ -84,6 +85,15 @@ const intlMiddleware = createMiddleware(routing);
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Eski dil değiştirici sürümünün ürettiği /de/de/... ve /en/en/...
+  // bağlantılarını 404'e bırakma; tek locale önekiyle kanoniğe taşı.
+  const duplicateLocaleTarget = resolveDuplicateLocaleRedirect(pathname);
+  if (duplicateLocaleTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = duplicateLocaleTarget;
+    return NextResponse.redirect(url, 301);
+  }
 
   // i18n slug/locale tutarlılığı: yanlış-dil section/slug kullanan detay
   // URL'lerini (örn. /de/rehber/vpn-nedir, /en/guide/what-is-a-vpn) içeriğin

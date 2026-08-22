@@ -680,6 +680,27 @@ export const ALL_SECTION_SLUGS: string[] = Array.from(
 );
 
 /**
+ * Aynı locale'in iki kez yazıldığı eski/bozuk public URL'yi kanoniğe indirger.
+ *
+ * Örn. `/de/de/sana-uygun-vpn` -> `/de/sana-uygun-vpn`,
+ * `/en/en/hesaplayici` -> `/en/hesaplayici`, `/tr/tr/blog` -> `/blog`.
+ * Bu kontrol proxy'de diğer i18n kurallarından önce çalışır; böylece eski
+ * client-side dil değiştirici linkleri 404 üretmek yerine kalıcı olarak
+ * doğru adrese taşınır.
+ */
+export function resolveDuplicateLocaleRedirect(pathname: string): string | null {
+  const segments = pathname.split("/").filter(Boolean);
+  const locale = segments[0];
+
+  if (!locale || !APP_LOCALES.includes(locale as AppLocale)) return null;
+  if (segments[1] !== locale) return null;
+
+  const rest = segments.slice(2).join("/");
+  if (locale === DEFAULT_LOCALE) return rest ? `/${rest}` : "/";
+  return rest ? `/${locale}/${rest}` : `/${locale}`;
+}
+
+/**
  * Dil değiştirici için: mevcut pathname'i hedef locale'in doğru public path'ine
  * çevirir. Blog slug'ları language-switcher içinde ayrı işlenir.
  */
