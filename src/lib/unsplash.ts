@@ -1224,11 +1224,15 @@ const aliases: Record<string, string> = {
 
 const FALLBACK_IMAGES: BlogImageSet = imageDatabase["vpn-basics"];
 
+function imageKey(image: UnsplashImage): string {
+  return image.url.split("?")[0] ?? image.url;
+}
+
 const ALL_BLOG_IMAGES = Array.from(
   new Map(
     Object.values(imageDatabase)
       .flatMap((set) => [set.hero, set.mid, set.end])
-      .map((image) => [image.url, image] as const),
+      .map((image) => [imageKey(image), image] as const),
   ).values(),
 );
 
@@ -1264,7 +1268,7 @@ export function getBlogImage(
   const candidates = [
     ...preferred,
     ...ALL_BLOG_IMAGES.filter(
-      (image) => !preferred.some((item) => item.url === image.url),
+      (image) => !preferred.some((item) => imageKey(item) === imageKey(image)),
     ),
   ];
   return candidates[seedHash(`${coverImage}:${position}:${seed}`) % candidates.length] ?? set[position];
