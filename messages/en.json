@@ -90,7 +90,17 @@
     },
     "guides": {
       "title": "Latest guides",
-      "subtitle": "What you need to know about VPNs."
+      "subtitle": "What you need to know about VPNs.",
+      "exploreKicker": "Quick discovery",
+      "exploreTitle": "Choose where to start",
+      "exploreBody": "Explore comparisons, use cases and connection tools from one place.",
+      "comparisonTitle": "Compare VPNs",
+      "comparisonDescription": "Review provider profiles built from sources.",
+      "useCaseTitle": "Choose by use case",
+      "useCaseDescription": "Open guides for travel, privacy and streaming.",
+      "toolsTitle": "Check your connection",
+      "toolsDescription": "Use live diagnostic tools for your current connection.",
+      "sourceNote": "Provider information is explained through official, verifiable sources."
     },
     "faq": {
       "title": "Frequently asked questions"

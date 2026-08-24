@@ -90,7 +90,17 @@
     },
     "guides": {
       "title": "Neueste Ratgeber",
-      "subtitle": "Was Sie über VPNs wissen sollten."
+      "subtitle": "Was Sie über VPNs wissen sollten.",
+      "exploreKicker": "Schnell entdecken",
+      "exploreTitle": "Wählen Sie Ihren Einstieg",
+      "exploreBody": "Entdecken Sie Vergleiche, Einsatzzwecke und Verbindungstools an einem Ort.",
+      "comparisonTitle": "VPNs vergleichen",
+      "comparisonDescription": "Anbieterprofile auf Quellenbasis prüfen.",
+      "useCaseTitle": "Nach Einsatzzweck wählen",
+      "useCaseDescription": "Ratgeber für Reisen, Datenschutz und Streaming öffnen.",
+      "toolsTitle": "Verbindung prüfen",
+      "toolsDescription": "Live-Diagnose für Ihre aktuelle Verbindung nutzen.",
+      "sourceNote": "Anbieterinformationen werden anhand offizieller, überprüfbarer Quellen erklärt."
     },
     "faq": {
       "title": "Häufige Fragen"

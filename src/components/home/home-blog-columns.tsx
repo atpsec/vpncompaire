@@ -1,4 +1,12 @@
-import { ArrowRight, Clock3, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Clock3,
+  Compass,
+  ShieldCheck,
+  SlidersHorizontal,
+  Sparkles,
+} from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
@@ -144,6 +152,78 @@ function CompactArticle({
   );
 }
 
+function GuideExploreRail({
+  tHome,
+}: {
+  tHome: (key: string, values?: Record<string, string | number>) => string;
+}) {
+  const links = [
+    {
+      href: "/en-iyi-vpn",
+      label: tHome("guides.comparisonTitle"),
+      description: tHome("guides.comparisonDescription"),
+      icon: SlidersHorizontal,
+    },
+    {
+      href: "/en-iyi/seyahat",
+      label: tHome("guides.useCaseTitle"),
+      description: tHome("guides.useCaseDescription"),
+      icon: Compass,
+    },
+    {
+      href: "/araclar",
+      label: tHome("guides.toolsTitle"),
+      description: tHome("guides.toolsDescription"),
+      icon: ShieldCheck,
+    },
+  ];
+
+  return (
+    <aside className="rounded-2xl border border-border bg-surface-base p-4 shadow-sm sm:p-5">
+      <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-accent-700">
+        <Compass className="size-3.5" aria-hidden="true" />
+        {tHome("guides.exploreKicker")}
+      </div>
+      <h3 className="mt-3 text-lg font-bold leading-snug text-ink-strong">
+        {tHome("guides.exploreTitle")}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+        {tHome("guides.exploreBody")}
+      </p>
+
+      <nav className="mt-5" aria-label={tHome("guides.exploreKicker")}>
+        <ul className="space-y-2">
+          {links.map(({ href, label, description, icon: Icon }) => (
+            <li key={href}>
+              <Link
+                href={href}
+                className="group flex items-start gap-3 rounded-xl border border-transparent p-2.5 transition-colors hover:border-border hover:bg-surface-subtle"
+              >
+                <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg bg-accent-50 text-accent-700">
+                  <Icon className="size-4" aria-hidden="true" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center justify-between gap-2 text-sm font-semibold text-ink-strong group-hover:text-accent-700">
+                    {label}
+                    <ArrowUpRight className="size-3.5 shrink-0 text-ink-faint transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                  </span>
+                  <span className="mt-1 block text-xs leading-relaxed text-ink-subtle">
+                    {description}
+                  </span>
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div className="mt-4 border-t border-border pt-4 text-xs leading-relaxed text-ink-subtle">
+        {tHome("guides.sourceNote")}
+      </div>
+    </aside>
+  );
+}
+
 export async function HomeBlogColumns({ locale }: HomeBlogColumnsProps) {
   const [posts, tHome, tBlog] = await Promise.all([
     getVisibleBlogPostSummaries(locale),
@@ -162,7 +242,7 @@ export async function HomeBlogColumns({ locale }: HomeBlogColumnsProps) {
       aria-labelledby="homepage-blog-heading"
       className="border-y border-border bg-surface-subtle/40 py-16 sm:py-20"
     >
-      <Container>
+      <Container size="xl">
         <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
@@ -186,7 +266,9 @@ export async function HomeBlogColumns({ locale }: HomeBlogColumnsProps) {
           </Link>
         </div>
 
-        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(280px,0.75fr)] lg:gap-10">
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(220px,0.65fr)_minmax(0,1.55fr)_minmax(280px,0.8fr)] lg:gap-6 xl:gap-8">
+          <GuideExploreRail tHome={tHome} />
+
           <div className="grid gap-5 sm:grid-cols-2">
             {featured.slice(0, 2).map((post) => (
               <FeaturedArticle key={post.slug} post={post} tBlog={tBlog} />

@@ -90,7 +90,17 @@
     },
     "guides": {
       "title": "Son Rehberler",
-      "subtitle": "VPN hakkında bilmen gerekenler."
+      "subtitle": "VPN hakkında bilmen gerekenler.",
+      "exploreKicker": "Hızlı keşif",
+      "exploreTitle": "Nereden başlayacağını seç",
+      "exploreBody": "Karşılaştırmaları, kullanım amaçlarını ve bağlantı araçlarını tek yerden keşfet.",
+      "comparisonTitle": "VPN'leri karşılaştır",
+      "comparisonDescription": "Kaynaklara dayalı sağlayıcı profillerini incele.",
+      "useCaseTitle": "İhtiyacına göre seç",
+      "useCaseDescription": "Seyahat, gizlilik ve streaming rehberlerini aç.",
+      "toolsTitle": "Bağlantını kontrol et",
+      "toolsDescription": "Mevcut bağlantın için anlık tanılama araçlarını kullan.",
+      "sourceNote": "Sağlayıcı bilgileri resmi ve doğrulanabilir kaynaklarla açıklanır."
     },
     "faq": {
       "title": "Sık Sorulan Sorular"
