@@ -22,17 +22,17 @@ export function EditorialNotice({ locale }: { locale: Locale }) {
   return (
     <aside
       aria-label={t.title}
-      className="border-b border-brand-200/70 bg-brand-50/60 dark:border-brand-800/50 dark:bg-brand-950/20"
+      className="border-t border-border/70 bg-surface-subtle/45"
     >
-      <div className="mx-auto flex w-full max-w-7xl items-start gap-3 px-4 py-3 text-sm sm:px-6 lg:px-8">
-        <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300">
+      <div className="mx-auto flex w-full max-w-7xl items-start gap-2.5 px-4 py-4 text-xs sm:px-6 lg:px-8">
+        <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-surface-base text-ink-subtle ring-1 ring-border/80">
           <BookOpen className="size-4" aria-hidden="true" />
         </div>
-        <p className="max-w-4xl leading-relaxed text-ink-muted">
-          <span className="font-semibold text-ink-strong">{t.title}:</span>{" "}
+        <p className="max-w-4xl leading-relaxed text-ink-subtle">
+          <span className="font-semibold text-ink-muted">{t.title}:</span>{" "}
           {t.body}
         </p>
-        <Info className="ml-auto mt-0.5 hidden size-4 shrink-0 text-brand-600 sm:block" aria-hidden="true" />
+        <Info className="ml-auto mt-0.5 hidden size-3.5 shrink-0 text-ink-faint sm:block" aria-hidden="true" />
       </div>
     </aside>
   );
