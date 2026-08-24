@@ -8,6 +8,7 @@ import { UseCaseGrid } from "@/components/home/use-case-grid";
 import { ComparisonBlock } from "@/components/home/comparison-block";
 import { MethodologyBlock } from "@/components/home/methodology-block";
 import { FAQSection } from "@/components/home/faq-section";
+import { HomeBlogColumns } from "@/components/home/home-blog-columns";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   organizationSchema,
@@ -38,6 +39,7 @@ export default async function HomePage({ params }: Props) {
       <IpSecurityBanner />
       <TopThreePodium />
       <TopVPNList />
+      <HomeBlogColumns locale={locale} />
       <ComparePicker />
       <UseCaseGrid />
       <ComparisonBlock />
