@@ -71,9 +71,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "Yurt dışı Türkler için", href: "/en-iyi/yurt-disindaki-turkler" },
-      { label: "Türkiye için", href: "/en-iyi/turkiye" },
-      { label: "Gizlilik için", href: "/en-iyi/gizlilik" },
+      { label: "Yurt dışı Türkler için", href: "/best-vpn/turks-abroad" },
+      { label: "Türkiye için", href: "/best-vpn/turkey" },
+      { label: "Gizlilik için", href: "/best-vpn/privacy" },
     ],
   },
   en: {
@@ -140,9 +140,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "For Turks abroad", href: "/en-iyi/yurt-disindaki-turkler" },
-      { label: "Best in Turkey", href: "/en-iyi/turkiye" },
-      { label: "Best for privacy", href: "/en-iyi/gizlilik" },
+      { label: "For Turks abroad", href: "/best-vpn/turks-abroad" },
+      { label: "Best in Turkey", href: "/best-vpn/turkey" },
+      { label: "Best for privacy", href: "/best-vpn/privacy" },
     ],
   },
   de: {
@@ -209,9 +209,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "VPN für Reisende", href: "/en-iyi/seyahat" },
-      { label: "VPN für Datenschutz", href: "/en-iyi/gizlilik" },
-      { label: "VPN für Android", href: "/cihazlar/android" },
+      { label: "VPN für Reisende", href: "/best-vpn/travel" },
+      { label: "VPN für Datenschutz", href: "/best-vpn/privacy" },
+      { label: "VPN für Android", href: "/devices/android" },
     ],
   },
 } as const;
@@ -222,11 +222,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: localizedAlternates("/en-iyi/seyahat", locale),
+    alternates: localizedAlternates("/best-vpn/travel", locale),
     openGraph: {
       title: c.metaTitle,
       description: c.metaDescription,
-      url: absoluteUrl("/en-iyi/seyahat", locale),
+      url: absoluteUrl("/best-vpn/travel", locale),
       type: "article",
     },
   };

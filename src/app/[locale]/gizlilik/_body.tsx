@@ -108,7 +108,7 @@ export function TrBody() {
         <p>
           Analitik veriler sitenin performansını değerlendirmek için
           kullanılır. Detaylar için{" "}
-          <Link href="/cerez-politikasi">Çerez Politikası</Link>.
+          <Link href="/cookie-policy">Çerez Politikası</Link>.
         </p>
 
         <h3>2.3. İletişim e-postası</h3>
@@ -154,7 +154,7 @@ export function TrBody() {
         <p>
           Sayfalarımızda Google AdSense reklamları gösterilir; AdSense,
           reklamları sunmak ve ölçmek için çerez kullanabilir (ayrıntılar{" "}
-          <Link href="/cerez-politikasi">çerez politikamızda</Link>). Bir VPN
+          <Link href="/cookie-policy">çerez politikamızda</Link>). Bir VPN
           sağlayıcısının bağlantısına tıkladığında doğrudan sağlayıcının resmi
           sitesine gidersin; o noktadan sonra sağlayıcının kendi gizlilik
           politikası geçerli olur.
@@ -176,7 +176,7 @@ export function TrBody() {
         </ul>
         <p>
           Bu hakları kullanmak için{" "}
-          <Link href="/iletisim">iletişim sayfamızdan</Link> bize
+          <Link href="/contact">iletişim sayfamızdan</Link> bize
           ulaşabilirsiniz.
         </p>
 
@@ -205,7 +205,7 @@ export function TrBody() {
             <p className="mt-1 text-sm text-ink leading-relaxed">
               KVKK kapsamındaki haklarını kullanmak veya gizlilik
               politikasıyla ilgili soru sormak için{" "}
-              <Link href="/iletisim" className="text-brand-700 underline">
+              <Link href="/contact" className="text-brand-700 underline">
                 iletişim sayfamızdan
               </Link>{" "}
               bize ulaşabilirsin.
@@ -318,7 +318,7 @@ export function EnBody() {
         </ul>
         <p>
           Analytics data is used to evaluate the site&apos;s performance. See
-          the <Link href="/cerez-politikasi">Cookie Policy</Link> for details.
+          the <Link href="/cookie-policy">Cookie Policy</Link> for details.
         </p>
 
         <h3>2.3. Contact email</h3>
@@ -365,7 +365,7 @@ export function EnBody() {
         <p>
           Our pages display Google AdSense ads; AdSense may use cookies to
           serve and measure ads (details in our{" "}
-          <Link href="/cerez-politikasi">cookie policy</Link>). When you click
+          <Link href="/cookie-policy">cookie policy</Link>). When you click
           a VPN provider link you go directly to the provider&apos;s official
           site; from that point on the provider&apos;s own privacy policy
           applies.
@@ -393,7 +393,7 @@ export function EnBody() {
         </ul>
         <p>
           To exercise these rights, reach us via the{" "}
-          <Link href="/iletisim">contact page</Link>.
+          <Link href="/contact">contact page</Link>.
         </p>
 
         <h2>6. Data security</h2>
@@ -421,7 +421,7 @@ export function EnBody() {
             <p className="mt-1 text-sm text-ink leading-relaxed">
               To exercise your rights or ask a question about this privacy
               policy, reach out via the{" "}
-              <Link href="/iletisim" className="text-brand-700 underline">
+              <Link href="/contact" className="text-brand-700 underline">
                 contact page
               </Link>
               .
@@ -542,7 +542,7 @@ export function DeBody() {
         <p>
           Analysedaten dienen der Bewertung der Website-Performance. Details
           finden Sie in der{" "}
-          <Link href="/cerez-politikasi">Cookie-Richtlinie</Link>.
+          <Link href="/cookie-policy">Cookie-Richtlinie</Link>.
         </p>
 
         <h3>2.3. Kontakt-E-Mail</h3>
@@ -590,7 +590,7 @@ export function DeBody() {
           Auf unseren Seiten werden Google-AdSense-Anzeigen ausgeliefert;
           AdSense kann Cookies zum Ausliefern und Messen von Anzeigen
           verwenden (Details in unserer{" "}
-          <Link href="/cerez-politikasi">Cookie-Richtlinie</Link>). Wenn Sie
+          <Link href="/cookie-policy">Cookie-Richtlinie</Link>). Wenn Sie
           auf einen VPN-Anbieter-Link klicken, gelangen Sie direkt zur
           offiziellen Website des Anbieters; ab diesem Zeitpunkt gilt dessen
           eigene Datenschutzerklärung.
@@ -623,7 +623,7 @@ export function DeBody() {
         </ul>
         <p>
           Zur Ausübung dieser Rechte erreichen Sie uns über die{" "}
-          <Link href="/iletisim">Kontaktseite</Link>.
+          <Link href="/contact">Kontaktseite</Link>.
         </p>
 
         <h2>6. Datensicherheit</h2>
@@ -652,7 +652,7 @@ export function DeBody() {
             <p className="mt-1 text-sm text-ink leading-relaxed">
               Um Ihre Rechte auszuüben oder eine Frage zu dieser
               Datenschutzerklärung zu stellen, wenden Sie sich über die{" "}
-              <Link href="/iletisim" className="text-brand-700 underline">
+              <Link href="/contact" className="text-brand-700 underline">
                 Kontaktseite
               </Link>{" "}
               an uns.

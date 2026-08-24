@@ -101,7 +101,7 @@ function VpnTestView() {
         data={breadcrumbSchema(
           [
             { name: tNav.home, path: "/" },
-            { name: tNav.tools, path: "/araclar" },
+            { name: tNav.tools, path: "/tools" },
             { name: t.breadcrumb, path: "/vpn-test" },
           ],
           "tr",
@@ -115,7 +115,7 @@ function VpnTestView() {
             {tNav.home}
           </Link>{" "}
           ›{" "}
-          <Link href="/araclar" className="hover:text-ink">
+          <Link href="/tools" className="hover:text-ink">
             {tNav.tools}
           </Link>{" "}
           › <span className="text-ink-strong">{t.breadcrumb}</span>

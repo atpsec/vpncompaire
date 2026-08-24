@@ -1,6 +1,6 @@
 // "Aile ve çocuklar için VPN" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/aile-ve-cocuklar-icin-vpn/page.tsx) bu
-// modülden render eder; yerelleştirilmiş URL'ler (/rehber/aile-ve-cocuklar-icin-vpn,
+// Sayfa (src/app/[locale]/guide/aile-ve-cocuklar-icin-vpn/page.tsx) bu
+// modülden render eder; yerelleştirilmiş URL'ler (/guide/aile-ve-cocuklar-icin-vpn,
 // /en/guide/vpn-for-families, /de/ratgeber/vpn-fuer-familien) proxy rewrite
 // ile aynı sayfaya düşer.
 
@@ -204,9 +204,9 @@ const tr: VpnForFamiliesContent = {
   ],
   relatedLabel: "İlgili sayfalar",
   relatedLinks: [
-    { href: "/cihazlar", text: "Cihaz bazlı kurulum" },
-    { href: "/rehber/uzaktan-calisanlar-icin-vpn", text: "Uzaktan çalışanlar" },
-    { href: "/sana-uygun-vpn", text: "Quiz: Sana uygun VPN" },
+    { href: "/devices", text: "Cihaz bazlı kurulum" },
+    { href: "/guide/uzaktan-calisanlar-icin-vpn", text: "Uzaktan çalışanlar" },
+    { href: "/quiz", text: "Quiz: Sana uygun VPN" },
   ],
 };
 
@@ -369,9 +369,9 @@ const en: VpnForFamiliesContent = {
   ],
   relatedLabel: "Related pages",
   relatedLinks: [
-    { href: "/cihazlar", text: "Setup by device" },
+    { href: "/devices", text: "Setup by device" },
     { href: "/guide/vpn-for-remote-workers", text: "Remote workers" },
-    { href: "/sana-uygun-vpn", text: "Quiz: the right VPN for you" },
+    { href: "/quiz", text: "Quiz: the right VPN for you" },
   ],
 };
 
@@ -538,9 +538,9 @@ const de: VpnForFamiliesContent = {
   ],
   relatedLabel: "Verwandte Seiten",
   relatedLinks: [
-    { href: "/cihazlar", text: "Einrichtung nach Gerät" },
+    { href: "/devices", text: "Einrichtung nach Gerät" },
     { href: "/ratgeber/vpn-fuer-remote-arbeit", text: "Remote-Arbeit" },
-    { href: "/sana-uygun-vpn", text: "Quiz: Das passende VPN für dich" },
+    { href: "/quiz", text: "Quiz: Das passende VPN für dich" },
   ],
 };
 

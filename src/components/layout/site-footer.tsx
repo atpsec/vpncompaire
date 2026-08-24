@@ -53,7 +53,7 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <Link
-                  href="/en-iyi-vpn"
+                  href="/vpn-reviews"
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("reviews")}
@@ -69,7 +69,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/cihazlar"
+                  href="/devices"
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("devices")}
@@ -85,7 +85,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/metodoloji"
+                  href="/methodology"
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("methodology")}
@@ -93,7 +93,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/hakkimizda"
+                  href="/about"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.about")}
@@ -109,7 +109,7 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <Link
-                  href="/sana-uygun-vpn"
+                  href="/quiz"
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("quiz")}
@@ -117,7 +117,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/hesaplayici"
+                  href="/calculator"
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("calculator")}
@@ -125,7 +125,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/sunucu-haritasi"
+                  href="/server-map"
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("filter")}
@@ -133,7 +133,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/sozluk"
+                  href="/glossary"
                   className="text-ink-muted hover:text-ink"
                 >
                   {tNav("glossary")}
@@ -141,7 +141,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/iptal-ve-iade"
+                  href="/refund-policy"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.cancel")}
@@ -149,7 +149,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/guvenlik-araclari"
+                  href="/security-tools"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.security")}
@@ -165,7 +165,7 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <Link
-                  href="/reklam-aciklamasi"
+                  href="/affiliate-disclosure"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.disclosure")}
@@ -173,7 +173,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/yasal-uyari"
+                  href="/legal-notice"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.legalNotice")}
@@ -181,7 +181,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/gizlilik"
+                  href="/privacy-policy"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.privacy")}
@@ -189,7 +189,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/cerez-politikasi"
+                  href="/cookie-policy"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.cookies")}
@@ -197,7 +197,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/sartlar"
+                  href="/terms"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.terms")}
@@ -205,7 +205,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/iletisim"
+                  href="/contact"
                   className="text-ink-muted hover:text-ink"
                 >
                   {t("links.contact")}
@@ -228,7 +228,7 @@ export function SiteFooter() {
               </span>{" "}
               {tDisclosure("banner")}{" "}
               <Link
-                href="/reklam-aciklamasi"
+                href="/affiliate-disclosure"
                 className="font-medium text-brand-700 hover:underline whitespace-nowrap"
               >
                 {tDisclosure("learnMore")} →

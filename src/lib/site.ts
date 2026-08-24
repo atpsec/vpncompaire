@@ -6,6 +6,7 @@ import {
   CONTENT_REGISTRY,
   SECTION_HUB_SERVED,
   DEFAULT_LOCALE,
+  canonicalEnglishPath,
   type AppLocale,
   type SectionKey,
 } from "@/lib/i18n-paths";
@@ -14,8 +15,8 @@ export const siteConfig = {
   name: env.NEXT_PUBLIC_SITE_NAME,
   brand: env.NEXT_PUBLIC_SITE_BRAND,
   url: env.NEXT_PUBLIC_SITE_URL,
-  defaultLocale: "tr" as const,
-  locales: ["tr", "en", "de"] as const,
+  defaultLocale: "en" as const,
+  locales: ["en"] as const,
   gaId: env.NEXT_PUBLIC_GA_ID || undefined,
   // ads.txt ile aynı publisher; env override edebilir.
   adsenseClientId:
@@ -27,7 +28,7 @@ export const siteConfig = {
   },
   author: {
     name: "VPN Advisor Editör Ekibi",
-    url: "/hakkimizda",
+    url: "/about",
   },
   social: {
     twitter: "",
@@ -37,17 +38,19 @@ export const siteConfig = {
   ogImage: `${env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/og/default`,
 } as const;
 
-export type Locale = (typeof siteConfig.locales)[number];
+// Legacy locale values remain in the type because old data and URL migration
+// code still need to understand them, although only English is public.
+export type Locale = AppLocale;
 
 /**
  * Search'te yayınlanmaya hazır diller. Almanca sürüm kullanıcılar için
  * erişilebilir kalır; editoryal çeviri tamamlanana kadar noindex tutulur.
  */
-export const SEO_LOCALES = ["tr", "en"] as const;
+export const SEO_LOCALES = ["en"] as const;
 export type SeoLocale = (typeof SEO_LOCALES)[number];
 
 export function isSeoLocale(locale: string): locale is SeoLocale {
-  return locale === "tr" || locale === "en";
+  return locale === "en";
 }
 
 /**
@@ -56,12 +59,11 @@ export function isSeoLocale(locale: string): locale is SeoLocale {
  * locale verilmezse eski davranış korunur (prefix yok).
  */
 export function absoluteUrl(path = "", locale?: string): string {
+  void locale;
   const base = siteConfig.url.replace(/\/$/, "");
-  const prefix =
-    locale && locale !== siteConfig.defaultLocale ? `/${locale}` : "";
-  if (!path) return `${base}${prefix}`;
+  if (!path) return base;
   const normalized = path.startsWith("/") ? path : `/${path}`;
-  return `${base}${prefix}${normalized}`;
+  return `${base}${canonicalEnglishPath(normalized)}`;
 }
 
 /**
@@ -74,13 +76,13 @@ export function absoluteUrl(path = "", locale?: string): string {
  * halde EN/DE hreflang'leri 301'lenen/var olmayan URL'leri işaret eder.
  */
 export function localizedAlternates(path = "", locale?: string) {
-  const canonicalLocale = locale === "de" ? "en" : locale;
+  void locale;
+  const canonical = absoluteUrl(path, "en");
   return {
-    canonical: absoluteUrl(path, canonicalLocale),
+    canonical,
     languages: {
-      tr: absoluteUrl(path, "tr"),
-      en: absoluteUrl(path, "en"),
-      "x-default": absoluteUrl(path, siteConfig.defaultLocale),
+      en: canonical,
+      "x-default": canonical,
     },
   };
 }
@@ -92,16 +94,17 @@ export function localizedAlternates(path = "", locale?: string) {
  */
 export function bilingualAlternates(
   path = "",
-  locale: string,
-  fallbackLocale: "tr" | "en",
+  _locale: string,
+  _fallbackLocale: "tr" | "en",
 ) {
-  const activeLocale = locale === "tr" || locale === "en" ? locale : fallbackLocale;
+  void _locale;
+  void _fallbackLocale;
+  const canonical = absoluteUrl(path, "en");
   return {
-    canonical: absoluteUrl(path, activeLocale),
+    canonical,
     languages: {
-      tr: absoluteUrl(path, "tr"),
-      en: absoluteUrl(path, "en"),
-      "x-default": absoluteUrl(path, "tr"),
+      en: canonical,
+      "x-default": canonical,
     },
   };
 }
@@ -116,7 +119,7 @@ export function defaultLocaleAlternates(path = "") {
   return {
     canonical,
     languages: {
-      tr: canonical,
+      en: canonical,
       "x-default": canonical,
     },
   };

@@ -57,7 +57,7 @@ function ProviderCard({ product, featured }: { product: Product; featured: boole
         </div>
         <div className="mt-5 flex flex-col gap-2">
           <Button asChild variant="primary" size="md" className="w-full"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-podium" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-podium">{t("ctaOfficial")}<ArrowRight className="size-4" /></ProviderLink></Button>
-          <Button asChild variant="ghost" size="sm" className="w-full"><Link href={`/inceleme/${product.slug}`}>{copy.viewProfile}</Link></Button>
+          <Button asChild variant="ghost" size="sm" className="w-full"><Link href={`/reviews/${product.slug}`}>{copy.viewProfile}</Link></Button>
         </div>
       </div>
     </article>

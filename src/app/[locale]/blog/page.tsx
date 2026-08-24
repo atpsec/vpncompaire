@@ -58,9 +58,8 @@ export default async function BlogPage({ params }: Props) {
     imageUrl: getBlogImage(post.coverImage, "hero", post.slug).url,
   }));
   const canonical = absoluteUrl("/blog", locale);
-  const localePath = locale === "tr" ? "" : `/${locale}`;
-  const homeName =
-    locale === "tr" ? "Ana Sayfa" : locale === "de" ? "Startseite" : "Home";
+  const localePath = "";
+  const homeName = "Home";
   const latestArticlesLabel = t("latestArticles");
   const collectionLd = blogCollectionSchema({
     locale,

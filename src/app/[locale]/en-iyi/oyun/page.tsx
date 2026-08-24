@@ -71,9 +71,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "Streaming için", href: "/en-iyi/streaming" },
-      { label: "Gizlilik için", href: "/en-iyi/gizlilik" },
-      { label: "PIA incelemesi", href: "/inceleme/pia" },
+      { label: "Streaming için", href: "/best-vpn/streaming" },
+      { label: "Gizlilik için", href: "/best-vpn/privacy" },
+      { label: "PIA incelemesi", href: "/reviews/pia" },
     ],
   },
   en: {
@@ -140,9 +140,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "Best for streaming", href: "/en-iyi/streaming" },
-      { label: "Best for privacy", href: "/en-iyi/gizlilik" },
-      { label: "PIA review", href: "/inceleme/pia" },
+      { label: "Best for streaming", href: "/best-vpn/streaming" },
+      { label: "Best for privacy", href: "/best-vpn/privacy" },
+      { label: "PIA review", href: "/reviews/pia" },
     ],
   },
   de: {
@@ -209,9 +209,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "VPN für Streaming", href: "/en-iyi/streaming" },
-      { label: "VPN für Datenschutz", href: "/en-iyi/gizlilik" },
-      { label: "PIA-Testbericht", href: "/inceleme/pia" },
+      { label: "VPN für Streaming", href: "/best-vpn/streaming" },
+      { label: "VPN für Datenschutz", href: "/best-vpn/privacy" },
+      { label: "PIA-Testbericht", href: "/reviews/pia" },
     ],
   },
 } as const;
@@ -222,11 +222,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: localizedAlternates("/en-iyi/oyun", locale),
+    alternates: localizedAlternates("/best-vpn/gaming", locale),
     openGraph: {
       title: c.metaTitle,
       description: c.metaDescription,
-      url: absoluteUrl("/en-iyi/oyun", locale),
+      url: absoluteUrl("/best-vpn/gaming", locale),
       type: "article",
     },
   };

@@ -38,8 +38,8 @@ export function DataDisclaimer({ verifiedAt, variant = "card" }: Props) {
     <>
       {verifiedAt ? <span className="font-semibold text-ink">{t.checked} {verifiedAt}. </span> : null}
       {t.body}{" "}
-      <Link href="/metodoloji" className="font-medium text-brand-700 hover:underline whitespace-nowrap">{t.methodology}</Link>{" · "}
-      <Link href="/reklam-aciklamasi" className="font-medium text-brand-700 hover:underline whitespace-nowrap">{t.disclosure}</Link>
+      <Link href="/methodology" className="font-medium text-brand-700 hover:underline whitespace-nowrap">{t.methodology}</Link>{" · "}
+      <Link href="/affiliate-disclosure" className="font-medium text-brand-700 hover:underline whitespace-nowrap">{t.disclosure}</Link>
     </>
   );
 

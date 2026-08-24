@@ -23,11 +23,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/araclar/email-guvenlik-kontrolu", locale),
+    alternates: localizedAlternates("/tools/email-guvenlik-kontrolu", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar/email-guvenlik-kontrolu", locale),
+      url: absoluteUrl("/tools/email-guvenlik-kontrolu", locale),
       type: "website",
     },
     twitter: {
@@ -55,7 +55,7 @@ function EmailSecurityView() {
     "@type": "WebApplication",
     name: t("metaTitle"),
     description: t("metaDescription"),
-    url: absoluteUrl("/araclar/email-guvenlik-kontrolu"),
+    url: absoluteUrl("/tools/email-guvenlik-kontrolu"),
     applicationCategory: "SecurityApplication",
     operatingSystem: "Any",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -135,8 +135,8 @@ function EmailSecurityView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: tNav("tools"), path: "/araclar" },
-            { name: t("breadcrumb"), path: "/araclar/email-guvenlik-kontrolu" },
+            { name: tNav("tools"), path: "/tools" },
+            { name: t("breadcrumb"), path: "/tools/email-guvenlik-kontrolu" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -149,7 +149,7 @@ function EmailSecurityView() {
             {tNav("home")}
           </Link>{" "}
           ›{" "}
-          <Link href="/araclar" className="hover:text-ink">
+          <Link href="/tools" className="hover:text-ink">
             {tNav("tools")}
           </Link>{" "}
           › <span className="text-ink-strong">{t("breadcrumb")}</span>

@@ -1,6 +1,6 @@
 // "Uzaktan çalışanlar için VPN" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/uzaktan-calisanlar-icin-vpn/page.tsx) bu
-// modülden render eder; yerelleştirilmiş URL'ler (/rehber/uzaktan-calisanlar-icin-vpn,
+// Sayfa (src/app/[locale]/guide/uzaktan-calisanlar-icin-vpn/page.tsx) bu
+// modülden render eder; yerelleştirilmiş URL'ler (/guide/uzaktan-calisanlar-icin-vpn,
 // /en/guide/vpn-for-remote-workers, /de/ratgeber/vpn-fuer-remote-arbeit)
 // proxy rewrite ile aynı sayfaya düşer.
 
@@ -185,15 +185,15 @@ const tr: RemoteWorkersContent = {
     },
     privacy: {
       h3: "Yüksek gizlilik (hukuk, medikal, gazetecilik)",
-      link1: { href: "/inceleme/mullvad", text: "Mullvad" },
+      link1: { href: "/reviews/mullvad", text: "Mullvad" },
       sep: " veya ",
-      link2: { href: "/inceleme/proton-vpn", text: "Proton VPN" },
+      link2: { href: "/reviews/proton-vpn", text: "Proton VPN" },
       after:
         ". Sağlayıcıların hesap, açık kaynak istemci ve kayıt tutma açıklamalarını; güncel bağımsız denetim raporlarıyla birlikte kontrol et.",
     },
     budget: {
       h3: "Bütçe öncelikli freelancer",
-      link: { href: "/inceleme/surfshark", text: "Surfshark" },
+      link: { href: "/reviews/surfshark", text: "Surfshark" },
       after:
         " sağlayıcının sınırsız eşzamanlı cihaz politikasını sunuyor. Güncel fiyatı, hesap paylaşım koşullarını ve hız davranışını satın almadan önce kendi bağlantında doğrula.",
     },
@@ -229,12 +229,12 @@ const tr: RemoteWorkersContent = {
   related: {
     label: "İlgili sayfalar",
     links: [
-      { href: "/en-iyi/seyahat", text: "Seyahat için en iyi VPN" },
+      { href: "/best-vpn/travel", text: "Seyahat için en iyi VPN" },
       {
-        href: "/rehber/vpn-guvenlik-kontrol-listesi",
+        href: "/guide/vpn-guvenlik-kontrol-listesi",
         text: "Güvenlik kontrol listesi",
       },
-      { href: "/sana-uygun-vpn", text: "Quiz: Sana uygun VPN" },
+      { href: "/quiz", text: "Quiz: Sana uygun VPN" },
     ],
   },
 };
@@ -367,15 +367,15 @@ const en: RemoteWorkersContent = {
     },
     privacy: {
       h3: "High privacy (legal, medical, journalism)",
-      link1: { href: "/inceleme/mullvad", text: "Mullvad" },
+      link1: { href: "/reviews/mullvad", text: "Mullvad" },
       sep: " or ",
-      link2: { href: "/inceleme/proton-vpn", text: "Proton VPN" },
+      link2: { href: "/reviews/proton-vpn", text: "Proton VPN" },
       after:
         ". Review each provider's account, open-source client and logging statements together with its latest independent audit reports.",
     },
     budget: {
       h3: "Budget-first freelancer",
-      link: { href: "/inceleme/surfshark", text: "Surfshark" },
+      link: { href: "/reviews/surfshark", text: "Surfshark" },
       after:
         " advertises unlimited simultaneous devices. Check current pricing, account-sharing terms and performance on your own connection before subscribing.",
     },
@@ -411,12 +411,12 @@ const en: RemoteWorkersContent = {
   related: {
     label: "Related pages",
     links: [
-      { href: "/en-iyi/seyahat", text: "Best VPN for travel" },
+      { href: "/best-vpn/travel", text: "Best VPN for travel" },
       {
         href: "/guide/vpn-security-checklist",
         text: "Security checklist",
       },
-      { href: "/sana-uygun-vpn", text: "Quiz: the right VPN for you" },
+      { href: "/quiz", text: "Quiz: the right VPN for you" },
     ],
   },
 };
@@ -549,15 +549,15 @@ const de: RemoteWorkersContent = {
     },
     privacy: {
       h3: "Hoher Datenschutz (Recht, Medizin, Journalismus)",
-      link1: { href: "/inceleme/mullvad", text: "Mullvad" },
+      link1: { href: "/reviews/mullvad", text: "Mullvad" },
       sep: " oder ",
-      link2: { href: "/inceleme/proton-vpn", text: "Proton VPN" },
+      link2: { href: "/reviews/proton-vpn", text: "Proton VPN" },
       after:
         ". Prüfe Konto-, Open-Source-Client- und Protokollierungsangaben der Anbieter zusammen mit den neuesten unabhängigen Prüfberichten.",
     },
     budget: {
       h3: "Freelancer mit knappem Budget",
-      link: { href: "/inceleme/surfshark", text: "Surfshark" },
+      link: { href: "/reviews/surfshark", text: "Surfshark" },
       after:
         " wirbt mit unbegrenzt vielen gleichzeitigen Geräten. Prüfe aktuelle Preise, Regeln zur Kontonutzung und Leistung vor dem Abschluss in deinem eigenen Netz.",
     },
@@ -593,12 +593,12 @@ const de: RemoteWorkersContent = {
   related: {
     label: "Verwandte Seiten",
     links: [
-      { href: "/en-iyi/seyahat", text: "Das beste VPN für Reisen" },
+      { href: "/best-vpn/travel", text: "Das beste VPN für Reisen" },
       {
         href: "/ratgeber/vpn-sicherheits-checkliste",
         text: "Sicherheits-Checkliste",
       },
-      { href: "/sana-uygun-vpn", text: "Quiz: Das passende VPN für dich" },
+      { href: "/quiz", text: "Quiz: Das passende VPN für dich" },
     ],
   },
 };

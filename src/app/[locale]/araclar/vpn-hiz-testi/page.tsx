@@ -20,11 +20,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/araclar/vpn-hiz-testi", locale),
+    alternates: localizedAlternates("/tools/vpn-hiz-testi", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar/vpn-hiz-testi", locale),
+      url: absoluteUrl("/tools/vpn-hiz-testi", locale),
       type: "website",
     },
   };
@@ -47,7 +47,7 @@ function SpeedTestView() {
     "@type": "WebApplication",
     name: t("metaTitle"),
     description: t("metaDescription"),
-    url: absoluteUrl("/araclar/vpn-hiz-testi"),
+    url: absoluteUrl("/tools/vpn-hiz-testi"),
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Any",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -69,8 +69,8 @@ function SpeedTestView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: tNav("tools"), path: "/araclar" },
-            { name: t("breadcrumb"), path: "/araclar/vpn-hiz-testi" },
+            { name: tNav("tools"), path: "/tools" },
+            { name: t("breadcrumb"), path: "/tools/vpn-hiz-testi" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -83,7 +83,7 @@ function SpeedTestView() {
             {tNav("home")}
           </Link>{" "}
           ›{" "}
-          <Link href="/araclar" className="hover:text-ink">
+          <Link href="/tools" className="hover:text-ink">
             {tNav("tools")}
           </Link>{" "}
           › <span className="text-ink-strong">{t("breadcrumb")}</span>

@@ -12,13 +12,13 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 
 const useCases = [
-  { slug: "gizlilik", key: "privacy", Icon: Lock, tone: "brand" },
+  { slug: "privacy", key: "privacy", Icon: Lock, tone: "brand" },
   { slug: "streaming", key: "streaming", Icon: Tv, tone: "accent" },
-  { slug: "oyun", key: "gaming", Icon: Gamepad2, tone: "brand" },
-  { slug: "seyahat", key: "travel", Icon: Plane, tone: "accent" },
-  { slug: "turkiye", key: "turkey", Icon: Flag, tone: "brand" },
+  { slug: "gaming", key: "gaming", Icon: Gamepad2, tone: "brand" },
+  { slug: "travel", key: "travel", Icon: Plane, tone: "accent" },
+  { slug: "turkey", key: "turkey", Icon: Flag, tone: "brand" },
   {
-    slug: "yurt-disindaki-turkler",
+    slug: "turks-abroad",
     key: "expats",
     Icon: Globe2,
     tone: "accent",
@@ -61,16 +61,7 @@ export function UseCaseGrid() {
                 </div>
               </div>
             );
-            const href = `/en-iyi/${slug}`;
-            return slug === "turkiye" || slug === "yurt-disindaki-turkler" ? (
-              <a key={slug} href={href}>
-                {content}
-              </a>
-            ) : (
-              <Link key={slug} href={href}>
-                {content}
-              </Link>
-            );
+            return <Link key={slug} href={`/best-vpn/${slug}`}>{content}</Link>;
           })}
         </div>
       </Container>

@@ -77,7 +77,7 @@ export default async function Page({ params }: Props) {
           })}
         </div>
 
-        <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center"><Link href="/en-iyi-vpn" className="inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline">{t.footer} <ArrowRight className="size-4" /></Link></section>
+        <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center"><Link href="/vpn-reviews" className="inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline">{t.footer} <ArrowRight className="size-4" /></Link></section>
       </Container>
     </>
   );

@@ -183,7 +183,7 @@ export default async function Page({ params }: Props) {
           </ol>
           <p>
             {c.choosing.closingBefore}
-            <Link href="/en-iyi-vpn">{c.choosing.closingLink}</Link>
+            <Link href="/vpn-reviews">{c.choosing.closingLink}</Link>
             {c.choosing.closingAfter}
           </p>
 

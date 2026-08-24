@@ -1,6 +1,6 @@
-﻿// "Yurt dışındaki Türkler için VPN" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/yurt-disindaki-turkler-icin-vpn/page.tsx) bu
-// modülden render eder; yerelleştirilmiş URL'ler (/rehber/yurt-disindaki-turkler-icin-vpn,
+// "Yurt dışındaki Türkler için VPN" rehberinin locale-aware içeriği (tr/en/de).
+// Sayfa (src/app/[locale]/guide/yurt-disindaki-turkler-icin-vpn/page.tsx) bu
+// modülden render eder; yerelleştirilmiş URL'ler (/guide/yurt-disindaki-turkler-icin-vpn,
 // /en/guide/vpn-for-turks-abroad, /de/ratgeber/vpn-fuer-tuerken-im-ausland)
 // proxy rewrite ile aynı sayfaya düşer.
 
@@ -146,27 +146,27 @@ const tr: VpnForTurksAbroadContent = {
       "Mevcut sağlayıcı sunucu dizinleri ve profillerinde Türkiye konumu belgeleyen örnekler aşağıdadır. Dizinler ve sanal konumlar değişebileceği için abone olmadan önce sağlayıcının güncel listesini kontrol edin:",
     items: [
       {
-        href: "/inceleme/nordvpn",
+        href: "/reviews/nordvpn",
         linkText: "NordVPN",
         text: " — sağlayıcının güncel dizininde sanal Türkiye konumu listeleniyor",
       },
       {
-        href: "/inceleme/expressvpn",
+        href: "/reviews/expressvpn",
         linkText: "ExpressVPN",
         text: " — sağlayıcının sunucu dizininde sanal Türkiye konumu listeleniyor",
       },
       {
-        href: "/inceleme/surfshark",
+        href: "/reviews/surfshark",
         linkText: "Surfshark",
         text: " — sağlayıcı Türkiye konumu ve sınırsız eşzamanlı cihaz politikasını belgeliyor",
       },
       {
-        href: "/inceleme/cyberghost",
+        href: "/reviews/cyberghost",
         linkText: "CyberGhost",
         text: " — sağlayıcının sunucu dizininde Türkiye konumu listeleniyor",
       },
       {
-        href: "/inceleme/pia",
+        href: "/reviews/pia",
         linkText: "PIA",
         text: " — sağlayıcının dizininde Türkiye konumu listeleniyor; port forwarding kapsamını ayrıca doğrulayın",
       },
@@ -205,11 +205,11 @@ const tr: VpnForTurksAbroadContent = {
   relatedLabel: "İlgili sayfalar",
   relatedLinks: [
     {
-      href: "/en-iyi/yurt-disindaki-turkler",
+      href: "/best-vpn/turks-abroad",
       text: "Diaspora kullanım senaryosu",
     },
-    { href: "/en-iyi/streaming", text: "Streaming için en iyi" },
-    { href: "/sana-uygun-vpn", text: "Quiz: Sana uygun VPN" },
+    { href: "/best-vpn/streaming", text: "Streaming için en iyi" },
+    { href: "/quiz", text: "Quiz: Sana uygun VPN" },
   ],
 };
 
@@ -312,27 +312,27 @@ const en: VpnForTurksAbroadContent = {
       "The current provider server directories and profiles below document a Türkiye location. Directories and virtual locations can change, so verify the provider's latest list before subscribing:",
     items: [
       {
-        href: "/inceleme/nordvpn",
+        href: "/reviews/nordvpn",
         linkText: "NordVPN",
         text: " — the provider's current directory lists a virtual Türkiye location",
       },
       {
-        href: "/inceleme/expressvpn",
+        href: "/reviews/expressvpn",
         linkText: "ExpressVPN",
         text: " — the provider's server directory lists a virtual Türkiye location",
       },
       {
-        href: "/inceleme/surfshark",
+        href: "/reviews/surfshark",
         linkText: "Surfshark",
         text: " — the provider documents a Türkiye location and unlimited simultaneous devices",
       },
       {
-        href: "/inceleme/cyberghost",
+        href: "/reviews/cyberghost",
         linkText: "CyberGhost",
         text: " — the provider's server directory lists a Türkiye location",
       },
       {
-        href: "/inceleme/pia",
+        href: "/reviews/pia",
         linkText: "PIA",
         text: " — the provider's directory lists a Türkiye location; verify port-forwarding coverage separately",
       },
@@ -370,9 +370,9 @@ const en: VpnForTurksAbroadContent = {
   ],
   relatedLabel: "Related pages",
   relatedLinks: [
-    { href: "/en-iyi/yurt-disindaki-turkler", text: "Diaspora use case" },
-    { href: "/en-iyi/streaming", text: "Best for streaming" },
-    { href: "/sana-uygun-vpn", text: "Quiz: the right VPN for you" },
+    { href: "/best-vpn/turks-abroad", text: "Diaspora use case" },
+    { href: "/best-vpn/streaming", text: "Best for streaming" },
+    { href: "/quiz", text: "Quiz: the right VPN for you" },
   ],
 };
 
@@ -480,27 +480,27 @@ const de: VpnForTurksAbroadContent = {
       "Die folgenden aktuellen Serververzeichnisse und Anbieterprofile dokumentieren einen Türkei-Standort. Verzeichnisse und virtuelle Standorte können sich ändern; prüfe vor dem Abo die neueste Anbieterliste:",
     items: [
       {
-        href: "/inceleme/nordvpn",
+        href: "/reviews/nordvpn",
         linkText: "NordVPN",
         text: " — das aktuelle Anbieterverzeichnis listet einen virtuellen Türkei-Standort",
       },
       {
-        href: "/inceleme/expressvpn",
+        href: "/reviews/expressvpn",
         linkText: "ExpressVPN",
         text: " — das Serververzeichnis des Anbieters listet einen virtuellen Türkei-Standort",
       },
       {
-        href: "/inceleme/surfshark",
+        href: "/reviews/surfshark",
         linkText: "Surfshark",
         text: " — der Anbieter dokumentiert einen Türkei-Standort und unbegrenzt viele gleichzeitige Geräte",
       },
       {
-        href: "/inceleme/cyberghost",
+        href: "/reviews/cyberghost",
         linkText: "CyberGhost",
         text: " — das Serververzeichnis des Anbieters listet einen Türkei-Standort",
       },
       {
-        href: "/inceleme/pia",
+        href: "/reviews/pia",
         linkText: "PIA",
         text: " — das Anbieterverzeichnis listet einen Türkei-Standort; Port-Forwarding-Abdeckung separat prüfen",
       },
@@ -542,11 +542,11 @@ const de: VpnForTurksAbroadContent = {
   relatedLabel: "Verwandte Seiten",
   relatedLinks: [
     {
-      href: "/en-iyi/yurt-disindaki-turkler",
+      href: "/best-vpn/turks-abroad",
       text: "Diaspora-Anwendungsfall",
     },
-    { href: "/en-iyi/streaming", text: "Die besten fürs Streaming" },
-    { href: "/sana-uygun-vpn", text: "Quiz: Das passende VPN für dich" },
+    { href: "/best-vpn/streaming", text: "Die besten fürs Streaming" },
+    { href: "/quiz", text: "Quiz: Das passende VPN für dich" },
   ],
 };
 

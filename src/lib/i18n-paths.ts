@@ -11,7 +11,9 @@
 export type AppLocale = "tr" | "en" | "de";
 
 export const APP_LOCALES: readonly AppLocale[] = ["tr", "en", "de"] as const;
-export const DEFAULT_LOCALE: AppLocale = "tr";
+/** English is the only public/canonical language. TR and DE remain legacy
+ * URL signals so the proxy can redirect them without rendering mixed pages. */
+export const DEFAULT_LOCALE: AppLocale = "en";
 
 /** Locale-aware bölüm (section) slug'ları. Tek doğruluk kaynağı. */
 export type SectionKey = "blog" | "guide" | "comparison" | "category";
@@ -565,10 +567,29 @@ function parseLocale(segments: string[]): {
   rest: string[];
 } {
   const maybeLocale = segments[0];
-  const urlLocale: AppLocale =
-    maybeLocale === "en" || maybeLocale === "de" ? maybeLocale : DEFAULT_LOCALE;
-  const rest = urlLocale === DEFAULT_LOCALE ? segments : segments.slice(1);
+  const hasExplicitLocale = APP_LOCALES.includes(maybeLocale as AppLocale);
+  const urlLocale: AppLocale = hasExplicitLocale
+    ? (maybeLocale as AppLocale)
+    : DEFAULT_LOCALE;
+  const rest = hasExplicitLocale ? segments.slice(1) : segments;
   return { urlLocale, rest };
+}
+
+/**
+ * Permanent migration for the old locale-prefixed site. The old path is
+ * stripped first, then passed through the content registry so Turkish and
+ * German slugs land on the matching English URL instead of the homepage.
+ */
+export function resolveLegacyLocaleRedirect(pathname: string): string | null {
+  const segments = pathname.split("/").filter(Boolean);
+  const locale = segments[0];
+  if (locale !== "tr" && locale !== "de") return null;
+
+  const rest = segments.slice(1).join("/");
+  if (!rest) return "/";
+
+  const strippedPath = `/${rest}`;
+  return canonicalEnglishPath(resolveLocalizedRedirect(strippedPath) ?? strippedPath);
 }
 
 export function resolveLocalizedRedirect(pathname: string): string | null {
@@ -634,23 +655,26 @@ export function resolveInternalRewrite(pathname: string): string | null {
 
   const { urlLocale, rest } = parseLocale(segments);
   if (rest.length === 0) return null;
-  // TR'de public slug = iç slug; rewrite gerekmez.
-  if (urlLocale === DEFAULT_LOCALE) return null;
 
   const sectionSlug = rest[0];
   const section = sectionForSlug(sectionSlug);
   if (!section || !REDIRECT_MANAGED_SECTIONS.includes(section)) return null;
 
-  const trSection = SECTION_SLUGS[DEFAULT_LOCALE][section];
+  // Route folders retain their original Turkish names internally; public
+  // canonical URLs use the English section slug and no /en prefix.
+  const internalSection = SECTION_SLUGS.tr[section];
+  // The public URL is locale-neutral, but the filesystem route still needs
+  // the [locale] segment for Next.js to select the English page.
   const prefix = `/${urlLocale}`;
 
   // HUB
   if (rest.length === 1) {
     const hubLocales = SECTION_HUB_SERVED[section];
     if (!hubLocales || !hubLocales.includes(urlLocale)) return null;
-    // Yalnızca localized slug (TR slug değil) gelen istekleri rewrite et.
+    // Only the public English slug needs an internal rewrite. Legacy locale
+    // prefixes are redirected before this function is reached.
     if (sectionSlug !== SECTION_SLUGS[urlLocale][section]) return null;
-    return `${prefix}/${trSection}`;
+    return `${prefix}/${internalSection}`;
   }
 
   // DETAY
@@ -660,10 +684,10 @@ export function resolveInternalRewrite(pathname: string): string | null {
   if (!found) return null;
   if (!availableLocales(found.contentId).includes(urlLocale)) return null;
 
-  const trTranslation = CONTENT_REGISTRY[found.contentId].translations[DEFAULT_LOCALE];
-  if (!trTranslation) return null;
+  const internalTranslation = CONTENT_REGISTRY[found.contentId].translations.tr;
+  if (!internalTranslation) return null;
 
-  let target = `${prefix}/${trSection}/${trTranslation.slug}`;
+  let target = `${prefix}/${internalSection}/${internalTranslation.slug}`;
   if (extra) target = `${target}/${extra}`;
   return target === pathname ? null : target;
 }
@@ -678,6 +702,169 @@ export const ALL_SECTION_SLUGS: string[] = Array.from(
     ),
   ),
 );
+
+/** Public English route names. The filesystem keeps its established Turkish
+ * route folders to avoid deleting or moving content, while visitors and
+ * search engines see consistent English URLs. */
+const PUBLIC_ROUTE_MAP: Readonly<Record<string, string>> = {
+  reviews: "inceleme",
+  comparison: "karsilastir",
+  guide: "rehber",
+  devices: "cihazlar",
+  tools: "araclar",
+  quiz: "sana-uygun-vpn",
+  "vpn-reviews": "en-iyi-vpn",
+  "best-vpn": "en-iyi",
+  methodology: "metodoloji",
+  about: "hakkimizda",
+  contact: "iletisim",
+  "affiliate-disclosure": "reklam-aciklamasi",
+  "legal-notice": "yasal-uyari",
+  "privacy-policy": "gizlilik",
+  "cookie-policy": "cerez-politikasi",
+  terms: "sartlar",
+  "refund-policy": "iptal-ve-iade",
+  calculator: "hesaplayici",
+  "server-map": "sunucu-haritasi",
+  glossary: "sozluk",
+  "security-tools": "guvenlik-araclari",
+};
+
+const USE_CASE_PUBLIC_SLUGS: Readonly<Record<string, string>> = {
+  gizlilik: "privacy",
+  streaming: "streaming",
+  oyun: "gaming",
+  seyahat: "travel",
+  turkiye: "turkey",
+  "yurt-disindaki-turkler": "turks-abroad",
+};
+
+const USE_CASE_INTERNAL_SLUGS = new Map(
+  Object.entries(USE_CASE_PUBLIC_SLUGS).map(([internal, publicSlug]) => [
+    publicSlug,
+    internal,
+  ]),
+);
+
+const TOOL_PUBLIC_SLUGS: Readonly<Record<string, string>> = {
+  "email-guvenlik-kontrolu": "email-security-check",
+  "ip-adresim": "my-ip",
+  "vpn-hiz-testi": "vpn-speed-test",
+};
+
+const TOOL_INTERNAL_SLUGS = new Map(
+  Object.entries(TOOL_PUBLIC_SLUGS).map(([internal, publicSlug]) => [
+    publicSlug,
+    internal,
+  ]),
+);
+
+function stripExplicitEnglishPrefix(pathname: string): string {
+  const segments = pathname.split("/").filter(Boolean);
+  return segments[0] === "en"
+    ? `/${segments.slice(1).join("/")}`.replace(/\/$/, "") || "/"
+    : pathname || "/";
+}
+
+/** Convert an internal/legacy path into its public English canonical path. */
+export function canonicalEnglishPath(pathname: string): string {
+  const normalized = stripExplicitEnglishPrefix(pathname);
+  const segments = normalized.split("/").filter(Boolean);
+  if (segments.length === 0) return "/";
+
+  const [first, ...rest] = segments;
+  if (first === "blog" || first === "go" || first === "vpn-test") {
+    return `/${segments.join("/")}`;
+  }
+
+  const publicRoot = Object.entries(PUBLIC_ROUTE_MAP).find(
+    ([publicSlug]) => publicSlug === first,
+  )?.[0];
+  if (publicRoot) {
+    if (publicRoot === "tools" && rest[0]) {
+      return `/tools/${TOOL_PUBLIC_SLUGS[rest[0]] ?? rest[0]}${
+        rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""
+      }`;
+    }
+    if (publicRoot === "best-vpn" && rest[0]) {
+      return `/best-vpn/${USE_CASE_PUBLIC_SLUGS[rest[0]] ?? rest[0]}${
+        rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""
+      }`;
+    }
+    if (publicRoot === "guide" || publicRoot === "comparison") {
+      const section = publicRoot === "guide" ? "guide" : "comparison";
+      const found = rest[0] ? findContentBySlug(section, rest[0]) : null;
+      if (found) return getLocalizedPath({ locale: "en", section, contentId: found.contentId });
+    }
+    return `/${segments.join("/")}`;
+  }
+
+  const publicEntry = Object.entries(PUBLIC_ROUTE_MAP).find(
+    ([, internalSlug]) => internalSlug === first,
+  );
+  if (!publicEntry) return `/${segments.join("/")}`;
+
+  const [publicSlug] = publicEntry;
+  if (publicSlug === "tools" && rest[0]) {
+    return `/tools/${TOOL_PUBLIC_SLUGS[rest[0]] ?? rest[0]}${
+      rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""
+    }`;
+  }
+  if (publicSlug === "best-vpn" && rest[0]) {
+    return `/best-vpn/${USE_CASE_PUBLIC_SLUGS[rest[0]] ?? rest[0]}${
+      rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""
+    }`;
+  }
+
+  if (publicSlug === "guide" || publicSlug === "comparison") {
+    const section = publicSlug === "guide" ? "guide" : "comparison";
+    const found = rest[0] ? findContentBySlug(section, rest[0]) : null;
+    if (found) return getLocalizedPath({ locale: "en", section, contentId: found.contentId });
+  }
+
+  return `/${publicSlug}${rest.length ? `/${rest.join("/")}` : ""}`;
+}
+
+/** Redirect old internal English-site paths to the new English URL system. */
+export function resolveEnglishLegacyRedirect(pathname: string): string | null {
+  const target = canonicalEnglishPath(pathname);
+  return target === pathname ? null : target;
+}
+
+/** Rewrite a canonical English public path to the existing route folder. */
+export function resolveEnglishPublicRewrite(pathname: string): string | null {
+  const normalized = stripExplicitEnglishPrefix(pathname);
+  const segments = normalized.split("/").filter(Boolean);
+  if (segments.length === 0) return null;
+
+  const [first, ...rest] = segments;
+  const internalRoot = PUBLIC_ROUTE_MAP[first];
+  if (!internalRoot) return null;
+
+  if (first === "best-vpn" && rest[0]) {
+    const internalUseCase = USE_CASE_INTERNAL_SLUGS.get(rest[0]) ?? rest[0];
+    return `/${DEFAULT_LOCALE}/en-iyi/${internalUseCase}${rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""}`;
+  }
+
+  if (first === "tools" && rest[0]) {
+    const internalTool = TOOL_INTERNAL_SLUGS.get(rest[0]) ?? rest[0];
+    return `/${DEFAULT_LOCALE}/${internalRoot}/${internalTool}${
+      rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""
+    }`;
+  }
+
+  if (first === "guide" || first === "comparison") {
+    const section = first === "guide" ? "guide" : "comparison";
+    if (!rest[0]) return `/${DEFAULT_LOCALE}/${internalRoot}`;
+    const found = findContentBySlug(section, rest[0]);
+    const internalSlug = found
+      ? CONTENT_REGISTRY[found.contentId].translations.tr?.slug
+      : rest[0];
+    return `/${DEFAULT_LOCALE}/${internalRoot}/${internalSlug}${rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""}`;
+  }
+
+  return `/${DEFAULT_LOCALE}/${internalRoot}${rest.length ? `/${rest.join("/")}` : ""}`;
+}
 
 /**
  * Aynı locale'in iki kez yazıldığı eski/bozuk public URL'yi kanoniğe indirger.
@@ -711,11 +898,9 @@ export function localizePathname(pathname: string, targetLocale: AppLocale): str
 
   // Accept both the locale-prefixed public form (/en/...) and the
   // locale-neutral form used by next-intl links (/...).
-  const sourceLocale =
-    segments[0] === "en" || segments[0] === "de"
-      ? (segments[0] as AppLocale)
-      : DEFAULT_LOCALE;
-  const pathSegments = sourceLocale === DEFAULT_LOCALE ? segments : segments.slice(1);
+  const pathSegments = APP_LOCALES.includes(segments[0] as AppLocale)
+    ? segments.slice(1)
+    : segments;
   const localeNeutralPath = `/${pathSegments.join("/")}`;
 
   if (pathSegments.length === 0) {

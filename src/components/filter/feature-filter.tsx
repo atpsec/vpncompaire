@@ -149,7 +149,7 @@ export function FeatureFilter() {
 
               <div className="mt-auto pt-4 flex flex-col gap-2">
                 <Button asChild variant="primary" size="sm">
-                  <Link href={`/inceleme/${product.slug}`}>
+                  <Link href={`/reviews/${product.slug}`}>
                     {t("readReview")}
                   </Link>
                 </Button>

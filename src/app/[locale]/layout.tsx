@@ -2,7 +2,6 @@ import { Geist } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipToContent } from "@/components/layout/skip-to-content";
@@ -24,7 +23,7 @@ const geistSans = Geist({
 export const viewport = rootViewport;
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return [{ locale: "en" }];
 }
 
 type Props = {
@@ -34,30 +33,17 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale = routing.locales.includes(rawLocale as Locale)
-    ? (rawLocale as Locale)
-    : "tr";
-  const metadata = buildRootMetadata(locale);
-
-  if (locale !== "de") return metadata;
-
-  return {
-    ...metadata,
-    robots: {
-      index: false,
-      follow: true,
-      googleBot: { index: false, follow: true },
-    },
-  };
+  const locale: Locale = rawLocale === "en" ? "en" : "en";
+  return buildRootMetadata(locale);
 }
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale: rawLocale } = await params;
 
-  if (!routing.locales.includes(rawLocale as Locale)) {
+  if (rawLocale !== "en") {
     notFound();
   }
-  const locale = rawLocale as Locale;
+  const locale: Locale = "en";
 
   setRequestLocale(locale);
 

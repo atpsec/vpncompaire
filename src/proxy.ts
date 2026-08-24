@@ -4,27 +4,12 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import {
   resolveDuplicateLocaleRedirect,
+  resolveEnglishLegacyRedirect,
+  resolveEnglishPublicRewrite,
+  resolveLegacyLocaleRedirect,
   resolveLocalizedRedirect,
   resolveInternalRewrite,
 } from "@/lib/i18n-paths";
-import { countryCodeFromHeaders } from "@/lib/request-geo";
-
-const LOCALE_COOKIE = "NEXT_LOCALE";
-const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 yıl
-
-/**
- * Visitor locale preference for small route-specific decisions.
- * Public canonical pages are not geo-redirected; / and /blog stay Turkish.
- */
-function preferredLocale(request: NextRequest): "tr" | "en" | "de" {
-  const cookie = request.cookies.get(LOCALE_COOKIE)?.value;
-  if (cookie === "tr" || cookie === "en" || cookie === "de") return cookie;
-
-  const country = countryCodeFromHeaders(request.headers);
-  if (!country || country === "TR") return "tr";
-  if (country === "DE" || country === "AT" || country === "CH") return "de";
-  return "en";
-}
 
 // Simple in-memory rate limiter (production'da harici Redis önerilir)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -86,6 +71,22 @@ const intlMiddleware = createMiddleware(routing);
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // The site is now English-only. Keep old Turkish and German URLs useful by
+  // redirecting each path to its English equivalent before next-intl runs.
+  const legacyLocaleTarget = resolveLegacyLocaleRedirect(pathname);
+  if (legacyLocaleTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = legacyLocaleTarget;
+    return NextResponse.redirect(url, 301);
+  }
+
+  const englishPathTarget = resolveEnglishLegacyRedirect(pathname);
+  if (englishPathTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = englishPathTarget;
+    return NextResponse.redirect(url, 301);
+  }
+
   // Eski dil değiştirici sürümünün ürettiği /de/de/... ve /en/en/...
   // bağlantılarını 404'e bırakma; tek locale önekiyle kanoniğe taşı.
   const duplicateLocaleTarget = resolveDuplicateLocaleRedirect(pathname);
@@ -123,6 +124,15 @@ export default function proxy(request: NextRequest) {
     return NextResponse.rewrite(url, { request: { headers } });
   }
 
+  const englishRewriteTarget = resolveEnglishPublicRewrite(pathname);
+  if (englishRewriteTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = englishRewriteTarget;
+    const headers = new Headers(request.headers);
+    headers.set("X-NEXT-INTL-LOCALE", "en");
+    return NextResponse.rewrite(url, { request: { headers } });
+  }
+
   // Apply rate limiting to sensitive routes
   const shouldRateLimit =
     pathname.startsWith("/go/") ||
@@ -156,18 +166,6 @@ export default function proxy(request: NextRequest) {
   // / and /blog are Turkish, /en and /en/blog are English, /de and /de/blog are German.
   // Do not geo-redirect unprefixed canonical URLs; otherwise /blog can become /en/blog
   // for users with an English cookie or a non-TR country header.
-
-  // The default-locale public diagnostic route is intentionally unprefixed
-  // (/vpn-test). Let the real app/vpn-test route handle it directly.
-  if (pathname === "/vpn-test" && preferredLocale(request) === "tr") {
-    const res = NextResponse.next();
-    res.cookies.set(LOCALE_COOKIE, "tr", {
-      path: "/",
-      maxAge: LOCALE_COOKIE_MAX_AGE,
-      sameSite: "lax",
-    });
-    return res;
-  }
 
   // Continue with next-intl middleware
   return intlMiddleware(request);

@@ -21,11 +21,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/hesaplayici", locale),
+    alternates: localizedAlternates("/calculator", locale),
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: absoluteUrl("/hesaplayici", locale),
+      url: absoluteUrl("/calculator", locale),
       type: "website",
     },
   };
@@ -52,7 +52,7 @@ function CalculatorPageView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: t("breadcrumb"), path: "/hesaplayici" },
+            { name: t("breadcrumb"), path: "/calculator" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -119,7 +119,7 @@ function CalculatorPageView() {
           <p className="text-sm text-ink-muted">{t("altDirectHeading")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
-              href="/sana-uygun-vpn"
+              href="/quiz"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.quiz")}
@@ -131,7 +131,7 @@ function CalculatorPageView() {
               {t("altLinks.compare")}
             </Link>
             <Link
-              href="/sunucu-haritasi"
+              href="/server-map"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.filter")}

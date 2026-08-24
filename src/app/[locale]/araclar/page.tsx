@@ -27,11 +27,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/araclar", locale),
+    alternates: localizedAlternates("/tools", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar", locale),
+      url: absoluteUrl("/tools", locale),
       type: "website",
     },
   };
@@ -39,23 +39,23 @@ export async function generateMetadata({
 
 const TOOLS: ReadonlyArray<{
   href:
-    | "/araclar/email-guvenlik-kontrolu"
+    | "/tools/email-security-check"
     | "/vpn-test"
-    | "/araclar/dns-leak-test"
-    | "/araclar/webrtc-leak-test"
-    | "/araclar/vpn-hiz-testi";
+    | "/tools/dns-leak-test"
+    | "/tools/webrtc-leak-test"
+    | "/tools/vpn-speed-test";
   key: "emailSecurity" | "vpnTest" | "dns" | "webrtc" | "speed";
   Icon: LucideIcon;
 }> = [
   {
-    href: "/araclar/email-guvenlik-kontrolu",
+    href: "/tools/email-security-check",
     key: "emailSecurity",
     Icon: MailCheck,
   },
   { href: "/vpn-test", key: "vpnTest", Icon: ShieldCheck },
-  { href: "/araclar/dns-leak-test", key: "dns", Icon: Network },
-  { href: "/araclar/webrtc-leak-test", key: "webrtc", Icon: Wifi },
-  { href: "/araclar/vpn-hiz-testi", key: "speed", Icon: Gauge },
+  { href: "/tools/dns-leak-test", key: "dns", Icon: Network },
+  { href: "/tools/webrtc-leak-test", key: "webrtc", Icon: Wifi },
+  { href: "/tools/vpn-speed-test", key: "speed", Icon: Gauge },
 ];
 
 export default async function Page({ params }: Props) {
@@ -75,7 +75,7 @@ function ToolsIndexView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: t("breadcrumb"), path: "/araclar" },
+            { name: t("breadcrumb"), path: "/tools" },
           ],
           locale as "tr" | "en" | "de",
         )}

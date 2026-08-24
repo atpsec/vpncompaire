@@ -12,5 +12,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { locale } = await params;
-  redirect({ href: "/en-iyi-vpn", locale });
+  redirect({ href: "/vpn-reviews", locale });
 }

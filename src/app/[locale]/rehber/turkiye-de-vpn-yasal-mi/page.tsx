@@ -210,8 +210,8 @@ export default async function Page({ params }: Props) {
                   ) : null}
                 </>
               );
-              return link.href === "/en-iyi/turkiye" ||
-                link.href === "/en-iyi/yurt-disindaki-turkler" ? (
+              return link.href === "/best-vpn/turkey" ||
+                link.href === "/best-vpn/turks-abroad" ? (
                 <a key={link.href} href={link.href} className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">
                   {content}
                 </a>

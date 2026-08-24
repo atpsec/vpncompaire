@@ -91,7 +91,7 @@ function generatedImg(path: string, alt: string): UnsplashImage {
     url: path,
     alt,
     photographer: "VPN Advisor",
-    photographerUrl: "/hakkimizda",
+    photographerUrl: "/about",
     source: "generated",
   };
 }

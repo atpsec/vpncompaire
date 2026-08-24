@@ -6,7 +6,6 @@ import { Menu, X } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { SiteMark } from "@/components/brand/site-mark";
-import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 
@@ -16,12 +15,12 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const navItems = [
-    { href: "/en-iyi-vpn", labelKey: "reviews" },
+    { href: "/vpn-reviews", labelKey: "reviews" },
     { href: getLocalizedLinkHref({ locale, section: "comparison" }), labelKey: "compare" },
     { href: "/blog", labelKey: "blog" },
-    { href: "/sana-uygun-vpn", labelKey: "quiz" },
-    { href: "/cihazlar", labelKey: "devices" },
-    { href: "/araclar", labelKey: "tools" },
+    { href: "/quiz", labelKey: "quiz" },
+    { href: "/devices", labelKey: "devices" },
+    { href: "/tools", labelKey: "tools" },
     { href: getLocalizedLinkHref({ locale, section: "guide" }), labelKey: "guides" },
   ] as const;
 
@@ -68,10 +67,9 @@ export function SiteHeader() {
 
           <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle />
-            <LanguageSwitcher />
             <span aria-hidden="true" className="h-5 w-px bg-border" />
             <Button asChild variant="primary" size="sm">
-              <Link href="/en-iyi-vpn">{t("reviews")} →</Link>
+              <Link href="/vpn-reviews">{t("reviews")} →</Link>
             </Button>
           </div>
 
@@ -105,16 +103,10 @@ export function SiteHeader() {
                 </Link>
               ))}
               <Button asChild variant="primary" size="md" className="mt-2">
-                <Link href="/en-iyi-vpn" onClick={() => setOpen(false)}>
+                <Link href="/vpn-reviews" onClick={() => setOpen(false)}>
                   {t("reviews")}
                 </Link>
               </Button>
-              <div className="px-3 mt-3">
-                <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
-                  {t("language")}
-                </p>
-                <LanguageSwitcher className="mt-2" />
-              </div>
             </nav>
           </div>
         ) : null}

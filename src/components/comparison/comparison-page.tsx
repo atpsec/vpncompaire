@@ -245,7 +245,7 @@ export async function ComparisonPage({
               ))}
             </ul>
             <Button asChild variant="primary" className="mt-5 w-full">
-              <Link href={`/inceleme/${a.slug}`}>
+              <Link href={`/reviews/${a.slug}`}>
                 {t("reviewLink", { brand: a.brand })}
               </Link>
             </Button>
@@ -262,7 +262,7 @@ export async function ComparisonPage({
               ))}
             </ul>
             <Button asChild variant="primary" className="mt-5 w-full">
-              <Link href={`/inceleme/${b.slug}`}>
+              <Link href={`/reviews/${b.slug}`}>
                 {t("reviewLink", { brand: b.brand })}
               </Link>
             </Button>

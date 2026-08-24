@@ -90,27 +90,27 @@ const nextConfig: NextConfig = {
         // Proxy bunu da kanonikleştiriyor; bu açık kural eski crawler keşiflerini
         // doğrudan kalıcı yönlendirmeyle temiz tutar.
         source: "/en/en-iyi/yurt-disindaki-turkler",
-        destination: "/en-iyi/yurt-disindaki-turkler",
+        destination: "/best-vpn/turks-abroad",
         permanent: true,
       },
       {
         source: "/blog/claude-gemini-erisim-vpn",
-        destination: "/blog/chatgpt-turkiye-erisim-vpn",
+        destination: "/blog/chatgpt-access-turkey-vpn",
         permanent: true,
       },
       {
         source: "/en/blog/claude-gemini-access-vpn",
-        destination: "/en/blog/chatgpt-access-turkey-vpn",
+        destination: "/blog/chatgpt-access-turkey-vpn",
         permanent: true,
       },
       {
         source: "/blog/midjourney-stable-diffusion-vpn",
-        destination: "/blog/chatgpt-turkiye-erisim-vpn",
+        destination: "/blog/chatgpt-access-turkey-vpn",
         permanent: true,
       },
       {
         source: "/en/blog/midjourney-stable-diffusion-vpn",
-        destination: "/en/blog/chatgpt-access-turkey-vpn",
+        destination: "/blog/chatgpt-access-turkey-vpn",
         permanent: true,
       },
     ];

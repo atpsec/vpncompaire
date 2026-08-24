@@ -29,7 +29,7 @@ export default function NotFoundPage() {
             </Link>
           </Button>
           <Button asChild variant="secondary">
-            <Link href="/en-iyi-vpn">
+            <Link href="/vpn-reviews">
               <Search className="size-4" /> {t("ctaReviews")}
             </Link>
           </Button>
@@ -43,7 +43,7 @@ export default function NotFoundPage() {
             {t("cards.reviews.desc")}
           </p>
           <Link
-            href="/en-iyi-vpn"
+            href="/vpn-reviews"
             className="mt-2 inline-block text-sm font-medium text-brand-700 hover:underline"
           >
             {t("cards.reviews.link")}

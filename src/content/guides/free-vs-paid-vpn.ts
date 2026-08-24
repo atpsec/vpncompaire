@@ -1,6 +1,6 @@
-﻿// "Ücretsiz vs Ücretli VPN" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/ucretsiz-vs-ucretli-vpn/page.tsx) bu modülden
-// render eder; yerelleştirilmiş URL'ler (/rehber/ucretsiz-vs-ucretli-vpn,
+// "Ücretsiz vs Ücretli VPN" rehberinin locale-aware içeriği (tr/en/de).
+// Sayfa (src/app/[locale]/guide/ucretsiz-vs-ucretli-vpn/page.tsx) bu modülden
+// render eder; yerelleştirilmiş URL'ler (/guide/ucretsiz-vs-ucretli-vpn,
 // /en/guide/free-vs-paid-vpn, /de/ratgeber/kostenloses-vs-kostenpflichtiges-vpn)
 // proxy rewrite ile aynı sayfaya düşer.
 
@@ -147,26 +147,26 @@ const tr: FreeVsPaidVpnContent = {
       {
         scenario: "Streaming + birden fazla cihaz",
         recommendation: [
-          { href: "/inceleme/surfshark", label: "Surfshark" },
+          { href: "/reviews/surfshark", label: "Surfshark" },
           " veya ",
-          { href: "/inceleme/nordvpn", label: "NordVPN" },
+          { href: "/reviews/nordvpn", label: "NordVPN" },
         ],
       },
       {
         scenario: "Maksimum gizlilik + anonim",
         recommendation: [
-          { href: "/inceleme/mullvad", label: "Mullvad" },
+          { href: "/reviews/mullvad", label: "Mullvad" },
           " veya ",
-          { href: "/inceleme/proton-vpn", label: "Proton VPN" },
+          { href: "/reviews/proton-vpn", label: "Proton VPN" },
         ],
       },
       {
         scenario: "Premium istikrar + kolay kullanım",
-        recommendation: [{ href: "/inceleme/expressvpn", label: "ExpressVPN" }],
+        recommendation: [{ href: "/reviews/expressvpn", label: "ExpressVPN" }],
       },
       {
         scenario: "Teknik kontrol + port forwarding",
-        recommendation: [{ href: "/inceleme/pia", label: "PIA" }],
+        recommendation: [{ href: "/reviews/pia", label: "PIA" }],
       },
     ],
   },
@@ -195,12 +195,12 @@ const tr: FreeVsPaidVpnContent = {
   ],
   relatedLabel: "İlgili rehberler",
   relatedLinks: [
-    { href: "/rehber/vpn-nedir", text: "VPN nedir?" },
+    { href: "/guide/vpn-nedir", text: "VPN nedir?" },
     {
-      href: "/rehber/vpn-guvenlik-kontrol-listesi",
+      href: "/guide/vpn-guvenlik-kontrol-listesi",
       text: "Güvenlik kontrol listesi",
     },
-    { href: "/en-iyi-vpn", text: "VPN sağlayıcı karşılaştırmaları" },
+    { href: "/vpn-reviews", text: "VPN sağlayıcı karşılaştırmaları" },
   ],
 };
 
@@ -310,26 +310,26 @@ const en: FreeVsPaidVpnContent = {
       {
         scenario: "Streaming + multiple devices",
         recommendation: [
-          { href: "/inceleme/surfshark", label: "Surfshark" },
+          { href: "/reviews/surfshark", label: "Surfshark" },
           " or ",
-          { href: "/inceleme/nordvpn", label: "NordVPN" },
+          { href: "/reviews/nordvpn", label: "NordVPN" },
         ],
       },
       {
         scenario: "Maximum privacy + anonymity",
         recommendation: [
-          { href: "/inceleme/mullvad", label: "Mullvad" },
+          { href: "/reviews/mullvad", label: "Mullvad" },
           " or ",
-          { href: "/inceleme/proton-vpn", label: "Proton VPN" },
+          { href: "/reviews/proton-vpn", label: "Proton VPN" },
         ],
       },
       {
         scenario: "Premium reliability + ease of use",
-        recommendation: [{ href: "/inceleme/expressvpn", label: "ExpressVPN" }],
+        recommendation: [{ href: "/reviews/expressvpn", label: "ExpressVPN" }],
       },
       {
         scenario: "Technical control + port forwarding",
-        recommendation: [{ href: "/inceleme/pia", label: "PIA" }],
+        recommendation: [{ href: "/reviews/pia", label: "PIA" }],
       },
     ],
   },
@@ -363,7 +363,7 @@ const en: FreeVsPaidVpnContent = {
       href: "/guide/vpn-security-checklist",
       text: "Security checklist",
     },
-    { href: "/en-iyi-vpn", text: "VPN provider comparisons" },
+    { href: "/vpn-reviews", text: "VPN provider comparisons" },
   ],
 };
 
@@ -473,26 +473,26 @@ const de: FreeVsPaidVpnContent = {
       {
         scenario: "Streaming + mehrere Geräte",
         recommendation: [
-          { href: "/inceleme/surfshark", label: "Surfshark" },
+          { href: "/reviews/surfshark", label: "Surfshark" },
           " oder ",
-          { href: "/inceleme/nordvpn", label: "NordVPN" },
+          { href: "/reviews/nordvpn", label: "NordVPN" },
         ],
       },
       {
         scenario: "Maximaler Datenschutz + Anonymität",
         recommendation: [
-          { href: "/inceleme/mullvad", label: "Mullvad" },
+          { href: "/reviews/mullvad", label: "Mullvad" },
           " oder ",
-          { href: "/inceleme/proton-vpn", label: "Proton VPN" },
+          { href: "/reviews/proton-vpn", label: "Proton VPN" },
         ],
       },
       {
         scenario: "Premium-Stabilität + einfache Bedienung",
-        recommendation: [{ href: "/inceleme/expressvpn", label: "ExpressVPN" }],
+        recommendation: [{ href: "/reviews/expressvpn", label: "ExpressVPN" }],
       },
       {
         scenario: "Technische Kontrolle + Port-Forwarding",
-        recommendation: [{ href: "/inceleme/pia", label: "PIA" }],
+        recommendation: [{ href: "/reviews/pia", label: "PIA" }],
       },
     ],
   },
@@ -526,7 +526,7 @@ const de: FreeVsPaidVpnContent = {
       href: "/ratgeber/vpn-sicherheits-checkliste",
       text: "Sicherheits-Checkliste",
     },
-    { href: "/en-iyi-vpn", text: "VPN-Anbietervergleich" },
+    { href: "/vpn-reviews", text: "VPN-Anbietervergleich" },
   ],
 };
 

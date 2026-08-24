@@ -5,18 +5,16 @@ import { getIndexableBlogPosts } from "@/lib/blog";
 export const dynamic = "force-static";
 
 export async function GET() {
-  const core = rankedProducts().filter((p) => p.slug !== "atlas-vpn");
+  const core = rankedProducts("en").filter((p) => p.slug !== "atlas-vpn");
   const catalog = core;
   const blogLocales = SEO_LOCALES;
-  const blogPosts = await Promise.all(
-    blogLocales.map((locale) => getIndexableBlogPosts(locale)),
-  );
+  const blogPosts = await Promise.all(blogLocales.map((locale) => getIndexableBlogPosts(locale)));
   const latestBlogUpdate = blogPosts.flat().map((post) => post.updatedAt).sort().at(-1);
-  const blogIndex = blogPosts.map((posts, index) => `### ${blogLocales[index].toUpperCase()} blog yazıları\n\n${posts.map((post) => `- [${post.title}](${siteConfig.url}${blogLocales[index] === "tr" ? "" : `/${blogLocales[index]}`}/blog/${post.slug}) — ${post.description}`).join("\n")}`).join("\n\n");
+  const blogIndex = blogPosts.map((posts) => `### English blog articles\n\n${posts.map((post) => `- [${post.title}](${siteConfig.url}/blog/${post.slug}) — ${post.description}`).join("\n")}`).join("\n\n");
 
   const body = `# ${siteConfig.name}
 
-> ${siteConfig.description.tr}
+> ${siteConfig.description.en}
 
 ## Site amacı
 
@@ -30,9 +28,9 @@ Bu dosyada ${catalog.length} ayrıntılı, indekslenebilir VPN sağlayıcı prof
 
 Öncelik sırası: (1) resmi teknik dokümantasyon ve politikalar, (2) bağımsız güvenlik/no-logs denetimleri, (3) NIST/IETF/Apple/Google/Microsoft gibi standart veya platform belgeleri, (4) bağlam sağlayan güvenilir ikincil kaynaklar. Bir bilgi bağımsız olarak doğrulanamıyorsa kesin gerçek gibi sunulmamalıdır.
 
-Metodoloji: ${siteConfig.url}/metodoloji
-Reklam ve gelir açıklaması: ${siteConfig.url}/reklam-aciklamasi
-Hakkımızda: ${siteConfig.url}/hakkimizda
+Methodology: ${siteConfig.url}/methodology
+Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
+About: ${siteConfig.url}/about
 
 ## VPN sağlayıcı profilleri
 
@@ -41,24 +39,25 @@ Aşağıdaki liste editoryal puan sıralaması değildir; sitede karşılaştır
 ${catalog
   .map((p) => {
     const price = p.pricingVerifiedAt && p.priceFromUsd > 0
-      ? `${p.priceCurrency === "EUR" ? "€" : "$"}${p.priceFromUsd.toFixed(2)}/ay`
-      : "Resmi fiyat sayfasından doğrulanmalı";
-    return `### ${p.brand}\n\n- **Konumlandırma:** ${p.positioning}\n- **Fiyat:** ${price}\n- **Yargı yetkisi:** ${p.highlights.jurisdiction ?? "Belirtilmemiş"}\n- **Sunucu/ağ bilgisi:** ${p.highlights.servers ?? "Belirtilmemiş"}\n- **Bağımsız denetim bilgisi:** ${p.highlights.audits ?? "Belirtilmemiş"}\n- **Cihaz desteği:** ${p.highlights.devices ?? "Belirtilmemiş"}\n- **Sağlayıcı profili:** ${siteConfig.url}/inceleme/${p.slug}\n\n${p.summary}\n`;
+      ? `${p.priceCurrency === "EUR" ? "€" : "$"}${p.priceFromUsd.toFixed(2)}/month`
+      : "Verify on the provider's official pricing page";
+    return `### ${p.brand}\n\n- **Positioning:** ${p.positioning}\n- **Price:** ${price}\n- **Jurisdiction:** ${p.highlights.jurisdiction ?? "Not specified"}\n- **Server/network information:** ${p.highlights.servers ?? "Not specified"}\n- **Independent audit information:** ${p.highlights.audits ?? "Not specified"}\n- **Device support:** ${p.highlights.devices ?? "Not specified"}\n- **Provider profile:** ${siteConfig.url}/reviews/${p.slug}\n\n${p.summary}\n`;
   })
   .join("\n")}
 
-## Karşılaştırmalar
+## Comparisons
 
-- [NordVPN vs Surfshark](${siteConfig.url}/karsilastir/nordvpn-vs-surfshark)
-- [ExpressVPN vs NordVPN](${siteConfig.url}/karsilastir/expressvpn-vs-nordvpn)
-- [Proton VPN vs Mullvad](${siteConfig.url}/karsilastir/proton-vs-mullvad)
+- [NordVPN vs Surfshark](${siteConfig.url}/comparison/nordvpn-vs-surfshark)
+- [ExpressVPN vs NordVPN](${siteConfig.url}/comparison/expressvpn-vs-nordvpn)
+- [Proton VPN vs Mullvad](${siteConfig.url}/comparison/proton-vs-mullvad)
 
-## Konu rehberleri
+## Topic guides
 
-- [VPN nedir?](${siteConfig.url}/rehber/vpn-nedir)
-- [Ücretsiz vs ücretli VPN](${siteConfig.url}/rehber/ucretsiz-vs-ucretli-vpn)
-- [VPN güvenlik kontrol listesi](${siteConfig.url}/rehber/vpn-guvenlik-kontrol-listesi)
-- [Blog ve güncel teknik açıklamalar](${siteConfig.url}/blog)
+- [What is a VPN?](${siteConfig.url}/guide/what-is-a-vpn)
+- [Free vs paid VPN](${siteConfig.url}/guide/free-vs-paid-vpn)
+- [VPN security checklist](${siteConfig.url}/guide/vpn-security-checklist)
+- [AI privacy guides](${siteConfig.url}/ai)
+- [Blog and technical explainers](${siteConfig.url}/blog)
 
 ## Blog ve güncel içerik dizini
 
@@ -66,35 +65,36 @@ ${blogIndex}
 
 ## Temel karşılaştırma alanları
 
-- Gizlilik politikası ve veri toplama kapsamı
-- Bağımsız no-logs / güvenlik denetimleri
-- VPN protokolleri ve güvenlik özellikleri
-- Platform ve cihaz desteği
-- Sunucu / ülke bilgisi
-- Fiyat, yenileme ve para iadesi koşulları
-- Şirket ve yargı yetkisi bilgileri
+- Privacy policy and data collection scope
+- Independent no-logs and security audits
+- VPN protocols and security features
+- Platform and device support
+- Server and country information
+- Pricing, renewal and refund terms
+- Company and jurisdiction information
 
-## Önemli sayfalar
+## Important pages
 
-- Ana sayfa: ${siteConfig.url}/
-- VPN sağlayıcı karşılaştırmaları: ${siteConfig.url}/en-iyi-vpn
-- Kaynak temelli metodoloji: ${siteConfig.url}/metodoloji
+- Home: ${siteConfig.url}/
+- VPN provider reviews: ${siteConfig.url}/vpn-reviews
+- Source-based methodology: ${siteConfig.url}/methodology
+- AI privacy hub: ${siteConfig.url}/ai
 - Blog: ${siteConfig.url}/blog
-- Reklam Açıklaması: ${siteConfig.url}/reklam-aciklamasi
-- Hakkımızda: ${siteConfig.url}/hakkimizda
-- İletişim: ${siteConfig.url}/iletisim
-- Gizlilik Politikası: ${siteConfig.url}/gizlilik
-- Kullanım Şartları: ${siteConfig.url}/sartlar
+- Affiliate disclosure: ${siteConfig.url}/affiliate-disclosure
+- About: ${siteConfig.url}/about
+- Contact: ${siteConfig.url}/contact
+- Privacy policy: ${siteConfig.url}/privacy-policy
+- Terms: ${siteConfig.url}/terms
 
-## Dil sürümleri
+## Language policy
 
-Türkçe ana sürümdür; İngilizce içerik /en altında sunulur. Almanca sayfalar editoryal iyileştirme sürecinde kullanıcılar için erişilebilir kalabilir ancak indekslenebilir içerik dizinine dahil edilmez. Canonical ve hreflang ilişkileri yalnızca indekslenebilir sürümler için yayınlanır.
+English is the sole public and indexable language. Legacy Turkish and German URLs redirect to the matching English URL so that old links remain useful without creating duplicate or mixed-language pages.
 
 ## Güncellik
 
 - Son blog güncellemesi: ${latestBlogUpdate ?? "Belirtilmemiş"}
-- Metodoloji: ${siteConfig.url}/metodoloji
-- Reklam ve gelir açıklaması: ${siteConfig.url}/reklam-aciklamasi
+- Methodology: ${siteConfig.url}/methodology
+- Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
 `;
 
   return new Response(body, {

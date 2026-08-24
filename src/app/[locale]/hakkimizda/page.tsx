@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: rawLocale } = await params;
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   const t = copy[locale];
-  return { title: t.title, description: t.desc, alternates: localizedAlternates("/hakkimizda", locale), openGraph: { title: t.title, description: t.desc, url: absoluteUrl("/hakkimizda", locale), type: "website" } };
+  return { title: t.title, description: t.desc, alternates: localizedAlternates("/about", locale), openGraph: { title: t.title, description: t.desc, url: absoluteUrl("/about", locale), type: "website" } };
 }
 
 export default async function Page({ params }: Props) {
@@ -88,7 +88,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.here, path: "/hakkimizda" }], locale)} />
+      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.here, path: "/about" }], locale)} />
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t.home}</Link>{" "}› <span className="text-ink-strong">{t.here}</span></p>
         <header className="mt-6"><Badge variant="brand">{t.badge}</Badge><h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{t.h1}</h1><p className="mt-4 text-lg text-ink-muted">{t.lede}</p></header>
@@ -101,11 +101,11 @@ export default async function Page({ params }: Props) {
           <Card className="p-5"><FileSearch className="size-7 text-brand-600" /><h3 className="mt-3 font-semibold text-ink-strong">{t.p3t}</h3><p className="mt-1 text-sm text-ink-muted">{t.p3b}</p></Card>
         </div>
 
-        <article className="mt-12 prose prose-stone max-w-none"><h2>{t.methodH2}</h2><p>{t.methodBody} <Link href="/metodoloji">{t.methodology}</Link>.</p><h2>{t.revenueH2}</h2><p>{t.revenueBody} <Link href="/reklam-aciklamasi">{t.disclosure}</Link>.</p><h2>{t.authorH2}</h2><p>{t.authorBody}</p><h2>{t.contactH2}</h2><p>{t.contactBody}</p></article>
+        <article className="mt-12 prose prose-stone max-w-none"><h2>{t.methodH2}</h2><p>{t.methodBody} <Link href="/methodology">{t.methodology}</Link>.</p><h2>{t.revenueH2}</h2><p>{t.revenueBody} <Link href="/affiliate-disclosure">{t.disclosure}</Link>.</p><h2>{t.authorH2}</h2><p>{t.authorBody}</p><h2>{t.contactH2}</h2><p>{t.contactBody}</p></article>
 
-        <Card className="mt-12 p-6 bg-brand-50/40 text-center"><Mail className="size-6 text-brand-600 mx-auto" /><p className="mt-3 font-semibold text-ink-strong">{t.ctaTitle}</p><p className="mt-1 text-sm text-ink-muted">{t.ctaBody}</p><Link href="/iletisim" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">{t.cta}</Link></Card>
+        <Card className="mt-12 p-6 bg-brand-50/40 text-center"><Mail className="size-6 text-brand-600 mx-auto" /><p className="mt-3 font-semibold text-ink-strong">{t.ctaTitle}</p><p className="mt-1 text-sm text-ink-muted">{t.ctaBody}</p><Link href="/contact" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">{t.cta}</Link></Card>
 
-        <section className="mt-12 flex flex-wrap gap-2 justify-center"><Link href="/metodoloji" className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"><Scale className="size-3" /> {t.methodology}</Link><Link href="/reklam-aciklamasi" className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">{t.disclosure}</Link><Link href="/gizlilik" className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">{t.privacy}</Link></section>
+        <section className="mt-12 flex flex-wrap gap-2 justify-center"><Link href="/methodology" className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"><Scale className="size-3" /> {t.methodology}</Link><Link href="/affiliate-disclosure" className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">{t.disclosure}</Link><Link href="/privacy-policy" className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">{t.privacy}</Link></section>
       </Container>
     </>
   );

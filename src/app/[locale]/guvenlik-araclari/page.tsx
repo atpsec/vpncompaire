@@ -35,11 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: m.title,
     description: m.description,
-    alternates: localizedAlternates("/guvenlik-araclari", locale),
+    alternates: localizedAlternates("/security-tools", locale),
     openGraph: {
       title: m.ogTitle,
       description: m.ogDescription,
-      url: absoluteUrl("/guvenlik-araclari", locale),
+      url: absoluteUrl("/security-tools", locale),
       type: "article",
     },
   };
@@ -56,7 +56,7 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema(
           [
             { name: strings.breadcrumbHome, path: "/" },
-            { name: strings.breadcrumbHere, path: "/guvenlik-araclari" },
+            { name: strings.breadcrumbHere, path: "/security-tools" },
           ],
           locale as "tr" | "en" | "de",
         )}

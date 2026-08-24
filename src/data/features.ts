@@ -1,5 +1,5 @@
 /**
- * Boolean feature matrix per VPN — used by the /sunucu-haritasi filter tool.
+ * Boolean feature matrix per VPN — used by the /server-map filter tool.
  * Hand-curated from review research; update when audits or features change.
  */
 export const featureMatrix: Record<string, FeatureFlags> = {

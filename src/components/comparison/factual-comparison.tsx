@@ -74,7 +74,7 @@ export function FactualComparison({ locale, title, description, left, right }: P
       </header>
 
       <Card className="mt-6 p-5 bg-brand-50/40">
-        <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{t.note}</p><Link href="/metodoloji" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>
+        <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{t.note}</p><Link href="/methodology" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>
       </Card>
 
       <DataDisclaimer verifiedAt={left.pricingVerifiedAt} />
@@ -84,7 +84,7 @@ export function FactualComparison({ locale, title, description, left, right }: P
           <Card key={product.slug} className="p-6">
             <div className="flex items-center gap-4"><VPNLogo slug={product.slug} size={56} /><div><h2 className="text-xl font-bold text-ink-strong">{product.brand}</h2><p className="text-sm text-ink-muted">{product.positioning}</p></div></div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{product.summary}</p>
-            <div className="mt-4 flex flex-wrap gap-2"><Button asChild variant="primary"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "comparison-card" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="comparison-card">{t.official}<ArrowRight className="size-4" /></ProviderLink></Button><Button asChild variant="ghost"><Link href={`/inceleme/${product.slug}`}>{t.profile}</Link></Button></div>
+            <div className="mt-4 flex flex-wrap gap-2"><Button asChild variant="primary"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "comparison-card" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="comparison-card">{t.official}<ArrowRight className="size-4" /></ProviderLink></Button><Button asChild variant="ghost"><Link href={`/reviews/${product.slug}`}>{t.profile}</Link></Button></div>
           </Card>
         ))}
       </div>

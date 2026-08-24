@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/reklam-aciklamasi", locale),
+    alternates: localizedAlternates("/affiliate-disclosure", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/reklam-aciklamasi", locale),
+      url: absoluteUrl("/affiliate-disclosure", locale),
       type: "article",
     },
   };
@@ -35,7 +35,7 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema(
           [
             { name: t("breadcrumbHome"), path: "/" },
-            { name: t("breadcrumbHere"), path: "/reklam-aciklamasi" },
+            { name: t("breadcrumbHere"), path: "/affiliate-disclosure" },
           ],
           locale as "tr" | "en" | "de",
         )}

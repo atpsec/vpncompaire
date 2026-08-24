@@ -490,7 +490,7 @@ export function RefundBody({ locale }: { locale: string }) {
       ? "/guide/free-vs-paid-vpn"
       : locale === "de"
         ? "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn"
-        : "/rehber/ucretsiz-vs-ucretli-vpn";
+        : "/guide/ucretsiz-vs-ucretli-vpn";
   const products = rankedProducts(locale as Locale);
   const { strings, cancelInfo, faqs } = getRefundContent(locale);
 
@@ -591,7 +591,7 @@ export function RefundBody({ locale }: { locale: string }) {
 
               <div className="mt-4 flex flex-wrap gap-2 text-xs">
                 <Link
-                  href={`/inceleme/${p.slug}`}
+                  href={`/reviews/${p.slug}`}
                   className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 hover:border-brand-300"
                 >
                   {p.brand} {strings.reviewSuffix}
@@ -645,7 +645,7 @@ export function RefundBody({ locale }: { locale: string }) {
         <p className="text-sm text-ink-muted">{strings.relatedTitle}</p>
         <div className="mt-3 flex flex-wrap gap-2 justify-center">
           <Link
-            href="/hesaplayici"
+            href="/calculator"
             className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {strings.relatedCalculator}
@@ -657,7 +657,7 @@ export function RefundBody({ locale }: { locale: string }) {
             {strings.relatedFreeVsPaid}
           </Link>
           <Link
-            href="/yasal-uyari"
+            href="/legal-notice"
             className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
           >
             {strings.relatedLegal}

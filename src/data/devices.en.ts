@@ -1,8 +1,8 @@
 import type { DeviceContent } from "./devices";
 
 const COMMON_RELATED = [
-  { label: "Compare all VPNs", href: "/en-iyi-vpn" },
-  { label: "Comparison methodology and sources", href: "/metodoloji" },
+  { label: "Compare all VPNs", href: "/vpn-reviews" },
+  { label: "Comparison methodology and sources", href: "/methodology" },
 ];
 
 const DIFFICULTY = {
@@ -112,9 +112,9 @@ export const devicesEn: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "VPN for iPhone", href: "/cihazlar/iphone" },
-      { label: "VPN for Smart TV", href: "/cihazlar/smart-tv" },
-      { label: "Best VPN in Turkey", href: "/en-iyi/turkiye" },
+      { label: "VPN for iPhone", href: "/devices/iphone" },
+      { label: "VPN for Smart TV", href: "/devices/smart-tv" },
+      { label: "Best VPN in Turkey", href: "/best-vpn/turkey" },
       ...COMMON_RELATED,
     ],
   },
@@ -218,9 +218,9 @@ export const devicesEn: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "VPN for iPad", href: "/cihazlar/ipad" },
-      { label: "VPN for Android", href: "/cihazlar/android" },
-      { label: "Best VPN for privacy", href: "/en-iyi/gizlilik" },
+      { label: "VPN for iPad", href: "/devices/ipad" },
+      { label: "VPN for Android", href: "/devices/android" },
+      { label: "Best VPN for privacy", href: "/best-vpn/privacy" },
       ...COMMON_RELATED,
     ],
   },
@@ -323,9 +323,9 @@ export const devicesEn: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "VPN for iPhone", href: "/cihazlar/iphone" },
-      { label: "Best VPN for streaming", href: "/en-iyi/streaming" },
-      { label: "Best VPN for travel", href: "/en-iyi/seyahat" },
+      { label: "VPN for iPhone", href: "/devices/iphone" },
+      { label: "Best VPN for streaming", href: "/best-vpn/streaming" },
+      { label: "Best VPN for travel", href: "/best-vpn/travel" },
       ...COMMON_RELATED,
     ],
   },
@@ -436,9 +436,9 @@ export const devicesEn: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "Best VPN for streaming", href: "/en-iyi/streaming" },
-      { label: "VPN for Android", href: "/cihazlar/android" },
-      { label: "VPN for Turks abroad", href: "/en-iyi/yurt-disindaki-turkler" },
+      { label: "Best VPN for streaming", href: "/best-vpn/streaming" },
+      { label: "VPN for Android", href: "/devices/android" },
+      { label: "VPN for Turks abroad", href: "/best-vpn/turks-abroad" },
       ...COMMON_RELATED,
     ],
   },

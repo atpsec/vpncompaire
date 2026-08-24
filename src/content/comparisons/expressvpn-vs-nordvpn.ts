@@ -1,6 +1,6 @@
 // "ExpressVPN vs NordVPN" karşılaştırmasının locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/karsilastir/expressvpn-vs-nordvpn/page.tsx) bu
-// modülden render eder; yerelleştirilmiş URL'ler (/karsilastir/...,
+// Sayfa (src/app/[locale]/comparison/expressvpn-vs-nordvpn/page.tsx) bu
+// modülden render eder; yerelleştirilmiş URL'ler (/comparison/...,
 // /en/comparison/..., /de/vergleich/...) proxy rewrite ile aynı sayfaya düşer.
 // A = ExpressVPN, B = NordVPN.
 
@@ -159,12 +159,12 @@ const tr: ExpressvpnVsNordvpnContent = {
     title: "Diğer sayfalar",
     links: [
       {
-        href: "/karsilastir/nordvpn-vs-surfshark",
+        href: "/comparison/nordvpn-vs-surfshark",
         text: "NordVPN vs Surfshark",
       },
-      { href: "/inceleme/expressvpn", text: "ExpressVPN incelemesi" },
-      { href: "/inceleme/nordvpn", text: "NordVPN incelemesi" },
-      { href: "/en-iyi-vpn", text: "En iyi VPN 2026" },
+      { href: "/reviews/expressvpn", text: "ExpressVPN incelemesi" },
+      { href: "/reviews/nordvpn", text: "NordVPN incelemesi" },
+      { href: "/vpn-reviews", text: "En iyi VPN 2026" },
     ],
   },
 };
@@ -294,9 +294,9 @@ const en: ExpressvpnVsNordvpnContent = {
         href: "/comparison/nordvpn-vs-surfshark",
         text: "NordVPN vs Surfshark",
       },
-      { href: "/inceleme/expressvpn", text: "ExpressVPN review" },
-      { href: "/inceleme/nordvpn", text: "NordVPN review" },
-      { href: "/en-iyi-vpn", text: "Best VPNs 2026" },
+      { href: "/reviews/expressvpn", text: "ExpressVPN review" },
+      { href: "/reviews/nordvpn", text: "NordVPN review" },
+      { href: "/vpn-reviews", text: "Best VPNs 2026" },
     ],
   },
 };
@@ -427,9 +427,9 @@ const de: ExpressvpnVsNordvpnContent = {
         href: "/vergleich/nordvpn-vs-surfshark",
         text: "NordVPN vs Surfshark",
       },
-      { href: "/inceleme/expressvpn", text: "ExpressVPN im Test" },
-      { href: "/inceleme/nordvpn", text: "NordVPN im Test" },
-      { href: "/en-iyi-vpn", text: "Die besten VPNs 2026" },
+      { href: "/reviews/expressvpn", text: "ExpressVPN im Test" },
+      { href: "/reviews/nordvpn", text: "NordVPN im Test" },
+      { href: "/vpn-reviews", text: "Die besten VPNs 2026" },
     ],
   },
 };

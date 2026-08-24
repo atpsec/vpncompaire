@@ -71,9 +71,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "Yurt dışı Türkler için", href: "/en-iyi/yurt-disindaki-turkler" },
-      { label: "Türkiye için", href: "/en-iyi/turkiye" },
-      { label: "NordVPN vs Surfshark", href: "/karsilastir/nordvpn-vs-surfshark" },
+      { label: "Yurt dışı Türkler için", href: "/best-vpn/turks-abroad" },
+      { label: "Türkiye için", href: "/best-vpn/turkey" },
+      { label: "NordVPN vs Surfshark", href: "/comparison/nordvpn-vs-surfshark" },
     ],
   },
   en: {
@@ -140,9 +140,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "For Turks abroad", href: "/en-iyi/yurt-disindaki-turkler" },
-      { label: "Best in Turkey", href: "/en-iyi/turkiye" },
-      { label: "NordVPN vs Surfshark", href: "/karsilastir/nordvpn-vs-surfshark" },
+      { label: "For Turks abroad", href: "/best-vpn/turks-abroad" },
+      { label: "Best in Turkey", href: "/best-vpn/turkey" },
+      { label: "NordVPN vs Surfshark", href: "/comparison/nordvpn-vs-surfshark" },
     ],
   },
 } as const;
@@ -153,11 +153,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: localizedAlternates("/en-iyi/streaming", locale),
+    alternates: localizedAlternates("/best-vpn/streaming", locale),
     openGraph: {
       title: c.metaTitle,
       description: c.metaDescription,
-      url: absoluteUrl("/en-iyi/streaming", locale),
+      url: absoluteUrl("/best-vpn/streaming", locale),
       type: "article",
     },
   };

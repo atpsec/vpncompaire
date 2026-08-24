@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description:
     "Yurt dışından Türkiye konumu gereken senaryolarda sunucu dizini, servis koşulları, bankacılık güvenliği ve VPN sınırlamalarını kontrol etme rehberi.",
   // İçerik yalnızca Türkçe servis ediliyor; EN/DE istekleri middleware 301'ler.
-  alternates: defaultLocaleAlternates("/en-iyi/yurt-disindaki-turkler"),
+  alternates: defaultLocaleAlternates("/best-vpn/turks-abroad"),
 };
 
 type Props = { params: Promise<{ locale: string }> };
@@ -78,10 +78,10 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema(
           [
             { name: "Ana sayfa", path: "/" },
-            { name: "Kullanım Alanları", path: "/en-iyi" },
+            { name: "Kullanım Alanları", path: "/best-vpn" },
             {
               name: "Yurt dışındaki Türkler için",
-              path: "/en-iyi/yurt-disindaki-turkler",
+              path: "/best-vpn/turks-abroad",
             },
           ],
           "tr",
@@ -95,7 +95,7 @@ export default async function Page({ params }: Props) {
             Ana sayfa
           </Link>{" "}
           ›{" "}
-          <Link href="/en-iyi-vpn" className="hover:text-ink">
+          <Link href="/vpn-reviews" className="hover:text-ink">
             Kullanım Alanları
           </Link>{" "}
           ›{" "}
@@ -183,7 +183,7 @@ export default async function Page({ params }: Props) {
                           </ProviderLink>
                         </Button>
                         <Button asChild variant="ghost" size="sm">
-                          <Link href={`/inceleme/${product.slug}`}>
+                          <Link href={`/reviews/${product.slug}`}>
                             Tam incelemeyi oku →
                           </Link>
                         </Button>
@@ -241,19 +241,19 @@ export default async function Page({ params }: Props) {
           <p className="text-sm text-ink-muted">İlgili sayfalar</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <NextLink
-              href="/en-iyi/turkiye"
+              href="/best-vpn/turkey"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               <Flag className="size-3" /> Türkiye için
             </NextLink>
             <Link
-              href="/en-iyi/streaming"
+              href="/best-vpn/streaming"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               <Tv className="size-3" /> Streaming için
             </Link>
             <Link
-              href="/rehber/turkiye-de-vpn-yasal-mi"
+              href="/guide/is-vpn-legal-in-turkey"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Türkiye&apos;de VPN yasal mı?

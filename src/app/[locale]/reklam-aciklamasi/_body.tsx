@@ -53,13 +53,13 @@ function DisclosureBody({ locale }: { locale: "tr" | "en" | "de" }) {
         <h2>{t.revenueH}</h2><p>{t.revenueP}</p>
         <h2>{t.linksH}</h2><p>{t.linksP}</p>
         <h2>{t.independenceH}</h2><p>{t.independenceP}</p>
-        <h2>{t.sourcesH}</h2><ul>{t.sources.map((item) => <li key={item}>{item}</li>)}</ul><p><Link href="/metodoloji">{t.sourceLink}</Link>.</p>
-        <h2>{t.adsH}</h2><p>{t.adsP}</p><p><Link href="/cerez-politikasi">Cookie / consent</Link> · <Link href="/gizlilik">Privacy</Link></p>
+        <h2>{t.sourcesH}</h2><ul>{t.sources.map((item) => <li key={item}>{item}</li>)}</ul><p><Link href="/methodology">{t.sourceLink}</Link>.</p>
+        <h2>{t.adsH}</h2><p>{t.adsP}</p><p><Link href="/cookie-policy">Cookie / consent</Link> · <Link href="/privacy-policy">Privacy</Link></p>
         <h2>{t.guaranteeH}</h2><p>{t.guaranteeP}</p>
       </article>
 
-      <Card className="mt-12 p-6"><div className="flex items-start gap-3"><ShieldCheck className="size-5 text-brand-600 mt-0.5 shrink-0" /><div><p className="font-semibold text-ink-strong">{t.sourceLink}</p><p className="mt-1 text-sm text-ink leading-relaxed"><Link href="/metodoloji" className="text-brand-700 underline">/metodoloji</Link></p></div></div></Card>
-      <Card className="mt-6 p-6 border-accent-300 bg-accent-50/40"><div className="flex items-start gap-3"><AlertTriangle className="size-5 text-accent-600 mt-0.5 shrink-0" /><div><p className="font-semibold text-ink-strong">{t.reminder}</p><p className="mt-1 text-sm text-ink leading-relaxed">{t.reminderBody} <Link href="/yasal-uyari" className="text-brand-700 underline">{t.legal}</Link>.</p></div></div></Card>
+      <Card className="mt-12 p-6"><div className="flex items-start gap-3"><ShieldCheck className="size-5 text-brand-600 mt-0.5 shrink-0" /><div><p className="font-semibold text-ink-strong">{t.sourceLink}</p><p className="mt-1 text-sm text-ink leading-relaxed"><Link href="/methodology" className="text-brand-700 underline">/methodology</Link></p></div></div></Card>
+      <Card className="mt-6 p-6 border-accent-300 bg-accent-50/40"><div className="flex items-start gap-3"><AlertTriangle className="size-5 text-accent-600 mt-0.5 shrink-0" /><div><p className="font-semibold text-ink-strong">{t.reminder}</p><p className="mt-1 text-sm text-ink leading-relaxed">{t.reminderBody} <Link href="/legal-notice" className="text-brand-700 underline">{t.legal}</Link>.</p></div></div></Card>
     </>
   );
 }

@@ -28,11 +28,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/en-iyi", locale),
+    alternates: localizedAlternates("/best-vpn", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/en-iyi", locale),
+      url: absoluteUrl("/best-vpn", locale),
       type: "website",
     },
   };
@@ -40,15 +40,16 @@ export async function generateMetadata({
 
 const USE_CASES: ReadonlyArray<{
   slug: string;
+  publicSlug: string;
   Icon: LucideIcon;
   tone: "brand" | "accent";
 }> = [
-  { slug: "gizlilik", Icon: Lock, tone: "brand" },
-  { slug: "streaming", Icon: Tv, tone: "accent" },
-  { slug: "oyun", Icon: Gamepad2, tone: "brand" },
-  { slug: "seyahat", Icon: Plane, tone: "accent" },
-  { slug: "turkiye", Icon: Flag, tone: "brand" },
-  { slug: "yurt-disindaki-turkler", Icon: Globe2, tone: "accent" },
+  { slug: "gizlilik", publicSlug: "privacy", Icon: Lock, tone: "brand" },
+  { slug: "streaming", publicSlug: "streaming", Icon: Tv, tone: "accent" },
+  { slug: "oyun", publicSlug: "gaming", Icon: Gamepad2, tone: "brand" },
+  { slug: "seyahat", publicSlug: "travel", Icon: Plane, tone: "accent" },
+  { slug: "turkiye", publicSlug: "turkey", Icon: Flag, tone: "brand" },
+  { slug: "yurt-disindaki-turkler", publicSlug: "turks-abroad", Icon: Globe2, tone: "accent" },
 ];
 
 export default async function Page({ params }: Props) {
@@ -68,7 +69,7 @@ function UseCaseHubView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: t("breadcrumb"), path: "/en-iyi" },
+            { name: t("breadcrumb"), path: "/best-vpn" },
           ],
           locale,
         )}
@@ -90,7 +91,7 @@ function UseCaseHubView() {
         </header>
 
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {USE_CASES.map(({ slug, Icon, tone }) => {
+          {USE_CASES.map(({ slug, publicSlug, Icon, tone }) => {
             const card = (
               <Card className="p-5 hover:border-brand-300 hover:shadow-md transition-all h-full">
                 <div
@@ -114,7 +115,7 @@ function UseCaseHubView() {
                 </div>
               </Card>
             );
-            const href = `/en-iyi/${slug}`;
+            const href = `/best-vpn/${publicSlug}`;
             return slug === "turkiye" || slug === "yurt-disindaki-turkler" ? (
               <a key={slug} href={href} className="group">
                 {card}

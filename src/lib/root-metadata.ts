@@ -32,12 +32,8 @@ const GOOGLE_SEARCH_CONSOLE_TOKEN =
 
 export function buildRootMetadata(locale: Locale): Metadata {
   const description = siteConfig.description[locale];
-  const canonicalLocale = locale === "de" ? "en" : locale;
-  const socialImage = `${siteConfig.ogImage}?locale=${locale}`;
-  const url =
-    canonicalLocale === siteConfig.defaultLocale
-      ? siteConfig.url
-      : `${siteConfig.url}/${canonicalLocale}`;
+  const socialImage = `${siteConfig.ogImage}?locale=en`;
+  const url = siteConfig.url;
 
   return {
     metadataBase: new URL(siteConfig.url),
@@ -72,8 +68,7 @@ export function buildRootMetadata(locale: Locale): Metadata {
     alternates: {
       canonical: url,
       languages: {
-        tr: siteConfig.url,
-        en: `${siteConfig.url}/en`,
+        en: siteConfig.url,
         "x-default": siteConfig.url,
       },
     },

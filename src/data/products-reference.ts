@@ -310,7 +310,7 @@ export const referenceProducts: Product[] = [
     "F-Secure VPN",
     47,
     "F-Secure güvenlik paketinde gizlilik aracı",
-    "F-Secure VPN, Finlandiya merkezli F-Secure'un tüketici güvenlik paketleri içinde sunduğu VPN/gizlilik hizmetidir.",
+    "F-Secure VPN, Finlandiya merkezli F-Secure'un tüketici güvenlik paketleri içinde sunduğu VPN/privacy-policy hizmetidir.",
     "https://www.f-secure.com/en/vpn",
     ["Finlandiya merkezli güvenlik şirketi", "F-Secure paketleriyle entegrasyon", "Ana platformlarda kullanım"],
     ["Bağımsız VPN markalarına göre gelişmiş özellikler daha sınırlı olabilir", "Plan kapsamı ülkeye göre değişebilir"],

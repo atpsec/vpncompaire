@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/iletisim", locale),
+    alternates: localizedAlternates("/contact", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/iletisim", locale),
+      url: absoluteUrl("/contact", locale),
       type: "website",
     },
   };
@@ -45,7 +45,7 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema(
           [
             { name: t("breadcrumbHome"), path: "/" },
-            { name: t("breadcrumbHere"), path: "/iletisim" },
+            { name: t("breadcrumbHere"), path: "/contact" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -120,20 +120,20 @@ function QuickLinks() {
   return (
     <ul className="mt-3 space-y-2 text-sm">
       <li>
-        <Link href="/hakkimizda" className="text-brand-700 hover:underline">
+        <Link href="/about" className="text-brand-700 hover:underline">
           {t("footer.links.about")}
         </Link>{" "}
         {t("contact.quickLinks.aboutSuffix")}
       </li>
       <li>
-        <Link href="/metodoloji" className="text-brand-700 hover:underline">
+        <Link href="/methodology" className="text-brand-700 hover:underline">
           {t("footer.links.methodology")}
         </Link>{" "}
         {t("contact.quickLinks.methodologySuffix")}
       </li>
       <li>
         <Link
-          href="/reklam-aciklamasi"
+          href="/affiliate-disclosure"
           className="text-brand-700 hover:underline"
         >
           {t("footer.links.disclosure")}
@@ -141,7 +141,7 @@ function QuickLinks() {
         {t("contact.quickLinks.disclosureSuffix")}
       </li>
       <li>
-        <Link href="/gizlilik" className="text-brand-700 hover:underline">
+        <Link href="/privacy-policy" className="text-brand-700 hover:underline">
           {t("footer.links.privacy")}
         </Link>{" "}
         {t("contact.quickLinks.privacySuffix")}

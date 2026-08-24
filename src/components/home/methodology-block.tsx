@@ -44,7 +44,7 @@ export function MethodologyBlock() {
             </div>
             <h2 className="mt-4 text-3xl sm:text-4xl font-bold tracking-tight text-ink-strong">{t.title}</h2>
             <p className="mt-4 text-ink-muted">{t.body}</p>
-            <Link href="/metodoloji" className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-brand-700 hover:underline">
+            <Link href="/methodology" className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-brand-700 hover:underline">
               {t.cta} <ArrowRight className="size-3.5" />
             </Link>
           </div>

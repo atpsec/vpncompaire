@@ -125,14 +125,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isArchived = Boolean(getArchivedProduct(slug));
   const isReferenceOnly = referenceProducts.some((p) => p.slug === slug);
   const canonicalLocale = isArchived ? "tr" : locale === "de" ? "en" : locale;
-  const canonical = absoluteUrl(`/inceleme/${product.slug}`, canonicalLocale);
+  const canonical = absoluteUrl(`/reviews/${product.slug}`, canonicalLocale);
   const title = `${product.brand} — ${isArchived ? l.archived : l.metaSuffix}`;
   return {
     title,
     description: `${product.brand}: ${product.summary} ${l.intro}`,
     alternates: isArchived || isReferenceOnly
       ? { canonical }
-      : bilingualAlternates(`/inceleme/${product.slug}`, locale, "en"),
+      : bilingualAlternates(`/reviews/${product.slug}`, locale, "en"),
     robots:
       isArchived || isReferenceOnly || locale === "de"
         ? { index: false, follow: true }
@@ -160,7 +160,7 @@ export default async function Page({ params }: Props) {
     "@type": "WebPage",
     name: `${product.brand} ${isArchived ? labels[locale].archived : labels[locale].profile}`,
     description: product.summary,
-    url: absoluteUrl(`/inceleme/${product.slug}`, canonicalLocale),
+    url: absoluteUrl(`/reviews/${product.slug}`, canonicalLocale),
     ...(isArchived
       ? {}
       : {
@@ -184,10 +184,10 @@ function ProviderView({ product, locale, providerSchema, isArchived }: { product
   return (
     <>
       <JsonLd data={providerSchema} />
-      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.hub, path: "/en-iyi-vpn" }, { name: product.brand, path: `/inceleme/${product.slug}` }], isArchived ? "tr" : locale)} />
+      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.hub, path: "/vpn-reviews" }, { name: product.brand, path: `/reviews/${product.slug}` }], isArchived ? "tr" : locale)} />
 
       <Container size="md" className="py-12 sm:py-16">
-        <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t.home}</Link>{" "}›{" "}<Link href="/en-iyi-vpn" className="hover:text-ink">{t.hub}</Link>{" "}› <span className="text-ink-strong">{product.brand}</span></p>
+        <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t.home}</Link>{" "}›{" "}<Link href="/vpn-reviews" className="hover:text-ink">{t.hub}</Link>{" "}› <span className="text-ink-strong">{product.brand}</span></p>
 
         <header className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-start">
           <VPNLogo slug={product.slug} size={72} className="sm:mt-2" />
@@ -199,7 +199,7 @@ function ProviderView({ product, locale, providerSchema, isArchived }: { product
         </header>
 
         <Card className="mt-6 p-5 bg-brand-50/40">
-          <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{t.intro}</p><Link href="/metodoloji" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>
+          <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{t.intro}</p><Link href="/methodology" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>
         </Card>
 
         {isArchived ? null : <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />}
@@ -235,7 +235,7 @@ function ProviderView({ product, locale, providerSchema, isArchived }: { product
           {product.highlights.openSource !== undefined && <Row label={t.openSource} value={product.highlights.openSource ? t.yes : t.no} />}
         </dl></section>
 
-        <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center"><Link href="/en-iyi-vpn" className="inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline">{t.compare} <ArrowRight className="size-4" /></Link></section>
+        <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center"><Link href="/vpn-reviews" className="inline-flex items-center gap-1.5 text-base font-semibold text-brand-700 hover:underline">{t.compare} <ArrowRight className="size-4" /></Link></section>
       </Container>
     </>
   );

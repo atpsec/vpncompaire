@@ -52,7 +52,7 @@ export function ConsentBanner({ locale }: { locale: SupportedLocale }) {
   const copy = COPY[locale];
   const mounted = useMounted();
   const cookiePolicyHref =
-    locale === "tr" ? "/cerez-politikasi" : `/${locale}/cerez-politikasi`;
+    locale === "tr" ? "/cookie-policy" : `/${locale}/cookie-policy`;
 
   // Lazy initializer — ilk render'dan önce localStorage'ı okur.
   const [decided, setDecided] = useState<boolean>(() => {

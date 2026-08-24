@@ -1,6 +1,6 @@
 // "Türkiye'de VPN yasal mı?" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/turkiye-de-vpn-yasal-mi/page.tsx) bu modülden
-// render eder; yerelleştirilmiş URL'ler (/rehber/turkiye-de-vpn-yasal-mi,
+// Sayfa (src/app/[locale]/guide/turkiye-de-vpn-yasal-mi/page.tsx) bu modülden
+// render eder; yerelleştirilmiş URL'ler (/guide/turkiye-de-vpn-yasal-mi,
 // /en/guide/is-vpn-legal-in-turkey, /de/ratgeber/ist-vpn-in-der-tuerkei-legal)
 // proxy rewrite ile aynı sayfaya düşer.
 
@@ -143,7 +143,7 @@ const tr: IsVpnLegalInTurkeyContent = {
       {
         bold: "Denetlenmiş, güvenilir bir VPN seç:",
         text: " Ücretsiz VPN'ler verini satabilir. Denetimli sağlayıcılarla devam et — ",
-        link: { href: "/en-iyi-vpn", label: "en iyi seçimlerimizi gör" },
+        link: { href: "/vpn-reviews", label: "en iyi seçimlerimizi gör" },
         afterLink: ".",
       },
     ],
@@ -185,12 +185,12 @@ const tr: IsVpnLegalInTurkeyContent = {
   },
   relatedLabel: "İlgili sayfalar",
   relatedLinks: [
-    { href: "/en-iyi/turkiye", text: "Türkiye için en iyi VPN" },
+    { href: "/best-vpn/turkey", text: "Türkiye için en iyi VPN" },
     {
-      href: "/en-iyi/yurt-disindaki-turkler",
+      href: "/best-vpn/turks-abroad",
       text: "Yurt dışı Türkler için VPN",
     },
-    { href: "/en-iyi-vpn", text: "En iyi VPN'ler 2026" },
+    { href: "/vpn-reviews", text: "En iyi VPN'ler 2026" },
   ],
 };
 
@@ -296,7 +296,7 @@ const en: IsVpnLegalInTurkeyContent = {
       {
         bold: "Pick an audited, trustworthy VPN:",
         text: " Free VPNs may sell your data. Stick with audited providers — ",
-        link: { href: "/en-iyi-vpn", label: "see our top picks" },
+        link: { href: "/vpn-reviews", label: "see our top picks" },
         afterLink: ".",
       },
     ],
@@ -338,12 +338,12 @@ const en: IsVpnLegalInTurkeyContent = {
   },
   relatedLabel: "Related pages",
   relatedLinks: [
-    { href: "/en-iyi/turkiye", text: "Best VPN for Türkiye" },
+    { href: "/best-vpn/turkey", text: "Best VPN for Türkiye" },
     {
-      href: "/en-iyi/yurt-disindaki-turkler",
+      href: "/best-vpn/turks-abroad",
       text: "VPN for Turks abroad",
     },
-    { href: "/en-iyi-vpn", text: "Best VPNs 2026" },
+    { href: "/vpn-reviews", text: "Best VPNs 2026" },
   ],
 };
 
@@ -449,7 +449,7 @@ const de: IsVpnLegalInTurkeyContent = {
       {
         bold: "Wähle ein geprüftes, vertrauenswürdiges VPN:",
         text: " Kostenlose VPNs können deine Daten verkaufen. Bleib bei auditierten Anbietern — ",
-        link: { href: "/en-iyi-vpn", label: "sieh dir unsere Top-Auswahl an" },
+        link: { href: "/vpn-reviews", label: "sieh dir unsere Top-Auswahl an" },
         afterLink: ".",
       },
     ],
@@ -491,12 +491,12 @@ const de: IsVpnLegalInTurkeyContent = {
   },
   relatedLabel: "Verwandte Seiten",
   relatedLinks: [
-    { href: "/en-iyi/turkiye", text: "Bestes VPN für die Türkei" },
+    { href: "/best-vpn/turkey", text: "Bestes VPN für die Türkei" },
     {
-      href: "/en-iyi/yurt-disindaki-turkler",
+      href: "/best-vpn/turks-abroad",
       text: "VPN für Türken im Ausland",
     },
-    { href: "/en-iyi-vpn", text: "Die besten VPNs 2026" },
+    { href: "/vpn-reviews", text: "Die besten VPNs 2026" },
   ],
 };
 

@@ -55,13 +55,13 @@ export function Hero() {
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild variant="primary" size="md">
-              <Link href="/en-iyi-vpn">
+              <Link href="/vpn-reviews">
                 {copy.primaryCta}
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
             <Button asChild variant="secondary" size="md">
-              <Link href="/metodoloji">{copy.secondaryCta}</Link>
+              <Link href="/methodology">{copy.secondaryCta}</Link>
             </Button>
           </div>
 

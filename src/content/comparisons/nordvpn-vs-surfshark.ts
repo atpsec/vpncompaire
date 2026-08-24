@@ -1,6 +1,6 @@
 // "NordVPN vs Surfshark" karşılaştırmasının locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/karsilastir/nordvpn-vs-surfshark/page.tsx) bu
-// modülden render eder; yerelleştirilmiş URL'ler (/karsilastir/...,
+// Sayfa (src/app/[locale]/comparison/nordvpn-vs-surfshark/page.tsx) bu
+// modülden render eder; yerelleştirilmiş URL'ler (/comparison/...,
 // /en/comparison/..., /de/vergleich/...) proxy rewrite ile aynı sayfaya düşer.
 
 import type { AppLocale } from "@/lib/i18n-paths";
@@ -156,10 +156,10 @@ const tr: NordvpnVsSurfsharkContent = {
   related: {
     title: "Diğer karşılaştırmalar",
     links: [
-      { href: "/inceleme/expressvpn", text: "ExpressVPN incelemesi" },
-      { href: "/inceleme/proton-vpn", text: "Proton VPN incelemesi" },
+      { href: "/reviews/expressvpn", text: "ExpressVPN incelemesi" },
+      { href: "/reviews/proton-vpn", text: "Proton VPN incelemesi" },
     ],
-    allLink: { href: "/en-iyi-vpn", text: "Tüm sağlayıcı profilleri" },
+    allLink: { href: "/vpn-reviews", text: "Tüm sağlayıcı profilleri" },
   },
 };
 
@@ -280,10 +280,10 @@ const en: NordvpnVsSurfsharkContent = {
   related: {
     title: "More comparisons",
     links: [
-      { href: "/inceleme/expressvpn", text: "ExpressVPN review" },
-      { href: "/inceleme/proton-vpn", text: "Proton VPN review" },
+      { href: "/reviews/expressvpn", text: "ExpressVPN review" },
+      { href: "/reviews/proton-vpn", text: "Proton VPN review" },
     ],
-    allLink: { href: "/en-iyi-vpn", text: "All provider profiles" },
+    allLink: { href: "/vpn-reviews", text: "All provider profiles" },
   },
 };
 
@@ -404,10 +404,10 @@ const de: NordvpnVsSurfsharkContent = {
   related: {
     title: "Weitere Vergleiche",
     links: [
-      { href: "/inceleme/expressvpn", text: "ExpressVPN im Test" },
-      { href: "/inceleme/proton-vpn", text: "Proton VPN im Test" },
+      { href: "/reviews/expressvpn", text: "ExpressVPN im Test" },
+      { href: "/reviews/proton-vpn", text: "Proton VPN im Test" },
     ],
-    allLink: { href: "/en-iyi-vpn", text: "Alle Anbieterprofile" },
+    allLink: { href: "/vpn-reviews", text: "Alle Anbieterprofile" },
   },
 };
 

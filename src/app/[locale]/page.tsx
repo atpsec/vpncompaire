@@ -9,6 +9,7 @@ import { ComparisonBlock } from "@/components/home/comparison-block";
 import { MethodologyBlock } from "@/components/home/methodology-block";
 import { FAQSection } from "@/components/home/faq-section";
 import { HomeBlogColumns } from "@/components/home/home-blog-columns";
+import { AiEditorialBlock } from "@/components/home/ai-editorial-block";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   organizationSchema,
@@ -38,6 +39,7 @@ export default async function HomePage({ params }: Props) {
       <Hero />
       <TopThreePodium />
       <HomeBlogColumns locale={locale} />
+      <AiEditorialBlock />
       <TopVPNList />
       <IpSecurityBanner />
       <ComparePicker />

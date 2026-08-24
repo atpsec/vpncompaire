@@ -40,10 +40,10 @@ const CONTENT = {
     ],
     relatedKicker: "Diğer araçlar",
     related: [
-      { label: "Quiz: Sana uygun VPN", href: "/sana-uygun-vpn" },
-      { label: "Maliyet hesaplayıcı", href: "/hesaplayici" },
-      { label: "İki VPN'i karşılaştır", href: "/karsilastir" },
-      { label: "VPN sözlüğü", href: "/sozluk" },
+      { label: "Quiz: Sana uygun VPN", href: "/quiz" },
+      { label: "Maliyet hesaplayıcı", href: "/calculator" },
+      { label: "İki VPN'i karşılaştır", href: "/comparison" },
+      { label: "VPN sözlüğü", href: "/glossary" },
     ],
   },
   en: {
@@ -73,10 +73,10 @@ const CONTENT = {
     ],
     relatedKicker: "Other tools",
     related: [
-      { label: "Quiz: your-match VPN", href: "/sana-uygun-vpn" },
-      { label: "Cost calculator", href: "/hesaplayici" },
-      { label: "Compare two VPNs", href: "/karsilastir" },
-      { label: "VPN glossary", href: "/sozluk" },
+      { label: "Quiz: your-match VPN", href: "/quiz" },
+      { label: "Cost calculator", href: "/calculator" },
+      { label: "Compare two VPNs", href: "/comparison" },
+      { label: "VPN glossary", href: "/glossary" },
     ],
   },
 } as const;
@@ -87,11 +87,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: localizedAlternates("/sunucu-haritasi", locale),
+    alternates: localizedAlternates("/server-map", locale),
     openGraph: {
       title: c.ogTitle,
       description: c.ogDescription,
-      url: absoluteUrl("/sunucu-haritasi", locale),
+      url: absoluteUrl("/server-map", locale),
       type: "website",
     },
   };
@@ -112,7 +112,7 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema(
           [
             { name: c.breadcrumbHome, path: "/" },
-            { name: c.breadcrumbHere, path: "/sunucu-haritasi" },
+            { name: c.breadcrumbHere, path: "/server-map" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -156,7 +156,7 @@ export default async function Page({ params }: Props) {
             {c.related.map((r) => (
               <Link
                 key={r.href}
-                href={r.href === "/karsilastir" ? comparisonHref : r.href}
+                href={r.href === "/comparison" ? comparisonHref : r.href}
                 className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
               >
                 {r.label}

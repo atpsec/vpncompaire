@@ -1,6 +1,6 @@
 // "Öğrenciler için VPN" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/ogrenciler-icin-vpn/page.tsx) bu modülden
-// render eder; yerelleştirilmiş URL'ler (/rehber/ogrenciler-icin-vpn,
+// Sayfa (src/app/[locale]/guide/ogrenciler-icin-vpn/page.tsx) bu modülden
+// render eder; yerelleştirilmiş URL'ler (/guide/ogrenciler-icin-vpn,
 // /en/guide/vpn-for-students, /de/ratgeber/vpn-fuer-studenten) proxy rewrite
 // ile aynı sayfaya düşer.
 
@@ -200,9 +200,9 @@ const tr: VpnForStudentsContent = {
   ],
   relatedLabel: "İlgili rehberler",
   relatedLinks: [
-    { href: "/rehber/vpn-nedir", text: "VPN nedir?" },
-    { href: "/rehber/ucretsiz-vs-ucretli-vpn", text: "Ücretsiz vs Ücretli" },
-    { href: "/sana-uygun-vpn", text: "Quiz: Sana uygun VPN" },
+    { href: "/guide/vpn-nedir", text: "VPN nedir?" },
+    { href: "/guide/ucretsiz-vs-ucretli-vpn", text: "Ücretsiz vs Ücretli" },
+    { href: "/quiz", text: "Quiz: Sana uygun VPN" },
   ],
 };
 
@@ -371,7 +371,7 @@ const en: VpnForStudentsContent = {
   relatedLinks: [
     { href: "/guide/what-is-a-vpn", text: "What is a VPN?" },
     { href: "/guide/free-vs-paid-vpn", text: "Free vs paid" },
-    { href: "/sana-uygun-vpn", text: "Quiz: the right VPN for you" },
+    { href: "/quiz", text: "Quiz: the right VPN for you" },
   ],
 };
 
@@ -549,7 +549,7 @@ const de: VpnForStudentsContent = {
       href: "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn",
       text: "Kostenlos vs. kostenpflichtig",
     },
-    { href: "/sana-uygun-vpn", text: "Quiz: Das passende VPN für dich" },
+    { href: "/quiz", text: "Quiz: Das passende VPN für dich" },
   ],
 };
 

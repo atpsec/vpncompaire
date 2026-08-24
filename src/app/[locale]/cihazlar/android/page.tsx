@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: device.metaTitle,
     description: device.metaDescription,
-    alternates: bilingualAlternates("/cihazlar/android", locale, "tr"),
+    alternates: bilingualAlternates("/devices/android", locale, "tr"),
     robots: locale === "de" ? { index: false, follow: true } : undefined,
   };
 }

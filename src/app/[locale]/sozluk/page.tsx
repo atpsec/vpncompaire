@@ -22,11 +22,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/sozluk", locale),
+    alternates: localizedAlternates("/glossary", locale),
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: absoluteUrl("/sozluk", locale),
+      url: absoluteUrl("/glossary", locale),
       type: "website",
     },
   };
@@ -64,10 +64,10 @@ function GlossaryPageView() {
       locale === "en" ? "en" : locale === "de" ? "de" : "tr-TR",
     hasDefinedTerm: glossary.map((term) => ({
       "@type": "DefinedTerm",
-      "@id": absoluteUrl(`/sozluk#${term.id}`, locale),
+      "@id": absoluteUrl(`/glossary#${term.id}`, locale),
       name: term.term,
       description: term.long,
-      inDefinedTermSet: absoluteUrl("/sozluk", locale),
+      inDefinedTermSet: absoluteUrl("/glossary", locale),
     })),
   };
 
@@ -77,7 +77,7 @@ function GlossaryPageView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: t("breadcrumb"), path: "/sozluk" },
+            { name: t("breadcrumb"), path: "/glossary" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -146,7 +146,7 @@ function GlossaryPageView() {
               {t("relatedLinks.checklist")}
             </Link>
             <Link
-              href="/metodoloji"
+              href="/methodology"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("relatedLinks.methodology")}

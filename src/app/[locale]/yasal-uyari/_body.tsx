@@ -167,7 +167,7 @@ export function TrBody() {
           {siteConfig.name} gelirini Google AdSense reklamlarından elde eder.
           VPN sağlayıcılarına giden bağlantılar düz, ticari olmayan
           bağlantılardır; bunlardan komisyon almıyoruz. Detaylar için{" "}
-          <Link href="/reklam-aciklamasi">Reklam Açıklaması</Link>{" "}
+          <Link href="/affiliate-disclosure">Reklam Açıklaması</Link>{" "}
           sayfasına bak.
         </p>
 
@@ -351,7 +351,7 @@ export function EnBody() {
           {siteConfig.name} earns its revenue from Google AdSense ads. Links to
           VPN providers are plain, non-commercial links; we earn no commission
           from them. See the{" "}
-          <Link href="/reklam-aciklamasi">Advertising Disclosure</Link> for
+          <Link href="/affiliate-disclosure">Advertising Disclosure</Link> for
           details.
         </p>
 
@@ -540,7 +540,7 @@ export function DeBody() {
           {siteConfig.name} erzielt Einnahmen aus Google-AdSense-Anzeigen.
           Links zu VPN-Anbietern sind einfache, nicht-kommerzielle Links; wir
           erhalten dafür keine Provision. Details finden Sie im{" "}
-          <Link href="/reklam-aciklamasi">Werbehinweis</Link>.
+          <Link href="/affiliate-disclosure">Werbehinweis</Link>.
         </p>
 
         <h2>9. Haftungsbeschränkung</h2>
@@ -573,25 +573,25 @@ function RelatedLinksTr() {
       <p className="text-sm text-ink-muted">İlgili sayfalar</p>
       <div className="mt-3 flex flex-wrap gap-2 justify-center">
         <Link
-          href="/reklam-aciklamasi"
+          href="/affiliate-disclosure"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Reklam açıklaması
         </Link>
         <Link
-          href="/sartlar"
+          href="/terms"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Kullanım şartları
         </Link>
         <Link
-          href="/gizlilik"
+          href="/privacy-policy"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Gizlilik politikası
         </Link>
         <Link
-          href="/metodoloji"
+          href="/methodology"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Test metodolojimiz
@@ -607,25 +607,25 @@ function RelatedLinksEn() {
       <p className="text-sm text-ink-muted">Related pages</p>
       <div className="mt-3 flex flex-wrap gap-2 justify-center">
         <Link
-          href="/reklam-aciklamasi"
+          href="/affiliate-disclosure"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Advertising disclosure
         </Link>
         <Link
-          href="/sartlar"
+          href="/terms"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Terms of use
         </Link>
         <Link
-          href="/gizlilik"
+          href="/privacy-policy"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Privacy policy
         </Link>
         <Link
-          href="/metodoloji"
+          href="/methodology"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Our methodology
@@ -641,25 +641,25 @@ function RelatedLinksDe() {
       <p className="text-sm text-ink-muted">Verwandte Seiten</p>
       <div className="mt-3 flex flex-wrap gap-2 justify-center">
         <Link
-          href="/reklam-aciklamasi"
+          href="/affiliate-disclosure"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Werbehinweis
         </Link>
         <Link
-          href="/sartlar"
+          href="/terms"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Nutzungsbedingungen
         </Link>
         <Link
-          href="/gizlilik"
+          href="/privacy-policy"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Datenschutzerklärung
         </Link>
         <Link
-          href="/metodoloji"
+          href="/methodology"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
           Unsere Methodik

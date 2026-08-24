@@ -304,7 +304,7 @@ export function TrBody() {
         <h2>7. İletişim</h2>
         <p>
           Çerez politikamızla ilgili sorun varsa{" "}
-          <Link href="/iletisim">iletişim sayfamızdan</Link> bize
+          <Link href="/contact">iletişim sayfamızdan</Link> bize
           ulaşabilirsin.
         </p>
       </article>
@@ -316,7 +316,7 @@ export function TrBody() {
         <ul className="mt-3 space-y-2 text-sm">
           <li>
             <Link
-              href="/gizlilik"
+              href="/privacy-policy"
               className="text-brand-700 hover:underline"
             >
               Gizlilik Politikası →
@@ -324,7 +324,7 @@ export function TrBody() {
           </li>
           <li>
             <Link
-              href="/sartlar"
+              href="/terms"
               className="text-brand-700 hover:underline"
             >
               Kullanım Şartları →
@@ -332,7 +332,7 @@ export function TrBody() {
           </li>
           <li>
             <Link
-              href="/reklam-aciklamasi"
+              href="/affiliate-disclosure"
               className="text-brand-700 hover:underline"
             >
               Reklam Açıklaması →
@@ -642,7 +642,7 @@ export function EnBody() {
         <h2>7. Contact</h2>
         <p>
           If you have questions about our cookie policy, reach us via{" "}
-          <Link href="/iletisim">our contact page</Link>.
+          <Link href="/contact">our contact page</Link>.
         </p>
       </article>
 
@@ -653,7 +653,7 @@ export function EnBody() {
         <ul className="mt-3 space-y-2 text-sm">
           <li>
             <Link
-              href="/gizlilik"
+              href="/privacy-policy"
               className="text-brand-700 hover:underline"
             >
               Privacy Policy →
@@ -661,7 +661,7 @@ export function EnBody() {
           </li>
           <li>
             <Link
-              href="/sartlar"
+              href="/terms"
               className="text-brand-700 hover:underline"
             >
               Terms of Use →
@@ -669,7 +669,7 @@ export function EnBody() {
           </li>
           <li>
             <Link
-              href="/reklam-aciklamasi"
+              href="/affiliate-disclosure"
               className="text-brand-700 hover:underline"
             >
               Advertising Disclosure →
@@ -988,7 +988,7 @@ export function DeBody() {
         <h2>7. Kontakt</h2>
         <p>
           Bei Fragen zu unserer Cookie-Richtlinie erreichen Sie uns über{" "}
-          <Link href="/iletisim">unsere Kontaktseite</Link>.
+          <Link href="/contact">unsere Kontaktseite</Link>.
         </p>
       </article>
 
@@ -999,7 +999,7 @@ export function DeBody() {
         <ul className="mt-3 space-y-2 text-sm">
           <li>
             <Link
-              href="/gizlilik"
+              href="/privacy-policy"
               className="text-brand-700 hover:underline"
             >
               Datenschutzerklärung →
@@ -1007,7 +1007,7 @@ export function DeBody() {
           </li>
           <li>
             <Link
-              href="/sartlar"
+              href="/terms"
               className="text-brand-700 hover:underline"
             >
               Nutzungsbedingungen →
@@ -1015,7 +1015,7 @@ export function DeBody() {
           </li>
           <li>
             <Link
-              href="/reklam-aciklamasi"
+              href="/affiliate-disclosure"
               className="text-brand-700 hover:underline"
             >
               Werbehinweis →

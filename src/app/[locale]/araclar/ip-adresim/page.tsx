@@ -24,11 +24,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/araclar/ip-adresim", locale),
+    alternates: localizedAlternates("/tools/ip-adresim", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar/ip-adresim", locale),
+      url: absoluteUrl("/tools/ip-adresim", locale),
       type: "website",
     },
   };
@@ -83,7 +83,7 @@ export default async function Page({ params }: Props) {
     "@type": "WebApplication",
     name: t("metaTitle"),
     description: t("metaDescription"),
-    url: absoluteUrl("/araclar/ip-adresim"),
+    url: absoluteUrl("/tools/ip-adresim"),
     applicationCategory: "SecurityApplication",
     operatingSystem: "Any",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -95,8 +95,8 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: tCommon("ctaTitle"), path: "/araclar" },
-            { name: t("breadcrumb"), path: "/araclar/ip-adresim" },
+            { name: tCommon("ctaTitle"), path: "/tools" },
+            { name: t("breadcrumb"), path: "/tools/ip-adresim" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -109,7 +109,7 @@ export default async function Page({ params }: Props) {
             {tNav("home")}
           </Link>{" "}
           ›{" "}
-          <Link href="/araclar" className="hover:text-ink">
+          <Link href="/tools" className="hover:text-ink">
             {tNav("tools")}
           </Link>{" "}
           › <span className="text-ink-strong">{t("breadcrumb")}</span>

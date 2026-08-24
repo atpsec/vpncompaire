@@ -19,11 +19,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/araclar/dns-leak-test", locale),
+    alternates: localizedAlternates("/tools/dns-leak-test", locale),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/araclar/dns-leak-test", locale),
+      url: absoluteUrl("/tools/dns-leak-test", locale),
       type: "website",
     },
   };
@@ -46,7 +46,7 @@ function DnsLeakView() {
     "@type": "WebApplication",
     name: t("metaTitle"),
     description: t("metaDescription"),
-    url: absoluteUrl("/araclar/dns-leak-test"),
+    url: absoluteUrl("/tools/dns-leak-test"),
     applicationCategory: "SecurityApplication",
     operatingSystem: "Any",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
@@ -69,8 +69,8 @@ function DnsLeakView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: tNav("tools"), path: "/araclar" },
-            { name: t("breadcrumb"), path: "/araclar/dns-leak-test" },
+            { name: tNav("tools"), path: "/tools" },
+            { name: t("breadcrumb"), path: "/tools/dns-leak-test" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -83,7 +83,7 @@ function DnsLeakView() {
             {tNav("home")}
           </Link>{" "}
           ›{" "}
-          <Link href="/araclar" className="hover:text-ink">
+          <Link href="/tools" className="hover:text-ink">
             {tNav("tools")}
           </Link>{" "}
           › <span className="text-ink-strong">{t("breadcrumb")}</span>

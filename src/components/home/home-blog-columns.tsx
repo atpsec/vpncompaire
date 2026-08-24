@@ -161,19 +161,19 @@ function GuideExploreRail({
 }) {
   const links = [
     {
-      href: "/en-iyi-vpn",
+      href: "/vpn-reviews",
       label: tHome("guides.comparisonTitle"),
       description: tHome("guides.comparisonDescription"),
       icon: ArrowLeftRight,
     },
     {
-      href: "/en-iyi/seyahat",
+      href: "/best-vpn/travel",
       label: tHome("guides.useCaseTitle"),
       description: tHome("guides.useCaseDescription"),
       icon: ListChecks,
     },
     {
-      href: "/araclar",
+      href: "/tools",
       label: tHome("guides.toolsTitle"),
       description: tHome("guides.toolsDescription"),
       icon: Gauge,
@@ -263,7 +263,7 @@ function SelectionMethodCard({
           </p>
         </div>
         <Link
-          href="/metodoloji"
+          href="/methodology"
           className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent-600 transition-colors hover:text-accent-700"
         >
           {tHome("guides.selectionLink")}

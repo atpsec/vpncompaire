@@ -21,11 +21,11 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/sana-uygun-vpn", locale),
+    alternates: localizedAlternates("/quiz", locale),
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: absoluteUrl("/sana-uygun-vpn", locale),
+      url: absoluteUrl("/quiz", locale),
       type: "website",
     },
   };
@@ -52,7 +52,7 @@ function QuizPageView() {
         data={breadcrumbSchema(
           [
             { name: tNav("home"), path: "/" },
-            { name: t("breadcrumb"), path: "/sana-uygun-vpn" },
+            { name: t("breadcrumb"), path: "/quiz" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -84,7 +84,7 @@ function QuizPageView() {
           <p className="text-sm text-ink-muted">{t("altDirectHeading")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
-              href="/en-iyi-vpn"
+              href="/vpn-reviews"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.top")}
@@ -96,7 +96,7 @@ function QuizPageView() {
               {t("altLinks.compare")}
             </Link>
             <Link
-              href="/hesaplayici"
+              href="/calculator"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               {t("altLinks.calculator")}

@@ -53,8 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t.title,
     description: t.description,
-    alternates: localizedAlternates("/en-iyi-vpn", locale),
-    openGraph: { title: t.title, description: t.description, url: absoluteUrl("/en-iyi-vpn", locale), type: "website" },
+    alternates: localizedAlternates("/vpn-reviews", locale),
+    openGraph: { title: t.title, description: t.description, url: absoluteUrl("/vpn-reviews", locale), type: "website" },
   };
 }
 
@@ -68,7 +68,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd data={itemListSchema(evaluatedProfiles, locale)} />
-      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.here, path: "/en-iyi-vpn" }], locale)} />
+      <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.here, path: "/vpn-reviews" }], locale)} />
       <Container className="pt-12 sm:pt-16">
         <header className="max-w-3xl">
           <p className="text-sm font-medium text-brand-700">{t.breadcrumb}</p>

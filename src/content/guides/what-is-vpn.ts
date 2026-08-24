@@ -1,6 +1,6 @@
-﻿// "VPN nedir?" flagship rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/vpn-nedir/page.tsx) bu modülden render eder;
-// yerelleştirilmiş URL'ler (/rehber/vpn-nedir, /en/guide/what-is-a-vpn,
+// "VPN nedir?" flagship rehberinin locale-aware içeriği (tr/en/de).
+// Sayfa (src/app/[locale]/guide/vpn-nedir/page.tsx) bu modülden render eder;
+// yerelleştirilmiş URL'ler (/guide/vpn-nedir, /en/guide/what-is-a-vpn,
 // /de/ratgeber/was-ist-ein-vpn) proxy rewrite ile aynı sayfaya düşer.
 
 import type { AppLocale } from "@/lib/i18n-paths";
@@ -208,10 +208,10 @@ const tr: WhatIsVpnContent = {
   ],
   nextStepLabel: "Sıradaki adım",
   nextStepLinks: [
-    { href: "/en-iyi-vpn", text: "VPN sağlayıcı karşılaştırmaları" },
-    { href: "/rehber/ucretsiz-vs-ucretli-vpn", text: "Ücretsiz vs Ücretli VPN" },
+    { href: "/vpn-reviews", text: "VPN sağlayıcı karşılaştırmaları" },
+    { href: "/guide/ucretsiz-vs-ucretli-vpn", text: "Ücretsiz vs Ücretli VPN" },
     {
-      href: "/rehber/vpn-guvenlik-kontrol-listesi",
+      href: "/guide/vpn-guvenlik-kontrol-listesi",
       text: "VPN güvenlik kontrol listesi",
     },
   ],
@@ -384,7 +384,7 @@ const en: WhatIsVpnContent = {
   ],
   nextStepLabel: "Next step",
   nextStepLinks: [
-    { href: "/en-iyi-vpn", text: "VPN provider comparisons" },
+    { href: "/vpn-reviews", text: "VPN provider comparisons" },
     { href: "/guide/free-vs-paid-vpn", text: "Free vs paid VPN" },
     {
       href: "/guide/vpn-security-checklist",
@@ -560,7 +560,7 @@ const de: WhatIsVpnContent = {
   ],
   nextStepLabel: "Nächster Schritt",
   nextStepLinks: [
-    { href: "/en-iyi-vpn", text: "VPN-Anbietervergleich" },
+    { href: "/vpn-reviews", text: "VPN-Anbietervergleich" },
     { href: "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn", text: "Kostenlos vs. kostenpflichtig" },
     {
       href: "/ratgeber/vpn-sicherheits-checkliste",

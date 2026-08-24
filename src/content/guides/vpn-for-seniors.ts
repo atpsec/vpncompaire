@@ -1,6 +1,6 @@
 // "Yaşlılar için VPN" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/yaslilar-icin-vpn/page.tsx) bu modülden
-// render eder; yerelleştirilmiş URL'ler (/rehber/yaslilar-icin-vpn,
+// Sayfa (src/app/[locale]/guide/yaslilar-icin-vpn/page.tsx) bu modülden
+// render eder; yerelleştirilmiş URL'ler (/guide/yaslilar-icin-vpn,
 // /en/guide/vpn-for-seniors, /de/ratgeber/vpn-fuer-senioren) proxy rewrite
 // ile aynı sayfaya düşer.
 
@@ -227,9 +227,9 @@ const tr: SeniorsContent = {
   related: {
     label: "İlgili sayfalar",
     links: [
-      { href: "/rehber/vpn-nedir", text: "VPN nedir?" },
-      { href: "/rehber/aile-ve-cocuklar-icin-vpn", text: "Aile için VPN" },
-      { href: "/sana-uygun-vpn", text: "Quiz: Sana uygun VPN" },
+      { href: "/guide/vpn-nedir", text: "VPN nedir?" },
+      { href: "/guide/aile-ve-cocuklar-icin-vpn", text: "Aile için VPN" },
+      { href: "/quiz", text: "Quiz: Sana uygun VPN" },
     ],
   },
 };
@@ -417,7 +417,7 @@ const en: SeniorsContent = {
     links: [
       { href: "/guide/what-is-a-vpn", text: "What is a VPN?" },
       { href: "/guide/vpn-for-families", text: "VPN for families" },
-      { href: "/sana-uygun-vpn", text: "Quiz: the right VPN for you" },
+      { href: "/quiz", text: "Quiz: the right VPN for you" },
     ],
   },
 };
@@ -605,7 +605,7 @@ const de: SeniorsContent = {
     links: [
       { href: "/ratgeber/was-ist-ein-vpn", text: "Was ist ein VPN?" },
       { href: "/ratgeber/vpn-fuer-familien", text: "VPN für Familien" },
-      { href: "/sana-uygun-vpn", text: "Quiz: Das passende VPN für dich" },
+      { href: "/quiz", text: "Quiz: Das passende VPN für dich" },
     ],
   },
 };

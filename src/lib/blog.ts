@@ -4,6 +4,7 @@ import path from "path";
 import matter from "gray-matter";
 import type { Locale } from "@/lib/site";
 import {
+  canonicalEnglishPath,
   localizePathname,
   type AppLocale,
 } from "@/lib/i18n-paths";
@@ -83,8 +84,8 @@ function splitHref(href: string): { path: string; suffix: string } {
 
 function findBlogEntry(slug: string) {
   return (
-    getBlogSlugEntry(slug, "tr") ??
     getBlogSlugEntry(slug, "en") ??
+    getBlogSlugEntry(slug, "tr") ??
     getBlogSlugEntry(slug, "de")
   );
 }
@@ -95,22 +96,19 @@ function localizeMarkdownLinks(source: string, locale: AppLocale): string {
     if (!hrefPath || hrefPath.startsWith("//")) return full;
 
     const segments = hrefPath.split("/").filter(Boolean);
-    const sourceLocale =
-      segments[0] === "en" || segments[0] === "de"
-        ? (segments[0] as AppLocale)
-        : "tr";
-    const pathSegments = sourceLocale === "tr" ? segments : segments.slice(1);
+    const hasLocalePrefix = ["tr", "en", "de"].includes(segments[0]);
+    const pathSegments = hasLocalePrefix ? segments.slice(1) : segments;
 
     if (pathSegments[0] === "blog" && pathSegments[1]) {
       const entry = findBlogEntry(pathSegments[1]);
       if (entry) {
         const slug = slugForLocale(entry, locale);
-        const localized = locale === "tr" ? `/blog/${slug}` : `/${locale}/blog/${slug}`;
+        const localized = `/blog/${slug}`;
         return `${prefix}${localized}${pathSegments.length > 2 ? `/${pathSegments.slice(2).join("/")}` : ""}${suffix}`;
       }
     }
 
-    const localized = localizePathname(hrefPath, locale);
+    const localized = canonicalEnglishPath(localizePathname(hrefPath, locale));
     return `${prefix}${localized}${suffix}`;
   });
 }

@@ -67,9 +67,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "Streaming için", href: "/en-iyi/streaming" },
-      { label: "Türkiye için", href: "/en-iyi/turkiye" },
-      { label: "Mullvad incelemesi", href: "/inceleme/mullvad" },
+      { label: "Streaming için", href: "/best-vpn/streaming" },
+      { label: "Türkiye için", href: "/best-vpn/turkey" },
+      { label: "Mullvad incelemesi", href: "/reviews/mullvad" },
     ],
   },
   en: {
@@ -132,9 +132,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "Best for streaming", href: "/en-iyi/streaming" },
-      { label: "Best in Turkey", href: "/en-iyi/turkiye" },
-      { label: "Mullvad review", href: "/inceleme/mullvad" },
+      { label: "Best for streaming", href: "/best-vpn/streaming" },
+      { label: "Best in Turkey", href: "/best-vpn/turkey" },
+      { label: "Mullvad review", href: "/reviews/mullvad" },
     ],
   },
   de: {
@@ -197,9 +197,9 @@ const CONTENT = {
       },
     ],
     relatedLinks: [
-      { label: "VPN für Streaming", href: "/en-iyi/streaming" },
-      { label: "VPN für die Türkei", href: "/en-iyi/turkiye" },
-      { label: "Mullvad-Testbericht", href: "/inceleme/mullvad" },
+      { label: "VPN für Streaming", href: "/best-vpn/streaming" },
+      { label: "VPN für die Türkei", href: "/best-vpn/turkey" },
+      { label: "Mullvad-Testbericht", href: "/reviews/mullvad" },
     ],
   },
 } as const;
@@ -210,11 +210,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: localizedAlternates("/en-iyi/gizlilik", locale),
+    alternates: localizedAlternates("/best-vpn/privacy", locale),
     openGraph: {
       title: c.metaTitle,
       description: c.metaDescription,
-      url: absoluteUrl("/en-iyi/gizlilik", locale),
+      url: absoluteUrl("/best-vpn/privacy", locale),
       type: "article",
     },
   };

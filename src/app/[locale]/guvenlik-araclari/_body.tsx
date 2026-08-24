@@ -522,11 +522,11 @@ const TR_STRINGS: Strings = {
   ],
   nextStep: "Sıradaki adım",
   nextLinks: [
-    { label: "VPN seçimine başla", href: "/sana-uygun-vpn" },
-    { label: "VPN nedir?", href: "/rehber/vpn-nedir" },
+    { label: "VPN seçimine başla", href: "/quiz" },
+    { label: "VPN nedir?", href: "/guide/vpn-nedir" },
     {
       label: "VPN güvenlik kontrol listesi",
-      href: "/rehber/vpn-guvenlik-kontrol-listesi",
+      href: "/guide/vpn-guvenlik-kontrol-listesi",
     },
   ],
 };
@@ -594,11 +594,11 @@ const EN_STRINGS: Strings = {
   ],
   nextStep: "Next step",
   nextLinks: [
-    { label: "Start picking a VPN", href: "/sana-uygun-vpn" },
-    { label: "What is a VPN?", href: "/rehber/vpn-nedir" },
+    { label: "Start picking a VPN", href: "/quiz" },
+    { label: "What is a VPN?", href: "/guide/vpn-nedir" },
     {
       label: "VPN security checklist",
-      href: "/rehber/vpn-guvenlik-kontrol-listesi",
+      href: "/guide/vpn-guvenlik-kontrol-listesi",
     },
   ],
 };
@@ -616,13 +616,13 @@ export function SecurityToolsBody({ locale }: { locale: string }) {
   const nextLinks = strings.nextLinks.map((link) => ({
     ...link,
     href:
-      link.href === "/rehber/vpn-nedir"
+      link.href === "/guide/vpn-nedir"
         ? getLocalizedLinkHref({
             locale: locale as AppLocale,
             section: "guide",
             contentId: "what-is-vpn",
           })
-        : link.href === "/rehber/vpn-guvenlik-kontrol-listesi"
+        : link.href === "/guide/vpn-guvenlik-kontrol-listesi"
           ? getLocalizedLinkHref({
               locale: locale as AppLocale,
               section: "guide",

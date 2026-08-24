@@ -10,7 +10,7 @@ function inLanguageOf(locale: Locale): string {
   return "tr-TR";
 }
 
-export function organizationSchema(locale: Locale = "tr"): JsonLdObject {
+export function organizationSchema(locale: Locale = "en"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -35,7 +35,7 @@ export function organizationSchema(locale: Locale = "tr"): JsonLdObject {
   };
 }
 
-export function websiteSchema(locale: Locale = "tr"): JsonLdObject {
+export function websiteSchema(locale: Locale = "en"): JsonLdObject {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -70,7 +70,7 @@ export function faqSchema(items: FAQ[]): JsonLdObject {
 
 export function itemListSchema(
   items: { slug: string; brand: string }[],
-  locale: Locale = "tr",
+  locale: Locale = "en",
 ): JsonLdObject {
   return {
     "@context": "https://schema.org",
@@ -86,7 +86,7 @@ export function itemListSchema(
     itemListElement: items.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      url: absoluteUrl(`/inceleme/${p.slug}`, locale),
+      url: absoluteUrl(`/reviews/${p.slug}`, locale),
       name: p.brand,
     })),
   };
@@ -131,8 +131,7 @@ export function articleSchema(post: {
   category?: string;
   tags?: string[];
 }): JsonLdObject {
-  const localePath = post.locale === "tr" ? "" : `/${post.locale}`;
-  const articleUrl = absoluteUrl(`${localePath}/blog/${post.slug}`);
+  const articleUrl = absoluteUrl(`/blog/${post.slug}`, "en");
 
   return {
     "@context": "https://schema.org",
@@ -152,7 +151,7 @@ export function articleSchema(post: {
     author: {
       "@type": "Person",
       name: post.author,
-      url: absoluteUrl("/hakkimizda", post.locale),
+      url: absoluteUrl("/about", "en"),
     },
     publisher: {
       "@type": "Organization",

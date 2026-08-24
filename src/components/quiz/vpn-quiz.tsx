@@ -178,7 +178,7 @@ export function VPNQuiz() {
               </ProviderLink>
             </Button>
             <Button asChild variant="secondary">
-              <Link href={`/inceleme/${product.slug}`}>
+              <Link href={`/reviews/${product.slug}`}>
                 {t("result.ctaReview")}
               </Link>
             </Button>
@@ -209,7 +209,7 @@ export function VPNQuiz() {
                       </p>
                     </div>
                     <Link
-                      href={`/inceleme/${alt.slug}`}
+                      href={`/reviews/${alt.slug}`}
                       className="text-sm font-medium text-brand-700 hover:underline shrink-0"
                     >
                       {t("result.altLink")}

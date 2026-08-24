@@ -1,7 +1,7 @@
-﻿// "VPN güvenlik kontrol listesi" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/vpn-guvenlik-kontrol-listesi/page.tsx) bu
+// "VPN güvenlik kontrol listesi" rehberinin locale-aware içeriği (tr/en/de).
+// Sayfa (src/app/[locale]/guide/vpn-guvenlik-kontrol-listesi/page.tsx) bu
 // modülden render eder; yerelleştirilmiş URL'ler
-// (/rehber/vpn-guvenlik-kontrol-listesi, /en/guide/vpn-security-checklist,
+// (/guide/vpn-guvenlik-kontrol-listesi, /en/guide/vpn-security-checklist,
 // /de/ratgeber/vpn-sicherheits-checkliste) proxy rewrite ile aynı sayfaya düşer.
 
 import type { AppLocale } from "@/lib/i18n-paths";
@@ -116,12 +116,12 @@ const tr: VpnSecurityChecklistContent = {
   },
   relatedLabel: "İlgili sayfalar",
   relatedLinks: [
-    { href: "/rehber/vpn-nedir", text: "VPN nedir?" },
+    { href: "/guide/vpn-nedir", text: "VPN nedir?" },
     {
-      href: "/rehber/ucretsiz-vs-ucretli-vpn",
+      href: "/guide/ucretsiz-vs-ucretli-vpn",
       text: "Ücretsiz vs Ücretli VPN",
     },
-    { href: "/metodoloji", text: "Kaynak-temelli metodoloji" },
+    { href: "/methodology", text: "Kaynak-temelli metodoloji" },
   ],
 };
 
@@ -226,7 +226,7 @@ const en: VpnSecurityChecklistContent = {
       href: "/guide/free-vs-paid-vpn",
       text: "Free vs paid VPN",
     },
-    { href: "/metodoloji", text: "Source-based methodology" },
+    { href: "/methodology", text: "Source-based methodology" },
   ],
 };
 
@@ -331,7 +331,7 @@ const de: VpnSecurityChecklistContent = {
       href: "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn",
       text: "Kostenlos vs. kostenpflichtig",
     },
-    { href: "/metodoloji", text: "Quellenbasierte Methodik" },
+    { href: "/methodology", text: "Quellenbasierte Methodik" },
   ],
 };
 

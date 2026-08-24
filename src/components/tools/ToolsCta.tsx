@@ -20,7 +20,7 @@ export function ToolsCta({ title, body, buttonLabel }: Props) {
           <p className="mt-2 text-sm text-ink-muted">{body}</p>
         </div>
         <Button asChild variant="primary" size="md" className="shrink-0">
-          <Link href="/en-iyi-vpn">
+          <Link href="/vpn-reviews">
             {buttonLabel}
             <ArrowRight className="size-4" aria-hidden="true" />
           </Link>

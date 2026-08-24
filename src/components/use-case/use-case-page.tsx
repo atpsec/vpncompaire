@@ -50,11 +50,11 @@ export function UseCasePage({ slug, title, tagline, summary, Icon, badgeLabel, p
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: t("breadcrumb.home"), path: "/" }, { name: t("breadcrumb.hub"), path: "/en-iyi" }, { name: displayTitle, path: `/en-iyi/${slug}` }], locale)} />
+      <JsonLd data={breadcrumbSchema([{ name: t("breadcrumb.home"), path: "/" }, { name: t("breadcrumb.hub"), path: "/best-vpn" }, { name: displayTitle, path: `/best-vpn/${slug}` }], locale)} />
       <JsonLd data={faqSchema([...faqs])} />
 
       <Container size="md" className="py-12 sm:py-16">
-        <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t("breadcrumb.home")}</Link>{" "}›{" "}<Link href="/en-iyi" className="hover:text-ink">{t("breadcrumb.hub")}</Link>{" "}› <span className="text-ink-strong">{badgeLabel}</span></p>
+        <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t("breadcrumb.home")}</Link>{" "}›{" "}<Link href="/best-vpn" className="hover:text-ink">{t("breadcrumb.hub")}</Link>{" "}› <span className="text-ink-strong">{badgeLabel}</span></p>
 
         <header className="mt-6"><Badge variant="brand"><Icon className="size-3" /> {badgeLabel}</Badge><h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{displayTitle}</h1><p className="mt-4 text-lg text-ink-muted">{tagline}</p></header>
 
@@ -74,7 +74,7 @@ export function UseCasePage({ slug, title, tagline, summary, Icon, badgeLabel, p
                     <div className="flex-1 min-w-[200px]">
                       <div className="flex flex-wrap items-center gap-2"><h3 className="text-xl font-semibold text-ink-strong">{product.brand}</h3><Badge variant="brand">{pick.bestFor}</Badge></div>
                       <p className="mt-3 text-ink leading-relaxed">{pick.why}</p>
-                      <div className="mt-4 flex flex-wrap gap-3"><Button asChild variant="primary" size="sm"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "use-case" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="use-case">{t("ctaOfficial", { brand: product.brand })}<ArrowRight className="size-4" /></ProviderLink></Button><Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button></div>
+                      <div className="mt-4 flex flex-wrap gap-3"><Button asChild variant="primary" size="sm"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "use-case" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="use-case">{t("ctaOfficial", { brand: product.brand })}<ArrowRight className="size-4" /></ProviderLink></Button><Button asChild variant="ghost" size="sm"><Link href={`/reviews/${product.slug}`}>{profileLabel}</Link></Button></div>
                     </div>
                   </div>
                 </Card>
@@ -86,8 +86,8 @@ export function UseCasePage({ slug, title, tagline, summary, Icon, badgeLabel, p
         {considerations.length > 0 && <section className="mt-16 prose prose-stone max-w-none"><h2>{t("considerationsHeading")}</h2>{considerations.map((c) => <div key={c.title}><h3>{c.title}</h3><p>{c.body}</p></div>)}</section>}
         <section className="mt-16 prose prose-stone max-w-none"><h2>{t("faqHeading")}</h2>{faqs.map((f) => <div key={f.q}><h3>{f.q}</h3><p>{f.a}</p></div>)}</section>
         <section className="mt-16 rounded-xl border border-border bg-brand-50/30 p-6 text-center"><p className="text-sm text-ink-muted">{t("relatedHeading")}</p><div className="mt-3 flex flex-wrap gap-2 justify-center">{relatedLinks.map((l) => {
-          const isTrOnly = l.href === "/en-iyi/turkiye" || l.href === "/en-iyi/yurt-disindaki-turkler";
-          const href = l.href.startsWith("/karsilastir/")
+          const isTrOnly = l.href === "/best-vpn/turkey" || l.href === "/best-vpn/turks-abroad";
+          const href = l.href.startsWith("/comparison/")
             ? getLocalizedLinkHref({ locale: locale as AppLocale, section: "comparison", contentId: l.href.split("/").pop() })
             : l.href;
           return isTrOnly ? <a key={l.href} href={l.href} className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">{l.label}</a> : <Link key={l.href} href={href} className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300">{l.label}</Link>;

@@ -163,7 +163,7 @@ export async function IpSecurityBanner() {
                   size="md"
                   className="self-stretch lg:self-auto lg:shrink-0"
                 >
-                  <Link href="/en-iyi-vpn">
+                  <Link href="/vpn-reviews">
                     {t("compareLink")}
                     <ArrowRight className="size-4" />
                   </Link>

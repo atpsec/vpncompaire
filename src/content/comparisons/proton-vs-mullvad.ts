@@ -1,6 +1,6 @@
 // "Proton VPN vs Mullvad" karşılaştırmasının locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/karsilastir/proton-vs-mullvad/page.tsx) bu modülden
-// render eder; yerelleştirilmiş URL'ler (/karsilastir/..., /en/comparison/...,
+// Sayfa (src/app/[locale]/comparison/proton-vs-mullvad/page.tsx) bu modülden
+// render eder; yerelleştirilmiş URL'ler (/comparison/..., /en/comparison/...,
 // /de/vergleich/...) proxy rewrite ile aynı sayfaya düşer.
 // A = Proton VPN, B = Mullvad.
 
@@ -158,10 +158,10 @@ const tr: ProtonVsMullvadContent = {
   related: {
     title: "Diğer sayfalar",
     links: [
-      { href: "/en-iyi/gizlilik", text: "Gizlilik için en iyi VPN" },
-      { href: "/inceleme/proton-vpn", text: "Proton VPN incelemesi" },
-      { href: "/inceleme/mullvad", text: "Mullvad incelemesi" },
-      { href: "/karsilastir", text: "Tüm karşılaştırmalar" },
+      { href: "/best-vpn/privacy", text: "Gizlilik için en iyi VPN" },
+      { href: "/reviews/proton-vpn", text: "Proton VPN incelemesi" },
+      { href: "/reviews/mullvad", text: "Mullvad incelemesi" },
+      { href: "/comparison", text: "Tüm karşılaştırmalar" },
     ],
   },
 };
@@ -291,9 +291,9 @@ const en: ProtonVsMullvadContent = {
   related: {
     title: "Other pages",
     links: [
-      { href: "/en-iyi/gizlilik", text: "Best VPNs for privacy" },
-      { href: "/inceleme/proton-vpn", text: "Proton VPN review" },
-      { href: "/inceleme/mullvad", text: "Mullvad review" },
+      { href: "/best-vpn/privacy", text: "Best VPNs for privacy" },
+      { href: "/reviews/proton-vpn", text: "Proton VPN review" },
+      { href: "/reviews/mullvad", text: "Mullvad review" },
       { href: "/comparison", text: "All comparisons" },
     ],
   },
@@ -428,9 +428,9 @@ const de: ProtonVsMullvadContent = {
   related: {
     title: "Weitere Seiten",
     links: [
-      { href: "/en-iyi/gizlilik", text: "Die besten VPNs für Datenschutz" },
-      { href: "/inceleme/proton-vpn", text: "Proton VPN im Test" },
-      { href: "/inceleme/mullvad", text: "Mullvad im Test" },
+      { href: "/best-vpn/privacy", text: "Die besten VPNs für Datenschutz" },
+      { href: "/reviews/proton-vpn", text: "Proton VPN im Test" },
+      { href: "/reviews/mullvad", text: "Mullvad im Test" },
       { href: "/vergleich", text: "Alle Vergleiche" },
     ],
   },

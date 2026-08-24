@@ -54,7 +54,7 @@ export function ReferenceVPNDirectory() {
             return (
               <li key={product.slug}>
                 <Card className="h-full transition hover:shadow-sm hover:border-brand-200">
-                  <Link href={`/inceleme/${product.slug}`} className="flex h-full flex-col p-5">
+                  <Link href={`/reviews/${product.slug}`} className="flex h-full flex-col p-5">
                     <div className="flex items-start gap-3">
                       <ReferenceMark brand={product.brand} />
                       <div className="min-w-0 flex-1">

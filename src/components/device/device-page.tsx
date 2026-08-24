@@ -45,8 +45,8 @@ export async function DevicePage({
         data={breadcrumbSchema(
           [
             { name: t("breadcrumbHome"), path: "/" },
-            { name: t("breadcrumbHub"), path: "/cihazlar" },
-            { name: device.shortName, path: `/cihazlar/${device.slug}` },
+            { name: t("breadcrumbHub"), path: "/devices" },
+            { name: device.shortName, path: `/devices/${device.slug}` },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -59,7 +59,7 @@ export async function DevicePage({
             {t("breadcrumbHome")}
           </Link>{" "}
           ›{" "}
-          <Link href="/cihazlar" className="hover:text-ink">
+          <Link href="/devices" className="hover:text-ink">
             {t("breadcrumbHub")}
           </Link>{" "}
           › <span className="text-ink-strong">{device.shortName}</span>
@@ -175,7 +175,7 @@ export async function DevicePage({
                           </ProviderLink>
                         </Button>
                         <Button asChild variant="ghost" size="sm">
-                          <Link href={`/inceleme/${product.slug}`}>
+                          <Link href={`/reviews/${product.slug}`}>
                             {t("picks.readReview")}
                           </Link>
                         </Button>
@@ -228,8 +228,8 @@ export async function DevicePage({
           <p className="text-sm text-ink-muted">{t("relatedTitle")}</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             {device.relatedLinks.map((l) => (
-              l.href === "/en-iyi/turkiye" ||
-              l.href === "/en-iyi/yurt-disindaki-turkler" ? (
+              l.href === "/best-vpn/turkey" ||
+              l.href === "/best-vpn/turks-abroad" ? (
                 <a
                   key={l.href}
                   href={l.href}

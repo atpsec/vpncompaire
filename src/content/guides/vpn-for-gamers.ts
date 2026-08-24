@@ -1,6 +1,6 @@
 // "Gamerlar için VPN" rehberinin locale-aware içeriği (tr/en/de).
-// Sayfa (src/app/[locale]/rehber/gamerlar-icin-vpn/page.tsx) bu modülden
-// render eder; yerelleştirilmiş URL'ler (/rehber/gamerlar-icin-vpn,
+// Sayfa (src/app/[locale]/guide/gamerlar-icin-vpn/page.tsx) bu modülden
+// render eder; yerelleştirilmiş URL'ler (/guide/gamerlar-icin-vpn,
 // /en/guide/vpn-for-gamers, /de/ratgeber/vpn-fuer-gamer) proxy rewrite ile
 // aynı sayfaya düşer.
 
@@ -263,12 +263,12 @@ const tr: GamersContent = {
   related: {
     label: "İlgili sayfalar",
     links: [
-      { href: "/en-iyi/oyun", text: "Oyun için en iyi VPN" },
+      { href: "/best-vpn/gaming", text: "Oyun için en iyi VPN" },
       {
-        href: "/rehber/vpn-guvenlik-kontrol-listesi",
+        href: "/guide/vpn-guvenlik-kontrol-listesi",
         text: "Güvenlik kontrol listesi",
       },
-      { href: "/sana-uygun-vpn", text: "Quiz: Sana uygun VPN" },
+      { href: "/quiz", text: "Quiz: Sana uygun VPN" },
     ],
   },
 };
@@ -485,12 +485,12 @@ const en: GamersContent = {
   related: {
     label: "Related pages",
     links: [
-      { href: "/en-iyi/oyun", text: "Best VPN for gaming" },
+      { href: "/best-vpn/gaming", text: "Best VPN for gaming" },
       {
         href: "/guide/vpn-security-checklist",
         text: "Security checklist",
       },
-      { href: "/sana-uygun-vpn", text: "Quiz: the right VPN for you" },
+      { href: "/quiz", text: "Quiz: the right VPN for you" },
     ],
   },
 };
@@ -707,12 +707,12 @@ const de: GamersContent = {
   related: {
     label: "Verwandte Seiten",
     links: [
-      { href: "/en-iyi/oyun", text: "Das beste VPN fürs Gaming" },
+      { href: "/best-vpn/gaming", text: "Das beste VPN fürs Gaming" },
       {
         href: "/ratgeber/vpn-sicherheits-checkliste",
         text: "Sicherheits-Checkliste",
       },
-      { href: "/sana-uygun-vpn", text: "Quiz: Das passende VPN für dich" },
+      { href: "/quiz", text: "Quiz: Das passende VPN für dich" },
     ],
   },
 };

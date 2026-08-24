@@ -19,12 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: bilingualAlternates("/cihazlar", locale, "tr"),
+    alternates: bilingualAlternates("/devices", locale, "tr"),
     robots: locale === "de" ? { index: false, follow: true } : undefined,
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/cihazlar", locale),
+      url: absoluteUrl("/devices", locale),
       type: "website",
     },
   };
@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema(
           [
             { name: t("breadcrumbHome"), path: "/" },
-            { name: t("breadcrumbHere"), path: "/cihazlar" },
+            { name: t("breadcrumbHere"), path: "/devices" },
           ],
           locale as "tr" | "en" | "de",
         )}
@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           {list.map((d) => (
-            <Link key={d.slug} href={`/cihazlar/${d.slug}`} className="group">
+            <Link key={d.slug} href={`/devices/${d.slug}`} className="group">
               <Card className="p-6 hover:border-brand-300 hover:shadow-md transition-all h-full">
                 <div className="flex items-start gap-4">
                   <DeviceIcon

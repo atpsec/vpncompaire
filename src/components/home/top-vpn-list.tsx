@@ -107,7 +107,7 @@ function FeaturedCard({ product, tCommon, label, profileLabel }: { product: Prod
           <Button asChild variant="primary" size="md">
             <ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-featured" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-featured">{tCommon("visitSite")}<ArrowRight className="size-4" /></ProviderLink>
           </Button>
-          <Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button>
+          <Button asChild variant="ghost" size="sm"><Link href={`/reviews/${product.slug}`}>{profileLabel}</Link></Button>
         </div>
       </div>
     </Card>
@@ -132,7 +132,7 @@ function ProviderRow({ product, tCommon, profileLabel }: { product: Product; tCo
         <div className="min-w-0 rounded-xl border border-border/70 bg-surface-subtle/35 p-3 lg:flex lg:flex-col lg:justify-center lg:border-l lg:pl-5">
           <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} variant="compact" />
           <Button asChild variant="primary" size="md"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-list" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-list">{tCommon("visitSite")}<ArrowRight className="size-4" /></ProviderLink></Button>
-          <Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button>
+          <Button asChild variant="ghost" size="sm"><Link href={`/reviews/${product.slug}`}>{profileLabel}</Link></Button>
         </div>
       </div>
     </Card>
@@ -142,7 +142,7 @@ function ProviderRow({ product, tCommon, profileLabel }: { product: Product; tCo
 function CompactRow({ product, tCommon }: { product: Product; tCommon: ReturnType<typeof useTranslations> }) {
   return (
     <Card className="transition hover:shadow-sm hover:border-brand-200">
-      <Link href={`/inceleme/${product.slug}`} className="flex flex-wrap items-center gap-4 p-4 sm:p-5">
+      <Link href={`/reviews/${product.slug}`} className="flex flex-wrap items-center gap-4 p-4 sm:p-5">
         <VPNLogo slug={product.slug} size={40} />
         <div className="flex-1 min-w-[180px]">
           <div className="flex flex-wrap items-center gap-2"><h3 className="text-base font-semibold text-ink-strong">{product.brand}</h3><Badge variant={product.hasAffiliate ? "brand" : "outline"}>{product.positioning}</Badge></div>

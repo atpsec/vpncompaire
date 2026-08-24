@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description:
     "Türkiye için VPN seçerken güncel sunucu dizini, gizlilik belgeleri, obfuscation seçenekleri ve bağımsız denetim kaynaklarını nasıl kontrol edeceğinizi öğrenin.",
   // İçerik yalnızca Türkçe servis ediliyor; EN/DE istekleri middleware 301'ler.
-  alternates: defaultLocaleAlternates("/en-iyi/turkiye"),
+  alternates: defaultLocaleAlternates("/best-vpn/turkey"),
 };
 
 type Props = { params: Promise<{ locale: string }> };
@@ -77,8 +77,8 @@ export default async function Page({ params }: Props) {
       <JsonLd
         data={breadcrumbSchema([
           { name: "Ana sayfa", path: "/" },
-          { name: "Kullanım Alanları", path: "/en-iyi" },
-          { name: "Türkiye VPN bilgi rehberi", path: "/en-iyi/turkiye" },
+          { name: "Kullanım Alanları", path: "/best-vpn" },
+          { name: "Türkiye VPN bilgi rehberi", path: "/best-vpn/turkey" },
         ])}
       />
       <JsonLd data={faqSchema(faqs)} />
@@ -89,7 +89,7 @@ export default async function Page({ params }: Props) {
             Ana sayfa
           </Link>{" "}
           ›{" "}
-          <Link href="/en-iyi-vpn" className="hover:text-ink">
+          <Link href="/vpn-reviews" className="hover:text-ink">
             Kullanım Alanları
           </Link>{" "}
           › <span className="text-ink-strong">Türkiye için</span>
@@ -159,7 +159,7 @@ export default async function Page({ params }: Props) {
                           </ProviderLink>
                         </Button>
                         <Button asChild variant="ghost" size="sm">
-                          <Link href={`/inceleme/${product.slug}`}>
+                          <Link href={`/reviews/${product.slug}`}>
                             Tam incelemeyi oku →
                           </Link>
                         </Button>
@@ -205,7 +205,7 @@ export default async function Page({ params }: Props) {
             VPN teknolojisi, erişim kısıtları ve kullanım amacı farklı hukuki
             değerlendirmeler gerektirebilir. Bu sayfa hukuki danışmanlık
             değildir. Güncel çerçeve için{" "}
-            <Link href="/rehber/turkiye-de-vpn-yasal-mi">
+            <Link href="/guide/is-vpn-legal-in-turkey">
               Türkiye&apos;de VPN Yasal mı? rehberimizi
             </Link>{" "}
             inceleyebilirsin.
@@ -224,19 +224,19 @@ export default async function Page({ params }: Props) {
           <p className="text-sm text-ink-muted">Diğer kullanım alanları</p>
           <div className="mt-3 flex flex-wrap gap-2 justify-center">
             <Link
-              href="/en-iyi/gizlilik"
+              href="/best-vpn/privacy"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               <Lock className="size-3" /> Gizlilik için
             </Link>
             <Link
-              href="/en-iyi/streaming"
+              href="/best-vpn/streaming"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               <Tv className="size-3" /> Streaming için
             </Link>
             <NextLink
-              href="/en-iyi/yurt-disindaki-turkler"
+              href="/best-vpn/turks-abroad"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
             >
               Yurt dışındaki Türkler için

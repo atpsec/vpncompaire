@@ -13,16 +13,9 @@ import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import {
   absoluteUrl,
-  SEO_LOCALES,
   siteConfig,
   type Locale,
-  type SeoLocale,
 } from "@/lib/site";
-import {
-  getBlogSlugEntry,
-  slugForLocale,
-  type BlogLocale,
-} from "@/lib/blog-slugs";
 import type { Metadata } from "next";
 import { getLocalizedLinkHref } from "@/lib/i18n-paths";
 
@@ -79,117 +72,60 @@ const EN_CONTEXTUAL_NEXT_STEPS: Record<string, ContextualNextStep> = {
     title: "Choose a VPN path for your TV setup",
     body: "Compare the practical setup options for smart TVs, then check provider profiles before choosing a plan.",
     primaryLabel: "Open smart TV VPN guide",
-    primaryHref: "/cihazlar/smart-tv",
+    primaryHref: "/devices/smart-tv",
     secondaryLabel: "Compare streaming VPNs",
-    secondaryHref: "/en-iyi/streaming",
+    secondaryHref: "/best-vpn/streaming",
   },
   "android-tv-vpn-setup": {
     title: "Compare Android TV-friendly options",
     body: "Use the device guide for setup constraints and the streaming comparison for provider-level trade-offs.",
     primaryLabel: "Open smart TV device guide",
-    primaryHref: "/cihazlar/smart-tv",
+    primaryHref: "/devices/smart-tv",
     secondaryLabel: "Compare streaming VPNs",
-    secondaryHref: "/en-iyi/streaming",
+    secondaryHref: "/best-vpn/streaming",
   },
   "fire-tv-stick-vpn-setup": {
     title: "Find the right VPN setup for Fire TV",
     body: "Start with the device-level setup route, then compare providers that document streaming and multi-device support.",
     primaryLabel: "Open device VPN guides",
-    primaryHref: "/cihazlar",
+    primaryHref: "/devices",
     secondaryLabel: "Compare streaming VPNs",
-    secondaryHref: "/en-iyi/streaming",
+    secondaryHref: "/best-vpn/streaming",
   },
   "vpn-connected-but-not-working": {
     title: "Fix the connection before switching providers",
     body: "Run the relevant leak checks and compare documented DNS, kill-switch and protocol features before buying another plan.",
     primaryLabel: "Open VPN security tools",
-    primaryHref: "/guvenlik-araclari",
+    primaryHref: "/security-tools",
     secondaryLabel: "Compare privacy-focused VPNs",
-    secondaryHref: "/en-iyi/gizlilik",
+    secondaryHref: "/best-vpn/privacy",
   },
   "ios-vpn-shortcuts-automation": {
     title: "Choose an iPhone-friendly VPN",
     body: "Check iPhone setup coverage and compare providers that document mobile support, automation and privacy controls.",
     primaryLabel: "Open iPhone VPN guide",
-    primaryHref: "/cihazlar/iphone",
+    primaryHref: "/devices/iphone",
     secondaryLabel: "Compare privacy-focused VPNs",
-    secondaryHref: "/en-iyi/gizlilik",
+    secondaryHref: "/best-vpn/privacy",
   },
   "nordvpn-vs-surfshark-comparison": {
     title: "Verify the two providers before you choose",
     body: "Review the provider profiles and current comparison fields, including device limits, pricing and renewal terms.",
     primaryLabel: "Open NordVPN profile",
-    primaryHref: "/inceleme/nordvpn",
+    primaryHref: "/reviews/nordvpn",
     secondaryLabel: "Open Surfshark profile",
-    secondaryHref: "/inceleme/surfshark",
+    secondaryHref: "/reviews/surfshark",
   },
 };
 
-async function blogAlternates(slug: string, locale: BlogLocale) {
-  const entry = getBlogSlugEntry(slug, locale);
-  const selfCanonical = absoluteUrl(`/blog/${slug}`, locale);
-
-  const [trPosts, enPosts] = await Promise.all([
-    getBlogPosts("tr"),
-    getBlogPosts("en"),
-  ]);
-  const indexableSlugs: Record<SeoLocale, Set<string>> = {
-    tr: new Set(trPosts.filter((post) => post.indexable).map((post) => post.slug)),
-    en: new Set(enPosts.filter((post) => post.indexable).map((post) => post.slug)),
-  };
-  const existingSlugs: Record<SeoLocale, Set<string>> = {
-    tr: new Set(trPosts.map((post) => post.slug)),
-    en: new Set(enPosts.map((post) => post.slug)),
-  };
-  const counterpartSlug = (targetLocale: SeoLocale): string | null => {
-    const candidate = entry ? slugForLocale(entry, targetLocale) : slug;
-    return existingSlugs[targetLocale].has(candidate) ? candidate : null;
-  };
-  const languages: Record<string, string> = {};
-
-  for (const targetLocale of SEO_LOCALES) {
-    const targetSlug = counterpartSlug(targetLocale);
-
-    if (targetSlug && indexableSlugs[targetLocale].has(targetSlug)) {
-      languages[targetLocale] = absoluteUrl(`/blog/${targetSlug}`, targetLocale);
-    }
-  }
-
-  const enCounterpart = counterpartSlug("en");
-  const trCounterpart = counterpartSlug("tr");
-  const canonical =
-    locale === "de"
-      ? enCounterpart && indexableSlugs.en.has(enCounterpart)
-        ? absoluteUrl(`/blog/${enCounterpart}`, "en")
-        : trCounterpart && indexableSlugs.tr.has(trCounterpart)
-          ? absoluteUrl(`/blog/${trCounterpart}`, "tr")
-          : selfCanonical
-      : selfCanonical;
-
-  if (Object.keys(languages).length === 0) {
-    return { canonical };
-  }
-
-  languages["x-default"] = languages.tr ?? languages.en;
-
-  return {
-    canonical,
-    languages,
-  };
+async function blogAlternates(slug: string) {
+  const canonical = absoluteUrl(`/blog/${slug}`, "en");
+  return { canonical, languages: { en: canonical, "x-default": canonical } };
 }
 
 export async function generateStaticParams() {
-  const [trPosts, enPosts, dePosts] = await Promise.all([
-    getBlogPosts("tr"),
-    getBlogPosts("en"),
-    getBlogPosts("de"),
-  ]);
-
-  return [
-    ...trPosts.map((post) => ({ locale: "tr", slug: post.slug })),
-    ...enPosts.map((post) => ({ locale: "en", slug: post.slug })),
-    ...dePosts.map((post) => ({ locale: "de", slug: post.slug })),
-  ];
+  const posts = await getBlogPosts("en");
+  return posts.map((post) => ({ locale: "en", slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -202,17 +138,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const { frontmatter } = result;
-  const alternates = await blogAlternates(frontmatter.slug, locale);
+  const alternates = await blogAlternates(frontmatter.slug);
   const ogImage = absoluteUrl(`/og/blog/${frontmatter.slug}?locale=${locale}`);
 
   return {
     title: frontmatter.title,
     description: frontmatter.description,
     alternates,
-    robots:
-      !frontmatter.indexable || locale === "de"
-        ? { index: false, follow: true }
-        : undefined,
+    robots: !frontmatter.indexable ? { index: false, follow: true } : undefined,
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
@@ -266,7 +199,7 @@ export default async function BlogPostPage({ params }: Props) {
   );
 
   const heroImage = getBlogImage(frontmatter.coverImage, "hero", frontmatter.slug);
-  const localePath = locale === "tr" ? "" : `/${locale}`;
+  const localePath = "";
   const blogIndexPath = `${localePath}/blog`;
 
   const articleLd = articleSchema({
@@ -284,8 +217,7 @@ export default async function BlogPostPage({ params }: Props) {
     tags: frontmatter.tags,
   });
 
-  const homeName =
-    locale === "tr" ? "Ana Sayfa" : locale === "de" ? "Startseite" : "Home";
+  const homeName = "Home";
   const breadcrumbLd = breadcrumbSchema(
     [
       { name: homeName, path: `${localePath}/` },
@@ -374,7 +306,7 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="mt-2 text-sm leading-relaxed text-ink-muted">{nextSteps.body}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link
-              href="/en-iyi-vpn"
+              href="/vpn-reviews"
               className="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
             >
               {nextSteps.profiles}

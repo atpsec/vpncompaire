@@ -35,8 +35,8 @@ export type DeviceContent = {
 };
 
 const COMMON_RELATED = [
-  { label: "Tüm VPN'leri karşılaştır", href: "/en-iyi-vpn" },
-  { label: "Karşılaştırma metodolojisi ve kaynaklar", href: "/metodoloji" },
+  { label: "Tüm VPN'leri karşılaştır", href: "/vpn-reviews" },
+  { label: "Karşılaştırma metodolojisi ve kaynaklar", href: "/methodology" },
 ];
 
 export const devices: DeviceContent[] = [
@@ -140,9 +140,9 @@ export const devices: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "iPhone için VPN", href: "/cihazlar/iphone" },
-      { label: "Smart TV için VPN", href: "/cihazlar/smart-tv" },
-      { label: "Türkiye için en iyi VPN", href: "/en-iyi/turkiye" },
+      { label: "iPhone için VPN", href: "/devices/iphone" },
+      { label: "Smart TV için VPN", href: "/devices/smart-tv" },
+      { label: "Türkiye için en iyi VPN", href: "/best-vpn/turkey" },
       ...COMMON_RELATED,
     ],
   },
@@ -246,9 +246,9 @@ export const devices: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "iPad için VPN", href: "/cihazlar/ipad" },
-      { label: "Android için VPN", href: "/cihazlar/android" },
-      { label: "Gizlilik için en iyi VPN", href: "/en-iyi/gizlilik" },
+      { label: "iPad için VPN", href: "/devices/ipad" },
+      { label: "Android için VPN", href: "/devices/android" },
+      { label: "Gizlilik için en iyi VPN", href: "/best-vpn/privacy" },
       ...COMMON_RELATED,
     ],
   },
@@ -351,9 +351,9 @@ export const devices: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "iPhone için VPN", href: "/cihazlar/iphone" },
-      { label: "Streaming için en iyi VPN", href: "/en-iyi/streaming" },
-      { label: "Seyahat için en iyi VPN", href: "/en-iyi/seyahat" },
+      { label: "iPhone için VPN", href: "/devices/iphone" },
+      { label: "Streaming için en iyi VPN", href: "/best-vpn/streaming" },
+      { label: "Seyahat için en iyi VPN", href: "/best-vpn/travel" },
       ...COMMON_RELATED,
     ],
   },
@@ -465,9 +465,9 @@ export const devices: DeviceContent[] = [
       },
     ],
     relatedLinks: [
-      { label: "Streaming için en iyi VPN", href: "/en-iyi/streaming" },
-      { label: "Android için VPN", href: "/cihazlar/android" },
-      { label: "Yurt dışındaki Türkler için VPN", href: "/en-iyi/yurt-disindaki-turkler" },
+      { label: "Streaming için en iyi VPN", href: "/best-vpn/streaming" },
+      { label: "Android için VPN", href: "/devices/android" },
+      { label: "Yurt dışındaki Türkler için VPN", href: "/best-vpn/turks-abroad" },
       ...COMMON_RELATED,
     ],
   },

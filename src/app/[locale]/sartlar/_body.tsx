@@ -61,7 +61,7 @@ export function TrBody() {
           Site, VPN sağlayıcılarının kendi sitelerine düz (ticari olmayan)
           bağlantılar içerir; bunlardan komisyon almıyoruz. Sitenin geliri
           Google AdSense reklamlarından gelir — detaylar için{" "}
-          <Link href="/reklam-aciklamasi">Reklam Açıklaması</Link>{" "}
+          <Link href="/affiliate-disclosure">Reklam Açıklaması</Link>{" "}
           sayfasına bak. Bağlantıyı takip ettiğinde dış sitenin kendi
           şartları geçerli olur; o sitelerin içeriği veya hizmetlerinden
           sorumlu değiliz.
@@ -140,7 +140,7 @@ export function TrBody() {
         <h2>11. İletişim</h2>
         <p>
           Kullanım şartlarıyla ilgili sorularınız için{" "}
-          <Link href="/iletisim">iletişim sayfamızdan</Link> bize
+          <Link href="/contact">iletişim sayfamızdan</Link> bize
           ulaşabilirsin.
         </p>
       </article>
@@ -220,7 +220,7 @@ export function EnBody() {
           The site contains plain, non-commercial links to VPN providers&apos;
           own websites; we earn no commission from them. The site&apos;s
           revenue comes from Google AdSense ads — see the{" "}
-          <Link href="/reklam-aciklamasi">Advertising Disclosure</Link>. Once
+          <Link href="/affiliate-disclosure">Advertising Disclosure</Link>. Once
           you follow a link, the external site&apos;s own terms apply; we are
           not responsible for that site&apos;s content or services.
         </p>
@@ -298,7 +298,7 @@ export function EnBody() {
         <h2>11. Contact</h2>
         <p>
           For questions about these terms of use, reach us via the{" "}
-          <Link href="/iletisim">contact page</Link>.
+          <Link href="/contact">contact page</Link>.
         </p>
       </article>
 
@@ -381,7 +381,7 @@ export function DeBody() {
           Die Website enthält einfache, nicht-kommerzielle Links zu den
           Websites der VPN-Anbieter; wir erhalten dafür keine Provision. Der
           Umsatz der Website stammt aus Google-AdSense-Anzeigen — siehe den{" "}
-          <Link href="/reklam-aciklamasi">Werbehinweis</Link>. Sobald Sie
+          <Link href="/affiliate-disclosure">Werbehinweis</Link>. Sobald Sie
           einem Link folgen, gelten die Bedingungen der externen Website; wir
           sind nicht verantwortlich für deren Inhalte oder Dienste.
         </p>
@@ -461,7 +461,7 @@ export function DeBody() {
         <h2>11. Kontakt</h2>
         <p>
           Bei Fragen zu diesen Nutzungsbedingungen erreichen Sie uns über die{" "}
-          <Link href="/iletisim">Kontaktseite</Link>.
+          <Link href="/contact">Kontaktseite</Link>.
         </p>
       </article>
 

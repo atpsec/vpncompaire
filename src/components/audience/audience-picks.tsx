@@ -137,7 +137,7 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
                   </ProviderLink>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
-                  <Link href={`/inceleme/${product.slug}`}>
+                  <Link href={`/reviews/${product.slug}`}>
                     {t("readReview")}
                   </Link>
                 </Button>
