@@ -36,10 +36,10 @@ export default async function HomePage({ params }: Props) {
       <JsonLd data={itemListSchema(homepagePopularProducts(locale), locale)} />
       <JsonLd data={faqSchema(homeFaqs(locale))} />
       <Hero />
-      <IpSecurityBanner />
       <TopThreePodium />
-      <TopVPNList />
       <HomeBlogColumns locale={locale} />
+      <TopVPNList />
+      <IpSecurityBanner />
       <ComparePicker />
       <UseCaseGrid />
       <ComparisonBlock />
