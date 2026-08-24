@@ -395,51 +395,51 @@
   "useCaseHub": {
     "metaTitle": "VPN-Informationsratgeber nach Anwendungsfall",
     "metaDescription": "Erfahren Sie, welche Funktionen und Quellen Sie für Datenschutz, Streaming, Gaming, Reisen und andere VPN-Szenarien vergleichen sollten.",
-    "breadcrumb": "Use cases",
+    "breadcrumb": "Anwendungsfälle",
     "h1": "VPN-Ratgeber nach Anwendungsfall",
     "intro": "Ein allgemein bestes VPN gibt es nicht. Jeder Ratgeber erklärt, welche Funktionen und Quellen für ein bestimmtes Szenario geprüft werden können.",
-    "cardCta": "Review",
+    "cardCta": "Ratgeber öffnen",
     "cards": {
       "gizlilik": {
-        "title": "Best VPN for privacy",
-        "desc": "Protection from ISP surveillance, public Wi-Fi risk and data-collecting third parties."
+        "title": "VPN für Datenschutz",
+        "desc": "Schutz vor ISP-Überwachung, Risiken öffentlicher WLANs und daten­sammelnden Dritten."
       },
       "streaming": {
-        "title": "Best VPN for streaming",
-        "desc": "Netflix, Disney+, BBC iPlayer, HBO Max and regional library access."
+        "title": "VPN für Streaming",
+        "desc": "Netflix, Disney+, BBC iPlayer, HBO Max und Zugriff auf regionale Kataloge."
       },
       "oyun": {
-        "title": "Best VPN for gaming",
-        "desc": "Low latency, DDoS protection, regional server access."
+        "title": "VPN für Gaming",
+        "desc": "Niedrige Latenz, DDoS-Schutz und Zugriff auf regionale Spielserver."
       },
       "seyahat": {
-        "title": "Best VPN for travel",
-        "desc": "Public Wi-Fi safety, restricted networks, country bypass."
+        "title": "VPN für Reisen",
+        "desc": "Sicherheit in öffentlichen WLANs, restriktive Netzwerke und Länderzugang."
       },
       "turkiye": {
-        "title": "Best VPN in Turkey",
-        "desc": "Turkish server, DPI bypass, lawful-use guide."
+        "title": "VPN für die Türkei",
+        "desc": "Türkischer Server, DPI-Umgehung und Ratgeber zur rechtmäßigen Nutzung."
       },
       "yurt-disindaki-turkler": {
-        "title": "VPN for Turks abroad",
-        "desc": "BluTV, Exxen, Netflix TR, e-Government, Turkish banking access."
+        "title": "VPN für Türken im Ausland",
+        "desc": "BluTV, Exxen, Netflix TR, E-Government und türkischer Bankzugang."
       }
     }
   },
   "useCase": {
     "breadcrumb": {
-      "home": "Home",
-      "hub": "Use cases"
+      "home": "Startseite",
+      "hub": "Anwendungsfälle"
     },
-    "summaryTitle": "Quick summary",
+    "summaryTitle": "Kurzüberblick",
     "picksHeading": "Quellenprofile ({count})",
-    "considerationsHeading": "What to watch out for",
-    "faqHeading": "Frequently asked questions",
-    "relatedHeading": "Related pages",
-    "scoreLabel": "Score",
-    "ctaAffiliate": "Go to {brand} deal",
-    "ctaOfficial": "Visit {brand}",
-    "readReview": "Read full review →"
+    "considerationsHeading": "Worauf Sie achten sollten",
+    "faqHeading": "Häufig gestellte Fragen",
+    "relatedHeading": "Verwandte Seiten",
+    "scoreLabel": "Bewertung",
+    "ctaAffiliate": "Zum {brand}-Angebot",
+    "ctaOfficial": "{brand} besuchen",
+    "readReview": "Vollständigen Testbericht lesen →"
   },
   "review": {
     "metaTitle": "{brand} Review (2026) — {positioning}",
