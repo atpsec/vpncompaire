@@ -32,7 +32,9 @@ function ProviderCard({ product, featured }: { product: Product; featured: boole
   const locale = useLocale() as Locale;
   const copy = positioningFor(locale);
   const bestPlan = product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
-  const priceLabel = locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site";
+  const priceLabel = product.slug === "proton-vpn"
+    ? locale === "tr" ? "Ücretsiz plan" : locale === "de" ? "Kostenloser Tarif" : "Free plan"
+    : locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site";
 
   return (
     <article className={cn("relative h-full overflow-hidden rounded-2xl border bg-surface-base shadow-sm", featured ? "border-brand-300 shadow-md ring-1 ring-brand-200/50" : "border-border")}>
