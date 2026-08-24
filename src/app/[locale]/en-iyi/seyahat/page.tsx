@@ -145,11 +145,80 @@ const CONTENT = {
       { label: "Best for privacy", href: "/en-iyi/gizlilik" },
     ],
   },
+  de: {
+    metaTitle: "VPN-Informationsratgeber für Reisen (2026)",
+    metaDescription:
+      "Sicherheit in öffentlichen WLANs, Zugang in restriktiven Ländern und Zugriff auf Inhalte zu Hause — VPN-Auswahl für Reisende.",
+    title: "VPN-Informationsratgeber für Reisen",
+    tagline:
+      "Sicherheit in öffentlichen WLANs, Zugang in restriktiven Ländern und Zugriff auf Inhalte zu Hause.",
+    summary:
+      "Auf Reisen ist ein VPN vor allem für vier Dinge relevant: verschlüsselten Datenverkehr in öffentlichen WLANs, Obfuscation in restriktiven Ländern, den Fernzugriff auf Inhalte zu Hause und automatischen Schutz beim Wechsel zwischen Netzwerken. ExpressVPN punktet bei der Abdeckung, NordVPN bei Obfuscation und Surfshark bei der Gerätezahl.",
+    badgeLabel: "Reisen",
+    picks: [
+      {
+        slug: "expressvpn",
+        bestFor: "Große Länderabdeckung",
+        why: "ExpressVPN dokumentiert Server in 105 Ländern. Dadurch können Reisende von vielen Orten aus auf Inhalte zu Hause zugreifen und das lokale Netzwerk mit einem VPN verlassen. Die schnelle Verbindungseinrichtung von Lightway ist bei häufigen Netzwechseln praktisch.",
+      },
+      {
+        slug: "nordvpn",
+        bestFor: "Automatischer Schutz und Obfuscation",
+        why: "Auto-Connect kann sich bei unsicheren WLANs automatisch aktivieren. Obfuscation-Server verbergen VPN-Datenverkehr in restriktiven Netzwerken, wobei die tatsächliche Verfügbarkeit von Land, Netzwerk und aktueller Anbieterunterstützung abhängt.",
+      },
+      {
+        slug: "surfshark",
+        bestFor: "Viele Geräte und Camouflage Mode",
+        why: "Telefon, Tablet und Laptop lassen sich mit einem Konto verbinden. Der Camouflage Mode kann in Netzwerken helfen, die VPN-Datenverkehr erkennen wollen; prüfen Sie vor der Reise die aktuellen Tarif- und Gerätebedingungen.",
+      },
+    ],
+    considerations: [
+      {
+        title: "Sicherheit in öffentlichen WLANs",
+        body: "Hotel-, Café- und Flughafen-WLANs sind oft unverschlüsselt oder schwach geschützt. Andere Nutzer im Netzwerk können Datenverkehr beobachten. Ein VPN verschlüsselt unterstützten Datenverkehr zusätzlich, ersetzt aber HTTPS und aktuelle Gerätesicherheit nicht.",
+      },
+      {
+        title: "VPN-Sperren in restriktiven Ländern",
+        body: "Länder wie China, Iran, die Vereinigten Arabischen Emirate, Belarus und Turkmenistan erkennen und blockieren VPN-Datenverkehr teilweise aktiv. Obfuscation- oder Camouflage-Funktionen können helfen, garantieren aber keinen Zugang und müssen die lokalen Regeln beachten.",
+      },
+      {
+        title: "Zugriff auf Inhalte zu Hause",
+        body: "Außerhalb Deutschlands kann ein Server im gewünschten Heimatland für regionale Dienste relevant sein. Streaming-Kataloge und Zugänge ändern sich häufig; prüfen Sie den exakten Dienst, das Konto, den Server und die aktuellen Nutzungsbedingungen.",
+      },
+      {
+        title: "Vor der Reise installieren",
+        body: "Manche Länder blockieren VPN-Websites. Installieren und aktualisieren Sie die App deshalb vor der Abreise auf jedem benötigten Gerät und speichern Sie die offiziellen Support-Informationen.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Wo ist die Nutzung eines VPN eingeschränkt?",
+        a: "VPN-Regeln können sich nach Land und Zeitpunkt schnell ändern. Prüfen Sie vor der Reise aktuelle offizielle Quellen und holen Sie bei Bedarf lokale Rechtsberatung ein. Dieser Ratgeber ist keine Rechtsberatung.",
+      },
+      {
+        q: "Ist ein VPN im Hotel wirklich nötig?",
+        a: "Hotel-WLANs sind meist geteilt, unverschlüsselt oder schwach geschützt. Für Banking oder sensible Kommunikation kann ein VPN die Sichtbarkeit im lokalen Netzwerk reduzieren; HTTPS, Geräteschutz und sichere Konten bleiben ebenfalls wichtig.",
+      },
+      {
+        q: "Welche Risiken gibt es ohne VPN auf Reisen?",
+        a: "Mögliche Risiken sind das Beobachten von Datenverkehr, gefälschte WLAN-Hotspots, Sitzungsdiebstahl und DNS-Manipulation. Ein VPN reduziert bestimmte Netzwerk-Sichtbarkeit, beseitigt aber nicht Phishing, unsichere Apps oder einen nicht vertrauenswürdigen Anbieter.",
+      },
+      {
+        q: "Welchen VPN sollte ich für China wählen?",
+        a: "Zugang zur Great Firewall ist nicht garantiert und kann sich kurzfristig ändern. Prüfen Sie aktuelle offizielle Anbieterinformationen, installieren Sie die App vor der Reise und beachten Sie die lokalen Vorschriften.",
+      },
+    ],
+    relatedLinks: [
+      { label: "VPN für Reisende", href: "/en-iyi/seyahat" },
+      { label: "VPN für Datenschutz", href: "/en-iyi/gizlilik" },
+      { label: "VPN für Android", href: "/cihazlar/android" },
+    ],
+  },
 } as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "en" ? "en" : locale === "de" ? "de" : "tr"];
   return {
     title: c.metaTitle,
     description: c.metaDescription,
@@ -166,7 +235,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "en" ? "en" : locale === "de" ? "de" : "tr"];
 
   return (
     <UseCasePage

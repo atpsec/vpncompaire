@@ -145,11 +145,80 @@ const CONTENT = {
       { label: "PIA review", href: "/inceleme/pia" },
     ],
   },
+  de: {
+    metaTitle: "VPN-Informationsratgeber für Gaming (2026)",
+    metaDescription:
+      "Latenz, DDoS-Schutz, regionale Spielserver und Preise — VPN-Auswahl für Gamer.",
+    title: "VPN-Informationsratgeber für Gaming",
+    tagline:
+      "Lernen Sie, Latenz, DDoS-Umfang und regionale Serverinformationen für Gaming zu vergleichen.",
+    summary:
+      "Bei der VPN-Auswahl für Gaming sollten Latenz, Routenstabilität, IP-Sichtbarkeit und die Spielregeln gemeinsam betrachtet werden. Wir veröffentlichen hier keine direkt vergleichbaren Labormessungen; vergleichen Sie VPN-aus- und VPN-an-Werte auf demselben Gerät und im selben Spielserver.",
+    badgeLabel: "Gaming",
+    picks: [
+      {
+        slug: "expressvpn",
+        bestFor: "Lightway und nahe Server",
+        why: "Lightway ist ein moderner Protokollkandidat für Gaming. Die tatsächliche Latenz und Routenstabilität hängen von Standort, ISP, Serverlast und Spielserver ab; vergleichen Sie mehrere nahe Server unter denselben Bedingungen.",
+      },
+      {
+        slug: "nordvpn",
+        bestFor: "NordLynx und große Serverauswahl",
+        why: "NordLynx ist eine WireGuard-basierte Option für Downloads und Spielrouten. Wir haben hier keine direkt vergleichbaren Durchsatzmessungen; prüfen Sie zusätzlich, ob Meshnet zu Ihrem Spiel und Ihrer Plattform passt.",
+      },
+      {
+        slug: "pia",
+        bestFor: "Portweiterleitung und Konfiguration",
+        why: "Portweiterleitung kann in manchen selbst gehosteten Mehrspieler-Szenarien helfen. Die Verfügbarkeit hängt von Serverregion, Plattform und aktueller Anbieterunterstützung ab; prüfen Sie die Dokumentation vor der Einrichtung.",
+      },
+    ],
+    considerations: [
+      {
+        title: "Latenz und Ping",
+        body: "Ein VPN führt den Datenverkehr über einen zusätzlichen Server und kann die Latenz verändern. Messen Sie Basis-Ping, VPN-Ping, Jitter und Paketverlust zur gleichen Spielregion über mehrere nahe Server.",
+      },
+      {
+        title: "DDoS-Schutz",
+        body: "Streamer und kompetitive Spieler können DDoS-Angriffen ausgesetzt sein. Ein VPN kann die echte IP-Adresse aus einer Spielsitzung heraushalten; prüfen Sie den dokumentierten Filterumfang und seine Grenzen separat.",
+      },
+      {
+        title: "Zugang zu regionalen Spielservern",
+        body: "Einige Spiele nutzen Regionen wie ASIA, NA-East oder EU-West. Eine andere VPN-Region kann das Matchmaking beeinflussen; das Ergebnis hängt von Spielregeln, Kontoregion und serverseitigen Prüfungen ab.",
+      },
+      {
+        title: "Regionale Preise in Spiele-Stores",
+        body: "Spiele können in Steam, PlayStation Store oder Microsoft Store regional unterschiedlich bepreist sein. Der Zugriff auf eine andere Store-Region kann jedoch gegen die Nutzungsbedingungen der Plattform verstoßen.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Verschlechtert ein VPN die Gaming-Leistung?",
+        a: "Verschlüsselung und ein zusätzlicher Netzwerkweg können Geschwindigkeit und Latenz verändern; eine andere Route kann gelegentlich auch besser sein. Vergleichen Sie auf demselben Gerät und in derselben Spielregion VPN-aus-Werte mit Ping, Jitter, Paketverlust und Downloadgeschwindigkeit über nahe Server.",
+      },
+      {
+        q: "Welches Protokoll sollte ich verwenden?",
+        a: "WireGuard oder eine WireGuard-basierte Option ist oft ein sinnvoller erster Versuch. Vergleichen Sie bei Problemen IKEv2 oder OpenVPN UDP unter denselben Bedingungen. Das beste Ergebnis hängt von Gerät, Netzwerk und Route ab.",
+      },
+      {
+        q: "Wie funktioniert DDoS-Schutz über ein VPN?",
+        a: "Mit aktivem VPN sieht der Spielserver die IP des VPN-Servers statt Ihrer echten IP. Ein Angreifer kann dann nur die VPN-IP angreifen; der Anbieter kann den Datenverkehr filtern oder eine andere IP zuweisen. Umfang und Schutz sind anbieterabhängig.",
+      },
+      {
+        q: "Sollte mein Kind beim Gaming ein VPN nutzen?",
+        a: "In offenen Netzwerken kann ein VPN die lokale Sichtbarkeit reduzieren. Einige Spielserver blockieren VPN-Datenverkehr oder sperren Konten; prüfen Sie daher zuerst die Spielregeln und die Vorgaben des Netzbetreibers.",
+      },
+    ],
+    relatedLinks: [
+      { label: "VPN für Streaming", href: "/en-iyi/streaming" },
+      { label: "VPN für Datenschutz", href: "/en-iyi/gizlilik" },
+      { label: "PIA-Testbericht", href: "/inceleme/pia" },
+    ],
+  },
 } as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "en" ? "en" : locale === "de" ? "de" : "tr"];
   return {
     title: c.metaTitle,
     description: c.metaDescription,
@@ -166,7 +235,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "en" ? "en" : locale === "de" ? "de" : "tr"];
 
   return (
     <UseCasePage

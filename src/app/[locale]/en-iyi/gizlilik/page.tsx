@@ -137,11 +137,76 @@ const CONTENT = {
       { label: "Mullvad review", href: "/inceleme/mullvad" },
     ],
   },
+  de: {
+    metaTitle: "VPN-Informationsratgeber für Datenschutz (2026)",
+    metaDescription:
+      "VPN-Auswahl für datenschutzorientierte Nutzer — mit unabhängigen Audits, Open-Source-Clients und datenschutzfreundlichen Rechtsräumen.",
+    title: "VPN-Informationsratgeber für Datenschutz",
+    tagline:
+      "Open-Source-Code, unabhängige Audits und der Rechtsraum — drei Belegbereiche, wenn Datenschutz zählt.",
+    summary:
+      "Wenn Datenschutz Priorität hat, sollten Sie über Marketingversprechen hinausblicken. Dieser Ratgeber ordnet Anbieter nach Rechtsraum, wiederholten unabhängigen Audits und Open-Source-Clients ein; er kürt keinen universell besten Anbieter und gibt keine Garantie.",
+    badgeLabel: "Datenschutz",
+    picks: [
+      {
+        slug: "proton-vpn",
+        bestFor: "Open Source und Schweizer Rechtsraum",
+        why: "Proton veröffentlicht Open-Source-Clients und Audit-Informationen. Der Schweizer Rechtsraum und der kostenlose Tarif sind konkrete Punkte, die Sie vor einer Entscheidung anhand der aktuellen Primärquellen prüfen können. Der kostenlose Tarif ist kein VPN-Advisor-Leistungstest.",
+      },
+      {
+        slug: "mullvad",
+        bestFor: "Anonymes Konto und keine Affiliate-Beziehung",
+        why: "Für die Kontoerstellung ist keine E-Mail-Adresse nötig, sondern nur eine zufällige Kontonummer. Mullvad akzeptiert außerdem Barzahlungen und betreibt kein Affiliate-Programm — ein schlichtes, datenschutzorientiertes Modell.",
+      },
+      {
+        slug: "nordvpn",
+        bestFor: "Wiederholte Audits",
+        why: "Der Anbieter berichtet seit 2018 über sechs Deloitte-Audits zur No-Logs-Politik. Wiederholte unabhängige Prüfungen sind für den jeweils genannten Umfang und Zeitpunkt nützliche Belege, aber keine Garantie für jede künftige Umsetzung.",
+      },
+    ],
+    considerations: [
+      {
+        title: "Rechtsraum",
+        body: "Welchen Gesetzen unterliegt der VPN-Anbieter? Der Rechtsraum verändert den rechtlichen Kontext, beweist allein aber keinen stärkeren Datenschutz. Lesen Sie Richtlinie, Eigentumsverhältnisse und unabhängige Belege gemeinsam.",
+      },
+      {
+        title: "Belege durch unabhängige Audits",
+        body: "Eine No-Logs-Aussage ist für sich genommen Marketing. Ein Audit durch Deloitte, KPMG, Cure53 oder Securitum sowie historische Gerichtsakten liefern unabhängige Belege für den geprüften Zeitraum und Umfang, garantieren aber kein künftiges Verhalten.",
+      },
+      {
+        title: "Open-Source-Clients",
+        body: "Wenn der Anwendungscode öffentlich ist, können unabhängige Sicherheitsforscher ihn prüfen und Schwachstellen melden. Das erleichtert die Bewertung von Risiken, beweist aber weder das Fehlen einer Hintertür noch die Übereinstimmung jeder verteilten App mit dem veröffentlichten Quellcode.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Welcher VPN schützt die Privatsphäre am besten?",
+        a: "Ohne ein definiertes Bedrohungsmodell gibt es keinen universellen Sieger. Proton VPN und Mullvad zeigen unterschiedliche Belegbereiche wie Open-Source-Clients, Rechtsraum und Kontodesign. Vergleichen Sie die aktuellen Quellen nach Ihren eigenen Prioritäten.",
+      },
+      {
+        q: "Was ist der Unterschied zwischen einem Audit und einem Gerichtsurteil?",
+        a: "Ein Audit prüft die Aussagen eines Anbieters zu einem definierten Zeitpunkt und Umfang. Eine historische Gerichtsakte zeigt, wie der Anbieter auf eine konkrete rechtliche Anfrage reagiert hat. Beides garantiert nicht jede künftige Umsetzung.",
+      },
+      {
+        q: "Sind Open-Source-VPNs automatisch sicherer?",
+        a: "Open Source bedeutet, dass der Code unabhängig geprüft werden kann — ein Transparenzvorteil. Ein geschlossenes VPN ist dadurch nicht automatisch unsicher; dort werden Auditberichte und andere Primärquellen besonders wichtig.",
+      },
+      {
+        q: "Kann ich für Datenschutz einen kostenlosen VPN nutzen?",
+        a: "Viele kostenlose VPNs finanzieren sich über Datenverkauf oder Werbeeinblendungen und stehen damit dem Datenschutz entgegen. Proton VPN veröffentlicht Informationen zu einem kostenlosen Tarif mit eigener No-Logs- und Audit-Grundlage; prüfen Sie trotzdem den aktuellen Umfang.",
+      },
+    ],
+    relatedLinks: [
+      { label: "VPN für Streaming", href: "/en-iyi/streaming" },
+      { label: "VPN für die Türkei", href: "/en-iyi/turkiye" },
+      { label: "Mullvad-Testbericht", href: "/inceleme/mullvad" },
+    ],
+  },
 } as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "en" ? "en" : locale === "de" ? "de" : "tr"];
   return {
     title: c.metaTitle,
     description: c.metaDescription,
@@ -158,7 +223,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const c = CONTENT[locale === "en" ? "en" : "tr"];
+  const c = CONTENT[locale === "en" ? "en" : locale === "de" ? "de" : "tr"];
 
   return (
     <UseCasePage
