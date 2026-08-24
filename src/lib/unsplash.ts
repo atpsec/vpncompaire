@@ -94,6 +94,99 @@ function generatedImg(path: string, alt: string): UnsplashImage {
   };
 }
 
+type GeneratedCategory =
+  | "security"
+  | "streaming"
+  | "travel"
+  | "remote"
+  | "network"
+  | "money"
+  | "legal"
+  | "ai"
+  | "gaming"
+  | "devices"
+  | "education"
+  | "shopping"
+  | "audit";
+
+const GENERATED_HEROES: Record<GeneratedCategory, string> = {
+  security: "/blog/generated/vpn-security-hero.png",
+  streaming: "/blog/generated/streaming-vpn-hero.png",
+  travel: "/blog/generated/seyahatte-vpn-kullanimi-hero.png",
+  remote: "/blog/generated/remote-work-vpn-hero.png",
+  network: "/blog/generated/network-performance-vpn-hero.png",
+  money: "/blog/generated/vpn-pricing-hero.png",
+  legal: "/blog/generated/vpn-law-trust-hero.png",
+  ai: "/blog/generated/ai-privacy-vpn-hero.png",
+  gaming: "/blog/generated/gaming-vpn-hero.png",
+  devices: "/blog/generated/vpn-devices-hero.png",
+  education: "/blog/generated/online-learning-vpn-hero.png",
+  shopping: "/blog/generated/online-shopping-vpn-hero.png",
+  audit: "/blog/generated/vpn-audit-hero.png",
+};
+
+const GENERATED_SUPPORT_IMAGES = {
+  mid: "/blog/generated/vpn-network-detail.png",
+  end: "/blog/generated/vpn-global-detail.png",
+} as const;
+
+function generatedCategoryForCoverImage(coverImage: string): GeneratedCategory {
+  const key = coverImage.toLowerCase();
+
+  if (/(streaming|netflix|prime-video|twitch|hbo-max|disney|youtube|spotify|anime|sports|bbc|fire-tv|android-tv|apple-tv)/.test(key)) {
+    return "streaming";
+  }
+  if (/(gaming|steam|playstation|xbox|console)/.test(key)) {
+    return "gaming";
+  }
+  if (/(travel|flight|hotel|car-rental|booking|public-wifi)/.test(key)) {
+    return "travel";
+  }
+  if (/(ai|chatgpt|claude|gemini|perplexity|midjourney|stable-diffusion|api-key)/.test(key)) {
+    return "ai";
+  }
+  if (/(remote|freelancer|work|multi-device|daily-security)/.test(key)) {
+    return "remote";
+  }
+  if (/(education|learning|course|teacher|educator)/.test(key)) {
+    return "education";
+  }
+  if (/(shopping|e-commerce)/.test(key)) {
+    return "shopping";
+  }
+  if (/(finance|investor|trader|gold|subscription|pricing|refund|free-vs-paid|savings|app-store)/.test(key)) {
+    return "money";
+  }
+  if (/(audit|trustworthy|review)/.test(key)) {
+    return "audit";
+  }
+  if (/(legal|jurisdiction)/.test(key)) {
+    return "legal";
+  }
+  if (/(device|router|linux|mac|ios|chromebook)/.test(key)) {
+    return "devices";
+  }
+  if (/(speed|performance|dns|webrtc|ipv6|mtu|throttling|protocol|wireguard|openvpn|network)/.test(key)) {
+    return "network";
+  }
+
+  return "security";
+}
+
+function generatedSupportAlt(coverImage: string, position: "mid" | "end"): string {
+  const isEnglish = coverImage.endsWith("-en") || coverImage.includes("-en-");
+
+  if (isEnglish) {
+    return position === "mid"
+      ? "Abstract secure data flow for a VPN connection"
+      : "Global internet access and privacy network illustration";
+  }
+
+  return position === "mid"
+    ? "VPN bağlantısında güvenli veri akışını gösteren görsel"
+    : "Global internet erişimi ve gizlilik ağını gösteren görsel";
+}
+
 const imageDatabase: Record<string, BlogImageSet> = {
   "vpn-basics": {
     hero: img("1558494949-ef010cbdcc31", "Güvenli ağ bağlantısı ve sunucu odası", PHOTOGRAPHERS.taylorVick),
@@ -1241,15 +1334,21 @@ const FALLBACK_IMAGES: BlogImageSet = imageDatabase["vpn-basics"];
 
 export function getBlogImages(coverImage: string): BlogImageSet {
   const key = aliases[coverImage] || coverImage;
-  return imageDatabase[key] || FALLBACK_IMAGES;
+  const set = imageDatabase[key] || FALLBACK_IMAGES;
+  const category = generatedCategoryForCoverImage(coverImage);
+
+  return {
+    hero: generatedImg(GENERATED_HEROES[category], set.hero.alt),
+    mid: generatedImg(GENERATED_SUPPORT_IMAGES.mid, generatedSupportAlt(coverImage, "mid")),
+    end: generatedImg(GENERATED_SUPPORT_IMAGES.end, generatedSupportAlt(coverImage, "end")),
+  };
 }
 
 export function getBlogImage(
   coverImage: string,
   position: "hero" | "mid" | "end",
 ): UnsplashImage {
-  const set = getBlogImages(coverImage);
-  return set[position];
+  return getBlogImages(coverImage)[position];
 }
 
 export function getUnsplashImageUrl(coverImage: string): string {
