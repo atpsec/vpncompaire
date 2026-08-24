@@ -1,3 +1,5 @@
+import { GENERATED_BLOG_HEROES } from "./generated-blog-images";
+
 export type UnsplashImage = {
   url: string;
   alt: string;
@@ -1332,10 +1334,20 @@ const aliases: Record<string, string> = {
 
 const FALLBACK_IMAGES: BlogImageSet = imageDatabase["vpn-basics"];
 
-export function getBlogImages(coverImage: string): BlogImageSet {
+export function getBlogImages(coverImage: string, imageKey?: string): BlogImageSet {
   const key = aliases[coverImage] || coverImage;
   const set = imageDatabase[key] || FALLBACK_IMAGES;
   const category = generatedCategoryForCoverImage(coverImage);
+  const uniqueHero = imageKey ? GENERATED_BLOG_HEROES[imageKey] : undefined;
+
+  if (uniqueHero) {
+    const uniqueImage = generatedImg(uniqueHero, set.hero.alt);
+    return {
+      hero: uniqueImage,
+      mid: uniqueImage,
+      end: uniqueImage,
+    };
+  }
 
   return {
     hero: generatedImg(GENERATED_HEROES[category], set.hero.alt),
@@ -1347,8 +1359,9 @@ export function getBlogImages(coverImage: string): BlogImageSet {
 export function getBlogImage(
   coverImage: string,
   position: "hero" | "mid" | "end",
+  imageKey?: string,
 ): UnsplashImage {
-  return getBlogImages(coverImage)[position];
+  return getBlogImages(coverImage, imageKey)[position];
 }
 
 export function getUnsplashImageUrl(coverImage: string): string {

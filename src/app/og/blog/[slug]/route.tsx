@@ -57,7 +57,7 @@ export async function GET(req: Request, ctx: RouteParams) {
   const title = found?.post.frontmatter.title ?? fallbackTitle;
   const category = found?.post.frontmatter.category ?? "blog";
   const coverImageKey = found?.post.frontmatter.coverImage ?? "vpn-basics";
-  const heroUrl = getBlogImage(coverImageKey, "hero").url;
+  const heroUrl = getBlogImage(coverImageKey, "hero", found?.post.frontmatter.slug).url;
   const heroSrc = heroUrl.startsWith("/")
     ? new URL(heroUrl, req.url).toString()
     : heroUrl;

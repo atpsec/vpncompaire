@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 
 type UnsplashImageProps = {
   coverImage: string;
+  imageKey?: string;
   position?: "hero" | "mid" | "end";
   alt?: string;
   className?: string;
@@ -12,13 +13,14 @@ type UnsplashImageProps = {
 
 export async function UnsplashImage({
   coverImage,
+  imageKey,
   position = "hero",
   alt,
   className = "",
   preload = false,
 }: UnsplashImageProps) {
   const t = await getTranslations("blog");
-  const image = getBlogImage(coverImage, position);
+  const image = getBlogImage(coverImage, position, imageKey);
   const isHero = position === "hero";
   const width = isHero ? 1200 : 800;
   const height = isHero ? 630 : 450;
