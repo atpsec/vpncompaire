@@ -100,7 +100,17 @@
       "useCaseDescription": "Open guides for travel, privacy and streaming.",
       "toolsTitle": "Check your connection",
       "toolsDescription": "Use live diagnostic tools for your current connection.",
-      "sourceNote": "Provider information is explained through official, verifiable sources."
+      "sourceNote": "Provider information is explained through official, verifiable sources.",
+      "selectionKicker": "Transparent selection",
+      "selectionTitle": "What do we look at when assessing a VPN?",
+      "selectionBody": "Every profile uses the same core fields and is built from providers' official documents and verifiable sources.",
+      "selectionLink": "Read the methodology",
+      "sourcesTitle": "Official sources",
+      "sourcesDescription": "Policy and feature documentation.",
+      "privacyTitle": "Privacy framework",
+      "privacyDescription": "Jurisdiction and audit information.",
+      "valueTitle": "Price and devices",
+      "valueDescription": "Plans, terms and supported platforms."
     },
     "faq": {
       "title": "Frequently asked questions"

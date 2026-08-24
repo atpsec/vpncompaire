@@ -100,7 +100,17 @@
       "useCaseDescription": "Seyahat, gizlilik ve streaming rehberlerini aç.",
       "toolsTitle": "Bağlantını kontrol et",
       "toolsDescription": "Mevcut bağlantın için anlık tanılama araçlarını kullan.",
-      "sourceNote": "Sağlayıcı bilgileri resmi ve doğrulanabilir kaynaklarla açıklanır."
+      "sourceNote": "Sağlayıcı bilgileri resmi ve doğrulanabilir kaynaklarla açıklanır.",
+      "selectionKicker": "Şeffaf seçim",
+      "selectionTitle": "Bir VPN'i değerlendirirken nelere bakıyoruz?",
+      "selectionBody": "Her profili, sağlayıcıların resmi belgeleri ve doğrulanabilir kaynakları üzerinden aynı temel başlıklarda inceliyoruz.",
+      "selectionLink": "Metodolojiyi incele",
+      "sourcesTitle": "Resmi kaynaklar",
+      "sourcesDescription": "Politika ve özellik belgeleri.",
+      "privacyTitle": "Gizlilik çerçevesi",
+      "privacyDescription": "Yargı yetkisi ve denetim bilgisi.",
+      "valueTitle": "Fiyat ve cihazlar",
+      "valueDescription": "Plan, süre ve desteklenen platformlar."
     },
     "faq": {
       "title": "Sık Sorulan Sorular"

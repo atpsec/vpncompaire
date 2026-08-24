@@ -100,7 +100,17 @@
       "useCaseDescription": "Ratgeber für Reisen, Datenschutz und Streaming öffnen.",
       "toolsTitle": "Verbindung prüfen",
       "toolsDescription": "Live-Diagnose für Ihre aktuelle Verbindung nutzen.",
-      "sourceNote": "Anbieterinformationen werden anhand offizieller, überprüfbarer Quellen erklärt."
+      "sourceNote": "Anbieterinformationen werden anhand offizieller, überprüfbarer Quellen erklärt.",
+      "selectionKicker": "Transparente Auswahl",
+      "selectionTitle": "Worauf achten wir bei der VPN-Bewertung?",
+      "selectionBody": "Jedes Profil nutzt dieselben Kernfelder und basiert auf offiziellen Dokumenten der Anbieter und überprüfbaren Quellen.",
+      "selectionLink": "Methodik lesen",
+      "sourcesTitle": "Offizielle Quellen",
+      "sourcesDescription": "Richtlinien und Funktionsdokumentation.",
+      "privacyTitle": "Datenschutzrahmen",
+      "privacyDescription": "Rechtsraum und Audit-Informationen.",
+      "valueTitle": "Preis und Geräte",
+      "valueDescription": "Tarife, Laufzeiten und unterstützte Plattformen."
     },
     "faq": {
       "title": "Häufige Fragen"
