@@ -1015,4 +1015,35 @@ export function topRankedProducts(locale: Locale = "tr"): Product[] {
   return rankedProducts(locale).slice(0, TOP_RANKED_LIMIT);
 }
 
+/**
+ * Ana sayfanın görünür popülerlik sırası.
+ *
+ * Bu liste teknik "en iyi" puanı değildir. 2025-2026 dönemindeki küresel
+ * tüketici araştırmaları, marka görünürlüğü ve bağımsız sektör listelerinde
+ * tekrar eden büyük tüketici VPN markalarının ortak sinyalini temsil eder.
+ * Sağlayıcı dizini ise alfabetik kalır; böylece popülerlik görünümü editoryal
+ * karşılaştırma sıralamasıyla karıştırılmaz.
+ */
+export const HOMEPAGE_POPULARITY_ORDER = [
+  "nordvpn",
+  "proton-vpn",
+  "surfshark",
+  "expressvpn",
+  "cyberghost",
+  "pia",
+] as const;
+
+export function homepagePopularProducts(locale: Locale = "tr"): Product[] {
+  const resolved = rankedProducts(locale);
+  const bySlug = new Map(resolved.map((product) => [product.slug, product]));
+  const ordered = HOMEPAGE_POPULARITY_ORDER.map((slug) => bySlug.get(slug)).filter(
+    (product): product is Product => Boolean(product),
+  );
+  const remainder = resolved.filter(
+    (product) => !HOMEPAGE_POPULARITY_ORDER.includes(product.slug as (typeof HOMEPAGE_POPULARITY_ORDER)[number]),
+  );
+
+  return [...ordered, ...remainder].slice(0, TOP_RANKED_LIMIT);
+}
+
 export const products: Product[] = rankedProducts("tr");

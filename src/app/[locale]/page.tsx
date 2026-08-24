@@ -16,7 +16,7 @@ import {
   itemListSchema,
 } from "@/lib/seo";
 import { homeFaqs } from "@/data/home-faqs";
-import { topRankedProducts } from "@/data/products";
+import { homepagePopularProducts } from "@/data/products";
 import type { Locale } from "@/lib/site";
 
 type Props = {
@@ -32,7 +32,7 @@ export default async function HomePage({ params }: Props) {
     <>
       <JsonLd data={organizationSchema(locale)} />
       <JsonLd data={websiteSchema(locale)} />
-      <JsonLd data={itemListSchema(topRankedProducts(locale), locale)} />
+      <JsonLd data={itemListSchema(homepagePopularProducts(locale), locale)} />
       <JsonLd data={faqSchema(homeFaqs(locale))} />
       <Hero />
       <IpSecurityBanner />

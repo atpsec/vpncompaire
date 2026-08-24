@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
-import { topRankedProducts, type Product } from "@/data/products";
+import { homepagePopularProducts, type Product } from "@/data/products";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
@@ -17,7 +17,7 @@ export function TopVPNList() {
   const tCommon = useTranslations("common");
   const locale = useLocale() as Locale;
   const copy = positioningFor(locale);
-  const list = topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn");
+  const list = homepagePopularProducts(locale).filter((p) => p.slug !== "atlas-vpn");
   const featured = list[0];
   const next = list.slice(1, 10);
   const extended = list.slice(10);

@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
-import { topRankedProducts, type Product } from "@/data/products";
+import { homepagePopularProducts, type Product } from "@/data/products";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -13,8 +13,9 @@ import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 export function TopThreePodium() {
   const locale = useLocale() as Locale;
-  const top = topRankedProducts(locale).slice(0, 3);
-  const label = locale === "tr" ? "Öne çıkan sağlayıcı profilleri" : locale === "de" ? "Hervorgehobene Anbieterprofile" : "Featured provider profiles";
+  const top = homepagePopularProducts(locale).slice(0, 3);
+  const copy = positioningFor(locale);
+  const label = copy.featured;
   return (
     <section aria-label={label} className="relative -mt-2 sm:-mt-4 pb-8 sm:pb-12">
       <Container>
