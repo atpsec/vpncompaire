@@ -57,7 +57,10 @@ export async function GET(req: Request, ctx: RouteParams) {
   const title = found?.post.frontmatter.title ?? fallbackTitle;
   const category = found?.post.frontmatter.category ?? "blog";
   const coverImageKey = found?.post.frontmatter.coverImage ?? "vpn-basics";
-  const heroUrl = getBlogImage(coverImageKey, "hero", slug).url;
+  const heroUrl = getBlogImage(coverImageKey, "hero").url;
+  const heroSrc = heroUrl.startsWith("/")
+    ? new URL(heroUrl, req.url).toString()
+    : heroUrl;
 
   return new ImageResponse(
     (
@@ -75,7 +78,7 @@ export async function GET(req: Request, ctx: RouteParams) {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={heroUrl}
+          src={heroSrc}
           alt=""
           width={1200}
           height={630}

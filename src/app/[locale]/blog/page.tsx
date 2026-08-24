@@ -53,9 +53,9 @@ export default async function BlogPage({ params }: Props) {
 
   const t = await getTranslations("blog");
   const posts = await getVisibleBlogPostSummaries(locale);
-  const postCards = posts.map((post, index) => ({
+  const postCards = posts.map((post) => ({
     ...post,
-    imageUrl: getBlogImage(post.coverImage, "hero", post.slug, index).url,
+    imageUrl: getBlogImage(post.coverImage, "hero").url,
   }));
   const canonical = absoluteUrl("/blog", locale);
   const localePath = locale === "tr" ? "" : `/${locale}`;

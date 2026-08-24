@@ -5,7 +5,6 @@ import { getTranslations } from "next-intl/server";
 type UnsplashImageProps = {
   coverImage: string;
   position?: "hero" | "mid" | "end";
-  seed?: string;
   alt?: string;
   className?: string;
   preload?: boolean;
@@ -14,13 +13,12 @@ type UnsplashImageProps = {
 export async function UnsplashImage({
   coverImage,
   position = "hero",
-  seed,
   alt,
   className = "",
   preload = false,
 }: UnsplashImageProps) {
   const t = await getTranslations("blog");
-  const image = getBlogImage(coverImage, position, seed);
+  const image = getBlogImage(coverImage, position);
   const isHero = position === "hero";
   const width = isHero ? 1200 : 800;
   const height = isHero ? 630 : 450;
@@ -40,16 +38,22 @@ export async function UnsplashImage({
         />
       </div>
       <figcaption className="mt-2 text-xs text-ink-subtle">
-        {t("photoBy")}{" "}
-        <a
-          href={image.photographerUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-ink-muted"
-        >
-          {image.photographer}
-        </a>{" "}
-        {t("onUnsplash")}
+        {image.source === "generated" ? (
+          t("generatedBy")
+        ) : (
+          <>
+            {t("photoBy")}{" "}
+            <a
+              href={image.photographerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-ink-muted"
+            >
+              {image.photographer}
+            </a>{" "}
+            {t("onUnsplash")}
+          </>
+        )}
       </figcaption>
     </figure>
   );

@@ -265,7 +265,7 @@ export default async function BlogPostPage({ params }: Props) {
     locale
   );
 
-  const heroImage = getBlogImage(frontmatter.coverImage, "hero", frontmatter.slug);
+  const heroImage = getBlogImage(frontmatter.coverImage, "hero");
   const localePath = locale === "tr" ? "" : `/${locale}`;
   const blogIndexPath = `${localePath}/blog`;
 
@@ -276,7 +276,9 @@ export default async function BlogPostPage({ params }: Props) {
     publishedAt: frontmatter.publishedAt,
     updatedAt: frontmatter.updatedAt,
     author: frontmatter.author,
-    imageUrl: heroImage.url,
+    imageUrl: heroImage.url.startsWith("/")
+      ? absoluteUrl(heroImage.url, locale)
+      : heroImage.url,
     locale,
     category: frontmatter.category,
     tags: frontmatter.tags,
@@ -318,7 +320,6 @@ export default async function BlogPostPage({ params }: Props) {
         <UnsplashImage
           coverImage={frontmatter.coverImage}
           position="hero"
-          seed={frontmatter.slug}
           alt={frontmatter.title}
           className="my-8"
           preload
@@ -329,7 +330,6 @@ export default async function BlogPostPage({ params }: Props) {
         <UnsplashImage
           coverImage={frontmatter.coverImage}
           position="mid"
-          seed={frontmatter.slug}
           className="my-10"
         />
 
@@ -363,7 +363,6 @@ export default async function BlogPostPage({ params }: Props) {
         <UnsplashImage
           coverImage={frontmatter.coverImage}
           position="end"
-          seed={frontmatter.slug}
           className="my-10"
         />
 

@@ -3,6 +3,7 @@ export type UnsplashImage = {
   alt: string;
   photographer: string;
   photographerUrl: string;
+  source: "unsplash" | "generated";
 };
 
 export type BlogImageSet = {
@@ -79,6 +80,17 @@ function img(photoId: string, alt: string, photographer: { name: string; url: st
     alt,
     photographer: photographer.name,
     photographerUrl: photographer.url,
+    source: "unsplash",
+  };
+}
+
+function generatedImg(path: string, alt: string): UnsplashImage {
+  return {
+    url: path,
+    alt,
+    photographer: "VPN Advisor",
+    photographerUrl: "/hakkimizda",
+    source: "generated",
   };
 }
 
@@ -99,7 +111,10 @@ const imageDatabase: Record<string, BlogImageSet> = {
     end: img("1611162617474-5b21e879e113", "Dünya haritası ve global erişim", PHOTOGRAPHERS.guerrillaBuzz, 800, 450),
   },
   "travel-vpn": {
-    hero: img("1488646953014-85cb44e25828", "Dünya haritası ve seyahat planlama", PHOTOGRAPHERS.annieSpratt),
+    hero: generatedImg(
+      "/blog/generated/seyahatte-vpn-kullanimi-hero.png",
+      "Havalimanı kafesinde halka açık Wi-Fi kullanan laptop ve güvenli ağ bağlantısı",
+    ),
     mid: img("1436491865332-7a61a109cc05", "Havalimanı ve uçak", PHOTOGRAPHERS.rossParmly, 800, 450),
     end: img("1521295121783-8a321d551ad2", "Kafede laptop ile çalışma", PHOTOGRAPHERS.christinHume, 800, 450),
   },
@@ -1224,27 +1239,6 @@ const aliases: Record<string, string> = {
 
 const FALLBACK_IMAGES: BlogImageSet = imageDatabase["vpn-basics"];
 
-function imageKey(image: UnsplashImage): string {
-  return image.url.split("?")[0] ?? image.url;
-}
-
-const ALL_BLOG_IMAGES = Array.from(
-  new Map(
-    Object.values(imageDatabase)
-      .flatMap((set) => [set.hero, set.mid, set.end])
-      .map((image) => [imageKey(image), image] as const),
-  ).values(),
-);
-
-function seedHash(seed: string): number {
-  let hash = 2166136261;
-  for (let index = 0; index < seed.length; index += 1) {
-    hash ^= seed.charCodeAt(index);
-    hash = Math.imul(hash, 16777619);
-  }
-  return hash >>> 0;
-}
-
 export function getBlogImages(coverImage: string): BlogImageSet {
   const key = aliases[coverImage] || coverImage;
   return imageDatabase[key] || FALLBACK_IMAGES;
@@ -1253,25 +1247,9 @@ export function getBlogImages(coverImage: string): BlogImageSet {
 export function getBlogImage(
   coverImage: string,
   position: "hero" | "mid" | "end",
-  seed?: string,
-  sequence?: number,
 ): UnsplashImage {
   const set = getBlogImages(coverImage);
-  if (!seed) return set[position];
-
-  if (sequence !== undefined && position === "hero") {
-    const baseIndex = seedHash("vpn-advisor-blog-gallery") % ALL_BLOG_IMAGES.length;
-    return ALL_BLOG_IMAGES[(baseIndex + sequence) % ALL_BLOG_IMAGES.length] ?? set[position];
-  }
-
-  const preferred = [set[position], set.hero, set.mid, set.end];
-  const candidates = [
-    ...preferred,
-    ...ALL_BLOG_IMAGES.filter(
-      (image) => !preferred.some((item) => imageKey(item) === imageKey(image)),
-    ),
-  ];
-  return candidates[seedHash(`${coverImage}:${position}:${seed}`) % candidates.length] ?? set[position];
+  return set[position];
 }
 
 export function getUnsplashImageUrl(coverImage: string): string {
