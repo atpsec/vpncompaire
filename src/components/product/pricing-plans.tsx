@@ -24,11 +24,14 @@ export function PricingPlans({
 }: Props) {
   const locale = useLocale();
   const t = useTranslations("pricingPlans");
-  const formatter = new Intl.DateTimeFormat(locale === "en" ? "en-US" : "tr-TR", {
+  const formatter = new Intl.DateTimeFormat(
+    locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US",
+    {
     year: "numeric",
     month: "long",
     day: "numeric",
-  });
+    },
+  );
   const verifiedDate = verifiedAt ? formatter.format(new Date(verifiedAt)) : null;
 
   return (

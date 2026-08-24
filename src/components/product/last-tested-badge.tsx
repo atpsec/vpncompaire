@@ -37,7 +37,7 @@ export function LastTestedBadge({
   if (!lastTestedAt) return null;
 
   const formatter = new Intl.DateTimeFormat(
-    locale === "en" ? "en-US" : "tr-TR",
+    locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US",
     { year: "numeric", month: "long", day: "numeric" },
   );
   const formattedDate = formatter.format(new Date(lastTestedAt));

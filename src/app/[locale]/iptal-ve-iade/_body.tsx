@@ -6,6 +6,7 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { ProviderLink } from "@/components/affiliate/provider-link";
 import { rankedProducts, type Product } from "@/data/products";
+import type { Locale } from "@/i18n/pick";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 type CancelInfo = { via: string; pitfalls: string[] };
@@ -229,6 +230,160 @@ const EN_FAQS: FAQ[] = [
   },
 ];
 
+const DE_CANCEL_INFO: Record<string, CancelInfo> = {
+  nordvpn: {
+    via: "Konto → Abonnement → Automatische Verlängerung deaktivieren. Für eine Erstattung innerhalb von 30 Tagen den Support (Live-Chat oder support@nordvpn.com) kontaktieren.",
+    pitfalls: [
+      "Das Deaktivieren der automatischen Verlängerung ist keine Erstattung — dafür ist eine separate Support-Anfrage erforderlich.",
+      "Abonnements über den App Store oder Google Play müssen über Apple bzw. Google erstattet werden.",
+    ],
+  },
+  surfshark: {
+    via: "Konto → Subscription → Cancel Subscription. Für eine Erstattung innerhalb von 30 Tagen den Support (Live-Chat) kontaktieren.",
+    pitfalls: [
+      "Automatische Verlängerung und Erstattung sind getrennte Vorgänge.",
+      "Abonnements über den App Store oder Google Play werden über die jeweilige Plattform erstattet.",
+    ],
+  },
+  expressvpn: {
+    via: "Konto → Subscription → Manage settings → Cancel automatic renewal. Für eine Erstattung innerhalb von 30 Tagen ist der 24/7-Live-Chat meist der schnellste Weg.",
+    pitfalls: [
+      "Die 30-Tage-Frist beginnt mit dem Start des Verlängerungszeitraums.",
+      "Bei einem Kauf über einen mobilen App-Store muss die Erstattung über Apple oder Google beantragt werden.",
+    ],
+  },
+  "proton-vpn": {
+    via: "account.proton.me → Subscription → Cancel. Für kostenpflichtige Tarife innerhalb von 30 Tagen eine Support-Anfrage zur Erstattung stellen.",
+    pitfalls: [
+      "Der kostenlose Tarif ist kein kostenpflichtiges Abonnement und muss nicht gekündigt werden.",
+      "Proton kann eine anteilige Erstattung anhand der verbleibenden Laufzeit berechnen.",
+    ],
+  },
+  pia: {
+    via: "Account → Subscription → Cancel. Für eine Erstattung innerhalb von 30 Tagen den Support (Live-Chat) kontaktieren.",
+    pitfalls: [
+      "Alle Tarife einschließlich des 3-Jahres-Tarifs haben eine 30-tägige Erstattungsfrist.",
+      "Abonnements über den App Store oder Google Play werden über die jeweilige Plattform erstattet.",
+    ],
+  },
+  cyberghost: {
+    via: "Konto → Subscription → Cancel. Für eine Erstattung innerhalb von 45 Tagen eine Support-Anfrage stellen.",
+    pitfalls: [
+      "Die 45 Tage gelten nur für langfristige Tarife ab einem Jahr; Monatstarife haben 14 Tage.",
+      "Abonnements aus mobilen App-Stores werden über die jeweilige Plattform erstattet.",
+    ],
+  },
+  ipvanish: {
+    via: "Konto → Subscription → Cancel. Für Jahrespläne innerhalb von 30 Tagen, für Monatspläne innerhalb von 7 Tagen eine Support-Anfrage stellen.",
+    pitfalls: [
+      "Bei Monatsplänen beträgt die Erstattungsfrist nur 7 Tage; langfristige Tarife können andere Bedingungen haben.",
+      "Für Zusatzdienste wie Boxcryptor können abweichende Erstattungsregeln gelten.",
+    ],
+  },
+  windscribe: {
+    via: "Konto → My Account → Manage Subscription → Cancel. Eine Erstattung muss innerhalb von 3 Tagen beim Support beantragt werden.",
+    pitfalls: [
+      "Die 3-Tage-Frist gehört zu den kürzesten Erstattungsfristen der Branche.",
+      "Für Build-a-Plan-Käufe können andere Erstattungsregeln gelten.",
+    ],
+  },
+  tunnelbear: {
+    via: "Konto → Cancel Subscription. Es gibt keine allgemeine Geld-zurück-Garantie — testen Sie vor einem kostenpflichtigen Tarif den kostenlosen Tarif mit 2 GB.",
+    pitfalls: [
+      "Ohne Geld-zurück-Garantie hängt eine Erstattung nach dem Kauf von einer Einzelfallentscheidung des Supports ab.",
+      "Die Kündigung löscht das Konto nicht; die Löschung von Daten muss separat beantragt werden.",
+    ],
+  },
+  mullvad: {
+    via: "Mit der Kontonummer anmelden → Manage account → Refund. Eine Erstattung muss innerhalb von 30 Tagen beim Support beantragt werden.",
+    pitfalls: [
+      "Bei anonymen Konten hängt der Rückerstattungsweg von der verwendeten Zahlungsart ab.",
+      "Bei Barzahlungen sollte die Support-Anfrage die für die Erstattung erforderlichen Adressdaten enthalten.",
+    ],
+  },
+};
+
+const DE_FAQS: FAQ[] = [
+  {
+    q: "Wann beginnt die Erstattungsfrist?",
+    a: "Nach den Anbieterbedingungen ist meist das Startdatum des Abonnements maßgeblich. Einige Anbieter rechnen ab dem Beginn des Verlängerungszeitraums. Prüfen Sie für die aktuellen Bedingungen die offizielle Support-Seite des Anbieters.",
+  },
+  {
+    q: "Ich habe über den App Store oder Google Play gekauft — wie beantrage ich eine Erstattung?",
+    a: "Dann gilt in der Regel nicht der eigene Erstattungsprozess des VPN-Anbieters. Die Erstattung muss über Apple App Store oder Google Play beantragt werden; es gelten deren jeweilige Regeln.",
+  },
+  {
+    q: "Ist das Deaktivieren der automatischen Verlängerung dasselbe wie eine Erstattung?",
+    a: "Nein. Dadurch werden nur künftige Abbuchungen verhindert. Für eine Erstattung des aktuellen Zeitraums muss zusätzlich eine Erstattungsanfrage beim Support des Anbieters gestellt werden.",
+  },
+  {
+    q: "Was kann ich tun, wenn meine Erstattungsanfrage abgelehnt wird?",
+    a: "Wenden Sie sich zunächst erneut an den Support und bewahren Sie die Korrespondenz auf. Wenn die Anfrage abgelehnt wird, können Sie sich an den Kartenanbieter oder PayPal wenden; ein Chargeback kann jedoch die weitere Nutzung des Anbieters beeinflussen.",
+  },
+  {
+    q: "Bekomme ich bei einer Kündigung mitten im Jahreszeitraum das Geld für die restlichen Monate zurück?",
+    a: "Meist nicht. Viele Anbieter erstatten innerhalb eines bestimmten Zeitfensters vollständig und danach nicht mehr. Proton VPN kann anteilig erstatten; bei anderen Anbietern läuft der Tarif bis zum Ende weiter oder fällt anschließend auf einen kostenlosen Tarif zurück.",
+  },
+];
+
+const DE_STRINGS: Strings = {
+  breadcrumbHome: "Startseite",
+  breadcrumbHere: "Kündigung & Erstattung",
+  badge: "Verbraucherleitfaden",
+  h1: "VPN kündigen und Erstattung beantragen",
+  lede: "Kündigungsschritte, Erstattungsfristen und häufige Stolperfallen für die aufgeführten VPN-Anbieter — anhand der jeweiligen Anbieterbedingungen zusammengestellt. Eine zentrale Übersicht, wenn eine Verlängerung bevorsteht oder Sie eine Erstattung beantragen möchten.",
+  warningTitle: "Allgemeiner Hinweis",
+  warningBody:
+    "Erstattungs- und Kündigungsbedingungen können vom Anbieter ohne Vorankündigung geändert werden. Die Erstattungsfrist beträgt typischerweise 30 Tage (CyberGhost 45, Windscribe 3, IPVanish 7 Tage bei Monatsplänen). Lesen Sie vor dem Kauf die aktuelle Erstattungsrichtlinie des Anbieters.",
+  navAria: "VPN auswählen",
+  daysSuffix: "Tage Erstattung",
+  refundWindowMissing: "Erstattungsfrist beim Anbieter erfragen",
+  howToCancel: "So kündigen Sie",
+  watchOut: "Darauf sollten Sie achten",
+  reviewSuffix: "Testbericht →",
+  supportLink: "Offizielle Support-Seite des Anbieters →",
+  stepsH2: "Allgemeiner Kündigungsablauf — 4 Schritte",
+  steps: [
+    {
+      bold: "Automatische Verlängerung deaktivieren.",
+      rest: " Schalten Sie im Kontobereich des Anbieters die Option für die automatische Verlängerung aus. Dadurch werden künftige Abbuchungen gestoppt.",
+    },
+    {
+      bold: "Bei gewünschter Erstattung eine Support-Anfrage stellen.",
+      rest: " Das Deaktivieren der Verlängerung ist keine Erstattung. Wenden Sie sich innerhalb der Erstattungsfrist an den Support; der Live-Chat ist oft schneller als E-Mail.",
+    },
+    {
+      bold: "Den Erstattungsweg für die Zahlungsart bestätigen.",
+      rest: " Kartenzahlungen gehen in der Regel auf die Karte zurück, PayPal-Zahlungen zu PayPal. Käufe über einen App-Store werden über Apple oder Google abgewickelt.",
+    },
+    {
+      bold: "Den Erstattungstermin verfolgen.",
+      rest: " Rückzahlungen auf Bankkarten können 3–10 Werktage, PayPal-Erstattungen 1–3 Werktage und App-Store-Erstattungen 1–7 Werktage benötigen.",
+    },
+  ],
+  faqsH2: "Häufig gestellte Fragen",
+  tipTitle: "Praktischer Tipp",
+  tipBody:
+    "Deaktivieren Sie die automatische Verlängerung am besten direkt nach dem Abschluss des VPN-Abonnements. So vermeiden Sie eine unerwartete Verlängerung und können zum Laufzeitende erneut einen Tarif vergleichen oder den Anbieter wechseln.",
+  relatedTitle: "Verwandte Seiten",
+  relatedCalculator: "Gesamtkosten berechnen",
+  relatedFreeVsPaid: "Kostenloses vs. kostenpflichtiges VPN",
+  relatedLegal: "Rechtlicher Hinweis",
+};
+
+const DE_POSITIONING: Record<string, string> = {
+  cyberghost: "Einfache Oberfläche für Einsteiger",
+  expressvpn: "Premium-Option mit übersichtlicher Oberfläche",
+  ipvanish: "Für Nutzer, die eigene Server-Hardware bevorzugen",
+  mullvad: "Datenschutzorientierte Option ohne Affiliate-Beziehung",
+  nordvpn: "Ausgewogene Wahl für die allgemeine Nutzung",
+  pia: "Für Nutzer mit technischem Kontrollbedarf und großem Servernetz",
+  "proton-vpn": "Für datenschutzorientierte Nutzer",
+  surfshark: "Budget- und Multi-Geräte-orientierte Option",
+  tunnelbear: "Einfache Oberfläche für Einsteiger",
+  windscribe: "Kostenloser Tarif und flexible Preise",
+};
+
 const TR_STRINGS: Strings = {
   breadcrumbHome: "Ana sayfa",
   breadcrumbHere: "İptal ve İade",
@@ -321,10 +476,11 @@ const EN_STRINGS: Strings = {
 
 export function getRefundContent(locale: string) {
   const isEn = locale === "en";
+  const isDe = locale === "de";
   return {
-    strings: isEn ? EN_STRINGS : TR_STRINGS,
-    cancelInfo: isEn ? EN_CANCEL_INFO : TR_CANCEL_INFO,
-    faqs: isEn ? EN_FAQS : TR_FAQS,
+    strings: isEn ? EN_STRINGS : isDe ? DE_STRINGS : TR_STRINGS,
+    cancelInfo: isEn ? EN_CANCEL_INFO : isDe ? DE_CANCEL_INFO : TR_CANCEL_INFO,
+    faqs: isEn ? EN_FAQS : isDe ? DE_FAQS : TR_FAQS,
   };
 }
 
@@ -335,7 +491,7 @@ export function RefundBody({ locale }: { locale: string }) {
       : locale === "de"
         ? "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn"
         : "/rehber/ucretsiz-vs-ucretli-vpn";
-  const products = rankedProducts(locale as "tr" | "en");
+  const products = rankedProducts(locale as Locale);
   const { strings, cancelInfo, faqs } = getRefundContent(locale);
 
   return (
@@ -398,7 +554,11 @@ export function RefundBody({ locale }: { locale: string }) {
                   <h2 className="text-xl font-bold text-ink-strong">
                     {p.brand}
                   </h2>
-                  <p className="text-xs text-ink-muted">{p.positioning}</p>
+                  <p className="text-xs text-ink-muted">
+                    {locale === "de"
+                      ? DE_POSITIONING[p.slug] ?? p.positioning
+                      : p.positioning}
+                  </p>
                 </div>
                 <Badge variant="brand">
                   <Clock className="size-3" />{" "}
