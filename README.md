@@ -80,15 +80,16 @@ messages/
    ```
 3. Bitti — yapı kendiliğinden `/en/...` rotalarını üretir.
 
-## Deploy (Vercel)
+## Deploy (Hostinger)
 
-```bash
-npx vercel --prod
-```
+Hostinger hPanel → Node.js Apps üzerinden production uygulaması oluştur:
 
-Environment variables:
-- `NEXT_PUBLIC_SITE_URL=https://vpnadvisor.net`
-- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=vpnadvisor.net` (analitik açmak için)
+1. Node.js sürümünü 20+ seç.
+2. Proje dosyalarını yükle ve `npm ci && npm run build` çalıştır.
+3. Başlatma komutu olarak `npm run start:hostinger` kullan.
+4. Ortam değişkenlerini `scripts/hostinger-env.example` dosyasındaki değerlerle tanımla.
+
+Uygulama Hostinger üzerinde çalışır; bu proje Vercel’e bağlı değildir.
 
 ## AI sitasyon optimizasyonu (GEO)
 

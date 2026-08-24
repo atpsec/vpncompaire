@@ -872,7 +872,7 @@ export const rawProducts: RawProduct[] = [
     ),
     summary: L(
       "Sağlayıcı politikasına göre anonim hesap sistemi, sabit fiyatlandırma ve affiliate programı sunmama prensibi ile gizliliği önceliklendirenler için değerlendirilebilecek bir seçenek. Bu siteyle finansal bağı yok — sıralamada bilgi vermek için yer alır.",
-      "An option for privacy-first users — per provider policy, an anonymous account system, flat pricing and no affiliate programme. No financial link with this site; included in the ranking purely for transparency.",
+      "An option for privacy-first users — per provider policy, an anonymous account system, flat pricing and no affiliate programme. No financial link with this site; included as a source-based reference profile for transparency.",
     ),
     score: 8.3,
     priceFromUsd: 5.0,
@@ -999,16 +999,18 @@ export function getProduct(slug: string, locale: Locale = "tr"): Product | undef
   return raw ? resolveProduct(raw, locale) : undefined;
 }
 
-/** Ana karşılaştırma listesinde gösterilecek azami sağlayıcı sayısı. */
+/** Kaynak profili dizininde gösterilecek azami sağlayıcı sayısı. */
 export const TOP_RANKED_LIMIT = 20;
 
 export function rankedProducts(locale: Locale = "tr"): Product[] {
   return [...rawProducts]
-    .sort((a, b) => a.rank - b.rank)
+    // `rank` legacy verisi olarak tutulur; kullanıcıya bir editoryal sıra
+    // veya test sonucu gibi gösterilmemesi için dizin alfabetik ve stabildir.
+    .sort((a, b) => a.brand.localeCompare(b.brand, locale === "tr" ? "tr" : locale))
     .map((p) => resolveProduct(p, locale));
 }
 
-/** Sıralama hub, ana sayfa ve karşılaştırma seçicisi için ilk N VPN. */
+/** Ana sayfa, sağlayıcı dizini ve karşılaştırma seçicisi için ilk N profil. */
 export function topRankedProducts(locale: Locale = "tr"): Product[] {
   return rankedProducts(locale).slice(0, TOP_RANKED_LIMIT);
 }

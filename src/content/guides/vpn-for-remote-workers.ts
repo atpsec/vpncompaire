@@ -61,7 +61,7 @@ const tr: RemoteWorkersContent = {
   metaTitle:
     "Uzaktan Çalışanlar İçin En İyi VPN (2026) — Otel, Kafe, Co-working Güvenliği",
   metaDescription:
-    "Uzaktan çalışanlar için VPN seçimi: halka açık Wi-Fi koruması, hassas dosya güvenliği, şirket VPN'i farkı ve seyahat bağlantısı özellikleriyle en iyi 3 VPN.",
+    "Uzaktan çalışanlar için VPN seçimi: halka açık Wi-Fi koruması, hassas dosya güvenliği, şirket VPN'i farkı ve seyahat bağlantısı kaynaklarını karşılaştırma.",
   keywords: [
     "uzaktan çalışan vpn",
     "remote work vpn",
@@ -72,7 +72,7 @@ const tr: RemoteWorkersContent = {
   ],
   ogTitle: "Uzaktan Çalışanlar İçin En İyi VPN (2026)",
   ogDescription:
-    "Otel, kafe, co-working alanında halka açık Wi-Fi güvenliği için en iyi VPN'ler.",
+    "Otel, kafe ve co-working alanlarında halka açık Wi-Fi güvenliği için VPN kaynaklarını karşılaştırma.",
   breadcrumb: {
     home: "Ana sayfa",
     guides: "Rehberler",
@@ -80,9 +80,9 @@ const tr: RemoteWorkersContent = {
   },
   badge: "Remote work",
   h1: "Uzaktan çalışanlar için VPN",
-  lede: "Otel, kafe, co-working alanında halka açık Wi-Fi güvenliği, müşteri dosyası koruması ve seyahat bağlantısı özellikleri için en iyi 3 VPN.",
+  lede: "Otel, kafe ve co-working alanlarında halka açık Wi-Fi güvenliği, müşteri dosyası koruması ve seyahat bağlantısı özelliklerini karşılaştırın.",
   picks: {
-    heading: "Uzaktan çalışanlar için en iyi 3 VPN",
+    heading: "Uzaktan çalışanlar için karşılaştırılabilecek sağlayıcı profilleri",
     subheading: "Protokol özellikleri, güvenlik araçları ve seyahat senaryolarına göre.",
     items: [
       {
@@ -243,7 +243,7 @@ const en: RemoteWorkersContent = {
   metaTitle:
     "Best VPN for Remote Workers (2026) — Hotel, Café & Co-working Security",
   metaDescription:
-    "Choosing a VPN as a remote worker: public Wi-Fi protection, sensitive file security, corporate VPN differences and travel-connectivity features in the top 3 VPNs.",
+    "Choosing a VPN as a remote worker: compare public Wi-Fi protection, sensitive file security, corporate VPN differences and travel-connectivity sources.",
   keywords: [
     "remote worker vpn",
     "remote work vpn",
@@ -254,7 +254,7 @@ const en: RemoteWorkersContent = {
   ],
   ogTitle: "Best VPN for Remote Workers (2026)",
   ogDescription:
-    "The best VPNs for public Wi-Fi security in hotels, cafés and co-working spaces.",
+    "A source-based guide to VPN features for public Wi-Fi security in hotels, cafés and co-working spaces.",
   breadcrumb: {
     home: "Home",
     guides: "Guides",
@@ -264,7 +264,7 @@ const en: RemoteWorkersContent = {
   h1: "VPN for remote workers",
   lede: "Three VPN profiles for public Wi-Fi in hotels, cafés and co-working spaces, client-file workflows and travel connectivity.",
   picks: {
-    heading: "Top 3 VPNs for remote workers",
+    heading: "Provider profiles to compare for remote workers",
     subheading: "Compared by protocol features, security tools and travel scenarios.",
     items: [
       {
@@ -444,9 +444,9 @@ const de: RemoteWorkersContent = {
   },
   badge: "Remote Work",
   h1: "VPN für Remote-Arbeit",
-  lede: "Die 3 besten VPNs für öffentliches WLAN in Hotel, Café und Co-working-Space, Kundendateien und Reiseverbindungs-Funktionen.",
+  lede: "Vergleichen Sie Anbieterquellen zu öffentlichem WLAN in Hotel, Café und Co-working-Space, Kundendateien und Reiseverbindungen.",
   picks: {
-    heading: "Die 3 besten VPNs für Remote-Arbeitende",
+    heading: "Vergleichbare Anbieterprofile für Remote-Arbeitende",
     subheading: "Verglichen nach Protokollmerkmalen, Sicherheitstools und Reise-Szenarien.",
     items: [
       {

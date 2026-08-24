@@ -8,10 +8,10 @@ type Props = { params: Promise<{ locale: string }> };
 
 const CONTENT = {
   tr: {
-    metaTitle: "Streaming İçin En İyi VPN'ler (2026)",
+    metaTitle: "Streaming İçin VPN Bilgi Rehberi (2026)",
     metaDescription:
       "Streaming için VPN seçerken sunucu konumu, cihaz desteği, hız ve değişebilen platform politikalarını kaynaklarla karşılaştırın.",
-    title: "Streaming İçin En İyi VPN'ler",
+    title: "Streaming için VPN bilgi rehberi",
     tagline:
       "Sunucu konumu, cihaz desteği ve sağlayıcı belgelerini karşılaştırın; sürekli platform erişimi garanti edilemez.",
     summary:
@@ -77,10 +77,10 @@ const CONTENT = {
     ],
   },
   en: {
-    metaTitle: "The Best VPNs for Streaming (2026)",
+    metaTitle: "VPN Information Guide for Streaming (2026)",
     metaDescription:
       "Compare server location, device support, performance and changing platform policies when evaluating a VPN for streaming.",
-    title: "The Best VPNs for Streaming",
+    title: "VPN information guide for streaming",
     tagline:
       "Compare server locations, device support and provider documentation; continuous platform access cannot be guaranteed.",
     summary:

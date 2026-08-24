@@ -2,14 +2,14 @@
 
 Bu doküman, üretim için iki kritik adımı kapsar:
 
-1. Affiliate ID'leri Vercel env'ye eklemek
-2. Custom domain (vpnadvisor.net) bağlamak
+1. Affiliate ID'lerini Hostinger ortam değişkenlerine eklemek
+2. Custom domain (vpnadvisor.net) yapılandırmasını doğrulamak
 
-Her ikisi de **opsiyoneldir** — env eksikse site `utm_*` parametreleriyle public URL'e yönlendirir; custom domain eksikse Vercel'in atadığı `.vercel.app` adresi çalışır.
+Her ikisi de **opsiyoneldir** — env eksikse site doğrudan sağlayıcı URL'ine gider; domain ayarı tamamlanana kadar Hostinger'ın geçici adresi kullanılabilir.
 
 ---
 
-## 1. Affiliate URL'lerini Vercel env'ye ekle
+## 1. Affiliate URL'lerini Hostinger'a ekle
 
 ### Adım 1: Her sağlayıcı için affiliate hesabı aç
 
@@ -44,9 +44,9 @@ https://www.tkqlhce.com/click-12345678-13456789
 
 Bu URL'i olduğu gibi kopyala.
 
-### Adım 3: Vercel project settings → Environment Variables
+### Adım 3: Hostinger hPanel → Node.js Apps → Environment Variables
 
-Vercel dashboard → Projeyi seç → Settings → Environment Variables. Şu env değişkenleri tanımlıdır:
+Hostinger hPanel'de uygulamayı seçip Environment Variables bölümünü aç. Şu env değişkenleri tanımlıdır:
 
 | Env değişkeni | Hangi sağlayıcı için? |
 |---------------|------------------------|
@@ -64,9 +64,9 @@ Her birinin değeri: adım 2'de aldığın **tam** tracking URL'i.
 
 > **Önemli:** Bu değişkenlerin başında `NEXT_PUBLIC_` **yok**. Sebep: tracking URL'leri yalnızca sunucu tarafında `/go/[slug]` redirect handler'ında kullanılır; istemciye expose edilmez. Bu, ID'lerin HTML kaynak görüntüleyiciden okunmasını engeller.
 
-### Adım 4: Vercel deploy'u tetikle
+### Adım 4: Hostinger uygulamasını yeniden başlat
 
-Env vars eklendikten sonra Vercel otomatik redeploy etmez — manuel redeploy gerekir (veya yeni bir commit push'lanır). Vercel dashboard'tan **Redeploy** ile yeniden yayınla.
+Env vars eklendikten sonra Node.js uygulamasını hPanel'den **Restart** ile yeniden başlat.
 
 ### Doğrulama
 
@@ -74,7 +74,7 @@ Deploy bittiğinde:
 
 ```bash
 # Bir affiliate ID'si set ettiysen örn. NordVPN için
-curl -I https://vpncompaire.vercel.app/go/nordvpn
+curl -I https://vpnadvisor.net/go/nordvpn
 # Location: header'ında senin go.nordvpn.net... URL'in olmalı
 ```
 
@@ -96,33 +96,28 @@ Hangi yerleşimden ne kadar gelir geldiğini ayırt etmek için kullanışlı. �
 
 ---
 
-## 2. Custom domain bağla (vpnadvisor.net)
+## 2. Custom domain'i Hostinger'da doğrula (vpnadvisor.net)
 
-### Adım 1: Domain'i Vercel'e ekle
+### Adım 1: Domain'i Hostinger uygulamasına bağla
 
-Vercel dashboard → Projeyi seç → Settings → Domains → **Add Domain**.
+Hostinger hPanel → Websites/Node.js Apps bölümünden uygulamanın domain ayarını aç ve `vpnadvisor.net` domain'ini ekle.
 
-`vpnadvisor.net` yaz, Add.
+Hostinger'ın gösterdiği hedef IP veya CNAME değerlerini not al.
 
-Vercel iki DNS kaydı isteyecek:
-
-- A record: `76.76.21.21` (apex/root için)
-- CNAME: `cname.vercel-dns.com` (www subdomain için)
-
-### Adım 2: DNS ayarlarını domain registrar'da yap
+### Adım 2: DNS ayarlarını domain sağlayıcında yap
 
 Domain'i nereden aldıysan (GoDaddy, Namecheap, Cloudflare DNS, vb.) DNS yönetim paneline gir.
 
 **Apex (vpnadvisor.net):**
 - Tür: `A`
 - Host: `@` (veya boş bırak)
-- Değer: `76.76.21.21`
+- Değer: Hostinger hPanel'in gösterdiği sunucu IP'si
 - TTL: 3600 (1 saat)
 
 **Www subdomain (www.vpnadvisor.net):**
 - Tür: `CNAME`
 - Host: `www`
-- Değer: `cname.vercel-dns.com`
+- Değer: Hostinger hPanel'in gösterdiği CNAME hedefi
 - TTL: 3600
 
 ### Adım 3: DNS propagation bekle
@@ -131,40 +126,34 @@ Domain'i nereden aldıysan (GoDaddy, Namecheap, Cloudflare DNS, vb.) DNS yöneti
 
 ```bash
 dig vpnadvisor.net +short
-# 76.76.21.21 dönmeli
+# Hostinger'ın gösterdiği hedef dönmeli
 ```
 
-Vercel dashboard'da domain otomatik olarak yeşil tik alacak.
+Hostinger hPanel'de domain doğrulaması tamamlanmalı.
 
-### Adım 4: NEXT_PUBLIC_SITE_URL güncelle
+### Adım 4: NEXT_PUBLIC_SITE_URL'i güncelle
 
-Vercel env vars'da:
+Hostinger ortam değişkenlerinde:
 
 ```
 NEXT_PUBLIC_SITE_URL=https://vpnadvisor.net
 ```
 
-(önceden `https://vpncompaire.vercel.app` ise değiştir)
+(geçici uygulama adresi kullanılıyorsa bunu değiştir)
 
 Bu güncellemeden sonra **redeploy şart** — sitemap, OG image, canonical URL'ler hepsi bu env'den türetiliyor.
 
-### Adım 5: Eski .vercel.app domain'i yönlendir (opsiyonel ama önerilir)
-
-`vpncompaire.vercel.app` adresinin SEO ekosistemine ikiz içerik girmemesi için Vercel'in built-in özelliğiyle ana domain'e 301 yönlendir:
-
-Vercel Dashboard → Settings → Domains → `vpncompaire.vercel.app` satırının yanında **"Edit"** → **"Redirect to"** → `vpnadvisor.net` seç.
-
-### Adım 6: Search Console'a yeniden submit et
+### Adım 5: Search Console'a yeniden submit et
 
 - Google Search Console: yeni domain için ayrı bir Property aç (vpnadvisor.net)
 - Sitemap submit et: `https://vpnadvisor.net/sitemap.xml`
-- Eski property (vpncompaire.vercel.app) varsa, ondan `Change of Address` aracını çalıştır
+- Eski geçici adres property'si varsa, mümkünse `Change of Address` aracını çalıştır
 
 ---
 
 ## 3. Plausible Analytics (opsiyonel)
 
-Plausible kullanmak istersen Vercel env'ye:
+Plausible kullanmak istersen Hostinger ortam değişkenlerine:
 
 ```
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=vpnadvisor.net
@@ -185,12 +174,12 @@ Plausible.io üzerinde aynı domain için site açmış olman gerekir. Bu kısı
 - [ ] IPVanish Impact/Pepperjam'a başvur
 - [ ] Windscribe affiliate'a başvur
 - [ ] TunnelBear CJ'ye başvur
-- [ ] Onaylanan her hesap için Vercel env vars ekle
+- [ ] Onaylanan her hesap için Hostinger env vars ekle
 - [ ] vpnadvisor.net domain'ini al (henüz alınmadıysa)
-- [ ] Vercel domain settings'e ekle
+- [ ] Hostinger domain settings'e ekle
 - [ ] DNS A + CNAME kayıtlarını set et
 - [ ] NEXT_PUBLIC_SITE_URL'i custom domain'e güncelle
 - [ ] Redeploy
-- [ ] vpncompaire.vercel.app → vpnadvisor.net 301 yönlendirme set et
+- [ ] Geçici uygulama adresinden vpnadvisor.net'e yönlendirme set et (gerekiyorsa)
 - [ ] Google Search Console'a yeni domain submit et
 - [ ] Plausible (opsiyonel) ayarla

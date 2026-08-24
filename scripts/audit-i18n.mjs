@@ -305,6 +305,7 @@ const redirectCases = [
   ["/karsilastir/proton-vs-mullvad", null],
   // Section modeli dışındaki TR-only tekil sayfalar.
   ["/en/en-iyi/turkiye", "/en-iyi/turkiye"],
+  ["/en/en-iyi/yurt-disindaki-turkler", "/en-iyi/yurt-disindaki-turkler"],
   ["/de/en-iyi/yurt-disindaki-turkler", "/en-iyi/yurt-disindaki-turkler"],
   ["/en-iyi/turkiye", null],
   ["/en/en-iyi/gizlilik", null], // lokalize use-case etkilenmez

@@ -7,8 +7,8 @@
 ## Stack
 - **Next.js 16** App Router, **TypeScript**, **Tailwind v4**, **next-intl** (locales: `tr`, `en`)
 - UI: **Lucide React** ikonlar, custom design tokenları (aşağıda)
-- Marka: **VPN Advisor** · Domain: **vpnadvisor.net** (rebrand'da repo/Vercel proje adı DEĞİŞMEDİ)
-- Hosting: **Vercel** (proje adı hâlâ `vpncompaire`)
+- Marka: **VPN Advisor** · Domain: **vpnadvisor.net**
+- Hosting: **Hostinger Node.js App** (Vercel kullanılmıyor)
 - Repo: `https://github.com/atpsec/vpncompaire`, default branch **`master`** (not main)
 - Analytics: **GA4 + consent banner** (`NEXT_PUBLIC_GA_ID`). Plausible kaldırıldı.
 
@@ -17,9 +17,9 @@
 |---|---|
 | Lint | `npm run lint` (warning toleranslı, error 0 olmalı) |
 | Build | `npm run build` (exit 0 olmalı) |
-| Prod deploy | `NODE_OPTIONS="--use-system-ca" npx vercel --prod --yes` |
+| Prod deploy | Hostinger hPanel → Node.js Apps → Restart |
 
-`NODE_OPTIONS=--use-system-ca` Windows'ta corporate root CA'ları okumak için **gerekli**, yoksa `vercel` komutu TLS hatasıyla düşer.
+Yayın öncesi `npm run lint && npm run build` çalıştır; Hostinger'da uygulamayı `npm run start:hostinger` ile başlat.
 
 ## Workflow
 1. Kod değişikliği yap.
@@ -69,13 +69,9 @@ Aşağıdaki yollar kullanıcının üzerinde çalıştığı henüz hazır olma
 - `flex flex-col gap-3 sm:grid sm:grid-cols-3` — bu sırayla yaz.
 - Uzun string'ler (IP, URL): `break-all`. Truncatable subtitle'lar: `truncate`.
 
-## Vercel geo headers (server component'lerde)
-Tüm header'lar Vercel tarafından sağlanır (Hobby plan dahil):
-- `x-vercel-ip-country` (ISO-3166-1 alpha-2)
-- `x-vercel-ip-city` (URL-encoded olabilir, `decodeURIComponent` ile aç)
-- `x-vercel-ip-region`
-- `x-vercel-ip-timezone` (IANA, örn. `Europe/Istanbul`)
-- `x-vercel-ip-latitude`, `x-vercel-ip-longitude`
+## Geo headers (server component'lerde)
+Hostinger doğrudan ülke/şehir header'ı sağlamadığında uygulama Cloudflare
+header'larını veya güvenli IP lookup fallback'ini kullanır.
 
 Lokal IP'leri (`isPrivateOrLocal`) erken filtrele, dev ortamda banner gösterme.
 

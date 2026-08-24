@@ -68,17 +68,17 @@ const tr: GamersContent = {
   ],
   ogTitle: "Gamerlar İçin En İyi VPN (2026)",
   ogDescription:
-    "Düşük ping, DDoS koruması ve bölge bypass için en iyi gaming VPN'leri.",
+    "Düşük ping, DDoS kapsamı ve bölgesel erişim için gaming VPN kaynaklarını karşılaştırma.",
   breadcrumb: {
     home: "Ana sayfa",
     guides: "Rehberler",
     current: "Gamerlar için VPN",
   },
   badge: "Gaming",
-  h1: "Gamerlar için en iyi VPN",
+  h1: "Gamerlar için VPN bilgi rehberi",
   lede: "Düşük ping hedefi, DDoS koruması ve bölge seçenekleri için 3 VPN profili. Valorant, CS2, League of Legends ve Fortnite gibi senaryolarda karar verirken ağ koşullarını ayrıca değerlendirin.",
   picks: {
-    heading: "Gamerlar için en iyi 3 VPN",
+    heading: "Gamerlar için karşılaştırılabilecek sağlayıcı profilleri",
     subheading: "Sağlayıcı belgeleri, protokol özellikleri ve öz-test ölçütlerine göre.",
     items: [
       {
@@ -296,10 +296,10 @@ const en: GamersContent = {
     current: "VPN for gamers",
   },
   badge: "Gaming",
-  h1: "Best VPN for gamers",
+  h1: "VPN information guide for gamers",
   lede: "Three VPN profiles to consider for latency, DDoS protection and region options. Compare them against your own route and game-server conditions.",
   picks: {
-    heading: "Top 3 VPNs for gamers",
+    heading: "Provider profiles to compare for gamers",
     subheading: "Selected using provider documentation, protocol features and self-test criteria.",
     items: [
       {
@@ -518,10 +518,10 @@ const de: GamersContent = {
     current: "VPN für Gamer",
   },
   badge: "Gaming",
-  h1: "Das beste VPN für Gamer",
+  h1: "VPN-Informationsratgeber für Gamer",
   lede: "Drei VPN-Profile für Latenz, DDoS-Schutz und Regionsoptionen. Vergleiche sie mit deiner eigenen Route und den Bedingungen deines Spielservers.",
   picks: {
-    heading: "Die 3 besten VPNs für Gamer",
+    heading: "Vergleichbare Anbieterprofile für Gamer",
     subheading: "Ausgewählt nach Anbieterdokumentation, Protokollmerkmalen und Selbsttest-Kriterien.",
     items: [
       {

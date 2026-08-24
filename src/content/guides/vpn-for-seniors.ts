@@ -72,14 +72,14 @@ const tr: SeniorsContent = {
     current: "Yaşlılar için VPN",
   },
   badge: "Yaşlılar",
-  h1: "Yaşlılar için en iyi VPN",
+  h1: "Yaşlılar için VPN bilgi rehberi",
   lede: "Anne-baban veya büyüklerin için: basit kurulum, dolandırıcılık koruması, sade Türkçe arayüz. Tek tıklamayla bağlantı, otomatik başlatma.",
   statBox: {
     title: "Risk ve koruma sınırı",
     body: "Yaşlı kullanıcılar sahte banka, kargo ve destek mesajlarıyla hedef alınabilir. Bazı VPN sağlayıcıları, bilinen zararlı alan adlarını filtreleyen isteğe bağlı araçlar belgeler; bu araçlar her sahte siteyi veya sosyal mühendislik girişimini yakalama garantisi vermez. Özelliği etkinleştirip cihazda doğrulamak ve aile içi eğitimle desteklemek gerekir.",
   },
   picks: {
-    heading: "Yaşlılar için en iyi 3 VPN",
+    heading: "Yaşlılar için karşılaştırılabilecek sağlayıcı profilleri",
     subheading: "Kolay kullanım, içerik filtreleme ve fiyata göre.",
     items: [
       {
@@ -238,7 +238,7 @@ const en: SeniorsContent = {
   metaTitle:
     "Best VPN for Seniors (2026) — Simple Setup + Scam Protection",
   metaDescription:
-    "VPNs for older users: one-tap connection, scam/phishing protection, a simple interface in Turkish. The 3 best VPNs for your mom and dad.",
+    "VPNs for older users: one-tap connection, scam/phishing context and simple interface guidance in Turkish.",
   keywords: [
     "vpn for seniors",
     "easy setup vpn",
@@ -256,14 +256,14 @@ const en: SeniorsContent = {
     current: "VPN for seniors",
   },
   badge: "Seniors",
-  h1: "Best VPN for seniors",
+  h1: "VPN information guide for seniors",
   lede: "For your parents or elders: simple setup, scam protection and a clean interface in Turkish. One-tap connection, automatic start-up.",
   statBox: {
     title: "Risk and protection limits",
     body: "Older users can be targeted by fake bank, delivery and support messages. Some VPN providers document optional tools that filter known malicious domains, but these tools do not guarantee detection of every fake site or social-engineering attempt. Enable and verify the feature on the device, and combine it with family guidance.",
   },
   picks: {
-    heading: "Top 3 VPNs for seniors",
+    heading: "Provider profiles to compare for seniors",
     subheading: "Ranked by ease of use, content filtering and price.",
     items: [
       {
@@ -444,14 +444,14 @@ const de: SeniorsContent = {
     current: "VPN für Senioren",
   },
   badge: "Senioren",
-  h1: "Das beste VPN für Senioren",
+  h1: "VPN-Informationsratgeber für Senioren",
   lede: "Für deine Eltern oder Großeltern: einfache Einrichtung, Betrugsschutz, schlichte türkischsprachige Oberfläche. Verbindung mit einem Tipp, automatischer Start.",
   statBox: {
     title: "Risiko und Schutzgrenzen",
     body: "Ältere Nutzer können mit gefälschten Bank-, Paket- und Supportnachrichten angegriffen werden. Einige VPN-Anbieter dokumentieren optionale Filter für bekannte schädliche Domains; sie garantieren jedoch nicht, jede Fake-Seite oder jeden Social-Engineering-Versuch zu erkennen. Aktiviere und prüfe die Funktion auf dem Gerät und ergänze sie durch Aufklärung.",
   },
   picks: {
-    heading: "Die 3 besten VPNs für Senioren",
+    heading: "Vergleichbare Anbieterprofile für Senioren",
     subheading: "Bewertet nach Bedienkomfort, Inhaltsfilterung und Preis.",
     items: [
       {

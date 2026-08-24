@@ -8,20 +8,20 @@ type Props = { params: Promise<{ locale: string }> };
 
 const CONTENT = {
   tr: {
-    metaTitle: "Gizlilik İçin En İyi VPN'ler (2026)",
+    metaTitle: "Gizlilik İçin VPN Bilgi Rehberi (2026)",
     metaDescription:
       "Bağımsız denetim, açık kaynak istemciler ve gizlilik dostu yargı yetkisi ile gizlilik öncelikli kullanıcılar için en iyi VPN seçimleri.",
-    title: "Gizlilik İçin En İyi VPN'ler",
+    title: "Gizlilik için VPN bilgi rehberi",
     tagline:
-      "Açık kaynak, bağımsız denetim ve gizlilik dostu yargı yetkisi — gerçek gizlilik için aranan üç temel.",
+      "Açık kaynak, bağımsız denetim ve yargı yetkisi bağlamı — gizlilik önceliğinde incelenebilecek üç kanıt alanı.",
     summary:
-      "Gizlilik öncelikli olduğunda VPN seçimi yalnızca pazarlama vaatlerine bakmaktan ibaret değil. Üç kritik faktör: jurisdiction (yargı yetkisi), tekrarlanan bağımsız denetim ve açık kaynak istemciler. Bu üçünü en sağlam birleştiren seçimleri sıraladık.",
+      "Gizlilik öncelikli olduğunda pazarlama vaatlerinin ötesine bakmak gerekir. Bu rehber yargı yetkisi, tekrarlanan bağımsız denetim ve açık kaynak istemciler etrafında bilgi profillerini düzenler; evrensel bir sıralama veya garanti sunmaz.",
     badgeLabel: "Gizlilik",
     picks: [
       {
         slug: "proton-vpn",
         bestFor: "Açık kaynak ve İsviçre yargı yetkisi",
-        why: "Tüm istemciler açık kaynak ve denetlenebilir; yıllık no-logs denetimi Securitum tarafından yapılır; İsviçre yasaları AB ve ABD istihbarat ittifaklarının dışında. Sınırsız ücretsiz plan da var — \"dener misin?\" testi için ideal.",
+        why: "Sağlayıcı açık kaynak istemcileri ve denetim bilgilerini yayımlar; İsviçre yargı yetkisi ve ücretsiz planı satın almadan önce doğrulanabilecek başlıklardır. Ücretsiz plan kendi kurulumunuzu değerlendirmeye yarar; VPN Advisor testi değildir.",
       },
       {
         slug: "mullvad",
@@ -31,13 +31,13 @@ const CONTENT = {
       {
         slug: "nordvpn",
         bestFor: "Denetim sürekliliği (6x Deloitte)",
-        why: "2018'den bu yana altı kez Deloitte tarafından no-logs denetiminden geçti. Tekrarlanan bağımsız denetim, sektörün ulaşabildiği en güçlü kanıt seviyesi.",
+        why: "Sağlayıcı 2018'den bu yana altı Deloitte no-logs denetimi bildirmektedir. Tekrarlanan bağımsız denetim, belirtilen kapsam ve tarih için yararlı kanıttır; gelecekteki her uygulama için garanti değildir.",
       },
     ],
     considerations: [
       {
         title: "Yargı yetkisi (jurisdiction)",
-        body: "VPN sağlayıcı hangi ülkenin yasalarına tabi? Beş/Dokuz/On Dört Göz ittifakları dışındaki yargı yetkileri (İsviçre, Panama, İsveç) genelde daha güçlü gizlilik koruması sağlar.",
+        body: "VPN sağlayıcı hangi ülkenin yasalarına tabi? Yargı yetkisi hukuki bağlamı değiştirir, ancak tek başına daha güçlü gizlilik kanıtı değildir; politika, sahiplik ve bağımsız kanıt birlikte okunmalıdır.",
       },
       {
         title: "Bağımsız denetim kanıtı",
@@ -51,7 +51,7 @@ const CONTENT = {
     faqs: [
       {
         q: "Hangi VPN en gizliliği koruyor?",
-        a: "Proton VPN, açık kaynak istemciler + İsviçre yargı yetkisi + yıllık denetim kombinasyonuyla en güçlü gizlilik altyapısına sahip. Mullvad, anonim hesap modeli ile farklı bir gizlilik boyutu sunar.",
+        a: "Tanımlı bir tehdit modeli olmadan evrensel kazanan yoktur. Proton VPN ve Mullvad; açık kaynak, yargı yetkisi ve hesap tasarımı gibi farklı kanıt alanlarını gösterir. Güncel kaynakları kendi önceliklerinize göre karşılaştırın.",
       },
       {
         q: "Bağımsız denetim ile mahkeme kararı arasında ne fark var?",
@@ -73,20 +73,20 @@ const CONTENT = {
     ],
   },
   en: {
-    metaTitle: "The Best VPNs for Privacy (2026)",
+    metaTitle: "VPN Information Guide for Privacy (2026)",
     metaDescription:
       "The best VPN picks for privacy-first users — independent audits, open-source clients and privacy-friendly jurisdictions.",
-    title: "The Best VPNs for Privacy",
+    title: "VPN information guide for privacy",
     tagline:
-      "Open source, independent audits and a privacy-friendly jurisdiction — the three pillars of real privacy.",
+      "Open-source code, independent audits and jurisdictional context — three evidence areas to study when privacy matters.",
     summary:
-      "When privacy comes first, picking a VPN is not just about marketing copy. Three critical factors: jurisdiction, repeated independent audits and open-source clients. We've ranked the picks that combine those three most convincingly.",
+      "When privacy comes first, look beyond marketing copy. This guide organizes provider profiles around jurisdiction, repeated independent audits and open-source clients; it does not rank or guarantee a universally best option.",
     badgeLabel: "Privacy",
     picks: [
       {
         slug: "proton-vpn",
         bestFor: "Open source and Swiss jurisdiction",
-        why: "All clients are open source and auditable; the annual no-logs audit is performed by Securitum; Swiss law sits outside both the EU and US intelligence alliances. There's an unlimited free plan too — ideal for a \"try first\" test.",
+        why: "The provider publishes open-source clients and audit information; its Swiss jurisdiction and free plan are useful topics to verify before choosing. A free plan lets you evaluate your own setup, not a VPN Advisor performance test.",
       },
       {
         slug: "mullvad",
@@ -96,13 +96,13 @@ const CONTENT = {
       {
         slug: "nordvpn",
         bestFor: "Audit continuity (6× Deloitte)",
-        why: "Audited for no-logs by Deloitte six times since 2018. Repeated independent auditing is the strongest evidence level the industry offers.",
+        why: "The provider reports six Deloitte no-logs audits since 2018. Repeated independent auditing is useful evidence for the stated scope and date, but it is not a guarantee of every future implementation.",
       },
     ],
     considerations: [
       {
         title: "Jurisdiction",
-        body: "Which country's laws does the VPN provider operate under? Jurisdictions outside the 5/9/14 Eyes alliances (Switzerland, Panama, Sweden) generally offer stronger privacy protection.",
+        body: "Which country's laws does the VPN provider operate under? Jurisdiction changes the legal context, but it does not by itself prove stronger privacy protection; read the policy, ownership and independent evidence together.",
       },
       {
         title: "Independent audit evidence",
@@ -116,7 +116,7 @@ const CONTENT = {
     faqs: [
       {
         q: "Which VPN preserves privacy the best?",
-        a: "Proton VPN has the strongest privacy stack: open-source clients + Swiss jurisdiction + annual audits. Mullvad offers a different dimension of privacy with its anonymous-account model.",
+        a: "There is no universal winner without a defined threat model. Proton VPN and Mullvad illustrate different evidence areas, such as open-source clients, jurisdiction and account design; compare the current sources for your own priorities.",
       },
       {
         q: "What's the difference between an independent audit and a court ruling?",

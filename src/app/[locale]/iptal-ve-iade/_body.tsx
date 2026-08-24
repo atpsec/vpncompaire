@@ -4,7 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { rankedProducts, type Product } from "@/data/products";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 type CancelInfo = { via: string; pitfalls: string[] };
 type FAQ = { q: string; a: string };
@@ -434,14 +436,16 @@ export function RefundBody({ locale }: { locale: string }) {
                 >
                   {p.brand} {strings.reviewSuffix}
                 </Link>
-                <a
-                  href={p.pricingUrl}
+                <ProviderLink
+                  href={providerOutboundHref({ slug: p.slug, fallbackUrl: p.pricingUrl, hasAffiliate: p.hasAffiliate, source: "refund-guide" })}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel={providerOutboundRel(p.slug, p.hasAffiliate)}
+                  provider={p.slug}
+                  placement="refund-guide"
                   className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 hover:border-brand-300"
                 >
                   {strings.supportLink}
-                </a>
+                </ProviderLink>
               </div>
             </Card>
           );

@@ -6,9 +6,11 @@ import { ArrowRight, RotateCcw, Sparkles, Check } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { getProduct } from "@/data/products";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 import type { Locale } from "@/lib/site";
 
 type QuestionData = {
@@ -112,12 +114,12 @@ export function VPNQuiz() {
     return acc;
   }, {});
 
-  const ranked = Object.entries(scores)
+  const matches = Object.entries(scores)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3);
 
-  if (showResult && ranked.length > 0) {
-    const top = ranked[0];
+  if (showResult && matches.length > 0) {
+    const top = matches[0];
     const product = getProduct(top[0], locale);
     if (!product) return null;
     const bestPlan =
@@ -139,7 +141,7 @@ export function VPNQuiz() {
               </h2>
               <p className="text-sm text-ink-muted">{product.positioning}</p>
               <Badge variant="success" className="mt-2">
-                {t("result.scoreBadge", { score: top[1] })}
+                {t("result.matchBadge")}
               </Badge>
             </div>
           </div>
@@ -164,14 +166,16 @@ export function VPNQuiz() {
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Button asChild variant="primary">
-              <a
-                href={product.pricingUrl}
-                rel="noopener nofollow"
+              <ProviderLink
+                href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "quiz-result" })}
+                rel={providerOutboundRel(product.slug, product.hasAffiliate)}
                 target="_blank"
+                provider={product.slug}
+                placement="quiz-result"
               >
                 {t("result.ctaDeal", { brand: product.brand })}
                 <ArrowRight className="size-4" />
-              </a>
+              </ProviderLink>
             </Button>
             <Button asChild variant="secondary">
               <Link href={`/inceleme/${product.slug}`}>
@@ -184,13 +188,13 @@ export function VPNQuiz() {
           </div>
         </Card>
 
-        {ranked.length > 1 ? (
+        {matches.length > 1 ? (
           <div className="mt-6">
             <h3 className="font-semibold text-ink-strong">
               {t("result.altsHeading")}
             </h3>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {ranked.slice(1).map(([slug, score]) => {
+              {matches.slice(1).map(([slug]) => {
                 const alt = getProduct(slug, locale);
                 if (!alt) return null;
                 return (
@@ -201,10 +205,7 @@ export function VPNQuiz() {
                         {alt.brand}
                       </p>
                       <p className="text-xs text-ink-muted">
-                        {t("result.altScore", {
-                          positioning: alt.positioning,
-                          score,
-                        })}
+                        {t("result.altMatch", { positioning: alt.positioning })}
                       </p>
                     </div>
                     <Link

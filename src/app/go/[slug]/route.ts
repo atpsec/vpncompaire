@@ -46,7 +46,7 @@ export async function GET(req: Request, { params }: Context): Promise<Response> 
     return textResponse("Geçersiz bağlantı.", 400);
   }
 
-  // Distributed rate limit (Vercel KV). Generous cap — a comparison-shopper may
+  // Distributed rate limit (optional Redis). Generous cap — a comparison-shopper may
   // open several links. No-op when KV is unconfigured; fails open on any error.
   const rl = await rateLimit(`go:${clientIpFrom(req.headers)}`, 30, 60);
   if (!rl.allowed) {

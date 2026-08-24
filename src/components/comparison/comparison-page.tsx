@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
@@ -14,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
 import { getLocalizedLinkHref, getLocalizedPath, type AppLocale } from "@/lib/i18n-paths";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 export type ComparisonCategory = {
   name: string;
@@ -129,14 +131,16 @@ export async function ComparisonPage({
             </div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{a.summary}</p>
             <Button asChild variant="primary" className="mt-4 w-full">
-              <a
-                href={a.pricingUrl}
-                rel="noopener nofollow"
+              <ProviderLink
+                href={providerOutboundHref({ slug: a.slug, fallbackUrl: a.pricingUrl, hasAffiliate: a.hasAffiliate, source: "comparison-a" })}
+                rel={providerOutboundRel(a.slug, a.hasAffiliate)}
                 target="_blank"
+                provider={a.slug}
+                placement="comparison-a"
               >
                 {t("ctaOfficial", { brand: a.brand })}{" "}
                 <ArrowRight className="size-4" />
-              </a>
+              </ProviderLink>
             </Button>
           </Card>
 
@@ -150,14 +154,16 @@ export async function ComparisonPage({
             </div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{b.summary}</p>
             <Button asChild variant="primary" className="mt-4 w-full">
-              <a
-                href={b.pricingUrl}
-                rel="noopener nofollow"
+              <ProviderLink
+                href={providerOutboundHref({ slug: b.slug, fallbackUrl: b.pricingUrl, hasAffiliate: b.hasAffiliate, source: "comparison-b" })}
+                rel={providerOutboundRel(b.slug, b.hasAffiliate)}
                 target="_blank"
+                provider={b.slug}
+                placement="comparison-b"
               >
                 {t("ctaOfficial", { brand: b.brand })}
                 <ArrowRight className="size-4" />
-              </a>
+              </ProviderLink>
             </Button>
           </Card>
         </div>

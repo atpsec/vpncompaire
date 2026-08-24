@@ -7,10 +7,12 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import { defaultLocaleAlternates } from "@/lib/site";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 export const metadata: Metadata = {
   title: "Türkiye İçin VPN Seçim Rehberi (2026)",
@@ -76,7 +78,7 @@ export default async function Page({ params }: Props) {
         data={breadcrumbSchema([
           { name: "Ana sayfa", path: "/" },
           { name: "Kullanım Alanları", path: "/en-iyi" },
-          { name: "Türkiye için en iyi VPN", path: "/en-iyi/turkiye" },
+          { name: "Türkiye VPN bilgi rehberi", path: "/en-iyi/turkiye" },
         ])}
       />
       <JsonLd data={faqSchema(faqs)} />
@@ -145,14 +147,16 @@ export default async function Page({ params }: Props) {
                       </p>
                       <div className="mt-4 flex flex-wrap gap-3">
                         <Button asChild variant="primary" size="sm">
-                          <a
-                            href={product.pricingUrl}
-                            rel="noopener nofollow"
+                          <ProviderLink
+                            href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "turkiye-guide" })}
+                            rel={providerOutboundRel(product.slug, product.hasAffiliate)}
                             target="_blank"
+                            provider={product.slug}
+                            placement="turkiye-guide"
                           >
                             {product.brand} resmi sitesine git
                             <ArrowRight className="size-4" />
-                          </a>
+                          </ProviderLink>
                         </Button>
                         <Button asChild variant="ghost" size="sm">
                           <Link href={`/inceleme/${product.slug}`}>

@@ -11,32 +11,55 @@ const OUT = join(ROOT, "public", "favicon.ico");
 
 const SIZE = 32;
 const BRAND = [0x25, 0x63, 0xeb, 0xff]; // #2563eb
-const WHITE = [0xff, 0xff, 0xff, 0xff];
+const STROKE_WIDTH = 2.25;
+const SHIELD = [
+  [16, 3.5],
+  [25, 7],
+  [25, 14.3],
+  [24.8, 17.4],
+  [23.6, 20.2],
+  [21.8, 22.9],
+  [19.2, 25.5],
+  [16, 27.5],
+  [12.8, 25.5],
+  [10.2, 22.9],
+  [8.4, 20.2],
+  [7.2, 17.4],
+  [7, 14.3],
+  [7, 7],
+  [16, 3.5],
+];
+const CHECK = [
+  [11.5, 15.6],
+  [14.5, 18.6],
+  [20.5, 12.6],
+];
 
-function inCheck(x, y) {
-  // Stylized check matching favicon.svg proportions
-  if (x >= 9 && x <= 13 && y >= 16 && y <= 20 && x - 9 <= y - 16) return true;
-  if (x >= 14 && x <= 18 && y >= 16 && y <= 21 && 18 - x <= y - 16) return true;
-  if (x >= 19 && x <= 22 && y >= 11 && y <= 16 && x - 19 <= 16 - y) return true;
-  return false;
+function distanceToSegment(x, y, [ax, ay], [bx, by]) {
+  const dx = bx - ax;
+  const dy = by - ay;
+  const lengthSquared = dx * dx + dy * dy;
+  const t = lengthSquared === 0
+    ? 0
+    : Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / lengthSquared));
+  const closestX = ax + t * dx;
+  const closestY = ay + t * dy;
+  return Math.hypot(x - closestX, y - closestY);
+}
+
+function nearPolyline(x, y, points) {
+  return points.slice(0, -1).some((point, index) =>
+    distanceToSegment(x, y, point, points[index + 1]) <= STROKE_WIDTH / 2,
+  );
 }
 
 function pixel(x, y) {
-  const inRound =
-    (x < 6 || x >= SIZE - 6 || y < 6 || y >= SIZE - 6)
-      ? !(
-          (x < 6 && y < 6 && (x - 6) ** 2 + (y - 6) ** 2 > 36) ||
-          (x >= SIZE - 6 && y < 6 && (x - (SIZE - 7)) ** 2 + (y - 6) ** 2 > 36) ||
-          (x < 6 && y >= SIZE - 6 && (x - 6) ** 2 + (y - (SIZE - 7)) ** 2 > 36) ||
-          (x >= SIZE - 6 &&
-            y >= SIZE - 6 &&
-            (x - (SIZE - 7)) ** 2 + (y - (SIZE - 7)) ** 2 > 36)
-        )
-      : true;
-
-  if (!inRound) return [0, 0, 0, 0];
-  if (inCheck(x, y)) return WHITE;
-  return BRAND;
+  const centerX = x + 0.5;
+  const centerY = y + 0.5;
+  if (nearPolyline(centerX, centerY, SHIELD) || nearPolyline(centerX, centerY, CHECK)) {
+    return BRAND;
+  }
+  return [0, 0, 0, 0];
 }
 
 function crc32(buf) {

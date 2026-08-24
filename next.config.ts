@@ -86,6 +86,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // Eski EN dil değiştiricisinin ürettiği TR-only use-case URL'si.
+        // Proxy bunu da kanonikleştiriyor; bu açık kural eski crawler keşiflerini
+        // doğrudan kalıcı yönlendirmeyle temiz tutar.
+        source: "/en/en-iyi/yurt-disindaki-turkler",
+        destination: "/en-iyi/yurt-disindaki-turkler",
+        permanent: true,
+      },
+      {
         source: "/blog/claude-gemini-erisim-vpn",
         destination: "/blog/chatgpt-turkiye-erisim-vpn",
         permanent: true,

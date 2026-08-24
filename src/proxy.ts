@@ -26,7 +26,7 @@ function preferredLocale(request: NextRequest): "tr" | "en" | "de" {
   return "en";
 }
 
-// Simple in-memory rate limiter (production'da Redis/Vercel KV önerilir)
+// Simple in-memory rate limiter (production'da harici Redis önerilir)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 // Rate limit config
@@ -67,7 +67,7 @@ function rateLimit(ip: string): boolean {
 }
 
 function getClientIp(request: NextRequest): string {
-  // Vercel provides x-forwarded-for and x-real-ip
+  // Hostinger/proxy katmanı standart forwarded header'larını sağlayabilir.
   const xff = request.headers.get("x-forwarded-for");
   if (xff) {
     return xff.split(",")[0].trim();
@@ -175,6 +175,6 @@ export default function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next|_vercel|go|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.svg|icon|apple-icon|.*\\..*).*)",
+    "/((?!api|_next|go|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.svg|icon|apple-icon|.*\\..*).*)",
   ],
 };

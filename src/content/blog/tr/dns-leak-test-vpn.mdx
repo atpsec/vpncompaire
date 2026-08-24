@@ -1,7 +1,7 @@
 ---
 slug: "dns-leak-test-vpn"
-title: "DNS Leak Nedir? VPN'de DNS Sızıntısı Testi 2026"
-description: "DNS sızıntısı VPN aktifken gerçek DNS sunucularınızı ifşa eder. ipleak.net ve dnsleaktest.com nasıl kullanılır, IPv6 leak, WebRTC, çözüm yolları."
+title: "DNS Sızıntı Sinyalleri: VPN Bağlantısı Nasıl Kontrol Edilir? 2026"
+description: "DNS çözümleyici sinyallerini bağımsız araçlarla nasıl kontrol edeceğinizi, sonuçların sınırlarını ve DNS, IPv6, WebRTC ayarlarını nasıl yorumlayacağınızı öğrenin."
 publishedAt: "2026-05-20"
 updatedAt: "2026-05-20"
 author: "VPN Advisor Editör Ekibi"
@@ -12,7 +12,7 @@ coverImage: "dns-leak-test"
 unsplashKeyword: "dns network leak test"
 ---
 
-VPN'iniz aktif, IP adresiniz başka bir ülkede görünüyor, her şey yolunda gibi. Ama tarayıcınızda yazdığınız her domain — `gmail.com`, `netflix.com`, `bankaniz.com.tr` — hâlâ ISS'inizin DNS sunucularına gidiyor olabilir. Bu durum DNS leak olarak adlandırılır ve VPN korumasının en yaygın delik nokta'larından biridir. IP'niz gizli olsa bile hangi sitelere gittiğiniz hâlâ kayıt altına alınıyorsa, gizlilik aslında sahtedir.
+VPN'iniz aktif, IP adresiniz başka bir ülkede görünüyor, her şey yolunda gibi. Ama tarayıcınızda yazdığınız her domain — `gmail.com`, `netflix.com`, `bankaniz.com.tr` — hâlâ ISS'inizin DNS sunucularına gidiyor olabilir. Çözümleyici yolu amaçlanan tünelle eşleşmiyorsa bu bir DNS sızıntısı sinyali olabilir; tek başına tüm ziyaretlerin kaydedildiğini veya VPN'in işe yaramadığını kanıtlamaz.
 
 ## DNS Nedir, Neden Önemli?
 
@@ -40,7 +40,7 @@ DNS sızıntısının birkaç tipik nedeni vardır:
 
 ## DNS Leak Nasıl Test Edilir?
 
-Sızıntı testi için en güvenilir araçlar şunlardır:
+Çözümleyici sinyallerini öğrenmek için kullanılabilecek bağımsız araçlar şunlardır:
 
 ### ipleak.net
 
@@ -51,13 +51,13 @@ En kapsamlı teste sahip site. Tek sayfada size şunları gösterir:
 - WebRTC üzerinden tespit edilen IP
 - Torrent IP tespiti
 
-VPN bağlıyken ipleak.net'i açın. DNS sunucuları VPN sağlayıcınıza ait IP'ler veya bilinen gizlilik DNS'leri (Cloudflare 1.1.1.1, Quad9 9.9.9.9) olmalıdır. Eğer Türk Telekom veya başka bir Türkiye merkezli ISS DNS'i görüyorsanız leak var demektir.
+VPN bağlıyken ipleak.net'i açın. Görünen DNS sunucularını sağlayıcının belgeleri veya bilinen resolver bilgileriyle karşılaştırın. Türk Telekom veya başka bir ISS DNS'i görüyorsanız yönlendirmeyi araştırın ve ikinci bir araçla tekrar kontrol edin; tek tarayıcı sonucu sistem genelinde kesin teşhis değildir.
 
 ### dnsleaktest.com
 
 İki test modu sunar: standart test (5 sorgu) ve genişletilmiş test (yaklaşık 30 sorgu). Genişletilmiş test daha güvenilirdir çünkü bazı leak'ler sadece belirli domainlerde tetiklenir.
 
-VPN bağlıyken Extended Test'i çalıştırın. Çıkan tüm sunucular VPN sağlayıcınızın altyapısında olmalıdır. Birden fazla farklı ISP'nin DNS'i görünüyorsa kısmi leak var demektir.
+VPN bağlıyken Extended Test'i çalıştırın. Çıkan sunucuları sağlayıcının belgeleriyle karşılaştırın. Birden fazla farklı ISP'nin DNS'i görünüyorsa bunu kesin teşhis değil, araştırılması gereken bir sinyal olarak değerlendirin.
 
 ### browserleaks.com
 
@@ -83,7 +83,7 @@ ipleak.net üzerinde "Your IPv6 address" alanı boş veya VPN sağlayıcısına 
 
 WebRTC (Web Real-Time Communication), tarayıcıların görüntülü görüşme ve dosya paylaşımı için kullandığı bir API'dir. Sorun: WebRTC, P2P bağlantı kurabilmek için cihazınızın hem yerel hem genel IP'sini öğrenmek zorundadır. Bu işlem işletim sisteminin ağ yığınını VPN'i bypass ederek doğrudan sorgular.
 
-Sonuç: VPN aktif olsa bile bir web sayfası WebRTC API'siyle gerçek IP'nizi öğrenebilir. Reklam ağları yıllardır bu yöntemi takip için kullanıyor.
+Sonuç: tarayıcı izinleri ve ağ yapılandırmasına bağlı olarak bir web sayfası WebRTC API'si üzerinden IP sinyali görebilir. Sonucu aynı koşullarda tekrarlamadan kesin hüküm vermeyin.
 
 **Çözüm**:
 
@@ -115,17 +115,17 @@ Sızıntı tespit ettiyseniz adım adım çözüm:
 5. **WebRTC'yi tarayıcıdan kapatın** — yukarıdaki adımlarla
 6. **Sistem DNS'ini manuel olarak Cloudflare/Quad9'a ayarlayın** — ek katman
 7. **Router seviyesinde VPN kurun** — tüm cihazları kapsar
-8. **Farklı VPN sağlayıcısı deneyin** — sürekli leak veriyorsa altyapısı güvenilir değildir
+8. **Sağlayıcı belgelerini ve destek kanalını inceleyin** — tek bağlantıdaki sinyal, sağlayıcı geneli için sızıntı oranı kanıtı değildir
 
 [WireGuard ve OpenVPN karşılaştırmamız](/blog/wireguard-vs-openvpn-karsilastirma) protokol tercihinde DNS davranışı farklarını da içeriyor.
 
 ## Sıkça Sorulan Sorular
 
-**Test bağlıyken yapılırsa nasıl emin olabilirim VPN'den geçtiği?**
-Önce VPN olmadan ipleak.net'i açın ve DNS sunucularının ISS'inize ait olduğunu doğrulayın. Sonra VPN'i bağlayın ve sayfayı yenileyin. DNS sunucuları değişmediyse leak var.
+**Kontrolün VPN'den geçtiğini nasıl anlayabilirim?**
+Önce VPN olmadan ipleak.net'i açın ve görünen resolver bilgisini not edin. Sonra VPN'i bağlayıp sayfayı yenileyin; değişmeyen sonuç, yönlendirme ayarlarını ve aracın sorgu kapsamını araştırmanız gerektiğini gösterir.
 
-**DNS leak ne kadar tehlikeli?**
-IP'niz gizli olsa bile hangi sitelere bağlandığınız bilgisi açıktır. ISS'iniz tüm tarama geçmişinizi loglayabilir. Hassas konularda (sağlık, finans, politik içerik) bu ciddi bir gizlilik ihlalidir.
+**DNS sızıntı sinyali ne anlama gelir?**
+IP'niz değişse bile resolver yolu farklı bir ağ sinyali gösterebilir. Bunun kapsamı kullanılan araç, cihaz ve ağ koşullarına bağlıdır; hassas kullanımda sağlayıcı politikasını ve tanılama sonucunu birlikte değerlendirin.
 
 **Tüm VPN'ler IPv6 sızıntısını engeller mi?**
 Hayır. Mullvad, ProtonVPN, AirVPN tam IPv6 desteği sağlar. NordVPN, ExpressVPN gibi büyük sağlayıcılar genelde IPv6'yı tamamen bloke eder (leak olmaz ama IPv6 da çalışmaz).
@@ -138,8 +138,8 @@ Quad9 kötü amaçlı domainleri filtreler ve İsviçre merkezlidir. Cloudflare 
 
 ## Sonuç
 
-DNS leak, VPN dünyasının en sinsi sorunudur çünkü görsel olarak hiçbir alarm vermez — bağlantı çalışır görünür, sadece arka planda gizliliğiniz aşınır. Düzenli olarak ipleak.net ve dnsleaktest.com üzerinden test yapmak, VPN gizliliğinizin temelidir.
+DNS resolver yönlendirmesi VPN gizliliğinin incelenmesi gereken sinyallerinden biridir. Bağlantı çalışırken de ayarlar değişebilir; önemli ağ veya istemci değişikliklerinden sonra kapsamı açıklayan araçlarla tekrar kontrol edin.
 
-IPv4, IPv6, WebRTC ve DNS sorgularının dördünü birden kapsayan koruma için kullandığınız VPN'in tüm leak korumalarını desteklediğinden, IPv6'nın ya tünelden geçtiğinden ya da kapalı olduğundan ve tarayıcınızın WebRTC ayarının sertleştirildiğinden emin olun. Sızıntısız bir kurulum için [VPN karşılaştırma sayfamızdaki](/karsilastir) DNS leak protection puanları kararınıza yardımcı olabilir.
+IPv4, IPv6, WebRTC ve DNS katmanlarının nasıl etkileştiğini öğrenin; ardından her katmanı kapsamı açıklanan araçlarla ayrı ayrı kontrol edin. [VPN karşılaştırma sayfamız](/karsilastir) sağlayıcı belgelerini ve denetim kanıtlarını düzenler; sızıntısız kurulum garantisi veya test puanı vermez.
 
 Gizlilik sadece IP gizlemek değildir — hangi domain'leri çözdüğünüz de en az IP kadar değerli bir veridir.

@@ -45,7 +45,7 @@ const tr: VpnForFamiliesContent = {
   metaTitle:
     "Aile ve Çocuklar İçin En İyi VPN (2026) — Ebeveyn Kontrolü + Çoklu Cihaz",
   metaDescription:
-    "Aile için VPN: çoklu cihaz desteği, ebeveyn kontrolü, zararlı içerik filtreleme, çocukların güvenli internet kullanımı. Sınırsız cihazlı en iyi 3 VPN.",
+    "Aile için VPN: çoklu cihaz desteği, ebeveyn kontrolü, zararlı içerik filtreleme ve çocukların güvenli internet kullanımı için kaynakları karşılaştırma rehberi.",
   keywords: [
     "aile vpn",
     "çocuklar için vpn",
@@ -56,16 +56,16 @@ const tr: VpnForFamiliesContent = {
   ],
   ogTitle: "Aile ve Çocuklar İçin En İyi VPN (2026)",
   ogDescription:
-    "Çoklu cihaz, ebeveyn kontrolü ve zararlı içerik filtreleme için en iyi aile VPN'leri.",
+    "Çoklu cihaz, ebeveyn kontrolü ve zararlı içerik filtreleme özelliklerini karşılaştırma rehberi.",
   badge: "Aile",
-  h1: "Aile ve çocuklar için en iyi VPN",
-  lede: "Çoklu cihaz desteği, zararlı içerik filtreleme ve tüm aile ev ağı koruması için en iyi 3 VPN. Tek hesap, sınırsız aile üyesi.",
+  h1: "Aile ve çocuklar için VPN bilgi rehberi",
+  lede: "Çoklu cihaz desteği, zararlı içerik filtreleme ve tüm aile ev ağı koruması için kaynak profillerini karşılaştırın.",
   breadcrumb: {
     home: "Ana sayfa",
     guides: "Rehberler",
     current: "Aile ve çocuklar",
   },
-  picksHeading: "Aile için en iyi 3 VPN",
+  picksHeading: "Aile için karşılaştırılabilecek sağlayıcı profilleri",
   picksSubheading: "Cihaz limiti, içerik filtreleme ve fiyata göre.",
   picks: [
     {
@@ -214,7 +214,7 @@ const en: VpnForFamiliesContent = {
   metaTitle:
     "Best VPN for Families & Kids (2026) — Parental Controls + Multi-Device",
   metaDescription:
-    "A VPN for the family: multi-device support, parental controls, harmful content filtering and safe internet use for kids. The 3 best VPNs with unlimited devices.",
+    "A family VPN guide covering multi-device support, parental controls, harmful-content filtering and safe internet use for kids.",
   keywords: [
     "family vpn",
     "vpn for kids",
@@ -227,10 +227,10 @@ const en: VpnForFamiliesContent = {
   ogDescription:
     "The best family VPNs for multi-device support, parental controls and harmful content filtering.",
   badge: "Family",
-  h1: "The best VPN for families and kids",
-  lede: "The 3 best VPNs for multi-device support, harmful content filtering and whole-home network protection. One account, unlimited family members.",
+  h1: "VPN information guide for families and kids",
+  lede: "Compare provider documentation for multi-device support, harmful-content filtering and whole-home network protection.",
   breadcrumb: { home: "Home", guides: "Guides", current: "Family and kids" },
-  picksHeading: "The 3 best VPNs for families",
+  picksHeading: "Provider profiles to compare for families",
   picksSubheading: "Based on device limits, content filtering and price.",
   picks: [
     {
@@ -392,14 +392,14 @@ const de: VpnForFamiliesContent = {
   ogDescription:
     "Die besten Familien-VPNs für viele Geräte, Kindersicherung und das Filtern schädlicher Inhalte.",
   badge: "Familie",
-  h1: "Das beste VPN für Familien und Kinder",
-  lede: "Die 3 besten VPNs für Multi-Geräte-Support, das Filtern schädlicher Inhalte und den Schutz des gesamten Heimnetzes. Ein Konto, unbegrenzt viele Familienmitglieder.",
+  h1: "VPN-Informationsratgeber für Familien und Kinder",
+  lede: "Vergleichen Sie Anbieterquellen zu Multi-Geräte-Support, dem Filtern schädlicher Inhalte und dem Schutz des gesamten Heimnetzes.",
   breadcrumb: {
     home: "Startseite",
     guides: "Ratgeber",
     current: "Familie und Kinder",
   },
-  picksHeading: "Die 3 besten VPNs für Familien",
+  picksHeading: "Vergleichbare Anbieterprofile für Familien",
   picksSubheading: "Nach Gerätelimit, Inhaltsfilter und Preis.",
   picks: [
     {

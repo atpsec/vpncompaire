@@ -72,7 +72,7 @@ export function TrBody() {
 
         <h3>2.1. Otomatik teknik veriler (sunucu logları)</h3>
         <p>
-          Vercel barındırma altyapımız, standart web sunucu logları olarak
+          Hostinger barındırma altyapımız, standart web sunucu logları olarak
           şunları geçici tutar:
         </p>
         <ul>
@@ -142,7 +142,7 @@ export function TrBody() {
         </p>
         <ul>
           <li>
-            <strong>Vercel</strong> (web hosting altyapısı) — sunucu
+            <strong>Hostinger</strong> (web hosting altyapısı) — sunucu
             loglarını işler. Veri işleme sözleşmesi standart koşullarda.
           </li>
           <li>
@@ -283,7 +283,7 @@ export function EnBody() {
 
         <h3>2.1. Automatic technical data (server logs)</h3>
         <p>
-          Our Vercel hosting infrastructure temporarily keeps standard web
+          Our Hostinger hosting infrastructure temporarily keeps standard web
           server logs:
         </p>
         <ul>
@@ -353,7 +353,7 @@ export function EnBody() {
         </p>
         <ul>
           <li>
-            <strong>Vercel</strong> (web hosting) — processes server logs.
+            <strong>Hostinger</strong> (web hosting) — processes server logs.
             Standard data-processing agreement.
           </li>
           <li>
@@ -501,7 +501,7 @@ export function DeBody() {
 
         <h3>2.1. Automatische technische Daten (Server-Logs)</h3>
         <p>
-          Unsere Vercel-Hosting-Infrastruktur speichert vorübergehend
+          Unsere Hostinger-Hosting-Infrastruktur speichert vorübergehend
           standardmäßige Webserver-Logs:
         </p>
         <ul>
@@ -577,7 +577,7 @@ export function DeBody() {
         </p>
         <ul>
           <li>
-            <strong>Vercel</strong> (Webhosting) — verarbeitet Server-Logs.
+            <strong>Hostinger</strong> (Webhosting) — verarbeitet Server-Logs.
             Standard-Auftragsverarbeitungsvertrag.
           </li>
           <li>

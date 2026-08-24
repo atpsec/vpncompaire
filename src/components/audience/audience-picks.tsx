@@ -1,11 +1,13 @@
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowRight, Check, Crown, Medal, Trophy } from "lucide-react";
+import { ArrowRight, Check, CircleCheck, FileSearch, GitCompare } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { getProduct } from "@/data/products";
 import type { Locale } from "@/lib/site";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 type Pick = {
   slug: string;
@@ -19,21 +21,29 @@ type Props = {
   subheading?: string;
 };
 
-const RANK_META = [
-  { icon: Crown, labelKey: "rank1" as const, color: "text-accent-600" },
-  { icon: Trophy, labelKey: "rank2" as const, color: "text-brand-600" },
-  { icon: Medal, labelKey: "rank3" as const, color: "text-ink-muted" },
+const PICK_META = [
+  { icon: CircleCheck, labelKey: "featured" as const, color: "text-accent-600" },
+  { icon: GitCompare, labelKey: "alternative" as const, color: "text-brand-600" },
+  { icon: FileSearch, labelKey: "reference" as const, color: "text-ink-muted" },
 ];
 
 export function AudiencePicks({ picks, heading, subheading }: Props) {
   const t = useTranslations("audience");
   const locale = useLocale() as Locale;
+  const educationalHeading =
+    heading && /en iyi|best vpn|beste vpn|top\s*\d|top-\d|top-?20/i.test(heading)
+      ? locale === "tr"
+        ? "Bu senaryo için karşılaştırılabilecek sağlayıcı profilleri"
+        : locale === "de"
+          ? "Vergleichbare Anbieterprofile für dieses Szenario"
+          : "Provider profiles to compare for this scenario"
+      : heading;
   return (
     <section className="mt-12">
-      {heading ? (
+      {educationalHeading ? (
         <header className="mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            {heading}
+            {educationalHeading}
           </h2>
           {subheading ? (
             <p className="mt-2 text-ink-muted">{subheading}</p>
@@ -45,8 +55,8 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
         {picks.map((pick, idx) => {
           const product = getProduct(pick.slug, locale);
           if (!product) return null;
-          const Rank = RANK_META[idx];
-          const RankIcon = Rank.icon;
+          const pickMeta = PICK_META[idx];
+          const PickIcon = pickMeta.icon;
           const bestPlan =
             product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
 
@@ -60,8 +70,8 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
               ) : null}
 
               <div className="flex items-center gap-2 text-xs font-medium">
-                <RankIcon className={`size-4 ${Rank.color}`} />
-                <span className={Rank.color}>{t(Rank.labelKey)}</span>
+                <PickIcon className={`size-4 ${pickMeta.color}`} />
+                <span className={pickMeta.color}>{t(pickMeta.labelKey)}</span>
               </div>
 
               <div className="mt-3 flex items-center gap-3">
@@ -115,14 +125,16 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
 
               <div className="mt-auto pt-5 flex flex-col gap-2">
                 <Button asChild variant="primary" size="sm">
-                  <a
-                    href={product.pricingUrl}
-                    rel="noopener nofollow"
+                  <ProviderLink
+                    href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "audience-pick" })}
+                    rel={providerOutboundRel(product.slug, product.hasAffiliate)}
                     target="_blank"
+                    provider={product.slug}
+                    placement="audience-pick"
                   >
                     {t("ctaDeal", { brand: product.brand })}
                     <ArrowRight className="size-3.5" />
-                  </a>
+                  </ProviderLink>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
                   <Link href={`/inceleme/${product.slug}`}>

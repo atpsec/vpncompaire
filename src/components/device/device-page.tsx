@@ -11,6 +11,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DeviceIcon } from "@/components/device/device-icon";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -18,6 +19,7 @@ import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import type { DeviceContent } from "@/data/devices";
 import { cn } from "@/lib/utils";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 const DIFFICULTY_TONE = {
   Kolay: "bg-success-50 text-success-700 border-success-100",
@@ -161,14 +163,16 @@ export async function DevicePage({
                       </p>
                       <div className="mt-4 flex flex-wrap gap-3">
                         <Button asChild variant="primary" size="sm">
-                          <a
-                            href={product.pricingUrl}
-                            rel="noopener nofollow"
+                          <ProviderLink
+                            href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "device-pick" })}
+                            rel={providerOutboundRel(product.slug, product.hasAffiliate)}
                             target="_blank"
+                            provider={product.slug}
+                            placement="device-pick"
                           >
                             {t("picks.ctaOfficial", { brand: product.brand })}
                             <ArrowRight className="size-4" />
-                          </a>
+                          </ProviderLink>
                         </Button>
                         <Button asChild variant="ghost" size="sm">
                           <Link href={`/inceleme/${product.slug}`}>

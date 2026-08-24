@@ -8,6 +8,9 @@
 > ADIM 4 küme C uygulandı. Aşağıdaki eski marka/Plausible/newsletter/RSS referanslarını
 > bu çerçevede oku. Çelişkide DEVIR-RAPORU kazanır.
 
+> **Güncel hosting notu:** Bu eski snapshot'taki Vercel referansları geçersizdir.
+> Proje Vercel'e bağlı değildir; yayın Hostinger Node.js App üzerinden yapılır.
+
 > 📌 Bu dosya kullanıcı (Ahmet) farklı bir Anthropic hesabına geçtiğinde,
 > yeni hesabın Claude'unun projeyi sıfırdan anlamasına yardımcı olur.
 
@@ -31,8 +34,8 @@ Sen Claude'sun ve bu projeye yeni atanıyorsun. Sırasıyla şunları yap:
 - **Adı:** vpncompaire
 - **Amaç:** TR/EN VPN karşılaştırma ve rehber sitesi
 - **Repo:** https://github.com/atpsec/vpncompaire (default branch: `master`, **not main**)
-- **Deploy:** Vercel (otomatik, push'tan sonra ~2 dk)
-- **Production URL:** https://vpncompaire.vercel.app (veya alias)
+- **Deploy:** Hostinger Node.js App (hPanel üzerinden)
+- **Production URL:** https://vpnadvisor.net
 
 ### Stack
 - **Framework:** Next.js 16 (App Router, Turbopack)
@@ -41,7 +44,7 @@ Sen Claude'sun ve bu projeye yeni atanıyorsun. Sırasıyla şunları yap:
 - **i18n:** next-intl 4 (tr default, en alternative)
 - **Content:** MDX (file-based blog, 100 yazı)
 - **Analytics:** Plausible (cookieless)
-- **Hosting:** Vercel
+- **Hosting:** Hostinger Node.js App
 - **DB:** Yok (file-based her şey)
 - **Auth:** Yok (statik+SSR, kullanıcı hesabı yok)
 
@@ -124,14 +127,14 @@ Sen Claude'sun ve bu projeye yeni atanıyorsun. Sırasıyla şunları yap:
 
 ---
 
-## 🔐 Environment Variables (Vercel'de set edilmiş)
+## 🔐 Environment Variables (Hostinger hPanel'de set edilir)
 
 ```bash
 # Public (NEXT_PUBLIC_*)
 NEXT_PUBLIC_SITE_NAME=vpncompaire
 NEXT_PUBLIC_SITE_BRAND=vpncompaire
-NEXT_PUBLIC_SITE_URL=https://vpncompaire.vercel.app
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=vpncompaire.vercel.app  # optional
+NEXT_PUBLIC_SITE_URL=https://vpnadvisor.net
+NEXT_PUBLIC_GA_ID=G-QLM2QBB9S4
 
 # Server-only
 PLAUSIBLE_API_KEY=  # OPTIONAL - view counter için, yoksa 0 döner
@@ -163,8 +166,8 @@ npm run dev              # localhost:3000
 npm run lint             # error 0 olmalı, warning tolere edilir
 npm run build            # exit 0 olmalı
 
-# Deploy (manuel — normalde Vercel auto-deploy yapar)
-NODE_OPTIONS="--use-system-ca" npx vercel --prod --yes
+# Deploy: Hostinger hPanel → Node.js Apps → Restart
+npm run start:hostinger
 ```
 
 > ⚠️ Windows'ta `NODE_OPTIONS=--use-system-ca` corporate root CA için **gerekli**.
@@ -226,7 +229,7 @@ Kullanıcının daha önce konuştuğumuz ama yapmadığımız önceliklendirilm
 
 ### Yüksek değerli, henüz yapılmamış:
 - 🇹🇷 **Türkiye-specific VPN performans dashboard'u** (canlı leaderboard, diferansiyasyon için kritik)
-- 💬 **Kullanıcı yorumları sistemi** (Vercel KV veya basit JSON file)
+- 💬 **Kullanıcı yorumları sistemi** (Upstash Redis veya basit JSON file)
 - 💰 **VPN price tracker** (haftalık snapshot, grafik)
 - 📊 **"Anonim kullanıcı verileri" raporu** (quiz sonuçları aggregate)
 - 🤖 **"VPN'imi sor" AI chatbot** (Anthropic API ile)
@@ -247,7 +250,7 @@ Kullanıcının daha önce konuştuğumuz ama yapmadığımız önceliklendirilm
 
 ## 🚨 Bilinen Sınırlamalar
 
-1. **Local build SSL sorunu:** Windows local'de `npm run build` font fetch hatası verebilir (Geist Google Font), ama production (Vercel) sorunsuz. Hatayı görmezden gel.
+1. **Local build SSL sorunu:** Windows local'de `npm run build` font fetch hatası verebilir. Build exit 0 ise Hostinger'a yayınlanabilir.
 
 2. **localStorage çakışma:** Tema toggle ve banner dismiss aynı `vpncompaire:*` prefix kullanır. Yeni key eklerken prefix'i koru.
 
@@ -264,7 +267,7 @@ Kullanıcının daha önce konuştuğumuz ama yapmadığımız önceliklendirilm
 1. **Build hatası:** `npm run lint` ile başla, error'ları çöz, sonra `npm run build`.
 2. **Görsel yüklenmiyor:** `src/lib/unsplash.ts` photo ID'si broken olabilir. `images.unsplash.com/photo-{ID}` URL'sini direkt test et — 404 ise değiştir.
 3. **i18n hatası (MISSING_MESSAGE):** `messages/tr.json` ve `messages/en.json`'da key sync yok demek. İkisine de ekle.
-4. **Vercel deploy fail:** GitHub Actions / Vercel dashboard'dan log'a bak. CSP veya env eksiklik olabilir.
+4. **Hostinger deploy sorunu:** hPanel Node.js App loglarını ve environment variables değerlerini kontrol et.
 5. **Git push fail (Windows):** `getaddrinfo()` ise 3-5 sn bekle retry. SSL ise `NODE_OPTIONS=--use-system-ca`.
 
 ---

@@ -159,7 +159,7 @@ const tr: NordvpnVsSurfsharkContent = {
       { href: "/inceleme/expressvpn", text: "ExpressVPN incelemesi" },
       { href: "/inceleme/proton-vpn", text: "Proton VPN incelemesi" },
     ],
-    allLink: { href: "/en-iyi-vpn", text: "Tüm sıralama" },
+    allLink: { href: "/en-iyi-vpn", text: "Tüm sağlayıcı profilleri" },
   },
 };
 
@@ -283,7 +283,7 @@ const en: NordvpnVsSurfsharkContent = {
       { href: "/inceleme/expressvpn", text: "ExpressVPN review" },
       { href: "/inceleme/proton-vpn", text: "Proton VPN review" },
     ],
-    allLink: { href: "/en-iyi-vpn", text: "Full ranking" },
+    allLink: { href: "/en-iyi-vpn", text: "All provider profiles" },
   },
 };
 
@@ -407,7 +407,7 @@ const de: NordvpnVsSurfsharkContent = {
       { href: "/inceleme/expressvpn", text: "ExpressVPN im Test" },
       { href: "/inceleme/proton-vpn", text: "Proton VPN im Test" },
     ],
-    allLink: { href: "/en-iyi-vpn", text: "Komplettes Ranking" },
+    allLink: { href: "/en-iyi-vpn", text: "Alle Anbieterprofile" },
   },
 };
 

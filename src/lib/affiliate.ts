@@ -48,11 +48,11 @@ const STATIC_ALLOWED_HOSTS: ReadonlySet<string> = new Set([
 /**
  * Per-slug env-driven affiliate tracking URLs.
  *
- * Set the matching env var in Vercel (or .env.local) to the FULL personal
+ * Set the matching env var in Hostinger (or .env.local) to the FULL personal
  * tracking URL from the affiliate dashboard. The /go/[slug] handler will
  * redirect to this URL instead of the brand's public URL.
  *
- * Example (Vercel project settings):
+ * Example (Hostinger environment variables):
  *   AFFILIATE_NORDVPN_URL=https://go.nordvpn.net/aff_c?offer_id=15&aff_id=12345
  *
  * Leave empty/unset to disable affiliate for a provider (the /go handler
@@ -122,6 +122,39 @@ export const allowedRedirectHosts: ReadonlySet<string> = (() => {
 
 export function affiliatePath(slug: string): string {
   return `/go/${slug}`;
+}
+
+/**
+ * Build the internal destination used by provider CTAs.
+ *
+ * Affiliate URLs are configured server-side. Until a provider's personal
+ * tracking URL is configured, the CTA stays a plain official-site link. Once
+ * the URL is added, the same CTA automatically switches to /go.
+ */
+export function providerOutboundHref({
+  slug,
+  fallbackUrl,
+  hasAffiliate,
+  source,
+}: {
+  slug: string;
+  fallbackUrl: string;
+  hasAffiliate: boolean;
+  source: string;
+}): string {
+  const affiliate = getAffiliate(slug);
+  if (!hasAffiliate || !affiliate?.hasProgram || !affiliate.trackingUrl) {
+    return fallbackUrl;
+  }
+
+  return `${affiliatePath(slug)}?source=${encodeURIComponent(source)}`;
+}
+
+export function providerOutboundRel(slug: string, hasAffiliate: boolean): string {
+  const affiliate = getAffiliate(slug);
+  return hasAffiliate && affiliate?.hasProgram && affiliate.trackingUrl
+    ? "noopener nofollow sponsored"
+    : "noopener nofollow";
 }
 
 export function getAffiliate(slug: string): AffiliateLink | undefined {

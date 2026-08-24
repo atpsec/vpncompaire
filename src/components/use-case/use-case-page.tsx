@@ -6,12 +6,14 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 export type UseCasePick = { slug: string; why: string; bestFor: string };
 export type UseCaseFAQ = { q: string; a: string };
@@ -38,16 +40,23 @@ export function UseCasePage({ slug, title, tagline, summary, Icon, badgeLabel, p
       : "This list is not a laboratory score or definitive ranking. It shows provider examples with documented features relevant to the use case; verify current primary sources before deciding.";
   const profileLabel = locale === "tr" ? "Sağlayıcı profili" : locale === "de" ? "Anbieterprofil" : "Provider profile";
   const examplesHeading = locale === "tr" ? "Bu senaryo için incelenebilecek sağlayıcı profilleri" : locale === "de" ? "Anbieterprofile für diesen Anwendungsfall" : "Provider profiles to consider for this use case";
+  const displayTitle = /en iyi|best vpn|beste vpn/i.test(title)
+    ? locale === "tr"
+      ? "Kullanım senaryosuna göre VPN bilgi rehberi"
+      : locale === "de"
+        ? "VPN-Informationsratgeber nach Anwendungsfall"
+        : "VPN information guide by use case"
+    : title;
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: t("breadcrumb.home"), path: "/" }, { name: t("breadcrumb.hub"), path: "/en-iyi" }, { name: title, path: `/en-iyi/${slug}` }], locale)} />
+      <JsonLd data={breadcrumbSchema([{ name: t("breadcrumb.home"), path: "/" }, { name: t("breadcrumb.hub"), path: "/en-iyi" }, { name: displayTitle, path: `/en-iyi/${slug}` }], locale)} />
       <JsonLd data={faqSchema([...faqs])} />
 
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t("breadcrumb.home")}</Link>{" "}›{" "}<Link href="/en-iyi" className="hover:text-ink">{t("breadcrumb.hub")}</Link>{" "}› <span className="text-ink-strong">{badgeLabel}</span></p>
 
-        <header className="mt-6"><Badge variant="brand"><Icon className="size-3" /> {badgeLabel}</Badge><h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{title}</h1><p className="mt-4 text-lg text-ink-muted">{tagline}</p></header>
+        <header className="mt-6"><Badge variant="brand"><Icon className="size-3" /> {badgeLabel}</Badge><h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{displayTitle}</h1><p className="mt-4 text-lg text-ink-muted">{tagline}</p></header>
 
         <Card className="mt-8 p-6 bg-brand-50/40"><h2 className="text-lg font-semibold text-ink-strong flex items-center gap-2"><ShieldCheck className="size-5 text-brand-600" /> {t("summaryTitle")}</h2><p className="mt-3 text-ink leading-relaxed">{summary}</p></Card>
         <Card className="mt-4 p-5"><div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-600 mt-0.5 shrink-0" /><p className="text-sm text-ink leading-relaxed">{note}</p></div></Card>
@@ -65,7 +74,7 @@ export function UseCasePage({ slug, title, tagline, summary, Icon, badgeLabel, p
                     <div className="flex-1 min-w-[200px]">
                       <div className="flex flex-wrap items-center gap-2"><h3 className="text-xl font-semibold text-ink-strong">{product.brand}</h3><Badge variant="brand">{pick.bestFor}</Badge></div>
                       <p className="mt-3 text-ink leading-relaxed">{pick.why}</p>
-                      <div className="mt-4 flex flex-wrap gap-3"><Button asChild variant="primary" size="sm"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t("ctaOfficial", { brand: product.brand })}<ArrowRight className="size-4" /></a></Button><Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button></div>
+                      <div className="mt-4 flex flex-wrap gap-3"><Button asChild variant="primary" size="sm"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "use-case" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="use-case">{t("ctaOfficial", { brand: product.brand })}<ArrowRight className="size-4" /></ProviderLink></Button><Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button></div>
                     </div>
                   </div>
                 </Card>

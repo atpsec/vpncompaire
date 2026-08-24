@@ -24,6 +24,7 @@ import {
   type BlogLocale,
 } from "@/lib/blog-slugs";
 import type { Metadata } from "next";
+import { getLocalizedLinkHref } from "@/lib/i18n-paths";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -58,6 +59,71 @@ const NEXT_STEP_COPY = {
     guide: "Einsteigerleitfaden lesen",
   },
 } as const;
+
+type ContextualNextStep = {
+  title: string;
+  body: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel: string;
+  secondaryHref: string;
+};
+
+/**
+ * Search Console currently surfaces these English articles most often. Keep
+ * the next step specific to the reader's intent instead of sending every
+ * visitor to the same generic comparison hub.
+ */
+const EN_CONTEXTUAL_NEXT_STEPS: Record<string, ContextualNextStep> = {
+  "apple-tv-vpn-setup": {
+    title: "Choose a VPN path for your TV setup",
+    body: "Compare the practical setup options for smart TVs, then check provider profiles before choosing a plan.",
+    primaryLabel: "Open smart TV VPN guide",
+    primaryHref: "/cihazlar/smart-tv",
+    secondaryLabel: "Compare streaming VPNs",
+    secondaryHref: "/en-iyi/streaming",
+  },
+  "android-tv-vpn-setup": {
+    title: "Compare Android TV-friendly options",
+    body: "Use the device guide for setup constraints and the streaming comparison for provider-level trade-offs.",
+    primaryLabel: "Open smart TV device guide",
+    primaryHref: "/cihazlar/smart-tv",
+    secondaryLabel: "Compare streaming VPNs",
+    secondaryHref: "/en-iyi/streaming",
+  },
+  "fire-tv-stick-vpn-setup": {
+    title: "Find the right VPN setup for Fire TV",
+    body: "Start with the device-level setup route, then compare providers that document streaming and multi-device support.",
+    primaryLabel: "Open device VPN guides",
+    primaryHref: "/cihazlar",
+    secondaryLabel: "Compare streaming VPNs",
+    secondaryHref: "/en-iyi/streaming",
+  },
+  "vpn-connected-but-not-working": {
+    title: "Fix the connection before switching providers",
+    body: "Run the relevant leak checks and compare documented DNS, kill-switch and protocol features before buying another plan.",
+    primaryLabel: "Open VPN security tools",
+    primaryHref: "/guvenlik-araclari",
+    secondaryLabel: "Compare privacy-focused VPNs",
+    secondaryHref: "/en-iyi/gizlilik",
+  },
+  "ios-vpn-shortcuts-automation": {
+    title: "Choose an iPhone-friendly VPN",
+    body: "Check iPhone setup coverage and compare providers that document mobile support, automation and privacy controls.",
+    primaryLabel: "Open iPhone VPN guide",
+    primaryHref: "/cihazlar/iphone",
+    secondaryLabel: "Compare privacy-focused VPNs",
+    secondaryHref: "/en-iyi/gizlilik",
+  },
+  "nordvpn-vs-surfshark-comparison": {
+    title: "Verify the two providers before you choose",
+    body: "Review the provider profiles and current comparison fields, including device limits, pricing and renewal terms.",
+    primaryLabel: "Open NordVPN profile",
+    primaryHref: "/inceleme/nordvpn",
+    secondaryLabel: "Open Surfshark profile",
+    secondaryHref: "/inceleme/surfshark",
+  },
+};
 
 async function blogAlternates(slug: string, locale: BlogLocale) {
   const entry = getBlogSlugEntry(slug, locale);
@@ -181,6 +247,17 @@ export default async function BlogPostPage({ params }: Props) {
 
   const { frontmatter, contentParts } = result;
   const nextSteps = NEXT_STEP_COPY[locale];
+  const contextualNextStep =
+    locale === "en" ? EN_CONTEXTUAL_NEXT_STEPS[frontmatter.slug] : undefined;
+  const comparisonHref = getLocalizedLinkHref({
+    locale,
+    section: "comparison",
+  });
+  const guideHref = getLocalizedLinkHref({
+    locale,
+    section: "guide",
+    contentId: "what-is-vpn",
+  });
 
   const relatedPosts = await getRelatedPosts(
     frontmatter.slug,
@@ -258,6 +335,31 @@ export default async function BlogPostPage({ params }: Props) {
 
         <BlogContent content={contentParts.second} />
 
+        {contextualNextStep ? (
+          <Card className="mt-12 border-accent-200 bg-accent-50/40 p-6">
+            <h2 className="text-xl font-semibold text-ink-strong">
+              {contextualNextStep.title}
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+              {contextualNextStep.body}
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link
+                href={contextualNextStep.primaryHref}
+                className="rounded-full bg-brand-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
+              >
+                {contextualNextStep.primaryLabel}
+              </Link>
+              <Link
+                href={contextualNextStep.secondaryHref}
+                className="rounded-full border border-border bg-surface-base px-4 py-2 text-sm font-semibold text-ink-strong transition-colors hover:border-brand-300"
+              >
+                {contextualNextStep.secondaryLabel}
+              </Link>
+            </div>
+          </Card>
+        ) : null}
+
         <UnsplashImage
           coverImage={frontmatter.coverImage}
           position="end"
@@ -276,13 +378,13 @@ export default async function BlogPostPage({ params }: Props) {
               {nextSteps.profiles}
             </Link>
             <Link
-              href="/karsilastir"
+              href={comparisonHref}
               className="rounded-full border border-border bg-surface-base px-4 py-2 text-sm font-semibold text-ink-strong transition-colors hover:border-brand-300"
             >
               {nextSteps.compare}
             </Link>
             <Link
-              href="/rehber/vpn-nedir"
+              href={guideHref}
               className="rounded-full border border-border bg-surface-base px-4 py-2 text-sm font-semibold text-ink-strong transition-colors hover:border-brand-300"
             >
               {nextSteps.guide}

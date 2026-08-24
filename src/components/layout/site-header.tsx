@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Menu, X, ShieldCheck } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
+import { SiteMark } from "@/components/brand/site-mark";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
@@ -46,7 +47,7 @@ export function SiteHeader() {
             className="flex items-center gap-2 text-ink-strong font-semibold tracking-tight"
             aria-label={t("homeAria")}
           >
-            <ShieldCheck className="size-6 text-brand-600" aria-hidden="true" />
+            <SiteMark className="size-6 text-brand-600" />
             <span className="text-lg">VPN Advisor</span>
           </Link>
 

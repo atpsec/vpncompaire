@@ -3,11 +3,13 @@ import { ArrowRight, FileSearch } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { topRankedProducts, type Product } from "@/data/products";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 export function TopThreePodium() {
   const locale = useLocale() as Locale;
@@ -51,7 +53,7 @@ function ProviderCard({ product, featured }: { product: Product; featured: boole
           {product.pricingVerifiedAt && bestPlan ? <span className="text-xs text-ink-subtle">{t("perMonthStart")}</span> : null}
         </div>
         <div className="mt-5 flex flex-col gap-2">
-          <Button asChild variant="primary" size="md" className="w-full"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t("ctaOfficial")}<ArrowRight className="size-4" /></a></Button>
+          <Button asChild variant="primary" size="md" className="w-full"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-podium" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-podium">{t("ctaOfficial")}<ArrowRight className="size-4" /></ProviderLink></Button>
           <Button asChild variant="ghost" size="sm" className="w-full"><Link href={`/inceleme/${product.slug}`}>{copy.viewProfile}</Link></Button>
         </div>
       </div>

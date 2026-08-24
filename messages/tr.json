@@ -42,10 +42,10 @@
     "pros": "Artıları",
     "cons": "Eksileri",
     "verifiedAudit": "Bağımsız denetim",
-    "noAffiliate": "Affiliate yok — tarafsız seçim"
+    "noAffiliate": "Affiliate ilişkisi yok"
   },
   "disclosure": {
-    "banner": "Reklam açıklaması: Bu site gelirini Google AdSense reklamlarından ve (etkin olduğunda) bazı VPN sağlayıcı ortaklık bağlantılarından elde edebilir. Ortaklık komisyonu sıralamayı, içeriği veya puanları etkilemez. Önerilerimiz; araştırma, özellik analizi, gizlilik politikaları, denetimler, fiyatlandırma ve kullanım kolaylığına dayanır.",
+    "banner": "Reklam açıklaması: Bu site Google AdSense reklamlarından ve (etkin olduğunda) bazı VPN sağlayıcı ortaklık bağlantılarından gelir elde edebilir. Komisyon, kaynak temelli bilgilerin sınıflandırılmasını etkilemez. İçerik; resmi belgeler, bağımsız denetimler, fiyatlandırma ve kullanım bilgileriyle açıklanır.",
     "short": "Bu site Google AdSense reklamları gösterebilir; bazı VPN bağlantıları ortaklık programına dahil olabilir.",
     "learnMore": "Detaylı bilgi"
   },
@@ -64,11 +64,11 @@
       }
     },
     "topVPNs": {
-      "title": "2026 VPN Sağlayıcı Karşılaştırmaları",
+      "title": "2026 VPN sağlayıcı bilgi profilleri",
       "subtitle": "Bağımsız denetimler, doğrulanabilir özellik kaynakları ve şeffaf fiyat analiziyle düzenlenmiş.",
       "extendedKicker": "Ek sağlayıcı profilleri",
       "extendedTitle": "Genişletilmiş inceleme havuzu",
-      "extendedSubtitle": "İlk 10 sıralama dışında değerlendirdiğimiz alternatifler — bütçe, niş özellik veya ikinci seçenek arayanlar için."
+      "extendedSubtitle": "Aynı bilgi alanlarında incelenebilen ek sağlayıcı profilleri."
     },
     "useCase": {
       "title": "Kullanım amacına göre VPN bul",
@@ -84,8 +84,8 @@
       "title": "Kafa Kafaya Karşılaştırmalar"
     },
     "methodology": {
-    "title": "Kaynakları nasıl değerlendiriyoruz",
-      "body": "Sitedeki her VPN aynı 6 kritere göre değerlendirilir: gizlilik politikası ve hukuki yetki alanı, bağımsız denetimler, hız, streaming uyumluluğu, fiyat şeffaflığı ve kullanım kolaylığı. Reklam geliri sıralamayı etkilemez.",
+    "title": "Kaynakları nasıl sınıflandırıyoruz",
+      "body": "Her sağlayıcı profili; gizlilik politikası ve yargı yetkisi, bağımsız denetimler, protokoller, cihaz desteği, fiyat şeffaflığı ve kullanım notları gibi bilgi alanlarını resmi ve doğrulanabilir kaynaklarla açıklar. VPN Advisor bu alanlar için sağlayıcı adına laboratuvar testi yapmaz.",
       "cta": "Tam metodolojiyi oku"
     },
     "guides": {
@@ -154,14 +154,14 @@
     "metaTitle": "VPN Karşılaştırma Metodolojisi — Kaynaklar ve Kriterler",
     "metaDescription": "VPN Advisor'ın kaynak temelli karşılaştırma yaklaşımı: resmi belgeler, bağımsız denetimler, fiyat, gizlilik, güncellik ve sınırlamalar.",
     "badge": "Şeffaf metodoloji",
-    "h1": "VPN Test Metodolojimiz",
-    "intro": "Sitedeki her VPN beş ayrı test alanı üzerinden, aynı standart prosedürle değerlendirilir. Reklam geliri sıralamayı veya puanları etkilemez — bu sayfa, her bir testi nasıl yürüttüğümüzü, hangi araçları kullandığımızı ve hangi varsayımlarla puanladığımızı detaylı biçimde açıklar.",
+    "h1": "VPN Bilgi ve Karşılaştırma Metodolojimiz",
+    "intro": "Sitedeki VPN profilleri beş bilgi alanında aynı kaynak çerçevesiyle hazırlanır. Reklam geliri içerik sınıflandırmasını etkilemez — bu sayfa hangi kaynakları kullandığımızı, belirsizliği nasıl gösterdiğimizi ve gerçek test yapmadığımız sınırları açıklar.",
     "lastUpdated": "Son güncelleme",
     "lastUpdatedDate": "25 Mayıs 2026",
     "toc": {
       "title": "Bu sayfada",
       "independence": "1. Bağımsızlık beyanı",
-      "tests": "2. Test metodolojisi",
+      "tests": "2. Kaynak ve bilgi çerçevesi",
       "scoring": "3. Puanlama sistemi",
       "freshness": "4. Güncellik politikası",
       "transparency": "5. Şeffaflık ve sınırlamalar"
@@ -175,7 +175,7 @@
       "withoutAffiliateBody": "Mullvad dahil tüm sağlayıcılar aynı kriterlerle puanlanır. Reklam geliri sıralamayı veya puanları etkilemez — bu, tarafsızlığımızın somut göstergesidir.",
       "pledgeTitle": "Editör taahhüdümüz",
       "pledgeItems": {
-        "0": "Test ettiğimiz tüm VPN aboneliklerini kendi paramızla satın aldık; sağlayıcılardan ücretsiz/sponsorlu hesap kabul etmedik.",
+        "0": "VPN aboneliği satın alıp saha veya laboratuvar testi yapmıyoruz; sağlayıcılardan ücretsiz/sponsorlu hesap alarak editoryal güven iddiası kurmuyoruz.",
         "1": "Hiçbir sağlayıcı yayın öncesi içeriği inceleme, düzenleme veya veto hakkına sahip değildir.",
         "2": "Sıralama, puanlama ve eleştirel notlar editör ekibinin sorumluluğundadır; satış/pazarlama tarafının müdahalesi yoktur.",
         "3": "Bir sağlayıcının puanı, reklam gelirinden bağımsız olarak hesaplanır; bir markanın reklam vermesi onu daha üst sıraya taşımaz."
@@ -183,29 +183,29 @@
       "linkText": "Tam bilgi için Reklam Açıklaması sayfasına bakın."
     },
     "tests": {
-      "title": "2. Test Metodolojisi",
-      "intro": "Her VPN, beş ayrı kategoride aynı prosedürle test edilir. Aşağıda her kategorinin detaylı protokolünü bulabilirsiniz.",
+      "title": "2. Kaynak ve bilgi çerçevesi",
+      "intro": "Her sağlayıcı aynı bilgi alanlarında; resmî belgeler, bağımsız denetimler ve standart kaynaklarıyla sınıflandırılır. Aşağıdaki başlıklar bir test protokolü değil, okuma ve doğrulama çerçevesidir.",
       "speed": {
-        "title": "a) Performans koşulları",
-        "summary": "Aynı baz hat üzerinden, sabit donanım ve sabit ISP koşullarında, üç farklı coğrafi bölgede ölçüm.",
-        "toolsLabel": "Kullanılan araçlar",
-        "tools": "Ookla Speedtest CLI, Cloudflare speed.cloudflare.com (çapraz doğrulama), fast.com (CDN bazlı sağlık kontrolü).",
-        "locationsLabel": "Test konumları",
-        "locations": "Türkiye (İstanbul, yakın sunucu), Almanya (Frankfurt, orta mesafe), ABD (New York, uzak mesafe).",
-        "methodLabel": "Prosedür",
+        "title": "a) Performans bilgisi nasıl okunur?",
+        "summary": "Sabit bir editoryal hız sonucu yayınlamıyoruz; protokol, rota, cihaz, ISS ve sunucu yükünün sonucu neden değiştirebileceğini açıklarız.",
+        "toolsLabel": "Eğitsel kaynaklar",
+        "tools": "Sağlayıcı teknik belgeleri, protokol standartları ve kullanıcıların kendi bağlantısında çalıştırabileceği bağımsız araçlar.",
+        "locationsLabel": "Neden tek sonuç yok?",
+        "locations": "İstanbul, Frankfurt veya New York gibi rotalar; mesafe ve ISS yönlendirmesi nedeniyle aynı sağlayıcıda farklı sonuçlar üretir.",
+        "methodLabel": "Kullanıcı kontrolü",
         "methodSteps": {
-          "0": "Test başlangıcında VPN kapalı durumda 5 ölçüm alıp baseline hesaplıyoruz (download, upload, ping).",
-          "1": "Her VPN için tercih edilen protokol (WireGuard / Lightway / NordLynx) seçilir.",
-          "2": "Her sunucuda 60 saniye arayla 10 ölçüm yapılır; en yüksek ve en düşük değer atılır, kalan 8'in ortalaması alınır.",
-          "3": "Sabit gün/saatte (sabah 09:00–11:00) ve pik saatte (akşam 20:00–22:00) ayrı testler yürütülür.",
-          "4": "Sonuçlar baseline'a göre yüzdesel düşüş olarak raporlanır; nominal hız tek başına anlam taşımaz."
+          "0": "Önce VPN kapalı temel değeri, ardından aynı cihaz ve saat aralığında VPN açık değeri kaydedin.",
+          "1": "Aynı sunucu veya yakın rotayı ve mümkünse aynı protokolü karşılaştırın.",
+          "2": "Tek ölçüm yerine birkaç tekrar yapın; dalgalanmayı ve gecikme/paket kaybını not edin.",
+          "3": "Yoğun ve sakin saatleri ayırın; sonucu başka kişilerin sonucu gibi genellemeyin.",
+          "4": "Bulduğunuz değeri kişisel bağlantı bağlamında yorumlayın; VPN Advisor sonucu olarak yayınlamayın."
         },
-        "metricsLabel": "Ölçtüğümüz metrikler",
-        "metrics": "Download (Mbps), Upload (Mbps), Ping (ms), Jitter (ms), %paket kaybı."
+        "metricsLabel": "Öğretici metrikler",
+        "metrics": "Download (Mbps), upload (Mbps), ping (ms), jitter (ms) ve paket kaybı; bunlar bu sitenin ölçümü değildir."
       },
       "security": {
-        "title": "b) Güvenlik ve sızıntı testleri",
-        "summary": "VPN'in gerçekten ne kadar koruma sağladığını doğrulayan teknik testler.",
+        "title": "b) Güvenlik ve sızıntı bilgisi",
+        "summary": "Sağlayıcının açıkladığı korumaları ve kullanıcıların kendi cihazında çalıştırabileceği tanılama araçlarının sınırlarını açıklarız.",
         "toolsLabel": "Kullanılan araçlar",
         "tools": "ipleak.net, dnsleaktest.com (extended test), browserleaks.com (WebRTC + canvas), test-ipv6.com, Wireshark (TCP düzeyi paket incelemesi).",
         "checksLabel": "Yapılan kontroller",
@@ -302,28 +302,28 @@
     },
     "freshness": {
       "title": "4. Güncellik Politikası",
-      "intro": "VPN piyasası hızla değişir. Bir bağımsız audit bugün güçlü bir kanıt olabilir; iki yıl sonra ise eskimiş sayılır. Bu yüzden test verilerimizi düzenli yenileyip her sayfada şeffaf biçimde gösteriyoruz.",
+      "intro": "VPN piyasası hızla değişir. Bir bağımsız denetim bugün güçlü bir kanıt olabilir; iki yıl sonra kapsamı veya güncelliği yeniden incelenmelidir. Bu yüzden kaynak ve fiyat kontrol tarihlerini görünür tutuyoruz.",
       "items": {
-        "0": "Her VPN, yılda en az iki kez tam test sürecinden yeniden geçirilir.",
+        "0": "Her profilin kaynak ve fiyat bilgisi, yeni belge veya önemli değişiklik olduğunda yeniden kontrol edilir.",
         "1": "Her inceleme sayfasında kaynak ve fiyat kontrol tarihleri açıkça gösterilir.",
-        "2": "Major bir olay yaşandığında (ihlal, ownership değişikliği, yeni audit, kritik özellik) ek olarak acil yeniden test yapılır.",
+        "2": "İhlal, sahiplik değişikliği, yeni denetim veya kritik özellik olduğunda ilgili içerik yeniden değerlendirilir.",
         "3": "Fiyat verileri ayrı bir 'pricingVerifiedAt' alanı ile takip edilir; piyasa fiyat değişikliklerine 30 gün içinde adapte oluruz."
       }
     },
     "transparency": {
       "title": "5. Şeffaflık ve Sınırlamalar",
-      "envTitle": "Test ortamımız",
+      "envTitle": "Bilgi kapsamımız",
       "envItems": {
-        "0": "Donanım: Windows 11 (Intel i7, 32 GB RAM), MacBook Pro M2, Pixel 8 (Android 14), iPhone 15 (iOS 17).",
-        "1": "ISP baseline: Türk Telekom fiber (1 Gbps download / 100 Mbps upload).",
-        "2": "Birincil test konumu: İstanbul, Türkiye.",
-        "3": "Tarayıcılar: Chrome, Firefox, Edge ve Safari'nin güncel sürümleri."
+        "0": "Sabit bir donanım, ISS veya laboratuvar konumu üzerinden sağlayıcı performansı iddia etmiyoruz.",
+        "1": "Resmî teknik belgeler, gizlilik politikaları, hizmet şartları ve fiyat sayfaları temel kaynaklardır.",
+        "2": "Bağımsız denetimlerin kapsamı, tarihi ve sınırlamaları ayrıca okunur.",
+        "3": "Kullanıcı araçları anlık tanılama içindir; genel sağlayıcı puanı veya garanti üretmez."
       },
       "limitsTitle": "Sınırlamaları açıkça beyan ederiz",
       "limitsItems": {
         "0": "Performans, ISP, rota, sunucu yükü ve cihaz koşullarına göre değişir; sabit laboratuvar sonucu yayınlamıyoruz.",
         "1": "Streaming başarı oranı zaman içinde değişir — platformlar VPN tespitini sürekli günceller.",
-        "2": "Bazı testler synthetic'tir (kontrollü ortam); gerçek kullanım koşullarında ufak sapmalar olabilir.",
+        "2": "Bu sitede sağlayıcı adına saha/laboratuvar testi yapılmaz; kullanıcı araçları kendi bağlantınızın o anki sinyalini gösterir.",
         "3": "Bağımsız bir sertifikasyon kuruluşunun bizi denetlemediğini açıkça belirtiriz; metodolojimizi şeffaf yayımlamak en güçlü kalite güvencemizdir.",
         "4": "Kullanıcı kendi öncelikleri (gizlilik vs hız vs streaming) doğrultusunda nihai kararı kendisi vermelidir."
       },
@@ -369,11 +369,11 @@
     "intro": "VPN profillerini altı bilgi alanında karşılaştırıyoruz. Aşağıdaki görünüm bağımsız denetim raporları, resmi özellik belgeleri ve fiyat şeffaflığına dayalı kaynak temelli editoryal çerçevedir. Kullanıcılar kendi önceliklerine göre değerlendirme yapmalıdır."
   },
   "useCaseHub": {
-    "metaTitle": "Kullanım Amacına Göre En İyi VPN'ler",
-    "metaDescription": "Gizlilik, streaming, oyun, seyahat, Türkiye için en uygun VPN'leri amaca göre seç.",
+    "metaTitle": "Kullanım Amacına Göre VPN Bilgi Rehberleri",
+    "metaDescription": "Gizlilik, streaming, oyun, seyahat ve diğer senaryolarda hangi özellikleri ve kaynakları karşılaştırmanız gerektiğini öğrenin.",
     "breadcrumb": "Kullanım Alanları",
-    "h1": "Amaca göre en iyi VPN",
-    "intro": "Tek bir \"en iyi VPN\" yok — kullanım amacına göre değişir. İhtiyacına en uygun listesi seç.",
+    "h1": "Kullanım amacına göre VPN rehberleri",
+    "intro": "Tek bir \"en iyi VPN\" yok. Her rehber, ilgili senaryoda hangi özelliklerin ve kaynak sinyallerinin incelenebileceğini açıklar.",
     "cardCta": "İncele",
     "cards": {
       "gizlilik": {
@@ -408,7 +408,7 @@
       "hub": "Kullanım Alanları"
     },
     "summaryTitle": "Hızlı özet",
-    "picksHeading": "İlk {count} seçim",
+    "picksHeading": "Kaynak profilleri ({count})",
     "considerationsHeading": "Neye dikkat etmeli?",
     "faqHeading": "Sıkça sorulan sorular",
     "relatedHeading": "İlgili sayfalar",
@@ -461,9 +461,9 @@
     "ogTitle": "Sana Uygun VPN Quiz'i",
     "ogDescription": "6 soruda kişisel VPN önerisi al.",
     "breadcrumb": "Sana uygun VPN",
-    "badge": "Kişisel öneri",
+    "badge": "Kişisel eşleşme",
     "h1": "Sana uygun VPN'i bulalım",
-    "intro": "6 soruyla bütçen, cihaz sayın, kullanım senaryona ve teknik seviyene göre kişiselleştirilmiş VPN önerisi. 30 saniye sürer.",
+    "intro": "6 soruyla bütçen, cihaz sayın, kullanım senaryon ve teknik seviyene göre kaynak profili eşleşmesi. 30 saniye sürer.",
     "questions": {
       "priority": {
         "prompt": "1. Önceliğin nedir?",
@@ -525,15 +525,15 @@
       }
     },
     "result": {
-      "kicker": "Cevaplarına göre öne çıkan öneri",
-      "scoreBadge": "Puan: {score}/30",
-      "disclaimer": "Bu quiz puanlama tabanlı bir yardımcıdır; kişisel bir tavsiye veya garanti değildir. Satın alma kararı vermeden önce sağlayıcının resmi sitesinden güncel fiyat ve özellikleri doğrulamanı öneririz.",
+      "kicker": "Cevaplarınla eşleşen kaynak profili",
+      "matchBadge": "Yanıtlarınla uyumlu bilgi profili",
+      "disclaimer": "Bu araç, verdiğin öncelikleri kaynak temelli profillerle eşleştiren eğitsel bir yardımcıdır; kişisel tavsiye veya garanti değildir. Satın alma kararı vermeden önce sağlayıcının resmi sitesinden güncel fiyat ve özellikleri doğrula.",
       "monthlyLabel": "Aylık",
-      "ctaDeal": "{brand} fırsatını gör",
-      "ctaReview": "İncelemeyi oku",
+      "ctaDeal": "{brand} resmi sitesini gör",
+      "ctaReview": "Profili oku",
       "ctaReset": "Yeniden başla",
-      "altsHeading": "Alternatif önerilerimiz",
-      "altScore": "{positioning} · Puan: {score}",
+      "altsHeading": "Diğer eşleşen profiller",
+      "altMatch": "{positioning} · alternatif bilgi profili",
       "altLink": "İncele →"
     },
     "progress": "Soru {current}/{total}",
@@ -857,12 +857,12 @@
     "relatedTitle": "Diğer sayfalar"
   },
   "lastTested": {
-    "label": "Son Test",
-    "environment": "Test Ortamı",
-    "testerLocation": "Konum",
-    "vpnVersion": "VPN Sürümü",
-    "testDuration": "Test Süresi",
-    "editorNote": "Editör Notu"
+    "label": "Kaynak kontrolü",
+    "environment": "Kaynak kapsamı",
+    "testerLocation": "Kaynak türü",
+    "vpnVersion": "Belge/sürüm",
+    "testDuration": "Kontrol tarihi",
+    "editorNote": "Editör notu"
   },
   "device": {
     "breadcrumbHome": "Ana sayfa",
@@ -904,16 +904,16 @@
     "emptyCta": "Filtreleri sıfırla"
   },
   "audience": {
-    "rank1": "1. Tercih",
-    "rank2": "2. Tercih",
-    "rank3": "3. Tercih",
+    "featured": "Öne çıkan profil",
+    "alternative": "Alternatif profil",
+    "reference": "Kaynak profili",
     "reasonLabel": "Neden:",
-    "fallbackAudit": "Bağımsız test",
+    "fallbackAudit": "Bağımsız denetim bilgisi",
     "fallbackDevices": "Çoklu cihaz",
     "moneyBack": "{days} gün para iade",
     "monthlyLabel": "Aylık",
-    "ctaDeal": "{brand} fırsatını gör",
-    "readReview": "İncelemeyi oku"
+    "ctaDeal": "{brand} resmi sitesini gör",
+    "readReview": "Profili oku"
   },
   "homeBlocks": {
     "comparisons": {
@@ -969,12 +969,12 @@
       "review": "İncele"
     },
     "topVPNs": {
-      "kicker": "Sıralama",
-      "editorsPick": "Editör'ün tercihi"
+      "kicker": "Kaynak dizini",
+      "editorsPick": "Örnek profil"
     },
     "podium": {
-      "ariaLabel": "İlk üç seçim",
-      "scoreKicker": "Puan",
+      "ariaLabel": "Örnek sağlayıcı profilleri",
+      "scoreKicker": "Kaynak profili",
       "perMonthStart": "/ay başlangıç",
       "ctaAffiliate": "Fırsata git",
       "ctaOfficial": "Resmi siteye git",
@@ -985,7 +985,7 @@
   "pricingPlans": {
     "verifiedAt": "Fiyatlar {date} tarihinde doğrulandı.",
     "verifyOnOfficialSite": "Güncel fiyatı resmi sitede kontrol edin.",
-    "bestValue": "En iyi değer",
+    "bestValue": "Öne çıkan plan",
     "perMonth": "/ay",
     "discount": "%{percent} indirim",
     "totalLabel": "Toplam",
@@ -1068,11 +1068,11 @@
     }
   },
   "tools": {
-    "metaTitle": "Ücretsiz Güvenlik Araçları - E-posta, IP, DNS, WebRTC ve Hız Testi | VPN Advisor",
-    "metaDescription": "E-posta ve VPN güvenliğinizi doğrulayan ücretsiz araçlar: e-posta sızıntı ve domain kontrolü, IP sorgulama, DNS sızıntı testi, WebRTC testi ve hız testi.",
+    "metaTitle": "Ücretsiz Güvenlik Tanı Araçları - E-posta, IP, DNS, WebRTC ve Hız | VPN Advisor",
+    "metaDescription": "E-posta ve bağlantı sinyallerini inceleyen ücretsiz araçlar: domain kontrolü, genel IP, DNS çözümleyici, WebRTC ve hız karşılaştırması.",
     "breadcrumb": "Araçlar",
-    "indexTitle": "Ücretsiz Güvenlik ve VPN Test Araçları",
-    "indexSubtitle": "Önce e-posta güvenliğinizi kontrol edin; ardından IP, DNS, WebRTC ve VPN hız testlerini çalıştırın. Hiçbir veri sunucumuza kaydedilmez.",
+    "indexTitle": "Ücretsiz Güvenlik ve VPN Tanı Araçları",
+    "indexSubtitle": "Önce e-posta güvenliğinizi kontrol edin; ardından IP, DNS, WebRTC ve VPN hız sinyallerini inceleyin. Araçlar mevcut bağlantınızı açıklar, sağlayıcı geneli için test sonucu üretmez.",
     "featuredLabel": "Öne çıkan",
     "cards": {
       "emailSecurity": {
@@ -1088,34 +1088,34 @@
         "description": "Genel IP'nizi, konumunuzu, ISS/ASN bilgisini ve VPN/proxy sinyallerini kontrol edin."
       },
       "dns": {
-        "title": "DNS Sızıntı Testi",
-        "description": "VPN aktifken DNS sorgularının nereye gittiğini görün."
+        "title": "DNS Çözümleyici Kontrolü",
+        "description": "Mevcut tarayıcı bağlantınızın DNS çözümleyici sinyallerini inceleyin."
       },
       "webrtc": {
-        "title": "WebRTC Sızıntı Testi",
-        "description": "Tarayıcınızın WebRTC üzerinden IP'nizi sızdırıp sızdırmadığını test edin."
+        "title": "WebRTC Sinyal Kontrolü",
+        "description": "Bu tarayıcı oturumunda WebRTC üzerinden public IP sinyali gözlenip gözlenmediğini inceleyin."
       },
       "speed": {
-        "title": "VPN Hız Testi",
-        "description": "VPN ile internet hızınızdaki düşüşü ölçün."
+        "title": "VPN Hız Karşılaştırması",
+        "description": "Mevcut bağlantınızda VPN açık/kapalı hız sinyallerini karşılaştırın."
       }
     },
     "common": {
       "tryAgain": "Tekrar test et",
       "copy": "Kopyala",
       "copied": "Kopyalandı!",
-      "loading": "Test ediliyor...",
+      "loading": "Kontrol ediliyor...",
       "privacyNote": "Sonuçlar yalnızca tarayıcınızda gösterilir, sunucumuza kaydedilmez.",
-      "ctaTitle": "VPN ile gerçek koruma istiyor musunuz?",
+      "ctaTitle": "VPN korumasını daha iyi anlamak ister misiniz?",
       "ctaBody": "Resmi kaynakları ve bağımsız denetimleri karşılaştıran VPN profillerini inceleyin.",
-      "ctaButton": "En iyi VPN'leri gör"
+      "ctaButton": "Sağlayıcı profillerini oku"
     },
     "ip": {
       "metaTitle": "IP Adresim Ne? - Ücretsiz IP Adresi Sorgulama 2026 | VPN Advisor",
       "metaDescription": "IP adresinizi, ISS'nizi, ülkenizi, şehrinizi ve tarayıcı parmak izinizi anında öğrenin. Ücretsiz, kayıtsız ve hızlı IP sorgulama aracı.",
       "breadcrumb": "IP Adresim",
       "title": "IP Adresiniz",
-      "subtitle": "Web siteleri sizi bu bilgilerle tanıyor. VPN olmadan kim olduğunuz, nerede olduğunuz ve hangi tarayıcıyı kullandığınız apaçık görünüyor.",
+      "subtitle": "Web siteleri bağlantınızdan bazı ağ ve tarayıcı sinyallerini görebilir. Bu araç, hangi bilgilerin o anda paylaşıldığını anlamanıza yardımcı olur.",
       "ipKicker": "IP Adresi",
       "ipv4": "IPv4",
       "ipv6": "IPv6",
@@ -1131,7 +1131,7 @@
       "platform": "Platform",
       "unknown": "Bilinmiyor",
       "explainTitle": "IP adresi nedir? Neden gizlemek isteyebilirsiniz?",
-      "explainBody": "IP adresiniz internetteki kimlik kartınızdır. Ziyaret ettiğiniz her site fiziksel konumunuzu, ISS'nizi ve davranışlarınızı takip etmek için bunu kullanabilir. VPN, IP adresinizi maskeleyerek bu izleri keser."
+      "explainBody": "IP adresi bağlantınızın yaklaşık ağ ve konum sinyalidir; kesin fiziksel adres veya kimlik değildir. VPN IP sinyalini değiştirebilir, ancak hesaplar, çerezler ve tarayıcı parmak izi gibi diğer tanımlayıcıları tek başına ortadan kaldırmaz."
     },
     "vpnTest": {
       "metaTitle": "VPN/IP Testi - Genel IP, Konum ve VPN Durumu Kontrolü | VPN Advisor",
@@ -1245,20 +1245,20 @@
       "explainBody": "Araç e-posta formatını doğrular, domainin MX, SPF ve DMARC kayıtlarını gerçek zamanlı DNS sorgularıyla kontrol eder, yaygın geçici veya paylaşılan rol adreslerini işaretler ve bilinen sızıntılarda eşleşme arar (HIBP anahtarı varsa Have I Been Pwned, yoksa XposedOrNot). Sonuçlar simülasyon değildir."
     },
     "dns": {
-      "metaTitle": "DNS Sızıntı Testi 2026 - Ücretsiz | VPN Advisor",
-      "metaDescription": "VPN'iniz DNS sızıntısı yapıyor mu? Tarayıcı tabanlı ücretsiz testimizle DNS sunucularınızı görün ve gizliliğinizi koruyun.",
+      "metaTitle": "DNS Çözümleyici Kontrolü 2026 - Ücretsiz | VPN Advisor",
+      "metaDescription": "Tarayıcınızın bu anki DNS çözümleyici sinyallerini görün. Araç, VPN yapılandırmasını kesin olarak doğrulamaz; sonuçları nasıl yorumlayacağınızı öğrenin.",
       "breadcrumb": "DNS Sızıntı Testi",
-      "title": "DNS Sızıntı Testi",
-      "subtitle": "VPN açıkken bile DNS sorgularınız ISS'nize gidiyor olabilir. Bu test, kullandığınız çözümleyiciyi gösterir.",
+      "title": "DNS Çözümleyici Kontrolü",
+      "subtitle": "VPN açıkken görülen DNS çözümleyici sinyallerini inceleyin. Bu tarayıcı aracı sisteminizin tüm DNS trafiğini kesin olarak ölçmez.",
       "startButton": "Testi başlat",
       "resultsTitle": "Test Sonuçları",
       "detectedServers": "Tespit edilen DNS sunucuları",
       "experimentalTitle": "Deneysel araç — sistem DNS'inizi test etmez",
       "experimentalBody": "Bu test sorguları doğrudan Cloudflare DoH (1.1.1.1) üzerinden yapar; işletim sisteminizin gerçek DNS çözümleyicisini ölçmez. Güvenilir bir DNS sızıntı testi için dnsleaktest.com gibi sunucu taraflı bir araç kullanın. Aşağıda Cloudflare'ın bildirdiği çözümleyiciler listelenir.",
-      "noLeak": "Sızıntı yok",
-      "leakDetected": "Olası sızıntı tespit edildi",
-      "noLeakBody": "DNS sorgularınız tek bir çözümleyiciden geçiyor. VPN kullanıyorsanız bunun VPN sağlayıcınızın sunucusu olduğundan emin olun.",
-      "leakBody": "Birden fazla farklı çözümleyici tespit edildi. ISS'niz hâlâ ziyaret ettiğiniz siteleri görüyor olabilir.",
+      "noLeak": "Tek çözümleyici gözlendi",
+      "leakDetected": "Birden fazla çözümleyici gözlendi",
+      "noLeakBody": "Bu araçta tek bir çözümleyici sinyali gözlendi. Bunun VPN sağlayıcınıza ait olduğunu ve tüm uygulama trafiğini kapsadığını ayrıca doğrulayın.",
+      "leakBody": "Birden fazla çözümleyici sinyali gözlendi. Bu sonuç, sisteminizdeki tüm DNS trafiğinin kesin kanıtı değildir; farklı bir sunucu taraflı araçla karşılaştırın.",
       "explainTitle": "DNS sızıntısı nedir, neden tehlikeli?",
       "explainBody": "DNS, alan adlarını IP adreslerine çevirir. VPN kullansanız bile yanlış yapılandırma yüzünden DNS sorguları ISS'nize gidebilir. Bu, geçmişinizi ISS'nizin görebilmesi anlamına gelir."
     },
@@ -1273,22 +1273,22 @@
       "detectedIps": "Tespit edilen IP'ler",
       "localIp": "Yerel IP",
       "publicIp": "Genel IP",
-      "noLeak": "Sızıntı yok",
-      "leakDetected": "WebRTC sızıntısı tespit edildi",
+      "noLeak": "Bu taramada public IP gözlenmedi",
+      "leakDetected": "Public IP sinyali gözlendi",
       "noIps": "IP tespit edilemedi",
-      "noLeakBody": "WebRTC üzerinden genel IP'niz görünmüyor. Tarayıcınız iyi yapılandırılmış.",
-      "leakBody": "WebRTC genel IP adresinizi açığa çıkarıyor. VPN kullansanız bile siteler gerçek konumunuzu görebilir.",
+      "noLeakBody": "Bu taramada WebRTC üzerinden public IP sinyali gözlenmedi. Bu sonuç tüm ağ koşullarında garanti değildir.",
+      "leakBody": "WebRTC bir public IP sinyali döndürdü. Tarayıcı izinlerini ve VPN yapılandırmasını inceleyip farklı bir ağda tekrar kontrol edin.",
       "fixTitle": "WebRTC nasıl devre dışı bırakılır?",
       "fixChrome": "Chrome: WebRTC Network Limiter eklentisini kurun.",
       "fixFirefox": "Firefox: about:config sayfasından media.peerconnection.enabled değerini false yapın.",
       "fixBrave": "Brave: Ayarlar > Gizlilik > WebRTC IP işleme politikasını 'Default Public Interface Only' yapın."
     },
     "speed": {
-      "metaTitle": "VPN Hız Testi - Ücretsiz İnternet Hız Ölçümü 2026 | VPN Advisor",
-      "metaDescription": "VPN'inizin gerçek hızını ölçün. Cloudflare altyapısıyla indirme hızı ve gecikmeyi test edin.",
+      "metaTitle": "VPN Hız Karşılaştırma Aracı - Ücretsiz | VPN Advisor",
+      "metaDescription": "VPN açık ve kapalı bağlantınızı kendi tarayıcınızda karşılaştırın. Cloudflare altyapılı bu araç genel sağlayıcı performansını kanıtlamaz.",
       "breadcrumb": "VPN Hız Testi",
-      "title": "VPN Hız Testi",
-      "subtitle": "İnternet hızınızı test etmeden önce VPN'inizi açın. Aynı testi VPN kapalıyken de yapın ve farkı kıyaslayın.",
+      "title": "VPN Hız Karşılaştırma Aracı",
+      "subtitle": "Aynı cihaz ve saat aralığında VPN açık/kapalı değerleri karşılaştırın. Bu, yalnızca mevcut bağlantınızın anlık tanılamasıdır.",
       "startButton": "Hız testini başlat",
       "downloadSpeed": "İndirme hızı",
       "latency": "Gecikme",
@@ -1298,7 +1298,7 @@
       "embedNote": "Daha kapsamlı test için Cloudflare'ın resmi aracını kullanın.",
       "openCloudflare": "speed.cloudflare.com'u aç",
       "explainTitle": "VPN ile hız düşüşü ne kadar normal?",
-      "explainBody": "VPN, trafiğinizi şifreler ve uzak bir sunucuya yönlendirir. Genellikle %10-30 arası bir hız kaybı normaldir. %50'den fazla kayıp varsa sunucu değiştirin veya başka bir protokol deneyin (WireGuard genellikle en hızlısı)."
+      "explainBody": "VPN, trafiğinizi şifreler ve ek bir rota üzerinden yönlendirir. Hız ve gecikme; cihaz, protokol, sunucu mesafesi, ISS rotası ve yoğunluğa göre değişir. Sabit bir yüzdeyi genellemek yerine aynı koşullarda tekrar ölçün."
     }
   }
 }

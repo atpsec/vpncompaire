@@ -42,7 +42,7 @@ const tr: VpnForStudentsContent = {
   metaTitle:
     "Öğrenciler İçin En İyi VPN (2026) — Kampüs, JSTOR ve İndirim Rehberi",
   metaDescription:
-    "Öğrenciler için VPN seçimi: kampüs Wi-Fi güvenliği, akademik veritabanı erişimi (JSTOR, ScienceDirect), öğrenci indirimleri ve bütçeye uygun en iyi 3 VPN.",
+    "Öğrenciler için VPN seçimi: kampüs Wi-Fi güvenliği, akademik veritabanı erişimi (JSTOR, ScienceDirect), öğrenci indirimleri ve bütçe kaynaklarını karşılaştırma.",
   keywords: [
     "öğrenci vpn",
     "ucuz vpn",
@@ -53,9 +53,9 @@ const tr: VpnForStudentsContent = {
   ],
   ogTitle: "Öğrenciler İçin En İyi VPN (2026)",
   ogDescription:
-    "Kampüs Wi-Fi, akademik veritabanı erişimi ve öğrenci indirimleri için en iyi VPN önerileri.",
+    "Kampüs Wi-Fi, akademik veritabanı erişimi ve öğrenci indirimleri için VPN kaynaklarını karşılaştırma rehberi.",
   badge: "Öğrenciler",
-  h1: "Öğrenciler için en iyi VPN",
+  h1: "Öğrenciler için VPN bilgi rehberi",
   lede: "Kampüs Wi-Fi güvenliği, yurt dışı staj/değişim, akademik kaynak erişimi ve öğrenci bütçesi için 3 VPN profili — resmi kaynaklar ve özellik karşılaştırmasına dayalı.",
   breadcrumb: {
     home: "Ana sayfa",
@@ -63,7 +63,7 @@ const tr: VpnForStudentsContent = {
     current: "Öğrenciler için VPN",
   },
   howToName: "Öğrenci olarak VPN nasıl seçilir?",
-  picksHeading: "Öğrenciler için en iyi 3 VPN",
+  picksHeading: "Öğrenciler için karşılaştırılabilecek sağlayıcı profilleri",
   picksSubheading: "Fiyat, çoklu cihaz desteği ve denetim geçmişine göre.",
   picks: [
     {
@@ -220,13 +220,13 @@ const en: VpnForStudentsContent = {
   ],
   ogTitle: "Best VPN for Students (2026)",
   ogDescription:
-    "The best VPN picks for campus Wi-Fi, academic database access and student discounts.",
+    "A source-based guide to VPN features for campus Wi-Fi, academic database access and student discounts.",
   badge: "Students",
-  h1: "The best VPN for students",
+  h1: "VPN information guide for students",
   lede: "Three VPN profiles for campus Wi-Fi, internships and exchanges abroad, academic resource access and a student budget — based on official features and policy comparisons.",
   breadcrumb: { home: "Home", guides: "Guides", current: "VPN for students" },
   howToName: "How to choose a VPN as a student",
-  picksHeading: "The 3 best VPNs for students",
+  picksHeading: "Provider profiles to compare for students",
   picksSubheading: "Based on price, multi-device support and audit history.",
   picks: [
     {
@@ -392,7 +392,7 @@ const de: VpnForStudentsContent = {
   ogDescription:
     "Die besten VPN-Empfehlungen für Campus-WLAN, akademische Datenbanken und Studentenrabatte.",
   badge: "Studenten",
-  h1: "Das beste VPN für Studenten",
+  h1: "VPN-Informationsratgeber für Studenten",
   lede: "Drei VPN-Profile für Campus-WLAN, Auslandspraktikum und Austausch, akademische Quellen und das Studentenbudget — auf Basis offizieller Funktionen und Richtlinien.",
   breadcrumb: {
     home: "Startseite",
@@ -400,7 +400,7 @@ const de: VpnForStudentsContent = {
     current: "VPN für Studenten",
   },
   howToName: "Wie wählst du als Student ein VPN aus?",
-  picksHeading: "Die 3 besten VPNs für Studenten",
+  picksHeading: "Vergleichbare Anbieterprofile für Studenten",
   picksSubheading: "Nach Preis, Multi-Geräte-Support und Audit-Historie.",
   picks: [
     {

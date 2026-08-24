@@ -12,6 +12,7 @@ import { buildRootMetadata, rootViewport } from "@/lib/root-metadata";
 import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { ThemeScript } from "@/components/theme/theme-script";
+import { EditorialNotice } from "@/components/legal/editorial-notice";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -74,6 +75,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <SkipToContent />
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
+            <EditorialNotice locale={locale} />
             <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
               {children}
             </main>

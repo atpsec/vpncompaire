@@ -18,6 +18,14 @@ export function BlogHeader({ post }: BlogHeaderProps) {
     month: "long",
     day: "numeric",
   }).format(new Date(post.publishedAt));
+  const updatedDate = new Intl.DateTimeFormat(dateLocale, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date(post.updatedAt));
+  const isUpdated = post.updatedAt !== post.publishedAt;
+  const displayedDate = isUpdated ? updatedDate : publishedDate;
+  const dateLabel = isUpdated ? t("updatedOn") : t("publishedOn");
   const publisherLabel = "VPN Advisor";
 
   return (
@@ -41,7 +49,7 @@ export function BlogHeader({ post }: BlogHeaderProps) {
         </div>
         <div className="flex items-center gap-1.5">
           <Calendar className="size-4" />
-          <span>{publishedDate}</span>
+          <span>{dateLabel}: {displayedDate}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <Clock className="size-4" />

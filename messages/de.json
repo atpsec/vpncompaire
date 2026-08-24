@@ -6,9 +6,9 @@
   },
   "nav": {
     "home": "Startseite",
-    "reviews": "Tests",
+    "reviews": "Profile",
     "compare": "Vergleichen",
-    "bestFor": "Bestenlisten",
+    "bestFor": "Nutzungsratgeber",
     "blog": "Blog",
     "quiz": "Quiz",
     "calculator": "Rechner",
@@ -29,9 +29,9 @@
     "followUs": "Folgen"
   },
   "common": {
-    "readReview": "Test lesen",
+    "readReview": "Profil lesen",
     "getDeal": "Angebot ansehen",
-    "tryNow": "Jetzt testen",
+    "tryNow": "Jetzt prüfen",
     "visitSite": "Website besuchen",
     "viewAll": "Alle anzeigen",
     "lastUpdated": "Aktualisiert",
@@ -45,7 +45,7 @@
     "noAffiliate": "Keine Provision - neutrale Auswahl"
   },
   "disclosure": {
-    "banner": "Werbehinweis: Diese Website kann Einnahmen aus Google-AdSense-Anzeigen und (wenn aktiv) VPN-Affiliate-Links erhalten. Affiliate-Provisionen beeinflussen Rankings, Inhalte oder Bewertungen nicht. Empfehlungen basieren auf Recherche, Funktionsanalyse, Datenschutzrichtlinien, Audits, Preisen und Nutzbarkeit.",
+    "banner": "Werbehinweis: Diese Website kann Einnahmen aus Google-AdSense-Anzeigen und (wenn aktiv) VPN-Affiliate-Links erhalten. Provisionen ändern nicht, wie quellenbasierte Informationen eingeordnet werden. Inhalte erklären offizielle Dokumentation, unabhängige Verifikation, Preise und Nutzbarkeit.",
     "short": "Diese Website kann Google-AdSense-Anzeigen zeigen; einige VPN-Links können Affiliate-Programme nutzen.",
     "learnMore": "Mehr erfahren"
   },
@@ -64,7 +64,7 @@
       }
     },
     "topVPNs": {
-      "title": "VPN-Anbietervergleich 2026",
+      "title": "VPN-Anbieterprofile 2026",
       "subtitle": "Unabhängige Audits, überprüfbare Funktionsquellen und transparente Preisanalyse.",
       "extendedKicker": "Weitere Anbieterprofile",
       "extendedTitle": "Erweiterter Review-Pool",
@@ -84,8 +84,8 @@
       "title": "Direkte Vergleiche"
     },
     "methodology": {
-      "title": "So testen wir",
-      "body": "Jedes VPN wird nach denselben Kriterien bewertet: Datenschutzrichtlinie und Standort, unabhängige Audits, Geschwindigkeit, Streaming-Kompatibilität, Preistransparenz und Bedienbarkeit. Werbeeinnahmen beeinflussen die Platzierung nicht.",
+      "title": "So ordnen wir Quellen ein",
+      "body": "Jedes Anbieterprofil erklärt Datenschutzrichtlinie und Rechtsraum, unabhängige Audits, Protokolle, Geräteunterstützung, Preistransparenz und Nutzungshinweise anhand offizieller und überprüfbarer Quellen. VPN Advisor führt für diese Felder keine Labortests beim Anbieter durch.",
       "cta": "Vollständige Methodik lesen"
     },
     "guides": {
@@ -158,14 +158,14 @@
     "metaTitle": "VPN-Vergleichsmethodik — Quellen und Kriterien",
     "metaDescription": "Die quellenbasierte Vergleichsmethodik von VPN Advisor: offizielle Dokumente, unabhängige Audits, Preise, Datenschutz, Aktualität und Grenzen.",
     "badge": "Transparente Methodik",
-    "h1": "Unsere VPN-Testmethodik",
-    "intro": "Jedes VPN wird in mehreren Testbereichen nach derselben standardisierten Methode bewertet. Werbeeinnahmen beeinflussen weder Rankings noch Bewertungen.",
+    "h1": "Unsere VPN-Informations- und Vergleichsmethodik",
+    "intro": "Anbieterprofile werden in denselben Informationsbereichen anhand von Quellen eingeordnet. Werbeeinnahmen ändern nicht, wie Belege klassifiziert werden; wir veröffentlichen keine eigenen Anbieter-Leistungstests.",
     "lastUpdated": "Last updated",
     "lastUpdatedDate": "May 25, 2026",
     "toc": {
       "title": "On this page",
       "independence": "1. Independence statement",
-      "tests": "2. Testing methodology",
+      "tests": "2. Quellen- und Informationsrahmen",
       "scoring": "3. Scoring system",
       "freshness": "4. Freshness policy",
       "transparency": "5. Transparency and limitations"
@@ -179,7 +179,7 @@
       "withoutAffiliateBody": "All providers, including Mullvad, are scored against the same criteria. Ad revenue does not influence rankings or scores — this is the most concrete signal of our impartiality.",
       "pledgeTitle": "Our editorial pledge",
       "pledgeItems": {
-        "0": "Every VPN subscription we test is purchased with our own money; we do not accept free or sponsored accounts from providers.",
+        "0": "Wir kaufen keine Abonnements für Labor- oder Praxistests und nehmen keine kostenlosen oder gesponserten Konten als Grundlage für Vertrauensaussagen an.",
         "1": "No provider has pre-publication review, edit or veto rights over our content.",
         "2": "Rankings, scores and critical notes are the responsibility of the editorial team; sales and marketing have no input.",
         "3": "A provider's score is calculated independently of ad revenue; a brand running ads does not move it higher in the ranking."
@@ -187,29 +187,29 @@
       "linkText": "See the Advertising Disclosure page for full details."
     },
     "tests": {
-      "title": "2. Testing Methodology",
-      "intro": "Jedes Anbieterprofil wird anhand derselben Quellenstruktur in fünf Informationsbereichen eingeordnet. Die Kriterien stehen unten.",
+      "title": "2. Quellen- und Informationsrahmen",
+      "intro": "Jedes Anbieterprofil wird in denselben Informationsbereichen anhand offizieller Dokumente, unabhängiger Audits und Standards eingeordnet. Dies ist ein Lese- und Prüfrahmen, kein Testprotokoll.",
       "speed": {
-        "title": "a) Speed test",
-        "summary": "Measurements over the same baseline, with fixed hardware and ISP, across three geographic regions.",
-        "toolsLabel": "Tools used",
-        "tools": "Ookla Speedtest CLI, Cloudflare speed.cloudflare.com (cross-verification), fast.com (CDN-based sanity check).",
-        "locationsLabel": "Test locations",
-        "locations": "Turkey (Istanbul, near server), Germany (Frankfurt, medium distance), USA (New York, far distance).",
-        "methodLabel": "Procedure",
+        "title": "a) Leistungsangaben richtig lesen",
+        "summary": "Wir veröffentlichen kein festes redaktionelles Geschwindigkeitsergebnis; Protokoll, Route, Gerät, ISP und Serverlast können Ergebnisse verändern.",
+        "toolsLabel": "Lehrquellen",
+        "tools": "Anbieterdokumentation, Protokollstandards und unabhängige Werkzeuge, die Leser auf ihrer eigenen Verbindung ausführen können.",
+        "locationsLabel": "Warum es kein Einzelergebnis gibt",
+        "locations": "Routen wie Istanbul, Frankfurt oder New York führen wegen Entfernung und ISP-Routing zu unterschiedlichen Ergebnissen.",
+        "methodLabel": "Eigene Kontrolle",
         "methodSteps": {
-          "0": "Before any test we take 5 measurements with the VPN off and compute the baseline (download, upload, ping).",
-          "1": "For each VPN we select the preferred protocol (WireGuard / Lightway / NordLynx).",
-          "2": "On every server we take 10 measurements 60 seconds apart; the highest and lowest are discarded and the remaining 8 are averaged.",
-          "3": "We run separate tests at a fixed off-peak time (09:00–11:00) and at peak (20:00–22:00).",
-          "4": "Results are reported as the percentage drop versus baseline; raw speed alone is not meaningful."
+          "0": "Erfassen Sie zunächst einen Wert ohne VPN und danach einen Wert mit VPN auf demselben Gerät.",
+          "1": "Vergleichen Sie denselben oder einen nahen Endpunkt und möglichst dasselbe Protokoll.",
+          "2": "Wiederholen Sie Messungen und notieren Sie Schwankungen, Latenz und Paketverlust.",
+          "3": "Trennen Sie Stoß- und Nebenzeiten; verallgemeinern Sie Ihren Wert nicht.",
+          "4": "Interpretieren Sie das Ergebnis als Momentaufnahme Ihrer Verbindung, nicht als VPN-Advisor-Test."
         },
-        "metricsLabel": "Metrics we record",
-        "metrics": "Download (Mbps), Upload (Mbps), Ping (ms), Jitter (ms), packet loss (%)."
+        "metricsLabel": "Lehrmetriken",
+        "metrics": "Download, Upload, Ping, Jitter und Paketverlust; diese Website erhebt keine Anbieter-Labormessungen."
       },
       "security": {
-        "title": "b) Security and leak tests",
-        "summary": "Technical tests that verify how much protection a VPN really delivers.",
+        "title": "b) Sicherheits- und Leakinformationen",
+        "summary": "Wir erklären dokumentierte Schutzfunktionen und die Grenzen einmaliger Diagnosen auf dem eigenen Gerät.",
         "toolsLabel": "Tools used",
         "tools": "ipleak.net, dnsleaktest.com (extended test), browserleaks.com (WebRTC + canvas), test-ipv6.com, Wireshark (TCP-level packet inspection).",
         "checksLabel": "Checks performed",
@@ -306,28 +306,28 @@
     },
     "freshness": {
       "title": "4. Freshness Policy",
-      "intro": "The VPN market changes quickly. An independent audit may be strong evidence today and stale in two years. That is why we refresh our data regularly and display it transparently on every page.",
+      "intro": "Der VPN-Markt verändert sich schnell. Ein unabhängiges Audit kann heute aussagekräftig sein und später eine neue Prüfung von Umfang und Aktualität benötigen.",
       "items": {
-        "0": "Every VPN goes through the full test pipeline at least twice per year.",
+        "0": "Quellen und Preise eines Profils werden bei neuen Dokumenten oder wesentlichen Änderungen erneut geprüft.",
         "1": "Jede Profilseite zeigt das relevante Quellen- und Preisprüfdatum deutlich an.",
-        "2": "If a major event occurs (breach, ownership change, new audit, critical feature) we run an emergency re-test.",
+        "2": "Bei Vorfällen, Eigentümerwechseln, neuen Audits oder kritischen Funktionen wird der relevante Inhalt neu bewertet.",
         "3": "Pricing is tracked via a separate 'pricingVerifiedAt' field; we adapt to market price changes within 30 days."
       }
     },
     "transparency": {
       "title": "5. Transparency and Limitations",
-      "envTitle": "Our test environment",
+      "envTitle": "Unser Informationsumfang",
       "envItems": {
-        "0": "Hardware: Windows 11 (Intel i7, 32 GB RAM), MacBook Pro M2, Pixel 8 (Android 14), iPhone 15 (iOS 17).",
-        "1": "ISP baseline: Türk Telekom fibre (1 Gbps down / 100 Mbps up).",
-        "2": "Primary test location: Istanbul, Turkey.",
-        "3": "Browsers: latest stable Chrome, Firefox, Edge and Safari."
+        "0": "Wir leiten keine Anbieterleistung aus einem festen Gerät, ISP oder Laborstandort ab.",
+        "1": "Offizielle technische Dokumente, Datenschutzrichtlinien, Bedingungen und Preise sind Primärquellen.",
+        "2": "Unabhängige Audits werden mit Umfang, Datum und Einschränkungen gelesen.",
+        "3": "Leserwerkzeuge liefern einmalige Diagnosen; sie erzeugen keine Anbieterbewertung oder Garantie."
       },
       "limitsTitle": "We disclose our limitations openly",
       "limitsItems": {
         "0": "Die Leistung hängt von ISP, Route, Serverlast und Gerät ab; feste Laborergebnisse veröffentlichen wir nicht.",
         "1": "Streaming success rates change over time — platforms continuously update their VPN detection.",
-        "2": "Anbieterangaben und unabhängige Belege haben unterschiedliche Reichweiten; die Praxis kann abweichen.",
+        "2": "Wir führen keine Anbieter-Feld- oder Labortests durch; Leserwerkzeuge zeigen nur Signale der aktuellen Verbindung.",
         "3": "We state explicitly that no independent certification body audits us; publishing our methodology openly is our strongest quality safeguard.",
         "4": "Users should make the final call based on their own priorities (privacy vs speed vs streaming)."
       },
@@ -373,11 +373,11 @@
     "intro": "Detaillierte Bewertungen der wichtigsten VPN-Anbieter."
   },
   "useCaseHub": {
-    "metaTitle": "Beste VPNs nach Einsatzzweck",
-    "metaDescription": "Finden Sie das beste VPN für Datenschutz, Streaming, Gaming, Reisen, die Türkei und weitere Szenarien.",
+    "metaTitle": "VPN-Informationsratgeber nach Anwendungsfall",
+    "metaDescription": "Erfahren Sie, welche Funktionen und Quellen Sie für Datenschutz, Streaming, Gaming, Reisen und andere VPN-Szenarien vergleichen sollten.",
     "breadcrumb": "Use cases",
-    "h1": "Beste VPNs nach Einsatzzweck",
-    "intro": "Wählen Sie den Einsatzzweck, der zu Ihnen passt.",
+    "h1": "VPN-Ratgeber nach Anwendungsfall",
+    "intro": "Ein allgemein bestes VPN gibt es nicht. Jeder Ratgeber erklärt, welche Funktionen und Quellen für ein bestimmtes Szenario geprüft werden können.",
     "cardCta": "Review",
     "cards": {
       "gizlilik": {
@@ -412,7 +412,7 @@
       "hub": "Use cases"
     },
     "summaryTitle": "Quick summary",
-    "picksHeading": "Top {count} picks",
+    "picksHeading": "Quellenprofile ({count})",
     "considerationsHeading": "What to watch out for",
     "faqHeading": "Frequently asked questions",
     "relatedHeading": "Related pages",
@@ -465,9 +465,9 @@
     "ogTitle": "Your-Match VPN Quiz",
     "ogDescription": "Get a personalised VPN recommendation in 6 questions.",
     "breadcrumb": "Your-match VPN",
-    "badge": "Personalised pick",
+    "badge": "Persönliche Zuordnung",
     "h1": "Let's find the VPN that fits you",
-    "intro": "A 6-question quiz that gives you a personalised VPN pick based on budget, device count, use case and technical skill. Takes about 30 seconds.",
+    "intro": "Ein Quiz mit 6 Fragen, das Budget, Gerätezahl, Nutzungsszenario und technische Kenntnisse quellenbasierten Anbieterprofilen zuordnet. Dauert etwa 30 Sekunden.",
     "questions": {
       "priority": {
         "prompt": "1. What's your priority?",
@@ -529,15 +529,15 @@
       }
     },
     "result": {
-      "kicker": "The top pick based on your answers",
-      "scoreBadge": "Score: {score}/30",
-      "disclaimer": "This quiz is a scoring-based helper, not personal advice or a guarantee. Before buying, verify current pricing and features on the provider's official site.",
+      "kicker": "Quellenprofil passend zu Ihren Antworten",
+      "matchBadge": "Profil passend zu Ihren Prioritäten",
+      "disclaimer": "Dieses Tool ordnet Ihre Prioritäten quellenbasierten Anbieterprofilen zu. Es ist keine persönliche Beratung oder Garantie. Prüfen Sie Preise und Funktionen vor dem Kauf auf der offiziellen Website.",
       "monthlyLabel": "Monthly",
-      "ctaDeal": "See the {brand} deal",
-      "ctaReview": "Read the review",
+      "ctaDeal": "{brand} auf der offiziellen Website ansehen",
+      "ctaReview": "Profil lesen",
       "ctaReset": "Start over",
-      "altsHeading": "Alternative picks",
-      "altScore": "{positioning} · Score: {score}",
+      "altsHeading": "Weitere passende Profile",
+      "altMatch": "{positioning} · alternatives Informationsprofil",
       "altLink": "Review →"
     },
     "progress": "Question {current}/{total}",
@@ -874,11 +874,11 @@
   },
   "lastTested": {
     "label": "Quellen geprüft",
-    "environment": "Test Environment",
-    "testerLocation": "Location",
-    "vpnVersion": "VPN Version",
-    "testDuration": "Test Duration",
-    "editorNote": "Editor's Note"
+    "environment": "Quellenumfang",
+    "testerLocation": "Quellentyp",
+    "vpnVersion": "Dokument/Version",
+    "testDuration": "Geprüft am",
+    "editorNote": "Redaktioneller Hinweis"
   },
   "device": {
     "breadcrumbHome": "Home",
@@ -922,16 +922,16 @@
     "subtitle": "Filtern Sie Anbieter nach Funktionen, Datenschutz und Plattformen."
   },
   "audience": {
-    "rank1": "Top pick",
-    "rank2": "Runner-up",
-    "rank3": "Honourable mention",
+    "featured": "Hervorgehobenes Profil",
+    "alternative": "Alternatives Profil",
+    "reference": "Quellenprofil",
     "reasonLabel": "Why:",
-    "fallbackAudit": "Independent test",
+    "fallbackAudit": "Informationen zu unabhängigen Audits",
     "fallbackDevices": "Multiple devices",
     "moneyBack": "{days}-day money-back",
     "monthlyLabel": "Monthly",
-    "ctaDeal": "See the {brand} deal",
-    "readReview": "Read review",
+    "ctaDeal": "{brand} auf der offiziellen Website ansehen",
+    "readReview": "Profil lesen",
     "title": "Empfehlungen nach Zielgruppe"
   },
   "homeBlocks": {
@@ -988,12 +988,12 @@
       "review": "Review"
     },
     "topVPNs": {
-      "kicker": "Ranking",
-      "editorsPick": "Editor's pick"
+      "kicker": "Quellenverzeichnis",
+      "editorsPick": "Beispielprofil"
     },
     "podium": {
-      "ariaLabel": "Top three picks",
-      "scoreKicker": "Score",
+      "ariaLabel": "Beispielhafte Anbieterprofile",
+      "scoreKicker": "Quellenprofil",
       "perMonthStart": "/mo starting",
       "ctaAffiliate": "Get deal",
       "ctaOfficial": "Visit official site",
@@ -1004,7 +1004,7 @@
   "pricingPlans": {
     "verifiedAt": "Prices verified on {date}.",
     "verifyOnOfficialSite": "Aktuelle Preise auf der offiziellen Website prüfen.",
-    "bestValue": "Bester Wert",
+    "bestValue": "Hervorgehobener Tarif",
     "perMonth": "pro Monat",
     "discount": "{percent}% off",
     "totalLabel": "Total",
@@ -1089,11 +1089,11 @@
     }
   },
   "tools": {
-    "metaTitle": "Kostenlose Sicherheitstools - E-Mail, IP, DNS, WebRTC und Speed | VPN Advisor",
-    "metaDescription": "Kostenlose Tools für E-Mail- und VPN-Sicherheit: E-Mail-Leak- und Domain-Check, IP-Abfrage, DNS-Leak-Test, WebRTC-Test und Speed-Test.",
+    "metaTitle": "Kostenlose Sicherheitsdiagnosen - E-Mail, IP, DNS, WebRTC und Speed | VPN Advisor",
+    "metaDescription": "Kostenlose Browser-Diagnosen für E-Mail- und Verbindungssignale: Domainprüfung, öffentliche IP, DNS-Resolver, WebRTC und Geschwindigkeitsvergleich.",
     "breadcrumb": "Tools",
-    "indexTitle": "Kostenlose Sicherheits- und VPN-Testtools",
-    "indexSubtitle": "Starten Sie mit dem E-Mail-Sicherheitscheck und prüfen Sie danach IP, DNS, WebRTC und VPN-Geschwindigkeit. Wir speichern keine Ergebnisse auf unseren Servern.",
+    "indexTitle": "Kostenlose Sicherheits- und VPN-Diagnosetools",
+    "indexSubtitle": "Starten Sie mit dem E-Mail-Sicherheitscheck und prüfen Sie danach IP-, DNS-, WebRTC- und Geschwindigkeitssignale. Die Tools beschreiben Ihre aktuelle Verbindung, keinen Anbieter-Test.",
     "featuredLabel": "Empfohlen",
     "cards": {
       "emailSecurity": {
@@ -1109,27 +1109,27 @@
         "description": "Prüfen Sie IP, Standort, ISP, ASN und VPN-/Proxy-Signale."
       },
       "dns": {
-        "title": "DNS-Leak-Test",
-        "description": "Prüfen Sie, wohin DNS-Anfragen bei aktivem VPN gehen."
+        "title": "DNS-Resolver-Prüfung",
+        "description": "Prüfen Sie DNS-Resolver-Signale Ihrer aktuellen Browserverbindung."
       },
       "webrtc": {
-        "title": "WebRTC-Leak-Test",
-        "description": "Erkennen Sie, ob der Browser Ihre echte IP über WebRTC verrät."
+        "title": "WebRTC-Signalprüfung",
+        "description": "Prüfen Sie, ob diese Browsersitzung eine öffentliche IP über WebRTC zeigt."
       },
       "speed": {
-        "title": "VPN-Speed-Test",
-        "description": "Messen Sie den Geschwindigkeitsverlust durch Ihr VPN."
+        "title": "VPN-Geschwindigkeitsvergleich",
+        "description": "Vergleichen Sie Werte Ihrer aktuellen Verbindung mit aktivem und inaktivem VPN."
       }
     },
     "common": {
       "tryAgain": "Erneut ausführen",
       "copy": "Kopieren",
       "copied": "Kopiert!",
-      "loading": "Test läuft...",
+      "loading": "Prüfung läuft...",
       "privacyNote": "Die Ergebnisse bleiben im Browser. Wir speichern diese Daten nicht.",
-      "ctaTitle": "Sie möchten echten VPN-Schutz?",
+      "ctaTitle": "Sie möchten VPN-Schutz besser verstehen?",
       "ctaBody": "Vergleichen Sie die besten VPNs aus unserer unabhängigen Methodik.",
-      "ctaButton": "Beste VPNs ansehen"
+      "ctaButton": "Anbieterprofile lesen"
     },
     "ip": {
       "metaTitle": "What is My IP? - Free IP Address Lookup 2026 | VPN Advisor",
@@ -1152,7 +1152,7 @@
       "platform": "Platform",
       "unknown": "Unknown",
       "explainTitle": "What is an IP address? Why hide it?",
-      "explainBody": "Your IP address is your identity card on the internet. Every site you visit can use it to track your physical location, ISP and behavior. A VPN masks your IP and breaks those trails."
+      "explainBody": "Eine IP-Adresse ist ein Netzwerk- und ungefähres Ortungssignal, keine genaue Identitätskarte. Ein VPN kann das öffentliche IP-Signal ändern; Konten, Cookies und Browser-Fingerprints bleiben eigene Identifikatoren."
     },
     "vpnTest": {
       "metaTitle": "VPN/IP-Test - Öffentliche IP, Standort und VPN-Status prüfen | VPN Advisor",
@@ -1266,50 +1266,50 @@
       "explainBody": "Das Tool validiert das E-Mail-Format, prüft MX-, SPF- und DMARC-Einträge der Domain per Live-DNS, markiert häufige Wegwerf- oder Rollenadressen und sucht in Leak-Datenbanken (Have I Been Pwned wenn konfiguriert, sonst XposedOrNot). Die Ergebnisse sind keine Simulation."
     },
     "dns": {
-      "metaTitle": "DNS Leak Test 2026 - Free | VPN Advisor",
-      "metaDescription": "Is your VPN leaking DNS? Use our free browser-based test to see your DNS resolvers and protect your privacy.",
-      "breadcrumb": "DNS Leak Test",
-      "title": "DNS Leak Test",
-      "subtitle": "Even with a VPN on, your DNS queries might still go to your ISP. This test reveals which resolver you actually use.",
+      "metaTitle": "DNS-Resolver-Signale 2026 - Kostenlos | VPN Advisor",
+      "metaDescription": "Prüfen Sie DNS-Resolver-Signale Ihrer aktuellen Browserverbindung. Die Diagnose beweist kein systemweites VPN-Verhalten.",
+      "breadcrumb": "DNS-Resolver-Prüfung",
+      "title": "DNS-Resolver-Prüfung",
+      "subtitle": "Prüfen Sie Resolver-Signale dieser Browsersitzung bei aktivem VPN. Das Ergebnis ist kein systemweites Urteil.",
       "startButton": "Start test",
       "resultsTitle": "Test results",
       "detectedServers": "Detected DNS servers",
       "experimentalTitle": "Experimental tool — does not test your system DNS",
-      "experimentalBody": "This test queries directly over Cloudflare DoH (1.1.1.1); it does not measure your operating system's actual DNS resolver. For a reliable DNS leak test use a server-side tool such as dnsleaktest.com. Below are the resolvers Cloudflare reported.",
-      "noLeak": "No leak",
-      "leakDetected": "Possible leak detected",
-      "noLeakBody": "Your DNS queries go through a single resolver. If you use a VPN, make sure it belongs to your provider.",
-      "leakBody": "Multiple distinct resolvers detected. Your ISP can still see the sites you visit.",
+      "experimentalBody": "Diese Browserprüfung fragt Cloudflare DoH (1.1.1.1) ab und misst nicht den vollständigen DNS-Pfad Ihres Betriebssystems. Vergleichen Sie ein serverseitiges Tool mit der Anbieterdokumentation.",
+      "noLeak": "Ein Resolver-Signal beobachtet",
+      "leakDetected": "Mehrere Resolver-Signale beobachtet",
+      "noLeakBody": "In dieser Browserprüfung erschien ein Resolver-Signal. Prüfen Sie Eigentümer und andere Anwendungen separat.",
+      "leakBody": "Mehrere Resolver-Signale erschienen. Das beweist nicht, dass jede DNS-Anfrage über den ISP läuft; vergleichen Sie eine weitere serverseitige Prüfung.",
       "explainTitle": "What is a DNS leak, why is it dangerous?",
       "explainBody": "DNS translates domain names into IP addresses. Even when you use a VPN, misconfiguration can route DNS queries to your ISP, exposing your browsing history."
     },
     "webrtc": {
-      "metaTitle": "WebRTC Leak Test - Is Your Real IP Exposed? | VPN Advisor",
-      "metaDescription": "WebRTC can leak your real IP even with a VPN on. Use this free browser test to check.",
-      "breadcrumb": "WebRTC Leak Test",
-      "title": "WebRTC Leak Test",
-      "subtitle": "WebRTC powers video calls in your browser. Unfortunately, it can leak your real IP even when your VPN is on.",
+      "metaTitle": "WebRTC-Signalprüfung - Sichtbarkeit öffentlicher IP | VPN Advisor",
+      "metaDescription": "Prüfen Sie, ob diese Browsersitzung bei aktivem VPN eine öffentliche IP über WebRTC zeigt. Das Ergebnis ist ein Signal.",
+      "breadcrumb": "WebRTC-Signalprüfung",
+      "title": "WebRTC-Signalprüfung",
+      "subtitle": "WebRTC unterstützt Browseranrufe und kann je nach Berechtigungen und Konfiguration Netzwerksignale zeigen. Diese Prüfung ist kein universelles Leakurteil.",
       "startButton": "Start test",
       "resultsTitle": "Test results",
       "detectedIps": "Detected IPs",
       "localIp": "Local IP",
       "publicIp": "Public IP",
-      "noLeak": "No leak",
-      "leakDetected": "WebRTC leak detected",
+      "noLeak": "Keine öffentliche IP in dieser Prüfung beobachtet",
+      "leakDetected": "Signal einer öffentlichen IP beobachtet",
       "noIps": "No IPs detected",
-      "noLeakBody": "Your public IP is not exposed through WebRTC. Your browser is well configured.",
-      "leakBody": "WebRTC is exposing your public IP. Sites can see your real location even with a VPN.",
+      "noLeakBody": "In dieser Prüfung erschien kein öffentliches IP-Signal über WebRTC. Das garantiert nicht jeden Netzwerk- oder Browserkontext.",
+      "leakBody": "WebRTC lieferte ein öffentliches IP-Signal. Prüfen Sie Browserberechtigungen und VPN-Einstellungen und vergleichen Sie ein weiteres Netzwerk.",
       "fixTitle": "How to disable WebRTC",
       "fixChrome": "Chrome: install the WebRTC Network Limiter extension.",
       "fixFirefox": "Firefox: open about:config and set media.peerconnection.enabled to false.",
       "fixBrave": "Brave: Settings > Privacy > WebRTC IP handling policy = Default Public Interface Only."
     },
     "speed": {
-      "metaTitle": "VPN Speed Test - Free Internet Speed Check 2026 | VPN Advisor",
-      "metaDescription": "Measure your VPN's real speed. Test download speed and latency using Cloudflare infrastructure.",
-      "breadcrumb": "VPN Speed Test",
-      "title": "VPN Speed Test",
-      "subtitle": "Turn on your VPN before running this test. Run it again with the VPN off and compare.",
+      "metaTitle": "VPN-Geschwindigkeitsvergleich - Kostenlose Verbindungsdiagnose 2026 | VPN Advisor",
+      "metaDescription": "Vergleichen Sie Download- und Latenzsignale mit aktivem und inaktivem VPN über Cloudflare. Ergebnisse beschreiben Ihre Verbindung, keinen Anbieter-Durchschnitt.",
+      "breadcrumb": "VPN-Geschwindigkeitsvergleich",
+      "title": "VPN-Geschwindigkeitsvergleich",
+      "subtitle": "Führen Sie die Prüfung unter gleichen Bedingungen mit aktivem und inaktivem VPN aus und vergleichen Sie die Signale Ihrer aktuellen Verbindung.",
       "startButton": "Start speed test",
       "downloadSpeed": "Download speed",
       "latency": "Latency",
@@ -1318,8 +1318,8 @@
       "embedTitle": "Cloudflare Speed Test",
       "embedNote": "For a more in-depth test use Cloudflare's official tool.",
       "openCloudflare": "Open speed.cloudflare.com",
-      "explainTitle": "How much speed loss with a VPN is normal?",
-      "explainBody": "A VPN encrypts your traffic and routes it through a remote server. A 10-30% speed drop is typical. If you lose more than 50%, switch servers or try another protocol (WireGuard is usually fastest)."
+      "explainTitle": "Wie sind Geschwindigkeitsänderungen zu verstehen?",
+      "explainBody": "Ein VPN kann Verschlüsselung und einen neuen Weg hinzufügen. Die Änderung hängt von Gerät, WLAN, ISP, Route, Serverlast und Protokoll ab; es gibt keinen universellen Prozentsatz. Wiederholen Sie vergleichbare Prüfungen, bevor Sie schließen."
     }
   }
 }

@@ -1,12 +1,12 @@
 import { env } from "@/env";
 
 /**
- * Distributed fixed-window rate limiter backed by Vercel KV (Upstash Redis
- * REST API). Dependency-free — talks to the KV REST endpoint via `fetch`, so
+ * Distributed fixed-window rate limiter backed by an Upstash-compatible Redis
+ * REST API. Dependency-free — talks to the Redis REST endpoint via `fetch`, so
  * it works in both the Node.js and Edge runtimes.
  *
- * Credentials (`KV_REST_API_URL` / `KV_REST_API_TOKEN`) are injected by Vercel
- * when a KV / Upstash store is linked to the project. When they are absent
+ * Credentials (`KV_REST_API_URL` / `KV_REST_API_TOKEN`) can be set as Hostinger
+ * environment variables. When they are absent
  * (local dev, or the store is not provisioned yet) `configured` is false and
  * the request is ALLOWED — callers should keep any existing local fallback.
  *

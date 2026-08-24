@@ -4,11 +4,13 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import type { Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { formatProductPrice } from "@/lib/product-price";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 const labels = {
   tr: {
@@ -82,7 +84,7 @@ export function FactualComparison({ locale, title, description, left, right }: P
           <Card key={product.slug} className="p-6">
             <div className="flex items-center gap-4"><VPNLogo slug={product.slug} size={56} /><div><h2 className="text-xl font-bold text-ink-strong">{product.brand}</h2><p className="text-sm text-ink-muted">{product.positioning}</p></div></div>
             <p className="mt-4 text-sm text-ink leading-relaxed">{product.summary}</p>
-            <div className="mt-4 flex flex-wrap gap-2"><Button asChild variant="primary"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t.official}<ArrowRight className="size-4" /></a></Button><Button asChild variant="ghost"><Link href={`/inceleme/${product.slug}`}>{t.profile}</Link></Button></div>
+            <div className="mt-4 flex flex-wrap gap-2"><Button asChild variant="primary"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "comparison-card" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="comparison-card">{t.official}<ArrowRight className="size-4" /></ProviderLink></Button><Button asChild variant="ghost"><Link href={`/inceleme/${product.slug}`}>{t.profile}</Link></Button></div>
           </Card>
         ))}
       </div>

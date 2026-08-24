@@ -1,7 +1,8 @@
 import { useLocale, useTranslations } from "next-intl";
-import { ShieldCheck, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
+import { SiteMark } from "@/components/brand/site-mark";
 import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 import { SocialLinks, SOCIAL_LINKS_ENABLED } from "@/components/layout/social-links";
 
@@ -23,7 +24,7 @@ export function SiteFooter() {
               href="/"
               className="flex items-center gap-2 font-semibold text-ink-strong"
             >
-              <ShieldCheck className="size-5 text-brand-600" />
+              <SiteMark className="size-5 text-brand-600" />
               {siteConfig.name}
             </Link>
             <p className="mt-3 max-w-sm text-sm text-ink-muted">

@@ -66,7 +66,7 @@ const tr: VpnForTurksAbroadContent = {
     guides: "Rehberler",
     current: "Yurt dışındaki Türkler",
   },
-  picksHeading: "Yurt dışındaki Türkler için en iyi 3 VPN",
+  picksHeading: "Yurt dışındaki Türkler için karşılaştırılabilecek sağlayıcı profilleri",
   picksSubheading: "Sağlayıcıların belgelediği Türkiye konumu, protokol ve cihaz politikalarına göre.",
   picks: [
     {
@@ -229,10 +229,10 @@ const en: VpnForTurksAbroadContent = {
   ogDescription:
     "VPN profiles documenting Türkiye servers for BluTV, Exxen and Turkish banking scenarios.",
   badge: "Diaspora",
-  h1: "VPN for Turks abroad",
+  h1: "VPN information guide for Turks abroad",
   lede: "A review of provider-documented Türkiye server options for people connecting from Germany, the US, the UK and the Netherlands. Check BluTV, Exxen, TRT, banking and e-Devlet compatibility with your own account before use.",
   breadcrumb: { home: "Home", guides: "Guides", current: "Turks abroad" },
-  picksHeading: "The 3 best VPNs for Turks abroad",
+  picksHeading: "Provider profiles to compare for Turks abroad",
   picksSubheading: "Based on provider-documented Türkiye locations, protocols and device policies.",
   picks: [
     {
@@ -393,14 +393,14 @@ const de: VpnForTurksAbroadContent = {
   ogDescription:
     "VPN-Profile mit dokumentiertem Türkei-Standort für BluTV, Exxen und türkische Banking-Szenarien.",
   badge: "Diaspora",
-  h1: "VPN für Türken im Ausland",
+  h1: "VPN-Informationsratgeber für Türken im Ausland",
   lede: "Ein Überblick über von Anbietern dokumentierte Türkei-Server für Verbindungen aus Deutschland, den USA, Großbritannien und den Niederlanden. Prüfe die aktuelle Kompatibilität mit BluTV, Exxen, TRT, Banking und e-Devlet vor der Nutzung selbst.",
   breadcrumb: {
     home: "Startseite",
     guides: "Ratgeber",
     current: "Türken im Ausland",
   },
-  picksHeading: "Die 3 besten VPNs für Türken im Ausland",
+  picksHeading: "Vergleichbare Anbieterprofile für Türken im Ausland",
   picksSubheading: "Nach dokumentiertem Türkei-Standort, Protokollen und Geräterichtlinien der Anbieter.",
   picks: [
     {

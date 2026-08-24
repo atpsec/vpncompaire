@@ -8,10 +8,10 @@ type Props = { params: Promise<{ locale: string }> };
 
 const CONTENT = {
   tr: {
-    metaTitle: "Seyahat İçin En İyi VPN'ler (2026)",
+    metaTitle: "Seyahat İçin VPN Bilgi Rehberi (2026)",
     metaDescription:
       "Halka açık Wi-Fi güvenliği, kısıtlayıcı ülkelerde erişim, evdeki içeriklere uzaktan ulaşma — seyahat eden için en iyi VPN seçimleri.",
-    title: "Seyahat İçin En İyi VPN'ler",
+    title: "Seyahat için VPN bilgi rehberi",
     tagline:
       "Halka açık Wi-Fi güvenliği, kısıtlayıcı ülkelerde erişim ve evdeki içeriklere uzaktan ulaşma.",
     summary:
@@ -77,10 +77,10 @@ const CONTENT = {
     ],
   },
   en: {
-    metaTitle: "The Best VPNs for Travel (2026)",
+    metaTitle: "VPN Information Guide for Travel (2026)",
     metaDescription:
       "Public Wi-Fi safety, access in restrictive countries and remote access to home content — the best VPN picks for travellers.",
-    title: "The Best VPNs for Travel",
+    title: "VPN information guide for travel",
     tagline:
       "Public Wi-Fi safety, access in restrictive countries and remote access to home content.",
     summary:

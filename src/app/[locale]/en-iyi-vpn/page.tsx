@@ -16,32 +16,30 @@ const EVALUATED_PROFILE_COUNT = topRankedProducts("tr").filter(
   (product) => product.slug !== "atlas-vpn",
 ).length;
 const REFERENCE_RECORD_COUNT = referenceProducts.length;
-const TOTAL_RECORD_COUNT = EVALUATED_PROFILE_COUNT + REFERENCE_RECORD_COUNT;
-
 const copy = {
   tr: {
-    title: `${TOTAL_RECORD_COUNT} VPN Kaydı (2026): ${EVALUATED_PROFILE_COUNT} Ayrıntılı Profil + ${REFERENCE_RECORD_COUNT} Referans`,
+    title: `VPN Sağlayıcı Rehberi (2026): ${EVALUATED_PROFILE_COUNT} Ayrıntılı Profil + ${REFERENCE_RECORD_COUNT} Referans`,
     description: `${EVALUATED_PROFILE_COUNT} kaynakları değerlendirilmiş, indekslenebilir VPN profili ile ${REFERENCE_RECORD_COUNT} referans kaydını ayrı kapsamlarla araştırın.`,
-    breadcrumb: "VPN karşılaştırma rehberi",
-    h1: `${TOTAL_RECORD_COUNT} sağlayıcı kaydı: ${EVALUATED_PROFILE_COUNT} ayrıntılı profil, ${REFERENCE_RECORD_COUNT} referans`,
+    breadcrumb: "VPN sağlayıcı bilgi rehberi",
+    h1: `VPN sağlayıcı bilgi rehberi: ${EVALUATED_PROFILE_COUNT} ayrıntılı profil, ${REFERENCE_RECORD_COUNT} referans`,
     intro: `Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. İlk ${EVALUATED_PROFILE_COUNT} sağlayıcı kaynakları ayrı ayrı değerlendirilmiş ve arama dizinine dahil edilen ayrıntılı profillerdir. Diğer ${REFERENCE_RECORD_COUNT} kayıt yalnızca pazar referansıdır; ayrıntılı öneri veya indekslenebilir profil değildir.`,
     home: "Ana sayfa",
     here: "VPN karşılaştırmaları",
   },
   en: {
-    title: `${TOTAL_RECORD_COUNT} VPN Records (2026): ${EVALUATED_PROFILE_COUNT} Evaluated Profiles + ${REFERENCE_RECORD_COUNT} References`,
+    title: `VPN Provider Guide (2026): ${EVALUATED_PROFILE_COUNT} Detailed Profiles + ${REFERENCE_RECORD_COUNT} References`,
     description: `Research ${EVALUATED_PROFILE_COUNT} source-reviewed, indexable VPN profiles separately from ${REFERENCE_RECORD_COUNT} reference-only market records.`,
-    breadcrumb: "VPN comparison guide",
-    h1: `${TOTAL_RECORD_COUNT} provider records: ${EVALUATED_PROFILE_COUNT} evaluated profiles and ${REFERENCE_RECORD_COUNT} references`,
+    breadcrumb: "VPN provider information guide",
+    h1: `VPN provider information guide: ${EVALUATED_PROFILE_COUNT} detailed profiles and ${REFERENCE_RECORD_COUNT} references`,
     intro: `This is not a laboratory ranking of the 'best VPN'. The first ${EVALUATED_PROFILE_COUNT} providers are source-reviewed profiles included in the search index. The other ${REFERENCE_RECORD_COUNT} entries are market references only, not detailed recommendations or indexable profiles.`,
     home: "Home",
     here: "VPN comparisons",
   },
   de: {
-    title: `${TOTAL_RECORD_COUNT} VPN-Einträge (2026): ${EVALUATED_PROFILE_COUNT} Profile + ${REFERENCE_RECORD_COUNT} Referenzen`,
+    title: `VPN-Anbieterleitfaden (2026): ${EVALUATED_PROFILE_COUNT} Profile + ${REFERENCE_RECORD_COUNT} Referenzen`,
     description: `${EVALUATED_PROFILE_COUNT} quellengeprüfte, indexierbare VPN-Profile getrennt von ${REFERENCE_RECORD_COUNT} reinen Referenzeinträgen recherchieren.`,
-    breadcrumb: "VPN-Vergleichsratgeber",
-    h1: `${TOTAL_RECORD_COUNT} Anbietereinträge: ${EVALUATED_PROFILE_COUNT} geprüfte Profile und ${REFERENCE_RECORD_COUNT} Referenzen`,
+    breadcrumb: "VPN-Anbieter-Informationsratgeber",
+    h1: `VPN-Anbieter-Informationsratgeber: ${EVALUATED_PROFILE_COUNT} Profile und ${REFERENCE_RECORD_COUNT} Referenzen`,
     intro: `Dies ist keine Labor-Rangliste des 'besten VPN'. Die ersten ${EVALUATED_PROFILE_COUNT} Anbieter sind quellengeprüfte Profile im Suchindex. Die weiteren ${REFERENCE_RECORD_COUNT} Einträge dienen nur als Marktreferenz und sind weder ausführliche Empfehlungen noch indexierbare Profile.`,
     home: "Startseite",
     here: "VPN-Vergleiche",

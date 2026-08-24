@@ -2,6 +2,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, Award, Server, Smartphone, MapPin, FileSearch } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -10,6 +11,7 @@ import { PricingPlans } from "@/components/product/pricing-plans";
 import { topRankedProducts, type Product } from "@/data/products";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 export function TopVPNList() {
   const tCommon = useTranslations("common");
@@ -103,7 +105,7 @@ function FeaturedCard({ product, tCommon, label, profileLabel }: { product: Prod
         <div className="flex flex-col gap-3 lg:w-72 lg:justify-center lg:border-l lg:border-border lg:pl-7">
           <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} />
           <Button asChild variant="primary" size="md">
-            <a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{tCommon("visitSite")}<ArrowRight className="size-4" /></a>
+            <ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-featured" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-featured">{tCommon("visitSite")}<ArrowRight className="size-4" /></ProviderLink>
           </Button>
           <Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button>
         </div>
@@ -129,7 +131,7 @@ function ProviderRow({ product, tCommon, profileLabel }: { product: Product; tCo
         </div>
         <div className="flex flex-col gap-3 lg:w-64 lg:justify-center lg:border-l lg:border-border lg:pl-6">
           <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} variant="compact" />
-          <Button asChild variant="primary" size="md"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{tCommon("visitSite")}<ArrowRight className="size-4" /></a></Button>
+          <Button asChild variant="primary" size="md"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-list" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-list">{tCommon("visitSite")}<ArrowRight className="size-4" /></ProviderLink></Button>
           <Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button>
         </div>
       </div>

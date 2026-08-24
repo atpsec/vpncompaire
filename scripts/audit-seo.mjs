@@ -50,6 +50,14 @@ function isInternalHttpUrl(value) {
   }
 }
 
+function isExpectedInternalRedirect(value) {
+  try {
+    return cleanUrl(value).pathname.startsWith("/go/");
+  } catch {
+    return false;
+  }
+}
+
 function decodeHtml(value) {
   return value
     .replaceAll("&amp;", "&")
@@ -359,7 +367,9 @@ if (uniqueSitemapEntries.length === 0) {
     const source = linkSources.get(link);
     if (result.error) fail(`${link} — iç link fetch hatası: ${result.error.message} (kaynak: ${source})`);
     else if (result.status >= 400) fail(`${link} — iç link ${result.status} döndürdü (kaynak: ${source})`);
-    else if (result.status >= 300) warn(`${link} — iç link redirect döndürüyor (${result.status}, kaynak: ${source})`);
+    else if (result.status >= 300 && !isExpectedInternalRedirect(link)) {
+      warn(`${link} — iç link redirect döndürüyor (${result.status}, kaynak: ${source})`);
+    }
   }
   pass(`İç link taraması: ${linkedUrls.size} benzersiz site içi URL`);
   pass("Sitemap URL'leri 2xx yanıt ve temel metadata kontrolünden geçti");

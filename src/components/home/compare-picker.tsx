@@ -7,11 +7,13 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { topRankedProducts, type Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { formatProductPriceShort } from "@/lib/product-price";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 const MIN = 2;
 const MAX = 4;
@@ -83,7 +85,7 @@ function ProductColumn({ product, locale }: { product: Product; locale: Locale }
         <Row icon={<MapPin className="size-3.5" />} label={t("rows.jurisdiction")} value={product.highlights.jurisdiction ?? "—"} />
         <Row icon={<Check className="size-3.5" />} label={t("rows.moneyBack")} value={product.highlights.moneyBackDays ? `${product.highlights.moneyBackDays} ${t("rows.days")}` : "—"} />
       </dl>
-      <div className="p-4 border-t border-border bg-surface-subtle/30 rounded-b-xl"><div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">{planLabel}</div>{product.pricingVerifiedAt && bestPlan ? <><div className="mt-1 text-sm font-medium text-ink-strong line-clamp-1">{bestPlan.name}</div><div className="mt-1 flex items-baseline gap-1"><span className="text-xl font-bold text-ink-strong tabular-nums">{formatProductPriceShort(bestPlan.monthlyPriceUsd, product.priceCurrency)}</span><span className="text-xs text-ink-subtle">{t("perMonth")}</span></div>{monthlyPlan && monthlyPlan !== bestPlan && <div className="mt-1 text-[11px] text-ink-faint">{t("monthlyLabel")} {formatProductPriceShort(monthlyPlan.monthlyPriceUsd, product.priceCurrency)}</div>}</> : <div className="mt-1 text-sm font-medium text-ink-muted">{t("officialSite")}</div>}<div className="mt-3 flex flex-col gap-1.5"><Button asChild variant="primary" size="sm"><a href={product.pricingUrl} rel="noopener nofollow" target="_blank">{t("ctaOfficial")}<ExternalLink className="size-3.5" /></a></Button><Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button></div></div>
+      <div className="p-4 border-t border-border bg-surface-subtle/30 rounded-b-xl"><div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">{planLabel}</div>{product.pricingVerifiedAt && bestPlan ? <><div className="mt-1 text-sm font-medium text-ink-strong line-clamp-1">{bestPlan.name}</div><div className="mt-1 flex items-baseline gap-1"><span className="text-xl font-bold text-ink-strong tabular-nums">{formatProductPriceShort(bestPlan.monthlyPriceUsd, product.priceCurrency)}</span><span className="text-xs text-ink-subtle">{t("perMonth")}</span></div>{monthlyPlan && monthlyPlan !== bestPlan && <div className="mt-1 text-[11px] text-ink-faint">{t("monthlyLabel")} {formatProductPriceShort(monthlyPlan.monthlyPriceUsd, product.priceCurrency)}</div>}</> : <div className="mt-1 text-sm font-medium text-ink-muted">{t("officialSite")}</div>}<div className="mt-3 flex flex-col gap-1.5"><Button asChild variant="primary" size="sm"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-picker" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-picker">{t("ctaOfficial")}<ExternalLink className="size-3.5" /></ProviderLink></Button><Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button></div></div>
     </Card>
   );
 }

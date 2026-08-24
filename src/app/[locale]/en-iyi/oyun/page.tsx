@@ -8,12 +8,12 @@ type Props = { params: Promise<{ locale: string }> };
 
 const CONTENT = {
   tr: {
-    metaTitle: "Oyun İçin En İyi VPN'ler (2026)",
+    metaTitle: "Oyun İçin VPN Bilgi Rehberi (2026)",
     metaDescription:
       "Düşük gecikme, DDoS koruması, bölgesel oyun sunucusu erişimi ve geographic price arbitrage için en iyi VPN seçimleri.",
-    title: "Oyun İçin En İyi VPN'ler",
+    title: "Oyun için VPN bilgi rehberi",
     tagline:
-      "Düşük gecikme, DDoS koruması ve bölgesel sunucu erişimi — oyuncular için en iyi seçimler.",
+      "Düşük gecikme, DDoS kapsamı ve bölgesel sunucu bilgilerini nasıl karşılaştıracağınızı öğrenin.",
     summary:
       "Oyun için VPN seçerken gecikme, rota kararlılığı, IP gizleme ve oyun kuralları birlikte değerlendirilmelidir. Burada doğrudan karşılaştırılabilir bir laboratuvar ölçümü sunmuyoruz; en sağlıklı seçim, aynı cihaz ve oyun sunucusunda VPN'siz ve VPN'li sonuçları karşılaştırmaktır.",
     badgeLabel: "Oyun",
@@ -77,12 +77,12 @@ const CONTENT = {
     ],
   },
   en: {
-    metaTitle: "The Best VPNs for Gaming (2026)",
+    metaTitle: "VPN Information Guide for Gaming (2026)",
     metaDescription:
       "Low latency, DDoS protection, regional game-server access and geographic price arbitrage — the best VPN picks for gamers.",
-    title: "The Best VPNs for Gaming",
+    title: "VPN information guide for gaming",
     tagline:
-      "Low latency, DDoS protection and regional server access — the best picks for gamers.",
+      "Learn how to compare latency, DDoS scope and regional server information for gaming.",
     summary:
       "When choosing a VPN for gaming, consider latency, route consistency, IP exposure and the game's rules together. We do not publish directly comparable lab measurements here; compare the VPN-off baseline with VPN-on results on the same device and game server.",
     badgeLabel: "Gaming",

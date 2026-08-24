@@ -6,6 +6,7 @@ import { Check, Filter, RotateCcw, X } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ProviderLink } from "@/components/affiliate/provider-link";
 import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { rankedProducts } from "@/data/products";
@@ -15,6 +16,7 @@ import {
   getFilterLabels,
   type FilterKey,
 } from "@/data/features";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 export function FeatureFilter() {
   const t = useTranslations("filter");
@@ -152,13 +154,15 @@ export function FeatureFilter() {
                   </Link>
                 </Button>
                 <Button asChild variant="ghost" size="sm">
-                  <a
-                    href={product.pricingUrl}
-                    rel="noopener nofollow"
+                  <ProviderLink
+                    href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "feature-filter" })}
+                    rel={providerOutboundRel(product.slug, product.hasAffiliate)}
                     target="_blank"
+                    provider={product.slug}
+                    placement="feature-filter"
                   >
                     {t("getDeal")}
-                  </a>
+                  </ProviderLink>
                 </Button>
               </div>
             </Card>
