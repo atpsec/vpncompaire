@@ -78,7 +78,7 @@ function FeaturedCard({ product, tCommon, label, profileLabel }: { product: Prod
     <Card className="relative overflow-hidden border-brand-200 shadow-md">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-accent-500" />
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-100/40 blur-3xl" />
-      <div className="relative grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-6 p-6 sm:p-7">
+      <div className="relative grid grid-cols-1 gap-6 p-6 sm:p-7 lg:grid-cols-[auto_minmax(0,1fr)_minmax(18rem,20rem)]">
         <div className="flex items-center gap-5 lg:flex-col lg:items-start lg:justify-start lg:border-r lg:border-border lg:pr-7 lg:w-44">
           <VPNLogo slug={product.slug} size={64} />
           <div className="lg:mt-1">
@@ -102,7 +102,7 @@ function FeaturedCard({ product, tCommon, label, profileLabel }: { product: Prod
           </dl>
         </div>
 
-        <div className="flex flex-col gap-3 lg:w-72 lg:justify-center lg:border-l lg:border-border lg:pl-7">
+        <div className="min-w-0 rounded-xl border border-border/70 bg-surface-subtle/35 p-3 lg:flex lg:flex-col lg:justify-center lg:border-l lg:pl-5">
           <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} />
           <Button asChild variant="primary" size="md">
             <ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-featured" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-featured">{tCommon("visitSite")}<ArrowRight className="size-4" /></ProviderLink>
@@ -117,7 +117,7 @@ function FeaturedCard({ product, tCommon, label, profileLabel }: { product: Prod
 function ProviderRow({ product, tCommon, profileLabel }: { product: Product; tCommon: ReturnType<typeof useTranslations>; profileLabel: string }) {
   return (
     <Card className="group transition hover:shadow-md hover:-translate-y-0.5">
-      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-5 p-5 sm:p-6">
+      <div className="grid grid-cols-1 gap-5 p-5 sm:p-6 lg:grid-cols-[auto_minmax(0,1fr)_minmax(18rem,20rem)]">
         <div className="flex items-center gap-4 lg:w-36 lg:border-r lg:border-border lg:pr-6"><VPNLogo slug={product.slug} size={52} /></div>
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2"><h3 className="text-xl font-semibold text-ink-strong">{product.brand}</h3><Badge variant={product.hasAffiliate ? "brand" : "outline"}>{product.positioning}</Badge></div>
@@ -129,7 +129,7 @@ function ProviderRow({ product, tCommon, profileLabel }: { product: Product; tCo
             {product.highlights.jurisdiction && <Highlight icon={<MapPin className="size-3.5" />} label={product.highlights.jurisdiction} compact />}
           </dl>
         </div>
-        <div className="flex flex-col gap-3 lg:w-64 lg:justify-center lg:border-l lg:border-border lg:pl-6">
+        <div className="min-w-0 rounded-xl border border-border/70 bg-surface-subtle/35 p-3 lg:flex lg:flex-col lg:justify-center lg:border-l lg:pl-5">
           <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} variant="compact" />
           <Button asChild variant="primary" size="md"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-list" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-list">{tCommon("visitSite")}<ArrowRight className="size-4" /></ProviderLink></Button>
           <Button asChild variant="ghost" size="sm"><Link href={`/inceleme/${product.slug}`}>{profileLabel}</Link></Button>

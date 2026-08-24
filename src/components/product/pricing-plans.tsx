@@ -32,7 +32,7 @@ export function PricingPlans({
   const verifiedDate = verifiedAt ? formatter.format(new Date(verifiedAt)) : null;
 
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn("min-w-0 space-y-2", className)}>
       <div
         className={cn(
           "grid gap-2",
@@ -69,19 +69,20 @@ function PlanCard({
   return (
     <div
       className={cn(
-        "relative rounded-lg border p-3",
+        "relative min-w-0 rounded-lg border p-3",
         isBest
           ? "border-brand-300 bg-brand-50/60"
           : "border-border bg-surface-subtle/50",
         variant === "compact" && "p-2.5",
+        isBest && "pt-5",
       )}
     >
       {isBest && (
-        <span className="absolute -top-2 left-3 rounded-full bg-brand-600 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+        <span className="absolute -top-2 left-2 whitespace-nowrap rounded-full bg-brand-600 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-white">
           {t("bestValue")}
         </span>
       )}
-      <div className="text-[11px] font-medium text-ink-subtle leading-tight">
+      <div className="break-words text-[11px] font-medium leading-tight text-ink-subtle">
         {plan.name}
       </div>
       <div className="mt-1.5 flex items-baseline gap-1">
@@ -105,7 +106,7 @@ function PlanCard({
           {plan.campaign}
         </div>
       ) : null}
-      <div className="mt-1 text-[10px] text-ink-faint tabular-nums">
+      <div className="mt-1 break-words text-[10px] text-ink-faint tabular-nums">
         {t("totalLabel")} {formatProductPrice(plan.totalPriceUsd, currency)}
         {plan.durationMonths > 1
           ? ` · ${plan.durationMonths} ${t("monthsSuffix")}`
