@@ -50,7 +50,7 @@ function absolutePath(pathname) {
 }
 
 function hasAdsenseScript(html) {
-  return /pagead\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/i.test(html);
+  return /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/i.test(html);
 }
 
 function hasPublisher(html, publisher) {
