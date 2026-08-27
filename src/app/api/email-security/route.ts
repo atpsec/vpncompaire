@@ -11,6 +11,7 @@ export const runtime = "nodejs";
 const NO_STORE_HEADERS = {
   "Cache-Control": "no-store, no-cache, must-revalidate",
 };
+const MAX_REQUEST_BODY_BYTES = 4_096;
 
 const BREACH_USER_AGENT = "VPN Advisor Email Security Tool";
 const XON_API_BASE = "https://api.xposedornot.com/v1";
@@ -354,9 +355,24 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const contentLength = Number(req.headers.get("content-length"));
+  if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BODY_BYTES) {
+    return NextResponse.json(
+      { error: "request_too_large" },
+      { status: 413, headers: NO_STORE_HEADERS },
+    );
+  }
+
   let body: unknown;
   try {
-    body = await req.json();
+    const rawBody = await req.text();
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_REQUEST_BODY_BYTES) {
+      return NextResponse.json(
+        { error: "request_too_large" },
+        { status: 413, headers: NO_STORE_HEADERS },
+      );
+    }
+    body = JSON.parse(rawBody) as unknown;
   } catch {
     return NextResponse.json(
       { error: "invalid_json" },

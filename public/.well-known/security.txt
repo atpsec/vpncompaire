@@ -1,0 +1,5 @@
+Contact: mailto:editor@vpnadvisor.net
+Expires: 2027-08-27T00:00:00.000Z
+Preferred-Languages: en, tr
+Canonical: https://vpnadvisor.net/.well-known/security.txt
+Policy: https://vpnadvisor.net/contact

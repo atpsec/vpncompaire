@@ -6,22 +6,51 @@ import { env } from "@/env";
  * it works in both the Node.js and Edge runtimes.
  *
  * Credentials (`KV_REST_API_URL` / `KV_REST_API_TOKEN`) can be set as Hostinger
- * environment variables. When they are absent
- * (local dev, or the store is not provisioned yet) `configured` is false and
- * the request is ALLOWED — callers should keep any existing local fallback.
+ * environment variables. When they are absent (local dev, or the store is not
+ * provisioned yet), a bounded in-memory fallback protects the current process.
  *
- * Fails OPEN on any network/KV error: an outage must never block real users,
- * which matters for the revenue-critical /go affiliate redirect.
+ * Fails over to the same bounded local limiter on any network/KV error: an
+ * outage must never block real users, while a missing store must not leave
+ * public diagnostics and redirects completely unprotected.
  */
 
 export type RateLimitResult = {
-  /** True if the request is within the limit (or the limiter is disabled). */
+  /** True if the request is within the limit. */
   allowed: boolean;
   /** True when KV credentials are present and the check actually ran. */
   configured: boolean;
 };
 
-const ALLOW_UNCONFIGURED: RateLimitResult = { allowed: true, configured: false };
+const localRateLimitMap = new Map<
+  string,
+  { count: number; resetTime: number }
+>();
+
+function localRateLimit(
+  key: string,
+  max: number,
+  windowSeconds: number,
+): RateLimitResult {
+  const now = Date.now();
+
+  if (localRateLimitMap.size > 10_000) {
+    for (const [entryKey, entry] of localRateLimitMap) {
+      if (entry.resetTime <= now) localRateLimitMap.delete(entryKey);
+    }
+  }
+
+  const existing = localRateLimitMap.get(key);
+  if (!existing || existing.resetTime <= now) {
+    localRateLimitMap.set(key, {
+      count: 1,
+      resetTime: now + windowSeconds * 1000,
+    });
+    return { allowed: true, configured: false };
+  }
+
+  existing.count += 1;
+  return { allowed: existing.count <= max, configured: false };
+}
 
 async function kv(command: string[]): Promise<number | null> {
   const url = env.KV_REST_API_URL;
@@ -48,21 +77,23 @@ export async function rateLimit(
   windowSeconds: number,
 ): Promise<RateLimitResult> {
   if (!env.KV_REST_API_URL || !env.KV_REST_API_TOKEN) {
-    return ALLOW_UNCONFIGURED;
+    return localRateLimit(key, max, windowSeconds);
   }
 
   const redisKey = `rl:${key}`;
   try {
     const count = await kv(["incr", redisKey]);
-    if (count === null) return ALLOW_UNCONFIGURED;
+    if (count === null) return localRateLimit(key, max, windowSeconds);
     // Set the TTL only on the first hit so the window doesn't slide forward.
     if (count === 1) {
       await kv(["expire", redisKey, String(windowSeconds)]);
     }
     return { allowed: count <= max, configured: true };
   } catch {
-    // Fail open — never block users on a KV outage.
-    return { allowed: true, configured: true };
+    // Keep users unblocked during a store outage while retaining local abuse
+    // protection for this process.
+    const fallback = localRateLimit(key, max, windowSeconds);
+    return { ...fallback, configured: true };
   }
 }
 
