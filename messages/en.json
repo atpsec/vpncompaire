@@ -45,7 +45,7 @@
     "noAffiliate": "No affiliate relationship"
   },
   "disclosure": {
-    "banner": "Advertising disclosure: This site may earn revenue from Google AdSense ads and, where active, VPN affiliate links. Commission does not change how source-based information is classified. Content explains official documentation, independent verification, pricing and usability information.",
+    "banner": "This site may earn revenue from Google AdSense ads and, where active, VPN affiliate links. Commission does not change how source-based information is classified. Content explains official documentation, independent verification, pricing and usability information.",
     "short": "This site may show Google AdSense ads; some VPN links may be affiliate.",
     "learnMore": "Learn more"
   },
@@ -152,7 +152,7 @@
     },
     "socialSoon": "Social media accounts coming soon.",
     "copyright": "All rights reserved.",
-    "disclosureTitle": "Advertising disclosure.",
+    "disclosureTitle": "Advertising and affiliate disclosure",
     "madeWith": "Source-based information project · Not a testing laboratory"
   },
   "newsletter": {

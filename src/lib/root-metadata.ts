@@ -57,9 +57,9 @@ export function buildRootMetadata(locale: Locale): Metadata {
     publisher: siteConfig.name,
     category: "technology",
     verification: buildVerificationMetadata(),
-    other: {
-      "google-adsense-account": siteConfig.adsenseClientId,
-    },
+    ...(siteConfig.adsenseClientId
+      ? { other: { "google-adsense-account": siteConfig.adsenseClientId } }
+      : {}),
     formatDetection: {
       email: false,
       address: false,

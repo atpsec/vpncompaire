@@ -45,7 +45,7 @@
     "noAffiliate": "Affiliate ilişkisi yok"
   },
   "disclosure": {
-    "banner": "Reklam açıklaması: Bu site Google AdSense reklamlarından ve (etkin olduğunda) bazı VPN sağlayıcı ortaklık bağlantılarından gelir elde edebilir. Komisyon, kaynak temelli bilgilerin sınıflandırılmasını etkilemez. İçerik; resmi belgeler, bağımsız denetimler, fiyatlandırma ve kullanım bilgileriyle açıklanır.",
+    "banner": "Bu site Google AdSense reklamlarından ve (etkin olduğunda) bazı VPN sağlayıcı ortaklık bağlantılarından gelir elde edebilir. Komisyon, kaynak temelli bilgilerin sınıflandırılmasını etkilemez. İçerik; resmi belgeler, bağımsız denetimler, fiyatlandırma ve kullanım bilgileriyle açıklanır.",
     "short": "Bu site Google AdSense reklamları gösterebilir; bazı VPN bağlantıları ortaklık programına dahil olabilir.",
     "learnMore": "Detaylı bilgi"
   },
@@ -152,7 +152,7 @@
     },
     "socialSoon": "Sosyal medya hesapları yakında.",
     "copyright": "Tüm hakları saklıdır.",
-    "disclosureTitle": "Reklam açıklaması.",
+    "disclosureTitle": "Reklam ve ortaklık açıklaması",
     "madeWith": "Gönüllü inceleme projesi · Resmi bir kuruluş değildir"
   },
   "newsletter": {

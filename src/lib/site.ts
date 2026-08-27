@@ -19,9 +19,9 @@ export const siteConfig = {
   locales: ["en"] as const,
   gaId: env.NEXT_PUBLIC_GA_ID || undefined,
   bingSiteVerification: env.BING_SITE_VERIFICATION || undefined,
-  // ads.txt ile aynı publisher; env override edebilir.
-  adsenseClientId:
-    env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-8715861903175610",
+  // Publisher ID yalnızca hosting ortamında açıkça yapılandırılmışsa kullanılır.
+  // Böylece yerel/staging build'leri production AdSense hesabına istek göndermez.
+  adsenseClientId: env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || undefined,
   description: {
     tr: "VPN sağlayıcılarını resmi belgeler, bağımsız denetimler ve güncel fiyat kaynaklarıyla karşılaştıran kaynak temelli rehber.",
     en: "A source-based guide comparing VPN providers through privacy policies, independent audit records, security features and current pricing sources.",

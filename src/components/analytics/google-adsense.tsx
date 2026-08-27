@@ -7,33 +7,35 @@ import { siteConfig } from "@/lib/site";
 const SEO_LOCALES = new Set(["en"]);
 const EXCLUDED_EXACT_PATHS = new Set([
   "/cookie-policy",
-  "/cookie-policy",
-  "/privacy-policy",
   "/privacy-policy",
   "/legal-notice",
-  "/legal-notice",
-  "/terms",
   "/terms",
   "/affiliate-disclosure",
-  "/affiliate-disclosure",
-  "/refund-policy",
   "/refund-policy",
   "/contact",
-  "/contact",
+  "/cerez-politikasi",
+  "/gizlilik",
+  "/yasal-uyari",
+  "/sartlar",
+  "/reklam-aciklamasi",
+  "/iptal-ve-iade",
+  "/iletisim",
 ]);
 const EXCLUDED_PREFIXES = [
   "/tools",
-  "/tools",
   "/vpn-test",
   "/calculator",
-  "/calculator",
-  "/quiz",
   "/quiz",
   "/server-map",
-  "/server-map",
   "/security-tools",
-  "/security-tools",
+  "/araclar",
+  "/guvenlik-araclari",
+  "/sunucu-haritasi",
+  "/hesaplayici",
+  "/sana-uygun-vpn",
 ];
+
+const ADSENSE_ID_PATTERN = /^ca-pub-\d{16}$/;
 
 /**
  * Auto Ads'i içerik yerine araç, yasal ve kısa yardımcı ekranlarda yüklemeyiz.
@@ -69,7 +71,9 @@ export function GoogleAdsense() {
   const pathname = usePathname();
   const id = siteConfig.adsenseClientId;
 
-  if (!pathname || isAdExcluded(pathname)) return null;
+  if (!id || !ADSENSE_ID_PATTERN.test(id) || !pathname || isAdExcluded(pathname)) {
+    return null;
+  }
 
   return (
     <Script

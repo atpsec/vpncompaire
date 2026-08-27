@@ -34,11 +34,13 @@ const envSchema = z.object({
     .min(1)
     .optional()
     .or(z.literal("")),
-  // Google AdSense publisher kimliği (ca-pub-XXXXXXXXXXXXXXXX). Set edilmezse
-  // site.ts varsayılanı (ads.txt ile aynı pub) kullanılır. /ads.txt public/ statik dosyasından servis edilir.
+  // Google AdSense publisher kimliği (ca-pub-XXXXXXXXXXXXXXXX). Yerel veya
+  // eksik yapılandırmada reklam scripti hiç yüklenmez. /ads.txt public/ statik
+  // dosyasından servis edilir.
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: z
     .string()
     .min(1)
+    .regex(/^ca-pub-\d{16}$/, "ca-pub- ile başlayan 16 haneli publisher ID olmalı")
     .optional()
     .or(z.literal("")),
 

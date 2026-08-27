@@ -45,7 +45,7 @@
     "noAffiliate": "Keine Provision - neutrale Auswahl"
   },
   "disclosure": {
-    "banner": "Werbehinweis: Diese Website kann Einnahmen aus Google-AdSense-Anzeigen und (wenn aktiv) VPN-Affiliate-Links erhalten. Provisionen ändern nicht, wie quellenbasierte Informationen eingeordnet werden. Inhalte erklären offizielle Dokumentation, unabhängige Verifikation, Preise und Nutzbarkeit.",
+    "banner": "Diese Website kann Einnahmen aus Google-AdSense-Anzeigen und (wenn aktiv) VPN-Affiliate-Links erhalten. Provisionen ändern nicht, wie quellenbasierte Informationen eingeordnet werden. Inhalte erklären offizielle Dokumentation, unabhängige Verifikation, Preise und Nutzbarkeit.",
     "short": "Diese Website kann Google-AdSense-Anzeigen zeigen; einige VPN-Links können Affiliate-Programme nutzen.",
     "learnMore": "Mehr erfahren"
   },
@@ -152,7 +152,7 @@
     },
     "socialSoon": "Social-Media-Kanäle folgen.",
     "copyright": "Alle Rechte vorbehalten.",
-    "disclosureTitle": "Werbehinweis.",
+    "disclosureTitle": "Werbe- und Affiliate-Hinweis",
     "madeWith": "Freiwilliges Review-Projekt - Keine offizielle Stelle"
   },
   "newsletter": {
