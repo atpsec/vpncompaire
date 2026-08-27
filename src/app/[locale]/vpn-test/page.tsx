@@ -85,6 +85,9 @@ function VpnTestView({ locale }: { locale: string }) {
     signalUnknown: t("signalUnknown"),
     copy: tCommon("copy"),
     copied: tCommon("copied"),
+    reportCopy: tCommon("copy"),
+    reportCopied: tCommon("copied"),
+    reportDownload: tCommon("downloadReport"),
   };
 
   return (

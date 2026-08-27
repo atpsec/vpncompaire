@@ -18,6 +18,7 @@
     "guides": "Rehberler",
     "tools": "Araçlar",
     "methodology": "Kaynak metodolojimiz",
+    "research": "Araştırma",
     "about": "Hakkımızda",
     "search": "Ara",
     "menu": "Menü",
@@ -148,6 +149,7 @@
       "sitemap": "Site haritası",
       "cancel": "İptal & İade",
       "security": "Güvenlik araçları",
+      "research": "Araştırma",
       "legalNotice": "Yasal Uyarı"
     },
     "socialSoon": "Sosyal medya hesapları yakında.",
@@ -1095,6 +1097,21 @@
     "indexTitle": "Ücretsiz Güvenlik ve VPN Tanı Araçları",
     "indexSubtitle": "Önce e-posta güvenliğinizi kontrol edin; ardından IP, DNS, WebRTC ve VPN hız sinyallerini inceleyin. Araçlar mevcut bağlantınızı açıklar, sağlayıcı geneli için test sonucu üretmez.",
     "featuredLabel": "Öne çıkan",
+    "workflow": {
+      "title": "Pratik bir gizlilik kontrolü yapın",
+      "subtitle": "Mevcut bağlantınızın neleri açığa çıkardığını anlamak için araçları sırayla kullanın. Gerekirse ayarları karşılaştırmak için her kontrolün raporunu kaydedin.",
+      "steps": [
+        ["Görünürlük", "Web sitelerinin görebildiği ağ sinyallerini VPN/IP testiyle inceleyin.", "/vpn-test", "VPN/IP testini aç"],
+        ["Tarayıcı maruziyeti", "Bu tarayıcı oturumunun WebRTC üzerinden public IP adayı gösterip göstermediğini kontrol edin.", "/tools/webrtc-leak-test", "WebRTC kontrolünü aç"],
+        ["DNS yolu", "DNS tarayıcı probunu çalıştırın ve sonucu kanıt olarak yorumlamadan önce kapsamını okuyun.", "/tools/dns-leak-test", "DNS probunu aç"],
+        ["Performans", "İki karşılaştırılabilir hız testi çalıştırıp ilk sonucu temel değer olarak kaydedin.", "/tools/vpn-speed-test", "Hız karşılaştırmasını aç"]
+      ]
+    },
+    "researchCta": {
+      "title": "Bu araçların arkasındaki kanıt standardı",
+      "body": "Canlı bağlantı sinyallerini, sağlayıcı belgelerini, bağımsız denetim kayıtlarını ve hâlâ doğrulama gerektiren iddiaları nasıl ayırdığımızı görün.",
+      "button": "Araştırma merkezini aç"
+    },
     "cards": {
       "emailSecurity": {
         "title": "E-posta Güvenliği Kontrolü",
@@ -1129,7 +1146,8 @@
       "privacyNote": "Sonuçlar yalnızca tarayıcınızda gösterilir, sunucumuza kaydedilmez.",
       "ctaTitle": "VPN korumasını daha iyi anlamak ister misiniz?",
       "ctaBody": "Resmi kaynakları ve bağımsız denetimleri karşılaştıran VPN profillerini inceleyin.",
-      "ctaButton": "Sağlayıcı profillerini oku"
+      "ctaButton": "Sağlayıcı profillerini oku",
+      "downloadReport": "Raporu indir"
     },
     "ip": {
       "metaTitle": "IP Adresim Ne? - Ücretsiz IP Adresi Sorgulama 2026 | VPN Advisor",
@@ -1189,7 +1207,10 @@
       "signalNo": "Hayır",
       "signalUnknown": "Bilinmiyor",
       "explainTitle": "Bu VPN/IP testi ne gösterir?",
-      "explainBody": "Bu araç web sitelerine görünen genel IP adresinizi, yaklaşık konumunuzu, sağlayıcı bilgilerini ve varsa risk sinyallerini kontrol eder. Trafiğinizi incelemez, cihazınıza bir şey kurmaz ve API anahtarlarını tarayıcıya göndermez."
+      "explainBody": "Bu araç web sitelerine görünen genel IP adresinizi, yaklaşık konumunuzu, sağlayıcı bilgilerini ve varsa risk sinyallerini kontrol eder. Trafiğinizi incelemez, cihazınıza bir şey kurmaz ve API anahtarlarını tarayıcıya göndermez.",
+      "reportCopy": "Raporu kopyala",
+      "reportCopied": "Rapor kopyalandı",
+      "reportDownload": "Raporu indir"
     },
     "emailSecurity": {
       "metaTitle": "E-posta Güvenliği Kontrolü - Ücretsiz Sızıntı, SPF, DMARC ve MX Testi | VPN Advisor",
@@ -1263,7 +1284,11 @@
         "role_account": "Paylaşılan rol hesapları risklidir. Benzersiz kullanıcı, güçlü parola ve 2FA kullanın."
       },
       "explainTitle": "Bu e-posta güvenliği kontrolü ne yapar?",
-      "explainBody": "Araç e-posta formatını doğrular, domainin MX, SPF ve DMARC kayıtlarını gerçek zamanlı DNS sorgularıyla kontrol eder, yaygın geçici veya paylaşılan rol adreslerini işaretler ve bilinen sızıntılarda eşleşme arar (HIBP anahtarı varsa Have I Been Pwned, yoksa XposedOrNot). Sonuçlar simülasyon değildir."
+      "explainBody": "Araç e-posta formatını doğrular, domainin MX, SPF ve DMARC kayıtlarını gerçek zamanlı DNS sorgularıyla kontrol eder, yaygın geçici veya paylaşılan rol adreslerini işaretler ve bilinen sızıntılarda eşleşme arar (HIBP anahtarı varsa Have I Been Pwned, yoksa XposedOrNot). Sonuçlar simülasyon değildir.",
+      "scoreCaveat": "Bu puan görülebilen sinyaller için bir önceliklendirme göstergesidir; hesabın veya posta kutusunun güvenli olduğunu sertifikalandırmaz.",
+      "reportCopy": "Raporu kopyala",
+      "reportCopied": "Rapor kopyalandı",
+      "reportDownload": "Raporu indir"
     },
     "dns": {
       "metaTitle": "DNS Çözümleyici Kontrolü 2026 - Ücretsiz | VPN Advisor",
@@ -1274,6 +1299,10 @@
       "startButton": "Testi başlat",
       "resultsTitle": "Test Sonuçları",
       "detectedServers": "Tespit edilen DNS sunucuları",
+      "observedAnswers": "Gözlenen prob yanıtları",
+      "answerCount": "Benzersiz yanıt sayısı",
+      "ttl": "TTL",
+      "unknown": "Prob yanıtı alınamadı",
       "experimentalTitle": "Deneysel araç — sistem DNS'inizi test etmez",
       "experimentalBody": "Bu test sorguları doğrudan Cloudflare DoH (1.1.1.1) üzerinden yapar; işletim sisteminizin gerçek DNS çözümleyicisini ölçmez. Güvenilir bir DNS sızıntı testi için dnsleaktest.com gibi sunucu taraflı bir araç kullanın. Aşağıda Cloudflare'ın bildirdiği çözümleyiciler listelenir.",
       "noLeak": "Tek çözümleyici gözlendi",
@@ -1281,7 +1310,10 @@
       "noLeakBody": "Bu araçta tek bir çözümleyici sinyali gözlendi. Bunun VPN sağlayıcınıza ait olduğunu ve tüm uygulama trafiğini kapsadığını ayrıca doğrulayın.",
       "leakBody": "Birden fazla çözümleyici sinyali gözlendi. Bu sonuç, sisteminizdeki tüm DNS trafiğinin kesin kanıtı değildir; farklı bir sunucu taraflı araçla karşılaştırın.",
       "explainTitle": "DNS sızıntısı nedir, neden tehlikeli?",
-      "explainBody": "DNS, alan adlarını IP adreslerine çevirir. VPN kullansanız bile yanlış yapılandırma yüzünden DNS sorguları ISS'nize gidebilir. Bu, geçmişinizi ISS'nizin görebilmesi anlamına gelir."
+      "explainBody": "DNS, alan adlarını IP adreslerine çevirir. VPN kullansanız bile yanlış yapılandırma yüzünden DNS sorguları ISS'nize gidebilir. Bu, geçmişinizi ISS'nizin görebilmesi anlamına gelir.",
+      "reportCopy": "Raporu kopyala",
+      "reportCopied": "Rapor kopyalandı",
+      "reportDownload": "Raporu indir"
     },
     "webrtc": {
       "metaTitle": "WebRTC Sızıntı Testi - Gerçek IP Açığa Çıkıyor mu? | VPN Advisor",
@@ -1299,10 +1331,14 @@
       "noIps": "IP tespit edilemedi",
       "noLeakBody": "Bu taramada WebRTC üzerinden public IP sinyali gözlenmedi. Bu sonuç tüm ağ koşullarında garanti değildir.",
       "leakBody": "WebRTC bir public IP sinyali döndürdü. Tarayıcı izinlerini ve VPN yapılandırmasını inceleyip farklı bir ağda tekrar kontrol edin.",
+      "candidateCount": "Gözlenen ICE adayları",
       "fixTitle": "WebRTC nasıl devre dışı bırakılır?",
       "fixChrome": "Chrome: WebRTC Network Limiter eklentisini kurun.",
       "fixFirefox": "Firefox: about:config sayfasından media.peerconnection.enabled değerini false yapın.",
-      "fixBrave": "Brave: Ayarlar > Gizlilik > WebRTC IP işleme politikasını 'Default Public Interface Only' yapın."
+      "fixBrave": "Brave: Ayarlar > Gizlilik > WebRTC IP işleme politikasını 'Default Public Interface Only' yapın.",
+      "reportCopy": "Raporu kopyala",
+      "reportCopied": "Rapor kopyalandı",
+      "reportDownload": "Raporu indir"
     },
     "speed": {
       "metaTitle": "VPN Hız Karşılaştırma Aracı - Ücretsiz | VPN Advisor",
@@ -1313,13 +1349,28 @@
       "startButton": "Hız testini başlat",
       "downloadSpeed": "İndirme hızı",
       "latency": "Gecikme",
+      "jitter": "Gecikme dalgalanması",
       "fileSize": "Test dosyası boyutu",
       "error": "Hız testi tamamlanamadı. Ağ bağlantınızı kontrol edip tekrar deneyin — bazı kurumsal ağlar veya reklam engelleyiciler Cloudflare test sunucusunu engelleyebilir.",
       "embedTitle": "Cloudflare Hız Testi",
       "embedNote": "Daha kapsamlı test için Cloudflare'ın resmi aracını kullanın.",
       "openCloudflare": "speed.cloudflare.com'u aç",
       "explainTitle": "VPN ile hız düşüşü ne kadar normal?",
-      "explainBody": "VPN, trafiğinizi şifreler ve ek bir rota üzerinden yönlendirir. Hız ve gecikme; cihaz, protokol, sunucu mesafesi, ISS rotası ve yoğunluğa göre değişir. Sabit bir yüzdeyi genellemek yerine aynı koşullarda tekrar ölçün."
+      "explainBody": "VPN, trafiğinizi şifreler ve ek bir rota üzerinden yönlendirir. Hız ve gecikme; cihaz, protokol, sunucu mesafesi, ISS rotası ve yoğunluğa göre değişir. Sabit bir yüzdeyi genellemek yerine aynı koşullarda tekrar ölçün.",
+      "saveBaseline": "Temel değer olarak kaydet",
+      "baselineSaved": "Temel değer kaydedildi",
+      "comparisonTitle": "Temel değer karşılaştırması",
+      "comparisonHint": "Bir kez test edin ve sonucu temel değer olarak kaydedin (örneğin VPN kapalıyken); sonra benzer koşullarda tekrar çalıştırın.",
+      "downloadChange": "İndirme değişimi",
+      "latencyChange": "Gecikme değişimi",
+      "downloadImproved": "temel değerden daha yüksek hız",
+      "downloadReduced": "temel değerden daha düşük hız",
+      "latencyImproved": "temel değerden daha düşük gecikme",
+      "latencyIncreased": "temel değerden daha yüksek gecikme",
+      "unchanged": "anlamlı değişiklik yok",
+      "reportCopy": "Raporu kopyala",
+      "reportCopied": "Rapor kopyalandı",
+      "reportDownload": "Raporu indir"
     }
   }
 }

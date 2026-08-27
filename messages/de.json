@@ -18,6 +18,7 @@
     "guides": "Ratgeber",
     "tools": "Tools",
     "methodology": "Quellenmethodik",
+    "research": "Forschung",
     "about": "Über uns",
     "search": "Suchen",
     "menu": "Menü",
@@ -148,6 +149,7 @@
       "sitemap": "Sitemap",
       "cancel": "Kündigung & Erstattung",
       "security": "Sicherheitstools",
+      "research": "Forschung",
       "legalNotice": "Rechtlicher Hinweis"
     },
     "socialSoon": "Social-Media-Kanäle folgen.",
@@ -1116,6 +1118,21 @@
     "indexTitle": "Kostenlose Sicherheits- und VPN-Diagnosetools",
     "indexSubtitle": "Starten Sie mit dem E-Mail-Sicherheitscheck und prüfen Sie danach IP-, DNS-, WebRTC- und Geschwindigkeitssignale. Die Tools beschreiben Ihre aktuelle Verbindung, keinen Anbieter-Test.",
     "featuredLabel": "Empfohlen",
+    "workflow": {
+      "title": "Praktischen Privatsphäre-Check durchführen",
+      "subtitle": "Nutzen Sie die Tools nacheinander, um zu verstehen, welche Signale Ihre aktuelle Verbindung preisgibt. Speichern Sie die Berichte bei Bedarf für spätere Vergleiche.",
+      "steps": [
+        ["Sichtbarkeit", "Prüfen Sie mit dem VPN/IP-Test die für Websites sichtbaren Netzwerksignale.", "/vpn-test", "VPN/IP-Test öffnen"],
+        ["Browser-Exposition", "Prüfen Sie, ob diese Browsersitzung öffentliche IP-Kandidaten über WebRTC zeigt.", "/tools/webrtc-leak-test", "WebRTC-Prüfung öffnen"],
+        ["DNS-Pfad", "Führen Sie die DNS-Browserprüfung aus und beachten Sie ihren Umfang vor einer Bewertung.", "/tools/dns-leak-test", "DNS-Probe öffnen"],
+        ["Leistung", "Führen Sie zwei vergleichbare Geschwindigkeitstests aus und speichern Sie den ersten als Basiswert.", "/tools/vpn-speed-test", "Geschwindigkeitsvergleich öffnen"]
+      ]
+    },
+    "researchCta": {
+      "title": "Der Belegstandard hinter diesen Tools",
+      "body": "Sehen Sie, wie wir Live-Verbindungssignale, Anbieterunterlagen, unabhängige Auditberichte und noch zu prüfende Aussagen trennen.",
+      "button": "Forschungsbereich öffnen"
+    },
     "cards": {
       "emailSecurity": {
         "title": "E-Mail-Sicherheitscheck",
@@ -1150,7 +1167,8 @@
       "privacyNote": "Die Ergebnisse bleiben im Browser. Wir speichern diese Daten nicht.",
       "ctaTitle": "Sie möchten VPN-Schutz besser verstehen?",
       "ctaBody": "Vergleichen Sie die besten VPNs aus unserer unabhängigen Methodik.",
-      "ctaButton": "Anbieterprofile lesen"
+      "ctaButton": "Anbieterprofile lesen",
+      "downloadReport": "Bericht herunterladen"
     },
     "ip": {
       "metaTitle": "What is My IP? - Free IP Address Lookup 2026 | VPN Advisor",
@@ -1210,7 +1228,10 @@
       "signalNo": "Nein",
       "signalUnknown": "Unbekannt",
       "explainTitle": "Was dieser VPN/IP-Test zeigt",
-      "explainBody": "Das Tool prüft die für Websites sichtbare Öffentliche IP, ungefähren Standort, Providerdaten und optionale Risikosignale."
+      "explainBody": "Das Tool prüft die für Websites sichtbare Öffentliche IP, ungefähren Standort, Providerdaten und optionale Risikosignale.",
+      "reportCopy": "Bericht kopieren",
+      "reportCopied": "Bericht kopiert",
+      "reportDownload": "Bericht herunterladen"
     },
     "emailSecurity": {
       "metaTitle": "E-Mail-Sicherheitscheck - Kostenloser Leak-, SPF-, DMARC- und MX-Test | VPN Advisor",
@@ -1284,7 +1305,11 @@
         "role_account": "Rollenadressen werden oft geteilt. Nutzen Sie eindeutige Benutzer, starke Passwörter und 2FA."
       },
       "explainTitle": "Was dieser E-Mail-Sicherheitscheck macht",
-      "explainBody": "Das Tool validiert das E-Mail-Format, prüft MX-, SPF- und DMARC-Einträge der Domain per Live-DNS, markiert häufige Wegwerf- oder Rollenadressen und sucht in Leak-Datenbanken (Have I Been Pwned wenn konfiguriert, sonst XposedOrNot). Die Ergebnisse sind keine Simulation."
+      "explainBody": "Das Tool validiert das E-Mail-Format, prüft MX-, SPF- und DMARC-Einträge der Domain per Live-DNS, markiert häufige Wegwerf- oder Rollenadressen und sucht in Leak-Datenbanken (Have I Been Pwned wenn konfiguriert, sonst XposedOrNot). Die Ergebnisse sind keine Simulation.",
+      "scoreCaveat": "Dies ist eine Triage-Bewertung sichtbarer Signale und keine Zertifizierung der Sicherheit des Kontos oder Postfachs.",
+      "reportCopy": "Bericht kopieren",
+      "reportCopied": "Bericht kopiert",
+      "reportDownload": "Bericht herunterladen"
     },
     "dns": {
       "metaTitle": "DNS-Resolver-Signale 2026 - Kostenlos | VPN Advisor",
@@ -1295,6 +1320,10 @@
       "startButton": "Start test",
       "resultsTitle": "Test results",
       "detectedServers": "Detected DNS servers",
+      "observedAnswers": "Beobachtete Probeantworten",
+      "answerCount": "Eindeutige Antworten",
+      "ttl": "TTL",
+      "unknown": "Keine Probeantwort erhalten",
       "experimentalTitle": "Experimental tool — does not test your system DNS",
       "experimentalBody": "Diese Browserprüfung fragt Cloudflare DoH (1.1.1.1) ab und misst nicht den vollständigen DNS-Pfad Ihres Betriebssystems. Vergleichen Sie ein serverseitiges Tool mit der Anbieterdokumentation.",
       "noLeak": "Ein Resolver-Signal beobachtet",
@@ -1302,7 +1331,10 @@
       "noLeakBody": "In dieser Browserprüfung erschien ein Resolver-Signal. Prüfen Sie Eigentümer und andere Anwendungen separat.",
       "leakBody": "Mehrere Resolver-Signale erschienen. Das beweist nicht, dass jede DNS-Anfrage über den ISP läuft; vergleichen Sie eine weitere serverseitige Prüfung.",
       "explainTitle": "What is a DNS leak, why is it dangerous?",
-      "explainBody": "DNS translates domain names into IP addresses. Even when you use a VPN, misconfiguration can route DNS queries to your ISP, exposing your browsing history."
+      "explainBody": "DNS translates domain names into IP addresses. Even when you use a VPN, misconfiguration can route DNS queries to your ISP, exposing your browsing history.",
+      "reportCopy": "Bericht kopieren",
+      "reportCopied": "Bericht kopiert",
+      "reportDownload": "Bericht herunterladen"
     },
     "webrtc": {
       "metaTitle": "WebRTC-Signalprüfung - Sichtbarkeit öffentlicher IP | VPN Advisor",
@@ -1320,10 +1352,14 @@
       "noIps": "No IPs detected",
       "noLeakBody": "In dieser Prüfung erschien kein öffentliches IP-Signal über WebRTC. Das garantiert nicht jeden Netzwerk- oder Browserkontext.",
       "leakBody": "WebRTC lieferte ein öffentliches IP-Signal. Prüfen Sie Browserberechtigungen und VPN-Einstellungen und vergleichen Sie ein weiteres Netzwerk.",
+      "candidateCount": "Beobachtete ICE-Kandidaten",
       "fixTitle": "How to disable WebRTC",
       "fixChrome": "Chrome: install the WebRTC Network Limiter extension.",
       "fixFirefox": "Firefox: open about:config and set media.peerconnection.enabled to false.",
-      "fixBrave": "Brave: Settings > Privacy > WebRTC IP handling policy = Default Public Interface Only."
+      "fixBrave": "Brave: Settings > Privacy > WebRTC IP handling policy = Default Public Interface Only.",
+      "reportCopy": "Bericht kopieren",
+      "reportCopied": "Bericht kopiert",
+      "reportDownload": "Bericht herunterladen"
     },
     "speed": {
       "metaTitle": "VPN-Geschwindigkeitsvergleich - Kostenlose Verbindungsdiagnose 2026 | VPN Advisor",
@@ -1334,13 +1370,28 @@
       "startButton": "Start speed test",
       "downloadSpeed": "Download speed",
       "latency": "Latency",
+      "jitter": "Latenz-Jitter",
       "fileSize": "Test payload size",
       "error": "The speed test could not complete. Check your connection and try again — some corporate networks or ad blockers may block the Cloudflare test server.",
       "embedTitle": "Cloudflare Speed Test",
       "embedNote": "For a more in-depth test use Cloudflare's official tool.",
       "openCloudflare": "Open speed.cloudflare.com",
       "explainTitle": "Wie sind Geschwindigkeitsänderungen zu verstehen?",
-      "explainBody": "Ein VPN kann Verschlüsselung und einen neuen Weg hinzufügen. Die Änderung hängt von Gerät, WLAN, ISP, Route, Serverlast und Protokoll ab; es gibt keinen universellen Prozentsatz. Wiederholen Sie vergleichbare Prüfungen, bevor Sie schließen."
+      "explainBody": "Ein VPN kann Verschlüsselung und einen neuen Weg hinzufügen. Die Änderung hängt von Gerät, WLAN, ISP, Route, Serverlast und Protokoll ab; es gibt keinen universellen Prozentsatz. Wiederholen Sie vergleichbare Prüfungen, bevor Sie schließen.",
+      "saveBaseline": "Als Basiswert speichern",
+      "baselineSaved": "Basiswert gespeichert",
+      "comparisonTitle": "Vergleich mit dem Basiswert",
+      "comparisonHint": "Führen Sie einen Test aus und speichern Sie ihn als Basiswert (zum Beispiel mit deaktiviertem VPN). Testen Sie danach unter vergleichbaren Bedingungen erneut.",
+      "downloadChange": "Download-Änderung",
+      "latencyChange": "Latenz-Änderung",
+      "downloadImproved": "höherer Durchsatz als der Basiswert",
+      "downloadReduced": "niedrigerer Durchsatz als der Basiswert",
+      "latencyImproved": "niedrigere Latenz als der Basiswert",
+      "latencyIncreased": "höhere Latenz als der Basiswert",
+      "unchanged": "praktisch unverändert",
+      "reportCopy": "Bericht kopieren",
+      "reportCopied": "Bericht kopiert",
+      "reportDownload": "Bericht herunterladen"
     }
   }
 }

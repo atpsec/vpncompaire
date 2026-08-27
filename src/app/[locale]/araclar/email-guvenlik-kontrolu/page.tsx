@@ -90,6 +90,10 @@ function EmailSecurityView() {
     breachTitle: t("breachTitle"),
     recommendationsTitle: t("recommendationsTitle"),
     noFindings: t("noFindings"),
+    scoreCaveat: t("scoreCaveat"),
+    reportCopy: tCommon("copy"),
+    reportCopied: tCommon("copied"),
+    reportDownload: tCommon("downloadReport"),
     mx: {
       title: t("mx.title"),
       pass: t("mx.pass"),

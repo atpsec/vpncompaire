@@ -16,6 +16,7 @@ const staticEntries = [
   ["/devices", 0.8, "weekly"],
   ["/tools", 0.8, "weekly"],
   ["/methodology", 0.75, "monthly"],
+  ["/research", 0.9, "weekly"],
   ["/about", 0.5, "monthly"],
   ["/contact", 0.4, "yearly"],
   ["/affiliate-disclosure", 0.5, "monthly"],

@@ -59,8 +59,23 @@ function SpeedTestView() {
     tryAgain: tCommon("tryAgain"),
     downloadSpeed: t("downloadSpeed"),
     latency: t("latency"),
+    jitter: t("jitter"),
     fileSize: t("fileSize"),
     error: t("error"),
+    saveBaseline: t("saveBaseline"),
+    baselineSaved: t("baselineSaved"),
+    comparisonTitle: t("comparisonTitle"),
+    comparisonHint: t("comparisonHint"),
+    downloadChange: t("downloadChange"),
+    latencyChange: t("latencyChange"),
+    downloadImproved: t("downloadImproved"),
+    downloadReduced: t("downloadReduced"),
+    latencyImproved: t("latencyImproved"),
+    latencyIncreased: t("latencyIncreased"),
+    unchanged: t("unchanged"),
+    reportCopy: t("reportCopy"),
+    reportCopied: t("reportCopied"),
+    reportDownload: t("reportDownload"),
   };
 
   return (

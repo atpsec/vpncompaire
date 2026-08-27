@@ -4,19 +4,25 @@ import { useState } from "react";
 import { Info, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ResultActions } from "@/components/tools/ResultActions";
 
 type Labels = {
   start: string;
   loading: string;
   resultsTitle: string;
-  detectedServers: string;
   experimentalTitle: string;
   experimentalBody: string;
   tryAgain: string;
   unknown: string;
+  observedAnswers: string;
+  answerCount: string;
+  ttl: string;
+  reportCopy: string;
+  reportCopied: string;
+  reportDownload: string;
 };
 
-type DnsRecord = { server: string; ttl: string };
+type DnsRecord = { domain: string; answer: string; ttl: string };
 
 async function queryDoh(domain: string): Promise<DnsRecord | null> {
   try {
@@ -29,7 +35,7 @@ async function queryDoh(domain: string): Promise<DnsRecord | null> {
       await res.json();
     const first = data.Answer?.[0];
     if (!first) return null;
-    return { server: first.data, ttl: String(first.TTL) };
+    return { domain, answer: first.data, ttl: String(first.TTL) };
   } catch {
     return null;
   }
@@ -53,7 +59,14 @@ export function DnsLeakTester({ labels }: { labels: Labels }) {
     setStatus("done");
   };
 
-  const uniqueServers = new Set(records.map((r) => r.server));
+  const uniqueAnswers = new Set(records.map((r) => r.answer));
+  const report = [
+    "VPN Advisor — DNS browser probe",
+    `Probes completed: ${records.length}`,
+    `Unique DNS answers observed: ${uniqueAnswers.size}`,
+    ...records.map((record) => `${record.domain}: ${record.answer} (TTL ${record.ttl}s)`),
+    "Important limitation: This browser probe queries Cloudflare DoH and does not identify the operating system's resolver or prove a system-wide DNS leak.",
+  ].join("\n");
 
   return (
     <div className="mt-8">
@@ -92,24 +105,38 @@ export function DnsLeakTester({ labels }: { labels: Labels }) {
 
           <div className="mt-6">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-ink-muted">
-              {labels.detectedServers}
+              {labels.observedAnswers}
             </h3>
+            <p className="mt-2 text-sm text-ink-muted">
+              {labels.answerCount}: {uniqueAnswers.size}
+            </p>
             {records.length === 0 ? (
               <p className="mt-2 font-mono text-sm text-ink-muted">
                 {labels.unknown}
               </p>
             ) : (
-              <ul className="mt-2 space-y-1">
-                {[...uniqueServers].map((server) => (
+              <ul className="mt-3 space-y-2">
+                {records.map((record) => (
                   <li
-                    key={server}
-                    className="break-all font-mono text-sm text-ink-strong"
+                    key={`${record.domain}-${record.answer}`}
+                    className="rounded-lg border border-border bg-surface-subtle p-3 text-sm"
                   >
-                    {server}
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <code className="break-all font-semibold text-ink-strong">{record.domain}</code>
+                      <span className="text-xs text-ink-muted">{labels.ttl}: {record.ttl}s</span>
+                    </div>
+                    <code className="mt-1 block break-all text-ink-muted">{record.answer}</code>
                   </li>
                 ))}
               </ul>
             )}
+            <ResultActions
+              copyText={report}
+              fileName="vpn-advisor-dns-probe.txt"
+              copyLabel={labels.reportCopy}
+              copiedLabel={labels.reportCopied}
+              downloadLabel={labels.reportDownload}
+            />
           </div>
         </Card>
       )}

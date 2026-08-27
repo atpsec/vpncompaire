@@ -93,6 +93,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/research"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {tNav("research")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="text-ink-muted hover:text-ink"
                 >

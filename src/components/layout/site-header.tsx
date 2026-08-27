@@ -21,6 +21,7 @@ export function SiteHeader() {
     { href: "/quiz", labelKey: "quiz" },
     { href: "/devices", labelKey: "devices" },
     { href: "/tools", labelKey: "tools" },
+    { href: "/research", labelKey: "research" },
     { href: getLocalizedLinkHref({ locale, section: "guide" }), labelKey: "guides" },
   ] as const;
 

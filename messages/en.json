@@ -18,6 +18,7 @@
     "guides": "Guides",
     "tools": "Tools",
     "methodology": "Source methodology",
+    "research": "Research",
     "about": "About",
     "search": "Search",
     "menu": "Menu",
@@ -148,6 +149,7 @@
       "sitemap": "Sitemap",
       "cancel": "Cancel & refund",
       "security": "Security tools",
+      "research": "Research",
       "legalNotice": "Legal notice"
     },
     "socialSoon": "Social media accounts coming soon.",
@@ -1095,6 +1097,21 @@
     "indexTitle": "Free Security and VPN Diagnostic Tools",
     "indexSubtitle": "Start with the email security check, then inspect IP, DNS, WebRTC and VPN speed signals. These tools describe your current connection, not a provider-wide test.",
     "featuredLabel": "Featured",
+    "workflow": {
+      "title": "Run a practical privacy checkup",
+      "subtitle": "Use the tools in sequence to understand what your current connection exposes. Save the report from each check if you need to compare settings later.",
+      "steps": [
+        ["Visibility", "Run the VPN/IP test to see the public network signals visible to websites.", "/vpn-test", "Open the VPN/IP test"],
+        ["Browser exposure", "Check WebRTC for public IP candidates exposed by this browser session.", "/tools/webrtc-leak-test", "Open the WebRTC check"],
+        ["DNS path", "Run the DNS browser probe and read its scope before treating it as evidence.", "/tools/dns-leak-test", "Open the DNS probe"],
+        ["Performance", "Run two comparable speed checks and save the first as your baseline.", "/tools/vpn-speed-test", "Open the speed comparison"]
+      ]
+    },
+    "researchCta": {
+      "title": "The evidence standard behind these tools",
+      "body": "See how VPN Advisor separates live connection signals, provider documentation, independent audit records and claims that still need verification.",
+      "button": "Open the research desk"
+    },
     "cards": {
       "emailSecurity": {
         "title": "Email Security Check",
@@ -1129,7 +1146,8 @@
       "privacyNote": "Results stay in your browser. We never log this data.",
       "ctaTitle": "Want to understand VPN protection?",
       "ctaBody": "Compare provider profiles using official sources and independent audits.",
-      "ctaButton": "Read provider profiles"
+      "ctaButton": "Read provider profiles",
+      "downloadReport": "Download report"
     },
     "ip": {
       "metaTitle": "What is My IP? - Free IP Address Lookup 2026 | VPN Advisor",
@@ -1189,7 +1207,10 @@
       "signalNo": "No",
       "signalUnknown": "Unknown",
       "explainTitle": "What this VPN/IP test shows",
-      "explainBody": "This tool checks the public IP address visible to websites, approximate location, provider details and optional risk signals. It does not inspect your traffic, install anything or expose API keys in the browser."
+      "explainBody": "This tool checks the public IP address visible to websites, approximate location, provider details and optional risk signals. It does not inspect your traffic, install anything or expose API keys in the browser.",
+      "reportCopy": "Copy report",
+      "reportCopied": "Report copied",
+      "reportDownload": "Download report"
     },
     "emailSecurity": {
       "metaTitle": "Email Security Check - Free Breach, SPF, DMARC and MX Test | VPN Advisor",
@@ -1263,7 +1284,11 @@
         "role_account": "Role accounts are often shared. Use unique users, strong passwords and 2FA."
       },
       "explainTitle": "What this email security check does",
-      "explainBody": "The tool validates the email format, checks the domain's MX, SPF and DMARC records via live DNS queries, flags common disposable or shared role addresses and searches known breach databases (Have I Been Pwned when configured, otherwise XposedOrNot). Results are not simulated."
+      "explainBody": "The tool validates the email format, checks the domain's MX, SPF and DMARC records via live DNS queries, flags common disposable or shared role addresses and searches known breach databases (Have I Been Pwned when configured, otherwise XposedOrNot). Results are not simulated.",
+      "scoreCaveat": "This is a triage score for visible signals, not a certification that the account or mailbox is secure.",
+      "reportCopy": "Copy report",
+      "reportCopied": "Report copied",
+      "reportDownload": "Download report"
     },
     "dns": {
       "metaTitle": "DNS Resolver Signals 2026 - Free | VPN Advisor",
@@ -1274,6 +1299,10 @@
       "startButton": "Start test",
       "resultsTitle": "Test results",
       "detectedServers": "Detected DNS servers",
+      "observedAnswers": "Observed probe answers",
+      "answerCount": "Unique answers",
+      "ttl": "TTL",
+      "unknown": "No probe response returned",
       "experimentalTitle": "Experimental tool — does not test your system DNS",
       "experimentalBody": "This browser check queries Cloudflare DoH (1.1.1.1); it does not measure your operating system's complete DNS path. Compare with a server-side tool and your provider documentation.",
       "noLeak": "Single resolver signal observed",
@@ -1281,7 +1310,10 @@
       "noLeakBody": "One resolver signal appeared in this browser check. Verify its ownership and whether other applications use the same path.",
       "leakBody": "Multiple resolver signals appeared. This is not proof that every DNS query leaves through the ISP; compare with another server-side check.",
       "explainTitle": "What is a DNS leak, why is it dangerous?",
-      "explainBody": "DNS translates domain names into IP addresses. Even when you use a VPN, misconfiguration can route DNS queries to your ISP, exposing your browsing history."
+      "explainBody": "DNS translates domain names into IP addresses. Even when you use a VPN, misconfiguration can route DNS queries to your ISP, exposing your browsing history.",
+      "reportCopy": "Copy report",
+      "reportCopied": "Report copied",
+      "reportDownload": "Download report"
     },
     "webrtc": {
       "metaTitle": "WebRTC Signal Check - Public IP Visibility | VPN Advisor",
@@ -1299,10 +1331,14 @@
       "noIps": "No IPs detected",
       "noLeakBody": "No public IP signal appeared through WebRTC in this check. This does not guarantee every network or browser context.",
       "leakBody": "WebRTC returned a public IP signal. Review browser permissions and VPN settings, then compare on another network.",
+      "candidateCount": "ICE candidates observed",
       "fixTitle": "How to disable WebRTC",
       "fixChrome": "Chrome: install the WebRTC Network Limiter extension.",
       "fixFirefox": "Firefox: open about:config and set media.peerconnection.enabled to false.",
-      "fixBrave": "Brave: Settings > Privacy > WebRTC IP handling policy = Default Public Interface Only."
+      "fixBrave": "Brave: Settings > Privacy > WebRTC IP handling policy = Default Public Interface Only.",
+      "reportCopy": "Copy report",
+      "reportCopied": "Report copied",
+      "reportDownload": "Download report"
     },
     "speed": {
       "metaTitle": "VPN Speed Comparison - Free Connection Diagnostic 2026 | VPN Advisor",
@@ -1313,13 +1349,28 @@
       "startButton": "Start speed test",
       "downloadSpeed": "Download speed",
       "latency": "Latency",
+      "jitter": "Latency jitter",
       "fileSize": "Test payload size",
       "error": "The speed test could not complete. Check your connection and try again — some corporate networks or ad blockers may block the Cloudflare test server.",
       "embedTitle": "Cloudflare Speed Test",
       "embedNote": "For a more in-depth test use Cloudflare's official tool.",
       "openCloudflare": "Open speed.cloudflare.com",
       "explainTitle": "How should you interpret VPN speed changes?",
-      "explainBody": "A VPN can add encryption and a new route. The change depends on device, Wi-Fi, ISP, route, server load and protocol; there is no universal percentage. Repeat comparable checks before drawing a conclusion."
+      "explainBody": "A VPN can add encryption and a new route. The change depends on device, Wi-Fi, ISP, route, server load and protocol; there is no universal percentage. Repeat comparable checks before drawing a conclusion.",
+      "saveBaseline": "Save as baseline",
+      "baselineSaved": "Baseline saved",
+      "comparisonTitle": "Baseline comparison",
+      "comparisonHint": "Run once, save that result as a baseline (for example with VPN off), then run again under comparable conditions.",
+      "downloadChange": "Download change",
+      "latencyChange": "Latency change",
+      "downloadImproved": "higher throughput than baseline",
+      "downloadReduced": "lower throughput than baseline",
+      "latencyImproved": "lower latency than baseline",
+      "latencyIncreased": "higher latency than baseline",
+      "unchanged": "effectively unchanged",
+      "reportCopy": "Copy report",
+      "reportCopied": "Report copied",
+      "reportDownload": "Download report"
     }
   }
 }

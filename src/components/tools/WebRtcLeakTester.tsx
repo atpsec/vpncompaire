@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AlertTriangle, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ResultActions } from "@/components/tools/ResultActions";
 
 type Labels = {
   start: string;
@@ -18,6 +19,10 @@ type Labels = {
   noLeakBody: string;
   leakBody: string;
   tryAgain: string;
+  candidateCount: string;
+  reportCopy: string;
+  reportCopied: string;
+  reportDownload: string;
 };
 
 type Detected = { ip: string; type: "local" | "public" };
@@ -81,18 +86,30 @@ async function detect(): Promise<Detected[]> {
 export function WebRtcLeakTester({ labels }: { labels: Labels }) {
   const [status, setStatus] = useState<"idle" | "loading" | "done">("idle");
   const [results, setResults] = useState<Detected[]>([]);
+  const [checkedAt, setCheckedAt] = useState<string | null>(null);
 
   const run = async () => {
     setStatus("loading");
     setResults([]);
     const detected = await detect();
     setResults(detected);
+    setCheckedAt(new Date().toISOString());
     setStatus("done");
   };
 
   const publicIps = results.filter((r) => r.type === "public");
   const localIps = results.filter((r) => r.type === "local");
   const leak = publicIps.length > 0;
+  const report = [
+    "VPN Advisor — WebRTC signal check",
+    `Checked: ${checkedAt ?? "unknown"}`,
+    `Candidates observed: ${results.length}`,
+    `Public IP signals: ${publicIps.length}`,
+    `Local IP signals: ${localIps.length}`,
+    `Public candidates: ${publicIps.map((item) => item.ip).join(", ") || "none"}`,
+    `Local candidates: ${localIps.map((item) => item.ip).join(", ") || "none"}`,
+    "Important limitation: A clean result means no public candidate appeared in this browser check; it is not a universal leak guarantee.",
+  ].join("\n");
 
   return (
     <div className="mt-8">
@@ -120,6 +137,9 @@ export function WebRtcLeakTester({ labels }: { labels: Labels }) {
           <h2 className="text-lg font-bold text-ink-strong">
             {labels.resultsTitle}
           </h2>
+          <p className="mt-1 text-sm text-ink-muted">
+            {labels.candidateCount}: {results.length} · {labels.publicIp}: {publicIps.length} · {labels.localIp}: {localIps.length}
+          </p>
 
           <div
             className={`mt-4 flex items-start gap-3 rounded-lg border p-4 ${
@@ -187,6 +207,13 @@ export function WebRtcLeakTester({ labels }: { labels: Labels }) {
               )}
             </div>
           </div>
+          <ResultActions
+            copyText={report}
+            fileName="vpn-advisor-webrtc-report.txt"
+            copyLabel={labels.reportCopy}
+            copiedLabel={labels.reportCopied}
+            downloadLabel={labels.reportDownload}
+          />
         </Card>
       )}
     </div>

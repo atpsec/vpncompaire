@@ -60,7 +60,13 @@ function DnsLeakView() {
     experimentalTitle: t("experimentalTitle"),
     experimentalBody: t("experimentalBody"),
     tryAgain: tCommon("tryAgain"),
-    unknown: tCommon("loading"),
+    unknown: t("unknown"),
+    observedAnswers: t("observedAnswers"),
+    answerCount: t("answerCount"),
+    ttl: t("ttl"),
+    reportCopy: t("reportCopy"),
+    reportCopied: t("reportCopied"),
+    reportDownload: t("reportDownload"),
   };
 
   return (

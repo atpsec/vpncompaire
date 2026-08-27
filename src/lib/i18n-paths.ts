@@ -716,6 +716,7 @@ const PUBLIC_ROUTE_MAP: Readonly<Record<string, string>> = {
   "vpn-reviews": "en-iyi-vpn",
   "best-vpn": "en-iyi",
   methodology: "metodoloji",
+  research: "arastirma",
   about: "hakkimizda",
   contact: "iletisim",
   "affiliate-disclosure": "reklam-aciklamasi",

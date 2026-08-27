@@ -29,6 +29,7 @@ Bu dosyada ${catalog.length} ayrıntılı, indekslenebilir VPN sağlayıcı prof
 Öncelik sırası: (1) resmi teknik dokümantasyon ve politikalar, (2) bağımsız güvenlik/no-logs denetimleri, (3) NIST/IETF/Apple/Google/Microsoft gibi standart veya platform belgeleri, (4) bağlam sağlayan güvenilir ikincil kaynaklar. Bir bilgi bağımsız olarak doğrulanamıyorsa kesin gerçek gibi sunulmamalıdır.
 
 Methodology: ${siteConfig.url}/methodology
+Research desk: ${siteConfig.url}/research
 Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
 About: ${siteConfig.url}/about
 
@@ -78,6 +79,7 @@ ${blogIndex}
 - Home: ${siteConfig.url}/
 - VPN provider reviews: ${siteConfig.url}/vpn-reviews
 - Source-based methodology: ${siteConfig.url}/methodology
+- Research desk: ${siteConfig.url}/research
 - AI privacy hub: ${siteConfig.url}/ai
 - Blog: ${siteConfig.url}/blog
 - Affiliate disclosure: ${siteConfig.url}/affiliate-disclosure

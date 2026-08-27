@@ -65,6 +65,10 @@ function WebRtcLeakView() {
     noLeakBody: t("noLeakBody"),
     leakBody: t("leakBody"),
     tryAgain: tCommon("tryAgain"),
+    candidateCount: t("candidateCount"),
+    reportCopy: t("reportCopy"),
+    reportCopied: t("reportCopied"),
+    reportDownload: t("reportDownload"),
   };
 
   return (

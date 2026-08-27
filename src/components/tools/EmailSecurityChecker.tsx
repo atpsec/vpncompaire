@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ResultActions } from "@/components/tools/ResultActions";
 
 type CheckStatus = "pass" | "warning" | "fail" | "unknown";
 type Risk = "low" | "medium" | "high";
@@ -80,6 +81,10 @@ type Labels = {
   breachTitle: string;
   recommendationsTitle: string;
   noFindings: string;
+  scoreCaveat: string;
+  reportCopy: string;
+  reportCopied: string;
+  reportDownload: string;
   mx: {
     title: string;
     pass: string;
@@ -217,6 +222,21 @@ export function EmailSecurityChecker({ labels }: { labels: Labels }) {
 
   const risk = result ? riskTone(result.risk) : null;
   const RiskIcon = risk?.icon;
+  const report = result
+    ? [
+        "VPN Advisor — email security check",
+        `Checked: ${result.checkedAt}`,
+        `Address: ${result.emailMasked}`,
+        `Domain: ${result.domain}`,
+        `Triage score: ${result.score}/100 (${result.risk})`,
+        `MX: ${result.domainChecks.mx.status}`,
+        `SPF: ${result.domainChecks.spf.status}`,
+        `DMARC: ${result.domainChecks.dmarc.status}`,
+        `Breach check: ${result.breachCheck.status === "checked" ? (result.breachCheck.found ? "known match" : "no known match") : "unavailable"}`,
+        `Recommendations: ${recommendations.map((finding) => labels.findings[finding]).join(" | ") || labels.noFindings}`,
+        "Important limitation: This is a domain and breach-signal triage result, not a guarantee that an account or mailbox is secure.",
+      ].join("\n")
+    : "";
 
   return (
     <div className="mt-8">
@@ -348,6 +368,9 @@ export function EmailSecurityChecker({ labels }: { labels: Labels }) {
                 <p className="mt-1 text-xs opacity-75">
                   {labels.checkedAt}: {formattedTime(result.checkedAt)}
                 </p>
+                <p className="mt-2 max-w-sm text-xs opacity-75">
+                  {labels.scoreCaveat}
+                </p>
               </div>
             </div>
           </div>
@@ -433,6 +456,14 @@ export function EmailSecurityChecker({ labels }: { labels: Labels }) {
               <p className="mt-3 text-sm text-ink-muted">{labels.noFindings}</p>
             )}
           </Card>
+
+          <ResultActions
+            copyText={report}
+            fileName="vpn-advisor-email-security-report.txt"
+            copyLabel={labels.reportCopy}
+            copiedLabel={labels.reportCopied}
+            downloadLabel={labels.reportDownload}
+          />
         </div>
       )}
     </div>

@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CopyButton } from "@/components/tools/CopyButton";
+import { ResultActions } from "@/components/tools/ResultActions";
 
 type VpnTestResult = {
   ip: string | null;
@@ -73,6 +74,9 @@ type Labels = {
   signalUnknown: string;
   copy: string;
   copied: string;
+  reportCopy: string;
+  reportCopied: string;
+  reportDownload: string;
 };
 
 type Status = "loading" | "done" | "error";
@@ -177,6 +181,23 @@ export function VpnIpDiagnostic({ labels }: { labels: Labels }) {
   }, [labels.detectionClear, labels.detectionDetected, labels.detectionUnavailable, result]);
 
   const DetectionIcon = detectionCopy.icon;
+  const report = result
+    ? [
+        "VPN Advisor — VPN/IP diagnostic",
+        `Checked: ${result.checkedAt}`,
+        `Public IP: ${result.ip ?? labels.unknown}`,
+        `Country: ${displayCountry ?? labels.unknown}`,
+        `City/region: ${[result.city, result.region].filter(Boolean).join(", ") || labels.unknown}`,
+        `ISP / organization: ${result.isp ?? labels.unknown}`,
+        `ASN: ${result.asn ?? labels.unknown}`,
+        `Network type: ${result.networkType ?? labels.unknown}`,
+        `Detection: ${detectionCopy.title}`,
+        ...Object.entries(result.signals).map(
+          ([key, value]) => `${labels.signals[key as keyof Labels["signals"]]}: ${signalLabel(value, labels)}`,
+        ),
+        "Important limitation: VPN, proxy and datacenter detection is heuristic and does not certify privacy or anonymity.",
+      ].join("\n")
+    : "";
 
   return (
     <div className="mt-8">
@@ -344,6 +365,13 @@ export function VpnIpDiagnostic({ labels }: { labels: Labels }) {
               {labels.detectionCaveat}
             </p>
           </Card>
+          <ResultActions
+            copyText={report}
+            fileName="vpn-advisor-vpn-ip-report.txt"
+            copyLabel={labels.reportCopy}
+            copiedLabel={labels.reportCopied}
+            downloadLabel={labels.reportDownload}
+          />
         </div>
       )}
     </div>
