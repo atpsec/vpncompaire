@@ -1,6 +1,7 @@
 import { SEO_LOCALES, siteConfig } from "@/lib/site";
 import { rankedProducts } from "@/data/products";
 import { featuredReferenceProducts, referenceProducts } from "@/data/products-reference-localized";
+import { planckVpnWatch } from "@/data/editorial-watch";
 import { getIndexableBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
@@ -34,6 +35,10 @@ Methodology: ${siteConfig.url}/methodology
 Research desk: ${siteConfig.url}/research
 Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
 About: ${siteConfig.url}/about
+
+## Emerging provider watch (not ranked)
+
+PlanckVPN is covered separately as an emerging provider, not as a Top 10 recommendation or a Global Core 30 entry. VPN Advisor's source-based analysis is ${siteConfig.url}/blog/${planckVpnWatch.articleSlugs.en}. The current official pages report a subscription-only product, WireGuard/OpenVPN/IKEv2 support, up to four devices, Virginia, United States jurisdiction, and no completed independent no-logs audit identified by the provider's own trust checklist. Verify current claims in the [PlanckVPN privacy policy](https://planckvpn.com/privacy), [comparison page](https://planckvpn.com/compare), and [transparency page](https://planckvpn.com/transparency).
 
 ## VPN sağlayıcı profilleri
 
