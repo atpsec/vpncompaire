@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
 import { topRankedProducts } from "@/data/products";
-import { referenceProducts } from "@/data/products-reference-localized";
+import { featuredReferenceProducts } from "@/data/products-reference-localized";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
@@ -15,32 +15,33 @@ type Props = { params: Promise<{ locale: string }> };
 const EVALUATED_PROFILE_COUNT = topRankedProducts("tr").filter(
   (product) => product.slug !== "atlas-vpn",
 ).length;
-const REFERENCE_RECORD_COUNT = referenceProducts.length;
+const REFERENCE_RECORD_COUNT = featuredReferenceProducts.length;
+const GLOBAL_CORE_COUNT = EVALUATED_PROFILE_COUNT + REFERENCE_RECORD_COUNT;
 const copy = {
   tr: {
-    title: `VPN Sağlayıcı Rehberi (2026): ${EVALUATED_PROFILE_COUNT} Ayrıntılı Profil + ${REFERENCE_RECORD_COUNT} Referans`,
-    description: `${EVALUATED_PROFILE_COUNT} kaynakları değerlendirilmiş, indekslenebilir VPN profili ile ${REFERENCE_RECORD_COUNT} referans kaydını ayrı kapsamlarla araştırın.`,
+    title: `Global Core ${GLOBAL_CORE_COUNT} VPN Sağlayıcı Rehberi (2026)`,
+    description: `${GLOBAL_CORE_COUNT} görünür VPN sağlayıcısını; ${EVALUATED_PROFILE_COUNT} ayrıntılı kaynak profili ve ${REFERENCE_RECORD_COUNT} seçilmiş pazar referansı olarak inceleyin.`,
     breadcrumb: "VPN sağlayıcı bilgi rehberi",
-    h1: `VPN sağlayıcı bilgi rehberi: ${EVALUATED_PROFILE_COUNT} ayrıntılı profil, ${REFERENCE_RECORD_COUNT} referans`,
-    intro: `Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. İlk ${EVALUATED_PROFILE_COUNT} sağlayıcı kaynakları ayrı ayrı değerlendirilmiş ve arama dizinine dahil edilen ayrıntılı profillerdir. Diğer ${REFERENCE_RECORD_COUNT} kayıt yalnızca pazar referansıdır; ayrıntılı öneri veya indekslenebilir profil değildir.`,
+    h1: `Global Core ${GLOBAL_CORE_COUNT} VPN sağlayıcı bilgi rehberi`,
+    intro: `Bu sayfa bir 'en iyi VPN' laboratuvar sıralaması değildir. Görünür katalog, büyük karşılaştırma ve araştırma kaynaklarında tekrar eden pazar görünürlüğüne göre seçilmiştir: ${EVALUATED_PROFILE_COUNT} sağlayıcı kaynakları ayrı ayrı değerlendirilmiş ayrıntılı profillerdir; ${REFERENCE_RECORD_COUNT} sağlayıcı ise seçilmiş pazar referansıdır.`,
     home: "Ana sayfa",
     here: "VPN karşılaştırmaları",
   },
   en: {
-    title: `VPN Provider Guide (2026): ${EVALUATED_PROFILE_COUNT} Detailed Profiles + ${REFERENCE_RECORD_COUNT} References`,
-    description: `Research ${EVALUATED_PROFILE_COUNT} source-reviewed, indexable VPN profiles separately from ${REFERENCE_RECORD_COUNT} reference-only market records.`,
+    title: `Global Core ${GLOBAL_CORE_COUNT} VPN Provider Guide (2026)`,
+    description: `Review ${GLOBAL_CORE_COUNT} visible VPN providers: ${EVALUATED_PROFILE_COUNT} detailed source-reviewed profiles and ${REFERENCE_RECORD_COUNT} selected market references.`,
     breadcrumb: "VPN provider information guide",
-    h1: `VPN provider information guide: ${EVALUATED_PROFILE_COUNT} detailed profiles and ${REFERENCE_RECORD_COUNT} references`,
-    intro: `This is not a laboratory ranking of the 'best VPN'. The first ${EVALUATED_PROFILE_COUNT} providers are source-reviewed profiles included in the search index. The other ${REFERENCE_RECORD_COUNT} entries are market references only, not detailed recommendations or indexable profiles.`,
+    h1: `Global Core ${GLOBAL_CORE_COUNT} VPN provider information guide`,
+    intro: `This is not a laboratory ranking of the 'best VPN'. The visible catalog is selected through repeated market visibility across major comparison and research sources: ${EVALUATED_PROFILE_COUNT} providers have detailed source-reviewed profiles, while ${REFERENCE_RECORD_COUNT} are selected market references.`,
     home: "Home",
     here: "VPN comparisons",
   },
   de: {
-    title: `VPN-Anbieterleitfaden (2026): ${EVALUATED_PROFILE_COUNT} Profile + ${REFERENCE_RECORD_COUNT} Referenzen`,
-    description: `${EVALUATED_PROFILE_COUNT} quellengeprüfte, indexierbare VPN-Profile getrennt von ${REFERENCE_RECORD_COUNT} reinen Referenzeinträgen recherchieren.`,
+    title: `Global Core ${GLOBAL_CORE_COUNT} VPN-Anbieterleitfaden (2026)`,
+    description: `${GLOBAL_CORE_COUNT} sichtbare VPN-Anbieter prüfen: ${EVALUATED_PROFILE_COUNT} ausführliche quellengeprüfte Profile und ${REFERENCE_RECORD_COUNT} ausgewählte Marktreferenzen.`,
     breadcrumb: "VPN-Anbieter-Informationsratgeber",
-    h1: `VPN-Anbieter-Informationsratgeber: ${EVALUATED_PROFILE_COUNT} Profile und ${REFERENCE_RECORD_COUNT} Referenzen`,
-    intro: `Dies ist keine Labor-Rangliste des 'besten VPN'. Die ersten ${EVALUATED_PROFILE_COUNT} Anbieter sind quellengeprüfte Profile im Suchindex. Die weiteren ${REFERENCE_RECORD_COUNT} Einträge dienen nur als Marktreferenz und sind weder ausführliche Empfehlungen noch indexierbare Profile.`,
+    h1: `Global Core ${GLOBAL_CORE_COUNT} VPN-Anbieter-Informationsratgeber`,
+    intro: `Dies ist keine Labor-Rangliste des 'besten VPN'. Das sichtbare Verzeichnis wurde anhand wiederholter Marktpräsenz in großen Vergleichs- und Forschungsquellen ausgewählt: ${EVALUATED_PROFILE_COUNT} Anbieter haben ausführliche quellengeprüfte Profile, ${REFERENCE_RECORD_COUNT} sind ausgewählte Marktreferenzen.`,
     home: "Startseite",
     here: "VPN-Vergleiche",
   },

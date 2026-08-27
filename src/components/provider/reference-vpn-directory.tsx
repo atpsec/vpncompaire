@@ -6,26 +6,26 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { referenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
+import { featuredReferenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
 import type { Locale } from "@/lib/site";
 
 const labels = {
   tr: {
-    kicker: "Genişletilmiş sağlayıcı dizini",
-    title: (count: number) => `${count} ek VPN sağlayıcı profili`,
-    intro: "Aşağıdaki sağlayıcılar sıralama değildir. Küresel VPN pazarını daha geniş kapsamak için aynı kaynak-temelli profil yapısına eklenmiştir.",
+    kicker: "Global Core 30 · seçilmiş pazar referansları",
+    title: (count: number) => `${count} seçilmiş VPN pazar referansı`,
+    intro: "Aşağıdaki sağlayıcılar Global Core 30 görünür kataloğunu tamamlar. Seçim, büyük karşılaştırma ve araştırma kaynaklarında tekrar eden pazar görünürlüğüne dayanır; bu bölüm sıralama veya laboratuvar sonucu değildir.",
     open: "Profili aç",
   },
   en: {
-    kicker: "Extended provider directory",
-    title: (count: number) => `${count} additional VPN provider profiles`,
-    intro: "The providers below are not a ranking. They extend market coverage using the same source-based provider-profile structure.",
+    kicker: "Global Core 30 · selected market references",
+    title: (count: number) => `${count} selected VPN market references`,
+    intro: "These providers complete the visible Global Core 30 directory. Selection reflects repeated market visibility across major comparison and research sources; this section is not a ranking or a laboratory result.",
     open: "Open profile",
   },
   de: {
-    kicker: "Erweitertes Anbieterverzeichnis",
-    title: (count: number) => `${count} weitere VPN-Anbieterprofile`,
-    intro: "Die folgenden Anbieter sind keine Rangliste. Sie erweitern die Marktabdeckung mit derselben quellenbasierten Profilstruktur.",
+    kicker: "Global Core 30 · ausgewählte Marktreferenzen",
+    title: (count: number) => `${count} ausgewählte VPN-Marktreferenzen`,
+    intro: "Diese Anbieter vervollständigen das sichtbare Global-Core-30-Verzeichnis. Die Auswahl folgt wiederholter Marktpräsenz in großen Vergleichs- und Forschungsquellen; dieser Abschnitt ist keine Rangliste und kein Labortest.",
     open: "Profil öffnen",
   },
 } as const;
@@ -43,13 +43,13 @@ export function ReferenceVPNDirectory() {
             {t.kicker}
           </span>
           <h2 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">
-            {t.title(referenceProducts.length)}
+            {t.title(featuredReferenceProducts.length)}
           </h2>
           <p className="mt-3 text-sm sm:text-base text-ink-muted">{t.intro}</p>
         </div>
 
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {referenceProducts.map((base) => {
+          {featuredReferenceProducts.map((base) => {
             const product = getReferenceProduct(base.slug, locale) ?? base;
             return (
               <li key={product.slug}>

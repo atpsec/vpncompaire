@@ -4,7 +4,7 @@ import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { products } from "@/data/products";
-import { referenceProducts } from "@/data/products-reference-localized";
+import { featuredReferenceProducts } from "@/data/products-reference-localized";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 
@@ -12,7 +12,7 @@ export function Hero() {
   const locale = useLocale() as Locale;
   const copy = positioningFor(locale);
   const activeCore = products.filter((p) => p.slug !== "atlas-vpn");
-  const catalogCount = activeCore.length + referenceProducts.length;
+  const catalogCount = activeCore.length + featuredReferenceProducts.length;
   const auditCount = activeCore.filter((p) => p.highlights.audits).length;
   const monthYear = new Intl.DateTimeFormat(locale, {
     year: "numeric",

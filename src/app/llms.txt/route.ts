@@ -1,5 +1,6 @@
 import { SEO_LOCALES, siteConfig } from "@/lib/site";
 import { rankedProducts } from "@/data/products";
+import { featuredReferenceProducts, referenceProducts } from "@/data/products-reference-localized";
 import { getIndexableBlogPosts } from "@/lib/blog";
 
 export const dynamic = "force-static";
@@ -7,6 +8,7 @@ export const dynamic = "force-static";
 export async function GET() {
   const core = rankedProducts("en").filter((p) => p.slug !== "atlas-vpn");
   const catalog = core;
+  const watchlistCount = Math.max(referenceProducts.length - featuredReferenceProducts.length, 0);
   const blogLocales = SEO_LOCALES;
   const blogPosts = await Promise.all(blogLocales.map((locale) => getIndexableBlogPosts(locale)));
   const latestBlogUpdate = blogPosts.flat().map((post) => post.updatedAt).sort().at(-1);
@@ -22,7 +24,7 @@ ${siteConfig.name}, VPN teknolojisi ve VPN sağlayıcıları hakkında kaynak te
 
 ## Kapsam
 
-Bu dosyada ${catalog.length} ayrıntılı, indekslenebilir VPN sağlayıcı profili listelenir. Genişletilmiş referans dizini, ürün-özel kaynaklandırma ve çeviri çalışması tamamlanana kadar arama/LLM dizininden çıkarılmıştır. Bu sayı bir kalite puanı değildir. Hizmeti sonlandırılmış ürünler aktif sağlayıcı sayısına dahil edilmez.
+Görünür Global Core katalogda ${catalog.length + featuredReferenceProducts.length} sağlayıcı vardır: ${catalog.length} ayrıntılı, indekslenebilir VPN profili ve ${featuredReferenceProducts.length} seçilmiş pazar referansı. Seçilmiş referanslar henüz ayrıntılı laboratuvar incelemesi değildir; kalan ${watchlistCount} kayıt eski bağlantıları ve gelecekteki araştırma kapsamını koruyan noindex watchlist'tir. Bu sayılar kalite puanı değildir. Hizmeti sonlandırılmış ürünler aktif sağlayıcı sayısına dahil edilmez.
 
 ## Kaynak ve doğrulama yaklaşımı
 

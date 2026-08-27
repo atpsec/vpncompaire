@@ -8,6 +8,31 @@ export const referenceProducts: Product[] = [
   ...currentSupplementProducts,
 ];
 
+/**
+ * Visible supplement for the Global Core 30 directory.
+ *
+ * This is a cross-source market-visibility selection, not a safety ranking
+ * or an endorsement. The remaining reference records stay available as a
+ * noindex watchlist so existing URLs and future research coverage are kept.
+ */
+export const GLOBAL_CORE_REFERENCE_SLUGS = [
+  "mozilla-vpn",
+  "adguard-vpn",
+  "torguard",
+  "airvpn",
+  "privatevpn",
+  "astrill-vpn",
+  "hma-vpn",
+  "turbo-vpn",
+  "bitdefender-vpn",
+  "avast-secureline",
+  "avg-secure-vpn",
+] as const;
+
+export const featuredReferenceProducts: Product[] = GLOBAL_CORE_REFERENCE_SLUGS
+  .map((slug) => referenceProducts.find((product) => product.slug === slug))
+  .filter((product): product is Product => Boolean(product));
+
 const copy = {
   en: {
     positioning: "Source-based VPN provider profile",
