@@ -149,7 +149,8 @@ export function articleSchema(post: {
       "@id": articleUrl,
     },
     author: {
-      "@type": "Person",
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#editorial-team`,
       name: post.author,
       url: absoluteUrl("/about", "en"),
     },
@@ -173,6 +174,47 @@ export function articleSchema(post: {
     isPartOf: {
       "@type": "WebSite",
       "@id": `${absoluteUrl("", post.locale)}/#website`,
+    },
+  };
+}
+
+/**
+ * Emits a Product only when the profile has a current, visible price. This
+ * editorial site intentionally does not add ratings or reviews it cannot
+ * substantiate.
+ */
+export function providerProductSchema(
+  product: {
+    slug: string;
+    brand: string;
+    summary: string;
+    priceFromUsd: number;
+    priceCurrency: "USD" | "EUR";
+    pricingUrl: string;
+    pricingVerifiedAt: string;
+  },
+  locale: Locale = "en",
+): JsonLdObject | null {
+  if (!product.pricingVerifiedAt || product.priceFromUsd <= 0) return null;
+
+  const profileUrl = absoluteUrl(`/reviews/${product.slug}`, locale);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${profileUrl}#product`,
+    name: product.brand,
+    description: product.summary,
+    category: "VPN service",
+    brand: {
+      "@type": "Brand",
+      name: product.brand,
+    },
+    url: profileUrl,
+    offers: {
+      "@type": "Offer",
+      price: product.priceFromUsd.toFixed(2),
+      priceCurrency: product.priceCurrency,
+      url: product.pricingUrl,
     },
   };
 }

@@ -10,6 +10,12 @@ User-agent: *
 Allow: /
 Disallow: /go/
 
+# Keep Bing's crawler policy explicit. The wildcard rule above already allows
+# these URLs; this group makes the intended Bing behavior easy to inspect.
+User-agent: Bingbot
+Allow: /
+Disallow: /go/
+
 # AI crawlers — explicitly allowed for citability
 User-agent: GPTBot
 Allow: /

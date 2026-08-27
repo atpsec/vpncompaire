@@ -11,7 +11,7 @@ import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { PricingPlans } from "@/components/product/pricing-plans";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, providerProductSchema } from "@/lib/seo";
 import { bilingualAlternates, absoluteUrl, type Locale } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
 import { referenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
@@ -48,6 +48,9 @@ const labels = {
     no: "Hayır",
     compare: "Diğer VPN sağlayıcılarıyla karşılaştır",
     methodology: "Kaynak temelli metodolojimizi inceleyin",
+    sources: "Gösterilen fiyatın birincil kaynağı",
+    sourcesIntro: "Bu bağlantı, profilde gösterilen fiyatı kontrol etmek için kullanılan sağlayıcı sayfasıdır. Diğer iddialar metodolojide sağlayıcı beyanı veya bağımsız rapor olarak etiketlenir.",
+    pricingSource: "Sağlayıcının fiyat sayfasını aç",
   },
   en: {
     profile: "VPN provider profile",
@@ -75,6 +78,9 @@ const labels = {
     no: "No",
     compare: "Compare with other VPN providers",
     methodology: "Read our source-based methodology",
+    sources: "Primary source for displayed pricing",
+    sourcesIntro: "This is the provider page used to check the price shown on this profile. Other claims are labeled as provider-published or independently reported in the methodology.",
+    pricingSource: "Open the provider pricing page",
   },
   de: {
     profile: "VPN-Anbieterprofil",
@@ -102,6 +108,9 @@ const labels = {
     no: "Nein",
     compare: "Mit anderen VPN-Anbietern vergleichen",
     methodology: "Quellenbasierte Methodik lesen",
+    sources: "Primärquelle für den angezeigten Preis",
+    sourcesIntro: "Dies ist die Anbieter-Seite, auf der der angezeigte Preis geprüft wurde. Andere Angaben werden in der Methodik als Anbieterangaben oder unabhängige Berichte gekennzeichnet.",
+    pricingSource: "Preisseite des Anbieters öffnen",
   },
 } as const;
 
@@ -153,6 +162,7 @@ export default async function Page({ params }: Props) {
   const product = resolveProduct(slug, locale);
   if (!product) notFound();
   const isArchived = Boolean(getArchivedProduct(slug));
+  const isReferenceOnly = referenceProducts.some((p) => p.slug === slug);
   const canonicalLocale = isArchived ? "tr" : locale === "de" ? "en" : locale;
 
   const providerSchema = {
@@ -174,16 +184,20 @@ export default async function Page({ params }: Props) {
     isPartOf: { "@type": "WebSite", name: "VPN Advisor", url: absoluteUrl() },
   };
 
-  return <ProviderView product={product} locale={locale} providerSchema={providerSchema} isArchived={isArchived} />;
+  return <ProviderView product={product} locale={locale} providerSchema={providerSchema} isArchived={isArchived} isReferenceOnly={isReferenceOnly} />;
 }
 
-function ProviderView({ product, locale, providerSchema, isArchived }: { product: Product; locale: Locale; providerSchema: Record<string, unknown>; isArchived: boolean }) {
+function ProviderView({ product, locale, providerSchema, isArchived, isReferenceOnly }: { product: Product; locale: Locale; providerSchema: Record<string, unknown>; isArchived: boolean; isReferenceOnly: boolean }) {
   const t = labels[locale];
   const hasStructuredPricing = Boolean(product.pricingVerifiedAt) && product.priceFromUsd > 0 && product.plans.length > 0;
+  const productSchema = !isArchived && !isReferenceOnly && locale === "en" && hasStructuredPricing
+    ? providerProductSchema(product, locale)
+    : null;
 
   return (
     <>
       <JsonLd data={providerSchema} />
+      {productSchema ? <JsonLd data={productSchema} /> : null}
       <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.hub, path: "/vpn-reviews" }, { name: product.brand, path: `/reviews/${product.slug}` }], isArchived ? "tr" : locale)} />
 
       <Container size="md" className="py-12 sm:py-16">
@@ -203,6 +217,22 @@ function ProviderView({ product, locale, providerSchema, isArchived }: { product
         </Card>
 
         {isArchived ? null : <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />}
+
+        {isArchived ? null : (
+          <Card className="mt-4 border-border bg-surface-subtle/30 p-5">
+            <h2 className="text-sm font-semibold text-ink-strong">{t.sources}</h2>
+            <p className="mt-1 text-sm leading-relaxed text-ink-muted">{t.sourcesIntro}</p>
+            <a
+              href={product.pricingUrl}
+              target="_blank"
+              rel="nofollow noopener"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline"
+            >
+              {t.pricingSource}
+              <ExternalLink className="size-3.5" />
+            </a>
+          </Card>
+        )}
 
         {isArchived ? null : (
           <Card className="mt-8 p-6">

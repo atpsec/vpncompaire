@@ -18,16 +18,17 @@ export const siteConfig = {
   defaultLocale: "en" as const,
   locales: ["en"] as const,
   gaId: env.NEXT_PUBLIC_GA_ID || undefined,
+  bingSiteVerification: env.BING_SITE_VERIFICATION || undefined,
   // ads.txt ile aynı publisher; env override edebilir.
   adsenseClientId:
     env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-8715861903175610",
   description: {
     tr: "VPN sağlayıcılarını resmi belgeler, bağımsız denetimler ve güncel fiyat kaynaklarıyla karşılaştıran kaynak temelli rehber.",
-    en: "A source-based guide comparing VPN providers through official documentation, independent audits and current pricing sources.",
+    en: "A source-based guide comparing VPN providers through privacy policies, independent audit records, security features and current pricing sources.",
     de: "Ein quellenbasierter Ratgeber, der VPN-Anbieter anhand offizieller Dokumente, unabhängiger Audits und aktueller Preisquellen vergleicht.",
   },
   author: {
-    name: "VPN Advisor Editör Ekibi",
+    name: "VPN Advisor Editorial Team",
     url: "/about",
   },
   social: {

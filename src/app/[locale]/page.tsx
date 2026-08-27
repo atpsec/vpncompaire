@@ -46,7 +46,7 @@ export default async function HomePage({ params }: Props) {
       <UseCaseGrid />
       <ComparisonBlock />
       <MethodologyBlock />
-      <FAQSection />
+      <FAQSection locale={locale} />
     </>
   );
 }

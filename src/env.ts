@@ -27,6 +27,13 @@ const envSchema = z.object({
     .min(1)
     .optional()
     .or(z.literal("")),
+  // Bing Webmaster Tools site verification token. Set after adding the site
+  // to Bing Webmaster Tools; omitted locally until the token is available.
+  BING_SITE_VERIFICATION: z
+    .string()
+    .min(1)
+    .optional()
+    .or(z.literal("")),
   // Google AdSense publisher kimliği (ca-pub-XXXXXXXXXXXXXXXX). Set edilmezse
   // site.ts varsayılanı (ads.txt ile aynı pub) kullanılır. /ads.txt public/ statik dosyasından servis edilir.
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: z
@@ -72,6 +79,7 @@ const parsed = envSchema.safeParse({
   NEXT_PUBLIC_SITE_BRAND: process.env.NEXT_PUBLIC_SITE_BRAND,
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+  BING_SITE_VERIFICATION: process.env.BING_SITE_VERIFICATION,
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,
   KV_REST_API_URL: process.env.KV_REST_API_URL,
   KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,

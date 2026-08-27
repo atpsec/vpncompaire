@@ -14,18 +14,24 @@ const copy = {
     body: "Fiyatlar ve sağlayıcı özellikleri zamanla değişebilir. Bu sayfadaki bilgiler resmi sağlayıcı kaynakları ve uygun olduğunda bağımsız doğrulamalar temel alınarak derlenir; laboratuvar testi veya kullanıcı puanı değildir.",
     methodology: "Metodoloji",
     disclosure: "Reklam açıklaması",
+    editorial: "Editoryal sahiplik:",
+    about: "VPN Advisor hakkında",
   },
   en: {
     checked: "Data checked:",
     body: "Pricing and provider features can change. Information on this page is compiled from official provider sources and, where available, independent verification; it is not a laboratory test or user rating.",
     methodology: "Methodology",
     disclosure: "Advertising disclosure",
+    editorial: "Editorial ownership:",
+    about: "About VPN Advisor",
   },
   de: {
     checked: "Daten geprüft:",
     body: "Preise und Anbietermerkmale können sich ändern. Die Informationen auf dieser Seite werden aus offiziellen Anbieterquellen und, wenn verfügbar, unabhängiger Verifikation zusammengestellt; sie sind kein Labortest und keine Nutzerbewertung.",
     methodology: "Methodik",
     disclosure: "Werbehinweis",
+    editorial: "Redaktionelle Verantwortung:",
+    about: "Über VPN Advisor",
   },
 } as const;
 
@@ -40,6 +46,10 @@ export function DataDisclaimer({ verifiedAt, variant = "card" }: Props) {
       {t.body}{" "}
       <Link href="/methodology" className="font-medium text-brand-700 hover:underline whitespace-nowrap">{t.methodology}</Link>{" · "}
       <Link href="/affiliate-disclosure" className="font-medium text-brand-700 hover:underline whitespace-nowrap">{t.disclosure}</Link>
+      <span className="mt-2 block">
+        <span className="font-semibold text-ink">{t.editorial} VPN Advisor Editorial Team.</span>{" "}
+        <Link href="/about" className="font-medium text-brand-700 hover:underline">{t.about}</Link>
+      </span>
     </>
   );
 

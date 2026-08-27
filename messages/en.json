@@ -1,8 +1,8 @@
 {
   "metadata": {
     "siteName": "VPN Advisor",
-    "defaultTitle": "VPN Advisor — Independent VPN Comparisons (2026)",
-    "defaultDescription": "VPN reviews and comparisons built from official documentation, independent audits and current pricing sources."
+    "defaultTitle": "VPN Advisor: VPN Comparisons by Privacy, Audits & Pricing (2026)",
+    "defaultDescription": "VPN comparisons built from privacy policies, independent audit records, security features and current pricing sources."
   },
   "nav": {
     "home": "Home",
@@ -51,7 +51,7 @@
   },
   "home": {
     "hero": {
-      "h1": "Volunteer, independent VPN comparisons",
+      "h1": "Compare VPN providers by privacy, audits and price",
       "subtitle": "VPN provider profiles compared through official sources for privacy, streaming, travel and everyday security.",
       "ctaPrimary": "View VPN comparisons",
       "ctaSecondary": "Our source approach",
@@ -130,7 +130,7 @@
     }
   },
   "footer": {
-    "tagline": "A volunteer VPN review project. Transparent methodology, independent assessments.",
+    "tagline": "Source-based VPN provider profiles. Transparent methodology and visible verification dates.",
     "sections": {
       "site": "Site",
       "tools": "Tools",
@@ -153,7 +153,7 @@
     "socialSoon": "Social media accounts coming soon.",
     "copyright": "All rights reserved.",
     "disclosureTitle": "Advertising disclosure.",
-    "madeWith": "Volunteer review project · Not an official entity"
+    "madeWith": "Source-based information project · Not a testing laboratory"
   },
   "newsletter": {
     "title": "Subscribe to our newsletter",
@@ -755,8 +755,8 @@
       }
     },
     "howWeTest": {
-      "h2": "How do we test?",
-      "body": "Every VPN on the site is evaluated against the same six objective criteria: privacy policy and jurisdiction, independent audits, speed, streaming compatibility, pricing transparency and ease of use. See our <methodology>methodology page</methodology> for the details."
+      "h2": "How do we classify information?",
+      "body": "Every provider profile is organised around the same six information areas: privacy policy and jurisdiction, independent audits, protocols and network details, device support, pricing transparency and use-case context. We do not run provider field or laboratory tests. See our <methodology>methodology page</methodology> for the details."
     },
     "revenue": {
       "h2": "Our revenue model",

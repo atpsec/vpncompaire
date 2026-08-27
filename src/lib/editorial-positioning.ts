@@ -19,7 +19,7 @@ export const editorialPositioning = {
   },
   en: {
     brand: "VPN information and comparison guide",
-    heroTitle: "Compare VPNs using verifiable features",
+    heroTitle: "Compare VPN providers by privacy, audits and price",
     heroSubtitle: "Compare pricing, privacy policies, independent audits, protocols, device support and official technical documentation. We do not present unverified lab tests or user ratings.",
     methodologyTag: "Source-based comparison methodology",
     primaryCta: "View VPN Comparisons",

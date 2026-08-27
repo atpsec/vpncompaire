@@ -86,7 +86,7 @@ export async function GET() {
   }
 
   for (const product of products) {
-    add(`/reviews/${product.slug}`, 0.82, "weekly");
+    add(`/reviews/${product.slug}`, 0.82, "weekly", product.pricingVerifiedAt || undefined);
   }
 
   for (const slug of useCaseEntries) {

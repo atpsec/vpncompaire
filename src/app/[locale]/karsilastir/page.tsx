@@ -12,6 +12,7 @@ import { getProduct } from "@/data/products";
 import { sectionHubAlternates, type Locale } from "@/lib/site";
 import { getLocalizedSectionPath, SECTION_SLUGS, DEFAULT_LOCALE, type AppLocale } from "@/lib/i18n-paths";
 import { formatProductPriceShort } from "@/lib/product-price";
+import { ComparePicker } from "@/components/home/compare-picker";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -57,6 +58,10 @@ export default async function Page({ params }: Props) {
       <Container size="lg" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t.home}</Link>{" "}› <span className="text-ink-strong">{t.here}</span></p>
         <header className="mt-6 max-w-3xl"><h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{t.h1}</h1><p className="mt-4 text-lg text-ink-muted">{t.lede}</p></header>
+
+        <div className="mt-10 -mx-4 sm:-mx-6 lg:-mx-8">
+          <ComparePicker />
+        </div>
 
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           {comparisons.map((c) => {

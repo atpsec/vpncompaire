@@ -3,13 +3,13 @@ import { siteConfig, type Locale } from "@/lib/site";
 
 const TITLES: Record<Locale, string> = {
   tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları (2026)`,
-  en: `${siteConfig.name} — Independent VPN Comparisons (2026)`,
+  en: `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing (2026)`,
   de: `${siteConfig.name} — Unabhängige VPN-Vergleiche (2026)`,
 };
 
 const TITLE_SHORT: Record<Locale, string> = {
   tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları`,
-  en: `${siteConfig.name} — Independent VPN Comparisons`,
+  en: `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing`,
   de: `${siteConfig.name} — Unabhängige VPN-Vergleiche`,
 };
 
@@ -30,6 +30,15 @@ const ALTERNATE_OG_LOCALES: Record<Locale, string[]> = {
 const GOOGLE_SEARCH_CONSOLE_TOKEN =
   "61Ha0d7XNarVnj3244M0ghLOzvRnhJ5B_5JLWFIi8BI";
 
+function buildVerificationMetadata(): NonNullable<Metadata["verification"]> {
+  return {
+    google: GOOGLE_SEARCH_CONSOLE_TOKEN,
+    ...(siteConfig.bingSiteVerification
+      ? { other: { "msvalidate.01": siteConfig.bingSiteVerification } }
+      : {}),
+  };
+}
+
 export function buildRootMetadata(locale: Locale): Metadata {
   const description = siteConfig.description[locale];
   const socialImage = `${siteConfig.ogImage}?locale=en`;
@@ -47,9 +56,7 @@ export function buildRootMetadata(locale: Locale): Metadata {
     creator: siteConfig.author.name,
     publisher: siteConfig.name,
     category: "technology",
-    verification: {
-      google: GOOGLE_SEARCH_CONSOLE_TOKEN,
-    },
+    verification: buildVerificationMetadata(),
     other: {
       "google-adsense-account": siteConfig.adsenseClientId,
     },
