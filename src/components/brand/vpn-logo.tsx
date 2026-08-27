@@ -1,48 +1,68 @@
-import {
-  siNordvpn,
-  siSurfshark,
-  siExpressvpn,
-  siProtonvpn,
-  siPrivateinternetaccess,
-  siMullvad,
-} from "simple-icons";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-type IconData = { title: string; hex: string; path: string };
-
-const BRANDS: Record<string, { icon: IconData; tile: string }> = {
-  nordvpn: { icon: siNordvpn, tile: "#4687FF" },
-  surfshark: { icon: siSurfshark, tile: "#1EBFBF" },
-  expressvpn: { icon: siExpressvpn, tile: "#DA3940" },
-  "proton-vpn": { icon: siProtonvpn, tile: "#6D4AFF" },
-  pia: { icon: siPrivateinternetaccess, tile: "#1E811F" },
-  mullvad: { icon: siMullvad, tile: "#FFCD46" },
+type LogoAsset = {
+  name: string;
+  src: string;
+  fit?: "contain" | "cover";
 };
 
-const CYBERGHOST_PATH =
-  "M12 3c-3.866 0-7 3.134-7 7v9.5c0 .55.45.95.97.78l2.03-.67 1.96.65a.5.5 0 0 0 .32 0l1.97-.66 1.97.66a.5.5 0 0 0 .32 0l1.96-.66 2.03.66c.52.17.97-.23.97-.78V10c0-3.866-3.134-7-7-7zm-2 7a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm4 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z";
-
-type LetterMark = {
-  text: string;
-  tile: string;
-  fg: string;
-  ariaLabel: string;
-};
-
-const LETTER_MARKS: Record<string, LetterMark> = {
-  ipvanish: { text: "IP", tile: "#FFA300", fg: "#1a1300", ariaLabel: "IPVanish logo" },
-  windscribe: { text: "W", tile: "#1AC8DB", fg: "#06222a", ariaLabel: "Windscribe logo" },
-  tunnelbear: { text: "T", tile: "#A47148", fg: "#ffffff", ariaLabel: "TunnelBear logo" },
-  "atlas-vpn": { text: "A", tile: "#2563EB", fg: "#ffffff", ariaLabel: "Atlas VPN logo" },
-  purevpn: { text: "P", tile: "#F97316", fg: "#1a0a00", ariaLabel: "PureVPN logo" },
-  vyprvpn: { text: "V", tile: "#0D9488", fg: "#ffffff", ariaLabel: "VyprVPN logo" },
-  ivpn: { text: "IV", tile: "#1E293B", fg: "#ffffff", ariaLabel: "IVPN logo" },
-  hideme: { text: "H", tile: "#059669", fg: "#ffffff", ariaLabel: "hide.me logo" },
-  "privado-vpn": { text: "Pr", tile: "#7C3AED", fg: "#ffffff", ariaLabel: "PrivadoVPN logo" },
-  "hotspot-shield": { text: "HS", tile: "#EF4444", fg: "#ffffff", ariaLabel: "Hotspot Shield logo" },
-  strongvpn: { text: "S", tile: "#0369A1", fg: "#ffffff", ariaLabel: "StrongVPN logo" },
-  zoogvpn: { text: "Z", tile: "#DB2777", fg: "#ffffff", ariaLabel: "ZoogVPN logo" },
-  "norton-vpn": { text: "N", tile: "#FBBF24", fg: "#1a1300", ariaLabel: "Norton VPN logo" },
+/**
+ * Provider marks are downloaded from each provider's own public brand or
+ * favicon asset. They stay local so a provider changing its CDN cannot break
+ * the comparison UI or make visitor browsers contact a third party merely to
+ * render a logo.
+ */
+const LOGOS: Record<string, LogoAsset> = {
+  nordvpn: { name: "NordVPN", src: "/provider-logos/nordvpn.svg" },
+  surfshark: { name: "Surfshark", src: "/provider-logos/surfshark.png" },
+  expressvpn: { name: "ExpressVPN", src: "/provider-logos/expressvpn.svg" },
+  "proton-vpn": { name: "Proton VPN", src: "/provider-logos/proton-vpn.svg" },
+  pia: { name: "Private Internet Access", src: "/provider-logos/pia.png" },
+  cyberghost: { name: "CyberGhost", src: "/provider-logos/cyberghost.png" },
+  ipvanish: { name: "IPVanish", src: "/provider-logos/ipvanish.svg" },
+  windscribe: { name: "Windscribe", src: "/provider-logos/windscribe.ico" },
+  tunnelbear: { name: "TunnelBear", src: "/provider-logos/tunnelbear.png" },
+  mullvad: { name: "Mullvad", src: "/provider-logos/mullvad.svg" },
+  purevpn: { name: "PureVPN", src: "/provider-logos/purevpn.png" },
+  vyprvpn: { name: "VyprVPN", src: "/provider-logos/vyprvpn.png" },
+  ivpn: { name: "IVPN", src: "/provider-logos/ivpn.svg" },
+  hideme: { name: "hide.me", src: "/provider-logos/hideme.png", fit: "cover" },
+  "privado-vpn": { name: "PrivadoVPN", src: "/provider-logos/privado-vpn.png" },
+  "hotspot-shield": { name: "Hotspot Shield", src: "/provider-logos/hotspot-shield.png" },
+  strongvpn: { name: "StrongVPN", src: "/provider-logos/strongvpn.png" },
+  zoogvpn: { name: "ZoogVPN", src: "/provider-logos/zoogvpn.png" },
+  "norton-vpn": { name: "Norton VPN", src: "/provider-logos/norton-vpn.png" },
+  "mozilla-vpn": { name: "Mozilla VPN", src: "/provider-logos/mozilla-vpn.png" },
+  "adguard-vpn": { name: "AdGuard VPN", src: "/provider-logos/adguard-vpn.ico" },
+  torguard: { name: "TorGuard", src: "/provider-logos/torguard.ico" },
+  airvpn: { name: "AirVPN", src: "/provider-logos/airvpn.ico" },
+  privatevpn: { name: "PrivateVPN", src: "/provider-logos/privatevpn.ico" },
+  "astrill-vpn": { name: "Astrill VPN", src: "/provider-logos/astrill-vpn.png" },
+  "hma-vpn": { name: "HMA VPN", src: "/provider-logos/hma-vpn.png" },
+  "turbo-vpn": { name: "Turbo VPN", src: "/provider-logos/turbo-vpn.png" },
+  "bitdefender-vpn": { name: "Bitdefender VPN", src: "/provider-logos/bitdefender-vpn.ico" },
+  "avast-secureline": { name: "Avast SecureLine VPN", src: "/provider-logos/avast-secureline.svg" },
+  "avg-secure-vpn": { name: "AVG Secure VPN", src: "/provider-logos/avg-secure-vpn.ico" },
+  "trust-zone": { name: "Trust.Zone", src: "/provider-logos/trust-zone.ico" },
+  "vpn-unlimited": { name: "VPN Unlimited", src: "/provider-logos/vpn-unlimited.ico" },
+  fastestvpn: { name: "FastestVPN", src: "/provider-logos/fastestvpn.ico" },
+  ovpn: { name: "OVPN", src: "/provider-logos/ovpn.ico" },
+  "x-vpn": { name: "X-VPN", src: "/provider-logos/x-vpn.ico" },
+  browsec: { name: "Browsec VPN", src: "/provider-logos/browsec.ico" },
+  "vpn-ac": { name: "VPN.ac", src: "/provider-logos/vpn-ac.ico" },
+  azirevpn: { name: "AzireVPN", src: "/provider-logos/azirevpn.ico" },
+  "goose-vpn": { name: "GOOSE VPN", src: "/provider-logos/goose-vpn.png" },
+  bulletvpn: { name: "BulletVPN", src: "/provider-logos/bulletvpn.svg" },
+  clearvpn: { name: "ClearVPN", src: "/provider-logos/clearvpn.png" },
+  "planet-vpn": { name: "Planet VPN", src: "/provider-logos/planet-vpn.svg" },
+  "malwarebytes-privacy": { name: "Malwarebytes Privacy VPN", src: "/provider-logos/malwarebytes-privacy.ico" },
+  "f-secure-vpn": { name: "F-Secure VPN", src: "/provider-logos/f-secure-vpn.ico" },
+  "avira-phantom-vpn": { name: "Avira Phantom VPN", src: "/provider-logos/avira-phantom-vpn.ico" },
+  "kaspersky-vpn": { name: "Kaspersky VPN", src: "/provider-logos/kaspersky-vpn.ico" },
+  nymvpn: { name: "NymVPN", src: "/provider-logos/nymvpn.ico" },
+  "mysterium-vpn": { name: "Mysterium VPN", src: "/provider-logos/mysterium-vpn.png" },
+  planckvpn: { name: "PlanckVPN", src: "/provider-logos/planckvpn.png" },
 };
 
 type Props = {
@@ -51,141 +71,33 @@ type Props = {
   className?: string;
 };
 
-function fallbackMark(slug: string): LetterMark {
-  const parts = slug
-    .replace(/-vpn$/i, "")
-    .split("-")
-    .filter(Boolean);
-  const text = (parts.length > 1 ? parts.map((part) => part[0]).join("") : parts[0]?.slice(0, 2) ?? "V")
-    .slice(0, 2)
-    .toUpperCase();
-  return {
-    text,
-    tile: "#EEF2FF",
-    fg: "#3730A3",
-    ariaLabel: `${slug.replace(/-/g, " ")} mark`,
-  };
-}
-
 export function VPNLogo({ slug, size = 48, className }: Props) {
-  if (slug === "cyberghost") {
-    return <CyberGhostMark size={size} className={className} />;
-  }
+  const logo = LOGOS[slug];
 
-  const letter = LETTER_MARKS[slug];
-  if (letter) {
-    return <LetterTile size={size} mark={letter} className={className} />;
-  }
-
-  const brand = BRANDS[slug];
-  if (!brand) {
-    return <LetterTile size={size} mark={fallbackMark(slug)} className={className} />;
-  }
-
-  const radius = Math.round(size * 0.22);
-  const padding = Math.round(size * 0.22);
-  const iconSize = size - padding * 2;
-
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      role="img"
-      aria-label={`${brand.icon.title} logo`}
-      className={cn("shrink-0", className)}
-      style={{ display: "block" }}
-    >
-      <rect x="0" y="0" width={size} height={size} rx={radius} ry={radius} fill={brand.tile} />
-      <rect
-        x="0.5"
-        y="0.5"
-        width={size - 1}
-        height={size - 1}
-        rx={radius - 0.5}
-        ry={radius - 0.5}
-        fill="none"
-        stroke="rgba(255,255,255,0.18)"
-        strokeWidth="1"
-      />
-      <g transform={`translate(${padding}, ${padding}) scale(${iconSize / 24})`}>
-        <path d={brand.icon.path} fill="#ffffff" />
-      </g>
-    </svg>
-  );
-}
-
-function LetterTile({ size, mark, className }: { size: number; mark: LetterMark; className?: string }) {
-  const radius = Math.round(size * 0.22);
-  const fontSize = Math.round(size * (mark.text.length > 1 ? 0.36 : 0.5));
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      role="img"
-      aria-label={mark.ariaLabel}
-      className={cn("shrink-0", className)}
-      style={{ display: "block" }}
-    >
-      <rect x="0" y="0" width={size} height={size} rx={radius} ry={radius} fill={mark.tile} />
-      <rect
-        x="0.5"
-        y="0.5"
-        width={size - 1}
-        height={size - 1}
-        rx={radius - 0.5}
-        ry={radius - 0.5}
-        fill="none"
-        stroke="rgba(0,0,0,0.08)"
-        strokeWidth="1"
-      />
-      <text
-        x="50%"
-        y="50%"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="system-ui, -apple-system, sans-serif"
-        fontSize={fontSize}
-        fontWeight={800}
-        fill={mark.fg}
-        letterSpacing="-0.04em"
+  if (!logo) {
+    return (
+      <span
+        aria-label={`${slug.replace(/-/g, " ")} logo unavailable`}
+        className={cn(
+          "inline-flex shrink-0 items-center justify-center rounded-xl border border-border bg-surface-subtle text-[10px] font-semibold text-ink-subtle",
+          className,
+        )}
+        style={{ width: size, height: size }}
       >
-        {mark.text}
-      </text>
-    </svg>
-  );
-}
+        —
+      </span>
+    );
+  }
 
-function CyberGhostMark({ size, className }: { size: number; className?: string }) {
-  const radius = Math.round(size * 0.22);
-  const padding = Math.round(size * 0.18);
-  const iconSize = size - padding * 2;
   return (
-    <svg
+    <Image
+      src={logo.src}
+      alt={`${logo.name} logo`}
       width={size}
       height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      role="img"
-      aria-label="CyberGhost VPN logo"
-      className={cn("shrink-0", className)}
-      style={{ display: "block" }}
-    >
-      <rect x="0" y="0" width={size} height={size} rx={radius} ry={radius} fill="#FFE100" />
-      <rect
-        x="0.5"
-        y="0.5"
-        width={size - 1}
-        height={size - 1}
-        rx={radius - 0.5}
-        ry={radius - 0.5}
-        fill="none"
-        stroke="rgba(0,0,0,0.08)"
-        strokeWidth="1"
-      />
-      <g transform={`translate(${padding}, ${padding}) scale(${iconSize / 24})`}>
-        <path d={CYBERGHOST_PATH} fill="#1a1a00" />
-      </g>
-    </svg>
+      unoptimized={logo.src.endsWith(".svg") || logo.src.endsWith(".ico")}
+      className={cn("shrink-0", logo.fit === "cover" ? "object-cover" : "object-contain", className)}
+      style={{ display: "block", width: size, height: size, objectFit: logo.fit ?? "contain" }}
+    />
   );
 }

@@ -1,0 +1,389 @@
+export const BLOG_REFERENCES_VERIFIED_AT = "2026-08-27";
+
+export type EditorialReference = {
+  title: string;
+  publisher: string;
+  url: string;
+  note: string;
+};
+
+const references = {
+  ftcPublicWifi: {
+    title: "Are Public Wi-Fi Networks Safe? What You Need To Know",
+    publisher: "U.S. Federal Trade Commission",
+    url: "https://consumer.ftc.gov/articles/are-public-wi-fi-networks-safe-what-you-need-know",
+    note: "Current consumer guidance on HTTPS, public Wi-Fi and account protection.",
+  },
+  nistVpnGuide: {
+    title: "Guide to IPsec VPNs (SP 800-77 Rev. 1)",
+    publisher: "NIST",
+    url: "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-77r1.pdf",
+    note: "Primary technical guidance on VPN architecture, security and limitations.",
+  },
+  nistZeroTrust: {
+    title: "Zero Trust Architecture (SP 800-207)",
+    publisher: "NIST",
+    url: "https://www.nist.gov/publications/zero-trust-architecture",
+    note: "Explains why network location alone must not be treated as a trust signal.",
+  },
+  cisaMfa: {
+    title: "Require Multifactor Authentication",
+    publisher: "CISA",
+    url: "https://www.cisa.gov/secure-our-world/require-multifactor-authentication",
+    note: "Account-security guidance that complements, but is not replaced by, a VPN.",
+  },
+  cisaPhishing: {
+    title: "Recognize and Report Phishing",
+    publisher: "CISA",
+    url: "https://www.cisa.gov/secure-our-world/recognize-and-report-phishing",
+    note: "Primary guidance for recognizing social-engineering attacks and suspicious links.",
+  },
+  effSurveillance: {
+    title: "Surveillance Self-Defense",
+    publisher: "Electronic Frontier Foundation",
+    url: "https://ssd.eff.org/",
+    note: "Threat-model-based digital security guidance for people at elevated risk.",
+  },
+  cpjDigitalSafety: {
+    title: "Digital Safety Kit",
+    publisher: "Committee to Protect Journalists",
+    url: "https://cpj.org/2019/07/digital-safety-kit-journalists/",
+    note: "Practical account, device, travel and communications safety guidance for journalists.",
+  },
+  wireguardProtocol: {
+    title: "WireGuard Protocol and Cryptography",
+    publisher: "WireGuard",
+    url: "https://www.wireguard.com/protocol/",
+    note: "The protocol project's own description of its handshake and cryptographic design.",
+  },
+  wireguardQuickstart: {
+    title: "WireGuard Quick Start",
+    publisher: "WireGuard",
+    url: "https://www.wireguard.com/quickstart/",
+    note: "Official configuration and operational guidance for WireGuard interfaces.",
+  },
+  openvpnManual: {
+    title: "OpenVPN 2.6 Manual",
+    publisher: "OpenVPN Community",
+    url: "https://openvpn.net/community-docs/community-articles/openvpn-2-6-manual.html",
+    note: "Primary documentation for OpenVPN options, transports and security controls.",
+  },
+  ikev2Rfc: {
+    title: "RFC 7296: Internet Key Exchange Protocol Version 2",
+    publisher: "RFC Editor / IETF",
+    url: "https://www.rfc-editor.org/info/rfc7296/",
+    note: "The standards-track specification for IKEv2.",
+  },
+  dotRfc: {
+    title: "RFC 7858: DNS over TLS",
+    publisher: "RFC Editor / IETF",
+    url: "https://www.rfc-editor.org/info/rfc7858/",
+    note: "The standards-track specification for DNS privacy over TLS.",
+  },
+  appleVpn: {
+    title: "VPN Overview for Apple Device Deployment",
+    publisher: "Apple",
+    url: "https://support.apple.com/guide/deployment/vpn-overview-depae3d361d0/web",
+    note: "Current Apple documentation for supported VPN technologies and deployment controls.",
+  },
+  appleShortcuts: {
+    title: "Introduction to Personal Automation in Shortcuts",
+    publisher: "Apple",
+    url: "https://support.apple.com/guide/shortcuts/intro-to-personal-automation-apd690170742/ios",
+    note: "Official iOS documentation for automation triggers and behavior.",
+  },
+  androidAlwaysOn: {
+    title: "Set Up VPN on Android Devices",
+    publisher: "Google Android Enterprise",
+    url: "https://support.google.com/work/android/answer/9213914?hl=en",
+    note: "Official guidance covering always-on VPN and block-without-VPN controls.",
+  },
+  networkManagerVpn: {
+    title: "NetworkManager VPN Support",
+    publisher: "NetworkManager",
+    url: "https://networkmanager.dev/docs/vpn/",
+    note: "Project documentation for VPN plug-ins and Linux connection management.",
+  },
+  netflixVpn: {
+    title: "Watching TV Shows and Movies Through a VPN",
+    publisher: "Netflix Help Center",
+    url: "https://help.netflix.com/en/node/114701",
+    note: "Netflix's current explanation of what viewers may see while using a VPN.",
+  },
+  netflixCountry: {
+    title: "Changing the Country of Your Account",
+    publisher: "Netflix Help Center",
+    url: "https://help.netflix.com/en/node/119024",
+    note: "Official account-country and regional-catalog guidance.",
+  },
+  netflixQuality: {
+    title: "Netflix-Recommended Internet Speeds",
+    publisher: "Netflix Help Center",
+    url: "https://help.netflix.com/en/node/13444",
+    note: "Current platform guidance for connection speed and playback quality.",
+  },
+  disneyAgreement: {
+    title: "Disney+ Subscriber Agreement",
+    publisher: "Disney+",
+    url: "https://www.disneyplus.com/legal/subscriber-agreement",
+    note: "Primary terms governing account, location and service use.",
+  },
+  bbcTerms: {
+    title: "BBC Terms of Use",
+    publisher: "BBC",
+    url: "https://www.bbc.co.uk/usingthebbc/terms/",
+    note: "Primary terms for BBC online services and location-dependent availability.",
+  },
+  crunchyrollTerms: {
+    title: "Crunchyroll Terms of Service",
+    publisher: "Crunchyroll",
+    url: "https://www.crunchyroll.com/terms/index.html",
+    note: "Primary service terms for account and content access.",
+  },
+  spotifyCountry: {
+    title: "Country or Region Settings",
+    publisher: "Spotify Support",
+    url: "https://support.spotify.com/article/country-region-settings/",
+    note: "Official explanation of how account country and payment details affect Spotify.",
+  },
+  spotifyTerms: {
+    title: "Spotify Terms of Use",
+    publisher: "Spotify",
+    url: "https://www.spotify.com/legal/end-user-agreement/",
+    note: "Primary rules governing access to and use of the service.",
+  },
+  youtubePremium: {
+    title: "YouTube Premium and Music Premium Availability",
+    publisher: "YouTube Help",
+    url: "https://support.google.com/youtube/answer/6307365?hl=en",
+    note: "Official country availability and membership guidance.",
+  },
+  youtubePaidTerms: {
+    title: "YouTube Paid Service Terms",
+    publisher: "YouTube",
+    url: "https://www.youtube.com/t/terms_paidservice",
+    note: "Primary terms for paid memberships, billing and location requirements.",
+  },
+  steamCurrencies: {
+    title: "Supported Currencies and Region Groups",
+    publisher: "Steamworks Documentation",
+    url: "https://partner.steamgames.com/doc/store/pricing/currencies?l=english&language=english",
+    note: "Current official currency list, including USD_LATAM and USD_MENA groups.",
+  },
+  steamPricing: {
+    title: "Steam Price Conversion Explorer",
+    publisher: "Steamworks Documentation",
+    url: "https://partner.steamgames.com/pricing/explorer?l=english",
+    note: "Valve's current explanation of publisher-set prices and conversion methods.",
+  },
+  steamAgreement: {
+    title: "Steam Subscriber Agreement",
+    publisher: "Valve",
+    url: "https://store.steampowered.com/subscriber_agreement/",
+    note: "Primary account and purchase terms, including location-related restrictions.",
+  },
+  playstationTerms: {
+    title: "PlayStation Network Terms of Service",
+    publisher: "Sony Interactive Entertainment",
+    url: "https://www.playstation.com/en-us/legal/psn-terms-of-service/",
+    note: "Primary account, store and service terms for PlayStation Network.",
+  },
+  microsoftAgreement: {
+    title: "Microsoft Services Agreement",
+    publisher: "Microsoft",
+    url: "https://www.microsoft.com/servicesagreement",
+    note: "Primary terms covering Microsoft accounts, Xbox services and digital purchases.",
+  },
+  googleFlights: {
+    title: "Track Flights and Prices",
+    publisher: "Google Travel Help",
+    url: "https://support.google.com/travel/answer/6235879?hl=en",
+    note: "Official price-tracking workflow that does not require changing network location.",
+  },
+  bookingTerms: {
+    title: "Booking.com Terms and Conditions",
+    publisher: "Booking.com",
+    url: "https://www.booking.com/content/terms.html",
+    note: "Primary platform terms and explanation of the accommodation marketplace relationship.",
+  },
+  udemyPricing: {
+    title: "Pricing Tiers for Courses",
+    publisher: "Udemy Support",
+    url: "https://support.udemy.com/hc/en-us/articles/229232187-Pricing-Tiers-For-Courses",
+    note: "Official explanation of course pricing tiers and marketplace controls.",
+  },
+  udemyTerms: {
+    title: "Udemy Terms of Use",
+    publisher: "Udemy",
+    url: "https://www.udemy.com/terms/",
+    note: "Primary terms for accounts, purchases, payments and platform use.",
+  },
+  ftcNegativeOptions: {
+    title: "Negative Options",
+    publisher: "U.S. Federal Trade Commission",
+    url: "https://www.ftc.gov/news-events/topics/truth-advertising/negative-options",
+    note: "Consumer-protection material on recurring subscriptions and cancellation practices.",
+  },
+  googlePlayCountry: {
+    title: "Change Your Google Play Country",
+    publisher: "Google Play Help",
+    url: "https://support.google.com/googleplay/answer/7431675?hl=en",
+    note: "Official account-country, payment-profile and switching-limit guidance.",
+  },
+  openAiCountries: {
+    title: "ChatGPT Supported Countries",
+    publisher: "OpenAI Help Center",
+    url: "https://help.openai.com/en/articles/7947663",
+    note: "Current official availability list; Turkey is included at the verification date.",
+  },
+  openAiDataControls: {
+    title: "Data Controls FAQ",
+    publisher: "OpenAI Help Center",
+    url: "https://help.openai.com/en/articles/7730893-data-controls-faq",
+    note: "Official controls for chat history, model improvement and data export.",
+  },
+  openAiBilling: {
+    title: "Multi-Currency Billing",
+    publisher: "OpenAI Help Center",
+    url: "https://help.openai.com/en/articles/10421635-multicurrency-billing",
+    note: "Official billing-currency and supported payment guidance.",
+  },
+  claudeCountries: {
+    title: "Where Can I Access Claude?",
+    publisher: "Anthropic Help Center",
+    url: "https://support.claude.com/en/articles/8461763-where-can-i-access-claude",
+    note: "Current official availability list; Turkey is included at the verification date.",
+  },
+  claudePrivacy: {
+    title: "Consumer Privacy Center",
+    publisher: "Anthropic",
+    url: "https://privacy.anthropic.com/en/collections/10663362-consumers",
+    note: "Official consumer privacy, retention and model-improvement documentation.",
+  },
+  geminiAvailability: {
+    title: "Where the Gemini Web App Is Available",
+    publisher: "Google Gemini Help",
+    url: "https://support.google.com/gemini/answer/13575153?hl=en",
+    note: "Official country, language and age availability guidance.",
+  },
+  geminiPrivacy: {
+    title: "Gemini Apps Privacy Hub",
+    publisher: "Google Gemini Help",
+    url: "https://support.google.com/gemini/answer/13594961?hl=en",
+    note: "Official explanation of Gemini data handling and user controls.",
+  },
+  nistAiRmf: {
+    title: "AI Risk Management Framework",
+    publisher: "NIST",
+    url: "https://www.nist.gov/itl/ai-risk-management-framework",
+    note: "A primary framework for identifying and managing AI-related risks.",
+  },
+  nordTrust: {
+    title: "NordVPN Trust Center",
+    publisher: "NordVPN",
+    url: "https://nordvpn.com/trust-center/",
+    note: "Provider-maintained audit, ownership and security documentation; independently verify scope.",
+  },
+  surfsharkTrust: {
+    title: "Surfshark Trust Center",
+    publisher: "Surfshark",
+    url: "https://surfshark.com/trust-center",
+    note: "Provider-maintained audit and transparency documentation; independently verify scope.",
+  },
+  expressTrust: {
+    title: "ExpressVPN Trust Center",
+    publisher: "ExpressVPN",
+    url: "https://www.expressvpn.com/trust-center",
+    note: "Provider-maintained audit and security documentation; independently verify scope.",
+  },
+  protonTransparency: {
+    title: "Proton VPN Transparency Report",
+    publisher: "Proton VPN",
+    url: "https://protonvpn.com/blog/transparency-report",
+    note: "Provider transparency disclosures; verify the date and scope of each statement.",
+  },
+  mullvadAudits: {
+    title: "Mullvad Security Audits",
+    publisher: "Mullvad VPN",
+    url: "https://mullvad.net/en/blog/tag/audits",
+    note: "Provider index of published security assessments; audit scope varies by report.",
+  },
+  planckPrivacy: {
+    title: "PlanckVPN Privacy Policy",
+    publisher: "PlanckVPN",
+    url: "https://planckvpn.com/privacy",
+    note: "The provider's current privacy claims; this is a first-party source.",
+  },
+  planckTransparency: {
+    title: "PlanckVPN Transparency",
+    publisher: "PlanckVPN",
+    url: "https://planckvpn.com/transparency",
+    note: "The provider's transparency checklist; verify whether independent reports are linked.",
+  },
+} satisfies Record<string, EditorialReference>;
+
+type ReferenceId = keyof typeof references;
+
+const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
+  "flight-tickets-vpn-savings": ["googleFlights", "bookingTerms"],
+  "hotel-booking-vpn-savings": ["bookingTerms", "googleFlights"],
+  "online-courses-udemy-vpn": ["udemyPricing", "udemyTerms"],
+  "playstation-xbox-store-vpn": ["playstationTerms", "microsoftAgreement"],
+  "software-subscription-vpn-savings": ["ftcNegativeOptions", "googlePlayCountry"],
+  "steam-regional-pricing-vpn": ["steamCurrencies", "steamPricing", "steamAgreement"],
+  "apple-tv-vpn-setup": ["appleVpn", "netflixVpn"],
+  "ios-vpn-shortcuts-automation": ["appleShortcuts", "appleVpn"],
+  "linux-vpn-setup-guide": ["networkManagerVpn", "wireguardQuickstart"],
+  "macos-vpn-setup": ["appleVpn", "wireguardQuickstart"],
+  "router-vpn-setup-guide": ["nistVpnGuide", "wireguardQuickstart"],
+  "xbox-playstation-vpn-setup": ["playstationTerms", "microsoftAgreement"],
+  "anime-crunchyroll-vpn": ["crunchyrollTerms", "netflixVpn"],
+  "disney-bbc-iplayer-vpn": ["disneyAgreement", "bbcTerms"],
+  "live-sports-streaming-vpn": ["bbcTerms", "youtubePaidTerms"],
+  "netflix-regional-libraries-vpn": ["netflixVpn", "netflixCountry", "netflixQuality"],
+  "spotify-regional-pricing-vpn": ["spotifyCountry", "spotifyTerms"],
+  "youtube-premium-cheap-vpn": ["youtubePremium", "youtubePaidTerms"],
+  "dns-leak-test-vpn": ["dotRfc", "nistVpnGuide"],
+  "double-vpn-multihop-explained": ["nistVpnGuide", "nistZeroTrust"],
+  "ram-only-servers-vpn": ["expressTrust", "nordTrust"],
+  "split-tunneling-vpn-explained": ["androidAlwaysOn", "appleVpn"],
+  "vpn-kill-switch-explained": ["androidAlwaysOn", "nistVpnGuide"],
+  "vpn-privacy-and-security": ["nistVpnGuide", "ftcPublicWifi"],
+  "wireguard-vs-openvpn-comparison": ["wireguardProtocol", "openvpnManual"],
+  "vpn-for-educators-teachers": ["cisaMfa", "ftcPublicWifi"],
+  "vpn-for-freelancers": ["nistZeroTrust", "cisaMfa"],
+  "vpn-for-investors-traders": ["cisaPhishing", "cisaMfa"],
+  "vpn-for-journalists-activists": ["cpjDigitalSafety", "effSurveillance"],
+  "vpn-for-remote-work": ["nistZeroTrust", "ftcPublicWifi"],
+  "vpn-for-travel": ["ftcPublicWifi", "nistVpnGuide"],
+  "vpn-streaming-and-content-access": ["netflixVpn", "disneyAgreement", "bbcTerms"],
+  "expressvpn-vs-protonvpn-comparison": ["expressTrust", "protonTransparency"],
+  "fastest-vpn-turkey-2026": ["wireguardProtocol", "openvpnManual"],
+  "free-vs-paid-vpn": ["nistVpnGuide", "ftcPublicWifi"],
+  "how-to-choose-vpn": ["nistVpnGuide", "wireguardProtocol"],
+  "nordvpn-vs-surfshark-comparison": ["nordTrust", "surfsharkTrust"],
+  "planckvpn-independent-vpn-analysis": ["planckPrivacy", "planckTransparency"],
+  "vpn-subscription-monthly-vs-yearly": ["ftcNegativeOptions", "googlePlayCountry"],
+  "vpn-protocols-comparison": ["wireguardProtocol", "openvpnManual", "ikev2Rfc"],
+  "vpn-speed-optimization": ["wireguardProtocol", "openvpnManual"],
+  "is-vpn-legal": ["effSurveillance", "nistVpnGuide"],
+  "vpn-for-internet-security-anxiety": ["cisaMfa", "ftcPublicWifi"],
+  "what-is-vpn-why-you-need-it": ["nistVpnGuide", "wireguardProtocol"],
+  "ai-content-creation-vpn": ["openAiDataControls", "claudePrivacy"],
+  "ai-phishing-deepfake-vpn-protection": ["cisaPhishing", "nistAiRmf"],
+  "ai-tools-privacy-vpn": ["openAiDataControls", "claudePrivacy", "geminiPrivacy"],
+  "chatgpt-access-turkey-vpn": ["openAiCountries", "claudeCountries", "geminiAvailability"],
+  "chatgpt-plus-pricing-vpn-savings": ["openAiBilling", "openAiCountries"],
+  "china-russia-ai-access-vpn": ["openAiCountries", "claudeCountries", "geminiAvailability"],
+};
+
+export function getBlogReferences(slug: string): EditorialReference[] {
+  return (articleReferenceIds[slug] ?? []).map((id) => references[id]);
+}
+
+export function getBlogReferenceCoverage() {
+  return Object.entries(articleReferenceIds).map(([slug, ids]) => ({
+    slug,
+    count: ids.length,
+  }));
+}

@@ -235,7 +235,7 @@ export function EnBody() {
           Privacy policy
         </h1>
         <p className="mt-3 text-sm text-ink-muted">
-          Last updated: June 2026
+          Last updated: 27 August 2026
         </p>
       </header>
 
@@ -255,13 +255,16 @@ export function EnBody() {
             password.
           </li>
           <li>
-            <strong>No forms</strong> — no form on this site collects personal
-            information.
+            <strong>Interactive tools are purpose-limited</strong> — diagnostic
+            inputs are processed only to return the requested result. The
+            email and VPN/IP tools use the server-side services described
+            below.
           </li>
           <li>
-            <strong>VPN provider links</strong> are not stored; a plain link
-            takes you directly to the provider&apos;s official site, with no
-            click tracking.
+            <strong>VPN provider links</strong> may contain a standard referral
+            parameter. We do not use those clicks to build reader profiles;
+            the destination provider receives the normal request and applies
+            its own privacy policy.
           </li>
           <li>
             <strong>Email to us</strong> is used only to respond to your message.
@@ -283,20 +286,20 @@ export function EnBody() {
 
         <h3>2.1. Automatic technical data (server logs)</h3>
         <p>
-          Our Hostinger hosting infrastructure temporarily keeps standard web
-          server logs:
+          Our Hostinger hosting infrastructure may process standard web server
+          logs needed to deliver and protect the site:
         </p>
         <ul>
-          <li>IP address (anonymised)</li>
+          <li>IP address</li>
           <li>Browser type and version (User-Agent)</li>
           <li>Access date/time</li>
           <li>Requested URL</li>
           <li>HTTP response code</li>
         </ul>
         <p>
-          These records are kept for 30 days for security, debugging and abuse
-          detection, then auto-deleted. They are not used to build personal
-          profiles.
+          Hostinger controls the infrastructure-level retention and security
+          settings for these records. VPN Advisor does not use server logs to
+          build advertising or behavioural profiles.
         </p>
 
         <h3>2.2. Analytics (Google Analytics)</h3>
@@ -306,8 +309,8 @@ export function EnBody() {
         </p>
         <ul>
           <li>
-            before you consent on the cookie banner, no analytics cookie is
-            set (anonymous aggregated pings only)
+            before you consent on the cookie banner, analytics storage remains
+            denied; the Google tag may send cookieless Consent Mode signals
           </li>
           <li>
             on &quot;Accept&quot; the <code>_ga</code> cookies are set; on
@@ -329,6 +332,40 @@ export function EnBody() {
           business record.
         </p>
 
+        <h3>2.4. Interactive diagnostic tools</h3>
+        <p>
+          Tool results are returned with no-store response headers and are not
+          intentionally saved in a VPN Advisor account or database. Some checks
+          require limited server-side or third-party processing:
+        </p>
+        <ul>
+          <li>
+            <strong>Email Security Check:</strong> the full address is sent to
+            our server for validation. The domain is queried for live MX, SPF
+            and DMARC records. A breach lookup is sent server-to-server to Have
+            I Been Pwned when configured, otherwise to XposedOrNot. We return a
+            masked address and do not intentionally retain the submitted
+            address or result.
+          </li>
+          <li>
+            <strong>VPN/IP Diagnostic:</strong> the public IP already visible
+            to the site may be sent to ipapi.is for network, ASN, approximate
+            location and VPN/proxy classification. VPN Advisor does not
+            intentionally retain the lookup result.
+          </li>
+          <li>
+            <strong>Browser diagnostics:</strong> DNS and speed checks contact
+            Cloudflare endpoints as disclosed on the relevant tool page.
+            WebRTC checks run in the browser. Each result describes a limited
+            signal, not a security certification.
+          </li>
+        </ul>
+        <p>
+          Do not submit an email address unless you agree to that limited data
+          flow. The relevant third party&apos;s privacy terms also apply to its
+          processing.
+        </p>
+
         <h2>3. Why we process data (legal basis)</h2>
         <ul>
           <li>
@@ -336,20 +373,26 @@ export function EnBody() {
             abuse prevention).
           </li>
           <li>
-            <strong>Google Analytics:</strong> consent (GDPR Art. 6(1)(a)
-            and KVKK explicit consent via the cookie banner). Not processed
-            unless you accept.
+            <strong>Google Analytics storage:</strong> consent (GDPR Art.
+            6(1)(a) and KVKK explicit consent via the cookie banner). Storage
+            remains denied unless you accept; limited cookieless Consent Mode
+            signals may still be sent.
           </li>
           <li>
             <strong>Contact email:</strong> contract/precontract necessity
             (answering your request).
           </li>
+          <li>
+            <strong>Diagnostics:</strong> your request to run the selected tool
+            and our legitimate interest in preventing abuse and returning a
+            reliable result.
+          </li>
         </ul>
 
         <h2>4. Data sharing</h2>
         <p>
-          We do not share your data with third parties. The mandatory technical
-          flows involve these service providers:
+          We do not sell personal data. Delivering the site and requested tools
+          involves these service providers:
         </p>
         <ul>
           <li>
@@ -357,9 +400,25 @@ export function EnBody() {
             Standard data-processing agreement.
           </li>
           <li>
-            <strong>Google</strong> (if you consented, analytics) — processes
-            anonymous pageview data in aggregate; data may be transferred to
-            the US (Google&apos;s standard contractual clauses).
+            <strong>Google</strong> — processes consent-state signals and, if
+            you accept analytics storage, measurement data. Data may be
+            transferred to the US under Google&apos;s published safeguards.
+          </li>
+          <li>
+            <strong>Google AdSense</strong> — serves and measures advertising
+            according to your consent choices and Google&apos;s policies.
+          </li>
+          <li>
+            <strong>Have I Been Pwned or XposedOrNot</strong> — receives the
+            submitted email address only when you run the breach check.
+          </li>
+          <li>
+            <strong>ipapi.is</strong> — receives the public IP when the VPN/IP
+            diagnostic requests network classification.
+          </li>
+          <li>
+            <strong>Cloudflare</strong> — provides endpoints used by the DNS and
+            speed diagnostics.
           </li>
         </ul>
         <p>
@@ -398,9 +457,11 @@ export function EnBody() {
 
         <h2>6. Data security</h2>
         <p>
-          Server traffic is encrypted over HTTPS (TLS 1.3). HTTP headers are
-          hardened (HSTS, CSP, X-Frame-Options, etc.). Because we do not use
-          cookies, our attack surface for cookie-based exploits is zero.
+          Server traffic is protected with HTTPS. HTTP headers include HSTS,
+          Content Security Policy, frame restrictions and MIME-sniffing
+          protection. Strictly necessary preference storage and consent-based
+          Google cookies may be used as described in the Cookie Policy; no
+          security control can reduce risk to zero.
         </p>
 
         <h2>7. Policy updates</h2>

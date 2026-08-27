@@ -1,109 +1,151 @@
 import { SEO_LOCALES, siteConfig } from "@/lib/site";
 import { rankedProducts } from "@/data/products";
-import { featuredReferenceProducts, referenceProducts } from "@/data/products-reference-localized";
+import {
+  featuredReferenceProducts,
+  referenceProducts,
+} from "@/data/products-reference-localized";
 import { planckVpnWatch } from "@/data/editorial-watch";
 import { getIndexableBlogPosts } from "@/lib/blog";
+import {
+  BLOG_REFERENCES_VERIFIED_AT,
+  getBlogReferences,
+} from "@/data/blog-references";
 
 export const dynamic = "force-static";
 
 export async function GET() {
-  const core = rankedProducts("en").filter((p) => p.slug !== "atlas-vpn");
+  const core = rankedProducts("en").filter((product) => product.slug !== "atlas-vpn");
   const catalog = core;
-  const watchlistCount = Math.max(referenceProducts.length - featuredReferenceProducts.length, 0);
-  const blogLocales = SEO_LOCALES;
-  const blogPosts = await Promise.all(blogLocales.map((locale) => getIndexableBlogPosts(locale)));
-  const latestBlogUpdate = blogPosts.flat().map((post) => post.updatedAt).sort().at(-1);
-  const blogIndex = blogPosts.map((posts) => `### English blog articles\n\n${posts.map((post) => `- [${post.title}](${siteConfig.url}/blog/${post.slug}) — ${post.description}`).join("\n")}`).join("\n\n");
+  const watchlistCount = Math.max(
+    referenceProducts.length - featuredReferenceProducts.length,
+    0,
+  );
+  const blogPosts = await Promise.all(
+    SEO_LOCALES.map((locale) => getIndexableBlogPosts(locale)),
+  );
+  const latestBlogUpdate = blogPosts
+    .flat()
+    .map((post) => post.updatedAt)
+    .sort()
+    .at(-1);
+  const blogIndex = blogPosts
+    .map(
+      (posts) =>
+        `### English blog articles\n\n${posts
+          .map((post) => {
+            const sourceCount = getBlogReferences(post.slug).length;
+            return `- [${post.title}](${siteConfig.url}/blog/${post.slug}) — ${post.description} Sources shown on page: ${sourceCount}; reference links checked ${BLOG_REFERENCES_VERIFIED_AT}.`;
+          })
+          .join("\n")}`,
+    )
+    .join("\n\n");
 
   const body = `# ${siteConfig.name}
 
 > ${siteConfig.description.en}
 
-## Site amacı
+Last editorial update: ${latestBlogUpdate ?? BLOG_REFERENCES_VERIFIED_AT}
 
-${siteConfig.name}, VPN teknolojisi ve VPN sağlayıcıları hakkında kaynak temelli bilgi sunan bir karşılaştırma ve rehber sitesidir. Site bir test laboratuvarı değildir; doğrulanmamış hız, streaming veya kullanıcı puanı yayınlamaz. Sağlayıcıların resmi teknik belgeleri, gizlilik politikaları, hizmet şartları, fiyatlandırma sayfaları, bağımsız denetimler ve güvenilir standart/platform belgeleri ortak bir çerçevede düzenlenir.
+## Purpose
 
-## Kapsam
+${siteConfig.name} is an English-language VPN comparison and digital-security reference site. It organizes provider facts, platform rules, standards and practical diagnostic signals. It is not a VPN testing laboratory and does not publish unrun speed tests, fabricated user ratings or guaranteed streaming-access claims.
 
-Görünür Global Core katalogda ${catalog.length + featuredReferenceProducts.length} sağlayıcı vardır: ${catalog.length} ayrıntılı, indekslenebilir VPN profili ve ${featuredReferenceProducts.length} seçilmiş pazar referansı. Seçilmiş referanslar henüz ayrıntılı laboratuvar incelemesi değildir; kalan ${watchlistCount} kayıt eski bağlantıları ve gelecekteki araştırma kapsamını koruyan noindex watchlist'tir. Bu sayılar kalite puanı değildir. Hizmeti sonlandırılmış ürünler aktif sağlayıcı sayısına dahil edilmez.
+## Public catalog scope
 
-## Kaynak ve doğrulama yaklaşımı
+The visible Global Core catalog contains ${catalog.length + featuredReferenceProducts.length} providers: ${catalog.length} detailed, indexable provider profiles and ${featuredReferenceProducts.length} selected market reference. The selected reference is not a laboratory review. Another ${watchlistCount} historical or research records remain noindex so old links keep context without inflating the public catalog. Catalog position is not a quality score.
 
-Öncelik sırası: (1) resmi teknik dokümantasyon ve politikalar, (2) bağımsız güvenlik/no-logs denetimleri, (3) NIST/IETF/Apple/Google/Microsoft gibi standart veya platform belgeleri, (4) bağlam sağlayan güvenilir ikincil kaynaklar. Bir bilgi bağımsız olarak doğrulanamıyorsa kesin gerçek gibi sunulmamalıdır.
+## Evidence hierarchy
 
-Methodology: ${siteConfig.url}/methodology
-Research desk: ${siteConfig.url}/research
-Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
-About: ${siteConfig.url}/about
+1. Official technical documentation, privacy policies, terms and pricing pages.
+2. Published independent security or no-logs assessments, with auditor, date and scope.
+3. Standards and platform documentation from organizations such as NIST, IETF, Apple, Google and Microsoft.
+4. Reliable secondary sources used only for context and clearly separated from primary evidence.
 
-## Emerging provider watch (not ranked)
+If a claim cannot be verified, it should be labelled as a provider statement, a limited diagnostic signal or an unresolved question rather than a fact.
 
-PlanckVPN is covered separately as an emerging provider, not as a Top 10 recommendation or a Global Core 30 entry. VPN Advisor's source-based analysis is ${siteConfig.url}/blog/${planckVpnWatch.articleSlugs.en}. The current official pages report a subscription-only product, WireGuard/OpenVPN/IKEv2 support, up to four devices, Virginia, United States jurisdiction, and no completed independent no-logs audit identified by the provider's own trust checklist. Verify current claims in the [PlanckVPN privacy policy](https://planckvpn.com/privacy), [comparison page](https://planckvpn.com/compare), and [transparency page](https://planckvpn.com/transparency).
+- Methodology: ${siteConfig.url}/methodology
+- Research desk: ${siteConfig.url}/research
+- Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
+- Corrections and contact: ${siteConfig.url}/contact
+- About the editorial project: ${siteConfig.url}/about
 
-## VPN sağlayıcı profilleri
+## Tool data-flow limits
 
-Aşağıdaki liste editoryal puan sıralaması değildir; sitede karşılaştırılan aktif sağlayıcı profillerine erişim dizinidir.
+VPN Advisor does not intentionally save diagnostic results. Some tools require limited external processing: the Email Security Check sends the submitted address server-to-server to Have I Been Pwned when configured, otherwise XposedOrNot; the VPN/IP Diagnostic may send the public IP to ipapi.is; DNS and speed tools use disclosed Cloudflare endpoints. Tool pages explain the data flow and limitations. Diagnostics are not provider-wide benchmarks or security certifications.
+
+## Emerging provider watch — not ranked
+
+PlanckVPN is covered separately as an emerging provider, not as a Top 10 recommendation or a Global Core 30 entry. The source-based analysis is ${siteConfig.url}/blog/${planckVpnWatch.articleSlugs.en}. Its official pages currently describe a subscription-only product, WireGuard/OpenVPN/IKEv2 support, up to four devices and United States jurisdiction. No completed independent no-logs audit was identified through the provider's own transparency checklist at the verification date. Recheck the [PlanckVPN privacy policy](https://planckvpn.com/privacy), [comparison page](https://planckvpn.com/compare) and [transparency page](https://planckvpn.com/transparency).
+
+## VPN provider profile directory
+
+This directory is not an editorial score ranking.
 
 ${catalog
-  .map((p) => {
-    const price = p.pricingVerifiedAt && p.priceFromUsd > 0
-      ? `${p.priceCurrency === "EUR" ? "€" : "$"}${p.priceFromUsd.toFixed(2)}/month`
-      : "Verify on the provider's official pricing page";
-    return `### ${p.brand}\n\n- **Positioning:** ${p.positioning}\n- **Price:** ${price}\n- **Jurisdiction:** ${p.highlights.jurisdiction ?? "Not specified"}\n- **Server/network information:** ${p.highlights.servers ?? "Not specified"}\n- **Independent audit information:** ${p.highlights.audits ?? "Not specified"}\n- **Device support:** ${p.highlights.devices ?? "Not specified"}\n- **Provider profile:** ${siteConfig.url}/reviews/${p.slug}\n\n${p.summary}\n`;
+  .map((product) => {
+    const price =
+      product.pricingVerifiedAt && product.priceFromUsd > 0
+        ? `${product.priceCurrency === "EUR" ? "€" : "$"}${product.priceFromUsd.toFixed(2)}/month; verify term and renewal conditions`
+        : "Verify on the provider's official pricing page";
+    return `### ${product.brand}\n\n- **Positioning:** ${product.positioning}\n- **Price:** ${price}\n- **Jurisdiction:** ${product.highlights.jurisdiction ?? "Not specified"}\n- **Server/network information:** ${product.highlights.servers ?? "Not specified"}\n- **Independent audit information:** ${product.highlights.audits ?? "Not specified"}\n- **Device support:** ${product.highlights.devices ?? "Not specified"}\n- **Provider profile:** ${siteConfig.url}/reviews/${product.slug}\n\n${product.summary}\n`;
   })
   .join("\n")}
 
-## Comparisons
+## Head-to-head comparisons
 
 - [NordVPN vs Surfshark](${siteConfig.url}/comparison/nordvpn-vs-surfshark)
 - [ExpressVPN vs NordVPN](${siteConfig.url}/comparison/expressvpn-vs-nordvpn)
 - [Proton VPN vs Mullvad](${siteConfig.url}/comparison/proton-vs-mullvad)
 
-## Topic guides
+## Topic guides and diagnostics
 
 - [What is a VPN?](${siteConfig.url}/guide/what-is-a-vpn)
 - [Free vs paid VPN](${siteConfig.url}/guide/free-vs-paid-vpn)
 - [VPN security checklist](${siteConfig.url}/guide/vpn-security-checklist)
 - [AI privacy guides](${siteConfig.url}/ai)
+- [Browser and connection diagnostics](${siteConfig.url}/tools)
 - [Blog and technical explainers](${siteConfig.url}/blog)
 
-## Blog ve güncel içerik dizini
+## Blog and current content index
+
+Each indexable English article displays its primary reference links and their shared verification date.
 
 ${blogIndex}
 
-## Temel karşılaştırma alanları
+## Core comparison fields
 
-- Privacy policy and data collection scope
-- Independent no-logs and security audits
-- VPN protocols and security features
-- Platform and device support
+- Privacy policy and documented data collection
+- Independent audit date, auditor, scope and exclusions
+- VPN protocols and platform-specific security features
+- Device and operating-system support
 - Server and country information
-- Pricing, renewal and refund terms
-- Company and jurisdiction information
+- Initial price, term, renewal and refund conditions
+- Company ownership and jurisdiction
 
 ## Important pages
 
 - Home: ${siteConfig.url}/
-- VPN provider reviews: ${siteConfig.url}/vpn-reviews
+- VPN provider profiles: ${siteConfig.url}/vpn-reviews
 - Source-based methodology: ${siteConfig.url}/methodology
 - Research desk: ${siteConfig.url}/research
 - AI privacy hub: ${siteConfig.url}/ai
+- Tools: ${siteConfig.url}/tools
 - Blog: ${siteConfig.url}/blog
 - Affiliate disclosure: ${siteConfig.url}/affiliate-disclosure
 - About: ${siteConfig.url}/about
-- Contact: ${siteConfig.url}/contact
+- Contact and corrections: ${siteConfig.url}/contact
 - Privacy policy: ${siteConfig.url}/privacy-policy
 - Terms: ${siteConfig.url}/terms
 
-## Language policy
+## Language and canonical policy
 
-English is the sole public and indexable language. Legacy Turkish and German URLs redirect to the matching English URL so that old links remain useful without creating duplicate or mixed-language pages.
+English is the sole public and indexable language. Legacy Turkish and German URLs redirect to the matching English URL so old links remain useful without creating duplicate or mixed-language pages.
 
-## Güncellik
+## Freshness
 
-- Son blog güncellemesi: ${latestBlogUpdate ?? "Belirtilmemiş"}
-- Methodology: ${siteConfig.url}/methodology
-- Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
+- Latest indexable blog update: ${latestBlogUpdate ?? "Not specified"}
+- Primary-reference links checked: ${BLOG_REFERENCES_VERIFIED_AT}
+- Provider prices and audits have their own per-profile verification dates.
 `;
 
   return new Response(body, {

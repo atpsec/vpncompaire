@@ -13,7 +13,7 @@ type Props = { params: Promise<{ locale: string }> };
 export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "AI, Privacy and VPN Security | VPN Advisor";
+  const title = "AI, Privacy and VPN Security";
   const description =
     "Practical guides to AI privacy, ChatGPT and Claude data controls, API key security, browser privacy and VPN choices.";
   const canonical = absoluteUrl("/ai", "en");

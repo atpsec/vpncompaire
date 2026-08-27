@@ -9,6 +9,7 @@ import { BlogContent } from "@/components/blog/blog-content";
 import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
 import { SocialShare } from "@/components/blog/social-share";
+import { EditorialReferences } from "@/components/blog/editorial-references";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import {
@@ -18,6 +19,10 @@ import {
 } from "@/lib/site";
 import type { Metadata } from "next";
 import { getLocalizedLinkHref } from "@/lib/i18n-paths";
+import {
+  BLOG_REFERENCES_VERIFIED_AT,
+  getBlogReferences,
+} from "@/data/blog-references";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -179,6 +184,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const { frontmatter, contentParts } = result;
+  const editorialReferences = getBlogReferences(frontmatter.slug);
   const nextSteps = NEXT_STEP_COPY[locale];
   const contextualNextStep =
     locale === "en" ? EN_CONTEXTUAL_NEXT_STEPS[frontmatter.slug] : undefined;
@@ -215,6 +221,7 @@ export default async function BlogPostPage({ params }: Props) {
     locale,
     category: frontmatter.category,
     tags: frontmatter.tags,
+    citations: editorialReferences.map((reference) => reference.url),
   });
 
   const homeName = "Home";
@@ -268,6 +275,11 @@ export default async function BlogPostPage({ params }: Props) {
         />
 
         <BlogContent content={contentParts.second} />
+
+        <EditorialReferences
+          references={editorialReferences}
+          verifiedAt={BLOG_REFERENCES_VERIFIED_AT}
+        />
 
         {contextualNextStep ? (
           <Card className="mt-12 border-accent-200 bg-accent-50/40 p-6">

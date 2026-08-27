@@ -1091,7 +1091,7 @@
     }
   },
   "tools": {
-    "metaTitle": "Free Security Diagnostics - Email, IP, DNS, WebRTC and Speed | VPN Advisor",
+    "metaTitle": "Free Security Diagnostics - Email, IP, DNS, WebRTC and Speed",
     "metaDescription": "Free browser diagnostics for email and connection signals: domain checks, public IP, DNS resolver signals, WebRTC signals and speed comparison.",
     "breadcrumb": "Tools",
     "indexTitle": "Free Security and VPN Diagnostic Tools",
@@ -1143,14 +1143,14 @@
       "copy": "Copy",
       "copied": "Copied!",
       "loading": "Checking...",
-      "privacyNote": "Results stay in your browser. We never log this data.",
+      "privacyNote": "VPN Advisor does not intentionally save these results. Some checks use server-side or third-party services; each tool explains its data flow before use.",
       "ctaTitle": "Want to understand VPN protection?",
       "ctaBody": "Compare provider profiles using official sources and independent audits.",
       "ctaButton": "Read provider profiles",
       "downloadReport": "Download report"
     },
     "ip": {
-      "metaTitle": "What is My IP? - Free IP Address Lookup 2026 | VPN Advisor",
+      "metaTitle": "What is My IP? - Free IP Address Lookup 2026",
       "metaDescription": "Instantly see your IP address, ISP, country, city and browser fingerprint. Free, log-free and fast IP lookup tool.",
       "breadcrumb": "My IP",
       "title": "Your IP Address",
@@ -1173,7 +1173,7 @@
       "explainBody": "An IP address is a network and approximate location signal, not a precise identity card. A VPN can change the public IP signal, but accounts, cookies and browser fingerprints remain separate identifiers."
     },
     "vpnTest": {
-      "metaTitle": "VPN/IP Test - Check Your Public IP, Location and VPN Status | VPN Advisor",
+      "metaTitle": "VPN/IP Test - Check Your Public IP, Location and VPN Status",
       "metaDescription": "Check your public IP address, country, city, ISP, ASN and whether the IP looks like a datacenter, proxy or VPN endpoint.",
       "breadcrumb": "VPN/IP Test",
       "title": "VPN/IP Diagnostic Test",
@@ -1183,7 +1183,7 @@
       "errorBody": "The diagnostic service is temporarily unavailable. Please try again in a moment.",
       "rateLimitedBody": "Too many checks were requested from this connection. Please wait a minute and try again.",
       "degradedNote": "The external lookup is unavailable, so we are showing only the IP and location details available from request headers.",
-      "privacyNote": "Your IP is used only for this check and is not stored by VPN Advisor.",
+      "privacyNote": "This check sends your public IP to ipapi.is for network classification. VPN Advisor does not intentionally store the result.",
       "lastChecked": "Checked just now",
       "unknown": "Unknown",
       "publicIp": "Public IP",
@@ -1213,7 +1213,7 @@
       "reportDownload": "Download report"
     },
     "emailSecurity": {
-      "metaTitle": "Email Security Check - Free Breach, SPF, DMARC and MX Test | VPN Advisor",
+      "metaTitle": "Email Security Check - Free Breach, SPF, DMARC and MX Test",
       "metaDescription": "Check an email address for domain security signals: MX, SPF, DMARC, disposable address risk and optional Have I Been Pwned breach matches. Free and privacy-conscious.",
       "breadcrumb": "Email Security Check",
       "featured": "Featured free tool",
@@ -1228,7 +1228,7 @@
       "errorBody": "The security check is temporarily unavailable. Please try again in a moment.",
       "rateLimitedBody": "Too many checks were requested from this connection. Please wait a minute and try again.",
       "privacyNote": "Privacy note:",
-      "privacyDetail": "Your email is used only for this check and is not stored. MX, SPF and DMARC results come from live DNS lookups. Breach checks run server-side (Have I Been Pwned when configured, otherwise XposedOrNot); no API keys are sent to the browser.",
+      "privacyDetail": "Your full email address is sent to VPN Advisor's server for this check. The domain is queried for live MX, SPF and DMARC records, and the address is sent server-to-server to Have I Been Pwned when configured, otherwise XposedOrNot. VPN Advisor does not intentionally retain the address or result; no API keys are sent to the browser.",
       "scoreLabel": "Security score",
       "risk": {
         "low": "Low risk",
@@ -1291,7 +1291,7 @@
       "reportDownload": "Download report"
     },
     "dns": {
-      "metaTitle": "DNS Resolver Signals 2026 - Free | VPN Advisor",
+      "metaTitle": "DNS Resolver Signals 2026 - Free",
       "metaDescription": "Inspect DNS resolver signals from your current browser connection. This diagnostic does not prove system-wide VPN behavior.",
       "breadcrumb": "DNS Resolver Check",
       "title": "DNS Resolver Check",
@@ -1316,7 +1316,7 @@
       "reportDownload": "Download report"
     },
     "webrtc": {
-      "metaTitle": "WebRTC Signal Check - Public IP Visibility | VPN Advisor",
+      "metaTitle": "WebRTC Signal Check - Public IP Visibility",
       "metaDescription": "Inspect whether this browser session exposes a public IP through WebRTC while a VPN is on. Treat the result as a signal.",
       "breadcrumb": "WebRTC Signal Check",
       "title": "WebRTC Signal Check",
@@ -1341,7 +1341,7 @@
       "reportDownload": "Download report"
     },
     "speed": {
-      "metaTitle": "VPN Speed Comparison - Free Connection Diagnostic 2026 | VPN Advisor",
+      "metaTitle": "VPN Speed Comparison - Free Connection Diagnostic 2026",
       "metaDescription": "Compare download and latency signals with your VPN on and off using Cloudflare infrastructure. Results describe your connection, not a provider average.",
       "breadcrumb": "VPN Speed Comparison",
       "title": "VPN Speed Comparison",

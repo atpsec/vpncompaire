@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { VPNLogo } from "@/components/brand/vpn-logo";
 import { featuredReferenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
 import { planckVpnWatch } from "@/data/editorial-watch";
 import type { Locale } from "@/lib/site";
@@ -87,9 +88,7 @@ export function ReferenceVPNDirectory() {
                 ))}
               </div>
             </div>
-            <span aria-hidden="true" className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-brand-200 bg-white text-sm font-bold text-brand-700">
-              PV
-            </span>
+            <VPNLogo slug="planckvpn" size={48} />
           </div>
           <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm font-medium">
             <Link
@@ -117,7 +116,7 @@ export function ReferenceVPNDirectory() {
                 <Card className="h-full transition hover:shadow-sm hover:border-brand-200">
                   <Link href={`/reviews/${product.slug}`} className="flex h-full flex-col p-5">
                     <div className="flex items-start gap-3">
-                      <ReferenceMark brand={product.brand} />
+                      <VPNLogo slug={product.slug} size={44} />
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <h3 className="font-semibold text-ink-strong">{product.brand}</h3>
@@ -139,25 +138,5 @@ export function ReferenceVPNDirectory() {
         </ul>
       </Container>
     </section>
-  );
-}
-
-function ReferenceMark({ brand }: { brand: string }) {
-  const letters = brand
-    .replace(/VPN/gi, "")
-    .trim()
-    .split(/\s+/)
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase() || "V";
-
-  return (
-    <span
-      aria-hidden="true"
-      className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-brand-100 bg-brand-50 text-sm font-bold text-brand-700"
-    >
-      {letters}
-    </span>
   );
 }

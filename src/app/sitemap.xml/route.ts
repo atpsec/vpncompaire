@@ -6,49 +6,49 @@ import { siteConfig } from "@/lib/site";
 export const revalidate = 3600;
 
 const staticEntries = [
-  ["/", 1, "daily"],
-  ["/vpn-reviews", 0.95, "weekly"],
-  ["/best-vpn", 0.85, "weekly"],
-  ["/comparison", 0.9, "weekly"],
-  ["/guide", 0.85, "weekly"],
-  ["/blog", 0.85, "daily"],
-  ["/ai", 0.9, "weekly"],
-  ["/devices", 0.8, "weekly"],
-  ["/tools", 0.8, "weekly"],
-  ["/methodology", 0.75, "monthly"],
-  ["/research", 0.9, "weekly"],
-  ["/about", 0.5, "monthly"],
-  ["/contact", 0.4, "yearly"],
-  ["/affiliate-disclosure", 0.5, "monthly"],
-  ["/legal-notice", 0.5, "monthly"],
-  ["/privacy-policy", 0.4, "yearly"],
-  ["/terms", 0.4, "yearly"],
-  ["/cookie-policy", 0.4, "yearly"],
-  ["/refund-policy", 0.4, "monthly"],
-  ["/calculator", 0.7, "monthly"],
-  ["/server-map", 0.7, "monthly"],
-  ["/glossary", 0.65, "monthly"],
-  ["/security-tools", 0.75, "monthly"],
+  ["/", 1, "daily", "2026-08-27"],
+  ["/vpn-reviews", 0.95, "weekly", "2026-08-27"],
+  ["/best-vpn", 0.85, "weekly", "2026-08-24"],
+  ["/comparison", 0.9, "weekly", "2026-08-27"],
+  ["/guide", 0.85, "weekly", "2026-08-27"],
+  ["/blog", 0.85, "daily", "2026-08-27"],
+  ["/ai", 0.9, "weekly", "2026-08-27"],
+  ["/devices", 0.8, "weekly", "2026-08-24"],
+  ["/tools", 0.8, "weekly", "2026-08-27"],
+  ["/methodology", 0.75, "monthly", "2026-08-24"],
+  ["/research", 0.9, "weekly", "2026-08-27"],
+  ["/about", 0.5, "monthly", "2026-08-24"],
+  ["/contact", 0.4, "yearly", "2026-08-24"],
+  ["/affiliate-disclosure", 0.5, "monthly", "2026-08-24"],
+  ["/legal-notice", 0.5, "monthly", "2026-08-24"],
+  ["/privacy-policy", 0.4, "yearly", "2026-08-27"],
+  ["/terms", 0.4, "yearly", "2026-08-24"],
+  ["/cookie-policy", 0.4, "yearly", "2026-08-24"],
+  ["/refund-policy", 0.4, "monthly", "2026-08-24"],
+  ["/calculator", 0.7, "monthly", "2026-08-24"],
+  ["/server-map", 0.7, "monthly", "2026-08-24"],
+  ["/glossary", 0.65, "monthly", "2026-08-24"],
+  ["/security-tools", 0.75, "monthly", "2026-08-24"],
 ] as const;
 
 const useCaseEntries = [
-  "privacy",
-  "streaming",
-  "gaming",
-  "travel",
-  "turkey",
-  "turks-abroad",
+  ["privacy", "2026-08-27"],
+  ["streaming", "2026-08-27"],
+  ["gaming", "2026-08-27"],
+  ["travel", "2026-08-27"],
+  ["turkey", "2026-08-27"],
+  ["turks-abroad", "2026-08-27"],
 ] as const;
 
 const deviceEntries = ["android", "iphone", "ipad", "smart-tv"] as const;
 
 const toolEntries = [
-  ["/tools/email-security-check", 0.7, "monthly"],
-  ["/tools/my-ip", 0.65, "monthly"],
-  ["/tools/dns-leak-test", 0.65, "monthly"],
-  ["/tools/webrtc-leak-test", 0.65, "monthly"],
-  ["/tools/vpn-speed-test", 0.65, "monthly"],
-  ["/vpn-test", 0.7, "monthly"],
+  ["/tools/email-security-check", 0.7, "monthly", "2026-08-27"],
+  ["/tools/my-ip", 0.65, "monthly", "2026-08-27"],
+  ["/tools/dns-leak-test", 0.65, "monthly", "2026-08-27"],
+  ["/tools/webrtc-leak-test", 0.65, "monthly", "2026-08-27"],
+  ["/tools/vpn-speed-test", 0.65, "monthly", "2026-08-27"],
+  ["/vpn-test", 0.7, "monthly", "2026-08-27"],
 ] as const;
 
 function escapeXml(value: string): string {
@@ -82,31 +82,41 @@ export async function GET() {
     if (!paths.has(path)) paths.set(path, urlEntry(path, priority, changefreq, lastmod));
   };
 
-  for (const [path, priority, changefreq] of staticEntries) {
-    add(path, priority, changefreq);
+  for (const [path, priority, changefreq, lastmod] of staticEntries) {
+    add(path, priority, changefreq, lastmod);
   }
 
   for (const product of products) {
-    add(`/reviews/${product.slug}`, 0.82, "weekly", product.pricingVerifiedAt || undefined);
+    add(
+      `/reviews/${product.slug}`,
+      0.82,
+      "weekly",
+      product.pricingVerifiedAt || "2026-08-27",
+    );
   }
 
-  for (const slug of useCaseEntries) {
-    add(`/best-vpn/${slug}`, 0.8, "weekly");
+  for (const [slug, lastmod] of useCaseEntries) {
+    add(`/best-vpn/${slug}`, 0.8, "weekly", lastmod);
   }
 
   for (const slug of deviceEntries) {
-    add(`/devices/${slug}`, 0.75, "monthly");
+    add(`/devices/${slug}`, 0.75, "monthly", "2026-08-24");
   }
 
-  for (const [path, priority, changefreq] of toolEntries) {
-    add(path, priority, changefreq);
+  for (const [path, priority, changefreq, lastmod] of toolEntries) {
+    add(path, priority, changefreq, lastmod);
   }
 
   for (const entry of Object.values(CONTENT_REGISTRY)) {
     const translation = entry.translations.en;
     if (!translation || entry.id === "is-vpn-legal-in-turkey") continue;
     const root = translation.section === "guide" ? "guide" : "comparison";
-    add(`/${root}/${translation.slug}`, root === "comparison" ? 0.8 : 0.75, "monthly");
+    add(
+      `/${root}/${translation.slug}`,
+      root === "comparison" ? 0.8 : 0.75,
+      "monthly",
+      root === "comparison" ? "2026-08-27" : "2026-08-24",
+    );
   }
 
   for (const post of posts.filter((post) => post.indexable)) {

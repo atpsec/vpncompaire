@@ -48,7 +48,7 @@ export function buildRootMetadata(locale: Locale): Metadata {
     metadataBase: new URL(siteConfig.url),
     title: {
       default: TITLES[locale],
-      template: `%s · ${siteConfig.name}`,
+      template: `%s | ${siteConfig.name}`,
     },
     description,
     applicationName: siteConfig.name,

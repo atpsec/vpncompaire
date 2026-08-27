@@ -130,6 +130,7 @@ export function articleSchema(post: {
   locale: Locale;
   category?: string;
   tags?: string[];
+  citations?: string[];
 }): JsonLdObject {
   const articleUrl = absoluteUrl(`/blog/${post.slug}`, "en");
 
@@ -144,6 +145,7 @@ export function articleSchema(post: {
     inLanguage: inLanguageOf(post.locale),
     articleSection: post.category,
     keywords: post.tags,
+    ...(post.citations?.length ? { citation: post.citations } : {}),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,

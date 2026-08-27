@@ -136,9 +136,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalLocale = isArchived ? "tr" : locale === "de" ? "en" : locale;
   const canonical = absoluteUrl(`/reviews/${product.slug}`, canonicalLocale);
   const title = `${product.brand} — ${isArchived ? l.archived : l.metaSuffix}`;
+  const description = isArchived
+    ? `${product.brand} is retained as an archived provider record with source links and historical context.`
+    : `Review ${product.brand}'s documented privacy, audits, jurisdiction, device support and current pricing in this source-based VPN profile.`;
   return {
     title,
-    description: `${product.brand}: ${product.summary} ${l.intro}`,
+    description,
     alternates: isArchived || isReferenceOnly
       ? { canonical }
       : bilingualAlternates(`/reviews/${product.slug}`, locale, "en"),

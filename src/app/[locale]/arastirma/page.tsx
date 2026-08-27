@@ -41,7 +41,7 @@ const publicationStandard = [
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   await params;
   return {
-    title: "VPN Research Desk — Transparency Index and Evidence | VPN Advisor",
+    title: "VPN Research Desk — Transparency Index and Evidence",
     description,
     alternates: localizedAlternates("/research", "en"),
     openGraph: {
