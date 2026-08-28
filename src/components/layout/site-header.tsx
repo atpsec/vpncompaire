@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Menu, X } from "lucide-react";
+import { Activity, Menu, X } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { SiteMark } from "@/components/brand/site-mark";
@@ -21,6 +21,7 @@ export function SiteHeader() {
     { href: "/quiz", labelKey: "quiz" },
     { href: "/devices", labelKey: "devices" },
     { href: "/tools", labelKey: "tools" },
+    { href: "/tools/what-websites-can-see", labelKey: "snapshot", featured: true },
     { href: "/research", labelKey: "research" },
     { href: getLocalizedLinkHref({ locale, section: "guide" }), labelKey: "guides" },
   ] as const;
@@ -59,8 +60,20 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-ink-muted hover:text-ink hover:bg-surface-subtle transition"
+                aria-label={"featured" in item ? t("snapshotAria") : undefined}
+                className={
+                  "featured" in item
+                    ? "group inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-brand-50/70 px-3 py-1.5 text-xs font-semibold text-brand-700 shadow-sm transition hover:border-brand-300 hover:bg-brand-100 dark:border-brand-800 dark:bg-brand-950/40 dark:text-brand-300 dark:hover:border-brand-700 dark:hover:bg-brand-900/50"
+                    : "rounded-md px-3 py-2 text-sm font-medium text-ink-muted transition hover:bg-surface-subtle hover:text-ink"
+                }
               >
+                {"featured" in item ? (
+                  <span className="relative flex size-2" aria-hidden="true">
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-success-400 opacity-60 motion-reduce:animate-none" />
+                    <span className="relative inline-flex size-2 rounded-full bg-success-500" />
+                  </span>
+                ) : null}
+                {"featured" in item ? <Activity className="size-3.5" aria-hidden="true" /> : null}
                 {t(item.labelKey)}
               </Link>
             ))}
@@ -98,8 +111,14 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-surface-subtle"
+                  aria-label={"featured" in item ? t("snapshotAria") : undefined}
+                  className={
+                    "featured" in item
+                      ? "inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-3 py-3 text-base font-semibold text-brand-700 dark:border-brand-800 dark:bg-brand-950/40 dark:text-brand-300"
+                      : "rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-surface-subtle"
+                  }
                 >
+                  {"featured" in item ? <Activity className="size-4" aria-hidden="true" /> : null}
                   {t(item.labelKey)}
                 </Link>
               ))}

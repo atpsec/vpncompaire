@@ -427,8 +427,8 @@ export function InternetYouDashboard({
           </Badge>
         </div>
 
-        <div className="relative mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="min-w-0 rounded-2xl border border-white/70 bg-white/75 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75 lg:col-span-2">
+        <div className="relative mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-[2fr_repeat(3,minmax(0,1fr))]">
+          <div className="min-w-0 rounded-2xl border border-white/70 bg-white/75 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75">
             <div className="flex items-start justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2 text-brand-700 dark:text-brand-300">
                 <Globe2 className="size-5 shrink-0" aria-hidden="true" />
@@ -728,38 +728,41 @@ function NextSteps({ copy }: { copy: Copy }) {
   ];
 
   return (
-    <section className="mt-6 rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50/70 via-surface-base to-accent-50/30 p-6 shadow-sm dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-accent-950/10 sm:p-8">
-      <div className="max-w-3xl">
-        <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
-          <ArrowRight className="size-5" aria-hidden="true" />
-          <p className="text-xs font-semibold uppercase tracking-wider">{copy.nextStepsKicker}</p>
+    <section className="mt-6 overflow-hidden rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50/80 via-surface-base to-accent-50/30 shadow-sm dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-accent-950/10">
+      <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        <div>
+          <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
+            <ShieldCheck className="size-5" aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase tracking-wider">{copy.nextStepsKicker}</p>
+          </div>
+          <h2 className="mt-2 text-2xl font-bold text-ink-strong">{copy.nextStepsTitle}</h2>
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-muted">{copy.nextStepsSubtitle}</p>
         </div>
-        <h2 className="mt-2 text-2xl font-bold text-ink-strong">{copy.nextStepsTitle}</h2>
-        <p className="mt-2 text-sm leading-relaxed text-ink-muted">{copy.nextStepsSubtitle}</p>
-      </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
-        {steps.map(({ icon: Icon, title, body, href }) => (
+        <div className="overflow-hidden rounded-2xl border border-white/80 bg-white/75 shadow-sm dark:border-white/10 dark:bg-surface-subtle/75">
+          {steps.map(({ icon: Icon, title, body, href }, index) => (
           <Link
             key={href}
             href={href}
-            className="group rounded-xl border border-border bg-surface-base p-5 transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 dark:bg-surface-subtle dark:hover:border-brand-700"
+            className="group flex items-center gap-3 border-b border-border px-4 py-3.5 transition last:border-b-0 hover:bg-brand-50/60 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-500 dark:hover:bg-brand-950/20 sm:gap-4 sm:px-5"
           >
-            <div className="flex items-start gap-3">
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-950/40 dark:text-brand-300">
-                <Icon className="size-5" aria-hidden="true" />
-              </span>
-              <div className="min-w-0">
-                <h3 className="font-bold text-ink-strong">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 group-hover:underline dark:text-brand-300">
-                  {copy.openNextStep}
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </span>
-              </div>
-            </div>
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-200 bg-brand-50 text-xs font-bold text-brand-700 dark:border-brand-800 dark:bg-brand-950/50 dark:text-brand-300">
+              {index + 1}
+            </span>
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-surface-subtle text-brand-700 dark:bg-surface-base dark:text-brand-300">
+              <Icon className="size-4" aria-hidden="true" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-bold text-ink-strong">{title}</span>
+              <span className="mt-0.5 block truncate text-xs text-ink-muted">{body}</span>
+            </span>
+            <span className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-brand-700 group-hover:underline dark:text-brand-300">
+              <span className="hidden sm:inline">{copy.openNextStep}</span>
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            </span>
           </Link>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
