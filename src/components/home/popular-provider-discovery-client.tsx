@@ -31,7 +31,7 @@ export type DiscoveryCopy = {
   affiliateNote: string;
 };
 
-const SESSION_STORAGE_KEY = "vpnadvisor:popular-provider-discovery:v1";
+const SESSION_STORAGE_KEY = "vpnadvisor:popular-provider-discovery:v2";
 const subscribeToSessionSelection = () => () => {};
 
 function chooseThree(providers: DiscoveryProvider[]): DiscoveryProvider[] {
@@ -63,14 +63,18 @@ function readSessionSelection(providers: DiscoveryProvider[]): DiscoveryProvider
   }
 }
 
-export function PopularProviderDiscoveryClient({ providers, copy }: { providers: DiscoveryProvider[]; copy: DiscoveryCopy }) {
-  const serverSelection = useMemo(() => providers.slice(0, 3), [providers]);
+export function PopularProviderDiscoveryClient({ providers, excludedSlugs, copy }: { providers: DiscoveryProvider[]; excludedSlugs: string[]; copy: DiscoveryCopy }) {
+  const candidates = useMemo(
+    () => providers.filter((provider) => !excludedSlugs.includes(provider.slug)),
+    [providers, excludedSlugs],
+  );
+  const serverSelection = useMemo(() => candidates.slice(0, 3), [candidates]);
   const clientSelection = useRef<DiscoveryProvider[] | null>(null);
   const getClientSelection = useCallback(() => {
     if (clientSelection.current) return clientSelection.current;
 
-    const stored = readSessionSelection(providers);
-    const selected = stored ?? chooseThree(providers);
+    const stored = readSessionSelection(candidates);
+    const selected = stored ?? chooseThree(candidates);
     clientSelection.current = selected;
 
     if (!stored) {
@@ -82,7 +86,7 @@ export function PopularProviderDiscoveryClient({ providers, copy }: { providers:
     }
 
     return selected;
-  }, [providers]);
+  }, [candidates]);
   const visibleProviders = useSyncExternalStore(
     subscribeToSessionSelection,
     getClientSelection,

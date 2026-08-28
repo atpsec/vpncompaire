@@ -1,7 +1,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Compass, FileSearch, RefreshCw } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { getProduct, type Product } from "@/data/products";
+import { getProduct, homepagePopularProducts, type Product } from "@/data/products";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 import type { Locale } from "@/lib/site";
 import { PopularProviderDiscoveryClient, type DiscoveryCopy, type DiscoveryProvider } from "./popular-provider-discovery-client";
@@ -78,6 +78,9 @@ export function PopularProviderDiscovery() {
     .map((slug) => getProduct(slug, locale))
     .filter((product): product is Product => Boolean(product))
     .map((product) => toDiscoveryProvider(product, locale, profileLabel));
+  const editorialTopThree = new Set(
+    homepagePopularProducts(locale).slice(0, 3).map((product) => product.slug),
+  );
 
   const opera: DiscoveryProvider = {
     slug: "opera-vpn",
@@ -117,6 +120,7 @@ export function PopularProviderDiscovery() {
         </div>
         <PopularProviderDiscoveryClient
           providers={[...providers, opera]}
+          excludedSlugs={[...editorialTopThree]}
           copy={copy}
         />
         <p className="mt-5 flex items-start gap-2 text-xs leading-relaxed text-ink-subtle">

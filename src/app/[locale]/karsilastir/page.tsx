@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
-import { getProduct } from "@/data/products";
+import { getComparisonProduct } from "@/data/comparison-products";
 import { sectionHubAlternates, type Locale } from "@/lib/site";
 import { getLocalizedSectionPath, SECTION_SLUGS, DEFAULT_LOCALE, type AppLocale } from "@/lib/i18n-paths";
 import { formatProductPriceShort } from "@/lib/product-price";
@@ -28,6 +28,7 @@ const comparisons: readonly Comparison[] = [
   { slug: "nordvpn-vs-surfshark", title: "NordVPN vs Surfshark", available: true, tag: "Popular", pair: ["nordvpn", "surfshark"] },
   { slug: "expressvpn-vs-nordvpn", title: "ExpressVPN vs NordVPN", available: true, tag: "Premium", pair: ["expressvpn", "nordvpn"] },
   { slug: "proton-vs-mullvad", title: "Proton VPN vs Mullvad", available: true, tag: "Privacy", pair: ["proton-vpn", "mullvad"] },
+  { slug: "opera-vpn-vs-proton-vpn", title: "Opera VPN vs Proton VPN", available: true, tag: "Privacy", pair: ["opera-vpn", "proton-vpn"] },
   { slug: "ucretsiz-vs-ucretli-vpn", title: "Ücretsiz vs Ücretli VPN", available: false, tag: "Soon" },
 ] as const;
 
@@ -66,8 +67,8 @@ export default async function Page({ params }: Props) {
         <div className="mt-10 grid sm:grid-cols-2 gap-4">
           {comparisons.map((c) => {
             const productLocale = locale === "tr" ? "tr" : "en";
-            const a = c.pair ? getProduct(c.pair[0], productLocale) : null;
-            const b = c.pair ? getProduct(c.pair[1], productLocale) : null;
+            const a = c.pair ? getComparisonProduct(c.pair[0], productLocale) : null;
+            const b = c.pair ? getComparisonProduct(c.pair[1], productLocale) : null;
             const inner = (
               <Card className={"p-5 h-full " + (c.available ? "hover:border-brand-300 hover:shadow-md transition-all" : "opacity-60 cursor-not-allowed")}>
                 <div className="flex items-center gap-4">

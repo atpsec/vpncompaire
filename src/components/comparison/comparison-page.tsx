@@ -10,7 +10,7 @@ import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
-import { getProduct } from "@/data/products";
+import { getComparisonProduct } from "@/data/comparison-products";
 import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
@@ -52,8 +52,8 @@ export async function ComparisonPage({
   faqs,
   relatedLinks,
 }: ComparisonPageProps) {
-  const a = getProduct(productSlugA, locale as "tr" | "en");
-  const b = getProduct(productSlugB, locale as "tr" | "en");
+  const a = getComparisonProduct(productSlugA, locale as AppLocale);
+  const b = getComparisonProduct(productSlugB, locale as AppLocale);
   if (!a || !b) return null;
   const t = await getTranslations({ locale, namespace: "comparison" });
   const appLocale = locale as AppLocale;

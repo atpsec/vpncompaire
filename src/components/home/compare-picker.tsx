@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { topRankedProducts, type Product } from "@/data/products";
+import { getComparisonProduct } from "@/data/comparison-products";
 import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { formatProductPriceShort } from "@/lib/product-price";
@@ -21,7 +22,13 @@ const MAX = 4;
 export function ComparePicker() {
   const t = useTranslations("homeBlocks.comparePicker");
   const locale = useLocale() as Locale;
-  const all = topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn");
+  const all = useMemo(() => {
+    const opera = getComparisonProduct("opera-vpn", locale);
+    return [
+      ...topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn"),
+      ...(opera ? [opera] : []),
+    ];
+  }, [locale]);
   const [selected, setSelected] = useState<string[]>(() => all.slice(0, 2).map((p) => p.slug));
 
   const toggle = (slug: string) => {
@@ -73,11 +80,22 @@ function ProductColumn({ product, locale }: { product: Product; locale: Locale }
   const bestPlan = product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
   const monthlyPlan = product.plans.find((pl) => pl.durationMonths === 1);
   const planLabel = locale === "tr" ? "Uzun dönem plan örneği" : locale === "de" ? "Beispiel für Langzeitplan" : "Long-term plan example";
-  const profileLabel = locale === "tr" ? "Sağlayıcı profili" : locale === "de" ? "Anbieterprofil" : "Provider profile";
+  const profileHref = product.slug === "opera-vpn" ? "/blog/opera-vpn-browser-vpn-review" : `/reviews/${product.slug}`;
+  const profileLabel = product.slug === "opera-vpn"
+    ? locale === "tr" ? "Opera VPN analizini oku" : locale === "de" ? "Opera-VPN-Analyse lesen" : "Read Opera VPN analysis"
+    : locale === "tr" ? "Sağlayıcı profili" : locale === "de" ? "Anbieterprofil" : "Provider profile";
 
   return (
     <Card className="flex flex-col h-full">
-      <div className="p-4 border-b border-border"><div className="flex items-center gap-3"><VPNLogo slug={product.slug} size={44} /><div className="min-w-0"><h3 className="font-bold text-ink-strong leading-tight">{product.brand}</h3><p className="text-xs text-ink-subtle line-clamp-1">{product.positioning}</p></div></div></div>
+      <div className="p-4 border-b border-border">
+        <div className="flex items-center gap-3">
+          <VPNLogo slug={product.slug} size={44} />
+          <div className="min-w-0">
+            <h3 className="font-bold text-ink-strong leading-tight">{product.brand}</h3>
+            <p className="text-xs text-ink-subtle line-clamp-1">{product.positioning}</p>
+          </div>
+        </div>
+      </div>
       <dl className="p-4 space-y-3 text-xs flex-1">
         <Row icon={<Award className="size-3.5" />} label={t("rows.audit")} value={product.highlights.audits ?? "—"} missing={!product.highlights.audits} />
         <Row icon={<Server className="size-3.5" />} label={t("rows.servers")} value={product.highlights.servers ?? "—"} />
@@ -85,10 +103,43 @@ function ProductColumn({ product, locale }: { product: Product; locale: Locale }
         <Row icon={<MapPin className="size-3.5" />} label={t("rows.jurisdiction")} value={product.highlights.jurisdiction ?? "—"} />
         <Row icon={<Check className="size-3.5" />} label={t("rows.moneyBack")} value={product.highlights.moneyBackDays ? `${product.highlights.moneyBackDays} ${t("rows.days")}` : "—"} />
       </dl>
-      <div className="p-4 border-t border-border bg-surface-subtle/30 rounded-b-xl"><div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">{planLabel}</div>{product.pricingVerifiedAt && bestPlan ? <><div className="mt-1 text-sm font-medium text-ink-strong line-clamp-1">{bestPlan.name}</div><div className="mt-1 flex items-baseline gap-1"><span className="text-xl font-bold text-ink-strong tabular-nums">{formatProductPriceShort(bestPlan.monthlyPriceUsd, product.priceCurrency)}</span><span className="text-xs text-ink-subtle">{t("perMonth")}</span></div>{monthlyPlan && monthlyPlan !== bestPlan && <div className="mt-1 text-[11px] text-ink-faint">{t("monthlyLabel")} {formatProductPriceShort(monthlyPlan.monthlyPriceUsd, product.priceCurrency)}</div>}</> : <div className="mt-1 text-sm font-medium text-ink-muted">{t("officialSite")}</div>}<div className="mt-3 flex flex-col gap-1.5"><Button asChild variant="primary" size="sm"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-picker" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-picker">{t("ctaOfficial")}<ExternalLink className="size-3.5" /></ProviderLink></Button><Button asChild variant="ghost" size="sm"><Link href={`/reviews/${product.slug}`}>{profileLabel}</Link></Button></div></div>
+      <div className="p-4 border-t border-border bg-surface-subtle/30 rounded-b-xl">
+        <div className="text-[10px] uppercase tracking-wider text-ink-subtle font-semibold">{planLabel}</div>
+        {product.pricingVerifiedAt && bestPlan ? (
+          <>
+            <div className="mt-1 text-sm font-medium text-ink-strong line-clamp-1">{bestPlan.name}</div>
+            <div className="mt-1 flex items-baseline gap-1">
+              <span className="text-xl font-bold text-ink-strong tabular-nums">{formatProductPriceShort(bestPlan.monthlyPriceUsd, product.priceCurrency)}</span>
+              <span className="text-xs text-ink-subtle">{t("perMonth")}</span>
+            </div>
+            {monthlyPlan && monthlyPlan !== bestPlan && (
+              <div className="mt-1 text-[11px] text-ink-faint">{t("monthlyLabel")} {formatProductPriceShort(monthlyPlan.monthlyPriceUsd, product.priceCurrency)}</div>
+            )}
+          </>
+        ) : (
+          <div className="mt-1 text-sm font-medium text-ink-muted">{t("officialSite")}</div>
+        )}
+        <div className="mt-3 flex flex-col gap-1.5">
+          <Button asChild variant="primary" size="sm">
+            <ProviderLink
+              href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-picker" })}
+              rel={providerOutboundRel(product.slug, product.hasAffiliate)}
+              target="_blank"
+              provider={product.slug}
+              placement="homepage-picker"
+            >
+              {t("ctaOfficial")}<ExternalLink className="size-3.5" />
+            </ProviderLink>
+          </Button>
+          <Button asChild variant="ghost" size="sm">
+            <Link href={profileHref}>{profileLabel}</Link>
+          </Button>
+        </div>
+      </div>
     </Card>
   );
 }
+
 
 function Row({ icon, label, value, missing = false }: { icon: React.ReactNode; label: string; value: string; missing?: boolean }) {
   return <div><dt className="flex items-center gap-1.5 text-ink-subtle text-[11px] uppercase tracking-wider font-medium">{icon}{label}</dt><dd className={cn("mt-0.5 text-ink-strong leading-snug", missing && "text-ink-faint")}>{missing ? <X className="inline size-3.5" /> : value}</dd></div>;

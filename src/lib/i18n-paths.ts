@@ -340,6 +340,27 @@ export const CONTENT_REGISTRY: Record<string, ContentEntry> = {
     },
     served: ["tr", "en", "de"],
   },
+  "opera-vpn-vs-proton-vpn": {
+    id: "opera-vpn-vs-proton-vpn",
+    translations: {
+      tr: {
+        section: "comparison",
+        slug: "opera-vpn-vs-proton-vpn",
+        title: "Opera VPN vs Proton VPN",
+      },
+      en: {
+        section: "comparison",
+        slug: "opera-vpn-vs-proton-vpn",
+        title: "Opera VPN vs Proton VPN",
+      },
+      de: {
+        section: "comparison",
+        slug: "opera-vpn-vs-proton-vpn",
+        title: "Opera VPN vs Proton VPN",
+      },
+    },
+    served: ["tr", "en", "de"],
+  },
 };
 
 /**
