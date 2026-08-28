@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   Activity,
   ArrowRight,
+  BookOpen,
   CircleHelp,
   Clock3,
   Cookie,
@@ -119,6 +120,18 @@ type Copy = {
   privacySignalsTitle: string;
   privacySignalsSubtitle: string;
   notChecked: string;
+  nextStepsKicker: string;
+  nextStepsTitle: string;
+  nextStepsSubtitle: string;
+  dnsActionTitle: string;
+  dnsActionBody: string;
+  webrtcActionTitle: string;
+  webrtcActionBody: string;
+  compareActionTitle: string;
+  compareActionBody: string;
+  researchActionTitle: string;
+  researchActionBody: string;
+  openNextStep: string;
   dnsLeak: string;
   dnsLeakBody: string;
   webrtcLeak: string;
@@ -504,6 +517,8 @@ export function InternetYouDashboard({
         visibleSignalCount={visibleSignalCount}
       />
 
+      <NextSteps copy={copy} />
+
       <section className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <Card className="p-6 sm:p-8">
           <div className="flex items-start gap-4">
@@ -681,6 +696,72 @@ function SummaryColumn({
       </div>
       <p className="mt-3 text-sm leading-relaxed text-ink-muted">{body}</p>
     </div>
+  );
+}
+
+function NextSteps({ copy }: { copy: Copy }) {
+  const steps = [
+    {
+      icon: Server,
+      title: copy.dnsActionTitle,
+      body: copy.dnsActionBody,
+      href: "/tools/dns-leak-test" as const,
+    },
+    {
+      icon: Wifi,
+      title: copy.webrtcActionTitle,
+      body: copy.webrtcActionBody,
+      href: "/tools/webrtc-leak-test" as const,
+    },
+    {
+      icon: ShieldCheck,
+      title: copy.compareActionTitle,
+      body: copy.compareActionBody,
+      href: "/comparison" as const,
+    },
+    {
+      icon: BookOpen,
+      title: copy.researchActionTitle,
+      body: copy.researchActionBody,
+      href: "/research/evidence-ledger" as const,
+    },
+  ];
+
+  return (
+    <section className="mt-6 rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50/70 via-surface-base to-accent-50/30 p-6 shadow-sm dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-accent-950/10 sm:p-8">
+      <div className="max-w-3xl">
+        <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
+          <ArrowRight className="size-5" aria-hidden="true" />
+          <p className="text-xs font-semibold uppercase tracking-wider">{copy.nextStepsKicker}</p>
+        </div>
+        <h2 className="mt-2 text-2xl font-bold text-ink-strong">{copy.nextStepsTitle}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-ink-muted">{copy.nextStepsSubtitle}</p>
+      </div>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        {steps.map(({ icon: Icon, title, body, href }) => (
+          <Link
+            key={href}
+            href={href}
+            className="group rounded-xl border border-border bg-surface-base p-5 transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 dark:bg-surface-subtle dark:hover:border-brand-700"
+          >
+            <div className="flex items-start gap-3">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-950/40 dark:text-brand-300">
+                <Icon className="size-5" aria-hidden="true" />
+              </span>
+              <div className="min-w-0">
+                <h3 className="font-bold text-ink-strong">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 group-hover:underline dark:text-brand-300">
+                  {copy.openNextStep}
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 
