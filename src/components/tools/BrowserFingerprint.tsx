@@ -12,19 +12,12 @@ type Labels = {
 };
 
 const EMPTY_SUBSCRIBE = () => () => {};
+let cachedSnapshot: { unknown: string; value: BrowserInfo } | null = null;
 
 export function BrowserFingerprint({ labels }: { labels: Labels }) {
   const info = useSyncExternalStore(
     EMPTY_SUBSCRIBE,
-    () => ({
-      ua: navigator.userAgent || labels.unknown,
-      screen:
-        typeof window.screen !== "undefined"
-          ? `${window.screen.width} × ${window.screen.height}`
-          : labels.unknown,
-      lang: navigator.language || labels.unknown,
-      platform: navigator.platform || labels.unknown,
-    }),
+    () => getBrowserInfo(labels.unknown),
     () => null,
   );
 
@@ -40,6 +33,30 @@ export function BrowserFingerprint({ labels }: { labels: Labels }) {
     </section>
   );
 }
+
+function getBrowserInfo(unknown: string): BrowserInfo {
+  if (cachedSnapshot?.unknown === unknown) return cachedSnapshot.value;
+
+  const value = {
+    ua: navigator.userAgent || unknown,
+    screen:
+      typeof window.screen !== "undefined"
+        ? `${window.screen.width} × ${window.screen.height}`
+        : unknown,
+    lang: navigator.language || unknown,
+    platform: navigator.platform || unknown,
+  };
+
+  cachedSnapshot = { unknown, value };
+  return value;
+}
+
+type BrowserInfo = {
+  ua: string;
+  screen: string;
+  lang: string;
+  platform: string;
+};
 
 function Row({
   label,
