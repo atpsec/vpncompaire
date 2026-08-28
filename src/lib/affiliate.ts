@@ -43,6 +43,8 @@ const STATIC_ALLOWED_HOSTS: ReadonlySet<string> = new Set([
   "strongvpn.com",
   "zoogvpn.com",
   "us.norton.com",
+  "opera.com",
+  "www.opera.com",
 ]);
 
 /**
@@ -90,6 +92,7 @@ const PUBLIC_URLS: Record<string, { brand: string; url: string; hasProgram: bool
   strongvpn: { brand: "StrongVPN", url: "https://strongvpn.com/", hasProgram: true },
   zoogvpn: { brand: "ZoogVPN", url: "https://zoogvpn.com/", hasProgram: true },
   "norton-vpn": { brand: "Norton VPN", url: "https://us.norton.com/products/norton-secure-vpn", hasProgram: true },
+  "opera-vpn": { brand: "Opera VPN", url: "https://www.opera.com/features/free-vpn", hasProgram: false },
 };
 
 export const affiliateLinks: Record<string, AffiliateLink> = Object.fromEntries(

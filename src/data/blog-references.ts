@@ -320,6 +320,30 @@ const references = {
     url: "https://planckvpn.com/transparency",
     note: "The provider's transparency checklist; verify whether independent reports are linked.",
   },
+  operaFreeVpn: {
+    title: "Free VPN for Browser: Private and Secure",
+    publisher: "Opera",
+    url: "https://www.opera.com/features/free-vpn",
+    note: "Opera's current description of its built-in free browser VPN, locations, server counts and VPN Pro distinction.",
+  },
+  operaVpnHelp: {
+    title: "VPN in Opera for Android",
+    publisher: "Opera Help",
+    url: "https://help.opera.com/en/mobile/vpn/",
+    note: "Official explanation of browser scope, availability, speed caveats and browser-level DNS/WebRTC behavior.",
+  },
+  operaNoLogAudit: {
+    title: "Opera Free Browser VPN Passes No-Log Audit",
+    publisher: "Opera Security",
+    url: "https://blogs.opera.com/security/2024/09/opera-free-browser-vpn-no-log-audit/",
+    note: "Provider-published summary of Deloitte's 2024 review; the article describes the review scope and date.",
+  },
+  operaPrivacy: {
+    title: "Opera Privacy Statement",
+    publisher: "Opera",
+    url: "https://www.opera.com/privacy",
+    note: "Opera's current privacy statement for the browser and related services.",
+  },
 } satisfies Record<string, EditorialReference>;
 
 type ReferenceId = keyof typeof references;
@@ -375,6 +399,7 @@ const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
   "chatgpt-access-turkey-vpn": ["openAiCountries", "claudeCountries", "geminiAvailability"],
   "chatgpt-plus-pricing-vpn-savings": ["openAiBilling", "openAiCountries"],
   "china-russia-ai-access-vpn": ["openAiCountries", "claudeCountries", "geminiAvailability"],
+  "opera-vpn-browser-vpn-review": ["operaFreeVpn", "operaVpnHelp", "operaNoLogAudit", "operaPrivacy"],
 };
 
 export function getBlogReferences(slug: string): EditorialReference[] {

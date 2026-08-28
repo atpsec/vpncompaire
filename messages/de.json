@@ -1024,6 +1024,18 @@
       "ctaOfficial": "Visit official site",
       "readReview": "Read review",
       "rank1": "#1 Editor's pick"
+    },
+    "discovery": {
+      "ariaLabel": "Beliebte VPN-Anbieter entdecken",
+      "kicker": "Beliebte Anbieter entdecken",
+      "title": "Beliebte VPN-Anbieter entdecken",
+      "subtitle": "Eine sitzungsstabile Auswahl aus einem quellenbasierten Pool. Dies ist eine Entdeckungsansicht, keine Qualitätsrangliste.",
+      "sessionNote": "Wird einmal pro Browsersitzung neu ausgewählt",
+      "selectionLabel": "Auswahl zur Entdeckung",
+      "official": "Offizielle Website besuchen",
+      "profile": "Profil lesen",
+      "operaProfile": "Opera-VPN-Analyse lesen",
+      "affiliateNote": "Links zu offiziellen Websites können Affiliate-Links enthalten. Unsere Vergleichsmethode bleibt unverändert."
     }
   },
   "pricingPlans": {

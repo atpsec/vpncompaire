@@ -3,6 +3,7 @@ import { Hero } from "@/components/home/hero";
 import { InternetYouPromo } from "@/components/home/internet-you-promo";
 import { IpSecurityBanner } from "@/components/home/IpSecurityBanner";
 import { TopThreePodium } from "@/components/home/top-three-podium";
+import { PopularProviderDiscovery } from "@/components/home/popular-provider-discovery";
 import { TopVPNList } from "@/components/home/top-vpn-list";
 import { ComparePicker } from "@/components/home/compare-picker";
 import { UseCaseGrid } from "@/components/home/use-case-grid";
@@ -40,6 +41,7 @@ export default async function HomePage({ params }: Props) {
       <Hero />
       <InternetYouPromo />
       <TopThreePodium />
+      <PopularProviderDiscovery />
       <HomeBlogColumns locale={locale} />
       <AiEditorialBlock />
       <TopVPNList />

@@ -1023,6 +1023,18 @@
       "ctaOfficial": "Visit official site",
       "readReview": "Read review",
       "rank1": "#1 Editor's pick"
+    },
+    "discovery": {
+      "ariaLabel": "Popular VPN provider discovery",
+      "kicker": "Explore popular providers",
+      "title": "Explore popular VPN providers",
+      "subtitle": "A session-stable selection from a research-backed pool. This is a discovery view, not a quality ranking.",
+      "sessionNote": "Refreshes once per browsing session",
+      "selectionLabel": "Discovery selection",
+      "official": "Visit official site",
+      "profile": "Read profile",
+      "operaProfile": "Read Opera VPN analysis",
+      "affiliateNote": "Official-site links may include affiliate links. Our comparison method is unchanged."
     }
   },
   "pricingPlans": {

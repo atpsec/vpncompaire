@@ -1005,6 +1005,18 @@
       "ctaOfficial": "Resmi siteye git",
       "readReview": "İncelemeyi oku",
       "rank1": "#1 Editör seçimi"
+    },
+    "discovery": {
+      "ariaLabel": "Popüler VPN sağlayıcılarını keşfet",
+      "kicker": "Popüler sağlayıcıları keşfet",
+      "title": "Popüler VPN sağlayıcılarını keşfet",
+      "subtitle": "Araştırma temelli havuzdan oturum boyunca sabit kalan bir seçim. Bu alan kalite sıralaması değil, keşif görünümüdür.",
+      "sessionNote": "Her tarama oturumunda bir kez yenilenir",
+      "selectionLabel": "Keşif seçimi",
+      "official": "Resmi siteye git",
+      "profile": "Profili oku",
+      "operaProfile": "Opera VPN analizini oku",
+      "affiliateNote": "Resmi site bağlantılarından bazıları affiliate olabilir. Karşılaştırma yöntemimiz değişmez."
     }
   },
   "pricingPlans": {

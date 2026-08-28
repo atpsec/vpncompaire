@@ -15,6 +15,7 @@ type LogoAsset = {
  */
 const LOGOS: Record<string, LogoAsset> = {
   nordvpn: { name: "NordVPN", src: "/provider-logos/nordvpn.svg" },
+  "opera-vpn": { name: "Opera", src: "/provider-logos/opera.svg" },
   surfshark: { name: "Surfshark", src: "/provider-logos/surfshark.png" },
   expressvpn: { name: "ExpressVPN", src: "/provider-logos/expressvpn.svg" },
   "proton-vpn": { name: "Proton VPN", src: "/provider-logos/proton-vpn.svg" },
