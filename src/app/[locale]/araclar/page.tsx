@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   Wifi,
   Globe2,
+  Eye,
   type LucideIcon,
 } from "lucide-react";
 import { Link } from "@/i18n/routing";
@@ -45,10 +46,23 @@ const TOOLS: ReadonlyArray<{
     | "/vpn-test"
     | "/tools/dns-leak-test"
     | "/tools/webrtc-leak-test"
-    | "/tools/vpn-speed-test";
-  key: "emailSecurity" | "vpnTest" | "ip" | "dns" | "webrtc" | "speed";
+    | "/tools/vpn-speed-test"
+    | "/tools/what-websites-can-see";
+  key:
+    | "emailSecurity"
+    | "vpnTest"
+    | "ip"
+    | "dns"
+    | "webrtc"
+    | "speed"
+    | "internetYou";
   Icon: LucideIcon;
 }> = [
+  {
+    href: "/tools/what-websites-can-see",
+    key: "internetYou",
+    Icon: Eye,
+  },
   {
     href: "/tools/email-security-check",
     key: "emailSecurity",
@@ -108,12 +122,14 @@ function ToolsIndexView() {
               key={href}
               href={href}
               className={`group block focus-visible:outline-none ${
-                key === "emailSecurity" ? "sm:col-span-2" : ""
+                key === "emailSecurity" || key === "internetYou"
+                  ? "sm:col-span-2"
+                  : ""
               }`}
             >
               <Card
                 className={`h-full p-6 transition group-hover:border-brand-300 group-hover:shadow-md group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-brand-500 ${
-                  key === "emailSecurity"
+                  key === "emailSecurity" || key === "internetYou"
                     ? "border-brand-200 bg-brand-50/40 dark:bg-brand-950/20"
                     : ""
                 }`}
@@ -122,7 +138,7 @@ function ToolsIndexView() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-400">
                     <Icon className="size-6" aria-hidden="true" />
                   </div>
-                  {key === "emailSecurity" && (
+                  {(key === "emailSecurity" || key === "internetYou") && (
                     <span className="rounded-full bg-accent-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-ink-strong">
                       {t("featuredLabel")}
                     </span>

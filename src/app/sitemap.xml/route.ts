@@ -48,6 +48,7 @@ const toolEntries = [
   ["/tools/dns-leak-test", 0.65, "monthly", "2026-08-27"],
   ["/tools/webrtc-leak-test", 0.65, "monthly", "2026-08-27"],
   ["/tools/vpn-speed-test", 0.65, "monthly", "2026-08-27"],
+  ["/tools/what-websites-can-see", 0.8, "monthly", "2026-08-28"],
   ["/vpn-test", 0.7, "monthly", "2026-08-27"],
 ] as const;
 

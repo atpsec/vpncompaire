@@ -1136,6 +1136,10 @@
       "speed": {
         "title": "VPN Speed Comparison",
         "description": "Compare VPN-on and VPN-off values on your current connection."
+      },
+      "internetYou": {
+        "title": "What Websites Can See About You",
+        "description": "See the public network, browser and device signals this session exposes — with privacy limits explained."
       }
     },
     "common": {
@@ -1171,6 +1175,74 @@
       "unknown": "Unknown",
       "explainTitle": "What is an IP address? Why hide it?",
       "explainBody": "An IP address is a network and approximate location signal, not a precise identity card. A VPN can change the public IP signal, but accounts, cookies and browser fingerprints remain separate identifiers."
+    },
+    "internetYou": {
+      "metaTitle": "What Websites Can See About You | IP, Browser and Device Check",
+      "metaDescription": "See the public IP, browser, device and connection signals this session exposes. A privacy-conscious snapshot that explains what websites cannot access.",
+      "breadcrumb": "What Websites Can See",
+      "eyebrow": "Privacy-first browser snapshot",
+      "title": "What Websites Can See About You",
+      "subtitle": "See the public network, browser and device signals this session exposes — with clear limits on what a normal website cannot access.",
+      "liveBadge": "Visible to websites now",
+      "noExternalLookup": "No diagnostic lookup runs when this page opens",
+      "publicIp": "Public IP",
+      "approxLocation": "Approximate location",
+      "browser": "Browser",
+      "device": "Device",
+      "countryOnly": "Country-level signal",
+      "requestHeaders": "From request headers",
+      "unknown": "Unavailable",
+      "browserDeviceTitle": "Your browser and device",
+      "browserDeviceSubtitle": "Signals your browser makes available to this page in this session.",
+      "operatingSystem": "Operating system",
+      "screen": "Screen resolution",
+      "language": "Language",
+      "timezone": "Timezone",
+      "touchSupport": "Touch support",
+      "cookies": "Cookies",
+      "connection": "Connection",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "yes": "Yes",
+      "no": "No",
+      "online": "Online",
+      "offline": "Offline",
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "privacySignalsTitle": "Privacy signals",
+      "privacySignalsSubtitle": "These checks are separate from the snapshot and only run when you choose to open them.",
+      "notChecked": "Not checked on this page",
+      "dnsLeak": "DNS leak",
+      "dnsLeakBody": "Use the dedicated browser probe to inspect resolver signals with its scope explained.",
+      "webrtcLeak": "WebRTC leak",
+      "webrtcLeakBody": "Use the dedicated WebRTC probe to see whether this browser exposes public IP candidates.",
+      "openCheck": "Open check",
+      "cannotSeeTitle": "What websites cannot see",
+      "macAddress": "Your MAC address",
+      "macAddressBody": "Normal websites cannot read your local MAC address through a standard browser.",
+      "filesAndPasswords": "Your files or passwords",
+      "filesAndPasswordsBody": "A website cannot browse local files or passwords unless you explicitly grant access through a browser prompt.",
+      "exactLocation": "Your exact location",
+      "exactLocationBody": "Precise GPS data requires a separate permission prompt and is not requested by this page.",
+      "privacyNote": "This snapshot is not intentionally saved. The IP and country signal come from the request; browser details stay in this session. No third-party lookup runs automatically.",
+      "faqTitle": "Frequently asked questions",
+      "faq": {
+        "items": [
+          {
+            "q": "What can websites see about me?",
+            "a": "A website can see your public IP address and request metadata, plus browser-provided signals such as browser family, operating system, screen size, language, timezone and whether cookies are enabled."
+          },
+          {
+            "q": "Can a website see my MAC address?",
+            "a": "No. Normal websites cannot read your local MAC address through standard browser APIs."
+          },
+          {
+            "q": "Does this tool prove that I am anonymous?",
+            "a": "No. This tool is a transparency snapshot, not an anonymity guarantee. Accounts, cookies, device settings and other signals can still identify or link activity."
+          }
+        ]
+      }
     },
     "vpnTest": {
       "metaTitle": "VPN/IP Test - Check Your Public IP, Location and VPN Status",

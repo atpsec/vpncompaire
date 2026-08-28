@@ -79,6 +79,14 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
       },
+      {
+        // The page renders request-specific IP data; never let an intermediary
+        // serve one visitor's snapshot to another visitor.
+        source: "/tools/what-websites-can-see",
+        headers: [
+          { key: "Cache-Control", value: "private, no-store, max-age=0" },
+        ],
+      },
     ];
   },
   // İçerik konsolidasyonu (ADIM 4 / Küme C — AI): birleştirilen blog yazıları

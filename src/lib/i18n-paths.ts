@@ -751,6 +751,7 @@ const TOOL_PUBLIC_SLUGS: Readonly<Record<string, string>> = {
   "email-guvenlik-kontrolu": "email-security-check",
   "ip-adresim": "my-ip",
   "vpn-hiz-testi": "vpn-speed-test",
+  "internette-sen": "what-websites-can-see",
 };
 
 const TOOL_INTERNAL_SLUGS = new Map(

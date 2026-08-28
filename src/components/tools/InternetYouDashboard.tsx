@@ -1,0 +1,574 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
+import {
+  CircleHelp,
+  Clock3,
+  Cookie,
+  ExternalLink,
+  EyeOff,
+  Globe2,
+  Laptop,
+  Languages,
+  LockKeyhole,
+  MapPin,
+  Monitor,
+  Server,
+  ShieldCheck,
+  Smartphone,
+  Tablet,
+  Wifi,
+  type LucideIcon,
+} from "lucide-react";
+import {
+  siAndroid,
+  siApple,
+  siBrave,
+  siFirefoxbrowser,
+  siGooglechrome,
+  siLinux,
+  siMacos,
+  siOpera,
+  siSafari,
+} from "simple-icons";
+import { Link } from "@/i18n/routing";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+
+export type InternetYouServerSnapshot = {
+  ip: string | null;
+  countryCode: string | null;
+  countryName: string | null;
+};
+
+type Copy = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  liveBadge: string;
+  noExternalLookup: string;
+  publicIp: string;
+  approxLocation: string;
+  browser: string;
+  device: string;
+  countryOnly: string;
+  requestHeaders: string;
+  unknown: string;
+  browserDeviceTitle: string;
+  browserDeviceSubtitle: string;
+  operatingSystem: string;
+  screen: string;
+  language: string;
+  timezone: string;
+  touchSupport: string;
+  cookies: string;
+  connection: string;
+  enabled: string;
+  disabled: string;
+  yes: string;
+  no: string;
+  online: string;
+  offline: string;
+  desktop: string;
+  mobile: string;
+  tablet: string;
+  privacySignalsTitle: string;
+  privacySignalsSubtitle: string;
+  notChecked: string;
+  dnsLeak: string;
+  dnsLeakBody: string;
+  webrtcLeak: string;
+  webrtcLeakBody: string;
+  openCheck: string;
+  cannotSeeTitle: string;
+  macAddress: string;
+  macAddressBody: string;
+  filesAndPasswords: string;
+  filesAndPasswordsBody: string;
+  exactLocation: string;
+  exactLocationBody: string;
+  privacyNote: string;
+};
+
+type BrandIconName =
+  | "android"
+  | "apple"
+  | "brave"
+  | "chrome"
+  | "firefox"
+  | "linux"
+  | "macos"
+  | "opera"
+  | "safari";
+
+type BrowserSnapshot = {
+  browser: { name: string; icon: BrandIconName | "generic" };
+  operatingSystem: { name: string; icon: BrandIconName | "generic" };
+  device: { name: string; icon: "desktop" | "mobile" | "tablet" };
+  screen: string;
+  language: string;
+  timezone: string;
+  touch: boolean;
+  cookies: boolean;
+  online: boolean;
+};
+
+const EMPTY_SUBSCRIBE = () => () => {};
+const EMPTY_SERVER_SNAPSHOT = () => null;
+let cachedBrowserSnapshot: BrowserSnapshot | null = null;
+
+function getBrowserSnapshot(): BrowserSnapshot {
+  if (cachedBrowserSnapshot) return cachedBrowserSnapshot;
+
+  const userAgent = navigator.userAgent;
+  const browser = detectBrowser(userAgent);
+  const operatingSystem = detectOperatingSystem(userAgent);
+  const device = detectDevice(userAgent);
+  const screen =
+    typeof window.screen !== "undefined"
+      ? `${window.screen.width} × ${window.screen.height}`
+      : "Unavailable";
+  const timezone =
+    Intl.DateTimeFormat().resolvedOptions().timeZone || "Unavailable";
+
+  cachedBrowserSnapshot = {
+    browser,
+    operatingSystem,
+    device,
+    screen,
+    language: navigator.language || "Unavailable",
+    timezone,
+    touch: navigator.maxTouchPoints > 0,
+    cookies: navigator.cookieEnabled,
+    online: navigator.onLine,
+  };
+
+  return cachedBrowserSnapshot;
+}
+
+function detectBrowser(
+  userAgent: string,
+): BrowserSnapshot["browser"] {
+  if (/Edg\//i.test(userAgent)) {
+    return { name: "Microsoft Edge", icon: "generic" };
+  }
+  if (/OPR\//i.test(userAgent)) return { name: "Opera", icon: "opera" };
+  if ("brave" in navigator) return { name: "Brave", icon: "brave" };
+  if (/Firefox\//i.test(userAgent)) {
+    return { name: "Firefox", icon: "firefox" };
+  }
+  if (/Chrome\//i.test(userAgent) && !/Chromium/i.test(userAgent)) {
+    return { name: "Google Chrome", icon: "chrome" };
+  }
+  if (/Safari\//i.test(userAgent) && !/Chrome\//i.test(userAgent)) {
+    return { name: "Safari", icon: "safari" };
+  }
+  return { name: "Browser", icon: "generic" };
+}
+
+function detectOperatingSystem(
+  userAgent: string,
+): BrowserSnapshot["operatingSystem"] {
+  if (/iPhone|iPad|iPod/i.test(userAgent)) {
+    return { name: "iOS", icon: "apple" };
+  }
+  if (/Android/i.test(userAgent)) return { name: "Android", icon: "android" };
+  if (/Mac OS X/i.test(userAgent)) return { name: "macOS", icon: "macos" };
+  if (/Windows/i.test(userAgent)) return { name: "Windows", icon: "generic" };
+  if (/Linux/i.test(userAgent)) return { name: "Linux", icon: "linux" };
+  return { name: "Operating system", icon: "generic" };
+}
+
+function detectDevice(userAgent: string): BrowserSnapshot["device"] {
+  if (/iPad|Tablet|Android(?!.*Mobile)/i.test(userAgent)) {
+    return { name: "Tablet", icon: "tablet" };
+  }
+  if (/Mobi|iPhone|Android/i.test(userAgent)) {
+    return { name: "Mobile", icon: "mobile" };
+  }
+  return { name: "Desktop", icon: "desktop" };
+}
+
+const BRAND_PATHS: Record<BrandIconName, string> = {
+  android: siAndroid.path,
+  apple: siApple.path,
+  brave: siBrave.path,
+  chrome: siGooglechrome.path,
+  firefox: siFirefoxbrowser.path,
+  linux: siLinux.path,
+  macos: siMacos.path,
+  opera: siOpera.path,
+  safari: siSafari.path,
+};
+
+const BRAND_COLORS: Record<BrandIconName, string> = {
+  android: "#3ddc84",
+  apple: "#111827",
+  brave: "#fb542b",
+  chrome: "#4285f4",
+  firefox: "#ff7139",
+  linux: "#111827",
+  macos: "#111827",
+  opera: "#ff1b2d",
+  safari: "#0a84ff",
+};
+
+function BrandMark({
+  icon,
+  label,
+  size = 52,
+}: {
+  icon: BrandIconName | "generic";
+  label: string;
+  size?: number;
+}) {
+  if (icon === "generic") {
+    return (
+      <div
+        className="flex shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-300"
+        style={{ width: size, height: size }}
+        role="img"
+        aria-label={label}
+      >
+        <Globe2 className="size-7" aria-hidden="true" />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="flex shrink-0 items-center justify-center rounded-2xl shadow-sm"
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: `${BRAND_COLORS[icon]}18`,
+        color: BRAND_COLORS[icon],
+      }}
+      role="img"
+      aria-label={label}
+    >
+      <svg viewBox="0 0 24 24" width={Math.round(size * 0.52)} height={Math.round(size * 0.52)} aria-hidden="true">
+        <path d={BRAND_PATHS[icon]} fill="currentColor" />
+      </svg>
+    </div>
+  );
+}
+
+function DeviceMark({
+  type,
+  label,
+  size = 52,
+}: {
+  type: BrowserSnapshot["device"]["icon"];
+  label: string;
+  size?: number;
+}) {
+  const Icon = type === "mobile" ? Smartphone : type === "tablet" ? Tablet : Laptop;
+  return (
+    <div
+      className="flex shrink-0 items-center justify-center rounded-2xl bg-accent-50 text-accent-700 dark:bg-accent-950/30 dark:text-accent-300"
+      style={{ width: size, height: size }}
+      role="img"
+      aria-label={label}
+    >
+      <Icon className="size-8" strokeWidth={1.7} aria-hidden="true" />
+    </div>
+  );
+}
+
+export function InternetYouDashboard({
+  serverSnapshot,
+  copy,
+}: {
+  serverSnapshot: InternetYouServerSnapshot;
+  copy: Copy;
+}) {
+  const browser = useSyncExternalStore(
+    EMPTY_SUBSCRIBE,
+    getBrowserSnapshot,
+    EMPTY_SERVER_SNAPSHOT,
+  );
+  const location = serverSnapshot.countryName
+    ? `${serverSnapshot.countryName}${serverSnapshot.countryCode ? ` (${serverSnapshot.countryCode})` : ""}`
+    : copy.unknown;
+
+  return (
+    <div className="mt-8">
+      <section className="relative overflow-hidden rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 via-surface-base to-accent-50/60 p-6 shadow-sm dark:border-brand-900/60 dark:from-brand-950/40 dark:via-surface-base dark:to-accent-950/20 sm:p-8">
+        <div className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full bg-brand-200/40 blur-3xl dark:bg-brand-800/20" />
+        <div className="pointer-events-none absolute -bottom-24 left-1/3 size-56 rounded-full bg-accent-200/30 blur-3xl dark:bg-accent-800/10" />
+        <div className="relative flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+          <div className="max-w-2xl">
+            <Badge variant="brand" className="bg-white/80 dark:bg-brand-950/60">
+              <ShieldCheck className="size-3.5" aria-hidden="true" />
+              {copy.eyebrow}
+            </Badge>
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink-strong sm:text-4xl">
+              {copy.title}
+            </h1>
+            <p className="mt-3 text-base leading-relaxed text-ink-muted sm:text-lg">
+              {copy.subtitle}
+            </p>
+          </div>
+          <Badge variant="success" className="w-fit shrink-0 bg-white/80 dark:bg-success-950/40">
+            <span className="size-2 rounded-full bg-success-500" aria-hidden="true" />
+            {copy.liveBadge}
+          </Badge>
+        </div>
+
+        <div className="relative mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <SignalCard
+            icon={<Globe2 className="size-5" aria-hidden="true" />}
+            label={copy.publicIp}
+            value={serverSnapshot.ip ?? copy.unknown}
+            detail={copy.requestHeaders}
+            mono
+          />
+          <SignalCard
+            icon={<MapPin className="size-5" aria-hidden="true" />}
+            label={copy.approxLocation}
+            value={location}
+            detail={serverSnapshot.countryName ? copy.countryOnly : copy.unknown}
+          />
+          <SignalCard
+            icon={
+              browser ? (
+                <BrandMark icon={browser.browser.icon} label={browser.browser.name} size={34} />
+              ) : (
+                <Globe2 className="size-5" aria-hidden="true" />
+              )
+            }
+            label={copy.browser}
+            value={browser?.browser.name ?? "…"}
+            detail={browser?.operatingSystem.name ?? "…"}
+          />
+          <SignalCard
+            icon={
+              browser ? (
+                <DeviceMark type={browser.device.icon} label={browser.device.name} size={34} />
+              ) : (
+                <Laptop className="size-5" aria-hidden="true" />
+              )
+            }
+            label={copy.device}
+            value={browser?.device.name ?? "…"}
+            detail={browser?.screen ?? "…"}
+          />
+        </div>
+
+        <p className="relative mt-5 flex items-center gap-2 text-xs font-medium text-ink-muted">
+          <LockKeyhole className="size-3.5 shrink-0 text-brand-600" aria-hidden="true" />
+          {copy.noExternalLookup}
+        </p>
+      </section>
+
+      <section className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <Card className="p-6 sm:p-8">
+          <div className="flex items-start gap-4">
+            {browser ? (
+              <BrandMark icon={browser.browser.icon} label={browser.browser.name} size={64} />
+            ) : (
+              <BrandMark icon="generic" label={copy.browser} size={64} />
+            )}
+            <div className="min-w-0">
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-700">
+                {copy.browser}
+              </p>
+              <h3 className="mt-1 text-2xl font-bold text-ink-strong">
+                {browser?.browser.name ?? "…"}
+              </h3>
+              <p className="mt-1 text-sm text-ink-muted">
+                {browser?.operatingSystem.name ?? "…"}
+              </p>
+            </div>
+          </div>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            <InfoRow icon={Monitor} label={copy.operatingSystem} value={browser?.operatingSystem.name ?? "…"} />
+            <InfoRow icon={Laptop} label={copy.device} value={browser?.device.name ?? "…"} />
+            <InfoRow icon={Monitor} label={copy.screen} value={browser?.screen ?? "…"} mono />
+            <InfoRow icon={Languages} label={copy.language} value={browser?.language ?? "…"} />
+            <InfoRow icon={Clock3} label={copy.timezone} value={browser?.timezone ?? "…"} />
+            <InfoRow icon={Wifi} label={copy.connection} value={browser ? (browser.online ? copy.online : copy.offline) : "…"} />
+          </div>
+        </Card>
+
+        <Card className="p-6 sm:p-8">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-bold text-ink-strong">{copy.browserDeviceTitle}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{copy.browserDeviceSubtitle}</p>
+            </div>
+            {browser ? <DeviceMark type={browser.device.icon} label={browser.device.name} size={56} /> : null}
+          </div>
+          <div className="mt-6 space-y-3">
+            <SmallSignal icon={Cookie} label={copy.cookies} value={browser ? (browser.cookies ? copy.enabled : copy.disabled) : "…"} positive={browser?.cookies} />
+            <SmallSignal icon={Smartphone} label={copy.touchSupport} value={browser ? (browser.touch ? copy.yes : copy.no) : "…"} positive={browser?.touch} />
+            <SmallSignal icon={Globe2} label={copy.connection} value={browser ? (browser.online ? copy.online : copy.offline) : "…"} positive={browser?.online} />
+          </div>
+        </Card>
+      </section>
+
+      <section className="mt-6 rounded-2xl border border-border bg-surface-subtle p-6 sm:p-8">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-ink-strong">{copy.privacySignalsTitle}</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">{copy.privacySignalsSubtitle}</p>
+          </div>
+          <Badge variant="outline" className="w-fit">{copy.notChecked}</Badge>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <PrivacyCheckCard
+            icon={Server}
+            title={copy.dnsLeak}
+            body={copy.dnsLeakBody}
+            href="/tools/dns-leak-test"
+            openLabel={copy.openCheck}
+          />
+          <PrivacyCheckCard
+            icon={Wifi}
+            title={copy.webrtcLeak}
+            body={copy.webrtcLeakBody}
+            href="/tools/webrtc-leak-test"
+            openLabel={copy.openCheck}
+          />
+        </div>
+      </section>
+
+      <section className="mt-6 rounded-2xl border border-border bg-surface-base p-6 sm:p-8 dark:bg-surface-subtle">
+        <div className="flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-success-50 text-success-700 dark:bg-success-950/30 dark:text-success-300">
+            <EyeOff className="size-5" aria-hidden="true" />
+          </div>
+          <h2 className="text-2xl font-bold text-ink-strong">{copy.cannotSeeTitle}</h2>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <LimitCard icon={LockKeyhole} title={copy.macAddress} body={copy.macAddressBody} />
+          <LimitCard icon={EyeOff} title={copy.filesAndPasswords} body={copy.filesAndPasswordsBody} />
+          <LimitCard icon={MapPin} title={copy.exactLocation} body={copy.exactLocationBody} />
+        </div>
+      </section>
+
+      <p className="mt-6 flex items-start gap-2 text-xs leading-relaxed text-ink-muted">
+        <CircleHelp className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+        <span>{copy.privacyNote}</span>
+      </p>
+    </div>
+  );
+}
+
+function SignalCard({
+  icon,
+  label,
+  value,
+  detail,
+  mono,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  detail: string;
+  mono?: boolean;
+}) {
+  return (
+    <div className="min-w-0 rounded-2xl border border-white/70 bg-white/75 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75">
+      <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">{icon}<span className="text-xs font-semibold uppercase tracking-wide">{label}</span></div>
+      <p className={`mt-3 truncate text-lg font-bold text-ink-strong ${mono ? "font-mono text-base" : ""}`}>{value}</p>
+      <p className="mt-1 truncate text-xs text-ink-muted">{detail}</p>
+    </div>
+  );
+}
+
+function InfoRow({
+  icon: Icon,
+  label,
+  value,
+  mono,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  mono?: boolean;
+}) {
+  return (
+    <div className="flex min-w-0 items-center gap-3 rounded-xl border border-border bg-surface-subtle p-3 dark:bg-surface-base">
+      <Icon className="size-4 shrink-0 text-brand-600" aria-hidden="true" />
+      <div className="min-w-0">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-muted">{label}</p>
+        <p className={`mt-0.5 truncate text-sm font-semibold text-ink-strong ${mono ? "font-mono" : ""}`}>{value}</p>
+      </div>
+    </div>
+  );
+}
+
+function SmallSignal({
+  icon: Icon,
+  label,
+  value,
+  positive,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  positive?: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface-subtle p-3 dark:bg-surface-base">
+      <div className="flex min-w-0 items-center gap-3">
+        <Icon className="size-4 shrink-0 text-brand-600" aria-hidden="true" />
+        <span className="truncate text-sm font-medium text-ink">{label}</span>
+      </div>
+      <span className={`shrink-0 text-sm font-semibold ${positive ? "text-success-700 dark:text-success-300" : "text-ink-muted"}`}>{value}</span>
+    </div>
+  );
+}
+
+function PrivacyCheckCard({
+  icon: Icon,
+  title,
+  body,
+  href,
+  openLabel,
+}: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  href: "/tools/dns-leak-test" | "/tools/webrtc-leak-test";
+  openLabel: string;
+}) {
+  return (
+    <div className="rounded-xl border border-border bg-surface-base p-5 dark:bg-surface-subtle">
+      <div className="flex items-start gap-3">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-surface-muted text-ink-muted"><Icon className="size-5" aria-hidden="true" /></div>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="font-bold text-ink-strong">{title}</h3>
+            <Badge variant="outline">Not run</Badge>
+          </div>
+          <p className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</p>
+          <Link href={href} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
+            {openLabel}
+            <ExternalLink className="size-3.5" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LimitCard({
+  icon: Icon,
+  title,
+  body,
+}: {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div className="rounded-xl border border-border bg-surface-subtle p-5 dark:bg-surface-base">
+      <Icon className="size-5 text-success-700 dark:text-success-300" aria-hidden="true" />
+      <h3 className="mt-4 font-bold text-ink-strong">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</p>
+    </div>
+  );
+}
