@@ -10,7 +10,7 @@ import {
   type InternetYouServerSnapshot,
 } from "@/components/tools/InternetYouDashboard";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
-import { resolveRequestGeo } from "@/lib/request-geo";
+import { ipVersionOf, resolveRequestGeo } from "@/lib/request-geo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -58,8 +58,12 @@ export default async function Page({ params }: Props) {
   ]);
   const faqItems = t.raw("faq.items") as FaqItem[];
   const geo = await resolveRequestGeo(await headers());
+  const ipVersion = ipVersionOf(geo.ip);
   const serverSnapshot: InternetYouServerSnapshot = {
     ip: geo.ip,
+    ipv4: ipVersion === "ipv4" ? geo.ip : null,
+    ipv6: ipVersion === "ipv6" ? geo.ip : null,
+    currentIpVersion: ipVersion,
     countryCode: geo.countryCode,
     countryName: geo.countryCode
       ? resolveCountryName(geo.countryCode, currentLocale)
@@ -78,7 +82,13 @@ export default async function Page({ params }: Props) {
     subtitle: t("subtitle"),
     liveBadge: t("liveBadge"),
     noExternalLookup: t("noExternalLookup"),
+    networkAddressesTitle: t("networkAddressesTitle"),
+    networkAddressesSubtitle: t("networkAddressesSubtitle"),
     publicIp: t("publicIp"),
+    ipv4: t("ipv4"),
+    ipv6: t("ipv6"),
+    detectedOnRequest: t("detectedOnRequest"),
+    notDetectedOnRequest: t("notDetectedOnRequest"),
     approxLocation: t("approxLocation"),
     browser: t("browser"),
     device: t("device"),

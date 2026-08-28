@@ -38,6 +38,9 @@ import { Card } from "@/components/ui/card";
 
 export type InternetYouServerSnapshot = {
   ip: string | null;
+  ipv4: string | null;
+  ipv6: string | null;
+  currentIpVersion: "ipv4" | "ipv6" | null;
   countryCode: string | null;
   countryName: string | null;
   countrySource: "header" | "lookup" | "none";
@@ -49,7 +52,13 @@ type Copy = {
   subtitle: string;
   liveBadge: string;
   noExternalLookup: string;
+  networkAddressesTitle: string;
+  networkAddressesSubtitle: string;
   publicIp: string;
+  ipv4: string;
+  ipv6: string;
+  detectedOnRequest: string;
+  notDetectedOnRequest: string;
   approxLocation: string;
   browser: string;
   device: string;
@@ -320,13 +329,36 @@ export function InternetYouDashboard({
         </div>
 
         <div className="relative mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <SignalCard
-            icon={<Globe2 className="size-5" aria-hidden="true" />}
-            label={copy.publicIp}
-            value={serverSnapshot.ip ?? copy.unknown}
-            detail={copy.requestHeaders}
-            mono
-          />
+          <div className="min-w-0 rounded-2xl border border-white/70 bg-white/75 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75 lg:col-span-2">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-2 text-brand-700 dark:text-brand-300">
+                <Globe2 className="size-5 shrink-0" aria-hidden="true" />
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-wide">{copy.networkAddressesTitle}</p>
+                  <p className="mt-1 text-xs normal-case tracking-normal text-ink-muted">{copy.networkAddressesSubtitle}</p>
+                </div>
+              </div>
+              <Badge variant="outline" className="shrink-0 bg-white/70 dark:bg-surface-base/50">
+                {serverSnapshot.currentIpVersion === "ipv6" ? copy.ipv6 : serverSnapshot.currentIpVersion === "ipv4" ? copy.ipv4 : copy.publicIp}
+              </Badge>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <AddressSignal
+                label={copy.ipv4}
+                value={serverSnapshot.ipv4 ?? copy.unknown}
+                detected={Boolean(serverSnapshot.ipv4)}
+                detectedLabel={copy.detectedOnRequest}
+                notDetectedLabel={copy.notDetectedOnRequest}
+              />
+              <AddressSignal
+                label={copy.ipv6}
+                value={serverSnapshot.ipv6 ?? copy.unknown}
+                detected={Boolean(serverSnapshot.ipv6)}
+                detectedLabel={copy.detectedOnRequest}
+                notDetectedLabel={copy.notDetectedOnRequest}
+              />
+            </div>
+          </div>
           <SignalCard
             icon={
               serverSnapshot.countryCode ? (
@@ -493,6 +525,31 @@ function SignalCard({
       <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">{icon}<span className="text-xs font-semibold uppercase tracking-wide">{label}</span></div>
       <p className={`mt-3 truncate text-lg font-bold text-ink-strong ${mono ? "font-mono text-base" : ""}`}>{value}</p>
       <p className="mt-1 truncate text-xs text-ink-muted">{detail}</p>
+    </div>
+  );
+}
+
+function AddressSignal({
+  label,
+  value,
+  detected,
+  detectedLabel,
+  notDetectedLabel,
+}: {
+  label: string;
+  value: string;
+  detected: boolean;
+  detectedLabel: string;
+  notDetectedLabel: string;
+}) {
+  return (
+    <div className={`min-w-0 rounded-xl border p-3 ${detected ? "border-brand-200 bg-brand-50/70 dark:border-brand-800/60 dark:bg-brand-950/30" : "border-border bg-surface-subtle/70 dark:bg-surface-base/50"}`}>
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-xs font-semibold uppercase tracking-wide text-ink-muted">{label}</span>
+        <span className={`size-2 shrink-0 rounded-full ${detected ? "bg-success-500" : "bg-ink-muted/40"}`} aria-hidden="true" />
+      </div>
+      <p className={`mt-2 truncate text-sm font-bold text-ink-strong ${detected ? "font-mono" : ""}`}>{value}</p>
+      <p className="mt-1 truncate text-[11px] text-ink-muted">{detected ? detectedLabel : notDetectedLabel}</p>
     </div>
   );
 }

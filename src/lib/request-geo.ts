@@ -2,6 +2,8 @@ import { clientIpFrom } from "@/lib/rate-limit";
 
 export type GeoSource = "cloudflare" | "ipwho" | "none";
 
+export type IpVersion = "ipv4" | "ipv6" | null;
+
 export type RequestGeo = {
   ip: string | null;
   countryCode: string | null;
@@ -39,6 +41,28 @@ export function isPrivateOrLocal(ip: string | null | undefined): boolean {
 export function isPublicIp(ip: string | null | undefined): boolean {
   if (!ip || ip === "unknown") return false;
   return !isPrivateOrLocal(ip);
+}
+
+/** Classify a validated request IP without attempting to convert between families. */
+export function ipVersionOf(ip: string | null | undefined): IpVersion {
+  if (!ip) return null;
+  const value = ip.trim();
+  if (!value) return null;
+  if (value.includes(":")) return "ipv6";
+
+  const octets = value.split(".");
+  if (
+    octets.length === 4 &&
+    octets.every((octet) => {
+      if (!/^\d{1,3}$/.test(octet)) return false;
+      const number = Number(octet);
+      return number >= 0 && number <= 255;
+    })
+  ) {
+    return "ipv4";
+  }
+
+  return null;
 }
 
 /** Country code from the optional CDN header. */
