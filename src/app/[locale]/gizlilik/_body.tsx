@@ -354,6 +354,13 @@ export function EnBody() {
             intentionally retain the lookup result.
           </li>
           <li>
+            <strong>Homepage Internet Snapshot:</strong> the public IP may be
+            sent server-to-server to ipwho.is to resolve an approximate
+            country, city, capital and time zone for the location preview. The
+            lookup is used for that response only and is not intentionally
+            retained by VPN Advisor; GPS permission is never requested.
+          </li>
+          <li>
             <strong>Browser diagnostics:</strong> DNS and speed checks contact
             Cloudflare endpoints as disclosed on the relevant tool page.
             WebRTC checks run in the browser. Each result describes a limited
@@ -415,6 +422,10 @@ export function EnBody() {
           <li>
             <strong>ipapi.is</strong> — receives the public IP when the VPN/IP
             diagnostic requests network classification.
+          </li>
+          <li>
+            <strong>ipwho.is</strong> — may receive the public IP for the
+            homepage location and local-time preview.
           </li>
           <li>
             <strong>Cloudflare</strong> — provides endpoints used by the DNS and

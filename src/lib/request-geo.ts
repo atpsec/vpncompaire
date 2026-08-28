@@ -9,6 +9,7 @@ export type RequestGeo = {
   countryCode: string | null;
   city: string | null;
   region: string | null;
+  capital: string | null;
   timezone: string;
   source: GeoSource;
 };
@@ -85,6 +86,7 @@ export function geoFromHeaders(headers: Headers): RequestGeo {
     countryCode,
     city: null,
     region: null,
+    capital: null,
     timezone: "UTC",
     source: hasCf ? "cloudflare" : "none",
   };
@@ -95,6 +97,7 @@ type IpWhoResponse = {
   country_code?: string;
   city?: string;
   region?: string;
+  capital?: string;
   timezone?: { id?: string };
 };
 
@@ -113,27 +116,39 @@ async function lookupGeoFromIp(ip: string): Promise<Partial<RequestGeo>> {
     countryCode,
     city: data.city ?? null,
     region: data.region ?? null,
+    capital: data.capital ?? null,
     timezone: data.timezone?.id ?? "UTC",
     source: "ipwho",
   };
 }
 
+export type GeoResolveOptions = {
+  /** Also resolve city, capital and timezone when a CDN only supplies country. */
+  enrichDetails?: boolean;
+};
+
 /** Header-based geo with IP lookup fallback for Hostinger. */
-export async function resolveRequestGeo(headers: Headers): Promise<RequestGeo> {
+export async function resolveRequestGeo(
+  headers: Headers,
+  options?: GeoResolveOptions,
+): Promise<RequestGeo> {
   const base = geoFromHeaders(headers);
-  if (base.countryCode || !base.ip) return base;
+  const shouldLookup = Boolean(base.ip) &&
+    (options?.enrichDetails === true || !base.countryCode);
+  if (!shouldLookup || !base.ip) return base;
 
   try {
     const enriched = await lookupGeoFromIp(base.ip);
-    if (!enriched.countryCode) return base;
+    if (!enriched.countryCode && !enriched.city && !enriched.capital) return base;
 
     return {
       ip: base.ip,
-      countryCode: enriched.countryCode,
+      countryCode: enriched.countryCode ?? base.countryCode,
       city: enriched.city ?? base.city,
       region: enriched.region ?? base.region,
+      capital: enriched.capital ?? base.capital,
       timezone: enriched.timezone ?? base.timezone,
-      source: "ipwho",
+      source: enriched.source === "ipwho" ? "ipwho" : base.source,
     };
   } catch {
     return base;

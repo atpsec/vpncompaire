@@ -82,6 +82,21 @@ const nextConfig: NextConfig = {
       {
         // The page renders request-specific IP data; never let an intermediary
         // serve one visitor's snapshot to another visitor.
+        source: "/",
+        headers: [
+          { key: "Cache-Control", value: "private, no-store, max-age=0" },
+        ],
+      },
+      {
+        // Keep the explicit English homepage equally request-private.
+        source: "/en",
+        headers: [
+          { key: "Cache-Control", value: "private, no-store, max-age=0" },
+        ],
+      },
+      {
+        // The tool renders request-specific IP data; never let an intermediary
+        // serve one visitor's snapshot to another visitor.
         source: "/tools/what-websites-can-see",
         headers: [
           { key: "Cache-Control", value: "private, no-store, max-age=0" },

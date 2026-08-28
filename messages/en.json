@@ -137,7 +137,14 @@
       "browserLabel": "Browser signals",
       "deviceLabel": "Device signals",
       "countryFallback": "Country signal",
-      "privacyNote": "Approximate country signal · no diagnostic probes run automatically.",
+      "locationTitle": "Approximate location",
+      "locationSubtitle": "Based on your public IP signal — not GPS.",
+      "cityLabel": "City",
+      "capitalLabel": "Capital",
+      "digitalLabel": "Digital time",
+      "analogLabel": "Analog clock",
+      "locationUnavailable": "Unavailable",
+      "privacyNote": "Approximate IP-based location · no GPS permission or diagnostic probes requested.",
       "cta": "View your internet snapshot"
     }
   },
@@ -1269,7 +1276,7 @@
       "filesAndPasswordsBody": "A website cannot browse local files or passwords unless you explicitly grant access through a browser prompt.",
       "exactLocation": "Your exact location",
       "exactLocationBody": "Precise GPS data requires a separate permission prompt and is not requested by this page.",
-      "privacyNote": "This snapshot is not intentionally saved. Browser details and any comparison baseline stay in this session only. If the hosting layer does not provide a country header, a short server-side IP geolocation lookup may be used to show the approximate country; no DNS or WebRTC probe runs automatically.",
+      "privacyNote": "This snapshot is not intentionally saved. Browser details and any comparison baseline stay in this session only. A short server-side IP geolocation lookup may be used to show approximate country, city and timezone; no GPS permission, DNS or WebRTC probe runs automatically.",
       "faqTitle": "Frequently asked questions",
       "faq": {
         "items": [
