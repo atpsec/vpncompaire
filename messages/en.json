@@ -128,6 +128,17 @@
       "compareLink": "Compare VPNs",
       "dismissLabel": "Dismiss notification",
       "maskedIpNote": "full address hidden"
+    },
+    "internetYou": {
+      "kicker": "New privacy snapshot",
+      "title": "See what websites can see about you",
+      "subtitle": "Get a clear, visual snapshot of your public IP, browser and device signals in seconds.",
+      "connectionLabel": "Your connection",
+      "browserLabel": "Browser signals",
+      "deviceLabel": "Device signals",
+      "countryFallback": "Country signal",
+      "privacyNote": "No diagnostic lookup runs automatically.",
+      "cta": "View your internet snapshot"
     }
   },
   "footer": {

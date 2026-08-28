@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import Image from "next/image";
 import {
   CircleHelp,
   Clock3,
@@ -325,7 +326,17 @@ export function InternetYouDashboard({
             mono
           />
           <SignalCard
-            icon={<MapPin className="size-5" aria-hidden="true" />}
+            icon={
+              serverSnapshot.countryCode ? (
+                <CountryFlag
+                  code={serverSnapshot.countryCode}
+                  name={serverSnapshot.countryName ?? copy.approxLocation}
+                  size={34}
+                />
+              ) : (
+                <MapPin className="size-5" aria-hidden="true" />
+              )
+            }
             label={copy.approxLocation}
             value={location}
             detail={serverSnapshot.countryName ? copy.countryOnly : copy.unknown}
@@ -475,6 +486,32 @@ function SignalCard({
       <p className={`mt-3 truncate text-lg font-bold text-ink-strong ${mono ? "font-mono text-base" : ""}`}>{value}</p>
       <p className="mt-1 truncate text-xs text-ink-muted">{detail}</p>
     </div>
+  );
+}
+
+function CountryFlag({
+  code,
+  name,
+  size = 34,
+}: {
+  code: string;
+  name: string;
+  size?: number;
+}) {
+  return (
+    <span
+      className="flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-surface-muted"
+      style={{ width: size, height: size }}
+    >
+      <Image
+        src={`https://flagcdn.com/h40/${code.toLowerCase()}.png`}
+        alt={name}
+        width={28}
+        height={20}
+        className="h-auto w-6 rounded-sm shadow-sm ring-1 ring-black/5"
+        unoptimized
+      />
+    </span>
   );
 }
 
