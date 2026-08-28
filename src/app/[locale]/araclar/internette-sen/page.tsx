@@ -10,7 +10,7 @@ import {
   type InternetYouServerSnapshot,
 } from "@/components/tools/InternetYouDashboard";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
-import { geoFromHeaders } from "@/lib/request-geo";
+import { resolveRequestGeo } from "@/lib/request-geo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -57,13 +57,19 @@ export default async function Page({ params }: Props) {
     getLocale(),
   ]);
   const faqItems = t.raw("faq.items") as FaqItem[];
-  const geo = geoFromHeaders(await headers());
+  const geo = await resolveRequestGeo(await headers());
   const serverSnapshot: InternetYouServerSnapshot = {
     ip: geo.ip,
     countryCode: geo.countryCode,
     countryName: geo.countryCode
       ? resolveCountryName(geo.countryCode, currentLocale)
       : null,
+    countrySource:
+      geo.source === "ipwho"
+        ? "lookup"
+        : geo.source === "cloudflare"
+          ? "header"
+          : "none",
   };
 
   const copy = {
@@ -77,6 +83,7 @@ export default async function Page({ params }: Props) {
     browser: t("browser"),
     device: t("device"),
     countryOnly: t("countryOnly"),
+    countryLookup: t("countryLookup"),
     requestHeaders: t("requestHeaders"),
     unknown: t("unknown"),
     browserDeviceTitle: t("browserDeviceTitle"),

@@ -40,6 +40,7 @@ export type InternetYouServerSnapshot = {
   ip: string | null;
   countryCode: string | null;
   countryName: string | null;
+  countrySource: "header" | "lookup" | "none";
 };
 
 type Copy = {
@@ -53,6 +54,7 @@ type Copy = {
   browser: string;
   device: string;
   countryOnly: string;
+  countryLookup: string;
   requestHeaders: string;
   unknown: string;
   browserDeviceTitle: string;
@@ -339,7 +341,13 @@ export function InternetYouDashboard({
             }
             label={copy.approxLocation}
             value={location}
-            detail={serverSnapshot.countryName ? copy.countryOnly : copy.unknown}
+            detail={
+              serverSnapshot.countryName
+                ? serverSnapshot.countrySource === "lookup"
+                  ? copy.countryLookup
+                  : copy.countryOnly
+                : copy.unknown
+            }
           />
           <SignalCard
             icon={

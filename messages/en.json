@@ -137,7 +137,7 @@
       "browserLabel": "Browser signals",
       "deviceLabel": "Device signals",
       "countryFallback": "Country signal",
-      "privacyNote": "No diagnostic lookup runs automatically.",
+      "privacyNote": "Approximate country signal · no diagnostic probes run automatically.",
       "cta": "View your internet snapshot"
     }
   },
@@ -1195,12 +1195,13 @@
       "title": "What Websites Can See About You",
       "subtitle": "See the public network, browser and device signals this session exposes — with clear limits on what a normal website cannot access.",
       "liveBadge": "Visible to websites now",
-      "noExternalLookup": "No diagnostic lookup runs when this page opens",
+      "noExternalLookup": "No DNS or WebRTC probe runs automatically",
       "publicIp": "Public IP",
       "approxLocation": "Approximate location",
       "browser": "Browser",
       "device": "Device",
       "countryOnly": "Country-level signal",
+      "countryLookup": "Approximate country from IP geolocation",
       "requestHeaders": "From request headers",
       "unknown": "Unavailable",
       "browserDeviceTitle": "Your browser and device",
@@ -1236,7 +1237,7 @@
       "filesAndPasswordsBody": "A website cannot browse local files or passwords unless you explicitly grant access through a browser prompt.",
       "exactLocation": "Your exact location",
       "exactLocationBody": "Precise GPS data requires a separate permission prompt and is not requested by this page.",
-      "privacyNote": "This snapshot is not intentionally saved. The IP and country signal come from the request; browser details stay in this session. No third-party lookup runs automatically.",
+      "privacyNote": "This snapshot is not intentionally saved. Browser details stay in this session. If the hosting layer does not provide a country header, a short server-side IP geolocation lookup may be used to show the approximate country; no DNS or WebRTC probe runs automatically.",
       "faqTitle": "Frequently asked questions",
       "faq": {
         "items": [
