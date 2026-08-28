@@ -1,5 +1,4 @@
 import { SEO_LOCALES, siteConfig } from "@/lib/site";
-import { rankedProducts } from "@/data/products";
 import {
   featuredReferenceProducts,
   referenceProducts,
@@ -10,12 +9,16 @@ import {
   BLOG_REFERENCES_VERIFIED_AT,
   getBlogReferences,
 } from "@/data/blog-references";
+import {
+  getDetailedProviderProducts,
+  getGlobalCoreProducts,
+} from "@/data/provider-catalog";
 
 export const dynamic = "force-static";
 
 export async function GET() {
-  const core = rankedProducts("en").filter((product) => product.slug !== "atlas-vpn");
-  const catalog = core;
+  const catalog = getDetailedProviderProducts("en");
+  const visibleCatalog = getGlobalCoreProducts("en");
   const watchlistCount = Math.max(
     referenceProducts.length - featuredReferenceProducts.length,
     0,
@@ -52,7 +55,7 @@ ${siteConfig.name} is an English-language VPN comparison and digital-security re
 
 ## Public catalog scope
 
-The visible Global Core catalog contains ${catalog.length + featuredReferenceProducts.length} providers: ${catalog.length} detailed, indexable provider profiles and ${featuredReferenceProducts.length} selected market reference. The selected reference is not a laboratory review. Another ${watchlistCount} historical or research records remain noindex so old links keep context without inflating the public catalog. Catalog position is not a quality score.
+The visible Global Core catalog contains ${visibleCatalog.length} providers: ${catalog.length} detailed, indexable provider profiles and ${featuredReferenceProducts.length} selected market references. The selected references are not laboratory reviews. Another ${watchlistCount} historical or research records remain noindex so old links keep context without inflating the public catalog. Catalog position is not a quality score.
 
 ## Evidence hierarchy
 
@@ -65,6 +68,7 @@ If a claim cannot be verified, it should be labelled as a provider statement, a 
 
 - Methodology: ${siteConfig.url}/methodology
 - Research desk: ${siteConfig.url}/research
+- Provider evidence ledger: ${siteConfig.url}/research/evidence-ledger
 - Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
 - Corrections and contact: ${siteConfig.url}/contact
 - About the editorial project: ${siteConfig.url}/about
@@ -128,6 +132,7 @@ ${blogIndex}
 - VPN provider profiles: ${siteConfig.url}/vpn-reviews
 - Source-based methodology: ${siteConfig.url}/methodology
 - Research desk: ${siteConfig.url}/research
+- Provider evidence ledger: ${siteConfig.url}/research/evidence-ledger
 - AI privacy hub: ${siteConfig.url}/ai
 - Tools: ${siteConfig.url}/tools
 - Blog: ${siteConfig.url}/blog

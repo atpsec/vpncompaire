@@ -26,6 +26,8 @@ const contentPages = [
   "/vpn-reviews",
   "/comparison",
   "/methodology",
+  "/research",
+  "/research/evidence-ledger",
   "/about",
   "/reviews/nordvpn",
 ];

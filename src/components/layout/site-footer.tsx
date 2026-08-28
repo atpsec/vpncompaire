@@ -101,6 +101,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/research/evidence-ledger"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {t("links.evidenceLedger")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="text-ink-muted hover:text-ink"
                 >

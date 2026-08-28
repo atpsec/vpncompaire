@@ -10,6 +10,7 @@ import {
   resolveLocalizedRedirect,
   resolveInternalRewrite,
 } from "@/lib/i18n-paths";
+import { clientIpFrom } from "@/lib/rate-limit";
 
 // Simple in-memory rate limiter (production'da harici Redis önerilir)
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
@@ -49,19 +50,6 @@ function rateLimit(ip: string): boolean {
   // Increment counter
   record.count++;
   return true;
-}
-
-function getClientIp(request: NextRequest): string {
-  // Hostinger/proxy katmanı standart forwarded header'larını sağlayabilir.
-  const xff = request.headers.get("x-forwarded-for");
-  if (xff) {
-    return xff.split(",")[0].trim();
-  }
-  const realIp = request.headers.get("x-real-ip");
-  if (realIp) {
-    return realIp;
-  }
-  return "unknown";
 }
 
 // localeDetection is disabled in routing.ts. Public locale URLs are explicit:
@@ -139,7 +127,7 @@ export default function proxy(request: NextRequest) {
     pathname.includes("/blog/");
 
   if (shouldRateLimit) {
-    const ip = getClientIp(request);
+    const ip = clientIpFrom(request.headers);
     const allowed = rateLimit(ip);
 
     if (!allowed) {

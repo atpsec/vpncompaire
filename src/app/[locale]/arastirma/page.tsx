@@ -14,6 +14,11 @@ import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
+import {
+  getDetailedProviderProducts,
+  getGlobalCoreProducts,
+} from "@/data/provider-catalog";
+import { providerEvidenceRecords } from "@/data/provider-evidence";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -56,6 +61,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const records = providerEvidenceRecords("en");
+  const detailedCount = getDetailedProviderProducts("en").length;
+  const catalogCount = getGlobalCoreProducts("en").length;
+  const datedPricingCount = records.filter(
+    (record) => record.primarySource.state === "source-checked",
+  ).length;
+  const auditSourceCount = records.filter(
+    (record) => record.audit.state === "source-linked",
+  ).length;
 
   const researchSchema = {
     "@context": "https://schema.org",
@@ -99,7 +113,7 @@ export default async function Page({ params }: Props) {
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-lg border border-accent-300 bg-accent-50 px-4 py-3 text-sm font-semibold text-ink-strong">
             <CalendarDays className="size-4 text-accent-700" aria-hidden="true" />
-            First flagship edition in preparation: VPN Transparency Index 2026
+            Working edition published: Provider Evidence Ledger · {catalogCount} records
           </div>
         </header>
 
@@ -107,7 +121,7 @@ export default async function Page({ params }: Props) {
           <ResearchCard
             icon={<FileSearch className="size-5" aria-hidden="true" />}
             title="Evidence ledger"
-            body="Each future index row will connect a claim to its source, date, scope and confidence instead of hiding the trail behind a single score."
+            body="The first working register is live today: it separates dated source checks, provider-reported claims and evidence gaps instead of hiding the trail behind a single score."
           />
           <ResearchCard
             icon={<FlaskConical className="size-5" aria-hidden="true" />}
@@ -117,7 +131,7 @@ export default async function Page({ params }: Props) {
           <ResearchCard
             icon={<BookOpenCheck className="size-5" aria-hidden="true" />}
             title="Citation-ready output"
-            body="Reports will include stable URLs, downloadable data, a data dictionary and a changelog so journalists, researchers and readers can verify the work."
+            body="The ledger provides a stable, citable URL and a visible change path. Downloadable datasets and a data dictionary will follow once field-level citations are complete."
           />
         </section>
 
@@ -128,8 +142,14 @@ export default async function Page({ params }: Props) {
               VPN Transparency Index 2026
             </h2>
             <p className="mt-4 leading-relaxed text-ink-muted">
-              The first edition will begin with a focused group of major providers. Depth comes before volume: a smaller set of well-documented records is more useful than a large directory with generic or untraceable claims.
+              The working edition starts with {catalogCount} visible records: {detailedCount} detailed profiles and selected market references. Depth comes before volume: a smaller set of well-documented records is more useful than a large directory with generic or untraceable claims.
             </p>
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            <ResearchMetric value={catalogCount} label="visible provider records" />
+            <ResearchMetric value={datedPricingCount} label="records with dated pricing checks" />
+            <ResearchMetric value={auditSourceCount} label="audit records with dedicated links" />
           </div>
 
           <div className="mt-8 overflow-hidden rounded-2xl border border-border">
@@ -173,9 +193,12 @@ export default async function Page({ params }: Props) {
         <section className="mt-16 rounded-2xl border border-brand-200 bg-brand-50/40 p-6 dark:bg-brand-950/20 sm:p-8">
           <h2 className="text-2xl font-bold text-ink-strong">Start with the evidence you can inspect today</h2>
           <p className="mt-3 max-w-3xl leading-relaxed text-ink-muted">
-            Our live tools describe the current browser or connection context. The methodology explains how provider information is classified; the research desk will add versioned, citable datasets as each edition is completed.
+            Our live tools describe the current browser or connection context. The methodology explains how provider information is classified; the evidence ledger is the first working dataset, with field-level citations and deeper editions added as they are completed.
           </p>
           <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
+            <Link href="/research/evidence-ledger" className="inline-flex items-center text-brand-700 hover:underline">
+              Inspect the evidence ledger <ArrowRight className="ml-1 size-4" aria-hidden="true" />
+            </Link>
             <Link href="/tools" className="inline-flex items-center text-brand-700 hover:underline">
               Explore security tools <ArrowRight className="ml-1 size-4" aria-hidden="true" />
             </Link>
@@ -205,6 +228,15 @@ function ResearchCard({
       </div>
       <h2 className="mt-5 text-xl font-bold text-ink-strong">{cardTitle}</h2>
       <p className="mt-3 text-sm leading-relaxed text-ink-muted">{body}</p>
+    </div>
+  );
+}
+
+function ResearchMetric({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-surface-subtle/60 p-4">
+      <p className="text-2xl font-bold tabular-nums text-ink-strong">{value}</p>
+      <p className="mt-1 text-xs leading-relaxed text-ink-muted">{label}</p>
     </div>
   );
 }

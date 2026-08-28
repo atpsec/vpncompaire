@@ -122,6 +122,32 @@ async function lookupGeoFromIp(ip: string): Promise<Partial<RequestGeo>> {
   };
 }
 
+// The public home page can be requested repeatedly by crawlers. Keep a small
+// process-local budget so an unconfigured/failed distributed limiter cannot
+// turn every request into an external geo-API call. Entries expire quickly and
+// are not used as a persistent visitor database.
+const geoLookupBudget = new Map<string, { count: number; resetTime: number }>();
+const GEO_LOOKUP_WINDOW_MS = 60_000;
+const GEO_LOOKUP_MAX = 20;
+
+function canLookupGeo(ip: string): boolean {
+  const now = Date.now();
+  if (geoLookupBudget.size > 5_000) {
+    for (const [key, value] of geoLookupBudget) {
+      if (value.resetTime <= now) geoLookupBudget.delete(key);
+    }
+  }
+
+  const existing = geoLookupBudget.get(ip);
+  if (!existing || existing.resetTime <= now) {
+    geoLookupBudget.set(ip, { count: 1, resetTime: now + GEO_LOOKUP_WINDOW_MS });
+    return true;
+  }
+
+  existing.count += 1;
+  return existing.count <= GEO_LOOKUP_MAX;
+}
+
 export type GeoResolveOptions = {
   /** Also resolve city, capital and timezone when a CDN only supplies country. */
   enrichDetails?: boolean;
@@ -136,6 +162,7 @@ export async function resolveRequestGeo(
   const shouldLookup = Boolean(base.ip) &&
     (options?.enrichDetails === true || !base.countryCode);
   if (!shouldLookup || !base.ip) return base;
+  if (!canLookupGeo(base.ip)) return base;
 
   try {
     const enriched = await lookupGeoFromIp(base.ip);

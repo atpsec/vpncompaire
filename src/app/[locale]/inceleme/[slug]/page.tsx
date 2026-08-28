@@ -15,6 +15,7 @@ import { breadcrumbSchema, providerProductSchema } from "@/lib/seo";
 import { bilingualAlternates, absoluteUrl, type Locale } from "@/lib/site";
 import { rawProducts, getProduct, type Product } from "@/data/products";
 import { referenceProducts, getReferenceProduct } from "@/data/products-reference-localized";
+import { providerEvidenceRecords, type EvidenceItem } from "@/data/provider-evidence";
 import { getArchivedProduct } from "@/data/products-current";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
@@ -51,6 +52,15 @@ const labels = {
     sources: "Gösterilen fiyatın birincil kaynağı",
     sourcesIntro: "Bu bağlantı, profilde gösterilen fiyatı kontrol etmek için kullanılan sağlayıcı sayfasıdır. Diğer iddialar metodolojide sağlayıcı beyanı veya bağımsız rapor olarak etiketlenir.",
     pricingSource: "Sağlayıcının fiyat sayfasını aç",
+    evidenceTitle: "Kanıt kapsamı",
+    evidencePricing: "Fiyat kaydı",
+    evidenceAudit: "Denetim kaydı",
+    evidenceFields: "Profil alanları",
+    evidenceSourceChecked: "Kaynak ve tarih kayıtlı",
+    evidenceSourceLinked: "Kaynak bağlantısı var",
+    evidenceProviderReported: "Sağlayıcı beyanı",
+    evidenceNeedsCheck: "Tarih veya kaynak kontrolü gerekli",
+    evidenceLedger: "Kanıt defterinde ayrıntıyı gör",
   },
   en: {
     profile: "VPN provider profile",
@@ -81,6 +91,15 @@ const labels = {
     sources: "Primary source for displayed pricing",
     sourcesIntro: "This is the provider page used to check the price shown on this profile. Other claims are labeled as provider-published or independently reported in the methodology.",
     pricingSource: "Open the provider pricing page",
+    evidenceTitle: "Evidence coverage",
+    evidencePricing: "Pricing record",
+    evidenceAudit: "Audit record",
+    evidenceFields: "Profile fields",
+    evidenceSourceChecked: "Source and date recorded",
+    evidenceSourceLinked: "Source link available",
+    evidenceProviderReported: "Provider-reported",
+    evidenceNeedsCheck: "Date or source check needed",
+    evidenceLedger: "See details in evidence ledger",
   },
   de: {
     profile: "VPN-Anbieterprofil",
@@ -111,6 +130,15 @@ const labels = {
     sources: "Primärquelle für den angezeigten Preis",
     sourcesIntro: "Dies ist die Anbieter-Seite, auf der der angezeigte Preis geprüft wurde. Andere Angaben werden in der Methodik als Anbieterangaben oder unabhängige Berichte gekennzeichnet.",
     pricingSource: "Preisseite des Anbieters öffnen",
+    evidenceTitle: "Evidenzabdeckung",
+    evidencePricing: "Preisdatensatz",
+    evidenceAudit: "Auditdatensatz",
+    evidenceFields: "Profilfelder",
+    evidenceSourceChecked: "Quelle und Datum erfasst",
+    evidenceSourceLinked: "Quellenlink vorhanden",
+    evidenceProviderReported: "Anbieterangabe",
+    evidenceNeedsCheck: "Datums- oder Quellenprüfung erforderlich",
+    evidenceLedger: "Details im Evidenzregister",
   },
 } as const;
 
@@ -192,6 +220,7 @@ export default async function Page({ params }: Props) {
 
 function ProviderView({ product, locale, providerSchema, isArchived, isReferenceOnly }: { product: Product; locale: Locale; providerSchema: Record<string, unknown>; isArchived: boolean; isReferenceOnly: boolean }) {
   const t = labels[locale];
+  const evidence = providerEvidenceRecords(locale).find((record) => record.slug === product.slug);
   const hasStructuredPricing = Boolean(product.pricingVerifiedAt) && product.priceFromUsd > 0 && product.plans.length > 0;
   const productSchema = !isArchived && !isReferenceOnly && locale === "en" && hasStructuredPricing
     ? providerProductSchema(product, locale)
@@ -234,6 +263,25 @@ function ProviderView({ product, locale, providerSchema, isArchived, isReference
               {t.pricingSource}
               <ExternalLink className="size-3.5" />
             </a>
+          </Card>
+        )}
+
+        {isArchived || !evidence ? null : (
+          <Card className="mt-4 border-brand-200 bg-brand-50/30 p-5">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <h2 className="text-sm font-semibold text-ink-strong">{t.evidenceTitle}</h2>
+                <p className="mt-1 text-sm leading-relaxed text-ink-muted">{t.intro}</p>
+              </div>
+              <Link href={`/research/evidence-ledger#provider-${product.slug}`} className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline">
+                {t.evidenceLedger} <ArrowRight className="size-4" />
+              </Link>
+            </div>
+            <dl className="mt-4 grid gap-3 sm:grid-cols-3">
+              <EvidenceStat label={t.evidencePricing} item={evidence.primarySource} t={t} />
+              <EvidenceStat label={t.evidenceAudit} item={evidence.audit} t={t} />
+              <EvidenceStat label={t.evidenceFields} item={evidence.profileFields} t={t} />
+            </dl>
           </Card>
         )}
 
@@ -280,4 +328,21 @@ function Stat({ label, value, highlight = false }: { label: string; value: strin
 
 function Row({ label, value }: { label: string; value: string }) {
   return <div className="grid grid-cols-2 px-4 py-3 text-sm"><dt className="text-ink-muted">{label}</dt><dd className="text-ink-strong font-medium">{value}</dd></div>;
+}
+
+function EvidenceStat({ label, item, t }: { label: string; item: EvidenceItem; t: (typeof labels)[Locale] }) {
+  const status = item.state === "source-checked"
+    ? `${t.evidenceSourceChecked}${item.checkedAt ? ` · ${item.checkedAt}` : ""}`
+    : item.state === "source-linked"
+      ? t.evidenceSourceLinked
+      : item.state === "provider-reported"
+        ? t.evidenceProviderReported
+        : t.evidenceNeedsCheck;
+
+  return (
+    <div className="rounded-lg border border-border bg-surface-base p-3">
+      <dt className="text-xs font-semibold uppercase tracking-wide text-ink-muted">{label}</dt>
+      <dd className="mt-1 text-sm font-semibold text-ink-strong">{status}</dd>
+    </div>
+  );
 }

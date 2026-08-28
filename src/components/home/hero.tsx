@@ -3,16 +3,15 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { products } from "@/data/products";
-import { featuredReferenceProducts } from "@/data/products-reference-localized";
+import { getDetailedProviderProducts, getGlobalCoreProducts } from "@/data/provider-catalog";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 
 export function Hero() {
   const locale = useLocale() as Locale;
   const copy = positioningFor(locale);
-  const activeCore = products.filter((p) => p.slug !== "atlas-vpn");
-  const catalogCount = activeCore.length + featuredReferenceProducts.length;
+  const activeCore = getDetailedProviderProducts(locale);
+  const catalogCount = getGlobalCoreProducts(locale).length;
   const auditCount = activeCore.filter((p) => p.highlights.audits).length;
   const monthYear = new Intl.DateTimeFormat(locale, {
     year: "numeric",

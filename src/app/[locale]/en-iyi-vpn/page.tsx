@@ -5,18 +5,18 @@ import { ReferenceVPNDirectory } from "@/components/provider/reference-vpn-direc
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { itemListSchema, breadcrumbSchema } from "@/lib/seo";
-import { topRankedProducts } from "@/data/products";
-import { featuredReferenceProducts } from "@/data/products-reference-localized";
+import {
+  getDetailedProviderProducts,
+  GLOBAL_CORE_TARGET_COUNT,
+} from "@/data/provider-catalog";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const EVALUATED_PROFILE_COUNT = topRankedProducts("tr").filter(
-  (product) => product.slug !== "atlas-vpn",
-).length;
-const REFERENCE_RECORD_COUNT = featuredReferenceProducts.length;
-const GLOBAL_CORE_COUNT = EVALUATED_PROFILE_COUNT + REFERENCE_RECORD_COUNT;
+const EVALUATED_PROFILE_COUNT = getDetailedProviderProducts("en").length;
+const GLOBAL_CORE_COUNT = GLOBAL_CORE_TARGET_COUNT;
+const REFERENCE_RECORD_COUNT = GLOBAL_CORE_COUNT - EVALUATED_PROFILE_COUNT;
 const copy = {
   tr: {
     title: `Global Core ${GLOBAL_CORE_COUNT} VPN Sağlayıcı Rehberi (2026)`,
@@ -64,7 +64,7 @@ export default async function Page({ params }: Props) {
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   setRequestLocale(locale);
   const t = copy[locale];
-  const evaluatedProfiles = topRankedProducts(locale).filter((p) => p.slug !== "atlas-vpn");
+  const evaluatedProfiles = getDetailedProviderProducts(locale);
 
   return (
     <>

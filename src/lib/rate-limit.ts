@@ -21,6 +21,38 @@ export type RateLimitResult = {
   configured: boolean;
 };
 
+function validIpv4(value: string): boolean {
+  const octets = value.split(".");
+  return (
+    octets.length === 4 &&
+    octets.every((octet) => {
+      if (!/^\d{1,3}$/.test(octet)) return false;
+      const number = Number(octet);
+      return number >= 0 && number <= 255;
+    })
+  );
+}
+
+function validIpv6(value: string): boolean {
+  if (!/^[0-9a-f:]+$/i.test(value)) return false;
+  const sections = value.split("::");
+  if (sections.length > 2) return false;
+  const count = (section: string) => {
+    if (!section) return 0;
+    const groups = section.split(":");
+    if (groups.some((group) => !/^[0-9a-f]{1,4}$/i.test(group))) return -1;
+    return groups.length;
+  };
+  const used = count(sections[0]) + count(sections[1] ?? "");
+  return used >= 0 && (sections.length === 2 ? used < 8 : used === 8);
+}
+
+/** Reject malformed forwarded-header values before they reach external APIs. */
+export function isValidClientIp(value: string): boolean {
+  const trimmed = value.trim().replace(/^\[|\]$/g, "");
+  return validIpv4(trimmed) || validIpv6(trimmed);
+}
+
 const localRateLimitMap = new Map<
   string,
   { count: number; resetTime: number }
@@ -99,7 +131,13 @@ export async function rateLimit(
 
 /** Best-effort client IP from standard proxy headers. */
 export function clientIpFrom(headers: Headers): string {
-  const xff = headers.get("x-forwarded-for");
-  if (xff) return xff.split(",")[0].trim();
-  return headers.get("x-real-ip") ?? "unknown";
+  const candidates = [
+    headers.get("cf-connecting-ip"),
+    headers.get("x-real-ip"),
+    headers.get("x-forwarded-for")?.split(",")[0],
+  ];
+  for (const candidate of candidates) {
+    if (candidate && isValidClientIp(candidate)) return candidate.trim();
+  }
+  return "unknown";
 }

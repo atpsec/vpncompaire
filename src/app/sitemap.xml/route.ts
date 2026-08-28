@@ -17,6 +17,7 @@ const staticEntries = [
   ["/tools", 0.8, "weekly", "2026-08-27"],
   ["/methodology", 0.75, "monthly", "2026-08-24"],
   ["/research", 0.9, "weekly", "2026-08-27"],
+  ["/research/evidence-ledger", 0.85, "weekly", "2026-08-28"],
   ["/about", 0.5, "monthly", "2026-08-24"],
   ["/contact", 0.4, "yearly", "2026-08-24"],
   ["/affiliate-disclosure", 0.5, "monthly", "2026-08-24"],
