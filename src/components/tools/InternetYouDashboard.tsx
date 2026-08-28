@@ -1,8 +1,11 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useState, useSyncExternalStore, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
+  Activity,
+  ArrowRight,
   CircleHelp,
   Clock3,
   Cookie,
@@ -14,6 +17,8 @@ import {
   LockKeyhole,
   MapPin,
   Monitor,
+  RefreshCw,
+  Save,
   Server,
   ShieldCheck,
   Smartphone,
@@ -34,6 +39,7 @@ import {
 } from "simple-icons";
 import { Link } from "@/i18n/routing";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 export type InternetYouServerSnapshot = {
@@ -59,6 +65,32 @@ type Copy = {
   ipv6: string;
   detectedOnRequest: string;
   notDetectedOnRequest: string;
+  visibilitySummaryTitle: string;
+  visibilitySummarySubtitle: string;
+  visibleNowTitle: string;
+  visibleNowBody: string;
+  approximateSignalsTitle: string;
+  approximateSignalsBody: string;
+  notAccessibleTitle: string;
+  notAccessibleBody: string;
+  signalsAvailable: string;
+  privacyControlsTitle: string;
+  privacyControlsKicker: string;
+  privacyControlsSubtitle: string;
+  secureConnection: string;
+  globalPrivacyControl: string;
+  doNotTrack: string;
+  notSet: string;
+  comparisonTitle: string;
+  comparisonKicker: string;
+  comparisonSubtitle: string;
+  comparisonEmpty: string;
+  saveSnapshot: string;
+  refreshSnapshot: string;
+  baselineLabel: string;
+  currentLabel: string;
+  changed: string;
+  unchanged: string;
   approxLocation: string;
   browser: string;
   device: string;
@@ -123,6 +155,17 @@ type BrowserSnapshot = {
   touch: boolean;
   cookies: boolean;
   online: boolean;
+  secureContext: boolean;
+  globalPrivacyControl: "on" | "off" | "unavailable";
+  doNotTrack: "on" | "off" | "unavailable";
+};
+
+type ConnectionSnapshot = {
+  ip: string | null;
+  ipv4: string | null;
+  ipv6: string | null;
+  currentIpVersion: InternetYouServerSnapshot["currentIpVersion"];
+  location: string;
 };
 
 const EMPTY_SUBSCRIBE = () => () => {};
@@ -142,6 +185,9 @@ function getBrowserSnapshot(): BrowserSnapshot {
       : "Unavailable";
   const timezone =
     Intl.DateTimeFormat().resolvedOptions().timeZone || "Unavailable";
+  const privacyNavigator = navigator as Navigator & {
+    globalPrivacyControl?: boolean | null;
+  };
 
   cachedBrowserSnapshot = {
     browser,
@@ -153,6 +199,19 @@ function getBrowserSnapshot(): BrowserSnapshot {
     touch: navigator.maxTouchPoints > 0,
     cookies: navigator.cookieEnabled,
     online: navigator.onLine,
+    secureContext: window.isSecureContext,
+    globalPrivacyControl:
+      privacyNavigator.globalPrivacyControl === true
+        ? "on"
+        : privacyNavigator.globalPrivacyControl === false
+          ? "off"
+          : "unavailable",
+    doNotTrack:
+      navigator.doNotTrack === "1"
+        ? "on"
+        : navigator.doNotTrack === "0"
+          ? "off"
+          : "unavailable",
   };
 
   return cachedBrowserSnapshot;
@@ -295,6 +354,9 @@ export function InternetYouDashboard({
   serverSnapshot: InternetYouServerSnapshot;
   copy: Copy;
 }) {
+  const router = useRouter();
+  const [baseline, setBaseline] = useState<ConnectionSnapshot | null>(null);
+  const [isRefreshing, startRefresh] = useTransition();
   const browser = useSyncExternalStore(
     EMPTY_SUBSCRIBE,
     getBrowserSnapshot,
@@ -303,6 +365,30 @@ export function InternetYouDashboard({
   const location = serverSnapshot.countryName
     ? `${serverSnapshot.countryName}${serverSnapshot.countryCode ? ` (${serverSnapshot.countryCode})` : ""}`
     : copy.unknown;
+  const currentConnection: ConnectionSnapshot = {
+    ip: serverSnapshot.ip,
+    ipv4: serverSnapshot.ipv4,
+    ipv6: serverSnapshot.ipv6,
+    currentIpVersion: serverSnapshot.currentIpVersion,
+    location,
+  };
+  const visibleSignalCount = browser
+    ? [
+        serverSnapshot.ip,
+        serverSnapshot.countryName,
+        browser.browser.name,
+        browser.operatingSystem.name,
+        browser.device.name,
+        browser.screen,
+        browser.language,
+        browser.timezone,
+        browser.cookies,
+      ].filter((value) => value !== null && value !== undefined && value !== "").length
+    : null;
+
+  function refreshSnapshot() {
+    startRefresh(() => router.refresh());
+  }
 
   return (
     <div className="mt-8">
@@ -413,6 +499,11 @@ export function InternetYouDashboard({
         </p>
       </section>
 
+      <VisibilitySummary
+        copy={copy}
+        visibleSignalCount={visibleSignalCount}
+      />
+
       <section className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <Card className="p-6 sm:p-8">
           <div className="flex items-start gap-4">
@@ -458,6 +549,17 @@ export function InternetYouDashboard({
           </div>
         </Card>
       </section>
+
+      <ConnectionComparison
+        baseline={baseline}
+        current={currentConnection}
+        copy={copy}
+        isRefreshing={isRefreshing}
+        onSave={() => setBaseline(currentConnection)}
+        onRefresh={refreshSnapshot}
+      />
+
+      <PrivacyControls browser={browser} copy={copy} />
 
       <section className="mt-6 rounded-2xl border border-border bg-surface-subtle p-6 sm:p-8">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -505,6 +607,227 @@ export function InternetYouDashboard({
       </p>
     </div>
   );
+}
+
+function VisibilitySummary({
+  copy,
+  visibleSignalCount,
+}: {
+  copy: Copy;
+  visibleSignalCount: number | null;
+}) {
+  return (
+    <section className="mt-6 rounded-2xl border border-border bg-surface-base p-6 shadow-sm sm:p-8 dark:bg-surface-subtle">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
+            <Activity className="size-5" aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase tracking-wider">{copy.visibilitySummaryTitle}</p>
+          </div>
+          <h2 className="mt-2 text-2xl font-bold text-ink-strong">{copy.visibleNowTitle}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink-muted">{copy.visibilitySummarySubtitle}</p>
+        </div>
+        <Badge variant="brand" className="w-fit shrink-0">
+          {visibleSignalCount === null ? "…" : visibleSignalCount} {copy.signalsAvailable}
+        </Badge>
+      </div>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <SummaryColumn
+          tone="brand"
+          title={copy.visibleNowTitle}
+          body={copy.visibleNowBody}
+          icon={<Globe2 className="size-5" aria-hidden="true" />}
+        />
+        <SummaryColumn
+          tone="accent"
+          title={copy.approximateSignalsTitle}
+          body={copy.approximateSignalsBody}
+          icon={<MapPin className="size-5" aria-hidden="true" />}
+        />
+        <SummaryColumn
+          tone="success"
+          title={copy.notAccessibleTitle}
+          body={copy.notAccessibleBody}
+          icon={<EyeOff className="size-5" aria-hidden="true" />}
+        />
+      </div>
+    </section>
+  );
+}
+
+function SummaryColumn({
+  tone,
+  title,
+  body,
+  icon,
+}: {
+  tone: "brand" | "accent" | "success";
+  title: string;
+  body: string;
+  icon: React.ReactNode;
+}) {
+  const toneClasses = {
+    brand: "border-brand-200 bg-brand-50/60 text-brand-700 dark:border-brand-800/60 dark:bg-brand-950/30 dark:text-brand-300",
+    accent: "border-accent-200 bg-accent-50/60 text-accent-700 dark:border-accent-800/60 dark:bg-accent-950/30 dark:text-accent-300",
+    success: "border-success-200 bg-success-50/60 text-success-700 dark:border-success-800/60 dark:bg-success-950/30 dark:text-success-300",
+  } as const;
+
+  return (
+    <div className={`rounded-xl border p-5 ${toneClasses[tone]}`}>
+      <div className="flex items-center gap-2">
+        {icon}
+        <h3 className="font-bold text-ink-strong">{title}</h3>
+      </div>
+      <p className="mt-3 text-sm leading-relaxed text-ink-muted">{body}</p>
+    </div>
+  );
+}
+
+function ConnectionComparison({
+  baseline,
+  current,
+  copy,
+  isRefreshing,
+  onSave,
+  onRefresh,
+}: {
+  baseline: ConnectionSnapshot | null;
+  current: ConnectionSnapshot;
+  copy: Copy;
+  isRefreshing: boolean;
+  onSave: () => void;
+  onRefresh: () => void;
+}) {
+  return (
+    <section className="mt-6 rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50/70 via-surface-base to-surface-base p-6 shadow-sm dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-surface-subtle sm:p-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
+            <RefreshCw className="size-5" aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase tracking-wider">{copy.comparisonKicker}</p>
+          </div>
+          <h2 className="mt-2 text-2xl font-bold text-ink-strong">{copy.comparisonTitle}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink-muted">{copy.comparisonSubtitle}</p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button type="button" variant="secondary" size="sm" onClick={onSave}>
+            <Save className="size-4" aria-hidden="true" />
+            {copy.saveSnapshot}
+          </Button>
+          <Button type="button" variant="primary" size="sm" onClick={onRefresh} disabled={isRefreshing}>
+            <RefreshCw className={`size-4 ${isRefreshing ? "animate-spin" : ""}`} aria-hidden="true" />
+            {copy.refreshSnapshot}
+          </Button>
+        </div>
+      </div>
+
+      {!baseline ? (
+        <div className="mt-6 flex flex-col gap-3 rounded-xl border border-dashed border-brand-300 bg-white/60 p-5 dark:border-brand-800 dark:bg-surface-base/40 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm leading-relaxed text-ink-muted">{copy.comparisonEmpty}</p>
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 dark:text-brand-300">
+            {copy.currentLabel}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </span>
+        </div>
+      ) : (
+        <div className="mt-6 grid gap-3 md:grid-cols-2">
+          <ComparisonRow label={copy.publicIp} baseline={baseline.ip} current={current.ip} copy={copy} />
+          <ComparisonRow label={copy.ipv4} baseline={baseline.ipv4} current={current.ipv4} copy={copy} />
+          <ComparisonRow label={copy.ipv6} baseline={baseline.ipv6} current={current.ipv6} copy={copy} />
+          <ComparisonRow label={copy.approxLocation} baseline={baseline.location} current={current.location} copy={copy} />
+        </div>
+      )}
+    </section>
+  );
+}
+
+function ComparisonRow({
+  label,
+  baseline,
+  current,
+  copy,
+}: {
+  label: string;
+  baseline: string | null;
+  current: string | null;
+  copy: Copy;
+}) {
+  const baselineValue = baseline ?? copy.unknown;
+  const currentValue = current ?? copy.unknown;
+  const same = baselineValue === currentValue;
+
+  return (
+    <div className="min-w-0 rounded-xl border border-border bg-surface-base p-4 dark:bg-surface-subtle">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-xs font-semibold uppercase tracking-wide text-ink-muted">{label}</span>
+        <Badge variant={same ? "outline" : "success"}>{same ? copy.unchanged : copy.changed}</Badge>
+      </div>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        <ComparisonValue label={copy.baselineLabel} value={baselineValue} mono={label !== copy.approxLocation} />
+        <ComparisonValue label={copy.currentLabel} value={currentValue} mono={label !== copy.approxLocation} />
+      </div>
+    </div>
+  );
+}
+
+function ComparisonValue({ label, value, mono }: { label: string; value: string; mono: boolean }) {
+  return (
+    <div className="min-w-0 rounded-lg bg-surface-subtle px-3 py-2 dark:bg-surface-base">
+      <p className="text-[10px] font-semibold uppercase tracking-wide text-ink-muted">{label}</p>
+      <p className={`mt-1 truncate text-xs font-semibold text-ink-strong ${mono ? "font-mono" : ""}`}>{value}</p>
+    </div>
+  );
+}
+
+function PrivacyControls({
+  browser,
+  copy,
+}: {
+  browser: BrowserSnapshot | null;
+  copy: Copy;
+}) {
+  return (
+    <section className="mt-6 rounded-2xl border border-border bg-surface-subtle p-6 sm:p-8">
+      <div>
+        <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
+          <LockKeyhole className="size-5" aria-hidden="true" />
+          <p className="text-xs font-semibold uppercase tracking-wider">{copy.privacyControlsKicker}</p>
+        </div>
+        <h2 className="mt-2 text-2xl font-bold text-ink-strong">{copy.privacyControlsTitle}</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ink-muted">{copy.privacyControlsSubtitle}</p>
+      </div>
+      <div className="mt-6 grid gap-3 md:grid-cols-3">
+        <SmallSignal
+          icon={ShieldCheck}
+          label={copy.secureConnection}
+          value={browser ? (browser.secureContext ? copy.enabled : copy.disabled) : "…"}
+          positive={browser?.secureContext}
+        />
+        <SmallSignal
+          icon={EyeOff}
+          label={copy.globalPrivacyControl}
+          value={browser ? privacyPreferenceValue(browser.globalPrivacyControl, copy) : "…"}
+          positive={browser?.globalPrivacyControl === "on"}
+        />
+        <SmallSignal
+          icon={EyeOff}
+          label={copy.doNotTrack}
+          value={browser ? privacyPreferenceValue(browser.doNotTrack, copy) : "…"}
+          positive={browser?.doNotTrack === "on"}
+        />
+      </div>
+    </section>
+  );
+}
+
+function privacyPreferenceValue(
+  value: BrowserSnapshot["globalPrivacyControl"],
+  copy: Copy,
+) {
+  if (value === "on") return copy.enabled;
+  if (value === "off") return copy.disabled;
+  return copy.notSet;
 }
 
 function SignalCard({
