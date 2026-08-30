@@ -10,53 +10,13 @@ import {
   resolveLocalizedRedirect,
   resolveInternalRewrite,
 } from "@/lib/i18n-paths";
-import { clientIpFrom } from "@/lib/rate-limit";
-
-// Simple in-memory rate limiter (production'da harici Redis önerilir)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
-
-// Rate limit config
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 100; // 100 requests per minute per IP
-
-function rateLimit(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-
-  // Clean up old entries (simple memory management)
-  if (rateLimitMap.size > 10000) {
-    const cutoff = now - RATE_LIMIT_WINDOW * 2;
-    for (const [key, value] of rateLimitMap.entries()) {
-      if (value.resetTime < cutoff) {
-        rateLimitMap.delete(key);
-      }
-    }
-  }
-
-  if (!record || now > record.resetTime) {
-    // New window
-    rateLimitMap.set(ip, {
-      count: 1,
-      resetTime: now + RATE_LIMIT_WINDOW,
-    });
-    return true;
-  }
-
-  if (record.count >= RATE_LIMIT_MAX_REQUESTS) {
-    // Rate limit exceeded
-    return false;
-  }
-
-  // Increment counter
-  record.count++;
-  return true;
-}
+import { clientIpFrom, rateLimit } from "@/lib/rate-limit";
 
 // localeDetection is disabled in routing.ts. Public locale URLs are explicit:
 // /, /blog, /en, /en/blog, /de, /de/blog.
 const intlMiddleware = createMiddleware(routing);
 
-export default function proxy(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // The site is now English-only. Keep old Turkish and German URLs useful by
@@ -122,15 +82,12 @@ export default function proxy(request: NextRequest) {
   }
 
   // Apply rate limiting to sensitive routes
-  const shouldRateLimit =
-    pathname.startsWith("/go/") ||
-    pathname.includes("/blog/");
+  const shouldRateLimit = pathname.includes("/blog/");
 
   if (shouldRateLimit) {
-    const ip = clientIpFrom(request.headers);
-    const allowed = rateLimit(ip);
+    const limiter = await rateLimit(`page:${clientIpFrom(request.headers)}`, 120, 60);
 
-    if (!allowed) {
+    if (!limiter.allowed) {
       return new NextResponse(
         JSON.stringify({
           error: "Too many requests",
@@ -140,10 +97,16 @@ export default function proxy(request: NextRequest) {
           status: 429,
           headers: {
             "Content-Type": "application/json",
+            "Cache-Control": "private, no-store, no-cache, must-revalidate, max-age=0",
+            "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none'",
+            "Cross-Origin-Resource-Policy": "same-origin",
+            "Referrer-Policy": "no-referrer",
             "Retry-After": "60",
-            "X-RateLimit-Limit": RATE_LIMIT_MAX_REQUESTS.toString(),
+            "X-Content-Type-Options": "nosniff",
+            "X-Robots-Tag": "noindex, nofollow, noarchive",
+            "X-RateLimit-Limit": "120",
             "X-RateLimit-Remaining": "0",
-            "X-RateLimit-Reset": (Date.now() + RATE_LIMIT_WINDOW).toString(),
+            "X-RateLimit-Reset": Math.ceil((Date.now() + 60_000) / 1000).toString(),
           },
         }
       );

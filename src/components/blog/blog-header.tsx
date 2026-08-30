@@ -4,6 +4,7 @@ import { Clock, Calendar, Building2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import type { BlogPostFrontmatter } from "@/lib/blog";
 import type { Locale } from "@/lib/site";
+import { BlogViewCounter } from "@/components/blog/blog-view-counter";
 
 type BlogHeaderProps = {
   post: BlogPostFrontmatter;
@@ -55,6 +56,7 @@ export function BlogHeader({ post }: BlogHeaderProps) {
           <Clock className="size-4" />
           <span>{t("readingTime", { minutes: post.readingTime })}</span>
         </div>
+        <BlogViewCounter slug={post.slug} />
       </div>
     </header>
   );

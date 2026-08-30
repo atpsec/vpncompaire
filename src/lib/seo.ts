@@ -5,9 +5,8 @@ import type { FAQ } from "@/data/home-faqs";
 type JsonLdObject = Record<string, unknown>;
 
 function inLanguageOf(locale: Locale): string {
-  if (locale === "en") return "en-US";
-  if (locale === "de") return "de-DE";
-  return "tr-TR";
+  void locale;
+  return "en-US";
 }
 
 export function organizationSchema(locale: Locale = "en"): JsonLdObject {
@@ -17,7 +16,7 @@ export function organizationSchema(locale: Locale = "en"): JsonLdObject {
     "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
     url: siteConfig.url,
-    description: siteConfig.description[locale],
+    description: siteConfig.description.en,
     inLanguage: inLanguageOf(locale),
     knowsAbout: [
       "Virtual private networks",
@@ -42,7 +41,7 @@ export function websiteSchema(locale: Locale = "en"): JsonLdObject {
     "@id": `${absoluteUrl("", locale)}/#website`,
     name: siteConfig.name,
     url: absoluteUrl("", locale),
-    description: siteConfig.description[locale],
+    description: siteConfig.description.en,
     inLanguage: inLanguageOf(locale),
     publisher: {
       "@type": "Organization",
@@ -75,12 +74,7 @@ export function itemListSchema(
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name:
-      locale === "tr"
-        ? "VPN sağlayıcı profilleri"
-        : locale === "de"
-          ? "VPN-Anbieterprofile"
-          : "VPN provider profiles",
+    name: "VPN provider profiles",
     itemListOrder: "https://schema.org/ItemListUnordered",
     numberOfItems: items.length,
     itemListElement: items.map((p, i) => ({
@@ -96,7 +90,7 @@ function breadcrumbItemUrl(path: string, locale?: Locale): string {
   if (path.startsWith("http://") || path.startsWith("https://")) {
     return path;
   }
-  // getLocalizedPath() zaten /en/... veya /de/... prefix'i içerir; tekrar ekleme.
+  // Legacy prefixed paths are accepted here only while old URLs are migrated.
   if (/^\/(?:en|de)(?:\/|$)/.test(path)) {
     return absoluteUrl(path);
   }

@@ -129,18 +129,34 @@ async function lookupGeoFromIp(ip: string): Promise<Partial<RequestGeo>> {
 const geoLookupBudget = new Map<string, { count: number; resetTime: number }>();
 const GEO_LOOKUP_WINDOW_MS = 60_000;
 const GEO_LOOKUP_MAX = 20;
+const GEO_LOOKUP_MAX_ENTRIES = 5_000;
+
+function geoBudgetKey(value: string): string {
+  let hash = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `g${(hash >>> 0).toString(16)}`;
+}
 
 function canLookupGeo(ip: string): boolean {
   const now = Date.now();
-  if (geoLookupBudget.size > 5_000) {
+  if (geoLookupBudget.size >= GEO_LOOKUP_MAX_ENTRIES) {
     for (const [key, value] of geoLookupBudget) {
       if (value.resetTime <= now) geoLookupBudget.delete(key);
     }
+
+    while (geoLookupBudget.size >= GEO_LOOKUP_MAX_ENTRIES) {
+      const oldestKey = geoLookupBudget.keys().next().value;
+      if (typeof oldestKey !== "string") break;
+      geoLookupBudget.delete(oldestKey);
+    }
   }
 
-  const existing = geoLookupBudget.get(ip);
+  const existing = geoLookupBudget.get(geoBudgetKey(ip));
   if (!existing || existing.resetTime <= now) {
-    geoLookupBudget.set(ip, { count: 1, resetTime: now + GEO_LOOKUP_WINDOW_MS });
+    geoLookupBudget.set(geoBudgetKey(ip), { count: 1, resetTime: now + GEO_LOOKUP_WINDOW_MS });
     return true;
   }
 

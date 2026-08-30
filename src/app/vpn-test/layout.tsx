@@ -11,7 +11,7 @@ const geistSans = Geist({
   display: "swap",
 });
 
-export const metadata = buildRootMetadata("tr");
+export const metadata = buildRootMetadata("en");
 export const viewport = rootViewport;
 
 export default function VpnTestLayout({
@@ -19,7 +19,7 @@ export default function VpnTestLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="tr"
+      lang="en"
       className={`${geistSans.variable} antialiased`}
       suppressHydrationWarning
     >
@@ -28,7 +28,7 @@ export default function VpnTestLayout({
       </head>
       <body className="min-h-screen bg-background text-foreground font-sans">
         {children}
-        <GoogleAnalytics locale="tr" />
+        <GoogleAnalytics locale="en" />
         <GoogleAdsense />
       </body>
     </html>

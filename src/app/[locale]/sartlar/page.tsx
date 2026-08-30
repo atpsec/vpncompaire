@@ -4,30 +4,30 @@ import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
-import { TrBody, EnBody, DeBody } from "./_body";
+import { EnBody } from "./_body";
 
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "terms" });
+  await params;
+  const t = await getTranslations({ locale: "en", namespace: "terms" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/terms", locale),
+    alternates: localizedAlternates("/terms", "en"),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/terms", locale),
+      url: absoluteUrl("/terms", "en"),
       type: "article",
     },
   };
 }
 
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "terms" });
+  await params;
+  setRequestLocale("en");
+  const t = await getTranslations({ locale: "en", namespace: "terms" });
 
   return (
     <>
@@ -37,18 +37,12 @@ export default async function Page({ params }: Props) {
             { name: t("breadcrumbHome"), path: "/" },
             { name: t("breadcrumbHere"), path: "/terms" },
           ],
-          locale as "tr" | "en" | "de",
+          "en",
         )}
       />
 
       <Container size="md" className="py-12 sm:py-16">
-        {locale === "en" ? (
-          <EnBody />
-        ) : locale === "de" ? (
-          <DeBody />
-        ) : (
-          <TrBody />
-        )}
+        <EnBody />
       </Container>
     </>
   );

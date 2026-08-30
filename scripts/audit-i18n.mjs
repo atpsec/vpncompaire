@@ -16,10 +16,32 @@ const pass = (message) => passes.push(message);
 
 const source = (file) => readFileSync(join(ROOT, file), "utf8");
 
-if (source("src/i18n/routing.ts").includes('defaultLocale: "en"')) {
-  pass("Default locale is English");
+if (
+  source("src/i18n/routing.ts").includes('locales: ["en"]') &&
+  source("src/i18n/routing.ts").includes('defaultLocale: "en"')
+) {
+  pass("Runtime routing supports English only");
 } else {
-  fail("Default locale is not English");
+  fail("Runtime routing exposes a non-English locale");
+}
+
+const messageFiles = readdirSync(join(ROOT, "messages")).filter((file) => file.endsWith(".json"));
+if (messageFiles.length === 1 && messageFiles[0] === "en.json") {
+  pass("Only the English message catalog remains");
+} else {
+  fail(`Non-English message catalogs remain: ${messageFiles.join(", ")}`);
+}
+
+const blogContentRoot = join(SRC, "content", "blog");
+const blogLocales = readdirSync(blogContentRoot).filter((name) => {
+  const localePath = join(blogContentRoot, name);
+  return statSync(localePath).isDirectory() &&
+    readdirSync(localePath).some((file) => file.endsWith(".mdx"));
+});
+if (blogLocales.length === 1 && blogLocales[0] === "en") {
+  pass("Only the English blog collection remains");
+} else {
+  fail(`Non-English blog collections remain: ${blogLocales.join(", ")}`);
 }
 
 if (source("src/lib/site.ts").includes('SEO_LOCALES = ["en"]')) {

@@ -3,6 +3,7 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { X } from "lucide-react";
@@ -18,7 +19,21 @@ export function IpSecurityBannerDismiss({
 }: {
   children: React.ReactNode;
 }) {
-  const [dismissed, setDismissed] = useState(false);
+  // Hide the request-specific banner during the first render. The cookie is
+  // intentionally read only in the browser so the homepage stays cacheable
+  // and never varies its HTML by visitor state.
+  const [dismissed, setDismissed] = useState(true);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      const hasDismissCookie = document.cookie
+        .split(";")
+        .some((entry) => entry.trim().startsWith(`${DISMISS_COOKIE}=`));
+      setDismissed(hasDismissCookie);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   if (dismissed) return null;
 

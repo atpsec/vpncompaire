@@ -2,26 +2,36 @@
 
 import { useSyncExternalStore, useState } from "react";
 import {
-  MessageCircle,
   Link as LinkIcon,
   Share2,
   Check,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import type { SimpleIcon } from "simple-icons";
+import {
+  siDiscord,
+  siFacebook,
+  siPinterest,
+  siReddit,
+  siTelegram,
+  siThreads,
+  siWhatsapp,
+  siX,
+} from "simple-icons";
 import { cn } from "@/lib/utils";
 
-// Brand icons — inlined SVG (lucide-react removed brand icons in recent versions).
-// Single-color, currentColor-aware, no runtime dependency on lucide-react brand support.
-
-function XIcon({ className }: { className?: string }) {
+// Official Simple Icons brand paths are bundled locally so sharing never depends
+// on an external image host or an additional network request.
+function BrandIcon({ icon, className }: { icon: SimpleIcon; className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
       aria-hidden="true"
       className={className}
     >
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      <path d={icon.path} />
     </svg>
   );
 }
@@ -34,20 +44,7 @@ function LinkedinIcon({ className }: { className?: string }) {
       aria-hidden="true"
       className={className}
     >
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  );
-}
-
-function FacebookIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-      className={className}
-    >
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 .003 22.225 0z" />
     </svg>
   );
 }
@@ -96,7 +93,7 @@ export function SocialShare({
   className,
 }: SocialShareProps) {
   const t = useTranslations("share");
-  const [copied, setCopied] = useState(false);
+  const [copiedKind, setCopiedKind] = useState<"link" | "discord" | null>(null);
   const canNativeShare = useSyncExternalStore(
     subscribeNoop,
     getNativeShareSnapshot,
@@ -106,20 +103,28 @@ export function SocialShare({
   const encodedUrl = encodeURIComponent(url);
   const twitterText = encodeURIComponent(truncateForTwitter(title));
   const whatsappText = encodeURIComponent(`${title} ${url}`);
+  const redditTitle = encodeURIComponent(title);
+  const telegramText = encodeURIComponent(title);
+  const pinterestDescription = encodeURIComponent(title);
+  const threadsText = encodeURIComponent(`${title} ${url}`);
 
   const twitterHref = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${twitterText}`;
   const linkedinHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
   const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
   const whatsappHref = `https://wa.me/?text=${whatsappText}`;
+  const redditHref = `https://www.reddit.com/submit?url=${encodedUrl}&title=${redditTitle}`;
+  const telegramHref = `https://t.me/share/url?url=${encodedUrl}&text=${telegramText}`;
+  const pinterestHref = `https://www.pinterest.com/pin/create/button/?url=${encodedUrl}&description=${pinterestDescription}`;
+  const threadsHref = `https://www.threads.net/intent/post?text=${threadsText}`;
 
-  async function handleCopy() {
+  async function writeToClipboard(value: string) {
     try {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
-        await navigator.clipboard.writeText(url);
+        await navigator.clipboard.writeText(value);
       } else {
         // Fallback for very old browsers
         const ta = document.createElement("textarea");
-        ta.value = url;
+        ta.value = value;
         ta.setAttribute("readonly", "");
         ta.style.position = "absolute";
         ta.style.left = "-9999px";
@@ -128,12 +133,24 @@ export function SocialShare({
         document.execCommand("copy");
         document.body.removeChild(ta);
       }
-      setCopied(true);
-      track("copy");
-      setTimeout(() => setCopied(false), 2000);
+      return true;
     } catch {
-      // ignore
+      return false;
     }
+  }
+
+  async function handleCopy() {
+    if (!(await writeToClipboard(url))) return;
+    setCopiedKind("link");
+    track("copy");
+    setTimeout(() => setCopiedKind(null), 2000);
+  }
+
+  async function handleDiscordCopy() {
+    if (!(await writeToClipboard(`${title}\n${url}`))) return;
+    setCopiedKind("discord");
+    track("discord");
+    setTimeout(() => setCopiedKind(null), 2000);
   }
 
   async function handleNativeShare() {
@@ -181,7 +198,7 @@ export function SocialShare({
           "bg-surface-subtle text-ink hover:bg-[#000] hover:text-white dark:bg-surface-muted dark:hover:bg-[#000]"
         )}
       >
-        <XIcon className="size-4" />
+        <BrandIcon icon={siX} className="size-4" />
       </a>
 
       <a
@@ -213,7 +230,7 @@ export function SocialShare({
           "bg-surface-subtle text-ink hover:bg-[#1877F2] hover:text-white dark:bg-surface-muted dark:hover:bg-[#1877F2]"
         )}
       >
-        <FacebookIcon className="size-4" />
+        <BrandIcon icon={siFacebook} className="size-4" />
       </a>
 
       <a
@@ -229,30 +246,114 @@ export function SocialShare({
           "bg-surface-subtle text-ink hover:bg-[#25D366] hover:text-white dark:bg-surface-muted dark:hover:bg-[#25D366]"
         )}
       >
-        <MessageCircle className="size-4" />
+        <BrandIcon icon={siWhatsapp} className="size-4" />
+      </a>
+
+      <a
+        href={redditHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => handlePlatformClick("reddit")}
+        aria-label={t("platforms.reddit")}
+        title={t("platforms.reddit")}
+        className={cn(
+          baseBtn,
+          sizeBtn,
+          "bg-surface-subtle text-ink hover:bg-[#FF4500] hover:text-white dark:bg-surface-muted dark:hover:bg-[#FF4500]"
+        )}
+      >
+        <BrandIcon icon={siReddit} className="size-4" />
+      </a>
+
+      <button
+        type="button"
+        onClick={handleDiscordCopy}
+        aria-label={copiedKind === "discord" ? t("platforms.discordCopied") : t("platforms.discord")}
+        title={copiedKind === "discord" ? t("platforms.discordCopied") : t("platforms.discord")}
+        className={cn(
+          baseBtn,
+          sizeBtn,
+          copiedKind === "discord"
+            ? "bg-emerald-500 text-white"
+            : "bg-surface-subtle text-ink hover:bg-[#5865F2] hover:text-white dark:bg-surface-muted dark:hover:bg-[#5865F2]"
+        )}
+      >
+        {copiedKind === "discord" ? (
+          <Check className="size-4" />
+        ) : (
+          <BrandIcon icon={siDiscord} className="size-4" />
+        )}
+      </button>
+
+      <a
+        href={telegramHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => handlePlatformClick("telegram")}
+        aria-label={t("platforms.telegram")}
+        title={t("platforms.telegram")}
+        className={cn(
+          baseBtn,
+          sizeBtn,
+          "bg-surface-subtle text-ink hover:bg-[#229ED9] hover:text-white dark:bg-surface-muted dark:hover:bg-[#229ED9]"
+        )}
+      >
+        <BrandIcon icon={siTelegram} className="size-4" />
+      </a>
+
+      <a
+        href={pinterestHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => handlePlatformClick("pinterest")}
+        aria-label={t("platforms.pinterest")}
+        title={t("platforms.pinterest")}
+        className={cn(
+          baseBtn,
+          sizeBtn,
+          "bg-surface-subtle text-ink hover:bg-[#E60023] hover:text-white dark:bg-surface-muted dark:hover:bg-[#E60023]"
+        )}
+      >
+        <BrandIcon icon={siPinterest} className="size-4" />
+      </a>
+
+      <a
+        href={threadsHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => handlePlatformClick("threads")}
+        aria-label={t("platforms.threads")}
+        title={t("platforms.threads")}
+        className={cn(
+          baseBtn,
+          sizeBtn,
+          "bg-surface-subtle text-ink hover:bg-[#000] hover:text-white dark:bg-surface-muted dark:hover:bg-[#000]"
+        )}
+      >
+        <BrandIcon icon={siThreads} className="size-4" />
       </a>
 
       <button
         type="button"
         onClick={handleCopy}
-        aria-label={copied ? t("copied") : t("copyLink")}
-        title={copied ? t("copied") : t("copyLink")}
+        aria-label={copiedKind === "link" ? t("copied") : t("copyLink")}
+        title={copiedKind === "link" ? t("copied") : t("copyLink")}
         className={cn(
           baseBtn,
           // Mobile-da daha buyuk; desktop-ta diger butonlarla ayni
           "h-11 px-4 sm:h-9 sm:px-0 sm:size-9 gap-2 text-sm font-medium",
-          copied
+          copiedKind === "link"
             ? "bg-emerald-500 text-white"
             : "bg-surface-subtle text-ink hover:bg-brand-600 hover:text-white dark:bg-surface-muted dark:hover:bg-brand-600"
         )}
       >
-        {copied ? (
+        {copiedKind === "link" ? (
           <Check className="size-4" />
         ) : (
           <LinkIcon className="size-4" />
         )}
         <span className="sm:hidden">
-          {copied ? t("copied") : t("copyLink")}
+          {copiedKind === "link" ? t("copied") : t("copyLink")}
         </span>
       </button>
 
@@ -271,7 +372,6 @@ export function SocialShare({
           <Share2 className="size-4" />
         </button>
       ) : null}
-
     </div>
   );
 }

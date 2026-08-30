@@ -23,9 +23,7 @@ export const siteConfig = {
   // Böylece yerel/staging build'leri production AdSense hesabına istek göndermez.
   adsenseClientId: env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || undefined,
   description: {
-    tr: "VPN sağlayıcılarını resmi belgeler, bağımsız denetimler ve güncel fiyat kaynaklarıyla karşılaştıran kaynak temelli rehber.",
     en: "A source-based guide comparing VPN providers through privacy policies, independent audit records, security features and current pricing sources.",
-    de: "Ein quellenbasierter Ratgeber, der VPN-Anbieter anhand offizieller Dokumente, unabhängiger Audits und aktueller Preisquellen vergleicht.",
   },
   author: {
     name: "VPN Advisor Editorial Team",
@@ -39,8 +37,8 @@ export const siteConfig = {
   ogImage: `${env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "")}/og/default`,
 } as const;
 
-// Legacy locale values remain in the type because old data and URL migration
-// code still need to understand them, although only English is public.
+// AppLocale still includes legacy URL identifiers used only by the permanent
+// redirect registry. Rendered site content is English-only.
 export type Locale = AppLocale;
 
 /**

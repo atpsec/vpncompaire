@@ -1,29 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { siteConfig, type Locale } from "@/lib/site";
 
-const TITLES: Record<Locale, string> = {
-  tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları (2026)`,
-  en: `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing (2026)`,
-  de: `${siteConfig.name} — Unabhängige VPN-Vergleiche (2026)`,
-};
-
-const TITLE_SHORT: Record<Locale, string> = {
-  tr: `${siteConfig.name} — Bağımsız VPN Karşılaştırmaları`,
-  en: `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing`,
-  de: `${siteConfig.name} — Unabhängige VPN-Vergleiche`,
-};
-
-const OG_LOCALE: Record<Locale, string> = {
-  tr: "tr_TR",
-  en: "en_US",
-  de: "de_DE",
-};
-
-const ALTERNATE_OG_LOCALES: Record<Locale, string[]> = {
-  tr: ["en_US"],
-  en: ["tr_TR"],
-  de: ["tr_TR", "en_US"],
-};
+const TITLE = `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing (2026)`;
+const TITLE_SHORT = `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing`;
 
 // Google Search Console verification tokens are intentionally public and are
 // emitted as a harmless meta tag on every locale page.
@@ -40,14 +19,15 @@ function buildVerificationMetadata(): NonNullable<Metadata["verification"]> {
 }
 
 export function buildRootMetadata(locale: Locale): Metadata {
-  const description = siteConfig.description[locale];
+  void locale;
+  const description = siteConfig.description.en;
   const socialImage = `${siteConfig.ogImage}?locale=en`;
   const url = siteConfig.url;
 
   return {
     metadataBase: new URL(siteConfig.url),
     title: {
-      default: TITLES[locale],
+      default: TITLE,
       template: `%s | ${siteConfig.name}`,
     },
     description,
@@ -81,24 +61,23 @@ export function buildRootMetadata(locale: Locale): Metadata {
     },
     openGraph: {
       type: "website",
-      locale: OG_LOCALE[locale],
+      locale: "en_US",
       url,
-      title: TITLE_SHORT[locale],
+      title: TITLE_SHORT,
       description,
       siteName: siteConfig.name,
-      alternateLocale: ALTERNATE_OG_LOCALES[locale],
       images: [
         {
           url: socialImage,
           width: 1200,
           height: 630,
-          alt: TITLE_SHORT[locale],
+          alt: TITLE_SHORT,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: TITLE_SHORT[locale],
+      title: TITLE_SHORT,
       description,
       images: [socialImage],
     },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import trMessages from "../../../messages/tr.json";
+import enMessages from "../../../messages/en.json";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -14,15 +14,15 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipToContent } from "@/components/layout/skip-to-content";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations({ locale: "tr", namespace: "tools.vpnTest" });
+  const t = await getTranslations({ locale: "en", namespace: "tools.vpnTest" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/vpn-test", "tr"),
+    alternates: localizedAlternates("/vpn-test", "en"),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/vpn-test", "tr"),
+      url: absoluteUrl("/vpn-test", "en"),
       type: "website",
     },
   };
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function Page() {
   return (
-    <NextIntlClientProvider locale="tr" messages={trMessages}>
+    <NextIntlClientProvider locale="en" messages={enMessages}>
       <SkipToContent />
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
@@ -44,9 +44,9 @@ export default function Page() {
 }
 
 function VpnTestView() {
-  const t = trMessages.tools.vpnTest;
-  const tNav = trMessages.nav;
-  const tCommon = trMessages.tools.common;
+  const t = enMessages.tools.vpnTest;
+  const tNav = enMessages.nav;
+  const tCommon = enMessages.tools.common;
 
   const webAppSchema = {
     "@context": "https://schema.org",
@@ -60,7 +60,7 @@ function VpnTestView() {
   };
 
   const labels = {
-    locale: "tr",
+    locale: "en",
     loading: tCommon.loading,
     runAgain: tCommon.tryAgain,
     checking: t.checking,

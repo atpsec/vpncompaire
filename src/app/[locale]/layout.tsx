@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipToContent } from "@/components/layout/skip-to-content";
-import type { Locale } from "@/lib/site";
 import type { Metadata } from "next";
 import { buildRootMetadata, rootViewport } from "@/lib/root-metadata";
 import { GoogleAdsense } from "@/components/analytics/google-adsense";
@@ -33,8 +32,8 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale: Locale = rawLocale === "en" ? "en" : "en";
-  return buildRootMetadata(locale);
+  if (rawLocale !== "en") notFound();
+  return buildRootMetadata("en");
 }
 
 export default async function LocaleLayout({ children, params }: Props) {
@@ -43,7 +42,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   if (rawLocale !== "en") {
     notFound();
   }
-  const locale: Locale = "en";
+  const locale = "en" as const;
 
   setRequestLocale(locale);
 

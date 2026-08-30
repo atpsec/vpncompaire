@@ -20,6 +20,9 @@
 # production
 /build
 deploy-hostinger.zip
+/deploy-*.zip
+/opera-brand-assets-extracted/
+/opera-brand-assets.zip
 
 # misc
 .DS_Store

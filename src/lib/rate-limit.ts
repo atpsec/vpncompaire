@@ -1,4 +1,4 @@
-import { env } from "@/env";
+import { hasKvRest, kvRestCommand } from "@/lib/kv-rest";
 
 /**
  * Distributed fixed-window rate limiter backed by an Upstash-compatible Redis
@@ -57,6 +57,30 @@ const localRateLimitMap = new Map<
   string,
   { count: number; resetTime: number }
 >();
+const LOCAL_RATE_LIMIT_MAX_ENTRIES = 10_000;
+
+function fallbackFingerprint(value: string): string {
+  // This is only a last-resort fallback for runtimes without Web Crypto. It
+  // keeps raw IPs out of the process-local map while remaining deterministic.
+  let hash = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `f${(hash >>> 0).toString(16)}`;
+}
+
+async function fingerprint(value: string): Promise<string> {
+  try {
+    const digest = await globalThis.crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(value),
+    );
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+  } catch {
+    return fallbackFingerprint(value);
+  }
+}
 
 function localRateLimit(
   key: string,
@@ -65,9 +89,17 @@ function localRateLimit(
 ): RateLimitResult {
   const now = Date.now();
 
-  if (localRateLimitMap.size > 10_000) {
+  if (localRateLimitMap.size >= LOCAL_RATE_LIMIT_MAX_ENTRIES) {
     for (const [entryKey, entry] of localRateLimitMap) {
       if (entry.resetTime <= now) localRateLimitMap.delete(entryKey);
+    }
+
+    // Evict the oldest insertion when every entry is still active. This
+    // guarantees attacker-controlled keys cannot grow memory without bound.
+    while (localRateLimitMap.size >= LOCAL_RATE_LIMIT_MAX_ENTRIES) {
+      const oldestKey = localRateLimitMap.keys().next().value;
+      if (typeof oldestKey !== "string") break;
+      localRateLimitMap.delete(oldestKey);
     }
   }
 
@@ -84,21 +116,6 @@ function localRateLimit(
   return { allowed: existing.count <= max, configured: false };
 }
 
-async function kv(command: string[]): Promise<number | null> {
-  const url = env.KV_REST_API_URL;
-  const token = env.KV_REST_API_TOKEN;
-  if (!url || !token) return null;
-
-  const path = command.map((c) => encodeURIComponent(c)).join("/");
-  const res = await fetch(`${url.replace(/\/$/, "")}/${path}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    cache: "no-store",
-  });
-  if (!res.ok) throw new Error(`KV ${command[0]} ${res.status}`);
-  const data = (await res.json()) as { result?: number };
-  return data.result ?? null;
-}
-
 /**
  * Increment a per-key counter and report whether it is within `max` hits per
  * `windowSeconds`. Window starts on the first hit (EXPIRE set once, NX-style).
@@ -108,23 +125,26 @@ export async function rateLimit(
   max: number,
   windowSeconds: number,
 ): Promise<RateLimitResult> {
-  if (!env.KV_REST_API_URL || !env.KV_REST_API_TOKEN) {
-    return localRateLimit(key, max, windowSeconds);
+  const safeKey = await fingerprint(key);
+
+  if (!hasKvRest()) {
+    return localRateLimit(safeKey, max, windowSeconds);
   }
 
-  const redisKey = `rl:${key}`;
+  const redisKey = `rl:${safeKey}`;
   try {
-    const count = await kv(["incr", redisKey]);
-    if (count === null) return localRateLimit(key, max, windowSeconds);
+    const rawCount = await kvRestCommand(["incr", redisKey]);
+    const count = typeof rawCount === "number" ? rawCount : Number(rawCount);
+    if (!Number.isFinite(count)) return localRateLimit(safeKey, max, windowSeconds);
     // Set the TTL only on the first hit so the window doesn't slide forward.
     if (count === 1) {
-      await kv(["expire", redisKey, String(windowSeconds)]);
+      await kvRestCommand(["expire", redisKey, String(windowSeconds)]);
     }
     return { allowed: count <= max, configured: true };
   } catch {
     // Keep users unblocked during a store outage while retaining local abuse
     // protection for this process.
-    const fallback = localRateLimit(key, max, windowSeconds);
+    const fallback = localRateLimit(safeKey, max, windowSeconds);
     return { ...fallback, configured: true };
   }
 }

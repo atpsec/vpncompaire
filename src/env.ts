@@ -44,9 +44,10 @@ const envSchema = z.object({
     .optional()
     .or(z.literal("")),
 
-  // Upstash Redis REST credentials (optional). Used by src/lib/rate-limit.ts
-  // for distributed rate limiting on /go and /api routes. When absent, the
-  // limiter is a no-op (allows).
+  // Upstash-compatible Redis REST credentials (optional). Used for distributed
+  // rate limiting and durable per-article readership totals. When absent,
+  // bounded process-local fallbacks keep requests working, but readership
+  // totals reset whenever the application process restarts.
   KV_REST_API_URL: z.string().url().optional().or(z.literal("")),
   KV_REST_API_TOKEN: z.string().min(1).optional().or(z.literal("")),
 

@@ -1,53 +1,12 @@
-import { headers } from "next/headers";
-import { getLocale, getTranslations } from "next-intl/server";
-import Image from "next/image";
-import {
-  ArrowRight,
-  Landmark,
-  Fingerprint,
-  Globe2,
-  Laptop,
-  LockKeyhole,
-  MapPin,
-  ShieldCheck,
-} from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { ArrowRight, Globe2, Fingerprint, Laptop, LockKeyhole, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { InternetYouClock } from "@/components/home/internet-you-clock";
-import { resolveRequestGeo } from "@/lib/request-geo";
-
-function resolveCountryName(code: string, locale: string): string {
-  try {
-    const displayNames = new Intl.DisplayNames([locale], { type: "region" });
-    return displayNames.of(code) ?? code;
-  } catch {
-    return code;
-  }
-}
-
-function maskIpAddress(ip: string | null): string {
-  if (!ip) return "••••••••";
-  if (ip.includes(":")) {
-    const groups = ip.split(":").filter(Boolean);
-    return groups.length >= 2 ? `${groups.slice(0, 2).join(":")}::••••` : "••••••••";
-  }
-  const octets = ip.split(".");
-  return octets.length === 4 ? `${octets[0]}.${octets[1]}.••.••` : "••••••••";
-}
+import { InternetYouSignals } from "@/components/home/internet-you-signals";
 
 export async function InternetYouPromo() {
-  const [locale, t] = await Promise.all([
-    getLocale(),
-    getTranslations("home.internetYou"),
-  ]);
-  const geo = await resolveRequestGeo(await headers(), { enrichDetails: true });
-  const countryCode = /^[A-Z]{2}$/.test(geo.countryCode ?? "")
-    ? geo.countryCode!.toLowerCase()
-    : null;
-  const countryName = countryCode
-    ? resolveCountryName(countryCode.toUpperCase(), locale)
-    : null;
+  const t = await getTranslations("home.internetYou");
 
   return (
     <section className="relative -mt-1 pb-8 sm:-mt-3 sm:pb-12">
@@ -68,35 +27,14 @@ export async function InternetYouPromo() {
                 {t("subtitle")}
               </p>
 
-              <dl className="mt-5 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-3">
-                <PromoSignal
-                  icon={<Globe2 className="size-4" aria-hidden="true" />}
-                  label={t("connectionLabel")}
-                  value={maskIpAddress(geo.ip)}
-                  countryCode={countryCode}
-                  countryName={countryName}
-                />
-                <PromoSignal
-                  icon={<Fingerprint className="size-4" aria-hidden="true" />}
-                  label={t("browserLabel")}
-                  value="Browser + language"
-                />
-                <PromoSignal
-                  icon={<Laptop className="size-4" aria-hidden="true" />}
-                  label={t("deviceLabel")}
-                  value="Device + screen"
-                />
-              </dl>
-
-              <InternetYouLocationCard
-                countryCode={countryCode}
-                countryName={countryName}
-                city={geo.city}
-                capital={geo.capital}
-                timeZone={geo.source === "ipwho" ? geo.timezone : null}
+              <InternetYouSignals
+                locale="en"
                 copy={{
-                  title: t("locationTitle"),
-                  subtitle: t("locationSubtitle"),
+                  connectionLabel: t("connectionLabel"),
+                  browserLabel: t("browserLabel"),
+                  deviceLabel: t("deviceLabel"),
+                  locationTitle: t("locationTitle"),
+                  locationSubtitle: t("locationSubtitle"),
                   city: t("cityLabel"),
                   capital: t("capitalLabel"),
                   digital: t("digitalLabel"),
@@ -140,148 +78,6 @@ export async function InternetYouPromo() {
         </article>
       </Container>
     </section>
-  );
-}
-
-function InternetYouLocationCard({
-  countryCode,
-  countryName,
-  city,
-  capital,
-  timeZone,
-  copy,
-}: {
-  countryCode: string | null;
-  countryName: string | null;
-  city: string | null;
-  capital: string | null;
-  timeZone: string | null;
-  copy: {
-    title: string;
-    subtitle: string;
-    city: string;
-    capital: string;
-    digital: string;
-    analog: string;
-    unavailable: string;
-  };
-}) {
-  return (
-    <div className="mt-4 max-w-2xl rounded-2xl border border-white/80 bg-white/65 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/70">
-      <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
-        <div className="min-w-0">
-          <div className="flex items-center gap-3">
-            <span className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-brand-100 bg-brand-50 dark:border-brand-800 dark:bg-brand-950/50">
-              {countryCode ? (
-                <Image
-                  src={`https://flagcdn.com/h40/${countryCode}.png`}
-                  alt={countryName ?? ""}
-                  width={30}
-                  height={20}
-                  className="h-5 w-auto rounded-sm shadow-sm ring-1 ring-black/5"
-                  unoptimized
-                />
-              ) : (
-                <MapPin className="size-5 text-brand-600" aria-hidden="true" />
-              )}
-            </span>
-            <div className="min-w-0">
-              <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-brand-700 dark:text-brand-300">
-                <MapPin className="size-3.5" aria-hidden="true" />
-                {copy.title}
-              </p>
-              <p className="mt-1 truncate text-sm font-bold text-ink-strong">
-                {countryName ?? copy.unavailable}
-              </p>
-              <p className="mt-0.5 truncate text-[11px] text-ink-subtle">
-                {copy.subtitle}
-              </p>
-            </div>
-          </div>
-
-          <dl className="mt-4 grid grid-cols-2 gap-3">
-            <LocationFact
-              icon={<MapPin className="size-3.5" aria-hidden="true" />}
-              label={copy.city}
-              value={city ?? copy.unavailable}
-            />
-            <LocationFact
-              icon={<Landmark className="size-3.5" aria-hidden="true" />}
-              label={copy.capital}
-              value={capital ?? copy.unavailable}
-            />
-          </dl>
-        </div>
-
-        <div className="border-t border-border pt-3 sm:border-l sm:border-t-0 sm:pl-4 sm:pt-0">
-          <InternetYouClock
-            timeZone={timeZone}
-            digitalLabel={copy.digital}
-            analogLabel={copy.analog}
-            unavailableLabel={copy.unavailable}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function LocationFact({
-  icon,
-  label,
-  value,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="min-w-0 rounded-xl border border-white/80 bg-white/70 px-3 py-2.5 dark:border-white/10 dark:bg-surface-base/70">
-      <dt className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-ink-muted">
-        <span className="text-brand-600">{icon}</span>
-        {label}
-      </dt>
-      <dd className="mt-1 truncate text-sm font-semibold text-ink-strong">{value}</dd>
-    </div>
-  );
-}
-
-function PromoSignal({
-  icon,
-  label,
-  value,
-  countryCode,
-  countryName,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  countryCode?: string | null;
-  countryName?: string | null;
-}) {
-  return (
-    <div className="min-w-0 rounded-xl border border-white/80 bg-white/70 p-3 shadow-sm dark:border-white/10 dark:bg-surface-subtle/70">
-      <dt className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.08em] text-brand-700 dark:text-brand-300">
-        {icon}
-        {label}
-      </dt>
-      <dd className="mt-1.5 flex min-w-0 items-center gap-2">
-        {countryCode ? (
-          <Image
-            src={`https://flagcdn.com/h40/${countryCode}.png`}
-            alt={countryName ?? ""}
-            width={24}
-            height={17}
-            className="h-4 w-auto shrink-0 rounded-sm shadow-sm ring-1 ring-black/5"
-            unoptimized
-          />
-        ) : null}
-        <span className={`min-w-0 truncate text-sm font-bold text-ink-strong ${label === "Your connection" ? "font-mono" : ""}`}>
-          {value}
-        </span>
-      </dd>
-      {countryName ? <p className="mt-1 truncate text-[11px] text-ink-subtle">{countryName}</p> : null}
-    </div>
   );
 }
 

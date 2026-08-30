@@ -4,30 +4,30 @@ import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema } from "@/lib/seo";
 import { localizedAlternates, absoluteUrl } from "@/lib/site";
-import { TrBody, EnBody, DeBody } from "./_body";
+import { EnBody } from "./_body";
 
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "disclosurePage" });
+  await params;
+  const t = await getTranslations({ locale: "en", namespace: "disclosurePage" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates("/affiliate-disclosure", locale),
+    alternates: localizedAlternates("/affiliate-disclosure", "en"),
     openGraph: {
       title: t("metaTitle"),
       description: t("metaDescription"),
-      url: absoluteUrl("/affiliate-disclosure", locale),
+      url: absoluteUrl("/affiliate-disclosure", "en"),
       type: "article",
     },
   };
 }
 
 export default async function Page({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "disclosurePage" });
+  await params;
+  setRequestLocale("en");
+  const t = await getTranslations({ locale: "en", namespace: "disclosurePage" });
 
   return (
     <>
@@ -37,18 +37,12 @@ export default async function Page({ params }: Props) {
             { name: t("breadcrumbHome"), path: "/" },
             { name: t("breadcrumbHere"), path: "/affiliate-disclosure" },
           ],
-          locale as "tr" | "en" | "de",
+          "en",
         )}
       />
 
       <Container size="md" className="py-12 sm:py-16">
-        {locale === "en" ? (
-          <EnBody />
-        ) : locale === "de" ? (
-          <DeBody />
-        ) : (
-          <TrBody />
-        )}
+        <EnBody />
       </Container>
     </>
   );

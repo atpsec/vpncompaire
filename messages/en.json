@@ -1090,6 +1090,8 @@
     "latestArticles": "Latest VPN articles",
     "readMore": "Read more",
     "readingTime": "{minutes} min read",
+    "views": "{count, plural, one {# read} other {# reads}}",
+    "viewsLoading": "Loading reads…",
     "publishedOn": "Published",
     "updatedOn": "Updated",
     "author": "Author",
@@ -1120,6 +1122,12 @@
       "linkedin": "Share on LinkedIn",
       "facebook": "Share on Facebook",
       "whatsapp": "Share on WhatsApp",
+      "reddit": "Share on Reddit",
+      "discord": "Copy for Discord",
+      "discordCopied": "Copied for Discord",
+      "telegram": "Share on Telegram",
+      "pinterest": "Share on Pinterest",
+      "threads": "Share on Threads",
       "native": "Share"
     }
   },

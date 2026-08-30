@@ -16,6 +16,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const cspDirectives = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://partner.googleadservices.com https://tpc.googlesyndication.com",
+  "script-src-attr 'none'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://flagcdn.com https://images.unsplash.com https://www.google-analytics.com https://*.google-analytics.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com",
   "font-src 'self' data:",
@@ -48,6 +49,9 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
   { key: "X-DNS-Prefetch-Control", value: "on" },
+  { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
+  { key: "X-Download-Options", value: "noopen" },
+  { key: "Origin-Agent-Cluster", value: "?1" },
 ];
 
 const nextConfig: NextConfig = {
@@ -72,26 +76,23 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
       {
+        // JSON endpoints can contain request-specific diagnostics. Keep them
+        // private even if an upstream cache ignores the route handler signal.
+        source: "/api/:path*",
+        headers: [
+          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate, max-age=0" },
+          { key: "Content-Security-Policy", value: "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" },
+          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+          { key: "Referrer-Policy", value: "no-referrer" },
+          { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
+        ],
+      },
+      {
         source: "/go/:slug",
         headers: [
           { key: "Cache-Control", value: "no-store, no-cache, must-revalidate" },
           { key: "Referrer-Policy", value: "no-referrer" },
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
-        ],
-      },
-      {
-        // The page renders request-specific IP data; never let an intermediary
-        // serve one visitor's snapshot to another visitor.
-        source: "/",
-        headers: [
-          { key: "Cache-Control", value: "private, no-store, max-age=0" },
-        ],
-      },
-      {
-        // Keep the explicit English homepage equally request-private.
-        source: "/en",
-        headers: [
-          { key: "Cache-Control", value: "private, no-store, max-age=0" },
         ],
       },
       {
@@ -120,6 +121,11 @@ const nextConfig: NextConfig = {
         // doğrudan kalıcı yönlendirmeyle temiz tutar.
         source: "/en/en-iyi/yurt-disindaki-turkler",
         destination: "/best-vpn/turks-abroad",
+        permanent: true,
+      },
+      {
+        source: "/compare",
+        destination: "/comparison",
         permanent: true,
       },
       {

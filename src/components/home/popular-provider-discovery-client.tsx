@@ -95,10 +95,9 @@ export function PopularProviderDiscoveryClient({ providers, excludedSlugs, copy 
 
   return (
     <ul className="grid gap-4 md:grid-cols-3" aria-label={copy.ariaLabel}>
-      {providers.map((provider) => {
-        const isVisible = visibleProviders.some((visibleProvider) => visibleProvider.slug === provider.slug);
+      {visibleProviders.map((provider) => {
         return (
-        <li key={provider.slug} className={isVisible ? undefined : "hidden"} aria-hidden={!isVisible}>
+        <li key={provider.slug}>
           <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-base p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md sm:p-6">
             <div className="flex items-start gap-4">
               <div className="flex size-[68px] shrink-0 items-center justify-center rounded-2xl border border-border bg-white shadow-sm">

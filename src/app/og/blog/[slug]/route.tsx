@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 import { getBlogPost, getBlogPosts } from "@/lib/blog";
-import type { BlogLocale } from "@/lib/blog-slugs";
 import { getBlogImage } from "@/lib/unsplash";
 
 export const runtime = "nodejs";
@@ -9,55 +8,20 @@ export const size = { width: 1200, height: 630 };
 
 type RouteParams = { params: Promise<{ slug: string }> };
 
-function isBlogLocale(value: string | null): value is BlogLocale {
-  return value === "tr" || value === "en" || value === "de";
-}
-
 export async function generateStaticParams() {
-  const [trPosts, enPosts, dePosts] = await Promise.all([
-    getBlogPosts("tr"),
-    getBlogPosts("en"),
-    getBlogPosts("de"),
-  ]);
-  const slugs = new Set<string>();
-  trPosts.forEach((p) => {
-    if (p.slug) slugs.add(p.slug);
-  });
-  enPosts.forEach((p) => {
-    if (p.slug) slugs.add(p.slug);
-  });
-  dePosts.forEach((p) => {
-    if (p.slug) slugs.add(p.slug);
-  });
-  return Array.from(slugs).map((slug) => ({ slug }));
-}
-
-async function findPost(slug: string, preferredLocale?: BlogLocale) {
-  const locales = Array.from(
-    new Set([preferredLocale, "tr", "en", "de"].filter(Boolean)),
-  ) as BlogLocale[];
-
-  for (const locale of locales) {
-    const post = await getBlogPost(slug, locale);
-    if (post) return { post, locale };
-  }
-
-  return null;
+  const posts = await getBlogPosts("en");
+  return posts.map(({ slug }) => ({ slug }));
 }
 
 export async function GET(req: Request, ctx: RouteParams) {
   const { slug } = await ctx.params;
-  const requestedLocale = new URL(req.url).searchParams.get("locale");
-  const found = await findPost(
-    slug,
-    isBlogLocale(requestedLocale) ? requestedLocale : undefined,
-  );
+  const post = await getBlogPost(slug, "en");
 
   const fallbackTitle = "VPN Advisor - VPN reviews & guides";
-  const title = found?.post.frontmatter.title ?? fallbackTitle;
-  const category = found?.post.frontmatter.category ?? "blog";
-  const coverImageKey = found?.post.frontmatter.coverImage ?? "vpn-basics";
-  const heroUrl = getBlogImage(coverImageKey, "hero", found?.post.frontmatter.slug).url;
+  const title = post?.frontmatter.title ?? fallbackTitle;
+  const category = post?.frontmatter.category ?? "blog";
+  const coverImageKey = post?.frontmatter.coverImage ?? "vpn-basics";
+  const heroUrl = getBlogImage(coverImageKey, "hero", post?.frontmatter.slug).url;
   const heroSrc = heroUrl.startsWith("/")
     ? new URL(heroUrl, req.url).toString()
     : heroUrl;
