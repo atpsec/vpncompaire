@@ -8,6 +8,7 @@ import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
+import { CitationSummary } from "@/components/seo/citation-summary";
 import type { Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { formatProductPrice } from "@/lib/product-price";
@@ -56,6 +57,20 @@ type Props = {
 
 export function FactualComparison({ locale, title, description, left, right }: Props) {
   const t = labels[locale];
+  const sourcePoint = (product: Product) => {
+    const price = product.pricingVerifiedAt
+      ? formatProductPrice(product.priceFromUsd, product.priceCurrency, locale)
+      : t.official;
+    const jurisdiction = product.highlights.jurisdiction ?? "—";
+    const audit = product.highlights.audits ?? "—";
+    if (locale === "tr") {
+      return `${product.brand}: fiyat ${price}; yargı yetkisi ${jurisdiction}; denetim alanı ${audit}.`;
+    }
+    if (locale === "de") {
+      return `${product.brand}: Preis ${price}; Rechtsraum ${jurisdiction}; Auditfeld ${audit}.`;
+    }
+    return `${product.brand}: price ${price}; jurisdiction ${jurisdiction}; audit field ${audit}.`;
+  };
   const rows = [
     [t.price, left.pricingVerifiedAt ? formatProductPrice(left.priceFromUsd, left.priceCurrency, locale) : t.official, right.pricingVerifiedAt ? formatProductPrice(right.priceFromUsd, right.priceCurrency, locale) : t.official],
     [t.jurisdiction, left.highlights.jurisdiction ?? "—", right.highlights.jurisdiction ?? "—"],
@@ -73,6 +88,30 @@ export function FactualComparison({ locale, title, description, left, right }: P
         <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{title}</h1>
         <p className="mt-4 text-lg text-ink-muted">{description}</p>
       </header>
+
+      <CitationSummary
+        title={
+          locale === "tr"
+            ? `${left.brand} ve ${right.brand} için kaynak özeti`
+            : locale === "de"
+              ? `Quellenübersicht für ${left.brand} und ${right.brand}`
+              : `Source summary for ${left.brand} and ${right.brand}`
+        }
+        intro={
+          locale === "tr"
+            ? "Bu sayfa iki sağlayıcının kamuya açık belgelerini aynı alanlarda gösterir; tek başına güvenlik, hız veya kalite sonucu üretmez."
+            : locale === "de"
+              ? "Diese Seite stellt öffentliche Anbieterunterlagen anhand derselben Felder gegenüber; sie ist kein Sicherheits-, Geschwindigkeits- oder Qualitätstest."
+              : "This page places public provider documentation side by side using the same fields; it is not a security, speed or quality test."
+        }
+        points={
+          locale === "tr"
+            ? [sourcePoint(left), sourcePoint(right), "Belirgin farklar belgelenen özellikler olarak okunmalıdır.", "Satın almadan önce resmi kaynaklardaki güncel şartlar kontrol edilmelidir."]
+            : locale === "de"
+              ? [sourcePoint(left), sourcePoint(right), "Unterschiede sind als dokumentierte Merkmale zu lesen.", "Vor dem Kauf sollten die aktuellen Bedingungen auf der offiziellen Seite geprüft werden."]
+              : [sourcePoint(left), sourcePoint(right), "Differences should be read as documented fields.", "Check current official terms before purchasing."]
+        }
+      />
 
       <Card className="mt-6 p-5 bg-brand-50/40">
         <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{t.note}</p><Link href="/methodology" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>

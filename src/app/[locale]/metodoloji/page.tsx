@@ -4,6 +4,7 @@ import { ShieldCheck, FileSearch, Scale, RefreshCw, Eye, ListChecks, CalendarDay
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
+import { CitationSummary } from "@/components/seo/citation-summary";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
@@ -120,6 +121,30 @@ export default async function Page({ params }: Props) {
         <p className="mt-5 text-base sm:text-lg text-ink-muted leading-relaxed">{t.intro}</p>
         <p className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-ink-muted"><CalendarDays className="size-3.5" />{t.updated}: <span className="text-ink">{date}</span></p>
       </header>
+
+      <CitationSummary
+        title={
+          locale === "tr"
+            ? "VPN Advisor kanıtları nasıl değerlendirir?"
+            : locale === "de"
+              ? "Wie bewertet VPN Advisor Evidenz?"
+              : "How does VPN Advisor evaluate evidence?"
+        }
+        intro={
+          locale === "tr"
+            ? "VPN Advisor bir laboratuvar test servisi değil; resmi belgeleri, bağımsız denetim kayıtlarını ve güncel fiyat kaynaklarını görünür bir çerçevede düzenleyen İngilizce bir referans sitesidir."
+            : locale === "de"
+              ? "VPN Advisor ist kein Testlabor, sondern eine englischsprachige Referenzseite, die offizielle Unterlagen, unabhängige Auditberichte und aktuelle Preisquellen in einem sichtbaren Rahmen ordnet."
+              : "VPN Advisor is not a testing laboratory. It is an English-language reference site that organizes official documentation, independent audit records and current pricing sources in a visible framework."
+        }
+        points={
+          locale === "tr"
+            ? ["Kaynak türü, tarih ve kapsam görünür tutulur.", "Sağlayıcı beyanı bağımsız kanıt olarak sunulmaz.", "Test edilmeyen hız, streaming veya kullanıcı puanı yayınlanmaz.", "Belirsizlik ve eksik kaynaklar açıkça işaretlenir."]
+            : locale === "de"
+              ? ["Quellentyp, Datum und Umfang bleiben sichtbar.", "Anbieterangaben werden nicht als unabhängiger Beleg ausgegeben.", "Nicht durchgeführte Geschwindigkeits-, Streaming- oder Nutzertests werden nicht veröffentlicht.", "Unsicherheit und Evidenzlücken werden ausdrücklich markiert."]
+              : ["Source type, date and scope stay visible.", "Provider claims are not presented as independent proof.", "Unrun speed, streaming or user tests are not published.", "Uncertainty and evidence gaps are labelled explicitly."]
+        }
+      />
 
       <nav aria-label={t.toc} className="mt-10 rounded-xl border border-border bg-surface-subtle p-5 sm:p-6">
         <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink-muted"><ListChecks className="size-4" />{t.toc}</h2>

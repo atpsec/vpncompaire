@@ -17,6 +17,7 @@
     "audit:editorial": "node scripts/audit-editorial.mjs",
     "audit:content": "node scripts/audit-content-quality.mjs",
     "audit:positioning": "node scripts/audit-source-positioning.mjs",
+    "audit:ai-visibility": "node scripts/audit-ai-visibility.mjs",
     "audit:links": "node scripts/check-external-links.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs"

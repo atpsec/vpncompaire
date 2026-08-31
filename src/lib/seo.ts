@@ -28,7 +28,17 @@ export function organizationSchema(locale: Locale = "en"): JsonLdObject {
     ],
     logo: {
       "@type": "ImageObject",
-      url: absoluteUrl("/favicon.svg"),
+      // Use the 180px touch icon for Organization markup. The 32px favicon is
+      // appropriate for browser chrome but is below Google's recommended
+      // minimum for an organization logo.
+      url: absoluteUrl("/apple-touch-icon.png"),
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "corrections and general inquiries",
+      email: "contact@vpnadvisor.net",
+      url: absoluteUrl("/contact"),
+      availableLanguage: "English",
     },
     sameAs: [siteConfig.social.twitter, siteConfig.social.github].filter(Boolean),
   };
@@ -157,7 +167,7 @@ export function articleSchema(post: {
       url: siteConfig.url,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/favicon.svg"),
+        url: absoluteUrl("/apple-touch-icon.png"),
       },
     },
     image: {

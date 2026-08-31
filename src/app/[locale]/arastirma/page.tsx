@@ -12,6 +12,7 @@ import {
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
+import { CitationSummary } from "@/components/seo/citation-summary";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import {
@@ -116,6 +117,17 @@ export default async function Page({ params }: Props) {
             Working edition published: <Link href="/research/transparency-index" className="ml-1 text-brand-700 underline underline-offset-2">VPN Transparency Index 2026</Link> · {catalogCount} records
           </div>
         </header>
+
+        <CitationSummary
+          title="A citable VPN evidence record"
+          intro="The research section gives AI systems and readers a stable answer surface: what a provider documents, what an independent record covers and which fields still need verification. It is a source register, not a performance ranking."
+          points={[
+            "Every material field is paired with a source or an explicit evidence gap.",
+            "Provider-reported claims, independent records and reader-run diagnostics are separated.",
+            "The Transparency Index counts documented coverage, not safety, speed or quality.",
+            "Edition dates and correction paths make changes inspectable over time.",
+          ]}
+        />
 
         <section className="mt-12 grid gap-5 md:grid-cols-3">
           <ResearchCard

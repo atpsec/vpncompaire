@@ -10,6 +10,7 @@ import { UnsplashImage } from "@/components/blog/unsplash-image";
 import { RelatedPosts } from "@/components/blog/related-posts";
 import { SocialShare } from "@/components/blog/social-share";
 import { EditorialReferences } from "@/components/blog/editorial-references";
+import { JsonLd } from "@/components/seo/json-ld";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo";
 import { getBlogImage } from "@/lib/unsplash";
 import {
@@ -236,14 +237,8 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <article className="py-12 sm:py-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      <JsonLd data={articleLd} />
+      <JsonLd data={breadcrumbLd} />
 
       <Container size="md">
         <BlogHeader post={frontmatter} />
