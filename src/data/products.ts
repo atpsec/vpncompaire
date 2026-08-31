@@ -564,7 +564,7 @@ export const rawProducts: RawProduct[] = [
       moneyBackDays: 45,
     },
     hasAffiliate: true,
-    pricingUrl: "https://www.cyberghostvpn.com/en_US/plans",
+    pricingUrl: "https://www.cyberghostvpn.com/buy",
     pricingVerifiedAt: VERIFIED,
     lastTestedAt: "",
     testEnvironment: {
@@ -655,7 +655,7 @@ export const rawProducts: RawProduct[] = [
       moneyBackDays: 30,
     },
     hasAffiliate: true,
-    pricingUrl: "https://www.ipvanish.com/buy/",
+    pricingUrl: "https://www.ipvanish.com/pricing/",
     pricingVerifiedAt: "",
     lastTestedAt: "",
     testEnvironment: {

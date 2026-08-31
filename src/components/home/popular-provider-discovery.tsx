@@ -106,15 +106,15 @@ export function PopularProviderDiscovery() {
   return (
     <section aria-label={copy.ariaLabel} className="py-10 sm:py-14">
       <Container>
-        <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
+        <div className="mb-7 flex flex-col gap-3">
+          <div className="max-w-3xl">
             <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-700">
               <Compass className="size-3.5" /> {copy.kicker}
             </span>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink-strong sm:text-4xl">{copy.title}</h2>
             <p className="mt-3 text-ink-muted">{copy.subtitle}</p>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-border bg-surface-subtle px-3 py-2 text-xs text-ink-muted sm:self-auto">
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-surface-subtle px-3 py-2 text-xs text-ink-muted">
             <RefreshCw className="size-3.5 text-brand-600" /> {copy.sessionNote}
           </span>
         </div>

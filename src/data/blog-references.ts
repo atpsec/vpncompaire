@@ -221,7 +221,7 @@ const references = {
   ftcNegativeOptions: {
     title: "Negative Options",
     publisher: "U.S. Federal Trade Commission",
-    url: "https://www.ftc.gov/news-events/topics/truth-advertising/negative-options",
+    url: "https://www.ftc.gov/legal-library/browse/rules/negative-option-rule",
     note: "Consumer-protection material on recurring subscriptions and cancellation practices.",
   },
   googlePlayCountry: {
@@ -281,7 +281,7 @@ const references = {
   nordTrust: {
     title: "NordVPN Trust Center",
     publisher: "NordVPN",
-    url: "https://nordvpn.com/trust-center/",
+    url: "https://nordvpn.com/trust/",
     note: "Provider-maintained audit, ownership and security documentation; independently verify scope.",
   },
   surfsharkTrust: {
@@ -293,7 +293,7 @@ const references = {
   expressTrust: {
     title: "ExpressVPN Trust Center",
     publisher: "ExpressVPN",
-    url: "https://www.expressvpn.com/trust-center",
+    url: "https://www.expressvpn.com/trust",
     note: "Provider-maintained audit and security documentation; independently verify scope.",
   },
   protonTransparency: {
