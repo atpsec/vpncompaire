@@ -26,7 +26,8 @@ export const siteConfig = {
     en: "A source-based guide comparing VPN providers through privacy policies, independent audit records, security features and current pricing sources.",
   },
   author: {
-    name: "VPN Advisor Editorial Team",
+    // Institutional byline: the project has no named editorial staff.
+    name: "VPN Advisor",
     url: "/about",
   },
   social: {

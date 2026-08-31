@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/site";
 
 /**
  * Products that are safe to show in a comparison without becoming part of
- * the scored 30-provider directory. Opera's free feature is browser-scoped,
+ * the source-based 30-provider directory. Opera's free feature is browser-scoped,
  * so it must not be presented as equivalent to a device-wide VPN plan.
  */
 const OPERA_COMPARISON_PRODUCT: Record<Locale, Product> = {

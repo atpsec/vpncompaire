@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { useTranslations } from "next-intl";
-import { ArrowRight, Check, Trophy } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
@@ -184,7 +184,7 @@ export async function ComparisonPage({
                   <h3 className="text-lg font-semibold text-ink-strong">
                     {cat.name}
                   </h3>
-                  <WinnerBadge
+                  <DocumentedEdgeBadge
                     winner={cat.winner}
                     aBrand={a.brand}
                     bBrand={b.brand}
@@ -200,9 +200,6 @@ export async function ComparisonPage({
                     )}
                   >
                     <div className="font-medium text-ink-strong flex items-center gap-1">
-                      {cat.winner === "a" && (
-                        <Trophy className="size-3.5 text-success-600" />
-                      )}
                       {a.brand}
                     </div>
                     <p className="mt-1 text-ink-muted">{cat.aDetail}</p>
@@ -216,9 +213,6 @@ export async function ComparisonPage({
                     )}
                   >
                     <div className="font-medium text-ink-strong flex items-center gap-1">
-                      {cat.winner === "b" && (
-                        <Trophy className="size-3.5 text-success-600" />
-                      )}
                       {b.brand}
                     </div>
                     <p className="mt-1 text-ink-muted">{cat.bDetail}</p>
@@ -300,7 +294,7 @@ export async function ComparisonPage({
   );
 }
 
-function WinnerBadge({
+function DocumentedEdgeBadge({
   winner,
   aBrand,
   bBrand,
@@ -315,7 +309,6 @@ function WinnerBadge({
   }
   return (
     <Badge variant="brand">
-      <Trophy className="size-3" />{" "}
       {t("winnerLeads", { brand: winner === "a" ? aBrand : bBrand })}
     </Badge>
   );

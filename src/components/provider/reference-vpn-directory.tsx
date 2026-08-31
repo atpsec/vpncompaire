@@ -27,7 +27,7 @@ const labels = {
   en: {
     kicker: "Global Core 30 · selected market references",
     title: (count: number) => `${count} selected VPN market references`,
-    intro: "These providers complete the visible Global Core 30 directory. Selection reflects repeated market visibility across major comparison and research sources; this section is not a ranking or a laboratory result.",
+    intro: "These providers complete the visible Global Core 30 directory. Selection reflects repeated market visibility across major comparison and source directories; this section is not a ranking or a laboratory result.",
     open: "Open profile",
     watchKicker: "Emerging provider · not ranked",
     watchTitle: "PlanckVPN: source-based watch profile",

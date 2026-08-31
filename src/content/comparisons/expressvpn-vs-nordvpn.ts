@@ -172,7 +172,7 @@ const tr: ExpressvpnVsNordvpnContent = {
 const en: ExpressvpnVsNordvpnContent = {
   metaTitle: "ExpressVPN vs NordVPN Comparison (2026)",
   metaDescription:
-    "We compared ExpressVPN and NordVPN across 6 criteria: speed, audits, streaming, price and more. A side-by-side analysis of two premium giants.",
+    "A source-based comparison of ExpressVPN and NordVPN using provider documentation, audit records, privacy information, platform support and subscription terms.",
   breadcrumb: {
     home: "Home",
     hub: "Compare",
@@ -188,12 +188,12 @@ const en: ExpressvpnVsNordvpnContent = {
   },
   categoriesH2: "Category-by-category highlights",
   categoriesIntro:
-    'Each row indicates how a provider is positioned for that criterion — it does not crown a categorical "winner".',
+    "Each row summarizes a source-backed difference for that criterion. A documented edge is not a lab result, universal winner or provider rating.",
   reasonLabel: "Why:",
-  winnerTie: "Both are strong",
+  winnerTie: "No clear documented edge",
   winnerLeads: {
-    a: "ExpressVPN leads on this criterion",
-    b: "NordVPN leads on this criterion",
+    a: "Documented edge: ExpressVPN",
+    b: "Documented edge: NordVPN",
   },
   categories: [
     {
@@ -264,7 +264,7 @@ const en: ExpressvpnVsNordvpnContent = {
       "A history of regular, repeated audits is critical",
       "Extra features like Threat Protection, Meshnet and Onion over VPN are valuable to you",
       "A 10-device limit is enough",
-      "You want maximum throughput (large downloads, 4K streaming)",
+      "You want to compare protocol options on your own route and device",
     ],
     cta: "Read the NordVPN review",
   },

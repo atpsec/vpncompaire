@@ -166,7 +166,7 @@ const tr: NordvpnVsSurfsharkContent = {
 const en: NordvpnVsSurfsharkContent = {
   metaTitle: "NordVPN vs Surfshark Comparison (2026)",
   metaDescription:
-    "We compared NordVPN and Surfshark across 6 criteria: privacy, audits, speed, streaming, price and device support. Weigh up which one may suit you.",
+    "A source-based comparison of NordVPN and Surfshark using provider documentation, audit records, privacy information, platform support and subscription terms.",
   breadcrumb: {
     home: "Home",
     hub: "Compare",
@@ -174,17 +174,17 @@ const en: NordvpnVsSurfsharkContent = {
   },
   badge: "Side-by-side comparison",
   h1: "NordVPN vs Surfshark: 2026 Comparison",
-  lede: "Two major VPNs operating under the same corporate roof — but with different priorities. We compared them side by side across 6 criteria, so you can judge which one may suit you.",
+  lede: "Two major VPNs operating under the same corporate roof, with different documented priorities. Compare the source-backed fields side by side and decide which may suit you.",
   ctaOfficial: {
     nordvpn: "NordVPN official site",
     surfshark: "Surfshark official site",
   },
   categoriesH2: "Category-by-category comparison",
   reasonLabel: "Why:",
-  winnerTie: "Both are strong",
+  winnerTie: "No clear documented edge",
   winnerLeads: {
-    nordvpn: "NordVPN leads on this criterion",
-    surfshark: "Surfshark leads on this criterion",
+    nordvpn: "Documented edge: NordVPN",
+    surfshark: "Documented edge: Surfshark",
   },
   categories: [
     {
@@ -262,7 +262,7 @@ const en: NordvpnVsSurfsharkContent = {
   faqs: [
     {
       q: "Is NordVPN or Surfshark better?",
-      a: "There's no single 'better' — it depends on your priorities. NordVPN stands out on overall performance and audit history, Surfshark on price and device support. If budget comes first and you need to protect many devices, consider Surfshark; if repeated audits and a broad set of extra features matter most, consider NordVPN. We recommend checking the latest details on each provider's own website before buying.",
+      a: "There's no single 'better' — it depends on your priorities. NordVPN has more frequently documented audit information in this record, while Surfshark may suit readers prioritising price or device support. Check the latest details on each provider's own website before buying.",
     },
     {
       q: "Aren't they two products of the same company?",

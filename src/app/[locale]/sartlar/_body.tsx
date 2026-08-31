@@ -30,9 +30,9 @@ export function EnBody() {
         <h2>1. Service description</h2>
         <p>
           {siteConfig.name} (&quot;the site&quot;) is an informational website
-          that reviews and compares VPN services with an independent
-          methodology. The site offers editorial content, comparisons and
-          guides about VPN providers.
+          that organizes public VPN provider information using a transparent,
+          source-based methodology. The site offers reference content,
+          comparisons and guides about VPN providers.
         </p>
 
         <h2>2. Acceptance</h2>
@@ -51,16 +51,18 @@ export function EnBody() {
           <li>provides no guarantee of fit for individual situations</li>
         </ul>
         <p>
-          Our recommendations rest on independent testing and general evidence;
-          before making a specific decision for your situation, you should
-          evaluate your own circumstances.
+          Our content rests on public sources and documented evidence, not on
+          VPN Advisor laboratory or field testing. Before making a specific
+          decision for your situation, you should evaluate your own
+          circumstances and check the provider&apos;s current terms.
         </p>
 
         <h2>4. Third-party links</h2>
         <p>
-          The site contains plain, non-commercial links to VPN providers&apos;
-          own websites; we earn no commission from them. The site&apos;s
-          revenue comes from Google AdSense ads — see the{" "}
+          The site may contain links to VPN providers&apos; own websites. Some
+          links may be affiliate links and may generate a commission; this
+          does not change the source-based comparison. The site&apos;s revenue
+          may also come from Google AdSense ads — see the{" "}
           <Link href="/affiliate-disclosure">Advertising Disclosure</Link>. Once
           you follow a link, the external site&apos;s own terms apply; we are
           not responsible for that site&apos;s content or services.

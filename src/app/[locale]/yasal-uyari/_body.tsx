@@ -157,9 +157,9 @@ export function EnBody() {
 
         <h2>8. Advertising and revenue</h2>
         <p>
-          {siteConfig.name} earns its revenue from Google AdSense ads. Links to
-          VPN providers are plain, non-commercial links; we earn no commission
-          from them. See the{" "}
+          {siteConfig.name} may earn revenue from Google AdSense ads and
+          affiliate links. Affiliate links may generate a commission; this
+          does not change the source-based comparison. See the{" "}
           <Link href="/affiliate-disclosure">Advertising Disclosure</Link> for
           details.
         </p>
@@ -167,7 +167,7 @@ export function EnBody() {
         <h2>9. Limitation of liability</h2>
         <p>
           To the maximum extent permitted by applicable law,{" "}
-          {siteConfig.name} and its authors/editors are not liable for{" "}
+          {siteConfig.name} and its publishers are not liable for{" "}
           <strong>direct, indirect, incidental or special damages</strong>{" "}
           arising from decisions based on the information on this site.
         </p>

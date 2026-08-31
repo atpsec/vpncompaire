@@ -113,6 +113,15 @@ function localizeMarkdownLinks(source: string, locale: AppLocale): string {
   });
 }
 
+/**
+ * The project currently publishes under one institutional byline. Keeping
+ * this normalization at the parser boundary prevents stale frontmatter from
+ * leaking an unsupported staff identity into metadata or visible UI.
+ */
+function normalizeAuthor(): string {
+  return "VPN Advisor";
+}
+
 export const getBlogPosts = cache(async function getBlogPosts(
   locale: Locale,
 ): Promise<BlogPost[]> {
@@ -137,7 +146,7 @@ export const getBlogPosts = cache(async function getBlogPosts(
       description: data.description,
       publishedAt: data.publishedAt,
       updatedAt: data.updatedAt,
-      author: data.author,
+      author: normalizeAuthor(),
       category: data.category,
       tags: data.tags || [],
       readingTime: data.readingTime,
@@ -275,7 +284,7 @@ export const getBlogPost = cache(async function getBlogPost(
       description: data.description,
       publishedAt: data.publishedAt,
       updatedAt: data.updatedAt,
-      author: data.author,
+      author: normalizeAuthor(),
       category: data.category,
       tags: data.tags || [],
       readingTime: data.readingTime,

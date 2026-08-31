@@ -146,8 +146,8 @@ export function articleSchema(post: {
     },
     author: {
       "@type": "Organization",
-      "@id": `${siteConfig.url}/#editorial-team`,
-      name: post.author,
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
       url: absoluteUrl("/about", "en"),
     },
     publisher: {

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const channels = [
-  { Icon: Edit3, key: "editorial", email: "editor@vpnadvisor.net" },
+  { Icon: Edit3, key: "editorial", email: "contact@vpnadvisor.net" },
   { Icon: Briefcase, key: "partnership", email: "partner@vpnadvisor.net" },
   { Icon: AlertCircle, key: "legal", email: "legal@vpnadvisor.net" },
 ] as const;

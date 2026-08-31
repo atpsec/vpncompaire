@@ -1,6 +1,7 @@
 /**
  * Boolean feature matrix per VPN — used by the /server-map filter tool.
- * Hand-curated from review research; update when audits or features change.
+ * Hand-curated from documented provider information; update when sources or
+ * feature records change.
  */
 export const featureMatrix: Record<string, FeatureFlags> = {
   nordvpn: {

@@ -22,9 +22,9 @@ import { providerEvidenceRecords } from "@/data/provider-evidence";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const title = "VPN research, evidence and transparent methodology";
+const title = "VPN sources, evidence and transparent methodology";
 const description =
-  "A public research desk for VPN transparency, provider documentation, independent audit records and reproducible connection diagnostics.";
+  "A public source desk for VPN transparency, provider documentation, independent audit records and reader-run connection diagnostics.";
 
 const dimensions = [
   ["Privacy and logging", "What the policy says, what data it covers and which questions remain open."],
@@ -37,7 +37,7 @@ const dimensions = [
 
 const publicationStandard = [
   "Every material claim gets a source URL and a source or verification date.",
-  "Provider statements, independent records and our own measurements are labelled separately.",
+  "Provider statements, independent records and reader-run diagnostics are labelled separately.",
   "Audit reports are described by scope; an audit is never treated as a blanket security certification.",
   "Uncertainty, missing evidence and test limitations remain visible in the published record.",
   "Each edition gets a changelog so readers can see what changed and why.",
@@ -46,11 +46,11 @@ const publicationStandard = [
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   await params;
   return {
-    title: "VPN Research Desk — Transparency Index and Evidence",
+    title: "VPN Source Desk — Transparency Index and Evidence",
     description,
     alternates: localizedAlternates("/research", "en"),
     openGraph: {
-      title: "VPN Research Desk — Transparency Index and Evidence | VPN Advisor",
+      title: "VPN Source Desk — Transparency Index and Evidence | VPN Advisor",
       description,
       url: absoluteUrl("/research"),
       type: "article",
@@ -103,13 +103,13 @@ export default async function Page({ params }: Props) {
         <header className="max-w-4xl">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
             <Database className="size-3.5" aria-hidden="true" />
-            Public research desk
+            Public source desk
           </span>
           <h1 className="mt-5 max-w-4xl text-4xl font-bold tracking-tight text-ink-strong sm:text-5xl lg:text-6xl">
             From provider claims to comparable evidence.
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-muted">
-            VPN Advisor is building a versioned research program for people who need to understand what a VPN provider documents, what independent records actually cover and what still needs verification.
+            VPN Advisor is building a versioned source register for people who need to understand what a VPN provider documents, what independent records actually cover and what still needs verification.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-lg border border-accent-300 bg-accent-50 px-4 py-3 text-sm font-semibold text-ink-strong">
             <CalendarDays className="size-4 text-accent-700" aria-hidden="true" />
@@ -125,8 +125,8 @@ export default async function Page({ params }: Props) {
           />
           <ResearchCard
             icon={<FlaskConical className="size-5" aria-hidden="true" />}
-            title="Reproducible checks"
-            body="Browser and connection diagnostics will document the test conditions and limitations. A reader-run signal will never be presented as a provider-wide verdict."
+            title="Reader-run diagnostics"
+            body="Browser and connection diagnostics document the current session and their limitations. A reader-run signal is never presented as a provider-wide verdict."
           />
           <ResearchCard
             icon={<BookOpenCheck className="size-5" aria-hidden="true" />}
@@ -156,7 +156,7 @@ export default async function Page({ params }: Props) {
             <table className="w-full text-left text-sm">
               <thead className="bg-surface-subtle text-xs font-semibold uppercase tracking-wide text-ink-muted">
                 <tr>
-                  <th className="px-5 py-4">Research dimension</th>
+                  <th className="px-5 py-4">Information dimension</th>
                   <th className="px-5 py-4">What the record will show</th>
                 </tr>
               </thead>
@@ -177,7 +177,7 @@ export default async function Page({ params }: Props) {
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">Publication standard</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink-strong">How we publish evidence</h2>
             <p className="mt-4 leading-relaxed text-ink-muted">
-              The research desk follows the same principle as the provider profiles: show the source, classify the information, disclose uncertainty and never present an unrun test as a completed test.
+              The source desk follows the same principle as the provider profiles: show the source, classify the information, disclose uncertainty and never present an unrun test as a completed test.
             </p>
           </div>
           <ul className="space-y-3">

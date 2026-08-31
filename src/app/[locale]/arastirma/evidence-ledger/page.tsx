@@ -107,7 +107,7 @@ export default async function Page({ params }: Props) {
         <header className="mt-6 max-w-4xl">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
             <FileSearch className="size-3.5" aria-hidden="true" />
-            Working research edition · {publicationDate}
+            Working source edition · {publicationDate}
           </span>
           <h1 className="mt-5 text-4xl font-bold tracking-tight text-ink-strong sm:text-5xl lg:text-6xl">
             Evidence before rankings.
@@ -144,7 +144,7 @@ export default async function Page({ params }: Props) {
               </h2>
             </div>
             <Link href="/research" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
-              Research desk <ArrowRight className="size-4" aria-hidden="true" />
+              Source desk <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
 

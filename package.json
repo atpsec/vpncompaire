@@ -16,6 +16,7 @@
     "audit:adsense": "node scripts/audit-adsense.mjs",
     "audit:editorial": "node scripts/audit-editorial.mjs",
     "audit:content": "node scripts/audit-content-quality.mjs",
+    "audit:positioning": "node scripts/audit-source-positioning.mjs",
     "audit:links": "node scripts/check-external-links.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs"

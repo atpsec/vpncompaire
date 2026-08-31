@@ -79,12 +79,12 @@ const CONTENT = {
   en: {
     metaTitle: "VPN Information Guide for Travel (2026)",
     metaDescription:
-      "Public Wi-Fi safety, access in restrictive countries and remote access to home content — the best VPN picks for travellers.",
+      "Public Wi-Fi safety, access in restrictive countries and remote access to home content — a source-based VPN guide for travellers.",
     title: "VPN information guide for travel",
     tagline:
       "Public Wi-Fi safety, access in restrictive countries and remote access to home content.",
     summary:
-      "While travelling, a VPN matters for four things: encrypting traffic on public Wi-Fi, obfuscation in restrictive countries, remote access to home content (Turkish media in particular) and auto-protection as you hop networks. ExpressVPN leads on coverage, NordVPN on obfuscation, Surfshark on device count.",
+      "While travelling, a VPN matters for four things: encrypting traffic on public Wi-Fi, obfuscation in restrictive countries, remote access to home content (Turkish media in particular) and auto-protection as you hop networks. This guide organizes provider-published coverage, obfuscation and device-support information; it is not a lab ranking.",
     badgeLabel: "Travel",
     picks: [
       {

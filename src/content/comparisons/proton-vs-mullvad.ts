@@ -169,7 +169,7 @@ const tr: ProtonVsMullvadContent = {
 const en: ProtonVsMullvadContent = {
   metaTitle: "Proton VPN vs Mullvad Comparison (2026)",
   metaDescription:
-    "We compared Proton VPN and Mullvad across 6 criteria: privacy philosophy, audits, price and usage model. For privacy purists.",
+    "A source-based comparison of Proton VPN and Mullvad using privacy documentation, audit records, account model, platform support and subscription terms.",
   breadcrumb: {
     home: "Home",
     hub: "Compare",
@@ -185,12 +185,12 @@ const en: ProtonVsMullvadContent = {
   },
   categoriesH2: "Category-by-category highlights",
   categoriesIntro:
-    'Each row indicates how a provider is positioned for that criterion — it does not crown a categorical "winner".',
+    "Each row summarizes a source-backed difference for that criterion. A documented edge is not a lab result, universal winner or provider rating.",
   reasonLabel: "Why:",
-  winnerTie: "Both are strong",
+  winnerTie: "No clear documented edge",
   winnerLeads: {
-    a: "Proton VPN leads on this criterion",
-    b: "Mullvad leads on this criterion",
+    a: "Documented edge: Proton VPN",
+    b: "Documented edge: Mullvad",
   },
   categories: [
     {
@@ -226,7 +226,7 @@ const en: ProtonVsMullvadContent = {
       aDetail: "On the Plus plan: Netflix US/UK/JP, Disney+, BBC iPlayer, BluTV",
       bDetail: "Not optimized for streaming — most platforms block it",
       reasoning:
-        "Proton VPN's Plus plan offers solid streaming bypass. Mullvad deliberately doesn't focus on streaming — it positions itself as a privacy tool. If streaming matters, Proton VPN is the clear pick.",
+        "Proton VPN's Plus documentation describes streaming support, while Mullvad does not position its service around streaming. This is a documented product difference, not a VPN Advisor access test or guarantee.",
     },
     {
       name: "Pricing model",
@@ -277,7 +277,7 @@ const en: ProtonVsMullvadContent = {
     },
     {
       q: "Which one for streaming?",
-      a: "Clearly Proton VPN. Mullvad isn't optimized for streaming — that's a deliberate design decision.",
+      a: "Proton VPN documents streaming support on the Plus plan, while Mullvad does not position its service around streaming. Current compatibility still needs to be checked on the reader's own account, device and network.",
     },
     {
       q: "Are both open source?",

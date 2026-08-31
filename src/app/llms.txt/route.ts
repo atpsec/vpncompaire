@@ -47,7 +47,7 @@ export async function GET() {
 
 > ${siteConfig.description.en}
 
-Last editorial update: ${latestBlogUpdate ?? BLOG_REFERENCES_VERIFIED_AT}
+Last publishing update: ${latestBlogUpdate ?? BLOG_REFERENCES_VERIFIED_AT}
 
 ## Purpose
 
@@ -55,7 +55,7 @@ ${siteConfig.name} is an English-language VPN comparison and digital-security re
 
 ## Public catalog scope
 
-The visible Global Core catalog contains ${visibleCatalog.length} providers: ${catalog.length} detailed, indexable provider profiles and ${featuredReferenceProducts.length} selected market references. The selected references are not laboratory reviews. Another ${watchlistCount} historical or research records remain noindex so old links keep context without inflating the public catalog. Catalog position is not a quality score.
+The visible Global Core catalog contains ${visibleCatalog.length} providers: ${catalog.length} detailed, indexable provider profiles and ${featuredReferenceProducts.length} selected market references. The selected references are not laboratory reviews. Another ${watchlistCount} historical records remain noindex so old links keep context without inflating the public catalog. Catalog position is not a quality score.
 
 ## Evidence hierarchy
 
@@ -67,13 +67,13 @@ The visible Global Core catalog contains ${visibleCatalog.length} providers: ${c
 If a claim cannot be verified, it should be labelled as a provider statement, a limited diagnostic signal or an unresolved question rather than a fact.
 
 - Methodology: ${siteConfig.url}/methodology
-- Research desk: ${siteConfig.url}/research
+- Source desk: ${siteConfig.url}/research
 - Provider evidence ledger: ${siteConfig.url}/research/evidence-ledger
 - VPN Transparency Index 2026: ${siteConfig.url}/research/transparency-index
 - Transparency Index JSON dataset: ${siteConfig.url}/research/transparency-index/data.json
 - Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
 - Corrections and contact: ${siteConfig.url}/contact
-- About the editorial project: ${siteConfig.url}/about
+- About the publishing project: ${siteConfig.url}/about
 
 ## Tool data-flow limits
 
@@ -133,7 +133,7 @@ ${blogIndex}
 - Home: ${siteConfig.url}/
 - VPN provider profiles: ${siteConfig.url}/vpn-reviews
 - Source-based methodology: ${siteConfig.url}/methodology
-- Research desk: ${siteConfig.url}/research
+- Source desk: ${siteConfig.url}/research
 - Provider evidence ledger: ${siteConfig.url}/research/evidence-ledger
 - VPN Transparency Index 2026: ${siteConfig.url}/research/transparency-index
 - Transparency Index JSON dataset: ${siteConfig.url}/research/transparency-index/data.json
