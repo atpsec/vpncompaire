@@ -27,6 +27,9 @@ deploy-hostinger.zip
 /deploy-*.zip
 /opera-brand-assets-extracted/
 /opera-brand-assets.zip
+/.pricing-report.md
+/.link-health-report.md
+/.site-health-report.md
 
 # misc
 .DS_Store

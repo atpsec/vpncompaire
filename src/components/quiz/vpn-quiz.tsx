@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { getProduct } from "@/data/products";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import type { Locale } from "@/lib/site";
 
 type QuestionData = {
@@ -186,6 +187,7 @@ export function VPNQuiz() {
               <RotateCcw className="size-4" /> {t("result.ctaReset")}
             </Button>
           </div>
+          <AffiliateNotice className="mt-4" variant="surface" />
         </Card>
 
         {matches.length > 1 ? (

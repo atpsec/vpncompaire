@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { ProviderLink } from "@/components/affiliate/provider-link";
 import { rankedProducts, type Product } from "@/data/products";
 import type { Locale } from "@/i18n/pick";
@@ -341,7 +342,7 @@ const DE_STRINGS: Strings = {
   howToCancel: "So kündigen Sie",
   watchOut: "Darauf sollten Sie achten",
   reviewSuffix: "Testbericht →",
-  supportLink: "Offizielle Support-Seite des Anbieters →",
+  supportLink: "Offizielle Anbieter-Website →",
   stepsH2: "Allgemeiner Kündigungsablauf — 4 Schritte",
   steps: [
     {
@@ -399,7 +400,7 @@ const TR_STRINGS: Strings = {
   howToCancel: "Nasıl iptal edilir?",
   watchOut: "Dikkat edilmesi gerekenler",
   reviewSuffix: "incelemesi →",
-  supportLink: "Sağlayıcının resmi destek sayfası →",
+  supportLink: "Sağlayıcının resmi sitesi →",
   stepsH2: "Genel iptal süreci — 4 adım",
   steps: [
     {
@@ -444,7 +445,7 @@ const EN_STRINGS: Strings = {
   howToCancel: "How to cancel",
   watchOut: "Watch out for",
   reviewSuffix: "review →",
-  supportLink: "Provider's official support page →",
+  supportLink: "Provider's official site →",
   stepsH2: "General cancellation flow — 4 steps",
   steps: [
     {
@@ -514,6 +515,7 @@ export function RefundBody({ locale }: { locale: string }) {
       </header>
 
       <DataDisclaimer />
+      <AffiliateNotice className="mt-4" variant="surface" />
 
       <Card className="mt-8 p-6 border-accent-300 bg-accent-50/40">
         <div className="flex items-start gap-3">

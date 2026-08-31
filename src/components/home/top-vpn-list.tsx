@@ -12,6 +12,7 @@ import { homepagePopularProducts, type Product } from "@/data/products";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 export function TopVPNList() {
   const tCommon = useTranslations("common");
@@ -40,6 +41,7 @@ export function TopVPNList() {
             {copy.sectionTitle}
           </h2>
           <p className="mt-3 text-ink-muted">{copy.sectionSubtitle}</p>
+          <AffiliateNotice className="mt-4" variant="surface" />
         </div>
 
         {featured && <FeaturedCard product={featured} tCommon={tCommon} label={copy.featured} profileLabel={copy.viewProfile} />}

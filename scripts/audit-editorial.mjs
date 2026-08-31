@@ -67,7 +67,38 @@ const riskyMatches = indexablePosts.flatMap((post) =>
     .map((pattern) => `${post.file}: ${pattern}`),
 );
 
-if (missingReferences.length > 0 || riskyMatches.length > 0) {
+const commercialSurfaces = [
+  "src/app/[locale]/inceleme/[slug]/page.tsx",
+  "src/app/[locale]/iptal-ve-iade/_body.tsx",
+  "src/components/audience/audience-picks.tsx",
+  "src/components/comparison/comparison-page.tsx",
+  "src/components/comparison/factual-comparison.tsx",
+  "src/components/device/device-page.tsx",
+  "src/components/filter/feature-filter.tsx",
+  "src/components/home/compare-picker.tsx",
+  "src/components/home/popular-provider-discovery.tsx",
+  "src/components/home/top-three-podium.tsx",
+  "src/components/home/top-vpn-list.tsx",
+  "src/components/quiz/vpn-quiz.tsx",
+  "src/components/use-case/use-case-page.tsx",
+];
+
+const missingInlineDisclosure = commercialSurfaces.filter((relativePath) => {
+  const source = fs.readFileSync(path.join(root, relativePath), "utf8");
+  return !source.includes("<AffiliateNotice");
+});
+
+const englishMessages = fs.readFileSync(path.join(root, "messages", "en.json"), "utf8");
+const hasClearCommissionLanguage =
+  englishMessages.includes("we may earn a commission") &&
+  englishMessages.includes("This does not change our comparison criteria");
+
+if (
+  missingReferences.length > 0 ||
+  riskyMatches.length > 0 ||
+  missingInlineDisclosure.length > 0 ||
+  !hasClearCommissionLanguage
+) {
   if (missingReferences.length > 0) {
     console.error("Indexable articles missing at least two primary references:");
     for (const post of missingReferences) {
@@ -78,9 +109,18 @@ if (missingReferences.length > 0 || riskyMatches.length > 0) {
     console.error("Risky or stale claims detected:");
     for (const match of riskyMatches) console.error(`- ${match}`);
   }
+  if (missingInlineDisclosure.length > 0) {
+    console.error("Commercial surfaces missing a visible inline affiliate disclosure:");
+    for (const relativePath of missingInlineDisclosure) {
+      console.error("- " + relativePath);
+    }
+  }
+  if (!hasClearCommissionLanguage) {
+    console.error("English affiliate notice must clearly state commission and editorial independence.");
+  }
   process.exit(1);
 }
 
 console.log(
-  `Editorial audit passed: ${indexablePosts.length} indexable English articles have at least two visible primary references.`,
+  `Editorial audit passed: ${indexablePosts.length} indexable English articles have at least two visible primary references; ${commercialSurfaces.length} commercial surfaces have inline disclosures.`,
 );

@@ -14,6 +14,7 @@ import { getProduct } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 export type UseCasePick = { slug: string; why: string; bestFor: string };
 export type UseCaseFAQ = { q: string; a: string };
@@ -63,6 +64,7 @@ export function UseCasePage({ slug, title, tagline, summary, Icon, badgeLabel, p
 
         <section className="mt-12">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">{examplesHeading}</h2>
+          <AffiliateNotice className="mt-4" variant="surface" />
           <div className="mt-6 space-y-4">
             {picks.map((pick) => {
               const product = getProduct(pick.slug, locale === "tr" ? "tr" : "en");

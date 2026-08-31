@@ -13,6 +13,7 @@ import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getComparisonProduct } from "@/data/comparison-products";
 import { cn } from "@/lib/utils";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
 import { getLocalizedLinkHref, getLocalizedPath, type AppLocale } from "@/lib/i18n-paths";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
@@ -167,6 +168,7 @@ export async function ComparisonPage({
             </Button>
           </Card>
         </div>
+        <AffiliateNotice className="mt-4" variant="surface" />
 
         <section className="mt-12">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">

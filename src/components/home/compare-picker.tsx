@@ -15,6 +15,7 @@ import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { formatProductPriceShort } from "@/lib/product-price";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 const MIN = 2;
 const MAX = 4;
@@ -51,7 +52,7 @@ export function ComparePicker() {
   return (
     <section className="py-16 sm:py-20 bg-surface-subtle/40 border-y border-border">
       <Container>
-        <div className="mb-8 max-w-2xl"><span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-700">{locale === "tr" ? "Etkileşimli karşılaştırma" : locale === "de" ? "Interaktiver Vergleich" : "Interactive comparison"}</span><h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-ink-strong">{h2}</h2><p className="mt-3 text-ink-muted">{intro}</p></div>
+        <div className="mb-8 max-w-2xl"><span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-700">{locale === "tr" ? "Etkileşimli karşılaştırma" : locale === "de" ? "Interaktiver Vergleich" : "Interactive comparison"}</span><h2 className="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-ink-strong">{h2}</h2><p className="mt-3 text-ink-muted">{intro}</p><AffiliateNotice className="mt-4" variant="surface" /></div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4"><p className="text-sm text-ink-muted">{t("selectedLabel")} <span className="font-semibold text-ink-strong tabular-nums">{selected.length}</span><span className="text-ink-faint"> {t("ofMax", { max: MAX })}</span></p>{selected.length > MIN && <button type="button" onClick={clear} className="text-xs text-ink-muted hover:text-ink underline-offset-2 hover:underline">{t("reset")}</button>}</div>
 

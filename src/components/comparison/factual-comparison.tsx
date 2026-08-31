@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ProviderLink } from "@/components/affiliate/provider-link";
 import { VPNLogo } from "@/components/brand/vpn-logo";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import type { Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { formatProductPrice } from "@/lib/product-price";
@@ -88,6 +89,7 @@ export function FactualComparison({ locale, title, description, left, right }: P
           </Card>
         ))}
       </div>
+      <AffiliateNotice className="mt-4" variant="surface" />
 
       <section className="mt-12">
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">{t.tableTitle}</h2>

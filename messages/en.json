@@ -1048,8 +1048,9 @@
   },
   "legalNotices": {
     "affiliate": {
-      "prefix": "Advertising content: this link may be an affiliate link. Commission does not change the price you pay.",
-      "detail": "Details"
+      "label": "Affiliate disclosure",
+      "prefix": "Some provider links may be affiliate links. If you buy through an eligible link, we may earn a commission at no added cost to you. This does not change our comparison criteria.",
+      "detail": "How funding works"
     },
     "dataDisclaimer": {
       "body": "Pricing, features, audit reports and privacy policies may be changed by the provider without notice. Before buying, please verify current details on the VPN provider's official site. For details, see the <legal>legal notice</legal> and <disclosure>advertising disclosure</disclosure>.",

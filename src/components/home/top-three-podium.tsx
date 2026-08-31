@@ -10,6 +10,7 @@ import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 export function TopThreePodium() {
   const locale = useLocale() as Locale;
@@ -22,6 +23,7 @@ export function TopThreePodium() {
         <ul className="flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-4">
           {top.map((p, i) => <li key={p.slug}><ProviderCard product={p} featured={i === 0} /></li>)}
         </ul>
+        <AffiliateNotice className="mt-4" />
       </Container>
     </section>
   );

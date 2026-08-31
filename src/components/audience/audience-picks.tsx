@@ -8,6 +8,7 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { getProduct } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 type Pick = {
   slug: string;
@@ -51,6 +52,7 @@ export function AudiencePicks({ picks, heading, subheading }: Props) {
         </header>
       ) : null}
 
+      <AffiliateNotice className="mb-4" variant="surface" />
       <div className="grid gap-4 sm:grid-cols-3">
         {picks.map((pick, idx) => {
           const product = getProduct(pick.slug, locale);

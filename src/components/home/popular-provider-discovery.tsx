@@ -1,10 +1,11 @@
 import { useLocale, useTranslations } from "next-intl";
-import { Compass, FileSearch, RefreshCw } from "lucide-react";
+import { Compass, RefreshCw } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { getProduct, homepagePopularProducts, type Product } from "@/data/products";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 import type { Locale } from "@/lib/site";
 import { PopularProviderDiscoveryClient, type DiscoveryCopy, type DiscoveryProvider } from "./popular-provider-discovery-client";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 /**
  * This is deliberately separate from the stable editorial top-three block and
@@ -123,10 +124,7 @@ export function PopularProviderDiscovery() {
           excludedSlugs={[...editorialTopThree]}
           copy={copy}
         />
-        <p className="mt-5 flex items-start gap-2 text-xs leading-relaxed text-ink-subtle">
-          <FileSearch className="mt-0.5 size-3.5 shrink-0 text-brand-600" />
-          <span>{copy.affiliateNote}</span>
-        </p>
+        <AffiliateNotice className="mt-5" variant="surface" />
       </Container>
     </section>
   );

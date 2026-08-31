@@ -17,6 +17,7 @@ import {
   type FilterKey,
 } from "@/data/features";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 export function FeatureFilter() {
   const t = useTranslations("filter");
@@ -108,6 +109,7 @@ export function FeatureFilter() {
           <p>{t("allShown")}</p>
         )}
       </div>
+      <AffiliateNotice className="mt-4" variant="surface" />
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {matches.map((product) => {

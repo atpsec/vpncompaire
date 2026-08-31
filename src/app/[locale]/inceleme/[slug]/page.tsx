@@ -18,6 +18,7 @@ import { referenceProducts, getReferenceProduct } from "@/data/products-referenc
 import { providerEvidenceRecords, type EvidenceItem } from "@/data/provider-evidence";
 import { getArchivedProduct } from "@/data/products-current";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -297,7 +298,7 @@ function ProviderView({ product, locale, providerSchema, isArchived, isReference
               <p className="mt-1 text-sm text-ink-muted">{t.pricingIntro}</p>
               <div className="mt-4 grid sm:grid-cols-[1fr_auto] gap-6">
                 {hasStructuredPricing ? <PricingPlans plans={product.plans} verifiedAt={product.pricingVerifiedAt} currency={product.priceCurrency} /> : <div className="rounded-lg border border-border bg-surface-subtle/40 p-4 text-sm text-ink-muted">{t.priceOfficial}</div>}
-                <div className="flex flex-col gap-2 sm:w-48"><Button asChild variant="primary"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "provider-profile" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="provider-profile">{t.official}<ExternalLink className="size-4" /></ProviderLink></Button></div>
+                <div className="flex flex-col gap-2 sm:w-56"><Button asChild variant="primary"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "provider-profile" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="provider-profile">{t.official}<ExternalLink className="size-4" /></ProviderLink></Button><AffiliateNotice /></div>
               </div>
             </div>
           </Card>

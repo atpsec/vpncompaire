@@ -20,6 +20,7 @@ import { getProduct } from "@/data/products";
 import type { DeviceContent } from "@/data/devices";
 import { cn } from "@/lib/utils";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 const DIFFICULTY_TONE = {
   Kolay: "bg-success-50 text-success-700 border-success-100",
@@ -140,6 +141,7 @@ export async function DevicePage({
             })}
           </h2>
           <p className="mt-2 text-ink-muted">{t("picks.intro")}</p>
+          <AffiliateNotice className="mt-4" variant="surface" />
           <div className="mt-6 space-y-4">
             {device.picks.map((pick, idx) => {
               const product = getProduct(pick.slug, locale as "tr" | "en");

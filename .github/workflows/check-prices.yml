@@ -1,4 +1,4 @@
-name: Weekly pricing audit
+name: Weekly pricing and source-link audit
 
 on:
   schedule:
@@ -21,26 +21,44 @@ jobs:
           node-version: "20"
 
       - name: Run pricing audit
-        id: audit
+        id: pricing
         run: node scripts/check-prices.mjs
         continue-on-error: true
+
+      - name: Run source-link audit
+        id: links
+        run: node scripts/check-external-links.mjs
+        continue-on-error: true
+
+      - name: Combine audit reports
+        if: always()
+        run: |
+          touch .pricing-report.md .link-health-report.md
+          {
+            cat .pricing-report.md
+            printf '\n---\n\n'
+            cat .link-health-report.md
+          } > .site-health-report.md
 
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: pricing-report
-          path: .pricing-report.md
+          name: site-health-report
+          path: |
+            .pricing-report.md
+            .link-health-report.md
+            .site-health-report.md
           retention-days: 30
 
-      - name: Open issue on drift
-        if: steps.audit.outcome == 'failure'
+      - name: Open issue on confirmed drift or broken links
+        if: steps.pricing.outcome == 'failure' || steps.links.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ISO=$(date -u +%Y-%m-%d)
           gh issue create \
-            --title "Pricing drift — ${ISO}" \
+            --title "Site health audit — ${ISO}" \
             --label "pricing,audit" \
-            --body-file .pricing-report.md \
+            --body-file .site-health-report.md \
             || echo "Issue creation skipped (label may be missing or duplicate exists)"

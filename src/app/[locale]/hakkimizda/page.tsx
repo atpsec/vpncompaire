@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { ShieldCheck, Eye, Scale, FileSearch, Mail } from "lucide-react";
+import { ShieldCheck, Eye, Scale, FileSearch, Mail, CalendarCheck2 } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
@@ -34,6 +34,11 @@ const copy = {
     revenueBody: "Site Google AdSense reklamları ve bazı sağlayıcı ortaklık bağlantılarından gelir elde edebilir. Bu ilişkiler açıkça belirtilir. Amaç, içeriği reklam için çoğaltmak değil; özgün ve yararlı bir VPN bilgi kaynağı oluşturmaktır.",
     authorH2: "Yazarlık ve sorumluluk",
     authorBody: "Sitede gerçekte var olmayan editör personeli veya uzman unvanı kullanılmamalıdır. Kurumsal içerikler VPN Advisor adıyla yayınlanır; dış kaynaklar ve güncelleme tarihleri içerik güvenilirliğinin temelidir.",
+    accountabilityH2: "Editoryal sorumluluk",
+    accountabilityBody: "VPN Advisor Editorial Team kurumsal yayın imzasıdır. Kimliği ve uzmanlığı doğrulanmamış kişilere uzman unvanı vermeyiz. Ticari ilişkiler karşılaştırma alanlarını, kaynak sınıflandırmasını veya düzeltme kararlarını değiştirmez.",
+    accountabilityReviewed: "Editoryal politika son kontrol: 31 Ağustos 2026",
+    accountabilityEvidence: "Kanıt standardı: birincil kaynaklar, görünür kontrol tarihleri ve belirsizlik notları.",
+    accountabilityCorrections: "Düzeltmeler: kaynakla desteklenen bildirimler incelenir ve önemli değişiklikler içerikteki güncelleme tarihine yansıtılır.",
     contactH2: "Düzeltme ve geri bildirim",
     contactBody: "Yanlış, eski veya eksik bir bilgi fark ederseniz iletişim sayfasından bildirebilirsiniz. Doğrulanabilir düzeltmeler içerik güncellemelerine yansıtılır.",
     ctaTitle: "Bir bilgi hatası mı buldunuz?",
@@ -54,6 +59,11 @@ const copy = {
     methodH2: "How comparisons work", methodBody: "Instead of editorial scores, we compare pricing, privacy, audits, protocols, platform support, jurisdiction and network information in a source-based format.",
     revenueH2: "Revenue model", revenueBody: "The site may earn revenue from Google AdSense and some provider affiliate links. These relationships are disclosed. The objective is to build original, useful VPN reference content rather than pages created primarily to show ads.",
     authorH2: "Authorship and responsibility", authorBody: "The site should not imply staff editors or expert credentials that do not exist. Institutional content is published under the VPN Advisor name; sourcing and update dates are central to trust.",
+    accountabilityH2: "Editorial accountability",
+    accountabilityBody: "VPN Advisor Editorial Team is an institutional publishing byline. We do not assign expert titles to people whose identity and credentials have not been verified. Commercial relationships do not change comparison fields, source classification or correction decisions.",
+    accountabilityReviewed: "Editorial policy reviewed: August 31, 2026",
+    accountabilityEvidence: "Evidence standard: primary sources, visible verification dates and explicit uncertainty notes.",
+    accountabilityCorrections: "Corrections: source-backed reports are reviewed, and material changes are reflected in the content update date.",
     contactH2: "Corrections and feedback", contactBody: "If you find outdated, incomplete or incorrect information, contact us. Verifiable corrections are reviewed and reflected in content updates.",
     ctaTitle: "Found an information error?", ctaBody: "Send the source with your note and we will review it.", cta: "Contact us", methodology: "Methodology", disclosure: "Advertising disclosure", privacy: "Privacy",
   },
@@ -68,6 +78,11 @@ const copy = {
     methodH2: "Wie Vergleiche funktionieren", methodBody: "Statt redaktioneller Punktzahlen vergleichen wir Preise, Datenschutz, Audits, Protokolle, Plattformunterstützung, Rechtsraum und Netzwerkinformationen quellenbasiert.",
     revenueH2: "Einnahmemodell", revenueBody: "Die Website kann Einnahmen über Google AdSense und einige Affiliate-Links erzielen. Diese Beziehungen werden offengelegt. Ziel sind eigenständige, nützliche VPN-Referenzinhalte und keine primär für Werbung erzeugten Seiten.",
     authorH2: "Autorschaft und Verantwortung", authorBody: "Die Website sollte keine nicht existierenden Redakteure oder Expertenqualifikationen suggerieren. Institutionelle Inhalte erscheinen unter dem Namen VPN Advisor; Quellen und Aktualisierungsdaten sind zentrale Vertrauenssignale.",
+    accountabilityH2: "Redaktionelle Verantwortung",
+    accountabilityBody: "VPN Advisor Editorial Team ist eine institutionelle Publikationszeile. Wir vergeben keine Expertenbezeichnungen an Personen, deren Identität und Qualifikation nicht überprüft wurden. Kommerzielle Beziehungen ändern weder Vergleichsfelder noch Quellenklassifizierung oder Korrekturentscheidungen.",
+    accountabilityReviewed: "Redaktionelle Richtlinie geprüft: 31. August 2026",
+    accountabilityEvidence: "Nachweisstandard: Primärquellen, sichtbare Prüfdaten und ausdrückliche Hinweise auf Unsicherheit.",
+    accountabilityCorrections: "Korrekturen: quellenbasierte Hinweise werden geprüft; wesentliche Änderungen erscheinen im Aktualisierungsdatum des Inhalts.",
     contactH2: "Korrekturen und Feedback", contactBody: "Wenn Sie veraltete, unvollständige oder falsche Informationen finden, können Sie uns kontaktieren. Nachprüfbare Korrekturen werden geprüft und eingearbeitet.",
     ctaTitle: "Einen Informationsfehler gefunden?", ctaBody: "Senden Sie den Hinweis zusammen mit der Quelle; wir prüfen ihn.", cta: "Kontakt", methodology: "Methodik", disclosure: "Werbehinweis", privacy: "Datenschutz",
   },
@@ -100,6 +115,21 @@ export default async function Page({ params }: Props) {
           <Card className="p-5"><Eye className="size-7 text-brand-600" /><h3 className="mt-3 font-semibold text-ink-strong">{t.p2t}</h3><p className="mt-1 text-sm text-ink-muted">{t.p2b}</p></Card>
           <Card className="p-5"><FileSearch className="size-7 text-brand-600" /><h3 className="mt-3 font-semibold text-ink-strong">{t.p3t}</h3><p className="mt-1 text-sm text-ink-muted">{t.p3b}</p></Card>
         </div>
+
+        <Card className="mt-8 border-brand-200 bg-brand-50/30 p-6">
+          <div className="flex items-start gap-3">
+            <CalendarCheck2 className="mt-0.5 size-5 shrink-0 text-brand-700" aria-hidden="true" />
+            <div>
+              <h2 className="text-lg font-semibold text-ink-strong">{t.accountabilityH2}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-ink">{t.accountabilityBody}</p>
+              <ul className="mt-4 space-y-2 text-sm text-ink-muted">
+                <li><strong className="text-ink-strong">{t.accountabilityReviewed}</strong></li>
+                <li>{t.accountabilityEvidence}</li>
+                <li>{t.accountabilityCorrections} <Link href="/contact" className="font-medium text-brand-700 hover:underline">{t.cta}</Link>.</li>
+              </ul>
+            </div>
+          </div>
+        </Card>
 
         <article className="mt-12 prose prose-stone max-w-none"><h2>{t.methodH2}</h2><p>{t.methodBody} <Link href="/methodology">{t.methodology}</Link>.</p><h2>{t.revenueH2}</h2><p>{t.revenueBody} <Link href="/affiliate-disclosure">{t.disclosure}</Link>.</p><h2>{t.authorH2}</h2><p>{t.authorBody}</p><h2>{t.contactH2}</h2><p>{t.contactBody}</p></article>
 
