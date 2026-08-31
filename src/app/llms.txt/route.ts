@@ -69,6 +69,8 @@ If a claim cannot be verified, it should be labelled as a provider statement, a 
 - Methodology: ${siteConfig.url}/methodology
 - Research desk: ${siteConfig.url}/research
 - Provider evidence ledger: ${siteConfig.url}/research/evidence-ledger
+- VPN Transparency Index 2026: ${siteConfig.url}/research/transparency-index
+- Transparency Index JSON dataset: ${siteConfig.url}/research/transparency-index/data.json
 - Affiliate and advertising disclosure: ${siteConfig.url}/affiliate-disclosure
 - Corrections and contact: ${siteConfig.url}/contact
 - About the editorial project: ${siteConfig.url}/about
@@ -133,6 +135,8 @@ ${blogIndex}
 - Source-based methodology: ${siteConfig.url}/methodology
 - Research desk: ${siteConfig.url}/research
 - Provider evidence ledger: ${siteConfig.url}/research/evidence-ledger
+- VPN Transparency Index 2026: ${siteConfig.url}/research/transparency-index
+- Transparency Index JSON dataset: ${siteConfig.url}/research/transparency-index/data.json
 - AI privacy hub: ${siteConfig.url}/ai
 - Tools: ${siteConfig.url}/tools
 - Blog: ${siteConfig.url}/blog
