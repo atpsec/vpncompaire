@@ -1,5 +1,6 @@
 import { createHmac, randomBytes } from "node:crypto";
 import fs from "node:fs";
+import fsPromises from "node:fs/promises";
 import path from "node:path";
 import { env } from "@/env";
 import { hasKvRest, kvRestCommand } from "@/lib/kv-rest";
@@ -9,7 +10,14 @@ const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const MAX_SLUG_LENGTH = 160;
 const SEEN_TTL_SECONDS = 48 * 60 * 60;
 const LOCAL_SEEN_MAX_ENTRIES = 20_000;
+const PERSISTED_SEEN_MAX_ENTRIES = 20_000;
+const MAX_PERSISTED_STORE_BYTES = 5 * 1024 * 1024;
 const processSecret = randomBytes(32).toString("hex");
+const persistentStorePath = env.BLOG_VIEW_STORE_PATH
+  ? path.isAbsolute(env.BLOG_VIEW_STORE_PATH)
+    ? env.BLOG_VIEW_STORE_PATH
+    : path.join(/* turbopackIgnore: true */ process.cwd(), env.BLOG_VIEW_STORE_PATH)
+  : path.join(process.cwd(), ".runtime", "blog-views.json");
 
 type BlogViewResult = {
   views: number;
@@ -18,6 +26,139 @@ type BlogViewResult = {
 
 const localCounts = new Map<string, number>();
 const localSeen = new Map<string, number>();
+let persistentStoreQueue: Promise<unknown> = Promise.resolve();
+
+type PersistedBlogViews = {
+  counts: Record<string, number>;
+  seen: Record<string, number>;
+};
+
+function emptyPersistedStore(): PersistedBlogViews {
+  return { counts: {}, seen: {} };
+}
+
+function withPersistentStore<T>(task: () => Promise<T>): Promise<T> {
+  const next = persistentStoreQueue.then(
+    () => task(),
+    () => task(),
+  );
+  persistentStoreQueue = next.then(() => undefined, () => undefined);
+  return next;
+}
+
+function sanitizePersistedStore(value: unknown): PersistedBlogViews {
+  if (!value || typeof value !== "object") return emptyPersistedStore();
+
+  const candidate = value as { counts?: unknown; seen?: unknown };
+  const counts: Record<string, number> = {};
+  const seen: Record<string, number> = {};
+
+  if (candidate.counts && typeof candidate.counts === "object") {
+    for (const [slug, count] of Object.entries(candidate.counts)) {
+      if (isValidBlogSlug(slug)) counts[slug] = parseCount(count);
+    }
+  }
+
+  if (candidate.seen && typeof candidate.seen === "object") {
+    for (const [key, expiresAt] of Object.entries(candidate.seen)) {
+      const numericExpiry = Number(expiresAt);
+      if (Number.isSafeInteger(numericExpiry) && numericExpiry > 0) {
+        seen[key] = numericExpiry;
+      }
+    }
+  }
+
+  return { counts, seen };
+}
+
+async function readPersistedStore(): Promise<PersistedBlogViews> {
+  try {
+    const stats = await fsPromises.stat(persistentStorePath);
+    if (stats.size > MAX_PERSISTED_STORE_BYTES) {
+      throw new Error("blog view store is larger than the safety limit");
+    }
+    const raw = await fsPromises.readFile(persistentStorePath, "utf8");
+    return sanitizePersistedStore(JSON.parse(raw));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+      return emptyPersistedStore();
+    }
+    throw error;
+  }
+}
+
+function prunePersistedStore(store: PersistedBlogViews, now: number): boolean {
+  let changed = false;
+
+  for (const [key, expiresAt] of Object.entries(store.seen)) {
+    if (expiresAt <= now) {
+      delete store.seen[key];
+      changed = true;
+    }
+  }
+
+  const seenEntries = Object.entries(store.seen);
+  if (seenEntries.length > PERSISTED_SEEN_MAX_ENTRIES) {
+    seenEntries
+      .sort(([, leftExpiry], [, rightExpiry]) => rightExpiry - leftExpiry)
+      .slice(PERSISTED_SEEN_MAX_ENTRIES)
+      .forEach(([key]) => delete store.seen[key]);
+    changed = true;
+  }
+
+  return changed;
+}
+
+async function writePersistedStore(store: PersistedBlogViews): Promise<void> {
+  const directory = path.dirname(persistentStorePath);
+  const temporaryPath = `${persistentStorePath}.${process.pid}.${Date.now()}.tmp`;
+
+  await fsPromises.mkdir(directory, { recursive: true, mode: 0o700 });
+  try {
+    await fsPromises.writeFile(
+      temporaryPath,
+      JSON.stringify(store),
+      { encoding: "utf8", mode: 0o600 },
+    );
+    await fsPromises.rename(temporaryPath, persistentStorePath);
+  } finally {
+    await fsPromises.unlink(temporaryPath).catch(() => undefined);
+  }
+}
+
+async function getPersistedBlogViewCount(slug: string): Promise<BlogViewResult> {
+  return withPersistentStore(async () => {
+    const store = await readPersistedStore();
+    if (prunePersistedStore(store, Date.now())) await writePersistedStore(store);
+    const views = parseCount(store.counts[slug]);
+    localCounts.set(slug, views);
+    return { views, durable: true };
+  });
+}
+
+async function recordPersistedBlogView(
+  slug: string,
+  readerToken: string,
+): Promise<BlogViewResult> {
+  return withPersistentStore(async () => {
+    const store = await readPersistedStore();
+    const now = Date.now();
+    const changedByPrune = prunePersistedStore(store, now);
+    const seenKey = `${slug}:${readerToken}`;
+    const seenUntil = store.seen[seenKey] ?? 0;
+
+    if (seenUntil <= now) {
+      store.seen[seenKey] = now + SEEN_TTL_SECONDS * 1000;
+      store.counts[slug] = parseCount(store.counts[slug]) + 1;
+    }
+
+    if (changedByPrune || seenUntil <= now) await writePersistedStore(store);
+
+    const views = parseCount(store.counts[slug]);
+    localCounts.set(slug, views);
+    return { views, durable: true };
+  });
+}
 
 export function isValidBlogSlug(slug: string): boolean {
   return slug.length <= MAX_SLUG_LENGTH && SLUG_PATTERN.test(slug);
@@ -76,6 +217,12 @@ export async function getBlogViewCount(slug: string): Promise<BlogViewResult> {
     }
   }
 
+  try {
+    return await getPersistedBlogViewCount(slug);
+  } catch {
+    // A read-only or unavailable filesystem must not break the article page.
+  }
+
   return { views: localCounts.get(slug) ?? 0, durable: false };
 }
 
@@ -104,6 +251,12 @@ export async function recordBlogView(
     } catch {
       // Fall through to the bounded process-local counter.
     }
+  }
+
+  try {
+    return await recordPersistedBlogView(slug, readerToken);
+  } catch {
+    // Fall through to the bounded process-local counter if disk persistence is unavailable.
   }
 
   const now = Date.now();

@@ -17,6 +17,10 @@
 /.next/
 /out/
 
+# server-only durable runtime data
+/.runtime/*
+!/.runtime/.gitkeep
+
 # production
 /build
 deploy-hostinger.zip
