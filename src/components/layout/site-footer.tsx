@@ -109,6 +109,14 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
+                  href="/research/transparency-index"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {t("links.transparencyIndex")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="text-ink-muted hover:text-ink"
                 >

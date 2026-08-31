@@ -171,6 +171,7 @@
       "security": "Security tools",
       "research": "Research",
       "evidenceLedger": "Evidence ledger",
+      "transparencyIndex": "Transparency Index",
       "legalNotice": "Legal notice"
     },
     "socialSoon": "Social media accounts coming soon.",
@@ -1096,6 +1097,8 @@
     "publishedOn": "Published",
     "updatedOn": "Updated",
     "author": "Author",
+    "editorialNote": "Source-led article. Provider claims and independent records are kept distinct; no laboratory result is implied unless stated.",
+    "meetTeam": "Meet the editorial team →",
     "category": "Category",
     "relatedPosts": "Related Posts",
     "backToBlog": "Back to all posts",

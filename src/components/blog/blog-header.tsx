@@ -1,6 +1,7 @@
 "use client";
 
-import { Clock, Calendar, Building2 } from "lucide-react";
+import { Clock, Calendar, Building2, ShieldCheck } from "lucide-react";
+import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import type { BlogPostFrontmatter } from "@/lib/blog";
 import type { Locale } from "@/lib/site";
@@ -57,6 +58,16 @@ export function BlogHeader({ post }: BlogHeaderProps) {
           <span>{t("readingTime", { minutes: post.readingTime })}</span>
         </div>
         <BlogViewCounter slug={post.slug} />
+      </div>
+
+      <div className="flex items-start gap-3 rounded-xl border border-brand-200 bg-brand-50/50 p-4 text-sm dark:bg-brand-950/20">
+        <ShieldCheck className="mt-0.5 size-5 shrink-0 text-brand-600" aria-hidden="true" />
+        <div>
+          <p className="font-semibold text-ink-strong">{t("author")}: {post.author}</p>
+          <p className="mt-1 leading-relaxed text-ink-muted">
+            {t("editorialNote")} <Link href="/about" className="font-semibold text-brand-700 hover:underline">{t("meetTeam")}</Link>
+          </p>
+        </div>
       </div>
     </header>
   );

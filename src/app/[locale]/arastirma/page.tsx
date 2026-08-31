@@ -113,7 +113,7 @@ export default async function Page({ params }: Props) {
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-lg border border-accent-300 bg-accent-50 px-4 py-3 text-sm font-semibold text-ink-strong">
             <CalendarDays className="size-4 text-accent-700" aria-hidden="true" />
-            Working edition published: Provider Evidence Ledger · {catalogCount} records
+            Working edition published: <Link href="/research/transparency-index" className="ml-1 text-brand-700 underline underline-offset-2">VPN Transparency Index 2026</Link> · {catalogCount} records
           </div>
         </header>
 
@@ -198,6 +198,9 @@ export default async function Page({ params }: Props) {
           <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold">
             <Link href="/research/evidence-ledger" className="inline-flex items-center text-brand-700 hover:underline">
               Inspect the evidence ledger <ArrowRight className="ml-1 size-4" aria-hidden="true" />
+            </Link>
+            <Link href="/research/transparency-index" className="inline-flex items-center text-brand-700 hover:underline">
+              View the Transparency Index <ArrowRight className="ml-1 size-4" aria-hidden="true" />
             </Link>
             <Link href="/tools" className="inline-flex items-center text-brand-700 hover:underline">
               Explore security tools <ArrowRight className="ml-1 size-4" aria-hidden="true" />

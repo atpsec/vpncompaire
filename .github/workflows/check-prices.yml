@@ -30,6 +30,11 @@ jobs:
         run: node scripts/check-external-links.mjs
         continue-on-error: true
 
+      - name: Run content quality audit
+        id: content
+        run: node scripts/audit-content-quality.mjs
+        continue-on-error: true
+
       - name: Combine audit reports
         if: always()
         run: |
@@ -51,8 +56,8 @@ jobs:
             .site-health-report.md
           retention-days: 30
 
-      - name: Open issue on confirmed drift or broken links
-        if: steps.pricing.outcome == 'failure' || steps.links.outcome == 'failure'
+      - name: Open issue on confirmed drift, broken links or content regression
+        if: steps.pricing.outcome == 'failure' || steps.links.outcome == 'failure' || steps.content.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

@@ -1,0 +1,256 @@
+import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Database,
+  Download,
+  FileSearch,
+  Info,
+  MinusCircle,
+  ShieldAlert,
+} from "lucide-react";
+import { Link } from "@/i18n/routing";
+import { Container } from "@/components/ui/container";
+import { VPNLogo } from "@/components/brand/vpn-logo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbSchema } from "@/lib/seo";
+import { absoluteUrl, localizedAlternates, siteConfig } from "@/lib/site";
+import {
+  getTransparencyIndexRecords,
+  TRANSPARENCY_INDEX_DIMENSIONS,
+  TRANSPARENCY_INDEX_EDITION,
+  type TransparencyIndexRecord,
+} from "@/data/transparency-index";
+
+type Props = { params: Promise<{ locale: string }> };
+
+const title = "VPN Transparency Index 2026: Evidence Coverage by Provider";
+const description =
+  "A transparent VPN documentation coverage index showing dated pricing checks, dedicated audit sources, structured profile fields and profile availability.";
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await params;
+  return {
+    title,
+    description,
+    alternates: localizedAlternates("/research/transparency-index", "en"),
+    openGraph: {
+      title: `${title} | VPN Advisor`,
+      description,
+      url: absoluteUrl("/research/transparency-index"),
+      type: "article",
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const records = getTransparencyIndexRecords();
+  const datedPricingCount = records.filter((record) => record.dimensions.datedPricing).length;
+  const auditSourceCount = records.filter((record) => record.dimensions.auditSource).length;
+  const detailedProfileCount = records.filter((record) => record.dimensions.detailedProfile).length;
+  const datasetUrl = absoluteUrl("/research/transparency-index/data.json");
+
+  const datasetSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": `${absoluteUrl("/research/transparency-index")}#dataset`,
+    name: "VPN Advisor Transparency Index 2026",
+    description,
+    url: absoluteUrl("/research/transparency-index"),
+    distribution: {
+      "@type": "DataDownload",
+      contentUrl: datasetUrl,
+      encodingFormat: "application/json",
+    },
+    inLanguage: "en-US",
+    dateModified: TRANSPARENCY_INDEX_EDITION,
+    isAccessibleForFree: true,
+    creator: {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    license: absoluteUrl("/terms"),
+    measurementTechnique:
+      "Documentation coverage derived from the VPN Advisor provider evidence ledger; not a provider performance or safety test.",
+    variableMeasured: TRANSPARENCY_INDEX_DIMENSIONS.map((dimension) => dimension.label),
+  };
+
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema(
+          [
+            { name: "Home", path: "/" },
+            { name: "Research", path: "/research" },
+            { name: "VPN Transparency Index", path: "/research/transparency-index" },
+          ],
+          "en",
+        )}
+      />
+      <JsonLd data={datasetSchema} />
+
+      <Container size="lg" className="py-12 sm:py-16 lg:py-20">
+        <p className="text-sm text-ink-muted">
+          <Link href="/" className="hover:text-ink">Home</Link> ›{" "}
+          <Link href="/research" className="hover:text-ink">Research</Link> ›{" "}
+          <span className="text-ink-strong">Transparency Index</span>
+        </p>
+
+        <header className="mt-6 max-w-4xl">
+          <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700">
+            <Database className="size-3.5" aria-hidden="true" />
+            Working edition · {TRANSPARENCY_INDEX_EDITION}
+          </span>
+          <h1 className="mt-5 text-4xl font-bold tracking-tight text-ink-strong sm:text-5xl lg:text-6xl">
+            VPN Transparency Index 2026
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink-muted">
+            A clear view of how much documentation each catalog record currently exposes and how much of that evidence can be inspected.
+          </p>
+        </header>
+
+        <section className="mt-8 rounded-2xl border border-accent-300 bg-accent-50/70 p-5 dark:bg-accent-950/20 sm:p-6" aria-label="Important limitation">
+          <div className="flex items-start gap-3">
+            <Info className="mt-0.5 size-5 shrink-0 text-accent-700" aria-hidden="true" />
+            <div>
+              <h2 className="font-semibold text-ink-strong">Documentation coverage, not a VPN ranking</h2>
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                This index counts whether four evidence dimensions are recorded. It is not a safety certification, performance score, “best VPN” ranking, user rating or endorsement. A higher coverage count does not mean a provider is safer or faster.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-10 grid gap-4 sm:grid-cols-4" aria-label="Transparency Index summary">
+          <SummaryCard value={records.length} label="catalog records" />
+          <SummaryCard value={detailedProfileCount} label="detailed profiles" />
+          <SummaryCard value={datedPricingCount} label="dated pricing checks" />
+          <SummaryCard value={auditSourceCount} label="dedicated audit links" />
+        </section>
+
+        <section className="mt-12 rounded-2xl border border-border bg-surface-subtle/50 p-5 sm:p-6" aria-labelledby="dimensions-heading">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">Four documented dimensions</p>
+              <h2 id="dimensions-heading" className="mt-2 text-2xl font-bold tracking-tight text-ink-strong">What the coverage count means</h2>
+            </div>
+            <a href={datasetUrl} download className="inline-flex items-center gap-2 self-start rounded-lg border border-border bg-surface-base px-3 py-2 text-sm font-semibold text-ink-strong hover:border-brand-300 hover:text-brand-700 sm:self-auto">
+              <Download className="size-4" aria-hidden="true" /> Download JSON dataset
+            </a>
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {TRANSPARENCY_INDEX_DIMENSIONS.map((dimension, index) => (
+              <article key={dimension.key} className="rounded-xl border border-border bg-surface-base p-4 dark:bg-surface-subtle">
+                <div className="flex size-9 items-center justify-center rounded-lg bg-brand-100 text-sm font-bold text-brand-700 dark:bg-brand-900/30 dark:text-brand-300">{index + 1}</div>
+                <h3 className="mt-4 font-semibold text-ink-strong">{dimension.label}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{dimension.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12" aria-labelledby="records-heading">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">Current working dataset</p>
+              <h2 id="records-heading" className="mt-2 text-3xl font-bold tracking-tight text-ink-strong">Provider coverage at a glance</h2>
+            </div>
+            <Link href="/research/evidence-ledger" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
+              Inspect source details <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-border">
+            <table className="min-w-[920px] w-full text-left text-sm">
+              <caption className="sr-only">VPN Advisor documentation coverage by provider</caption>
+              <thead className="bg-surface-subtle text-xs font-semibold uppercase tracking-wide text-ink-muted">
+                <tr>
+                  <th scope="col" className="px-5 py-4">Provider</th>
+                  <th scope="col" className="px-5 py-4">Coverage</th>
+                  {TRANSPARENCY_INDEX_DIMENSIONS.map((dimension) => (
+                    <th scope="col" key={dimension.key} className="px-5 py-4">{dimension.label}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border bg-surface-base">
+                {records.map((record) => <CoverageRow key={record.slug} record={record} />)}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="mt-14 grid gap-5 md:grid-cols-3" aria-labelledby="next-heading">
+          <div className="md:col-span-3">
+            <p className="text-sm font-semibold uppercase tracking-wide text-brand-700">How to use this page</p>
+            <h2 id="next-heading" className="mt-2 text-2xl font-bold tracking-tight text-ink-strong">Read the evidence behind the count</h2>
+          </div>
+          <NextStep icon={<FileSearch className="size-5" aria-hidden="true" />} title="Open the ledger" body="Inspect source states, check dates, provider-reported fields and gaps for every record." href="/research/evidence-ledger" label="Open evidence ledger" />
+          <NextStep icon={<ShieldAlert className="size-5" aria-hidden="true" />} title="Understand the limits" body="See how we separate provider claims, independent records and one-time browser diagnostics." href="/methodology" label="Read methodology" />
+          <NextStep icon={<CheckCircle2 className="size-5" aria-hidden="true" />} title="Suggest a correction" body="If a source has changed, send the exact provider URL so the next edition can be checked." href="/contact" label="Contact the editorial team" />
+        </section>
+      </Container>
+    </>
+  );
+}
+
+function SummaryCard({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="rounded-2xl border border-border bg-surface-base p-5">
+      <p className="text-3xl font-bold tabular-nums text-ink-strong">{value}</p>
+      <p className="mt-1 text-sm text-ink-muted">{label}</p>
+    </div>
+  );
+}
+
+function CoverageRow({ record }: { record: TransparencyIndexRecord }) {
+  const dimensions = [
+    record.dimensions.detailedProfile,
+    record.dimensions.datedPricing,
+    record.dimensions.auditSource,
+    record.dimensions.structuredFields,
+  ];
+
+  return (
+    <tr className="align-middle">
+      <th scope="row" className="px-5 py-4 font-semibold text-ink-strong">
+        <div className="flex items-center gap-3">
+          <VPNLogo slug={record.slug} size={36} />
+          <div>
+            <Link href={`/reviews/${record.slug}`} className="hover:text-brand-700 hover:underline">{record.brand}</Link>
+            <p className="mt-1 text-xs font-normal text-ink-subtle">{record.recordType}</p>
+          </div>
+        </div>
+      </th>
+      <td className="px-5 py-4">
+        <span className="font-semibold tabular-nums text-ink-strong">{record.coverageCount}/4</span>
+        <p className="mt-1 whitespace-nowrap text-xs text-ink-muted">{record.coverageLabel}</p>
+      </td>
+      {dimensions.map((available, index) => (
+        <td key={`${record.slug}-${index}`} className="px-5 py-4">
+          {available ? (
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-success-700"><CheckCircle2 className="size-4" aria-hidden="true" /> Recorded</span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink-muted"><MinusCircle className="size-4" aria-hidden="true" /> Gap remains</span>
+          )}
+        </td>
+      ))}
+    </tr>
+  );
+}
+
+function NextStep({ icon, title: stepTitle, body, href, label }: { icon: React.ReactNode; title: string; body: string; href: "/research/evidence-ledger" | "/methodology" | "/contact"; label: string }) {
+  return (
+    <article className="rounded-2xl border border-border bg-surface-base p-5">
+      <div className="flex size-10 items-center justify-center rounded-lg bg-brand-100 text-brand-700 dark:bg-brand-900/30 dark:text-brand-300">{icon}</div>
+      <h3 className="mt-4 font-semibold text-ink-strong">{stepTitle}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{body}</p>
+      <Link href={href} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">{label} <ArrowRight className="size-4" aria-hidden="true" /></Link>
+    </article>
+  );
+}

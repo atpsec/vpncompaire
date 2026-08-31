@@ -124,6 +124,9 @@ export default async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    // The public research distribution intentionally keeps a .json suffix;
+    // include it explicitly so the English-only public rewrite can run.
+    "/research/transparency-index/data.json",
     "/((?!api|_next|go|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.svg|icon|apple-icon|.*\\..*).*)",
   ],
 };

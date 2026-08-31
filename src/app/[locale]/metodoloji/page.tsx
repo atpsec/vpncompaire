@@ -108,7 +108,7 @@ export default async function Page({ params }: Props) {
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   setRequestLocale(locale);
   const t = copy[locale];
-  const date = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date("2026-08-08"));
+  const date = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date("2026-08-31"));
 
   return (
     <>
