@@ -72,7 +72,16 @@ export default async function Page({ params }: Props) {
             const inner = (
               <Card className={"p-5 h-full " + (c.available ? "hover:border-brand-300 hover:shadow-md transition-all" : "opacity-60 cursor-not-allowed")}>
                 <div className="flex items-center gap-4">
-                  {a && b ? <div className="flex items-center -space-x-2 shrink-0"><VPNLogo slug={a.slug} size={44} className="ring-2 ring-white" /><VPNLogo slug={b.slug} size={44} className="ring-2 ring-white" /></div> : null}
+                  {a && b ? (
+                    <div className="flex shrink-0 items-center gap-2" aria-label={`${a.brand} and ${b.brand} logos`}>
+                      <span className="flex size-12 items-center justify-center rounded-xl border border-border bg-white p-1 shadow-sm">
+                        <VPNLogo slug={a.slug} size={40} />
+                      </span>
+                      <span className="flex size-12 items-center justify-center rounded-xl border border-border bg-white p-1 shadow-sm">
+                        <VPNLogo slug={b.slug} size={40} />
+                      </span>
+                    </div>
+                  ) : null}
                   <div className="flex-1 min-w-0"><div className="flex items-center justify-between gap-2 flex-wrap"><h2 className="text-lg font-semibold text-ink-strong group-hover:text-brand-700">{c.title}</h2><Badge variant={c.available ? "brand" : "neutral"}>{c.tag}</Badge></div></div>
                 </div>
                 {a && b ? <dl className="mt-4 grid grid-cols-2 gap-3 text-xs"><FactCell brand={a.brand} price={a.priceFromUsd} currency={a.priceCurrency} pricingVerifiedAt={a.pricingVerifiedAt} audit={a.highlights.audits} priceLabel={t.price} auditLabel={t.audit} official={locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site"} /><FactCell brand={b.brand} price={b.priceFromUsd} currency={b.priceCurrency} pricingVerifiedAt={b.pricingVerifiedAt} audit={b.highlights.audits} priceLabel={t.price} auditLabel={t.audit} official={locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site"} /></dl> : null}
