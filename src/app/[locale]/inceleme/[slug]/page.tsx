@@ -24,6 +24,11 @@ import { isDetailedProviderSlug } from "@/data/provider-catalog";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
+// Provider records and their indexing status can change independently of the
+// rest of the static site. Keep this route dynamic so a deployment never
+// leaves a stale cached profile with outdated metadata or source labels.
+export const dynamic = "force-dynamic";
+
 const labels = {
   tr: {
     profile: "VPN sağlayıcı profili",
