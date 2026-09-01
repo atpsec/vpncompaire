@@ -1,5 +1,5 @@
-import { products } from "@/data/products";
-import { getBlogPosts } from "@/lib/blog";
+import { getDetailedProviderProducts } from "@/data/provider-catalog";
+import { getIndexableBlogPosts } from "@/lib/blog";
 import { CONTENT_REGISTRY } from "@/lib/i18n-paths";
 import { siteConfig } from "@/lib/site";
 
@@ -78,7 +78,7 @@ function urlEntry(
 }
 
 export async function GET() {
-  const posts = await getBlogPosts("en");
+  const posts = await getIndexableBlogPosts("en");
   const paths = new Map<string, string>();
 
   const add = (path: string, priority: number, changefreq: string, lastmod?: string) => {
@@ -89,7 +89,7 @@ export async function GET() {
     add(path, priority, changefreq, lastmod);
   }
 
-  for (const product of products) {
+  for (const product of getDetailedProviderProducts("en")) {
     add(
       `/reviews/${product.slug}`,
       0.82,
@@ -122,7 +122,7 @@ export async function GET() {
     );
   }
 
-  for (const post of posts.filter((post) => post.indexable)) {
+  for (const post of posts) {
     add(`/blog/${post.slug}`, 0.7, "monthly", post.updatedAt);
   }
 

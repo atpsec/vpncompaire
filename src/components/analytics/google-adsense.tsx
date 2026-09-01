@@ -22,6 +22,11 @@ const EXCLUDED_EXACT_PATHS = new Set([
   "/iletisim",
 ]);
 const EXCLUDED_PREFIXES = [
+  // Keep ad inventory away from directory and comparison surfaces until
+  // each provider record has enough original editorial depth.
+  "/reviews",
+  "/vpn-reviews",
+  "/comparison",
   "/tools",
   "/vpn-test",
   "/calculator",
@@ -33,12 +38,15 @@ const EXCLUDED_PREFIXES = [
   "/sunucu-haritasi",
   "/hesaplayici",
   "/sana-uygun-vpn",
+  // Blog articles are source-led reference content, not an ad inventory
+  // surface. Keep Auto Ads away until each article has passed a fresh review.
+  "/blog",
 ];
 
 const ADSENSE_ID_PATTERN = /^ca-pub-\d{16}$/;
 
 /**
- * Auto Ads'i içerik yerine araç, yasal ve kısa yardımcı ekranlarda yüklemeyiz.
+ * Auto Ads'i içerik yerine araç, yasal, blog ve kısa yardımcı ekranlarda yüklemeyiz.
  * Bu hem kullanıcı deneyimini korur hem de reklamı düşük değerli içerikten
  * uzak tutar. Google AdSense panelindeki sayfa hariç tutmalarıyla birlikte
  * güvenli bir uygulama katmanı olarak çalışır.

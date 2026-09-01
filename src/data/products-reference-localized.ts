@@ -27,6 +27,15 @@ export const GLOBAL_CORE_REFERENCE_SLUGS = [
   "bitdefender-vpn",
   "avast-secureline",
   "avg-secure-vpn",
+  "malwarebytes-privacy",
+  "f-secure-vpn",
+  "avira-phantom-vpn",
+  "kaspersky-vpn",
+  "nymvpn",
+  "trust-zone",
+  "vpn-unlimited",
+  "fastestvpn",
+  "perfect-privacy",
 ] as const;
 
 export const featuredReferenceProducts: Product[] = GLOBAL_CORE_REFERENCE_SLUGS

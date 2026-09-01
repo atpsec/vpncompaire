@@ -16,9 +16,34 @@ import {
  */
 export const GLOBAL_CORE_TARGET_COUNT = 30;
 
+/**
+ * Only these profiles have provider-specific editorial copy and a source
+ * record deep enough to be presented as finished, indexable profiles. Other
+ * market entries remain discoverable in the directory but are not described
+ * to search engines as completed reviews.
+ */
+export const DETAILED_PROVIDER_SLUGS = [
+  "nordvpn",
+  "surfshark",
+  "expressvpn",
+  "proton-vpn",
+  "pia",
+  "cyberghost",
+  "ipvanish",
+  "windscribe",
+  "tunnelbear",
+  "mullvad",
+] as const;
+
+const detailedProviderSlugs = new Set<string>(DETAILED_PROVIDER_SLUGS);
+
+export function isDetailedProviderSlug(slug: string): boolean {
+  return detailedProviderSlugs.has(slug);
+}
+
 export function getDetailedProviderProducts(locale: Locale = "en"): Product[] {
   return rankedProducts(locale)
-    .filter((product) => product.slug !== "atlas-vpn")
+    .filter((product) => isDetailedProviderSlug(product.slug))
     .slice(0, TOP_RANKED_LIMIT);
 }
 

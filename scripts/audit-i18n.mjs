@@ -57,7 +57,7 @@ if (source("src/app/[locale]/layout.tsx").includes('rawLocale !== "en"')) {
 }
 
 const sitemap = source("src/app/sitemap.xml/route.ts");
-if (sitemap.includes('getBlogPosts("en")') && sitemap.includes('"/ai"')) {
+if (sitemap.includes('getIndexableBlogPosts("en")') && sitemap.includes('"/ai"')) {
   pass("Sitemap contains English-only content and the AI hub");
 } else {
   fail("Sitemap is missing English-only blog loading or AI hub coverage");

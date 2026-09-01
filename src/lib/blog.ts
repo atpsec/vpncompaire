@@ -53,6 +53,52 @@ export { BLOG_SLUG_MAP, getCounterpartSlug } from "./blog-slugs";
  */
 export const MIN_INDEXABLE_BLOG_WORDS = 500;
 
+/**
+ * The public English blog is intentionally curated instead of being a dump
+ * of every draft that happens to clear a word-count threshold. A post must be
+ * on this list and meet the editorial threshold before it can be indexable.
+ *
+ * This is a publishing control, not a claim that the other posts are bad or
+ * deleted. Unlisted posts remain addressable for existing readers, but stay
+ * out of the index until they receive a deliberate editorial review.
+ */
+export const PUBLISHABLE_BLOG_SLUGS = new Set([
+  "what-is-vpn-why-you-need-it",
+  "how-to-choose-vpn",
+  "vpn-privacy-and-security",
+  "vpn-kill-switch-explained",
+  "dns-leak-test-vpn",
+  "vpn-protocols-comparison",
+  "wireguard-vs-openvpn-comparison",
+  "free-vs-paid-vpn",
+  "vpn-speed-optimization",
+  "vpn-for-travel",
+  "vpn-for-remote-work",
+  "vpn-for-journalists-activists",
+  "vpn-for-freelancers",
+  "vpn-for-educators-teachers",
+  "router-vpn-setup-guide",
+  "split-tunneling-vpn-explained",
+  "double-vpn-multihop-explained",
+  "macos-vpn-setup",
+  "linux-vpn-setup-guide",
+  "ios-vpn-shortcuts-automation",
+  "apple-tv-vpn-setup",
+  "xbox-playstation-vpn-setup",
+  "vpn-streaming-and-content-access",
+  "netflix-regional-libraries-vpn",
+  "ai-tools-privacy-vpn",
+  "ai-phishing-deepfake-vpn-protection",
+  "opera-vpn-browser-vpn-review",
+  "planckvpn-independent-vpn-analysis",
+  "nordvpn-vs-surfshark-comparison",
+  "expressvpn-vs-protonvpn-comparison",
+]);
+
+export function isPublishableBlogSlug(slug: string): boolean {
+  return PUBLISHABLE_BLOG_SLUGS.has(slug);
+}
+
 export function countEditorialWords(content: string): number {
   return content
     .replace(/```[\s\S]*?```/g, " ")
@@ -66,14 +112,16 @@ export function countEditorialWords(content: string): number {
 
 function indexingState(
   content: string,
+  slug: string,
   indexing?: "index" | "noindex",
 ): { wordCount: number; indexable: boolean } {
   const wordCount = countEditorialWords(content);
   return {
     wordCount,
     indexable:
-      indexing === "index" ||
-      (indexing !== "noindex" && wordCount >= MIN_INDEXABLE_BLOG_WORDS),
+      isPublishableBlogSlug(slug) &&
+      (indexing === "index" ||
+        (indexing !== "noindex" && wordCount >= MIN_INDEXABLE_BLOG_WORDS)),
   };
 }
 
@@ -153,7 +201,7 @@ export const getBlogPosts = cache(async function getBlogPosts(
       coverImage: data.coverImage,
       unsplashKeyword: data.unsplashKeyword,
       indexing,
-      ...indexingState(content, indexing),
+      ...indexingState(content, data.slug, indexing),
       content,
     };
   });
@@ -167,7 +215,9 @@ export const getBlogPosts = cache(async function getBlogPosts(
 export async function getIndexableBlogPosts(
   locale: Locale,
 ): Promise<BlogPost[]> {
-  return (await getBlogPosts(locale)).filter((post) => post.indexable);
+  return (await getBlogPosts(locale)).filter(
+    (post) => post.indexable && isPublishableBlogSlug(post.slug),
+  );
 }
 
 /** Almanca koleksiyon noindex olsa da mevcut kullanıcılar için görünür kalır. */
@@ -291,7 +341,7 @@ export const getBlogPost = cache(async function getBlogPost(
       coverImage: data.coverImage,
       unsplashKeyword: data.unsplashKeyword,
       indexing,
-      ...indexingState(rawContent, indexing),
+      ...indexingState(rawContent, data.slug, indexing),
     },
     contentParts: {
       first: firstResult.content,

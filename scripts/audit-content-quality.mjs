@@ -23,6 +23,21 @@ const checks = [
     path.join(root, "src", "app", "[locale]", "metodoloji", "page.tsx"),
     ["2026-08-31"],
   ],
+  [
+    "Provider quality gate",
+    path.join(root, "src", "data", "provider-catalog.ts"),
+    ["DETAILED_PROVIDER_SLUGS", "isDetailedProviderSlug"],
+  ],
+  [
+    "Curated blog publishing gate",
+    path.join(root, "src", "lib", "blog.ts"),
+    ["PUBLISHABLE_BLOG_SLUGS", "isPublishableBlogSlug", "editorial review"],
+  ],
+  [
+    "Commercial ad inventory guard",
+    path.join(root, "src", "components", "analytics", "google-adsense.tsx"),
+    ["/reviews", "/vpn-reviews", "/comparison"],
+  ],
 ];
 
 const failures = [];

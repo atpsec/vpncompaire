@@ -20,16 +20,12 @@ const pass = (message) => passes.push(message);
 const warn = (message) => warnings.push(message);
 const fail = (message) => errors.push(message);
 
-const contentPages = [
+const monetizedContentPages = [
   "/",
-  "/blog",
-  "/vpn-reviews",
-  "/comparison",
   "/methodology",
   "/research",
   "/research/evidence-ledger",
   "/about",
-  "/reviews/nordvpn",
 ];
 
 const excludedPages = [
@@ -45,6 +41,13 @@ const excludedPages = [
   "/terms",
   "/refund-policy",
   "/contact",
+  "/blog",
+  "/blog/what-is-vpn-why-you-need-it",
+  // Commercial/provider surfaces are intentionally kept outside AdSense
+  // inventory until every record has sufficient original editorial depth.
+  "/vpn-reviews",
+  "/comparison",
+  "/reviews/nordvpn",
 ];
 
 function absolutePath(pathname) {
@@ -110,7 +113,7 @@ async function auditPage(pathname, expectedAds) {
 
 console.log(`AdSense audit base: ${baseUrl.origin}`);
 
-for (const pathname of contentPages) {
+for (const pathname of monetizedContentPages) {
   await auditPage(pathname, true);
 }
 

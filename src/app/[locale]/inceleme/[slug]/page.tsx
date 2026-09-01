@@ -20,15 +20,19 @@ import { getArchivedProduct } from "@/data/products-current";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { isDetailedProviderSlug } from "@/data/provider-catalog";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 const labels = {
   tr: {
     profile: "VPN sağlayıcı profili",
+    reference: "Pazar referansı",
     archived: "Hizmeti sonlandırılmış servis arşivi",
     metaSuffix: "özellikler, fiyat ve kaynak özeti",
+    referenceMetaSuffix: "pazar referansı ve kaynak bağlantıları",
     intro: "Bu sayfa laboratuvar incelemesi veya kullanıcı yorumu değildir. Sağlayıcının yayınladığı bilgiler ve doğrulanabilir kaynaklar, karşılaştırmayı kolaylaştırmak için yapılandırılmıştır.",
+    referenceIntro: "Bu kısa pazar referansı keşif ve kaynak bağlantısı için korunur. Tamamlanmış editoryal inceleme olarak sunulmaz; bir alana güvenmeden önce sağlayıcının güncel belgelerini kontrol edin.",
     home: "Ana sayfa",
     hub: "VPN karşılaştırmaları",
     price: "Başlangıç fiyatı",
@@ -65,9 +69,12 @@ const labels = {
   },
   en: {
     profile: "VPN provider profile",
+    reference: "Market reference",
     archived: "Discontinued service archive",
-    metaSuffix: "features, pricing and source summary",
+    metaSuffix: "features, pricing and source record",
+    referenceMetaSuffix: "market reference and source links",
     intro: "This page is not a laboratory review or a user testimonial. Provider-published information and verifiable sources are structured to make comparison easier.",
+    referenceIntro: "This concise market reference is retained for discovery and source linking. It is not presented as a finished editorial review; verify the provider's current documentation before relying on any field.",
     home: "Home",
     hub: "VPN comparisons",
     price: "Starting price",
@@ -104,9 +111,12 @@ const labels = {
   },
   de: {
     profile: "VPN-Anbieterprofil",
+    reference: "Marktreferenz",
     archived: "Archiv eines eingestellten Dienstes",
     metaSuffix: "Funktionen, Preise und Quellenübersicht",
+    referenceMetaSuffix: "Marktreferenz und Quellenlinks",
     intro: "Diese Seite ist weder ein Labortest noch eine Nutzerbewertung. Anbieterangaben und überprüfbare Quellen werden strukturiert dargestellt, um Vergleiche zu erleichtern.",
+    referenceIntro: "Diese kurze Marktreferenz bleibt für Entdeckung und Quellenverknüpfung bestehen. Sie ist kein fertiges redaktionelles Review; prüfen Sie die aktuelle Anbieterdokumentation, bevor Sie Angaben verwenden.",
     home: "Startseite",
     hub: "VPN-Vergleiche",
     price: "Preis ab",
@@ -162,12 +172,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const l = labels[locale];
   const isArchived = Boolean(getArchivedProduct(slug));
   const isReferenceOnly = referenceProducts.some((p) => p.slug === slug);
-  const canonicalLocale = isArchived ? "tr" : locale === "de" ? "en" : locale;
-  const canonical = absoluteUrl(`/reviews/${product.slug}`, canonicalLocale);
-  const title = `${product.brand} — ${isArchived ? l.archived : l.metaSuffix}`;
+  const isDetailedProfile = isDetailedProviderSlug(slug);
+  const canonical = absoluteUrl(`/reviews/${product.slug}`, "en");
+  const title = `${product.brand} — ${isArchived ? l.archived : isDetailedProfile ? l.metaSuffix : l.referenceMetaSuffix}`;
   const description = isArchived
     ? `${product.brand} is retained as an archived provider record with source links and historical context.`
-    : `Review ${product.brand}'s documented privacy, audits, jurisdiction, device support and current pricing in this source-based VPN profile.`;
+    : isDetailedProfile
+      ? `Check ${product.brand}'s documented privacy, audits, jurisdiction, device support and current pricing in this source-based VPN profile.`
+      : `${product.brand} market reference with official source links and a concise record of documented provider information.`;
   return {
     title,
     description,
@@ -175,7 +187,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? { canonical }
       : bilingualAlternates(`/reviews/${product.slug}`, locale, "en"),
     robots:
-      isArchived || isReferenceOnly || locale === "de"
+      isArchived || isReferenceOnly || !isDetailedProfile || locale !== "en"
         ? { index: false, follow: true }
         : undefined,
     openGraph: {
@@ -195,14 +207,14 @@ export default async function Page({ params }: Props) {
   if (!product) notFound();
   const isArchived = Boolean(getArchivedProduct(slug));
   const isReferenceOnly = referenceProducts.some((p) => p.slug === slug);
-  const canonicalLocale = isArchived ? "tr" : locale === "de" ? "en" : locale;
+  const isDetailedProfile = isDetailedProviderSlug(slug);
 
   const providerSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `${product.brand} ${isArchived ? labels[locale].archived : labels[locale].profile}`,
+    name: `${product.brand} ${isArchived ? labels[locale].archived : isDetailedProfile ? labels[locale].profile : labels[locale].reference}`,
     description: product.summary,
-    url: absoluteUrl(`/reviews/${product.slug}`, canonicalLocale),
+    url: absoluteUrl(`/reviews/${product.slug}`, "en"),
     ...(isArchived
       ? {}
       : {
@@ -216,14 +228,14 @@ export default async function Page({ params }: Props) {
     isPartOf: { "@type": "WebSite", name: "VPN Advisor", url: absoluteUrl() },
   };
 
-  return <ProviderView product={product} locale={locale} providerSchema={providerSchema} isArchived={isArchived} isReferenceOnly={isReferenceOnly} />;
+  return <ProviderView product={product} locale={locale} providerSchema={providerSchema} isArchived={isArchived} isReferenceOnly={isReferenceOnly} isDetailedProfile={isDetailedProfile} />;
 }
 
-function ProviderView({ product, locale, providerSchema, isArchived, isReferenceOnly }: { product: Product; locale: Locale; providerSchema: Record<string, unknown>; isArchived: boolean; isReferenceOnly: boolean }) {
+function ProviderView({ product, locale, providerSchema, isArchived, isReferenceOnly, isDetailedProfile }: { product: Product; locale: Locale; providerSchema: Record<string, unknown>; isArchived: boolean; isReferenceOnly: boolean; isDetailedProfile: boolean }) {
   const t = labels[locale];
   const evidence = providerEvidenceRecords(locale).find((record) => record.slug === product.slug);
   const hasStructuredPricing = Boolean(product.pricingVerifiedAt) && product.priceFromUsd > 0 && product.plans.length > 0;
-  const productSchema = !isArchived && !isReferenceOnly && locale === "en" && hasStructuredPricing
+  const productSchema = !isArchived && !isReferenceOnly && isDetailedProfile && locale === "en" && hasStructuredPricing
     ? providerProductSchema(product, locale)
     : null;
 
@@ -246,7 +258,7 @@ function ProviderView({ product, locale, providerSchema, isArchived, isReference
         </header>
 
         <Card className="mt-6 p-5 bg-brand-50/40">
-          <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{t.intro}</p><Link href="/methodology" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>
+          <div className="flex items-start gap-3"><FileSearch className="size-5 text-brand-700 mt-0.5 shrink-0" /><div><p className="text-sm text-ink leading-relaxed">{isDetailedProfile ? t.intro : t.referenceIntro}</p><Link href="/methodology" className="mt-2 inline-flex text-sm font-semibold text-brand-700 hover:underline">{t.methodology}</Link></div></div>
         </Card>
 
         {isArchived ? null : <DataDisclaimer verifiedAt={product.pricingVerifiedAt} />}
