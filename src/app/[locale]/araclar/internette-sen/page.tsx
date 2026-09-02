@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { CircleHelp } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -196,8 +197,8 @@ export default async function Page({ params }: Props) {
       <JsonLd data={webAppSchema} />
       <JsonLd data={faqSchema(faqItems)} />
 
-      <Container size="lg" className="py-12 sm:py-16">
-        <p className="text-sm text-ink-muted">
+      <Container size="lg" className="py-10 sm:py-14">
+        <p className="text-xs font-medium text-ink-muted sm:text-sm">
           <Link href="/" className="hover:text-ink">{tNav("home")}</Link>{" "}›{" "}
           <Link href="/tools" className="hover:text-ink">{tTools("breadcrumb")}</Link>{" "}›{" "}
           <span className="text-ink-strong">{t("breadcrumb")}</span>
@@ -205,20 +206,32 @@ export default async function Page({ params }: Props) {
 
         <InternetYouDashboard serverSnapshot={serverSnapshot} copy={copy} />
 
-        <section className="mt-10 rounded-2xl border border-border bg-surface-subtle p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-ink-strong">{t("faqTitle")}</h2>
-          <div className="mt-5 divide-y divide-border rounded-xl border border-border bg-surface-base dark:bg-surface-subtle">
-            {faqItems.map((item) => (
-              <details key={item.q} className="group p-5">
-                <summary className="cursor-pointer list-none pr-8 font-semibold text-ink-strong marker:hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500">
-                  <span className="relative inline-flex items-center gap-2">
-                    <span className="text-brand-600 transition-transform group-open:rotate-45" aria-hidden="true">＋</span>
-                    {item.q}
-                  </span>
-                </summary>
-                <p className="mt-3 pl-7 text-sm leading-relaxed text-ink-muted">{item.a}</p>
-              </details>
-            ))}
+        <section className="mt-12 overflow-hidden rounded-[2rem] border border-border bg-surface-subtle p-6 sm:p-8 lg:p-10">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
+                <div className="flex size-9 items-center justify-center rounded-xl bg-brand-50 dark:bg-brand-950/40">
+                  <CircleHelp className="size-4" aria-hidden="true" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-[0.16em]">FAQ</span>
+              </div>
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-ink-strong sm:text-3xl">{t("faqTitle")}</h2>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-muted">
+                {t("subtitle")}
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-surface-base px-5 sm:px-7 dark:bg-surface-subtle">
+              {faqItems.map((item) => (
+                <details key={item.q} className="group border-b border-border py-5 last:border-b-0">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-semibold text-ink-strong marker:hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500">
+                    <span>{item.q}</span>
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-brand-200 text-lg font-normal text-brand-700 transition group-open:rotate-45 dark:border-brand-800 dark:text-brand-300" aria-hidden="true">＋</span>
+                  </summary>
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-muted">{item.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
         </section>
 

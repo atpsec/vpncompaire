@@ -404,37 +404,42 @@ export function InternetYouDashboard({
   }
 
   return (
-    <div className="mt-8">
-      <section className="relative overflow-hidden rounded-3xl border border-brand-200 bg-gradient-to-br from-brand-50 via-surface-base to-accent-50/60 p-6 shadow-sm dark:border-brand-900/60 dark:from-brand-950/40 dark:via-surface-base dark:to-accent-950/20 sm:p-8">
+    <div className="mt-8 space-y-6">
+      <section id="snapshot" className="relative overflow-hidden rounded-[2rem] border border-brand-200 bg-gradient-to-br from-brand-50 via-surface-base to-accent-50/60 p-6 shadow-sm dark:border-brand-900/60 dark:from-brand-950/40 dark:via-surface-base dark:to-accent-950/20 sm:p-10">
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-400 to-accent-400" />
         <div className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full bg-brand-200/40 blur-3xl dark:bg-brand-800/20" />
         <div className="pointer-events-none absolute -bottom-24 left-1/3 size-56 rounded-full bg-accent-200/30 blur-3xl dark:bg-accent-800/10" />
         <div className="relative flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-2xl">
-            <Badge variant="brand" className="bg-white/80 dark:bg-brand-950/60">
-              <ShieldCheck className="size-3.5" aria-hidden="true" />
-              {copy.eyebrow}
-            </Badge>
-            <h1 className="mt-4 text-3xl font-bold tracking-tight text-ink-strong sm:text-4xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant="brand" className="bg-white/80 dark:bg-brand-950/60">
+                <ShieldCheck className="size-3.5" aria-hidden="true" />
+                {copy.eyebrow}
+              </Badge>
+              <Badge variant="success" className="bg-white/80 dark:bg-success-950/40">
+                <span className="size-2 rounded-full bg-success-500" aria-hidden="true" />
+                {copy.liveBadge}
+              </Badge>
+            </div>
+            <h1 className="mt-5 max-w-3xl text-3xl font-bold tracking-tight text-ink-strong sm:text-5xl sm:leading-[1.08]">
               {copy.title}
             </h1>
-            <p className="mt-3 text-base leading-relaxed text-ink-muted sm:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
               {copy.subtitle}
             </p>
           </div>
-          <Badge variant="success" className="w-fit shrink-0 bg-white/80 dark:bg-success-950/40">
-            <span className="size-2 rounded-full bg-success-500" aria-hidden="true" />
-            {copy.liveBadge}
-          </Badge>
         </div>
 
-        <div className="relative mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-[2fr_repeat(3,minmax(0,1fr))]">
-          <div className="min-w-0 rounded-2xl border border-white/70 bg-white/75 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75">
+        <div className="relative mt-8 grid gap-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(15rem,0.65fr)]">
+          <div className="min-w-0 rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75 sm:p-6">
             <div className="flex items-start justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2 text-brand-700 dark:text-brand-300">
-                <Globe2 className="size-5 shrink-0" aria-hidden="true" />
+                <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-brand-100/80 dark:bg-brand-900/50">
+                  <Globe2 className="size-5" aria-hidden="true" />
+                </div>
                 <div className="min-w-0">
                   <p className="text-xs font-semibold uppercase tracking-wide">{copy.networkAddressesTitle}</p>
-                  <p className="mt-1 text-xs normal-case tracking-normal text-ink-muted">{copy.networkAddressesSubtitle}</p>
+                  <p className="mt-1 max-w-xl text-xs normal-case tracking-normal text-ink-muted">{copy.networkAddressesSubtitle}</p>
                 </div>
               </div>
               <Badge variant="outline" className="shrink-0 bg-white/70 dark:bg-surface-base/50">
@@ -458,52 +463,54 @@ export function InternetYouDashboard({
               />
             </div>
           </div>
-          <SignalCard
-            icon={
-              serverSnapshot.countryCode ? (
-                <CountryFlag
-                  code={serverSnapshot.countryCode}
-                  name={serverSnapshot.countryName ?? copy.approxLocation}
-                  size={34}
-                />
-              ) : (
-                <MapPin className="size-5" aria-hidden="true" />
-              )
-            }
-            label={copy.approxLocation}
-            value={location}
-            detail={
-              serverSnapshot.countryName
-                ? serverSnapshot.countrySource === "lookup"
-                  ? copy.countryLookup
-                  : copy.countryOnly
-                : copy.unknown
-            }
-          />
-          <SignalCard
-            icon={
-              browser ? (
-                <BrandMark icon={browser.browser.icon} label={browser.browser.name} size={34} />
-              ) : (
-                <Globe2 className="size-5" aria-hidden="true" />
-              )
-            }
-            label={copy.browser}
-            value={browser?.browser.name ?? "…"}
-            detail={browser?.operatingSystem.name ?? "…"}
-          />
-          <SignalCard
-            icon={
-              browser ? (
-                <DeviceMark type={browser.device.icon} label={browser.device.name} size={34} />
-              ) : (
-                <Laptop className="size-5" aria-hidden="true" />
-              )
-            }
-            label={copy.device}
-            value={browser?.device.name ?? "…"}
-            detail={browser?.screen ?? "…"}
-          />
+          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <SignalCard
+              icon={
+                serverSnapshot.countryCode ? (
+                  <CountryFlag
+                    code={serverSnapshot.countryCode}
+                    name={serverSnapshot.countryName ?? copy.approxLocation}
+                    size={34}
+                  />
+                ) : (
+                  <MapPin className="size-5" aria-hidden="true" />
+                )
+              }
+              label={copy.approxLocation}
+              value={location}
+              detail={
+                serverSnapshot.countryName
+                  ? serverSnapshot.countrySource === "lookup"
+                    ? copy.countryLookup
+                    : copy.countryOnly
+                  : copy.unknown
+              }
+            />
+            <SignalCard
+              icon={
+                browser ? (
+                  <BrandMark icon={browser.browser.icon} label={browser.browser.name} size={34} />
+                ) : (
+                  <Globe2 className="size-5" aria-hidden="true" />
+                )
+              }
+              label={copy.browser}
+              value={browser?.browser.name ?? "…"}
+              detail={browser?.operatingSystem.name ?? "…"}
+            />
+            <SignalCard
+              icon={
+                browser ? (
+                  <DeviceMark type={browser.device.icon} label={browser.device.name} size={34} />
+                ) : (
+                  <Laptop className="size-5" aria-hidden="true" />
+                )
+              }
+              label={copy.device}
+              value={browser?.device.name ?? "…"}
+              detail={browser?.screen ?? "…"}
+            />
+          </div>
         </div>
 
         <p className="relative mt-5 flex items-center gap-2 text-xs font-medium text-ink-muted">
@@ -517,10 +524,11 @@ export function InternetYouDashboard({
         visibleSignalCount={visibleSignalCount}
       />
 
-      <NextSteps copy={copy} />
+      <FlowNavigation copy={copy} />
 
-      <section className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <Card className="p-6 sm:p-8">
+      <section id="browser-device-signals" className="grid gap-6 scroll-mt-24 lg:grid-cols-[1.1fr_0.9fr]">
+        <Card className="relative overflow-hidden p-6 sm:p-8">
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 to-brand-300" />
           <div className="flex items-start gap-4">
             {browser ? (
               <BrandMark icon={browser.browser.icon} label={browser.browser.name} size={64} />
@@ -549,7 +557,8 @@ export function InternetYouDashboard({
           </div>
         </Card>
 
-        <Card className="p-6 sm:p-8">
+        <Card className="relative overflow-hidden p-6 sm:p-8">
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent-400 to-accent-300" />
           <div className="flex items-start justify-between gap-4">
             <div>
               <h3 className="text-xl font-bold text-ink-strong">{copy.browserDeviceTitle}</h3>
@@ -576,7 +585,7 @@ export function InternetYouDashboard({
 
       <PrivacyControls browser={browser} copy={copy} />
 
-      <section className="mt-6 rounded-2xl border border-border bg-surface-subtle p-6 sm:p-8">
+      <section id="privacy-signals" className="rounded-2xl border border-border bg-surface-subtle p-6 sm:p-8 scroll-mt-24">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-ink-strong">{copy.privacySignalsTitle}</h2>
@@ -602,7 +611,7 @@ export function InternetYouDashboard({
         </div>
       </section>
 
-      <section className="mt-6 rounded-2xl border border-border bg-surface-base p-6 sm:p-8 dark:bg-surface-subtle">
+      <section id="cannot-see" className="rounded-2xl border border-border bg-surface-base p-6 sm:p-8 dark:bg-surface-subtle scroll-mt-24">
         <div className="flex items-center gap-3">
           <div className="flex size-10 items-center justify-center rounded-xl bg-success-50 text-success-700 dark:bg-success-950/30 dark:text-success-300">
             <EyeOff className="size-5" aria-hidden="true" />
@@ -616,11 +625,45 @@ export function InternetYouDashboard({
         </div>
       </section>
 
-      <p className="mt-6 flex items-start gap-2 text-xs leading-relaxed text-ink-muted">
+      <NextSteps copy={copy} />
+
+      <p className="flex items-start gap-2 text-xs leading-relaxed text-ink-muted">
         <CircleHelp className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
         <span>{copy.privacyNote}</span>
       </p>
     </div>
+  );
+}
+
+function FlowNavigation({ copy }: { copy: Copy }) {
+  const anchors = [
+    { href: "#visibility-summary", label: copy.visibilitySummaryTitle },
+    { href: "#browser-device-signals", label: copy.browserDeviceTitle },
+    { href: "#privacy-signals", label: copy.privacySignalsTitle },
+    { href: "#next-steps", label: copy.nextStepsTitle },
+  ];
+
+  return (
+    <nav
+      aria-label={copy.title}
+      className="rounded-2xl border border-border/80 bg-surface-subtle/70 p-2 scroll-mt-24"
+    >
+      <div className="flex flex-wrap gap-1.5">
+        {anchors.map((anchor, index) => (
+          <a
+            key={anchor.href}
+            href={anchor.href}
+            className="group inline-flex min-w-0 flex-1 items-center gap-2 rounded-xl px-3 py-2.5 text-xs font-semibold text-ink-muted transition hover:bg-surface-base hover:text-ink-strong focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-500 dark:hover:bg-surface-base sm:text-sm"
+          >
+            <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-surface-base text-[10px] font-bold text-brand-700 dark:bg-surface-muted dark:text-brand-300">
+              0{index + 1}
+            </span>
+            <span className="min-w-0 truncate">{anchor.label}</span>
+            <ArrowRight className="ml-auto size-3.5 shrink-0 text-brand-600 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+          </a>
+        ))}
+      </div>
+    </nav>
   );
 }
 
@@ -632,7 +675,7 @@ function VisibilitySummary({
   visibleSignalCount: number | null;
 }) {
   return (
-    <section className="mt-6 rounded-2xl border border-border bg-surface-base p-6 shadow-sm sm:p-8 dark:bg-surface-subtle">
+    <section id="visibility-summary" className="rounded-2xl border border-border bg-surface-base p-6 shadow-sm scroll-mt-24 sm:p-8 dark:bg-surface-subtle">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
@@ -689,7 +732,7 @@ function SummaryColumn({
   } as const;
 
   return (
-    <div className={`rounded-xl border p-5 ${toneClasses[tone]}`}>
+    <div className={`rounded-xl border p-5 transition-colors hover:shadow-sm ${toneClasses[tone]}`}>
       <div className="flex items-center gap-2">
         {icon}
         <h3 className="font-bold text-ink-strong">{title}</h3>
@@ -728,7 +771,8 @@ function NextSteps({ copy }: { copy: Copy }) {
   ];
 
   return (
-    <section className="mt-6 overflow-hidden rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50/80 via-surface-base to-accent-50/30 shadow-sm dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-accent-950/10">
+    <section id="next-steps" className="relative overflow-hidden rounded-[2rem] border border-brand-200 bg-gradient-to-br from-brand-50/80 via-surface-base to-accent-50/30 shadow-sm scroll-mt-24 dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-accent-950/10">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 via-brand-400 to-accent-400" />
       <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
         <div>
           <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
@@ -784,7 +828,7 @@ function ConnectionComparison({
   onRefresh: () => void;
 }) {
   return (
-    <section className="mt-6 rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50/70 via-surface-base to-surface-base p-6 shadow-sm dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-surface-subtle sm:p-8">
+    <section id="connection-comparison" className="rounded-2xl border border-brand-200 bg-gradient-to-br from-brand-50/70 via-surface-base to-surface-base p-6 shadow-sm scroll-mt-24 dark:border-brand-900/60 dark:from-brand-950/30 dark:via-surface-subtle dark:to-surface-subtle sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
@@ -872,7 +916,7 @@ function PrivacyControls({
   copy: Copy;
 }) {
   return (
-    <section className="mt-6 rounded-2xl border border-border bg-surface-subtle p-6 sm:p-8">
+    <section id="privacy-controls" className="rounded-2xl border border-border bg-surface-subtle p-6 scroll-mt-24 sm:p-8">
       <div>
         <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300">
           <LockKeyhole className="size-5" aria-hidden="true" />
