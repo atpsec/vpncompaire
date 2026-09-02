@@ -1,3 +1,5 @@
+import { env } from "@/env";
+
 /**
  * Reject browser requests initiated by a different site before a public API
  * performs an expensive lookup or writes visitor data.
@@ -15,9 +17,33 @@ export function isCrossSiteRequest(request: Request): boolean {
   if (!origin) return false;
 
   try {
-    return new URL(origin).origin !== new URL(request.url).origin;
+    const requestUrl = new URL(request.url);
+    const forwardedProto = firstForwardedValue(
+      request.headers.get("x-forwarded-proto"),
+    );
+    const protocol = forwardedProto
+      ? `${forwardedProto}:`
+      : requestUrl.protocol;
+    const trustedOrigins = new Set<string>([
+      new URL(env.NEXT_PUBLIC_SITE_URL).origin,
+      requestUrl.origin,
+    ]);
+
+    for (const host of [
+      firstForwardedValue(request.headers.get("x-forwarded-host")),
+      request.headers.get("host")?.trim(),
+    ]) {
+      if (host) trustedOrigins.add(`${protocol}//${host}`);
+    }
+
+    return !trustedOrigins.has(new URL(origin).origin);
   } catch {
     // An invalid Origin is not a trustworthy same-origin signal.
     return true;
   }
+}
+
+function firstForwardedValue(value: string | null): string | null {
+  const first = value?.split(",", 1)[0]?.trim().toLowerCase();
+  return first || null;
 }
