@@ -13,7 +13,7 @@ import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 export type UseCasePick = { slug: string; why: string; bestFor: string };

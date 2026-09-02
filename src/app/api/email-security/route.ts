@@ -4,6 +4,7 @@ import { domainToASCII } from "node:url";
 import { NextResponse, type NextRequest } from "next/server";
 import { env } from "@/env";
 import { clientIpFrom, rateLimit } from "@/lib/rate-limit";
+import { isCrossSiteRequest } from "@/lib/request-security";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -339,6 +340,13 @@ function scoreResult(params: {
 }
 
 export async function POST(req: NextRequest) {
+  if (isCrossSiteRequest(req)) {
+    return NextResponse.json(
+      { error: "same_origin_only" },
+      { status: 403, headers: NO_STORE_HEADERS },
+    );
+  }
+
   const clientIp = clientIpFrom(req.headers);
   const rl = await rateLimit(`email-security:${hashIdentity(clientIp)}`, 10, 60);
 

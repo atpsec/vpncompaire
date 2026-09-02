@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { clientIpFrom, rateLimit } from "@/lib/rate-limit";
 import { resolveRequestGeo } from "@/lib/request-geo";
+import { isCrossSiteRequest } from "@/lib/request-security";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -28,7 +29,7 @@ function rateLimitResponse() {
 export async function GET(request: NextRequest) {
   // Same-origin browser fetches send this signal. Reject cross-site requests
   // early while still allowing privacy-focused browsers that omit the header.
-  if (request.headers.get("sec-fetch-site") === "cross-site") {
+  if (isCrossSiteRequest(request)) {
     return NextResponse.json(
       { error: "same_origin_only" },
       { status: 403, headers: NO_STORE_HEADERS },

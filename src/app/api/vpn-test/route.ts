@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
 import { clientIpFrom, rateLimit } from "@/lib/rate-limit";
 import { geoFromHeaders } from "@/lib/request-geo";
+import { isCrossSiteRequest } from "@/lib/request-security";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -166,6 +167,13 @@ async function lookupIp(ip: string): Promise<VpnTestResult | null> {
 }
 
 export async function GET(req: NextRequest) {
+  if (isCrossSiteRequest(req)) {
+    return NextResponse.json(
+      { error: "same_origin_only" },
+      { status: 403, headers: NO_STORE_HEADERS },
+    );
+  }
+
   const clientIp = clientIpFrom(req.headers);
   const fallbackIdentity = req.headers.get("user-agent") ?? "unknown";
   const identity = isPublicIpCandidate(clientIp) ? clientIp : fallbackIdentity;

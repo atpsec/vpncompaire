@@ -69,13 +69,11 @@ async function request(url, method) {
 
 async function check(url) {
   try {
-    let response;
-    try {
-      response = await request(url, "HEAD");
-    } catch {
-      response = await request(url, "GET");
-    }
-    if (response.status === 405 || response.status === 501) {
+    let response = await request(url, "HEAD").catch(() => null);
+    // Some otherwise healthy sites return 404/403 to HEAD while serving the
+    // same URL successfully to a normal GET request. Verify every non-2xx
+    // HEAD result before classifying the source link as broken.
+    if (!response || response.status >= 400) {
       response = await request(url, "GET");
     }
 

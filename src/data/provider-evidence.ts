@@ -40,7 +40,7 @@ export type ProviderEvidenceRecord = {
 const auditSources: Record<string, { label: string; url: string }> = {
   nordvpn: {
     label: "NordVPN Trust Center",
-    url: "https://nordvpn.com/trust-center/",
+    url: "https://nordvpn.com/trust/",
   },
   surfshark: {
     label: "Surfshark Trust Center",
@@ -48,7 +48,7 @@ const auditSources: Record<string, { label: string; url: string }> = {
   },
   expressvpn: {
     label: "ExpressVPN Trust Center",
-    url: "https://www.expressvpn.com/trust-center",
+    url: "https://www.expressvpn.com/trust",
   },
   "proton-vpn": {
     label: "Proton VPN Transparency Report",

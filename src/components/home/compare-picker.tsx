@@ -14,7 +14,7 @@ import { getComparisonProduct } from "@/data/comparison-products";
 import type { Locale } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { formatProductPriceShort } from "@/lib/product-price";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 const MIN = 2;

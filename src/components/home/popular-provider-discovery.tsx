@@ -2,7 +2,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Compass, RefreshCw } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { getProduct, homepagePopularProducts, type Product } from "@/data/products";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import type { Locale } from "@/lib/site";
 import { PopularProviderDiscoveryClient, type DiscoveryCopy, type DiscoveryProvider } from "./popular-provider-discovery-client";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";

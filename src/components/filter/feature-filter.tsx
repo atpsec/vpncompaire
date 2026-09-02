@@ -16,7 +16,7 @@ import {
   getFilterLabels,
   type FilterKey,
 } from "@/data/features";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 export function FeatureFilter() {

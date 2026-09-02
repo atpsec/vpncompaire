@@ -19,7 +19,7 @@ import { providerEvidenceRecords, type EvidenceItem } from "@/data/provider-evid
 import { getArchivedProduct } from "@/data/products-current";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { isDetailedProviderSlug } from "@/data/provider-catalog";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };

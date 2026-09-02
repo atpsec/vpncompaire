@@ -16,7 +16,7 @@ import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { LastTestedBadge } from "@/components/product/last-tested-badge";
 import { getLocalizedLinkHref, getLocalizedPath, type AppLocale } from "@/lib/i18n-paths";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 
 export type ComparisonCategory = {
   name: string;

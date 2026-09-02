@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { siteConfig } from "@/lib/site";
+import { publicAnalytics } from "@/lib/public-analytics";
 
 const SEO_LOCALES = new Set(["en"]);
 const EXCLUDED_EXACT_PATHS = new Set([
@@ -77,7 +77,7 @@ function isAdExcluded(pathname: string): boolean {
  */
 export function GoogleAdsense() {
   const pathname = usePathname();
-  const id = siteConfig.adsenseClientId;
+  const id = publicAnalytics.adsenseClientId;
 
   if (!id || !ADSENSE_ID_PATTERN.test(id) || !pathname || isAdExcluded(pathname)) {
     return null;

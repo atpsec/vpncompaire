@@ -12,7 +12,7 @@ import { type Product } from "@/data/products";
 import { getDetailedProviderProducts } from "@/data/provider-catalog";
 import { positioningFor } from "@/lib/editorial-positioning";
 import type { Locale } from "@/lib/site";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 
 export function TopVPNList() {

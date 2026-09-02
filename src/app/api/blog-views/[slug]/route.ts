@@ -7,6 +7,7 @@ import {
   recordBlogView,
 } from "@/lib/blog-views";
 import { clientIpFrom, rateLimit } from "@/lib/rate-limit";
+import { isCrossSiteRequest } from "@/lib/request-security";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -18,7 +19,7 @@ const RESPONSE_HEADERS = {
   "Referrer-Policy": "no-referrer",
   "X-Content-Type-Options": "nosniff",
   "X-Robots-Tag": "noindex, nofollow, noarchive",
-  Vary: "Sec-Fetch-Site",
+  Vary: "Sec-Fetch-Site, Origin",
 };
 
 type Context = { params: Promise<{ slug: string }> };
@@ -33,6 +34,10 @@ async function validateSlug(context: Context): Promise<string | null> {
 }
 
 export async function GET(request: NextRequest, context: Context) {
+  if (isCrossSiteRequest(request)) {
+    return errorResponse("same_origin_only", 403);
+  }
+
   const slug = await validateSlug(context);
   if (!slug) return errorResponse("not_found", 404);
 
@@ -44,7 +49,7 @@ export async function GET(request: NextRequest, context: Context) {
 }
 
 export async function POST(request: NextRequest, context: Context) {
-  if (request.headers.get("sec-fetch-site") === "cross-site") {
+  if (isCrossSiteRequest(request)) {
     return errorResponse("same_origin_only", 403);
   }
 

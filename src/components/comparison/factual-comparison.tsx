@@ -12,7 +12,7 @@ import { CitationSummary } from "@/components/seo/citation-summary";
 import type { Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { formatProductPrice } from "@/lib/product-price";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 
 const labels = {
   tr: {

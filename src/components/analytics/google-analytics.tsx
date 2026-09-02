@@ -1,6 +1,6 @@
 import Script from "next/script";
-import { siteConfig } from "@/lib/site";
 import { ConsentBanner } from "@/components/analytics/consent-banner";
+import { publicAnalytics } from "@/lib/public-analytics";
 
 type SupportedLocale = "tr" | "en" | "de";
 
@@ -15,7 +15,7 @@ type SupportedLocale = "tr" | "en" | "de";
  * ayrı yönetilir; analitik banner'ı reklam rızası yerine geçmez.
  */
 export function GoogleAnalytics({ locale }: { locale: SupportedLocale }) {
-  const id = siteConfig.gaId;
+  const id = publicAnalytics.gaId;
   if (!id) return null;
 
   return (

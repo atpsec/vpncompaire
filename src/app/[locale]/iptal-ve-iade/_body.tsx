@@ -8,7 +8,7 @@ import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import { ProviderLink } from "@/components/affiliate/provider-link";
 import { rankedProducts, type Product } from "@/data/products";
 import type { Locale } from "@/i18n/pick";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 
 type CancelInfo = { via: string; pitfalls: string[] };
 type FAQ = { q: string; a: string };

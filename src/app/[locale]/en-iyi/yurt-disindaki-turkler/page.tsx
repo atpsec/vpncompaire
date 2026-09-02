@@ -12,7 +12,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getProduct } from "@/data/products";
 import { defaultLocaleAlternates } from "@/lib/site";
-import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate";
+import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 
 export const metadata: Metadata = {
   title: "Yurt Dışındaki Türkler İçin VPN Rehberi (2026)",
