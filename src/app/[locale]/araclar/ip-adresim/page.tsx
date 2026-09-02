@@ -12,6 +12,7 @@ import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import { CopyButton } from "@/components/tools/CopyButton";
 import { BrowserFingerprint } from "@/components/tools/BrowserFingerprint";
 import { ToolsCta } from "@/components/tools/ToolsCta";
+import { IpPrivacyLens } from "@/components/tools/IpPrivacyLens";
 import { resolveRequestGeo } from "@/lib/request-geo";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -176,6 +177,25 @@ export default async function Page({ params }: Props) {
             mono
           />
         </dl>
+
+        <IpPrivacyLens
+          ip={ip}
+          city={decodedCity}
+          region={decodedRegion}
+          country={countryName}
+          labels={{
+            title: t("lensTitle"),
+            subtitle: t("lensSubtitle"),
+            approximateLocation: t("lensApproximateLocation"),
+            maskedIp: t("lensMaskedIp"),
+            privacy: t("lensPrivacy"),
+            copy: tCommon("copy"),
+            copied: tCommon("copied"),
+            download: t("lensDownload"),
+            downloaded: t("lensDownloaded"),
+            sceneAlt: t("lensSceneAlt"),
+          }}
+        />
 
         <BrowserFingerprint labels={fingerprintLabels} />
 
