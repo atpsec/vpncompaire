@@ -167,6 +167,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.atpaivideo.com" }],
+        destination: "https://atpaivideo.com/:path*",
+        permanent: true,
+      },
+      {
         // Eski EN dil değiştiricisinin ürettiği TR-only use-case URL'si.
         // Proxy bunu da kanonikleştiriyor; bu açık kural eski crawler keşiflerini
         // doğrudan kalıcı yönlendirmeyle temiz tutar.
