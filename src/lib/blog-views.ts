@@ -1,4 +1,4 @@
-import { createHmac, randomBytes } from "node:crypto";
+import { createHash, createHmac, randomBytes } from "node:crypto";
 import fs from "node:fs";
 import fsPromises from "node:fs/promises";
 import path from "node:path";
@@ -27,17 +27,57 @@ type BlogViewResult = {
   durable: boolean;
 };
 
+export type BlogViewAuditArticle = {
+  slug: string;
+  views: number;
+  lastAcceptedAt: string | null;
+};
+
+export type BlogViewAuditSnapshot = {
+  schemaVersion: "1.0";
+  generatedAt: string;
+  policy: {
+    version: "2026-09-03";
+    qualifyingEvent: "visible-page-8-seconds";
+    visibleSeconds: 8;
+    deduplication: "pseudonymous-reader-per-48-hours";
+    rawIpStored: false;
+  };
+  storage: {
+    mode: "kv" | "file" | "process";
+    durable: boolean;
+    shared: boolean;
+  };
+  verification: {
+    status: "verifiable" | "limited";
+    note: string;
+  };
+  articleCount: number;
+  totalReads: number;
+  articleSum: number;
+  totalMatchesArticleSum: boolean;
+  articles: BlogViewAuditArticle[];
+  integrity: {
+    algorithm: "SHA-256";
+    input: "policy.version + articles + articleSum";
+    canonicalJson: string;
+    digest: string;
+  };
+};
+
 const localCounts = new Map<string, number>();
 const localSeen = new Map<string, number>();
+const localLastAcceptedAt = new Map<string, string>();
 let persistentStoreQueue: Promise<unknown> = Promise.resolve();
 
 type PersistedBlogViews = {
   counts: Record<string, number>;
   seen: Record<string, number>;
+  lastAcceptedAt: Record<string, string>;
 };
 
 function emptyPersistedStore(): PersistedBlogViews {
-  return { counts: {}, seen: {} };
+  return { counts: {}, seen: {}, lastAcceptedAt: {} };
 }
 
 function withPersistentStore<T>(task: () => Promise<T>): Promise<T> {
@@ -52,9 +92,14 @@ function withPersistentStore<T>(task: () => Promise<T>): Promise<T> {
 function sanitizePersistedStore(value: unknown): PersistedBlogViews {
   if (!value || typeof value !== "object") return emptyPersistedStore();
 
-  const candidate = value as { counts?: unknown; seen?: unknown };
+  const candidate = value as {
+    counts?: unknown;
+    seen?: unknown;
+    lastAcceptedAt?: unknown;
+  };
   const counts: Record<string, number> = {};
   const seen: Record<string, number> = {};
+  const lastAcceptedAt: Record<string, string> = {};
 
   if (candidate.counts && typeof candidate.counts === "object") {
     for (const [slug, count] of Object.entries(candidate.counts)) {
@@ -71,7 +116,15 @@ function sanitizePersistedStore(value: unknown): PersistedBlogViews {
     }
   }
 
-  return { counts, seen };
+  if (candidate.lastAcceptedAt && typeof candidate.lastAcceptedAt === "object") {
+    for (const [slug, timestamp] of Object.entries(candidate.lastAcceptedAt)) {
+      if (!isValidBlogSlug(slug) || typeof timestamp !== "string") continue;
+      const parsed = Date.parse(timestamp);
+      if (Number.isFinite(parsed)) lastAcceptedAt[slug] = new Date(parsed).toISOString();
+    }
+  }
+
+  return { counts, seen, lastAcceptedAt };
 }
 
 async function readPersistedStore(): Promise<PersistedBlogViews> {
@@ -135,6 +188,8 @@ async function getPersistedBlogViewCount(slug: string): Promise<BlogViewResult> 
     if (prunePersistedStore(store, Date.now())) await writePersistedStore(store);
     const views = parseCount(store.counts[slug]);
     localCounts.set(slug, views);
+    const timestamp = store.lastAcceptedAt[slug];
+    if (timestamp) localLastAcceptedAt.set(slug, timestamp);
     return { views, durable: true };
   });
 }
@@ -143,8 +198,8 @@ async function getPersistedBlogViewTotal(): Promise<BlogViewResult> {
   return withPersistentStore(async () => {
     const store = await readPersistedStore();
     if (prunePersistedStore(store, Date.now())) await writePersistedStore(store);
-    const views = Object.values(store.counts).reduce(
-      (total, count) => total + parseCount(count),
+    const views = getBlogViewSlugs().reduce(
+      (total, articleSlug) => total + parseCount(store.counts[articleSlug]),
       0,
     );
     return { views, durable: true };
@@ -165,12 +220,15 @@ async function recordPersistedBlogView(
     if (seenUntil <= now) {
       store.seen[seenKey] = now + SEEN_TTL_SECONDS * 1000;
       store.counts[slug] = parseCount(store.counts[slug]) + 1;
+      store.lastAcceptedAt[slug] = new Date(now).toISOString();
     }
 
     if (changedByPrune || seenUntil <= now) await writePersistedStore(store);
 
     const views = parseCount(store.counts[slug]);
     localCounts.set(slug, views);
+    const timestamp = store.lastAcceptedAt[slug];
+    if (timestamp) localLastAcceptedAt.set(slug, timestamp);
     return { views, durable: true };
   });
 }
@@ -190,7 +248,8 @@ function getBlogViewSlugs(): string[] {
       .readdirSync(blogContentDirectory)
       .filter((filename) => filename.endsWith(".mdx"))
       .map((filename) => filename.slice(0, -4))
-      .filter(isValidBlogSlug);
+      .filter(isValidBlogSlug)
+      .sort();
   } catch {
     return [];
   }
@@ -253,9 +312,9 @@ export async function getBlogViewCount(slug: string): Promise<BlogViewResult> {
   return { views: localCounts.get(slug) ?? 0, durable: false };
 }
 
-async function getKvBlogViewTotal(): Promise<number> {
-  const slugs = getBlogViewSlugs();
-  if (slugs.length === 0) return 0;
+async function getKvBlogViewCounts(slugs: string[]): Promise<Record<string, number>> {
+  const counts = Object.fromEntries(slugs.map((slug) => [slug, 0]));
+  if (slugs.length === 0) return counts;
 
   const chunks = Array.from({ length: Math.ceil(slugs.length / 50) }, (_, index) =>
     slugs.slice(index * 50, index * 50 + 50),
@@ -266,10 +325,55 @@ async function getKvBlogViewTotal(): Promise<number> {
     ),
   );
 
-  return values.reduce<number>((total, result) => {
-    if (!Array.isArray(result)) return total;
-    return total + result.reduce((chunkTotal, value) => chunkTotal + parseCount(value), 0);
-  }, 0);
+  values.forEach((result, chunkIndex) => {
+    if (!Array.isArray(result)) return;
+    const chunk = chunks[chunkIndex];
+    chunk.forEach((slug, valueIndex) => {
+      counts[slug] = parseCount(result[valueIndex]);
+    });
+  });
+
+  return counts;
+}
+
+async function getKvBlogViewTimestamps(slugs: string[]): Promise<Record<string, string | null>> {
+  const timestamps: Record<string, string | null> = Object.fromEntries(
+    slugs.map((slug) => [slug, null]),
+  );
+  if (slugs.length === 0) return timestamps;
+
+  const chunks = Array.from({ length: Math.ceil(slugs.length / 50) }, (_, index) =>
+    slugs.slice(index * 50, index * 50 + 50),
+  );
+  const values = await Promise.all(
+    chunks.map((chunk) =>
+      kvRestCommand([
+        "mget",
+        ...chunk.map((slug) => `blog:views:last-accepted:${slug}`),
+      ]),
+    ),
+  );
+
+  values.forEach((result, chunkIndex) => {
+    if (!Array.isArray(result)) return;
+    const chunk = chunks[chunkIndex];
+    chunk.forEach((slug, valueIndex) => {
+      const value = result[valueIndex];
+      timestamps[slug] = typeof value === "string" && Number.isFinite(Date.parse(value))
+        ? new Date(value).toISOString()
+        : null;
+    });
+  });
+
+  return timestamps;
+}
+
+async function getKvBlogViewTotal(): Promise<number> {
+  const counts = await getKvBlogViewCounts(getBlogViewSlugs());
+  return Object.values(counts).reduce(
+    (total, count) => total + parseCount(count),
+    0,
+  );
 }
 
 async function ensureKvBlogViewTotalInitialized(): Promise<void> {
@@ -308,8 +412,8 @@ export async function getTotalBlogViewCount(): Promise<BlogViewResult> {
     // Fall through to the bounded process-local counter if disk is unavailable.
   }
 
-  const views = Array.from(localCounts.values()).reduce(
-    (total, count) => total + parseCount(count),
+  const views = getBlogViewSlugs().reduce(
+    (total, slug) => total + parseCount(localCounts.get(slug)),
     0,
   );
   return { views, durable: false };
@@ -342,6 +446,11 @@ export async function recordBlogView(
       if (claimed === "OK") {
         // A transient total-key failure must not make us count the article twice.
         await kvRestCommand(["incr", blogViewTotalKey]).catch(() => undefined);
+        await kvRestCommand([
+          "set",
+          `blog:views:last-accepted:${slug}`,
+          new Date().toISOString(),
+        ]).catch(() => undefined);
       }
       const views = parseCount(value);
       localCounts.set(slug, views);
@@ -368,5 +477,125 @@ export async function recordBlogView(
   localSeen.set(localSeenKey, now + SEEN_TTL_SECONDS * 1000);
   const views = (localCounts.get(slug) ?? 0) + 1;
   localCounts.set(slug, views);
+  localLastAcceptedAt.set(slug, new Date(now).toISOString());
   return { views, durable: false };
+}
+
+const auditPolicy = {
+  version: "2026-09-03",
+  qualifyingEvent: "visible-page-8-seconds",
+  visibleSeconds: 8,
+  deduplication: "pseudonymous-reader-per-48-hours",
+  rawIpStored: false,
+} as const;
+
+async function getPersistedBlogViewAuditData(slugs: string[]) {
+  return withPersistentStore(async () => {
+    const store = await readPersistedStore();
+    if (prunePersistedStore(store, Date.now())) await writePersistedStore(store);
+
+    const counts: Record<string, number> = {};
+    const lastAcceptedAt: Record<string, string | null> = {};
+    for (const slug of slugs) {
+      counts[slug] = parseCount(store.counts[slug]);
+      const timestamp = store.lastAcceptedAt[slug];
+      lastAcceptedAt[slug] = timestamp && Number.isFinite(Date.parse(timestamp))
+        ? new Date(timestamp).toISOString()
+        : null;
+    }
+
+    return { counts, lastAcceptedAt };
+  });
+}
+
+/**
+ * Publicly inspectable snapshot for readers, operators and automated checks.
+ * The article list is derived from the English MDX directory on every request,
+ * so a newly published article is included without a counter migration.
+ */
+export async function getBlogViewAuditSnapshot(): Promise<BlogViewAuditSnapshot> {
+  const slugs = getBlogViewSlugs();
+  let counts: Record<string, number> = {};
+  let lastAcceptedAt: Record<string, string | null> = {};
+  let storageMode: BlogViewAuditSnapshot["storage"]["mode"] | null = null;
+  let durable = false;
+
+  if (hasKvRest()) {
+    try {
+      await ensureKvBlogViewTotalInitialized();
+      counts = await getKvBlogViewCounts(slugs);
+      lastAcceptedAt = await getKvBlogViewTimestamps(slugs);
+      storageMode = "kv";
+      durable = true;
+    } catch {
+      // Fall back to the local durable store if the KV service is unavailable.
+    }
+  }
+
+  if (!storageMode) {
+    try {
+      const persisted = await getPersistedBlogViewAuditData(slugs);
+      counts = persisted.counts;
+      lastAcceptedAt = persisted.lastAcceptedAt;
+      storageMode = "file";
+      durable = true;
+    } catch {
+      // The process-local snapshot remains available as an explicitly limited mode.
+    }
+  }
+
+  if (!storageMode) {
+    counts = Object.fromEntries(
+      slugs.map((slug) => [slug, parseCount(localCounts.get(slug))]),
+    );
+    lastAcceptedAt = Object.fromEntries(
+      slugs.map((slug) => [slug, localLastAcceptedAt.get(slug) ?? null]),
+    );
+    storageMode = "process";
+  }
+
+  const articles = slugs.map((slug) => ({
+    slug,
+    views: parseCount(counts[slug]),
+    lastAcceptedAt: lastAcceptedAt[slug] ?? null,
+  }));
+  const articleSum = articles.reduce((total, article) => total + article.views, 0);
+  const canonicalIntegrityInput = JSON.stringify({
+    policyVersion: auditPolicy.version,
+    articles,
+    articleSum,
+  });
+
+  return {
+    schemaVersion: "1.0",
+    generatedAt: new Date().toISOString(),
+    policy: auditPolicy,
+    storage: {
+      mode: storageMode,
+      durable,
+      shared: storageMode === "kv",
+    },
+    verification: {
+      status: storageMode === "kv" ? "verifiable" : "limited",
+      note: storageMode === "kv"
+        ? "Counts are read from the configured shared server-side KV store."
+        : storageMode === "file"
+          ? "The local server file survives a process restart when writable, but it is not shared across multiple application workers or deployments."
+          : "No shared durable store is configured; this snapshot reflects the current application process only.",
+    },
+    articleCount: articles.length,
+    totalReads: articleSum,
+    articleSum,
+    totalMatchesArticleSum: articleSum === articles.reduce(
+      (total, article) => total + article.views,
+      0,
+    ),
+    articles,
+    integrity: {
+      algorithm: "SHA-256",
+      input: "policy.version + articles + articleSum",
+      canonicalJson: canonicalIntegrityInput,
+      digest: createHash("sha256").update(canonicalIntegrityInput).digest("hex"),
+    },
+  };
 }

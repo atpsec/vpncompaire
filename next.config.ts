@@ -100,6 +100,18 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // The readership register is intentionally a public read-only data
+        // surface so external auditors can fetch it with CORS.
+        source: "/api/blog-readership-audit",
+        headers: [
+          privateNoStoreCacheHeader,
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Methods", value: "GET, OPTIONS" },
+          { key: "Access-Control-Allow-Headers", value: "Accept" },
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" },
+        ],
+      },
+      {
         source: "/go/:slug",
         headers: [
           privateNoStoreCacheHeader,

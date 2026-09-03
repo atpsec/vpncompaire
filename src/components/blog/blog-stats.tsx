@@ -1,6 +1,7 @@
 import { getBlogStats } from "@/lib/blog-stats";
 import type { Locale } from "@/lib/site";
 import { BlogTotalViewCounter } from "@/components/blog/blog-total-view-counter";
+import { Link } from "@/i18n/routing";
 
 type BlogStatsProps = {
   locale: Locale;
@@ -79,6 +80,13 @@ export async function BlogStats({ locale }: BlogStatsProps) {
         <span>{t.updated}:</span>
         <span className="font-semibold text-foreground">{formatDate(stats.latestUpdate)}</span>
       </div>
+
+      <Link
+        href="/research/blog-readership"
+        className="inline-flex items-center px-1 text-xs font-semibold text-brand-700 hover:underline"
+      >
+        Audit the counter →
+      </Link>
     </div>
   );
 }

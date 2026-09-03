@@ -46,9 +46,9 @@ const envSchema = z.object({
     .or(z.literal("")),
 
   // Upstash-compatible Redis REST credentials (optional). Used for distributed
-  // rate limiting and durable per-article readership totals. When absent,
-  // bounded process-local fallbacks keep requests working, but readership
-  // totals reset whenever the application process restarts.
+  // rate limiting and shared durable per-article readership totals. When
+  // absent, a server-file fallback keeps one instance working, but it is not
+  // shared across multiple application workers or deployments.
   KV_REST_API_URL: z.string().url().optional().or(z.literal("")),
   KV_REST_API_TOKEN: z.string().min(1).optional().or(z.literal("")),
   // Optional server-side path for the local durable blog-view fallback.
