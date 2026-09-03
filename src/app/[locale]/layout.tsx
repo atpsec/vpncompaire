@@ -21,6 +21,11 @@ const geistSans = Geist({
 
 export const viewport = rootViewport;
 
+// Keep the CDN from retaining a statically generated document for Next.js'
+// one-year default. Hostinger's edge cache otherwise served old page HTML
+// after deploys, which can leave visitors on a stale or broken release.
+export const revalidate = 3600;
+
 export function generateStaticParams() {
   return [{ locale: "en" }];
 }
