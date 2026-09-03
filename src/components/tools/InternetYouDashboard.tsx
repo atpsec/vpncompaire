@@ -7,6 +7,7 @@ import {
   Activity,
   ArrowRight,
   BookOpen,
+  CheckCircle2,
   CircleHelp,
   Clock3,
   Cookie,
@@ -23,6 +24,7 @@ import {
   Server,
   ShieldCheck,
   Smartphone,
+  Target,
   Tablet,
   Wifi,
   type LucideIcon,
@@ -145,6 +147,23 @@ type Copy = {
   exactLocation: string;
   exactLocationBody: string;
   privacyNote: string;
+  checkupKicker: string;
+  checkupTitle: string;
+  checkupSubtitle: string;
+  checkupOptionsLabel: string;
+  checkupVpnTitle: string;
+  checkupVpnBody: string;
+  checkupDnsTitle: string;
+  checkupDnsBody: string;
+  checkupWebrtcTitle: string;
+  checkupWebrtcBody: string;
+  checkupRecommendation: string;
+  checkupDuration: string;
+  checkupVpnAction: string;
+  checkupDnsAction: string;
+  checkupWebrtcAction: string;
+  checkupCompareAction: string;
+  checkupSaved: string;
 };
 
 type BrandIconName =
@@ -431,7 +450,7 @@ export function InternetYouDashboard({
         </div>
 
         <div className="relative mt-8 grid gap-3 lg:grid-cols-[minmax(0,1.35fr)_minmax(15rem,0.65fr)]">
-          <div className="min-w-0 rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75 sm:p-6">
+          <div className="flex h-full min-w-0 flex-col rounded-2xl border border-white/70 bg-white/80 p-5 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-surface-subtle/75 sm:p-6">
             <div className="flex items-start justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2 text-brand-700 dark:text-brand-300">
                 <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-brand-100/80 dark:bg-brand-900/50">
@@ -462,6 +481,11 @@ export function InternetYouDashboard({
                 notDetectedLabel={copy.notDetectedOnRequest}
               />
             </div>
+            <PrivacyCheckup
+              copy={copy}
+              baseline={baseline}
+              onSaveSnapshot={() => setBaseline(currentConnection)}
+            />
           </div>
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
             <SignalCard
@@ -632,6 +656,107 @@ export function InternetYouDashboard({
         <span>{copy.privacyNote}</span>
       </p>
     </div>
+  );
+}
+
+type CheckupId = "vpn" | "dns" | "webrtc";
+
+function PrivacyCheckup({
+  copy,
+  baseline,
+  onSaveSnapshot,
+}: {
+  copy: Copy;
+  baseline: ConnectionSnapshot | null;
+  onSaveSnapshot: () => void;
+}) {
+  const [selected, setSelected] = useState<CheckupId>("vpn");
+  const options: Array<{
+    id: CheckupId;
+    icon: LucideIcon;
+    title: string;
+    body: string;
+  }> = [
+    { id: "vpn", icon: Target, title: copy.checkupVpnTitle, body: copy.checkupVpnBody },
+    { id: "dns", icon: Server, title: copy.checkupDnsTitle, body: copy.checkupDnsBody },
+    { id: "webrtc", icon: Wifi, title: copy.checkupWebrtcTitle, body: copy.checkupWebrtcBody },
+  ];
+  const selectedOption = options.find((option) => option.id === selected) ?? options[0];
+
+  return (
+    <section className="mt-5 flex flex-1 flex-col rounded-2xl border border-brand-200/80 bg-brand-50/65 p-4 dark:border-brand-800/60 dark:bg-brand-950/25 sm:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex min-w-0 items-start gap-3">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-white/80 text-brand-700 shadow-sm dark:bg-brand-950/60 dark:text-brand-300">
+            <ShieldCheck className="size-5" aria-hidden="true" />
+          </div>
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-brand-700 dark:text-brand-300">{copy.checkupKicker}</p>
+            <h2 className="mt-1 text-lg font-bold tracking-tight text-ink-strong">{copy.checkupTitle}</h2>
+            <p className="mt-1 text-sm leading-relaxed text-ink-muted">{copy.checkupSubtitle}</p>
+          </div>
+        </div>
+        <span className="shrink-0 rounded-full border border-brand-200 bg-white/70 px-2.5 py-1 text-[11px] font-semibold text-brand-700 dark:border-brand-800 dark:bg-brand-950/50 dark:text-brand-300">{copy.checkupDuration}</span>
+      </div>
+
+      <div className="mt-4 grid gap-2 sm:grid-cols-3" role="group" aria-label={copy.checkupOptionsLabel}>
+        {options.map(({ id, icon: Icon, title, body }) => {
+          const isSelected = selected === id;
+          return (
+            <button
+              key={id}
+              type="button"
+              aria-pressed={isSelected}
+              onClick={() => setSelected(id)}
+              className={`flex min-w-0 items-start gap-2 rounded-xl border p-3 text-left transition ${isSelected ? "border-brand-400 bg-white shadow-sm dark:border-brand-600 dark:bg-surface-subtle" : "border-brand-200/70 bg-white/45 hover:border-brand-300 hover:bg-white/75 dark:border-brand-900/70 dark:bg-surface-base/30 dark:hover:border-brand-700"}`}
+            >
+              <Icon className={`mt-0.5 size-4 shrink-0 ${isSelected ? "text-brand-600 dark:text-brand-300" : "text-ink-muted"}`} aria-hidden="true" />
+              <span className="min-w-0">
+                <span className="block text-sm font-bold text-ink-strong">{title}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-ink-muted">{body}</span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-4 flex flex-1 flex-col justify-end rounded-xl border border-white/80 bg-white/70 p-3.5 dark:border-white/10 dark:bg-surface-subtle/70 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <div className="min-w-0">
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-brand-700 dark:text-brand-300">{copy.checkupRecommendation}</p>
+          <p className="mt-1 text-sm leading-relaxed text-ink-muted">{selectedOption.body}</p>
+          {selected === "vpn" && baseline ? (
+            <p className="mt-1 flex items-center gap-1 text-xs font-semibold text-success-700 dark:text-success-300">
+              <CheckCircle2 className="size-3.5" aria-hidden="true" />
+              {copy.checkupSaved}
+            </p>
+          ) : null}
+        </div>
+        <div className="mt-3 shrink-0 sm:mt-0">
+          {selected === "vpn" ? (
+            baseline ? (
+              <Button asChild variant="secondary" size="sm">
+                <a href="#connection-comparison">
+                  {copy.checkupCompareAction}
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </a>
+              </Button>
+            ) : (
+              <Button type="button" variant="primary" size="sm" onClick={onSaveSnapshot}>
+                {copy.checkupVpnAction}
+                <Save className="size-4" aria-hidden="true" />
+              </Button>
+            )
+          ) : (
+            <Button asChild variant="primary" size="sm">
+              <Link href={selected === "dns" ? "/tools/dns-leak-test" : "/tools/webrtc-leak-test"}>
+                {selected === "dns" ? copy.checkupDnsAction : copy.checkupWebrtcAction}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </Button>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
 

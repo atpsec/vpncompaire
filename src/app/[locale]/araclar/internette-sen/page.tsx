@@ -169,6 +169,23 @@ export default async function Page({ params }: Props) {
     exactLocation: t("exactLocation"),
     exactLocationBody: t("exactLocationBody"),
     privacyNote: t("privacyNote"),
+    checkupKicker: t("checkupKicker"),
+    checkupTitle: t("checkupTitle"),
+    checkupSubtitle: t("checkupSubtitle"),
+    checkupOptionsLabel: t("checkupOptionsLabel"),
+    checkupVpnTitle: t("checkupVpnTitle"),
+    checkupVpnBody: t("checkupVpnBody"),
+    checkupDnsTitle: t("checkupDnsTitle"),
+    checkupDnsBody: t("checkupDnsBody"),
+    checkupWebrtcTitle: t("checkupWebrtcTitle"),
+    checkupWebrtcBody: t("checkupWebrtcBody"),
+    checkupRecommendation: t("checkupRecommendation"),
+    checkupDuration: t("checkupDuration"),
+    checkupVpnAction: t("checkupVpnAction"),
+    checkupDnsAction: t("checkupDnsAction"),
+    checkupWebrtcAction: t("checkupWebrtcAction"),
+    checkupCompareAction: t("checkupCompareAction"),
+    checkupSaved: t("checkupSaved"),
   };
 
   const webAppSchema = {
