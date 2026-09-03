@@ -19,6 +19,12 @@ const intlMiddleware = createMiddleware(routing);
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // The phone-like private-space demo is a standalone app route and does not
+  // participate in the site's locale URL system.
+  if (pathname === "/phone" || pathname.startsWith("/phone/")) {
+    return NextResponse.next();
+  }
+
   // The site is now English-only. Keep old Turkish and German URLs useful by
   // redirecting each path to its English equivalent before next-intl runs.
   const legacyLocaleTarget = resolveLegacyLocaleRedirect(pathname);

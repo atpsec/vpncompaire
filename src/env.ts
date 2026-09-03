@@ -54,6 +54,8 @@ const envSchema = z.object({
   // Optional server-side path for the local durable blog-view fallback.
   // Keep this outside public/; the default is a hidden runtime directory.
   BLOG_VIEW_STORE_PATH: z.string().min(1).optional().or(z.literal("")),
+  // Optional durable store path for the standalone phone-space account data.
+  PHONE_AUTH_STORE_PATH: z.string().min(1).optional().or(z.literal("")),
 
   // Optional Have I Been Pwned API key for the email security checker.
   // Kept server-side only. When absent, the tool still runs DNS/auth checks
@@ -91,6 +93,7 @@ const parsed = envSchema.safeParse({
   KV_REST_API_URL: process.env.KV_REST_API_URL,
   KV_REST_API_TOKEN: process.env.KV_REST_API_TOKEN,
   BLOG_VIEW_STORE_PATH: process.env.BLOG_VIEW_STORE_PATH,
+  PHONE_AUTH_STORE_PATH: process.env.PHONE_AUTH_STORE_PATH,
   HIBP_API_KEY: process.env.HIBP_API_KEY,
   AFFILIATE_NORDVPN_URL: process.env.AFFILIATE_NORDVPN_URL,
   AFFILIATE_SURFSHARK_URL: process.env.AFFILIATE_SURFSHARK_URL,
