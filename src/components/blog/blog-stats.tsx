@@ -1,5 +1,6 @@
 import { getBlogStats } from "@/lib/blog-stats";
 import type { Locale } from "@/lib/site";
+import { BlogTotalViewCounter } from "@/components/blog/blog-total-view-counter";
 
 type BlogStatsProps = {
   locale: Locale;
@@ -11,6 +12,8 @@ export async function BlogStats({ locale }: BlogStatsProps) {
   const labels = {
     tr: {
       posts: "Blog Yazısı",
+      totalViews: "Toplam Okunma",
+      totalViewsLoading: "Okunma yükleniyor",
       categories: "Kategori",
       avgReading: "Ort. Okuma",
       minutes: "dk",
@@ -18,6 +21,8 @@ export async function BlogStats({ locale }: BlogStatsProps) {
     },
     en: {
       posts: "Blog Posts",
+      totalViews: "Total article reads",
+      totalViewsLoading: "Loading total reads…",
       categories: "Categories",
       avgReading: "Avg. Reading",
       minutes: "min",
@@ -25,6 +30,8 @@ export async function BlogStats({ locale }: BlogStatsProps) {
     },
     de: {
       posts: "Blogbeiträge",
+      totalViews: "Gesamte Aufrufe",
+      totalViewsLoading: "Aufrufe werden geladen",
       categories: "Kategorien",
       avgReading: "Ø Lesezeit",
       minutes: "Min.",
@@ -51,6 +58,12 @@ export async function BlogStats({ locale }: BlogStatsProps) {
         <span className="font-semibold text-foreground">{stats.totalPosts}</span>
         <span>{t.posts}</span>
       </div>
+
+      <BlogTotalViewCounter
+        label={t.totalViews}
+        loadingLabel={t.totalViewsLoading}
+        locale={locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US"}
+      />
 
       <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/50 px-3 py-1">
         <span className="font-semibold text-foreground">{stats.categories.length}</span>

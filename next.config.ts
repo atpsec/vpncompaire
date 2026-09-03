@@ -54,6 +54,18 @@ const securityHeaders = [
   { key: "Origin-Agent-Cluster", value: "?1" },
 ];
 
+const publicDocumentCacheHeader = {
+  // Keep public documents fast while forcing the edge to revalidate instead
+  // of serving a stale HTML release for Next.js' default one-year window.
+  key: "Cache-Control",
+  value: "public, max-age=0, must-revalidate, s-maxage=3600",
+};
+
+const privateNoStoreCacheHeader = {
+  key: "Cache-Control",
+  value: "private, no-store, no-cache, must-revalidate, max-age=0",
+};
+
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
   poweredByHeader: false,
@@ -73,14 +85,14 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        headers: securityHeaders,
+        headers: [...securityHeaders, publicDocumentCacheHeader],
       },
       {
         // JSON endpoints can contain request-specific diagnostics. Keep them
         // private even if an upstream cache ignores the route handler signal.
         source: "/api/:path*",
         headers: [
-          { key: "Cache-Control", value: "private, no-store, no-cache, must-revalidate, max-age=0" },
+          privateNoStoreCacheHeader,
           { key: "Content-Security-Policy", value: "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'" },
           { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
           { key: "Referrer-Policy", value: "no-referrer" },
@@ -90,7 +102,7 @@ const nextConfig: NextConfig = {
       {
         source: "/go/:slug",
         headers: [
-          { key: "Cache-Control", value: "no-store, no-cache, must-revalidate" },
+          privateNoStoreCacheHeader,
           { key: "Referrer-Policy", value: "no-referrer" },
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
         ],
@@ -100,8 +112,35 @@ const nextConfig: NextConfig = {
         // serve one visitor's snapshot to another visitor.
         source: "/tools/what-websites-can-see",
         headers: [
-          { key: "Cache-Control", value: "private, no-store, max-age=0" },
+          privateNoStoreCacheHeader,
         ],
+      },
+      {
+        // These localized routes render request-specific IP/geo data.
+        source: "/:locale/araclar/ip-adresim",
+        headers: [privateNoStoreCacheHeader],
+      },
+      {
+        source: "/tools/ip-adresim",
+        headers: [privateNoStoreCacheHeader],
+      },
+      {
+        source: "/tools/my-ip",
+        headers: [privateNoStoreCacheHeader],
+      },
+      {
+        source: "/:locale/araclar/internette-sen",
+        headers: [privateNoStoreCacheHeader],
+      },
+      {
+        // Provider profiles intentionally remain dynamic so a deployment does
+        // not leave stale pricing, metadata or source labels at the edge.
+        source: "/:locale/inceleme/:slug*",
+        headers: [privateNoStoreCacheHeader],
+      },
+      {
+        source: "/reviews/:slug*",
+        headers: [privateNoStoreCacheHeader],
       },
     ];
   },

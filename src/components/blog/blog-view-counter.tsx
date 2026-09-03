@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 const ENGAGED_READER_DELAY_MS = 8_000;
 const recordedThisTab = new Set<string>();
+const pendingRecordRequests = new Map<string, Promise<number | null>>();
 
 type ViewResponse = {
   views?: unknown;
@@ -24,6 +25,7 @@ async function requestCount(slug: string, method: "GET" | "POST"): Promise<numbe
       cache: "no-store",
       credentials: "same-origin",
       headers: { Accept: "application/json" },
+      keepalive: method === "POST",
       referrerPolicy: "no-referrer",
     });
     if (!response.ok) return null;
@@ -31,6 +33,17 @@ async function requestCount(slug: string, method: "GET" | "POST"): Promise<numbe
   } catch {
     return null;
   }
+}
+
+function recordCountOnce(slug: string): Promise<number | null> {
+  const pending = pendingRecordRequests.get(slug);
+  if (pending) return pending;
+
+  const request = requestCount(slug, "POST").finally(() => {
+    pendingRecordRequests.delete(slug);
+  });
+  pendingRecordRequests.set(slug, request);
+  return request;
 }
 
 export function BlogViewCounter({ slug }: { slug: string }) {
@@ -56,11 +69,14 @@ export function BlogViewCounter({ slug }: { slug: string }) {
 
       timerId = window.setTimeout(() => {
         recordedThisTab.add(slug);
-        void requestCount(slug, "POST").then((count) => {
+        void recordCountOnce(slug).then((count) => {
           if (active && count !== null) {
             setViews(count);
           } else if (count === null) {
             recordedThisTab.delete(slug);
+            // A transient network/KV failure should not permanently disable
+            // this article's counter for the current visit.
+            if (active) startTimer();
           }
         });
       }, ENGAGED_READER_DELAY_MS);

@@ -13,6 +13,9 @@ const LOCAL_SEEN_MAX_ENTRIES = 20_000;
 const PERSISTED_SEEN_MAX_ENTRIES = 20_000;
 const MAX_PERSISTED_STORE_BYTES = 5 * 1024 * 1024;
 const processSecret = randomBytes(32).toString("hex");
+const blogContentDirectory = path.join(process.cwd(), "src", "content", "blog", "en");
+const blogViewTotalKey = "blog:views:total";
+const blogViewTotalInitializedKey = "blog:views:total:initialized";
 const persistentStorePath = env.BLOG_VIEW_STORE_PATH
   ? path.isAbsolute(env.BLOG_VIEW_STORE_PATH)
     ? env.BLOG_VIEW_STORE_PATH
@@ -136,6 +139,18 @@ async function getPersistedBlogViewCount(slug: string): Promise<BlogViewResult> 
   });
 }
 
+async function getPersistedBlogViewTotal(): Promise<BlogViewResult> {
+  return withPersistentStore(async () => {
+    const store = await readPersistedStore();
+    if (prunePersistedStore(store, Date.now())) await writePersistedStore(store);
+    const views = Object.values(store.counts).reduce(
+      (total, count) => total + parseCount(count),
+      0,
+    );
+    return { views, durable: true };
+  });
+}
+
 async function recordPersistedBlogView(
   slug: string,
   readerToken: string,
@@ -166,7 +181,19 @@ export function isValidBlogSlug(slug: string): boolean {
 
 export function blogSlugExists(slug: string): boolean {
   if (!isValidBlogSlug(slug)) return false;
-  return fs.existsSync(path.join(process.cwd(), "src", "content", "blog", "en", `${slug}.mdx`));
+  return fs.existsSync(path.join(blogContentDirectory, `${slug}.mdx`));
+}
+
+function getBlogViewSlugs(): string[] {
+  try {
+    return fs
+      .readdirSync(blogContentDirectory)
+      .filter((filename) => filename.endsWith(".mdx"))
+      .map((filename) => filename.slice(0, -4))
+      .filter(isValidBlogSlug);
+  } catch {
+    return [];
+  }
 }
 
 function parseCount(value: unknown): number {
@@ -226,6 +253,68 @@ export async function getBlogViewCount(slug: string): Promise<BlogViewResult> {
   return { views: localCounts.get(slug) ?? 0, durable: false };
 }
 
+async function getKvBlogViewTotal(): Promise<number> {
+  const slugs = getBlogViewSlugs();
+  if (slugs.length === 0) return 0;
+
+  const chunks = Array.from({ length: Math.ceil(slugs.length / 50) }, (_, index) =>
+    slugs.slice(index * 50, index * 50 + 50),
+  );
+  const values = await Promise.all(
+    chunks.map((chunk) =>
+      kvRestCommand(["mget", ...chunk.map((slug) => `blog:views:${slug}`)]),
+    ),
+  );
+
+  return values.reduce<number>((total, result) => {
+    if (!Array.isArray(result)) return total;
+    return total + result.reduce((chunkTotal, value) => chunkTotal + parseCount(value), 0);
+  }, 0);
+}
+
+async function ensureKvBlogViewTotalInitialized(): Promise<void> {
+  const initialized = await kvRestCommand(["get", blogViewTotalInitializedKey]);
+  if (initialized !== null) return;
+
+  const views = await getKvBlogViewTotal();
+  await kvRestCommand(["set", blogViewTotalKey, String(views), "nx"]);
+  await kvRestCommand(["set", blogViewTotalInitializedKey, "1", "nx"]);
+}
+
+export async function getTotalBlogViewCount(): Promise<BlogViewResult> {
+  if (hasKvRest()) {
+    try {
+      const initialized = await kvRestCommand(["get", blogViewTotalInitializedKey]);
+      if (initialized !== null) {
+        const current = await kvRestCommand(["get", blogViewTotalKey]);
+        return { views: parseCount(current), durable: true };
+      }
+
+      // Older deployments only stored per-article keys. Backfill the aggregate
+      // once from those keys, without overwriting a concurrent new increment.
+      const views = await getKvBlogViewTotal();
+      await kvRestCommand(["set", blogViewTotalKey, String(views), "nx"]);
+      await kvRestCommand(["set", blogViewTotalInitializedKey, "1", "nx"]);
+      const current = await kvRestCommand(["get", blogViewTotalKey]);
+      return { views: parseCount(current ?? views), durable: true };
+    } catch {
+      // Keep the blog index available during a short KV outage.
+    }
+  }
+
+  try {
+    return await getPersistedBlogViewTotal();
+  } catch {
+    // Fall through to the bounded process-local counter if disk is unavailable.
+  }
+
+  const views = Array.from(localCounts.values()).reduce(
+    (total, count) => total + parseCount(count),
+    0,
+  );
+  return { views, durable: false };
+}
+
 export async function recordBlogView(
   slug: string,
   readerToken: string,
@@ -242,9 +331,18 @@ export async function recordBlogView(
         String(SEEN_TTL_SECONDS),
         "nx",
       ]);
+      if (claimed === "OK") {
+        // Initialize from historical per-article keys before the first new
+        // increment so the aggregate never starts below the existing total.
+        await ensureKvBlogViewTotalInitialized().catch(() => undefined);
+      }
       const value = claimed === "OK"
         ? await kvRestCommand(["incr", `blog:views:${slug}`])
         : await kvRestCommand(["get", `blog:views:${slug}`]);
+      if (claimed === "OK") {
+        // A transient total-key failure must not make us count the article twice.
+        await kvRestCommand(["incr", blogViewTotalKey]).catch(() => undefined);
+      }
       const views = parseCount(value);
       localCounts.set(slug, views);
       return { views, durable: true };
