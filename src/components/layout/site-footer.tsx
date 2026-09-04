@@ -31,6 +31,14 @@ export function SiteFooter() {
               {t("tagline")}
             </p>
 
+            <div className="mt-6">
+              <a href="https://www.scrolllaunch.com/products/vpn-advisor?ref=badge" target="_blank" rel="noopener">
+                {/* Keep the partner-provided embed exact so it remains in the server HTML. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://www.scrolllaunch.com/api/badge/vpn-advisor" alt="Featured on ScrollLaunch" width="220" height="48" loading="lazy" />
+              </a>
+            </div>
+
             {SOCIAL_LINKS_ENABLED && (
               <div className="mt-5">
                 <p className="text-xs font-semibold uppercase tracking-wide text-ink-muted">
