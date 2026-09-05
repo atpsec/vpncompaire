@@ -61,6 +61,14 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 text-sm">
               <li>
                 <Link
+                  href="/blog"
+                  className="text-ink-muted hover:text-ink"
+                >
+                  {tNav("blog")}
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/vpn-reviews"
                   className="text-ink-muted hover:text-ink"
                 >
