@@ -14,6 +14,7 @@ type Labels = {
   experimentalBody: string;
   tryAgain: string;
   unknown: string;
+  noResponseHint: string;
   observedAnswers: string;
   answerCount: string;
   ttl: string;
@@ -111,9 +112,14 @@ export function DnsLeakTester({ labels }: { labels: Labels }) {
               {labels.answerCount}: {uniqueAnswers.size}
             </p>
             {records.length === 0 ? (
-              <p className="mt-2 font-mono text-sm text-ink-muted">
-                {labels.unknown}
-              </p>
+              <>
+                <p className="mt-2 font-mono text-sm text-ink-muted">
+                  {labels.unknown}
+                </p>
+                <p className="mt-2 text-sm text-ink-muted">
+                  {labels.noResponseHint}
+                </p>
+              </>
             ) : (
               <ul className="mt-3 space-y-2">
                 {records.map((record) => (

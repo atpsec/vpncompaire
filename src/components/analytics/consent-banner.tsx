@@ -51,8 +51,10 @@ function useMounted(): boolean {
 export function ConsentBanner({ locale }: { locale: SupportedLocale }) {
   const copy = COPY[locale];
   const mounted = useMounted();
+  // English is the default locale and uses the unprefixed canonical route.
+  // Keeping the link unprefixed avoids a needless 301 before the policy opens.
   const cookiePolicyHref =
-    locale === "tr" ? "/cookie-policy" : `/${locale}/cookie-policy`;
+    locale === "en" || locale === "tr" ? "/cookie-policy" : `/${locale}/cookie-policy`;
 
   // Lazy initializer — ilk render'dan önce localStorage'ı okur.
   const [decided, setDecided] = useState<boolean>(() => {

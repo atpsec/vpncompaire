@@ -12,6 +12,27 @@ const defaultSiteUrl = process.env.NODE_ENV === "production"
   ? "https://vpnadvisor.net"
   : "http://localhost:3000";
 
+// A local, legacy or wrong-domain value can accidentally be copied into a
+// production hosting panel. It then leaks into canonical tags, JSON-LD,
+// sitemap.xml and robots.txt even though the app is being served from the
+// public domain. Keep local URLs useful in development while making the
+// single production domain safe by default.
+function isCanonicalProductionUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && url.hostname.toLowerCase() === "vpnadvisor.net" && url.pathname === "/";
+  } catch {
+    return false;
+  }
+}
+
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const siteUrlInput =
+  process.env.NODE_ENV === "production" &&
+  (!configuredSiteUrl || !isCanonicalProductionUrl(configuredSiteUrl))
+    ? defaultSiteUrl
+    : configuredSiteUrl;
+
 const envSchema = z.object({
   NEXT_PUBLIC_SITE_NAME: z
     .string()
@@ -90,7 +111,7 @@ const envSchema = z.object({
 const parsed = envSchema.safeParse({
   NEXT_PUBLIC_SITE_NAME: process.env.NEXT_PUBLIC_SITE_NAME,
   NEXT_PUBLIC_SITE_BRAND: process.env.NEXT_PUBLIC_SITE_BRAND,
-  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+  NEXT_PUBLIC_SITE_URL: siteUrlInput,
   NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
   BING_SITE_VERIFICATION: process.env.BING_SITE_VERIFICATION,
   NEXT_PUBLIC_ADSENSE_CLIENT_ID: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID,

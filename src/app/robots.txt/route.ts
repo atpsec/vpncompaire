@@ -101,6 +101,12 @@ Sitemap: ${siteConfig.url}/sitemap.xml
 `;
 
   return new Response(body, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      // Robots is a small SEO control plane document. Revalidate it quickly
+      // so a domain or crawler-policy fix is not held for a full page-cache
+      // window after deployment.
+      "Cache-Control": "public, max-age=0, s-maxage=300, must-revalidate",
+    },
   });
 }

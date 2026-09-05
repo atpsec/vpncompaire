@@ -132,6 +132,11 @@ export async function GET() {
   ).join("\n")}\n</urlset>`;
 
   return new Response(xml, {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      // Keep sitemap changes discoverable shortly after a content or domain
+      // update while still allowing a short shared-cache lifetime.
+      "Cache-Control": "public, max-age=0, s-maxage=600, must-revalidate",
+    },
   });
 }

@@ -376,10 +376,41 @@ async function getKvBlogViewTotal(): Promise<number> {
   );
 }
 
+/**
+ * Move counts from the local fallback into KV once, if both stores are
+ * available during the first KV-backed request. The NX guard preserves any
+ * value that was already written to KV and avoids copying deduplication tokens
+ * or raw request data.
+ */
+async function migratePersistedCountsToKv(): Promise<void> {
+  let store: PersistedBlogViews;
+  try {
+    store = await readPersistedStore();
+  } catch {
+    return;
+  }
+
+  const candidates = Object.entries(store.counts).filter(
+    ([slug, count]) => isValidBlogSlug(slug) && parseCount(count) > 0,
+  );
+  if (candidates.length === 0) return;
+
+  const slugs = candidates.map(([slug]) => slug);
+  const existing = await getKvBlogViewCounts(slugs);
+  await Promise.all(
+    candidates
+      .filter(([slug]) => parseCount(existing[slug]) === 0)
+      .map(([slug, count]) =>
+        kvRestCommand(["set", `blog:views:${slug}`, String(parseCount(count)), "nx"]),
+      ),
+  );
+}
+
 async function ensureKvBlogViewTotalInitialized(): Promise<void> {
   const initialized = await kvRestCommand(["get", blogViewTotalInitializedKey]);
   if (initialized !== null) return;
 
+  await migratePersistedCountsToKv();
   const views = await getKvBlogViewTotal();
   await kvRestCommand(["set", blogViewTotalKey, String(views), "nx"]);
   await kvRestCommand(["set", blogViewTotalInitializedKey, "1", "nx"]);
@@ -395,7 +426,9 @@ export async function getTotalBlogViewCount(): Promise<BlogViewResult> {
       }
 
       // Older deployments only stored per-article keys. Backfill the aggregate
-      // once from those keys, without overwriting a concurrent new increment.
+      // once from those keys, and migrate a local fallback file if it is still
+      // available, without overwriting a concurrent new increment.
+      await migratePersistedCountsToKv();
       const views = await getKvBlogViewTotal();
       await kvRestCommand(["set", blogViewTotalKey, String(views), "nx"]);
       await kvRestCommand(["set", blogViewTotalInitializedKey, "1", "nx"]);

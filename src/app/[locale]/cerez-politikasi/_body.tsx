@@ -34,9 +34,11 @@ export function EnBody() {
           vpnadvisor.net <strong>sets no non-essential cookie without your
           consent</strong>. We use Google Analytics to measure traffic, but
           it only activates when you click{" "}
-          <strong>&quot;Accept&quot;</strong> on the cookie banner. We also
-          use a single <strong>strictly necessary (functional) cookie</strong>{" "}
-          to remember your language. This page explains all of them.
+          <strong>&quot;Accept&quot;</strong> on the analytics banner. If
+          AdSense is enabled, Google&apos;s certified CMP handles advertising
+          consent separately. We also use a single{" "}
+          <strong>strictly necessary (functional) cookie</strong> to remember
+          your language. This page explains all of them.
         </p>
       </Card>
 
@@ -220,8 +222,8 @@ export function EnBody() {
           <li>
             For visitors in the European Economic Area, the United Kingdom and
             Switzerland, personalised advertising and measurement cookies are
-            enabled <strong>only with explicit consent</strong> (Google
-            Consent Mode v2)
+            enabled <strong>only with explicit consent</strong> through
+            Google&apos;s certified CMP (Google Consent Mode v2).
           </li>
           <li>
             Without consent, Google may serve limited or non-personalised ads
@@ -237,13 +239,13 @@ export function EnBody() {
         <p>
           Under Turkey (KVKK), EU (GDPR/ePrivacy), and UK (PECR)
           regulations, <strong>non-essential cookies require explicit
-          consent</strong>. That is why we show a{" "}
-          <strong>cookie consent banner</strong> for analytics (Google
-          Analytics) and advertising (Google AdSense) cookies; they are not
-          set until you click &quot;Accept&quot;. The <code>NEXT_LOCALE</code> language cookie is
-          &quot;strictly necessary&quot; and needs no consent. Your choice is
-          stored in your browser; clear your browser data to see the banner
-          again and change your preference.
+          consent</strong>. The site banner controls analytics storage for
+          Google Analytics. If AdSense is enabled, Google&apos;s certified CMP
+          controls advertising consent separately; accepting the analytics
+          banner does not grant advertising consent. The <code>NEXT_LOCALE</code>
+          language cookie is &quot;strictly necessary&quot; and needs no consent.
+          Your choices are stored in your browser; clear your browser data to
+          see the banners again and change them.
         </p>
 
         <h2>4. How to delete the data</h2>

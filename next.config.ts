@@ -88,6 +88,27 @@ const nextConfig: NextConfig = {
         headers: [...securityHeaders, publicDocumentCacheHeader],
       },
       {
+        // Keep crawler control documents fresher than ordinary content. A
+        // stale robots or sitemap response can preserve a retired domain or
+        // URL set after the application itself has been redeployed.
+        source: "/robots.txt",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate, s-maxage=300" },
+        ],
+      },
+      {
+        source: "/sitemap.xml",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate, s-maxage=600" },
+        ],
+      },
+      {
+        source: "/sitemap-vpn-providers.xml",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate, s-maxage=600" },
+        ],
+      },
+      {
         // JSON endpoints can contain request-specific diagnostics. Keep them
         // private even if an upstream cache ignores the route handler signal.
         source: "/api/:path*",

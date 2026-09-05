@@ -61,6 +61,7 @@ function DnsLeakView() {
     experimentalBody: t("experimentalBody"),
     tryAgain: tCommon("tryAgain"),
     unknown: t("unknown"),
+    noResponseHint: t("noResponseHint"),
     observedAnswers: t("observedAnswers"),
     answerCount: t("answerCount"),
     ttl: t("ttl"),

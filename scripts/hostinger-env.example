@@ -1,10 +1,16 @@
 # Hostinger hPanel → Node.js Apps → Environment variables
-# Production values for atpaivideo.com (copy each line into hPanel)
+# Production values for vpnadvisor.net (copy each line into hPanel)
 
-NEXT_PUBLIC_SITE_URL=https://atpaivideo.com
+NEXT_PUBLIC_SITE_URL=https://vpnadvisor.net
 NEXT_PUBLIC_SITE_NAME=VPN Advisor
 NEXT_PUBLIC_SITE_BRAND=VPN Advisor
 NEXT_PUBLIC_GA_ID=G-QLM2QBB9S4
 BING_SITE_VERIFICATION=
 NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-8715861903175610
+# Required for shared, redeploy-safe readership counts. Create an
+# Upstash-compatible Redis database and copy these two values from its REST
+# credentials; leaving them empty falls back to the local .runtime file.
+KV_REST_API_URL=
+KV_REST_API_TOKEN=
+BLOG_VIEW_STORE_PATH=.runtime/blog-views.json
 PHONE_AUTH_STORE_PATH=.runtime/phone-auth.json

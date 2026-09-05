@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, RotateCcw, Sparkles, Check } from "lucide-react";
 import { Link } from "@/i18n/routing";
@@ -92,6 +92,7 @@ export function VPNQuiz() {
   const locale = useLocale() as Locale;
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [showResult, setShowResult] = useState(false);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const currentIdx = QUESTIONS.findIndex((q) => answers[q.id] === undefined);
   const allAnswered = currentIdx === -1;
@@ -119,6 +120,21 @@ export function VPNQuiz() {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3);
 
+  // The result replaces the quiz in the DOM, so keyboard and mobile users
+  // should be taken directly to the new content instead of being left at the
+  // old "Show result" button near the bottom of a long page.
+  useEffect(() => {
+    if (!showResult || matches.length === 0) return;
+    const frame = window.requestAnimationFrame(() => {
+      const result = resultRef.current;
+      if (!result) return;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      result.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      result.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [showResult, matches.length]);
+
   if (showResult && matches.length > 0) {
     const top = matches[0];
     const product = getProduct(top[0], locale);
@@ -127,7 +143,12 @@ export function VPNQuiz() {
       product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
 
     return (
-      <div className="mt-8">
+      <div
+        ref={resultRef}
+        tabIndex={-1}
+        aria-labelledby="quiz-result-heading"
+        className="mt-8 outline-none"
+      >
         <Card className="p-8 border-brand-300 bg-gradient-to-br from-brand-50/60 to-accent-50/40">
           <div className="flex items-center gap-2 text-sm font-medium text-brand-700">
             <Sparkles className="size-4" />
@@ -137,7 +158,7 @@ export function VPNQuiz() {
           <div className="mt-4 flex items-center gap-4">
             <VPNLogo slug={product.slug} size={88} />
             <div>
-              <h2 className="text-3xl font-bold text-ink-strong">
+              <h2 id="quiz-result-heading" className="text-3xl font-bold text-ink-strong">
                 {product.brand}
               </h2>
               <p className="text-sm text-ink-muted">{product.positioning}</p>
