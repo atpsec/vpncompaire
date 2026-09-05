@@ -1,0 +1,86 @@
+---
+slug: "mullvad-public-encrypted-dns-quad9-2026"
+title: "Mullvad Is Shutting Down Its Public Encrypted DNS: What Changes Before November 2026?"
+description: "Mullvad will retire its public encrypted DNS service and sponsor Quad9 instead. Here is who needs to migrate, what browser and Apple users should do, and what does not change."
+publishedAt: "2026-09-05"
+updatedAt: "2026-09-05"
+author: "VPN Advisor"
+category: "gizlilik-guvenlik"
+tags: ["Mullvad", "DNS over HTTPS", "DoH", "Quad9", "privacy", "2026"]
+readingTime: 7
+coverImage: "dns-over-https"
+unsplashKeyword: "encrypted DNS network privacy"
+---
+
+Mullvad has announced that it will shut down its public encrypted DNS service and support Quad9 instead. The change is scheduled for **November 2, 2026**. It affects people who use Mullvad's public DNS outside the Mullvad VPN, not the private DNS resolver built into an active Mullvad VPN connection.
+
+This is a service handover rather than the end of encrypted DNS. Mullvad says it wants to direct its resources toward sponsoring Quad9, a non-profit resolver that specializes in public DNS privacy and threat blocking. The practical question for users is whether they configured Mullvad DNS manually, use Mullvad Browser's defaults, or installed an Apple configuration profile.
+
+## Quick verdict
+
+- **Mullvad VPN users:** Mullvad says its VPN's internal DNS continues to handle DNS queries while the VPN is active.
+- **Mullvad Browser users:** default DoH settings and the included ad-blocking configuration should migrate to Quad9 automatically.
+- **Custom Mullvad Browser DNS settings:** they will not be changed automatically; review and replace them yourself.
+- **Manual iOS and macOS profiles:** existing Mullvad DoH profiles will stop working and need to be replaced.
+- **Everyone else:** if a device, router or browser points to Mullvad's public DoH endpoint, change it before the deadline.
+
+Mullvad's [original announcement](https://mullvad.net/en/blog/2026/9/3/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead) is the source for the date and migration behavior. Settings and product behavior can change, so use the provider documentation linked below when applying the change.
+
+## What exactly is changing?
+
+Mullvad has operated public encrypted DNS-over-HTTPS (DoH) servers since 2022. A public resolver can answer domain lookups for people who are not using a particular VPN. Encrypting the DNS connection helps prevent the local network or internet service provider from reading ordinary, unencrypted DNS requests, although it does not make the rest of the connection anonymous.
+
+Mullvad says public DNS is not necessary when its VPN is connected because the VPN tunnel already encrypts traffic and the Mullvad VPN client handles DNS internally. The shutdown therefore targets the separately operated public resolver service. It does not mean Mullvad VPN connections will suddenly use ordinary ISP DNS by default.
+
+The deadline matters because manually configured endpoints may simply stop resolving after November 2. A browser or operating system can then fall back to another resolver, or lose DNS resolution entirely, depending on its configuration.
+
+## Who needs to take action?
+
+### Mullvad Browser defaults
+
+Mullvad says users who kept the browser's default DoH configuration, including its included ad-blocking configuration, will be migrated to Quad9 automatically. That is the lowest-friction path, but it is still worth checking the browser's DNS setting after an update or migration. Users who customized DoH settings should not assume that Mullvad will overwrite them.
+
+### iOS and macOS profiles
+
+The announcement says existing Mullvad DoH profiles for iOS and macOS will stop working. Replace them with the corresponding [Quad9 iOS guide](https://docs.quad9.net/Setup_Guides/iOS/iOS_14_and_later_%28Encrypted%29/) or [Quad9 macOS guide](https://docs.quad9.net/Setup_Guides/MacOS/Big_Sur_and_later_%28Encrypted%29/) before the deadline.
+
+Quad9's documentation also warns that a DNS profile is not necessarily used when iCloud Private Relay or most VPN clients are active. On iOS and macOS, follow the VPN provider's instructions if you want Quad9 to resolve queries inside a VPN tunnel rather than at the operating-system level.
+
+### Manual device, router or browser settings
+
+If you entered a Mullvad DNS address yourself, find that setting and replace it with a current Quad9 configuration. Quad9's [service-address documentation](https://quad9.net/service/service-addresses-and-features/) lists the recommended threat-blocking and DNSSEC-validating service, including:
+
+- IPv4: `9.9.9.9` and `149.112.112.112`
+- IPv6: `2620:fe::fe` and `2620:fe::9`
+- DoH: `https://dns.quad9.net/dns-query`
+- DoT: `tls://dns.quad9.net`
+
+Use all addresses required by your device or router, and follow the official setup guide for the platform. Do not paste a DoH URL into a field that expects a plain IP address.
+
+## What Quad9 adds — and what it does not
+
+Quad9 is a Swiss-based non-profit public DNS operator. Its recommended resolver combines DNSSEC validation with threat blocking. Quad9 says it supports DoH, DNS-over-TLS and DNSCrypt, and its privacy page says it does not collect users' personal data or log end-user IP addresses.
+
+Those are useful reasons for Mullvad to support an established specialist instead of maintaining a second public resolver. They are still provider statements and should be understood with the published policy and service scope, not as a universal security certification.
+
+The biggest conceptual limit is that Quad9 is a **DNS resolver, not a VPN**. It can encrypt the DNS lookup between a compatible client and resolver, and the recommended service can block domains associated with malware, phishing and other threats. It does not hide your public IP from websites, encrypt every application connection, bypass all network restrictions or protect a device from a compromised account or malicious download.
+
+The threat-blocking profile can also change how a connection behaves: a domain identified as malicious may fail to resolve. That is a security feature, not evidence that the website is unreachable because of a VPN. If a legitimate domain is blocked, check Quad9's current support and blocked-domain information before disabling encrypted DNS altogether.
+
+## How to verify the migration
+
+After changing the setting, use this checklist:
+
+1. Confirm that the old Mullvad DNS hostname or profile is no longer selected.
+2. Confirm that the new configuration uses the intended Quad9 service, preferably the recommended encrypted profile.
+3. Open a few ordinary websites and test a domain that should resolve reliably.
+4. If you use a VPN, verify DNS behavior inside the VPN client rather than relying only on the operating-system profile.
+5. Run a [DNS leak check](/blog/dns-leak-test-vpn) and read its limitations; one browser test cannot prove every application's DNS path.
+
+Do not treat a successful lookup as proof that all traffic is private. DNS privacy, IP masking, browser privacy and account security solve different problems. Our [VPN security checklist](/guide/vpn-security-checklist) covers the wider set of controls, while the [Mullvad profile](/reviews/mullvad) focuses on the provider's documented VPN features and evidence.
+
+## Bottom line
+
+Mullvad's decision is a meaningful infrastructure change for people who relied on its public encrypted DNS, but it is not a shutdown of Mullvad VPN's internal DNS. Most Mullvad Browser users on default settings should be moved automatically. People with custom settings, or with iOS and macOS profiles, should act before **November 2, 2026**.
+
+Quad9 is a credible specialist destination for a public encrypted resolver, particularly for users who want DNSSEC validation and threat blocking. Just keep the boundary clear: encrypted DNS improves one part of the connection path; it is not a replacement for a full VPN or a complete privacy and security plan.

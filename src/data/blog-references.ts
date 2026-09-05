@@ -344,6 +344,30 @@ const references = {
     url: "https://www.opera.com/privacy",
     note: "Opera's current privacy statement for the browser and related services.",
   },
+  mullvadDnsAnnouncement: {
+    title: "Shutting down our public encrypted DNS servers and sponsoring Quad9 instead",
+    publisher: "Mullvad VPN",
+    url: "https://mullvad.net/en/blog/2026/9/3/shutting-down-our-public-encrypted-dns-servers-and-sponsoring-quad9-instead",
+    note: "Primary announcement for the November 2, 2026 deadline and the browser, iOS and macOS migration behavior.",
+  },
+  quad9Addresses: {
+    title: "Service Addresses & Features",
+    publisher: "Quad9",
+    url: "https://quad9.net/service/service-addresses-and-features/",
+    note: "Official resolver addresses and encrypted DoH/DoT endpoints for the recommended threat-blocking service.",
+  },
+  quad9Privacy: {
+    title: "Privacy",
+    publisher: "Quad9",
+    url: "https://quad9.net/service/privacy/",
+    note: "Quad9's published privacy position and explanation of its non-profit public resolver model.",
+  },
+  quad9Docs: {
+    title: "Quad9 Documentation",
+    publisher: "Quad9 Documentation",
+    url: "https://docs.quad9.net/",
+    note: "Official setup documentation and support for DoH, DoT and DNSCrypt across common platforms.",
+  },
 } satisfies Record<string, EditorialReference>;
 
 type ReferenceId = keyof typeof references;
@@ -400,10 +424,22 @@ const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
   "chatgpt-plus-pricing-vpn-savings": ["openAiBilling", "openAiCountries"],
   "china-russia-ai-access-vpn": ["openAiCountries", "claudeCountries", "geminiAvailability"],
   "opera-vpn-browser-vpn-review": ["operaFreeVpn", "operaVpnHelp", "operaNoLogAudit", "operaPrivacy"],
+  "mullvad-public-encrypted-dns-quad9-2026": ["mullvadDnsAnnouncement", "quad9Addresses", "quad9Privacy", "quad9Docs"],
+};
+
+// Most article references are checked in the shared editorial pass above. A
+// newly published article can carry its own verification date so the page does
+// not claim that its newer primary sources were checked on the older baseline.
+const articleReferenceVerifiedAt: Record<string, string> = {
+  "mullvad-public-encrypted-dns-quad9-2026": "2026-09-05",
 };
 
 export function getBlogReferences(slug: string): EditorialReference[] {
   return (articleReferenceIds[slug] ?? []).map((id) => references[id]);
+}
+
+export function getBlogReferencesVerifiedAt(slug: string): string {
+  return articleReferenceVerifiedAt[slug] ?? BLOG_REFERENCES_VERIFIED_AT;
 }
 
 export function getBlogReferenceCoverage() {

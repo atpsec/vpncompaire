@@ -8,6 +8,7 @@ import { getIndexableBlogPosts } from "@/lib/blog";
 import {
   BLOG_REFERENCES_VERIFIED_AT,
   getBlogReferences,
+  getBlogReferencesVerifiedAt,
 } from "@/data/blog-references";
 import {
   getDetailedProviderProducts,
@@ -37,7 +38,7 @@ export async function GET() {
         `### English blog articles\n\n${posts
           .map((post) => {
             const sourceCount = getBlogReferences(post.slug).length;
-            return `- [${post.title}](${siteConfig.url}/blog/${post.slug}) — ${post.description} Sources shown on page: ${sourceCount}; reference links checked ${BLOG_REFERENCES_VERIFIED_AT}.`;
+            return `- [${post.title}](${siteConfig.url}/blog/${post.slug}) — ${post.description} Sources shown on page: ${sourceCount}; reference links checked ${getBlogReferencesVerifiedAt(post.slug)}.`;
           })
           .join("\n")}`,
     )
@@ -116,7 +117,7 @@ ${catalog
 
 ## Blog and current content index
 
-Each indexable English article displays its primary reference links and their shared verification date.
+Each indexable English article displays its primary reference links and either its article-specific or shared verification date.
 
 ${blogIndex}
 

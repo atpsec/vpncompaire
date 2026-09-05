@@ -111,6 +111,10 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "xbox-playstation-vpn",
     en: "xbox-playstation-vpn-setup",
   },
+  "mullvad-public-encrypted-dns-quad9-2026": {
+    tr: "mullvad-public-encrypted-dns-quad9-2026",
+    en: "mullvad-public-encrypted-dns-quad9-2026",
+  },
   "linux-vpn-kurulum-rehberi": {
     tr: "linux-vpn-kurulum-rehberi",
     en: "linux-vpn-setup-guide",

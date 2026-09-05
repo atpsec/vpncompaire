@@ -6,6 +6,7 @@
 export const GENERATED_BLOG_HEROES: Record<string, string> = {
   "4k-streaming-vpn-hiz-gecikme-2026": "/blog/generated/unique/4k-streaming-vpn-hiz-gecikme-2026.webp",
   "abonelik-yenileme-kur-vergi-vpn-2026": "/blog/generated/unique/abonelik-yenileme-kur-vergi-vpn-2026.webp",
+  "mullvad-public-encrypted-dns-quad9-2026": "/blog/generated/unique/dns-over-https-private-dns-vpn-farki-2026.webp",
   "ai-agent-tarayici-gizlilik-vpn-2026": "/blog/generated/unique/ai-agent-tarayici-gizlilik-vpn-2026.webp",
   "ai-api-anahtar-guvenlik-vpn": "/blog/generated/unique/ai-api-anahtar-guvenlik-vpn.webp",
   "ai-api-anahtari-vpn-passkey-guvenlik-2026": "/blog/generated/unique/ai-api-anahtari-vpn-passkey-guvenlik-2026.webp",

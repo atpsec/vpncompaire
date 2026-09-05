@@ -21,8 +21,8 @@ import {
 import type { Metadata } from "next";
 import { getLocalizedLinkHref } from "@/lib/i18n-paths";
 import {
-  BLOG_REFERENCES_VERIFIED_AT,
   getBlogReferences,
+  getBlogReferencesVerifiedAt,
 } from "@/data/blog-references";
 
 type Props = {
@@ -273,7 +273,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         <EditorialReferences
           references={editorialReferences}
-          verifiedAt={BLOG_REFERENCES_VERIFIED_AT}
+          verifiedAt={getBlogReferencesVerifiedAt(frontmatter.slug)}
         />
 
         {contextualNextStep ? (
