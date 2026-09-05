@@ -8,6 +8,10 @@ import { z } from "zod";
  * runtime'da değil. Bu, "production'da değişken eksik" sürprizini önler.
  */
 
+const defaultSiteUrl = process.env.NODE_ENV === "production"
+  ? "https://vpnadvisor.net"
+  : "http://localhost:3000";
+
 const envSchema = z.object({
   NEXT_PUBLIC_SITE_NAME: z
     .string()
@@ -20,7 +24,7 @@ const envSchema = z.object({
   NEXT_PUBLIC_SITE_URL: z
     .string()
     .url("NEXT_PUBLIC_SITE_URL geçerli bir URL olmalı")
-    .default("http://localhost:3000")
+    .default(defaultSiteUrl)
     .transform((u) => u.replace(/\/$/, "")),
   // Google Analytics 4 ölçüm kimliği (G-XXXXXXXXXX). Set edilmezse GA yüklenmez.
   NEXT_PUBLIC_GA_ID: z
