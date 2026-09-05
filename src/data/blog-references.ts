@@ -368,6 +368,36 @@ const references = {
     url: "https://docs.quad9.net/",
     note: "Official setup documentation and support for DoH, DoT and DNSCrypt across common platforms.",
   },
+  berlinInitialIncident: {
+    title: "IKT-Vorfall im Landesnetz Berlin",
+    publisher: "Berlin Senate Chancellery",
+    url: "https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1703898.php",
+    note: "Official August 17 notice identifying the affected Senate departments and the network isolation.",
+  },
+  berlinAdditionalExfiltration: {
+    title: "Mehr Daten beim IKT-Vorfall abgeflossen",
+    publisher: "Berlin Senate Chancellery",
+    url: "https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1707289.php",
+    note: "Official August 26 update on additional data outflows and the ongoing forensic review.",
+  },
+  berlinExtortionUpdate: {
+    title: "Aktuelle Lage nach dem IKT-Vorfall im Landesnetz Berlin",
+    publisher: "Berlin Senate Chancellery",
+    url: "https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1710327.php",
+    note: "Official September 3 update documenting the Rhysida claim, the alleged 5.7 TB volume and the ransom demand.",
+  },
+  berlinPublishedData: {
+    title: "Aktuelle Lage nach dem IKT-Vorfall im Landesnetz Berlin und der Veröffentlichung der gestohlenen Daten",
+    publisher: "Berlin Senate Chancellery",
+    url: "https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2026/pressemitteilung.1710705.php",
+    note: "Official September 4 confirmation that stolen data had been published and that affected people may be contacted after analysis.",
+  },
+  berlinNetworkContext: {
+    title: "Berliner Verwaltung: Sensible Daten bei Hackerangriff erbeutet",
+    publisher: "Tagesschau / rbb24",
+    url: "https://www.tagesschau.de/inland/regional/berlin/hackerangriff-berlin-100.html",
+    note: "Secondary reporting on the Berlin state network's approximate 600 connected public and administrative sites and operational context.",
+  },
 } satisfies Record<string, EditorialReference>;
 
 type ReferenceId = keyof typeof references;
@@ -425,6 +455,7 @@ const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
   "china-russia-ai-access-vpn": ["openAiCountries", "claudeCountries", "geminiAvailability"],
   "opera-vpn-browser-vpn-review": ["operaFreeVpn", "operaVpnHelp", "operaNoLogAudit", "operaPrivacy"],
   "mullvad-public-encrypted-dns-quad9-2026": ["mullvadDnsAnnouncement", "quad9Addresses", "quad9Privacy", "quad9Docs"],
+  "berlin-state-network-data-leak-2026": ["berlinInitialIncident", "berlinAdditionalExfiltration", "berlinExtortionUpdate", "berlinPublishedData", "berlinNetworkContext"],
 };
 
 // Most article references are checked in the shared editorial pass above. A
@@ -432,6 +463,7 @@ const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
 // not claim that its newer primary sources were checked on the older baseline.
 const articleReferenceVerifiedAt: Record<string, string> = {
   "mullvad-public-encrypted-dns-quad9-2026": "2026-09-05",
+  "berlin-state-network-data-leak-2026": "2026-09-05",
 };
 
 export function getBlogReferences(slug: string): EditorialReference[] {

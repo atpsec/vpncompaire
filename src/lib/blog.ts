@@ -94,6 +94,7 @@ export const PUBLISHABLE_BLOG_SLUGS = new Set([
   "nordvpn-vs-surfshark-comparison",
   "expressvpn-vs-protonvpn-comparison",
   "mullvad-public-encrypted-dns-quad9-2026",
+  "berlin-state-network-data-leak-2026",
 ]);
 
 export function isPublishableBlogSlug(slug: string): boolean {
