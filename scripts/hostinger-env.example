@@ -7,10 +7,11 @@ NEXT_PUBLIC_SITE_BRAND=VPN Advisor
 NEXT_PUBLIC_GA_ID=G-QLM2QBB9S4
 BING_SITE_VERIFICATION=
 NEXT_PUBLIC_ADSENSE_CLIENT_ID=ca-pub-8715861903175610
-# Required for shared, redeploy-safe readership counts. Create an
+# Preferred for shared, redeploy-safe readership counts. Create an
 # Upstash-compatible Redis database and copy these two values from its REST
-# credentials; leaving them empty falls back to the local .runtime file.
+# credentials. If KV is unavailable, use a path outside the deployment root
+# so Hostinger redeploys do not replace the local readership file.
 KV_REST_API_URL=
 KV_REST_API_TOKEN=
-BLOG_VIEW_STORE_PATH=.runtime/blog-views.json
+BLOG_VIEW_STORE_PATH=/home/YOUR_HOSTINGER_USER/.runtime/blog-views.json
 PHONE_AUTH_STORE_PATH=.runtime/phone-auth.json
