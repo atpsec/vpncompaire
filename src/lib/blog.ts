@@ -71,6 +71,7 @@ export const PUBLISHABLE_BLOG_SLUGS = new Set([
   "vpn-protocols-comparison",
   "wireguard-vs-openvpn-comparison",
   "free-vs-paid-vpn",
+  "ucretsiz-vpn-tehlikeleri",
   "vpn-speed-optimization",
   "vpn-for-travel",
   "vpn-for-remote-work",

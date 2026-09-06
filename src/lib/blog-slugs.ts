@@ -47,6 +47,10 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "ucretsiz-vs-ucretli-vpn",
     en: "free-vs-paid-vpn",
   },
+  "ucretsiz-vpn-tehlikeleri": {
+    tr: "ucretsiz-vpn-tehlikeleri",
+    en: "ucretsiz-vpn-tehlikeleri",
+  },
   "vpn-ve-hiz-performans-optimizasyonu": {
     tr: "vpn-ve-hiz-performans-optimizasyonu",
     en: "vpn-speed-optimization",

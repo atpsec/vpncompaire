@@ -14,6 +14,30 @@ const references = {
     url: "https://consumer.ftc.gov/articles/are-public-wi-fi-networks-safe-what-you-need-know",
     note: "Current consumer guidance on HTTPS, public Wi-Fi and account protection.",
   },
+  ftcVpnApps: {
+    title: "In the market for a VPN app?",
+    publisher: "U.S. Federal Trade Commission",
+    url: "https://www.ftc.gov/business-guidance/blog/2018/02/market-vpn-app",
+    note: "Consumer guidance on VPN interception, encryption, third-party sharing and anonymity limits.",
+  },
+  csiroVpnStudy: {
+    title: "An Analysis of the Privacy and Security Risks of Android VPN Permission-enabled Apps",
+    publisher: "CSIRO, UNSW, ICSI and UC Berkeley",
+    url: "https://research.csiro.au/isp/wp-content/uploads/sites/106/2016/08/paper-1.pdf",
+    note: "Peer-reviewed study of 283 Android VPN apps; findings are historical and should not be read as a current census.",
+  },
+  googlePlayVpnService: {
+    title: "Understanding Google Play's VpnService policy",
+    publisher: "Google Play Console Help",
+    url: "https://support.google.com/googleplay/android-developer/answer/12564964?hl=en",
+    note: "Official disclosure, encryption and traffic-manipulation requirements for Android VPN apps.",
+  },
+  techradarVpnTransparency: {
+    title: "Investigation: over 75% of Android VPNs fail basic transparency tests",
+    publisher: "TechRadar",
+    url: "https://www.techradar.com/vpn/investigation-over-75-percent-of-android-vpns-fail-basic-transparency-tests",
+    note: "Independent 2026 transparency audit of 3,471 Android VPN listings; measures signals, not proof of malware.",
+  },
   nistVpnGuide: {
     title: "Guide to IPsec VPNs (SP 800-77 Rev. 1)",
     publisher: "NIST",
@@ -438,6 +462,7 @@ const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
   "expressvpn-vs-protonvpn-comparison": ["expressTrust", "protonTransparency"],
   "fastest-vpn-turkey-2026": ["wireguardProtocol", "openvpnManual"],
   "free-vs-paid-vpn": ["nistVpnGuide", "ftcPublicWifi"],
+  "ucretsiz-vpn-tehlikeleri": ["ftcVpnApps", "csiroVpnStudy", "googlePlayVpnService", "techradarVpnTransparency"],
   "how-to-choose-vpn": ["nistVpnGuide", "wireguardProtocol"],
   "nordvpn-vs-surfshark-comparison": ["nordTrust", "surfsharkTrust"],
   "planckvpn-independent-vpn-analysis": ["planckPrivacy", "planckTransparency"],
@@ -462,6 +487,7 @@ const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
 // newly published article can carry its own verification date so the page does
 // not claim that its newer primary sources were checked on the older baseline.
 const articleReferenceVerifiedAt: Record<string, string> = {
+  "ucretsiz-vpn-tehlikeleri": "2026-09-05",
   "mullvad-public-encrypted-dns-quad9-2026": "2026-09-05",
   "berlin-state-network-data-leak-2026": "2026-09-05",
 };
