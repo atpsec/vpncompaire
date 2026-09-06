@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { DeviceIcon } from "@/components/device/device-icon";
 import { JsonLd } from "@/components/seo/json-ld";
+import { DecisionFramework } from "@/components/content/decision-framework";
 import { breadcrumbSchema } from "@/lib/seo";
 import { devices } from "@/data/devices";
 import { devicesEn } from "@/data/devices.en";
@@ -98,6 +99,8 @@ export default async function Page({ params }: Props) {
             {t("notListedBody")}
           </p>
         </section>
+
+        <DecisionFramework locale={locale as "tr" | "en" | "de"} variant="device" />
       </Container>
     </>
   );

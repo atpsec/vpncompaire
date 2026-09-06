@@ -5,7 +5,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { BlogAuditPanel } from "@/components/blog/blog-audit-panel";
-import { breadcrumbSchema } from "@/lib/seo";
+import { breadcrumbSchema, datasetSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -33,19 +33,15 @@ export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const pageUrl = absoluteUrl("/research/blog-readership");
-  const pageSchema = {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    "@id": `${pageUrl}#dataset`,
+  const pageSchema = datasetSchema({
     name: title,
     description,
-    url: pageUrl,
-    inLanguage: "en-US",
-    isAccessibleForFree: true,
+    url: "/research/blog-readership",
+    creator: "/",
+    distributionUrl: "/api/blog-readership-audit",
     measurementTechnique:
       "Server-side accepted article-read events after eight seconds of visible page time, with pseudonymous 48-hour deduplication.",
-  };
+  });
 
   return (
     <>

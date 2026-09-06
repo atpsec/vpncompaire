@@ -119,6 +119,16 @@ export function VPNQuiz() {
   const matches = Object.entries(scores)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3);
+  const topMatchSlug = matches[0]?.[0];
+
+  useEffect(() => {
+    if (!showResult || !topMatchSlug) return;
+    window.gtag?.("event", "quiz_complete", {
+      top_match: topMatchSlug,
+      answer_count: Object.keys(answers).length,
+      locale: document.documentElement.lang || undefined,
+    });
+  }, [answers, showResult, topMatchSlug]);
 
   // The result replaces the quiz in the DOM, so keyboard and mobile users
   // should be taken directly to the new content instead of being left at the

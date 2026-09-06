@@ -15,6 +15,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { JsonLd } from "@/components/seo/json-ld";
+import { DecisionFramework } from "@/components/content/decision-framework";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 
@@ -127,6 +128,8 @@ function UseCaseHubView() {
             );
           })}
         </div>
+
+        <DecisionFramework locale={locale} variant="use-case" />
       </Container>
     </>
   );

@@ -255,3 +255,63 @@ export function blogCollectionSchema(params: {
     },
   };
 }
+
+type DatasetSchemaParams = {
+  name: string;
+  description: string;
+  url: string;
+  creator?: string;
+  distributionUrl?: string;
+  encodingFormat?: string;
+  dateModified?: string;
+  measurementTechnique?: string;
+  variableMeasured?: string[];
+};
+
+function schemaUrl(value: string): string {
+  if (/^https?:\/\//i.test(value)) return value;
+  return absoluteUrl(value);
+}
+
+/**
+ * Keep Dataset markup in one place so every URL emitted for Search Console is
+ * absolute, site-scoped and tested consistently.
+ */
+export function datasetSchema(params: DatasetSchemaParams): JsonLdObject {
+  const pageUrl = schemaUrl(params.url);
+  const creatorUrl = schemaUrl(params.creator ?? "/about");
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "@id": `${pageUrl}#dataset`,
+    name: params.name,
+    description: params.description,
+    url: pageUrl,
+    ...(params.distributionUrl
+      ? {
+          distribution: {
+            "@type": "DataDownload",
+            contentUrl: schemaUrl(params.distributionUrl),
+            encodingFormat: params.encodingFormat ?? "application/json",
+          },
+        }
+      : {}),
+    ...(params.dateModified ? { dateModified: params.dateModified } : {}),
+    inLanguage: "en-US",
+    isAccessibleForFree: true,
+    creator: {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      url: creatorUrl,
+    },
+    ...(params.measurementTechnique
+      ? { measurementTechnique: params.measurementTechnique }
+      : {}),
+    ...(params.variableMeasured?.length
+      ? { variableMeasured: params.variableMeasured }
+      : {}),
+    license: absoluteUrl("/terms"),
+  };
+}

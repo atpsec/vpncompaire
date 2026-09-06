@@ -165,6 +165,38 @@ function extractInternalLinks(html) {
   return [...links];
 }
 
+function validateStructuredDataUrls(value, pageUrl, auditUrl, path = "JSON-LD") {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) =>
+      validateStructuredDataUrls(item, pageUrl, auditUrl, `${path}[${index}]`),
+    );
+    return;
+  }
+  if (!value || typeof value !== "object") return;
+
+  for (const [key, child] of Object.entries(value)) {
+    const childPath = `${path}.${key}`;
+    if (["url", "contentUrl", "downloadUrl", "sameAs"].includes(key)) {
+      const candidates = Array.isArray(child) ? child : [child];
+      for (const candidate of candidates) {
+        if (typeof candidate !== "string") continue;
+        try {
+          const parsed = new URL(candidate, pageUrl);
+          if (!['http:', 'https:'].includes(parsed.protocol)) {
+            fail(`${auditUrl} — JSON-LD ${childPath} HTTP(S) URL olmalı: ${candidate}`);
+          }
+          if (["url", "contentUrl", "downloadUrl"].includes(key) && !/^https?:\/\//i.test(candidate)) {
+            fail(`${auditUrl} — JSON-LD ${childPath} mutlak URL olmalı: ${candidate}`);
+          }
+        } catch {
+          fail(`${auditUrl} — JSON-LD ${childPath} geçersiz URL: ${candidate}`);
+        }
+      }
+    }
+    validateStructuredDataUrls(child, pageUrl, auditUrl, childPath);
+  }
+}
+
 function validatePage(result) {
   const { auditUrl: url, sitemapUrl } = result;
   if (result.error) {
@@ -217,7 +249,8 @@ function validatePage(result) {
   if (jsonLd.length === 0) warn(`${url} — JSON-LD bulunamadı`);
   for (const block of jsonLd) {
     try {
-      JSON.parse(block[1]);
+      const parsed = JSON.parse(block[1]);
+      validateStructuredDataUrls(parsed, sitemapUrl, url);
     } catch {
       fail(`${url} — geçersiz JSON-LD`);
     }

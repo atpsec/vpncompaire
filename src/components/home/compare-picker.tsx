@@ -33,6 +33,13 @@ export function ComparePicker() {
   const [selected, setSelected] = useState<string[]>(() => all.slice(0, 2).map((p) => p.slug));
 
   const toggle = (slug: string) => {
+    const action = selected.includes(slug) ? "remove" : "add";
+    window.gtag?.("event", "comparison_selection", {
+      provider: slug,
+      action,
+      selected_count: selected.length,
+      locale: document.documentElement.lang || undefined,
+    });
     setSelected((prev) => {
       if (prev.includes(slug)) {
         if (prev.length <= MIN) return prev;

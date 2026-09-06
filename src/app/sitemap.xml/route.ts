@@ -5,21 +5,26 @@ import { siteConfig } from "@/lib/site";
 
 export const revalidate = 3600;
 
+// Only pages changed in the current editorial release use this date. Keeping
+// lastmod explicit avoids telling crawlers that every URL changed on every
+// request while still making the latest release discoverable.
+const CURRENT_EDITORIAL_RELEASE = "2026-09-06";
+
 const staticEntries = [
-  ["/", 1, "daily", "2026-08-27"],
+  ["/", 1, "daily", CURRENT_EDITORIAL_RELEASE],
   ["/vpn-reviews", 0.95, "weekly", "2026-08-27"],
-  ["/best-vpn", 0.85, "weekly", "2026-08-24"],
+  ["/best-vpn", 0.85, "weekly", CURRENT_EDITORIAL_RELEASE],
   ["/comparison", 0.9, "weekly", "2026-08-27"],
-  ["/guide", 0.85, "weekly", "2026-08-27"],
-  ["/blog", 0.85, "daily", "2026-08-27"],
+  ["/guide", 0.85, "weekly", CURRENT_EDITORIAL_RELEASE],
+  ["/blog", 0.85, "daily", CURRENT_EDITORIAL_RELEASE],
   ["/ai", 0.9, "weekly", "2026-08-27"],
-  ["/devices", 0.8, "weekly", "2026-08-24"],
+  ["/devices", 0.8, "weekly", CURRENT_EDITORIAL_RELEASE],
   ["/tools", 0.8, "weekly", "2026-08-27"],
   ["/methodology", 0.75, "monthly", "2026-08-31"],
   ["/research", 0.9, "weekly", "2026-08-31"],
-  ["/research/evidence-ledger", 0.85, "weekly", "2026-08-31"],
-  ["/research/transparency-index", 0.88, "monthly", "2026-08-31"],
-  ["/research/blog-readership", 0.8, "daily", "2026-09-03"],
+  ["/research/evidence-ledger", 0.85, "weekly", CURRENT_EDITORIAL_RELEASE],
+  ["/research/transparency-index", 0.88, "monthly", CURRENT_EDITORIAL_RELEASE],
+  ["/research/blog-readership", 0.8, "daily", CURRENT_EDITORIAL_RELEASE],
   ["/about", 0.5, "monthly", "2026-08-31"],
   ["/contact", 0.4, "yearly", "2026-08-24"],
   ["/affiliate-disclosure", 0.5, "monthly", "2026-08-24"],

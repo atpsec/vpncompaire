@@ -12,8 +12,8 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbSchema } from "@/lib/seo";
-import { absoluteUrl, localizedAlternates, siteConfig } from "@/lib/site";
+import { breadcrumbSchema, datasetSchema } from "@/lib/seo";
+import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import {
   providerEvidenceRecords,
   type EvidenceItem,
@@ -57,23 +57,12 @@ export default async function Page({ params }: Props) {
     (record) => record.audit.state === "provider-reported" || record.audit.state === "needs-source",
   ).length;
 
-  const datasetSchema = {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    "@id": `${absoluteUrl("/research/evidence-ledger")}#dataset`,
+  const datasetLd = datasetSchema({
     name: title,
     description,
-    url: absoluteUrl("/research/evidence-ledger"),
-    inLanguage: "en-US",
+    url: "/research/evidence-ledger",
+    creator: "/",
     dateModified: publicationDate,
-    isAccessibleForFree: true,
-    creator: {
-      "@type": "Organization",
-      "@id": `${siteConfig.url}/#organization`,
-      name: siteConfig.name,
-      url: siteConfig.url,
-    },
-    license: absoluteUrl("/terms"),
     measurementTechnique:
       "Source classification of provider-published pages and dated pricing checks; not a laboratory performance test.",
     variableMeasured: [
@@ -81,7 +70,7 @@ export default async function Page({ params }: Props) {
       "Audit source availability and scope status",
       "Jurisdiction, network and device fields",
     ],
-  };
+  });
 
   return (
     <>
@@ -95,7 +84,7 @@ export default async function Page({ params }: Props) {
           "en",
         )}
       />
-      <JsonLd data={datasetSchema} />
+      <JsonLd data={datasetLd} />
 
       <Container size="lg" className="py-12 sm:py-16 lg:py-20">
         <p className="text-sm text-ink-muted">
