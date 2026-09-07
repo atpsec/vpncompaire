@@ -175,6 +175,16 @@
       "legalNotice": "Legal notice"
     },
     "socialSoon": "Social media accounts coming soon.",
+    "trust": {
+      "profilesTitle": "External profiles",
+      "profilesSubtitle": "Public third-party profiles and listings. These are not VPN Advisor certifications or endorsements.",
+      "scrollLaunchLabel": "View VPN Advisor's ScrollLaunch feature page",
+      "resourcesTitle": "Independent reading",
+      "resourcesSubtitle": "Useful external research and guidance; these links do not represent endorsements of VPN Advisor.",
+      "privacyGuides": "Privacy Guides",
+      "avComparatives": "AV-Comparatives (2020 report)",
+      "eff": "EFF · SSD"
+    },
     "copyright": "All rights reserved.",
     "disclosureTitle": "Advertising and affiliate disclosure",
     "madeWith": "Source-based information project · Not a testing laboratory"

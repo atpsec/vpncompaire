@@ -88,6 +88,10 @@ function ProductColumn({ product, locale }: { product: Product; locale: Locale }
   const bestPlan = product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
   const monthlyPlan = product.plans.find((pl) => pl.durationMonths === 1);
   const planLabel = locale === "tr" ? "Uzun dönem plan örneği" : locale === "de" ? "Beispiel für Langzeitplan" : "Long-term plan example";
+  const checkedLabel = locale === "tr" ? "Fiyat kontrolü" : locale === "de" ? "Preis geprüft" : "Price checked";
+  const checkedDate = product.pricingVerifiedAt
+    ? new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(product.pricingVerifiedAt))
+    : null;
   const profileHref = product.slug === "opera-vpn" ? "/blog/opera-vpn-browser-vpn-review" : `/reviews/${product.slug}`;
   const profileLabel = product.slug === "opera-vpn"
     ? locale === "tr" ? "Opera VPN analizini oku" : locale === "de" ? "Opera-VPN-Analyse lesen" : "Read Opera VPN analysis"
@@ -127,6 +131,7 @@ function ProductColumn({ product, locale }: { product: Product; locale: Locale }
         ) : (
           <div className="mt-1 text-sm font-medium text-ink-muted">{t("officialSite")}</div>
         )}
+        {checkedDate && <p className="mt-1 text-[11px] text-ink-subtle">{checkedLabel}: {checkedDate}</p>}
         <div className="mt-3 flex flex-col gap-1.5">
           <Button asChild variant="primary" size="sm">
             <ProviderLink

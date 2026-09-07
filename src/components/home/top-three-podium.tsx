@@ -37,6 +37,10 @@ function ProviderCard({ product, featured }: { product: Product; featured: boole
   const priceLabel = product.slug === "proton-vpn"
     ? locale === "tr" ? "Ücretsiz plan" : locale === "de" ? "Kostenloser Tarif" : "Free plan"
     : locale === "tr" ? "Resmi site" : locale === "de" ? "Offizielle Website" : "Official site";
+  const checkedLabel = locale === "tr" ? "Fiyat kontrolü" : locale === "de" ? "Preis geprüft" : "Price checked";
+  const checkedDate = product.pricingVerifiedAt
+    ? new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(product.pricingVerifiedAt))
+    : null;
 
   return (
     <article className={cn("relative h-full overflow-hidden rounded-2xl border bg-surface-base shadow-sm", featured ? "border-brand-300 shadow-md ring-1 ring-brand-200/50" : "border-border")}>
@@ -57,6 +61,7 @@ function ProviderCard({ product, featured }: { product: Product; featured: boole
           <span className="text-2xl font-bold text-ink-strong tabular-nums">{product.pricingVerifiedAt && bestPlan ? `${product.priceCurrency === "EUR" ? "€" : "$"}${bestPlan.monthlyPriceUsd.toFixed(2)}` : priceLabel}</span>
           {product.pricingVerifiedAt && bestPlan ? <span className="text-xs text-ink-subtle">{t("perMonthStart")}</span> : null}
         </div>
+        {checkedDate && <p className="mt-1 text-center text-[11px] text-ink-subtle">{checkedLabel}: {checkedDate}</p>}
         <div className="mt-5 flex flex-col gap-2">
           <Button asChild variant="primary" size="md" className="w-full"><ProviderLink href={providerOutboundHref({ slug: product.slug, fallbackUrl: product.pricingUrl, hasAffiliate: product.hasAffiliate, source: "homepage-podium" })} rel={providerOutboundRel(product.slug, product.hasAffiliate)} target="_blank" provider={product.slug} placement="homepage-podium">{t("ctaOfficial")}<ArrowRight className="size-4" /></ProviderLink></Button>
           <Button asChild variant="ghost" size="sm" className="w-full"><Link href={`/reviews/${product.slug}`}>{copy.viewProfile}</Link></Button>

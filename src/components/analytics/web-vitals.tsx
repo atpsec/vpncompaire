@@ -2,13 +2,24 @@
 
 import { useReportWebVitals } from "next/web-vitals";
 
+const CONSENT_KEY = "vpnadvisor:consent";
+
 /**
  * Sends field performance metrics to the existing consent-aware GA4 channel.
  * The callback is intentionally a no-op until the user has enabled analytics.
  */
 export function WebVitals() {
   useReportWebVitals((metric) => {
-    if (typeof window.gtag !== "function") return;
+    let consented = false;
+    try {
+      consented = window.localStorage.getItem(CONSENT_KEY) === "granted";
+    } catch {
+      consented = false;
+    }
+    if (
+      typeof window.gtag !== "function" ||
+      !consented
+    ) return;
 
     const value = metric.name === "CLS"
       ? Math.round(metric.value * 1000)

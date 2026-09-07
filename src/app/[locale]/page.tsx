@@ -38,13 +38,13 @@ export default async function HomePage({ params }: Props) {
       <JsonLd data={itemListSchema(getDetailedProviderProducts(locale), locale)} />
       <JsonLd data={faqSchema(homeFaqs(locale))} />
       <Hero />
-      <InternetYouPromo />
+      <ComparePicker />
       <TopThreePodium />
+      <InternetYouPromo />
+      <IpSecurityBanner />
       <HomeBlogColumns locale={locale} />
       <AiEditorialBlock />
       <TopVPNList />
-      <IpSecurityBanner />
-      <ComparePicker />
       <UseCaseGrid />
       <ComparisonBlock />
       <MethodologyBlock />

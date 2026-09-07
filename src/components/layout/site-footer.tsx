@@ -1,10 +1,16 @@
 import { useLocale, useTranslations } from "next-intl";
-import { Info } from "lucide-react";
+import {
+  BookOpen,
+  ExternalLink,
+  Info,
+  Link2,
+} from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
 import { SiteMark } from "@/components/brand/site-mark";
 import { getLocalizedLinkHref, type AppLocale } from "@/lib/i18n-paths";
 import { SocialLinks, SOCIAL_LINKS_ENABLED } from "@/components/layout/social-links";
+import { DomainRatingBadge } from "@/components/layout/domain-rating-badge";
 
 export function SiteFooter() {
   const t = useTranslations("footer");
@@ -31,12 +37,74 @@ export function SiteFooter() {
               {t("tagline")}
             </p>
 
-            <div className="mt-6">
-              <a href="https://www.scrolllaunch.com/products/vpn-advisor?ref=badge" target="_blank" rel="noopener">
-                {/* Keep the partner-provided embed exact so it remains in the server HTML. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="https://www.scrolllaunch.com/api/badge/vpn-advisor" alt="Featured on ScrollLaunch" width="220" height="48" loading="lazy" />
-              </a>
+            <div className="mt-6 space-y-4">
+              <section
+                aria-labelledby="external-profiles-heading"
+                className="rounded-2xl border border-brand-100/80 bg-gradient-to-br from-background via-background to-brand-50/60 p-4 shadow-sm dark:border-brand-900/70 dark:from-surface-base dark:via-surface-base dark:to-brand-950/30"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900/60 dark:text-brand-300">
+                    <Link2 className="size-4" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h2 id="external-profiles-heading" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-700 dark:text-brand-300">
+                      {t("trust.profilesTitle")}
+                    </h2>
+                    <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+                      {t("trust.profilesSubtitle")}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="flex min-h-[68px] min-w-0 items-center justify-center rounded-xl border border-border/80 bg-background/75 px-2 py-2 shadow-sm transition hover:border-brand-200 hover:shadow-md dark:bg-surface-base/70">
+                    <DomainRatingBadge />
+                  </div>
+                  <a
+                    className="group flex min-h-[68px] min-w-0 items-center justify-center rounded-xl border border-border/80 bg-background/75 px-2 py-2 shadow-sm transition hover:border-brand-200 hover:shadow-md dark:bg-surface-base/70"
+                    href="https://www.scrolllaunch.com/products/vpn-advisor?ref=badge"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t("trust.scrollLaunchLabel")}
+                  >
+                    {/* Keep the partner-provided embed exact so it remains in the server HTML. */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img className="h-12 w-auto max-w-full" src="https://www.scrolllaunch.com/api/badge/vpn-advisor" alt="Featured on ScrollLaunch" width="220" height="48" loading="lazy" />
+                  </a>
+                </div>
+              </section>
+
+              <section
+                aria-labelledby="independent-resources-heading"
+                className="rounded-xl border border-border/80 bg-background/60 p-4"
+              >
+                <div className="flex items-center gap-2">
+                  <BookOpen className="size-4 text-ink-muted" aria-hidden="true" />
+                  <h2 id="independent-resources-heading" className="text-sm font-semibold text-ink-strong">
+                    {t("trust.resourcesTitle")}
+                  </h2>
+                </div>
+                <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+                  {t("trust.resourcesSubtitle")}
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs">
+                  <li>
+                    <a className="inline-flex items-center gap-1 font-medium text-brand-700 hover:underline" href="https://www.privacyguides.org/en/vpn/" target="_blank" rel="noopener noreferrer">
+                      {t("trust.privacyGuides")} <ExternalLink className="size-3" aria-hidden="true" />
+                    </a>
+                  </li>
+                  <li>
+                    <a className="inline-flex items-center gap-1 font-medium text-brand-700 hover:underline" href="https://www.av-comparatives.org/tests/vpn-report-2020-35-services/" target="_blank" rel="noopener noreferrer">
+                      {t("trust.avComparatives")} <ExternalLink className="size-3" aria-hidden="true" />
+                    </a>
+                  </li>
+                  <li>
+                    <a className="inline-flex items-center gap-1 font-medium text-brand-700 hover:underline" href="https://ssd.eff.org/" target="_blank" rel="noopener noreferrer">
+                      {t("trust.eff")} <ExternalLink className="size-3" aria-hidden="true" />
+                    </a>
+                  </li>
+                </ul>
+              </section>
             </div>
 
             {SOCIAL_LINKS_ENABLED && (
