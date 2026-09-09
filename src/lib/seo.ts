@@ -15,6 +15,7 @@ export function organizationSchema(locale: Locale = "en"): JsonLdObject {
     "@type": "Organization",
     "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
+    alternateName: siteConfig.url.replace(/^https?:\/\//, ""),
     url: siteConfig.url,
     description: siteConfig.description.en,
     inLanguage: inLanguageOf(locale),
@@ -25,6 +26,16 @@ export function organizationSchema(locale: Locale = "en"): JsonLdObject {
       "Network security",
       "Independent security audits",
       "VPN pricing and subscription terms",
+    ],
+    about: [
+      { "@type": "Thing", name: "Virtual private networks" },
+      { "@type": "Thing", name: "Digital privacy" },
+      { "@type": "Thing", name: "Network security" },
+    ],
+    mentions: [
+      { "@type": "Thing", name: "VPN provider comparisons" },
+      { "@type": "Thing", name: "Independent security audits" },
+      { "@type": "Thing", name: "VPN pricing and subscription terms" },
     ],
     logo: {
       "@type": "ImageObject",
@@ -40,7 +51,14 @@ export function organizationSchema(locale: Locale = "en"): JsonLdObject {
       url: absoluteUrl("/contact"),
       availableLanguage: "English",
     },
-    sameAs: [siteConfig.social.twitter, siteConfig.social.github].filter(Boolean),
+    // These are public profiles that identify the publishing project. Do not
+    // add a social URL here unless it is actually controlled by the project.
+    sameAs: [
+      "https://github.com/atpsec/vpncompaire",
+      "https://www.scrolllaunch.com/products/vpn-advisor",
+      siteConfig.social.twitter,
+      siteConfig.social.github,
+    ].filter(Boolean),
   };
 }
 
@@ -50,6 +68,7 @@ export function websiteSchema(locale: Locale = "en"): JsonLdObject {
     "@type": "WebSite",
     "@id": `${absoluteUrl("", locale)}/#website`,
     name: siteConfig.name,
+    alternateName: siteConfig.url.replace(/^https?:\/\//, ""),
     url: absoluteUrl("", locale),
     description: siteConfig.description.en,
     inLanguage: inLanguageOf(locale),

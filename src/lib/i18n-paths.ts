@@ -8,6 +8,8 @@
 // karşılığını tek yerden üretmek. Böylece `/de` altında Türkçe section slug
 // (`rehber`), `/en` altında Türkçe section slug gibi tutarsızlıklar engellenir.
 
+import { getBlogSlugEntry, slugForLocale } from "./blog-slugs";
+
 export type AppLocale = "tr" | "en" | "de";
 
 export const APP_LOCALES: readonly AppLocale[] = ["tr", "en", "de"] as const;
@@ -796,7 +798,19 @@ export function canonicalEnglishPath(pathname: string): string {
   if (segments.length === 0) return "/";
 
   const [first, ...rest] = segments;
-  if (first === "blog" || first === "go" || first === "vpn-test") {
+  if (first === "blog") {
+    const blogSlug = rest[0];
+    const entry = blogSlug
+      ? getBlogSlugEntry(blogSlug, "en") ??
+        getBlogSlugEntry(blogSlug, "tr") ??
+        getBlogSlugEntry(blogSlug, "de")
+      : null;
+    const canonicalSlug = entry ? slugForLocale(entry, "en") : blogSlug;
+    return `/${first}${canonicalSlug ? `/${canonicalSlug}` : ""}${
+      rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""
+    }`;
+  }
+  if (first === "go" || first === "vpn-test") {
     return `/${segments.join("/")}`;
   }
 
@@ -828,6 +842,14 @@ export function canonicalEnglishPath(pathname: string): string {
   if (!publicEntry) return `/${segments.join("/")}`;
 
   const [publicSlug] = publicEntry;
+  // The old internal review hub was `/inceleme`, while the public hub is
+  // `/vpn-reviews`. Review detail pages still live under `/reviews/:slug`,
+  // so only the hub needs this direct mapping. Keeping it here avoids the
+  // extra `/inceleme` -> `/reviews` -> `/vpn-reviews` redirect chain that
+  // search crawlers report as a redirect error.
+  if (publicSlug === "reviews" && rest.length === 0) {
+    return "/vpn-reviews";
+  }
   if (publicSlug === "tools" && rest[0]) {
     return `/tools/${TOOL_PUBLIC_SLUGS[rest[0]] ?? rest[0]}${
       rest.length > 1 ? `/${rest.slice(1).join("/")}` : ""

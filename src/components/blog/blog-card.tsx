@@ -47,7 +47,7 @@ export function BlogCard({ post }: BlogCardProps) {
             href={`/blog/${post.slug}`}
             className="inline-flex items-center gap-1 font-medium text-accent-600 hover:text-accent-700 transition-colors"
           >
-            {t("readMore")}
+            {t("readMoreAbout", { title: post.title })}
             <ArrowRight className="size-3" />
           </Link>
         </div>

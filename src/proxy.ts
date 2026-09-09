@@ -11,6 +11,10 @@ import {
   resolveInternalRewrite,
 } from "@/lib/i18n-paths";
 import { clientIpFrom, rateLimit } from "@/lib/rate-limit";
+import {
+  appendVaryAccept,
+  preferredRepresentation,
+} from "@/lib/accept";
 
 // localeDetection is disabled in routing.ts. Public locale URLs are explicit:
 // /, /blog, /en, /en/blog, /de, /de/blog.
@@ -119,17 +123,46 @@ export default async function proxy(request: NextRequest) {
     }
   }
 
+  // Serve a clean Markdown representation to agents that explicitly prefer
+  // it. The public URL remains the same; the internal route is only a
+  // rendering target and is not linked or included in the sitemap.
+  if (request.method === "GET") {
+    const representation = preferredRepresentation(request.headers.get("accept"));
+    if (representation === "text/markdown") {
+      const url = request.nextUrl.clone();
+      url.pathname = `/agent-markdown${pathname}`;
+      const rewritten = NextResponse.rewrite(url);
+      appendVaryAccept(rewritten.headers);
+      return rewritten;
+    }
+
+    if (representation === null) {
+      return new NextResponse(
+        "Not Acceptable\n\nAvailable representations: text/html, text/markdown\n",
+        {
+          status: 406,
+          headers: {
+            "Content-Type": "text/plain; charset=utf-8",
+            "Vary": "Accept, Accept-Encoding",
+          },
+        },
+      );
+    }
+  }
+
   // Public locale URLs are explicit now:
   // / and /blog are Turkish, /en and /en/blog are English, /de and /de/blog are German.
   // Do not geo-redirect unprefixed canonical URLs; otherwise /blog can become /en/blog
   // for users with an English cookie or a non-TR country header.
 
   // Continue with next-intl middleware
-  return intlMiddleware(request);
+  const response = intlMiddleware(request);
+  appendVaryAccept(response.headers);
+  return response;
 }
 
 export const config = {
   matcher: [
-    "/((?!api|_next|go|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.svg|icon|apple-icon|.*\\..*).*)",
+    "/((?!api|_next|go|agent-markdown|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.svg|icon|apple-icon|.*\\..*).*)",
   ],
 };

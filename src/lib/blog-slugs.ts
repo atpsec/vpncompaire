@@ -163,6 +163,12 @@ export const BLOG_SLUG_MAP: Record<string, BlogSlugEntry> = {
     tr: "chatgpt-plus-fiyat-vpn-tasarruf",
     en: "chatgpt-plus-pricing-vpn-savings",
   },
+  // Legacy URL without the old `-tasarruf` suffix. Keep the backlink alive
+  // while sending crawlers and readers to the consolidated English article.
+  "chatgpt-plus-fiyat-vpn": {
+    tr: "chatgpt-plus-fiyat-vpn",
+    en: "chatgpt-plus-pricing-vpn-savings",
+  },
   "ai-icerik-uretimi-vpn": {
     tr: "ai-icerik-uretimi-vpn",
     en: "ai-content-creation-vpn",

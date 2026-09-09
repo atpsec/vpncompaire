@@ -222,7 +222,7 @@ function EvidenceCell({ item }: { item: EvidenceItem }) {
         <a
           href={item.sourceUrl}
           target="_blank"
-          rel="noopener noreferrer nofollow"
+          rel="noopener noreferrer"
           className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-700 hover:underline"
         >
           {item.sourceLabel} <ExternalLink className="size-3" aria-hidden="true" />

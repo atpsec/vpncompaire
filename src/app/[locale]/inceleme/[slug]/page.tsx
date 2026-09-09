@@ -275,7 +275,7 @@ function ProviderView({ product, locale, providerSchema, isArchived, isReference
             <a
               href={product.pricingUrl}
               target="_blank"
-              rel="nofollow noopener"
+              rel="noopener noreferrer"
               className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline"
             >
               {t.pricingSource}

@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { siteConfig, type Locale } from "@/lib/site";
 
-const TITLE = `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing (2026)`;
-const TITLE_SHORT = `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing`;
+// Keep the canonical homepage title within the range that search results can
+// usually display without truncation while retaining the site's core topics.
+const TITLE = `${siteConfig.name}: VPN Comparisons by Privacy, Audits & Pricing`;
+const TITLE_SHORT = TITLE;
 
 // Google Search Console verification tokens are intentionally public and are
 // emitted as a harmless meta tag on every locale page.

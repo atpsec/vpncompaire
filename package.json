@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start:hostinger": "next start -p ${PORT:-3000}",
+    "start:hostinger": "next start",
     "generate:favicons": "node scripts/generate-favicon.mjs",
     "lint": "eslint",
     "audit:i18n": "node scripts/audit-i18n.mjs",
@@ -61,6 +61,7 @@
     "typescript": "^5"
   },
   "overrides": {
+    "browserslist": "4.28.9",
     "js-yaml": "4.3.1",
     "minimatch@3.1.5": {
       "brace-expansion": "1.1.18"

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "siteName": "VPN Advisor",
-    "defaultTitle": "VPN Advisor: VPN Comparisons by Privacy, Audits & Pricing (2026)",
+    "defaultTitle": "VPN Advisor: VPN Comparisons by Privacy, Audits & Pricing",
     "defaultDescription": "VPN comparisons built from privacy policies, independent audit records, security features and current pricing sources."
   },
   "nav": {
@@ -1101,6 +1101,7 @@
     "intro": "In-depth articles on VPN technology, privacy, security and usage scenarios.",
     "latestArticles": "Latest VPN articles",
     "readMore": "Read more",
+    "readMoreAbout": "Read more about {title}",
     "readingTime": "{minutes} min read",
     "views": "{count, plural, one {# read} other {# reads}}",
     "viewsLoading": "Loading reads…",

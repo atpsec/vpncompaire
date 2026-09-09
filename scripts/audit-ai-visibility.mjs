@@ -62,6 +62,20 @@ if (llmsResult.response.status !== 200 || !/VPN Advisor/i.test(llmsResult.body))
   pass("llms.txt is reachable (supporting surface; not treated as a Google ranking requirement)");
 }
 
+const markdownResult = await get("/", { Accept: "text/markdown" });
+const markdownContentType = markdownResult.response.headers.get("content-type") || "";
+const markdownVary = markdownResult.response.headers.get("vary") || "";
+if (
+  markdownResult.response.status !== 200 ||
+  !/^text\/markdown\b/i.test(markdownContentType) ||
+  !/\baccept\b/i.test(markdownVary) ||
+  !/When to use VPN Advisor/i.test(markdownResult.body)
+) {
+  fail("Accept: text/markdown must return agent guidance with Content-Type text/markdown and Vary: Accept");
+} else {
+  pass("canonical pages negotiate an agent-readable Markdown representation with cache-safe headers");
+}
+
 for (const pathname of publicPages) {
   const result = await get(pathname);
   if (result.response.status !== 200) {

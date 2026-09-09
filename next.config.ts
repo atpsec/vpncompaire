@@ -85,7 +85,29 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        headers: [...securityHeaders, publicDocumentCacheHeader],
+        headers: [
+          ...securityHeaders,
+          publicDocumentCacheHeader,
+          // Accept negotiation is implemented in proxy.ts for public pages.
+          // Include the key on the broad rule too so the root rewrite (/) ->
+          // /en cannot lose it before the final HTML response is emitted.
+          { key: "Vary", value: "Accept, Accept-Encoding" },
+        ],
+      },
+      {
+        // Public document pages have two representations: browser HTML and
+        // agent-readable Markdown selected by Accept. Keep both variants
+        // separate at the CDN while preserving Next.js App Router's own RSC
+        // cache discriminators.
+        source:
+          "/((?!api|_next|go|agent-markdown|og|robots\\.txt|sitemap\\.xml|llms\\.txt|ads\\.txt|favicon\\.ico|favicon\\.svg|apple-touch-icon\\.svg|icon|apple-icon|.*\\..*).*)",
+        headers: [
+          {
+            key: "Vary",
+            value:
+              "Accept, Accept-Encoding, RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+          },
+        ],
       },
       {
         // Keep crawler control documents fresher than ordinary content. A

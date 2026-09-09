@@ -106,7 +106,7 @@ function FeaturedArticle({
           href={`/blog/${post.slug}`}
           className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-accent-600 transition-colors hover:text-accent-700"
         >
-          {tBlog("readMore")}
+          {tBlog("readMoreAbout", { title: post.title })}
           <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
       </div>

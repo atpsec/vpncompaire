@@ -12,6 +12,7 @@ import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { WebVitals } from "@/components/analytics/web-vitals";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { EditorialNotice } from "@/components/legal/editorial-notice";
+import { siteConfig } from "@/lib/site";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -60,6 +61,13 @@ export default async function LocaleLayout({ children, params }: Props) {
     >
       <head>
         <ThemeScript />
+        <link
+          rel="alternate"
+          type="text/markdown"
+          href={`${siteConfig.url}/llms.txt`}
+          title="VPN Advisor agent-readable index"
+        />
+        <link rel="preconnect" href="https://www.scrolllaunch.com" />
       </head>
       <body className="min-h-screen bg-background text-foreground font-sans">
         <NextIntlClientProvider>
