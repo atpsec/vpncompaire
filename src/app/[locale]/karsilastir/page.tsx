@@ -42,7 +42,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: rawLocale } = await params;
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   const t = pageCopy[locale];
-  return { title: t.title, description: t.description, alternates: sectionHubAlternates("comparison", locale) };
+  return {
+    title: t.title,
+    description: t.description,
+    alternates: sectionHubAlternates("comparison", locale),
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function Page({ params }: Props) {

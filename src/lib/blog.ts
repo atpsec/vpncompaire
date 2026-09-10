@@ -63,6 +63,9 @@ export const MIN_INDEXABLE_BLOG_WORDS = 500;
  * out of the index until they receive a deliberate editorial review.
  */
 export const PUBLISHABLE_BLOG_SLUGS = new Set([
+  // Core evergreen explainers, setup guides and privacy/security analysis.
+  // Commercial provider reviews, duplicate comparisons and short-lived news
+  // stay addressable but out of the index until they receive a deeper review.
   "what-is-vpn-why-you-need-it",
   "how-to-choose-vpn",
   "vpn-privacy-and-security",
@@ -71,7 +74,6 @@ export const PUBLISHABLE_BLOG_SLUGS = new Set([
   "vpn-protocols-comparison",
   "wireguard-vs-openvpn-comparison",
   "free-vs-paid-vpn",
-  "ucretsiz-vpn-tehlikeleri",
   "vpn-speed-optimization",
   "vpn-for-travel",
   "vpn-for-remote-work",
@@ -90,12 +92,6 @@ export const PUBLISHABLE_BLOG_SLUGS = new Set([
   "netflix-regional-libraries-vpn",
   "ai-tools-privacy-vpn",
   "ai-phishing-deepfake-vpn-protection",
-  "opera-vpn-browser-vpn-review",
-  "planckvpn-independent-vpn-analysis",
-  "nordvpn-vs-surfshark-comparison",
-  "expressvpn-vs-protonvpn-comparison",
-  "mullvad-public-encrypted-dns-quad9-2026",
-  "berlin-state-network-data-leak-2026",
 ]);
 
 export function isPublishableBlogSlug(slug: string): boolean {

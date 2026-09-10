@@ -20,6 +20,50 @@ import {
 // /, /blog, /en, /en/blog, /de, /de/blog.
 const intlMiddleware = createMiddleware(routing);
 
+// Keep catalogue, utility and commercial surfaces available to readers while
+// the editorial depth is being rebuilt. These routes are the most likely to
+// look repetitive when a crawler evaluates the site as a whole, so they should
+// not be presented as indexable search content for now.
+const NOINDEX_PREFIXES = [
+  "/reviews",
+  "/vpn-reviews",
+  "/comparison",
+  "/karsilastir",
+  "/best-vpn",
+  "/en-iyi-vpn",
+  "/en-iyi",
+  "/ai",
+  "/tools",
+  "/araclar",
+  "/vpn-test",
+  "/calculator",
+  "/hesaplayici",
+  "/quiz",
+  "/sana-uygun-vpn",
+  "/server-map",
+  "/sunucu-haritasi",
+  "/security-tools",
+  "/guvenlik-araclari",
+  "/glossary",
+  "/sozluk",
+  "/research/blog-readership",
+  "/arastirma/blog-readership",
+] as const;
+
+function shouldNoIndex(pathname: string): boolean {
+  const normalized = pathname.replace(/^\/(?:en|de)(?=\/|$)/, "") || "/";
+  return NOINDEX_PREFIXES.some(
+    (prefix) => normalized === prefix || normalized.startsWith(`${prefix}/`),
+  );
+}
+
+function markNoIndex(response: NextResponse, pathname: string): NextResponse {
+  if (shouldNoIndex(pathname)) {
+    response.headers.set("X-Robots-Tag", "noindex, follow, noarchive");
+  }
+  return response;
+}
+
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -81,7 +125,7 @@ export default async function proxy(request: NextRequest) {
     headers.set("X-NEXT-INTL-LOCALE", locale);
     const rewritten = NextResponse.rewrite(url, { request: { headers } });
     appendVaryAccept(rewritten.headers);
-    return rewritten;
+    return markNoIndex(rewritten, pathname);
   }
 
   const englishRewriteTarget = resolveEnglishPublicRewrite(pathname);
@@ -92,7 +136,7 @@ export default async function proxy(request: NextRequest) {
     headers.set("X-NEXT-INTL-LOCALE", "en");
     const rewritten = NextResponse.rewrite(url, { request: { headers } });
     appendVaryAccept(rewritten.headers);
-    return rewritten;
+    return markNoIndex(rewritten, pathname);
   }
 
   // Apply rate limiting to sensitive routes
@@ -137,7 +181,7 @@ export default async function proxy(request: NextRequest) {
       url.pathname = `/agent-markdown${pathname}`;
       const rewritten = NextResponse.rewrite(url);
       appendVaryAccept(rewritten.headers);
-      return rewritten;
+      return markNoIndex(rewritten, pathname);
     }
 
     if (representation === null) {
@@ -162,7 +206,7 @@ export default async function proxy(request: NextRequest) {
   // Continue with next-intl middleware
   const response = intlMiddleware(request);
   appendVaryAccept(response.headers);
-  return response;
+  return markNoIndex(response, pathname);
 }
 
 export const config = {

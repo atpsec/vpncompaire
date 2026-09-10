@@ -7,7 +7,7 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "incelemeRedirect" });
-  return { title: t("metaTitle") };
+  return { title: t("metaTitle"), robots: { index: false, follow: true } };
 }
 
 export default async function Page({ params }: Props) {

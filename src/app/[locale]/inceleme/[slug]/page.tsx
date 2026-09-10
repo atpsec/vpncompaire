@@ -191,10 +191,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: isArchived || isReferenceOnly
       ? { canonical }
       : bilingualAlternates(`/reviews/${product.slug}`, locale, "en"),
-    robots:
-      isArchived || isReferenceOnly || !isDetailedProfile || locale !== "en"
-        ? { index: false, follow: true }
-        : undefined,
+    // Provider pages remain useful for readers, but their current structured
+    // format does not yet provide enough original editorial depth for search.
+    robots: { index: false, follow: true },
     openGraph: {
       title,
       description: product.summary,

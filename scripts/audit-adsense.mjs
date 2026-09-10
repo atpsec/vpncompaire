@@ -47,6 +47,11 @@ const excludedPages = [
   // inventory until every record has sufficient original editorial depth.
   "/vpn-reviews",
   "/comparison",
+  "/best-vpn",
+  "/ai",
+  "/devices",
+  "/glossary",
+  "/research/blog-readership",
   "/reviews/nordvpn",
 ];
 

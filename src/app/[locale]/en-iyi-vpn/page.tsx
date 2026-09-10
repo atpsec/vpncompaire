@@ -55,6 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t.title,
     description: t.description,
     alternates: localizedAlternates("/vpn-reviews", locale),
+    robots: { index: false, follow: true },
     openGraph: { title: t.title, description: t.description, url: absoluteUrl("/vpn-reviews", locale), type: "website" },
   };
 }

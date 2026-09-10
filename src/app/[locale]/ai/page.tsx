@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
       languages: { en: canonical, "x-default": canonical },
     },
     openGraph: { title, description, url: canonical, type: "website" },
-    robots: { index: true, follow: true },
+    robots: { index: false, follow: true },
   };
 }
 
