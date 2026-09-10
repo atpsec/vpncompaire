@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "site": {
+    "property": "sc-domain:vpnadvisor.net",
+    "baseUrl": "https://vpnadvisor.net",
+    "locale": "en",
+    "timezone": "Europe/Berlin"
+  },
+  "policy": {
+    "maxActiveExperiments": 1,
+    "earlyReviewDays": 7,
+    "decisionReviewDays": [14, 28],
+    "maxObservationDays": 42,
+    "minimumImpressionsPerWindow": 100,
+    "searchType": "web",
+    "dataState": "final"
+  }
+}

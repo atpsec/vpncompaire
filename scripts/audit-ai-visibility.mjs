@@ -8,6 +8,7 @@ const baseUrl = new URL(requestedBase || process.env.AI_VISIBILITY_BASE_URL || "
 baseUrl.pathname = baseUrl.pathname.replace(/\/$/, "");
 
 const errors = [];
+const warnings = [];
 const passes = [];
 const requiredAgents = ["OAI-SearchBot", "Bingbot", "ClaudeBot", "PerplexityBot"];
 const publicPages = [
@@ -17,12 +18,15 @@ const publicPages = [
   "/research",
   "/research/evidence-ledger",
   "/research/transparency-index",
+  "/comparison/proton-vs-mullvad",
+  "/comparison/nordvpn-vs-surfshark",
   "/ai",
   "/blog",
   "/vpn-reviews",
 ];
 
 function fail(message) { errors.push(message); }
+function warn(message) { warnings.push(message); }
 function pass(message) { passes.push(message); }
 
 async function get(pathname, headers = {}) {
@@ -76,6 +80,18 @@ if (
   pass("canonical pages negotiate an agent-readable Markdown representation with cache-safe headers");
 }
 
+const htmlResult = await get("/", { Accept: "text/html" });
+const htmlContentType = htmlResult.response.headers.get("content-type") || "";
+const htmlVary = htmlResult.response.headers.get("vary") || "";
+if (htmlResult.response.status !== 200 || !/^text\/html\b/i.test(htmlContentType)) {
+  fail("the browser representation must return a 200 text/html response");
+} else {
+  pass("canonical pages retain a browser-facing HTML representation");
+  if (!/\baccept\b/i.test(htmlVary)) {
+    warn("the browser representation does not advertise Vary: Accept; inspect the edge response after deployment");
+  }
+}
+
 for (const pathname of publicPages) {
   const result = await get(pathname);
   if (result.response.status !== 200) {
@@ -109,4 +125,5 @@ if (errors.length) {
 }
 
 for (const message of passes) console.log(`PASS: ${message}`);
+for (const message of warnings) console.log(`WARN: ${message}`);
 console.log(`AI visibility audit passed: ${passes.length} checks.`);

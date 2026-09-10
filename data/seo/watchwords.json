@@ -1,0 +1,56 @@
+[
+  {
+    "id": "proton-vpn-vs-mullvad-privacy",
+    "query": "proton vpn vs mullvad privacy",
+    "canonicalPath": "/comparison/proton-vs-mullvad",
+    "locale": "en",
+    "priority": 1,
+    "intent": "Compare privacy evidence, audit scope and practical trade-offs between Proton VPN and Mullvad.",
+    "status": "candidate"
+  },
+  {
+    "id": "nordvpn-vs-surfshark-renewal-price",
+    "query": "nordvpn vs surfshark renewal price",
+    "canonicalPath": "/comparison/nordvpn-vs-surfshark",
+    "locale": "en",
+    "priority": 2,
+    "intent": "Compare first-term and renewal pricing conditions for NordVPN and Surfshark.",
+    "status": "candidate"
+  },
+  {
+    "id": "vpn-audit-comparison",
+    "query": "vpn audit comparison",
+    "canonicalPath": "/research/evidence-ledger",
+    "locale": "en",
+    "priority": 2,
+    "intent": "Understand which VPN audit claims have a named auditor, date, scope and public evidence.",
+    "status": "candidate"
+  },
+  {
+    "id": "vpn-transparency-comparison",
+    "query": "vpn transparency comparison",
+    "canonicalPath": "/research/transparency-index",
+    "locale": "en",
+    "priority": 2,
+    "intent": "Compare the documentation and evidence coverage disclosed for VPN providers.",
+    "status": "candidate"
+  },
+  {
+    "id": "free-vs-paid-vpn-privacy",
+    "query": "free vs paid vpn privacy",
+    "canonicalPath": "/guide/free-vs-paid-vpn",
+    "locale": "en",
+    "priority": 3,
+    "intent": "Decide how free and paid VPN services differ in privacy, business model and practical risk.",
+    "status": "candidate"
+  },
+  {
+    "id": "vpn-advisor",
+    "query": "VPN Advisor",
+    "canonicalPath": "/",
+    "locale": "en",
+    "priority": 3,
+    "intent": "Find the VPN Advisor publishing project and understand its comparison methodology.",
+    "status": "candidate"
+  }
+]

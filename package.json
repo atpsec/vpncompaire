@@ -20,7 +20,10 @@
     "audit:ai-visibility": "node scripts/audit-ai-visibility.mjs",
     "audit:links": "node scripts/check-external-links.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
-    "seo:indexnow": "node scripts/submit-indexnow.mjs"
+    "seo:indexnow": "node scripts/submit-indexnow.mjs",
+    "seo:collect": "node scripts/seo-watch.mjs collect",
+    "seo:report": "node scripts/seo-watch.mjs report",
+    "seo:review": "node scripts/seo-watch.mjs review"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

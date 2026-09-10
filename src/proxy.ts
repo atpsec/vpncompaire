@@ -79,7 +79,9 @@ export default async function proxy(request: NextRequest) {
     const locale = rewriteTarget.split("/")[1];
     const headers = new Headers(request.headers);
     headers.set("X-NEXT-INTL-LOCALE", locale);
-    return NextResponse.rewrite(url, { request: { headers } });
+    const rewritten = NextResponse.rewrite(url, { request: { headers } });
+    appendVaryAccept(rewritten.headers);
+    return rewritten;
   }
 
   const englishRewriteTarget = resolveEnglishPublicRewrite(pathname);
@@ -88,7 +90,9 @@ export default async function proxy(request: NextRequest) {
     url.pathname = englishRewriteTarget;
     const headers = new Headers(request.headers);
     headers.set("X-NEXT-INTL-LOCALE", "en");
-    return NextResponse.rewrite(url, { request: { headers } });
+    const rewritten = NextResponse.rewrite(url, { request: { headers } });
+    appendVaryAccept(rewritten.headers);
+    return rewritten;
   }
 
   // Apply rate limiting to sensitive routes
