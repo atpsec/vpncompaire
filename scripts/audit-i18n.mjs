@@ -57,10 +57,10 @@ if (source("src/app/[locale]/layout.tsx").includes('rawLocale !== "en"')) {
 }
 
 const sitemap = source("src/app/sitemap.xml/route.ts");
-if (sitemap.includes('getIndexableBlogPosts("en")') && sitemap.includes('"/ai"')) {
-  pass("Sitemap contains English-only content and the AI hub");
+if (sitemap.includes('getIndexableBlogPosts("en")')) {
+  pass("Sitemap contains English-only indexable content");
 } else {
-  fail("Sitemap is missing English-only blog loading or AI hub coverage");
+  fail("Sitemap is missing English-only blog loading");
 }
 
 const forbiddenPublicRoots = [

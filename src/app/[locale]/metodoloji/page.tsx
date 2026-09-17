@@ -5,6 +5,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { CitationSummary } from "@/components/seo/citation-summary";
+import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
@@ -113,6 +114,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <GoogleAdsense />
       <JsonLd data={breadcrumbSchema([{ name: locale === "tr" ? "Ana sayfa" : locale === "de" ? "Startseite" : "Home", path: "/" }, { name: t.h1, path: "/methodology" }], locale)} />
       <Container size="md" className="py-12 sm:py-16 lg:py-20">
       <header className="min-w-0">

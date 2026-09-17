@@ -7,7 +7,12 @@ export const revalidate = 3600;
 // Only pages changed in the current editorial release use this date. Keeping
 // lastmod explicit avoids telling crawlers that every URL changed on every
 // request while still making the latest release discoverable.
-const CURRENT_EDITORIAL_RELEASE = "2026-09-06";
+const CURRENT_EDITORIAL_RELEASE = "2026-09-17";
+
+// These pages remain useful navigational/legal destinations, but their route
+// metadata deliberately says noindex. Keeping them out of the sitemap avoids
+// the Search Console "submitted URL marked noindex" warning.
+const NON_INDEXABLE_GUIDE_SLUGS = new Set(["is-vpn-legal-in-turkey"]);
 
 const staticEntries = [
   ["/", 1, "daily", CURRENT_EDITORIAL_RELEASE],
@@ -58,6 +63,7 @@ export async function GET() {
   for (const entry of Object.values(CONTENT_REGISTRY)) {
     const translation = entry.translations.en;
     if (!translation || translation.section !== "guide") continue;
+    if (NON_INDEXABLE_GUIDE_SLUGS.has(translation.slug)) continue;
     const root = "guide";
     add(
       `/${root}/${translation.slug}`,

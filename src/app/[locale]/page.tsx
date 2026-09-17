@@ -11,6 +11,7 @@ import { MethodologyBlock } from "@/components/home/methodology-block";
 import { FAQSection } from "@/components/home/faq-section";
 import { HomeBlogColumns } from "@/components/home/home-blog-columns";
 import { AiEditorialBlock } from "@/components/home/ai-editorial-block";
+import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   organizationSchema,
@@ -33,6 +34,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
+      <GoogleAdsense />
       <JsonLd data={organizationSchema(locale)} />
       <JsonLd data={websiteSchema(locale)} />
       <JsonLd data={itemListSchema(getDetailedProviderProducts(locale), locale)} />

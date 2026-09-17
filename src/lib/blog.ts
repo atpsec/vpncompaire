@@ -92,6 +92,7 @@ export const PUBLISHABLE_BLOG_SLUGS = new Set([
   "netflix-regional-libraries-vpn",
   "ai-tools-privacy-vpn",
   "ai-phishing-deepfake-vpn-protection",
+  "current-cyberattacks-september-2026",
 ]);
 
 export function isPublishableBlogSlug(slug: string): boolean {

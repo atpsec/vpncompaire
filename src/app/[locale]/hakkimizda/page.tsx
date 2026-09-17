@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
+import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 
@@ -103,6 +104,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
+      <GoogleAdsense />
       <JsonLd data={breadcrumbSchema([{ name: t.home, path: "/" }, { name: t.here, path: "/about" }], locale)} />
       <Container size="md" className="py-12 sm:py-16">
         <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">{t.home}</Link>{" "}› <span className="text-ink-strong">{t.here}</span></p>

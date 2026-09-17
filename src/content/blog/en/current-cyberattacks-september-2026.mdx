@@ -1,0 +1,160 @@
+---
+slug: "current-cyberattacks-september-2026"
+title: "Current Cyberattacks in September 2026: Passkey Phishing, AI Fraud and Fake Downloads"
+description: "A source-led September 2026 briefing on passkey phishing, AI-assisted invoice fraud, fake installers, fake IT support and VPN limits."
+publishedAt: "2026-09-17"
+updatedAt: "2026-09-17"
+author: "VPN Advisor"
+category: "gizlilik-guvenlik"
+tags: ["cybersecurity", "phishing", "passkey", "malware", "invoice fraud", "VPN", "2026"]
+readingTime: 12
+coverImage: "vpn-privacy-security-basics-en"
+unsplashKeyword: "cybersecurity threat intelligence phishing defense"
+indexing: index
+---
+
+Cyberattacks in September 2026 are showing a consistent pattern: criminals are not relying on one dramatic vulnerability. They are combining convincing social engineering with legitimate cloud services, remote-support tools, stolen sessions and carefully imitated download pages.
+
+This source-led briefing covers four recent campaigns described by Microsoft Security. It focuses on the behaviour that people and small teams can recognise, what to do after a suspicious interaction, and where a VPN helps or does not help. It is not a complete list of every incident worldwide, and the observations below should not be read as proof that every user of a named platform is affected.
+
+## Quick answer: what is changing in current attacks?
+
+The most important shift is the move from “break into a server” to “persuade a person, then use the access that person already has.” In the campaigns covered here, attackers used several recurring ideas:
+
+- A fake IT or security message creates urgency around a passkey, SSO, MFA or device problem.
+- A payment request looks like it came from an executive or a known supplier.
+- A search result or lookalike website offers a familiar software installer.
+- A remote-support conversation turns a trusted help channel into access to the endpoint.
+
+AI can make messages more fluent and more personalised, but the defensive lesson is not to hunt for an “AI writing style.” Verify the request, the identity and the destination independently.
+
+## Attack 1: passkey-themed social engineering becomes cloud compromise
+
+In a September 9 report, [Microsoft described an active cloud intrusion pattern](https://www.microsoft.com/en-us/security/blog/2026/09/09/passkey-themed-social-engineering-leads-identity-cloud-compromise/) observed since May 2026. The initial contact could arrive as a phone call, SMS or Microsoft Teams message that appeared to come from an IT helpdesk. The story was usually about a passkey, SSO or MFA update that supposedly needed immediate attention.
+
+The important point is that the passkey itself was not the weakness. The attacker tried to manipulate the user into an adversary-in-the-middle flow or a device-code phishing flow. Once access was gained, Microsoft observed activity such as reconnaissance through Microsoft Graph, downloads from SharePoint or OneDrive, and collection of Exchange mail or other cloud data. Attackers also tried to add authentication methods or trusted devices so that access could survive a password change.
+
+### What the warning signs look like
+
+Treat an unsolicited request as high risk when it combines several of these signals:
+
+- The caller or chat contact asks you to approve a sign-in, scan a QR code or enter a code while they stay on the line.
+- The message claims that your passkey, MFA or SSO will stop working unless you act immediately.
+- The sender is external, newly created or visually similar to your organisation's helpdesk.
+- A new phone, authenticator, passkey or device appears in your account settings.
+- A normal sign-in alert is followed by unusual activity in mail, files or cloud administration.
+
+If a request may be genuine, end the conversation and open the organisation's known support portal yourself. Do not use the phone number, meeting link or sign-in page supplied by the unexpected contact.
+
+## Attack 2: AI-assisted executive impersonation and invoice fraud
+
+Microsoft reported more than one million financial-fraud emails sent during a three-day period from August 3 to 5, 2026, in a campaign involving fake executives, vendors and service notifications. The [Microsoft analysis of AI-assisted executive impersonation](https://www.microsoft.com/en-us/security/blog/2026/09/10/protecting-organizations-ai-assisted-executive-impersonation-invoice-fraud/) describes messages that imitated familiar business workflows and included a fabricated invoice. One observed request was for an ACH payment of almost $50,000.
+
+This type of fraud is dangerous because the email does not need to steal a password to cause damage. It only needs to change a payment instruction at the right moment. A fake invoice, a changed bank account or an urgent “keep this confidential” request can bypass a technically strong network if the organisation treats email as proof of identity.
+
+The report also notes that language patterns suggesting AI assistance are clues, not a reliable detection method. A polished message can be written by a person, and a message with awkward wording can still be malicious. Likewise, the legitimate organisations mentioned in a fraudulent message are not automatically responsible for the campaign.
+
+### A safer payment rule
+
+Use a second, trusted channel for any unusual payment, bank-detail change or urgent request from an executive or supplier. Call a number already stored in your approved records, or ask the supplier to confirm through an established portal. Do not reply to the original message to verify it; if the mailbox or thread is compromised, the attacker may answer convincingly.
+
+For small businesses, this rule is more valuable than trying to identify every AI-generated sentence. Put the check in the process: two-person approval for new bank details, a callback for high-value transfers, and a clear way to report suspicious mail without embarrassing the employee who noticed it.
+
+## Attack 3: counterfeit software installers lead to malware
+
+In a September 1 investigation, [Microsoft tracked a deceptive software-download campaign](https://www.microsoft.com/en-us/security/blog/2026/09/01/counterfeit-installers-system-compromise-tracking-deceptive-software-download-campaign/) built around fake software sites and lookalike vendors. The campaign was observed across sectors including healthcare, manufacturing, gaming, technology, logistics, government and education.
+
+The basic trap is familiar: a person searches for a tool, reaches a convincing page and downloads an installer that appears to be the product they wanted. Microsoft observed regenerated archives and changing payloads, which makes a single file hash or screenshot a weak long-term defence. After execution, the malware could establish persistence, weaken protections and communicate with attacker-controlled infrastructure.
+
+### Safer download habits
+
+Download software from the vendor's address typed manually, an official app store or an organisation-managed catalogue. Check the spelling of the domain and the publisher shown by the operating system, but do not treat either check as perfect proof. Search ads and high-ranking results can still lead to imitation sites.
+
+Keep SmartScreen or the equivalent reputation protection enabled, install operating-system and browser updates, and make sure endpoint protection and tamper protection have not been disabled. On a work device, a request to run an unsigned installer or to turn off protection should be treated as a security event, not as a normal installation step.
+
+## Attack 4: fake IT support and remote access
+
+In a September 2 report, [Microsoft described attackers impersonating IT support](https://www.microsoft.com/en-us/security/blog/2026/09/02/impersonating-it-support-threat-actors-turn-remote-session-into-enterprise-wide-access/) through external collaboration messages. After building trust, they persuaded a user to start a remote session, often using a legitimate support utility such as Quick Assist. The later stages included a malicious installer, a portable Node.js runtime, JavaScript-based persistence, PowerShell reconnaissance and attempts to move through the environment with WinRM.
+
+Microsoft explicitly described this as social engineering and abuse of legitimate tools, not a security flaw in Teams. That distinction matters: blocking one application may not solve the problem if the same conversation moves to a phone call, another chat service or a different remote-support utility.
+
+Verify unexpected support requests through a known internal directory or ticketing system. Organisations should restrict external collaboration where practical, maintain an allowlist for remote-support tools, log remote sessions, require approval for elevated access and rotate credentials when an unauthorised session may have occurred.
+
+## Practical defence checklist
+
+The following controls address the common path across all four campaigns:
+
+1. **Verify identity out of band.** Use a known phone number, bookmarked portal or existing ticket. Do not trust the contact details in an unexpected message.
+2. **Use phishing-resistant MFA.** Passkeys and hardware security keys can strengthen authentication, but a user can still be tricked into approving the wrong flow. Never approve a sign-in you did not initiate.
+3. **Review account changes.** Check new authentication methods, devices, forwarding rules, recovery addresses, application consents and active sessions. Remove anything you cannot explain.
+4. **Separate payment approval from email.** Confirm new bank details and high-value transfers through a second channel and, for teams, a second person.
+5. **Use official download paths.** Keep endpoint protection, browser protections and automatic updates enabled. Do not install a tool because a pop-up or remote caller says it is urgent.
+6. **Limit remote-support access.** Disable or restrict tools that are not needed, record approved sessions and treat a request to share control as a privileged action.
+7. **Prepare recovery steps.** Keep tested backups, an incident contact list and a simple process for revoking sessions and reporting a suspected compromise.
+
+These layers complement the account and phishing guidance from [CISA's MFA recommendations](https://www.cisa.gov/secure-our-world/require-multifactor-authentication) and [CISA's phishing guidance](https://www.cisa.gov/secure-our-world/recognize-and-report-phishing). A VPN is one network-privacy layer; it is not a substitute for these controls.
+
+## Where a VPN helps — and where it does not
+
+A VPN can encrypt the connection between your device and the VPN server and reduce the amount of traffic metadata visible to a local Wi-Fi operator or internet service provider. That is useful on untrusted networks, especially when travelling. Correct DNS routing can also reduce some local-network DNS manipulation.
+
+However, a VPN does not:
+
+- recognise whether a Teams contact is really your IT department;
+- verify that a payment request came from your executive or supplier;
+- make a lookalike download site legitimate;
+- stop you from running a malicious installer;
+- remove an attacker-added passkey, device or cloud session; or
+- recover data already copied from SharePoint, OneDrive or email.
+
+For the boundary between network privacy and account security, see our [VPN privacy and security guide](/blog/vpn-privacy-and-security). If you use a VPN on public Wi-Fi, our [VPN for travel guide](/blog/vpn-for-travel) explains the practical setup trade-offs, while the [DNS leak test guide](/blog/dns-leak-test-vpn) shows how to check whether DNS requests follow the intended path.
+
+## What to do if you already interacted with a suspicious request
+
+Do not continue the conversation while trying to “test” the attacker. If you approved a sign-in, shared a remote session, installed software or entered credentials, use a clean device or a trusted administrator workflow where possible and take these steps:
+
+1. Disconnect the affected device from the network if malware or remote control is suspected. Do not destroy evidence or start deleting files before your IT or incident-response contact advises you.
+2. Report the event immediately. Include the sender, time, links, application name, device and exactly what you approved or entered.
+3. Revoke active sessions and remove unknown authentication methods, devices, application consents and mail-forwarding rules.
+4. Change the affected password from a clean device. Change any reused password on other services and check recovery details.
+5. If money was sent or bank details changed, contact the bank using its official number and ask what recall or fraud process applies.
+6. Preserve messages, headers, screenshots and transaction records. Do not forward suspicious installers or stolen data to colleagues.
+
+The order can vary by incident. The key is speed: a password change alone may not end a cloud intrusion if the attacker added another authentication method or retained a valid session.
+
+## What to monitor next
+
+These campaigns leave useful behavioural signals even when the original message looks convincing:
+
+- a new authenticator, passkey, device or recovery address;
+- a sign-in from an unusual location followed by mail or file downloads;
+- a new inbox forwarding rule or unexpected OAuth application consent;
+- a supplier asking for changed bank details or an executive demanding secrecy;
+- software downloaded from a search result rather than the vendor's known domain;
+- a remote-support session followed by an installer, command shell or request for administrator access.
+
+For a small team, monitoring does not need to start with an expensive platform. Review identity alerts, payment exceptions, endpoint detections and remote-support logs every day, and make sure someone owns the response when an alert is raised.
+
+## Frequently asked questions
+
+### Do passkeys make phishing impossible?
+
+No. Passkeys can resist many conventional credential-theft attacks, but an attacker can still trick a person into authorising an unexpected sign-in or into following a fake support process. The safest habit is to initiate the sign-in yourself and reject every approval you did not request.
+
+### Can a VPN stop these current cyberattacks?
+
+No. A VPN can improve network privacy and protect traffic on an untrusted connection, but it cannot validate identities, stop invoice fraud, remove malware or reverse a cloud account takeover.
+
+### Are counterfeit installers only an enterprise problem?
+
+No. Individuals can reach fake download sites through search results, social media or a message. Use official vendor paths, keep protections enabled and do not bypass an operating-system warning merely because the file appears urgent.
+
+### What makes this a “current” threat briefing?
+
+The article reflects the public Microsoft Security reports linked above and the defensive guidance available on **September 17, 2026**. Threat actors change infrastructure quickly, so the durable lessons are the verification, authentication, download and recovery controls rather than any single domain, file hash or message template.
+
+## Conclusion
+
+The common thread in these September 2026 campaigns is trust abuse. A passkey notice, invoice, software download or support request can look ordinary while giving an attacker a route into identity, money, devices or cloud data.
+
+The practical response is layered: verify through a second channel, use phishing-resistant MFA, review account changes, approve payments independently, download software from trusted sources and keep a tested recovery path. Add a VPN when you need network privacy, especially on untrusted Wi-Fi, but keep its role precise. It strengthens the connection layer; it does not replace judgement, endpoint protection or account security.

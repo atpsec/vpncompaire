@@ -36,7 +36,7 @@ const checks = [
   [
     "Commercial ad inventory guard",
     path.join(root, "src", "components", "analytics", "google-adsense.tsx"),
-    ["/reviews", "/vpn-reviews", "/comparison"],
+    ["Only page-level monetized surfaces", "excluded pages", "allowlist"],
   ],
 ];
 

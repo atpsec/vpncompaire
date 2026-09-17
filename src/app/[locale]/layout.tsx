@@ -7,7 +7,6 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipToContent } from "@/components/layout/skip-to-content";
 import type { Metadata } from "next";
 import { buildRootMetadata, rootViewport } from "@/lib/root-metadata";
-import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { WebVitals } from "@/components/analytics/web-vitals";
 import { ThemeScript } from "@/components/theme/theme-script";
@@ -83,7 +82,6 @@ export default async function LocaleLayout({ children, params }: Props) {
         </NextIntlClientProvider>
         <GoogleAnalytics locale={locale} />
         <WebVitals />
-        <GoogleAdsense />
       </body>
     </html>
   );

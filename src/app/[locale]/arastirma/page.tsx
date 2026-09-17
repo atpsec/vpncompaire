@@ -13,6 +13,7 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { CitationSummary } from "@/components/seo/citation-summary";
+import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import {
@@ -88,8 +89,9 @@ export default async function Page({ params }: Props) {
   };
 
   return (
-    <>
-      <JsonLd
+      <>
+        <GoogleAdsense />
+        <JsonLd
         data={breadcrumbSchema(
           [
             { name: "Home", path: "/" },

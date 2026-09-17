@@ -62,6 +62,30 @@ const references = {
     url: "https://www.cisa.gov/secure-our-world/recognize-and-report-phishing",
     note: "Primary guidance for recognizing social-engineering attacks and suspicious links.",
   },
+  microsoftPasskeySocialEngineering: {
+    title: "Passkey-themed social engineering leads to identity and cloud compromise",
+    publisher: "Microsoft Security",
+    url: "https://www.microsoft.com/en-us/security/blog/2026/09/09/passkey-themed-social-engineering-leads-identity-cloud-compromise/",
+    note: "September 2026 threat intelligence on helpdesk impersonation, device-code phishing and cloud-data access.",
+  },
+  microsoftAiInvoiceFraud: {
+    title: "Protecting organizations from AI-assisted executive impersonation and invoice fraud",
+    publisher: "Microsoft Security",
+    url: "https://www.microsoft.com/en-us/security/blog/2026/09/10/protecting-organizations-ai-assisted-executive-impersonation-invoice-fraud/",
+    note: "September 2026 analysis of executive impersonation, supplier fraud and payment redirection attempts.",
+  },
+  microsoftCounterfeitInstallers: {
+    title: "Counterfeit installers to system compromise: Tracking a deceptive software download campaign",
+    publisher: "Microsoft Security",
+    url: "https://www.microsoft.com/en-us/security/blog/2026/09/01/counterfeit-installers-system-compromise-tracking-deceptive-software-download-campaign/",
+    note: "September 2026 investigation of lookalike download sites, malicious installers and persistence.",
+  },
+  microsoftFakeItSupport: {
+    title: "Impersonating IT support: how threat actors turn a remote session into enterprise-wide access",
+    publisher: "Microsoft Security",
+    url: "https://www.microsoft.com/en-us/security/blog/2026/09/02/impersonating-it-support-threat-actors-turn-remote-session-into-enterprise-wide-access/",
+    note: "September 2026 analysis of external collaboration lures, remote-support abuse and post-session intrusion activity.",
+  },
   effSurveillance: {
     title: "Surveillance Self-Defense",
     publisher: "Electronic Frontier Foundation",
@@ -481,6 +505,7 @@ const articleReferenceIds: Record<string, readonly ReferenceId[]> = {
   "opera-vpn-browser-vpn-review": ["operaFreeVpn", "operaVpnHelp", "operaNoLogAudit", "operaPrivacy"],
   "mullvad-public-encrypted-dns-quad9-2026": ["mullvadDnsAnnouncement", "quad9Addresses", "quad9Privacy", "quad9Docs"],
   "berlin-state-network-data-leak-2026": ["berlinInitialIncident", "berlinAdditionalExfiltration", "berlinExtortionUpdate", "berlinPublishedData", "berlinNetworkContext"],
+  "current-cyberattacks-september-2026": ["microsoftPasskeySocialEngineering", "microsoftAiInvoiceFraud", "microsoftCounterfeitInstallers", "microsoftFakeItSupport", "cisaMfa", "cisaPhishing"],
 };
 
 // Most article references are checked in the shared editorial pass above. A
@@ -490,6 +515,7 @@ const articleReferenceVerifiedAt: Record<string, string> = {
   "ucretsiz-vpn-tehlikeleri": "2026-09-05",
   "mullvad-public-encrypted-dns-quad9-2026": "2026-09-05",
   "berlin-state-network-data-leak-2026": "2026-09-05",
+  "current-cyberattacks-september-2026": "2026-09-17",
 };
 
 export function getBlogReferences(slug: string): EditorialReference[] {
