@@ -87,6 +87,10 @@ const envSchema = z.object({
   // and reports breach-check availability gracefully.
   HIBP_API_KEY: z.string().min(1).optional().or(z.literal("")),
 
+  // Optional TypeSafe AI key for server-side VPN quiz preference analysis.
+  // The deterministic recommendation remains available when this is absent.
+  TYPESAFE_API_KEY: z.string().min(1).optional().or(z.literal("")),
+
   // Affiliate tracking URLs — server-side only (not NEXT_PUBLIC_*).
   // Each one holds the FULL personal tracking URL provided by the
   // affiliate dashboard (e.g. https://go.nordvpn.net/aff_c?offer_id=...&aff_id=YOURID).
@@ -120,6 +124,7 @@ const parsed = envSchema.safeParse({
   BLOG_VIEW_STORE_PATH: process.env.BLOG_VIEW_STORE_PATH,
   PHONE_AUTH_STORE_PATH: process.env.PHONE_AUTH_STORE_PATH,
   HIBP_API_KEY: process.env.HIBP_API_KEY,
+  TYPESAFE_API_KEY: process.env.TYPESAFE_API_KEY,
   AFFILIATE_NORDVPN_URL: process.env.AFFILIATE_NORDVPN_URL,
   AFFILIATE_SURFSHARK_URL: process.env.AFFILIATE_SURFSHARK_URL,
   AFFILIATE_EXPRESSVPN_URL: process.env.AFFILIATE_EXPRESSVPN_URL,

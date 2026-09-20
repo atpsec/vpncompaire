@@ -581,6 +581,14 @@
     "result": {
       "kicker": "Source profile matching your answers",
       "matchBadge": "Profile matched to your priorities",
+      "aiSignal": "TypeSafe preference signal: {intent} · {confidence}% confidence",
+      "intentLabels": {
+        "privacy": "privacy",
+        "streaming": "streaming",
+        "travel": "travel and public Wi-Fi",
+        "gaming": "gaming",
+        "balanced": "balanced everyday use"
+      },
       "disclaimer": "This tool is an educational helper that matches your priorities to source-based provider profiles; it is not personal advice or a guarantee. Verify current pricing and features on the provider's official site before buying.",
       "monthlyLabel": "Monthly",
       "ctaDeal": "View {brand} on its official site",
@@ -592,6 +600,8 @@
     },
     "progress": "Question {current}/{total}",
     "showResult": "Show result",
+    "analyzing": "Checking your fit…",
+    "analysisDisclosure": "When TypeSafe analysis is enabled, only these six selections are sent for use-case classification. No account or contact data is included.",
     "reset": "Reset",
     "altDirectHeading": "Skip the quiz",
     "altLinks": {

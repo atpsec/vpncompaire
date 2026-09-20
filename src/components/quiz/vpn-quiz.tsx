@@ -13,122 +13,149 @@ import { getProduct } from "@/data/products";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
 import type { Locale } from "@/lib/site";
+import {
+  isCompleteQuizAnswers,
+  rankQuizAnswers,
+  VPN_QUIZ_QUESTIONS,
+  type QuizAnswers,
+  type QuizMatch,
+  type QuizQuestionId,
+} from "@/lib/vpn-quiz";
 
-type QuestionData = {
-  id: string;
-  /** Per-option per-VPN points awarded. Index matches option position. */
-  optionsPoints: ReadonlyArray<Partial<Record<string, number>>>;
+type RecommendationMeta = {
+  intent: "privacy" | "streaming" | "travel" | "gaming" | "balanced";
+  confidence: number;
 };
 
-const QUESTIONS: ReadonlyArray<QuestionData> = [
-  {
-    id: "priority",
-    optionsPoints: [
-      { nordvpn: 3, expressvpn: 3, surfshark: 2, cyberghost: 3 },
-      { mullvad: 4, "proton-vpn": 3, pia: 2, nordvpn: 1 },
-      { nordvpn: 2, surfshark: 2, expressvpn: 2, "proton-vpn": 2 },
-      { nordvpn: 3, expressvpn: 3, pia: 2 },
-    ],
-  },
-  {
-    id: "budget",
-    optionsPoints: [
-      { "proton-vpn": 5, windscribe: 2 },
-      { surfshark: 4, pia: 3, ipvanish: 2 },
-      { nordvpn: 3, "proton-vpn": 2, mullvad: 3 },
-      { expressvpn: 4, nordvpn: 3 },
-    ],
-  },
-  {
-    id: "devices",
-    optionsPoints: [
-      { mullvad: 2, "proton-vpn": 2 },
-      { nordvpn: 2, expressvpn: 2, pia: 2 },
-      { nordvpn: 3, ipvanish: 2 },
-      { surfshark: 5, windscribe: 2 },
-    ],
-  },
-  {
-    id: "location",
-    optionsPoints: [
-      {
-        nordvpn: 3,
-        expressvpn: 3,
-        surfshark: 3,
-        cyberghost: 2,
-        pia: 1,
-      },
-      { mullvad: 3, "proton-vpn": 2 },
-      { nordvpn: 1, surfshark: 1 },
-    ],
-  },
-  {
-    id: "trust",
-    optionsPoints: [
-      {
-        nordvpn: 3,
-        expressvpn: 3,
-        mullvad: 2,
-        "proton-vpn": 3,
-        tunnelbear: 2,
-      },
-      { "proton-vpn": 4, mullvad: 4, pia: 3 },
-      { pia: 4, expressvpn: 3 },
-      { nordvpn: 2, expressvpn: 2, surfshark: 1 },
-    ],
-  },
-  {
-    id: "ease",
-    optionsPoints: [
-      { surfshark: 2, nordvpn: 2, expressvpn: 3, tunnelbear: 3 },
-      { nordvpn: 2, "proton-vpn": 2, surfshark: 2 },
-      { pia: 4, mullvad: 3, "proton-vpn": 2 },
-    ],
-  },
-];
+type RecommendationResponse = {
+  matches: Array<{ slug: string; score: number }>;
+  mode: "deterministic" | "typesafe";
+  intent?: RecommendationMeta["intent"];
+  confidence?: number;
+};
+
+const RECOMMENDATION_INTENTS = new Set<RecommendationMeta["intent"]>([
+  "privacy",
+  "streaming",
+  "travel",
+  "gaming",
+  "balanced",
+]);
+
+function validRecommendationIntent(
+  value: unknown,
+): value is RecommendationMeta["intent"] {
+  return (
+    typeof value === "string" &&
+    RECOMMENDATION_INTENTS.has(value as RecommendationMeta["intent"])
+  );
+}
+
+function validRecommendation(value: unknown): value is RecommendationResponse {
+  if (!value || typeof value !== "object") return false;
+  const response = value as Partial<RecommendationResponse>;
+  return (
+    (response.mode === "deterministic" || response.mode === "typesafe") &&
+    Array.isArray(response.matches) &&
+    response.matches.length > 0 &&
+    response.matches.length <= 3 &&
+    response.matches.every(
+      (match) =>
+        match &&
+        typeof match.slug === "string" &&
+        typeof match.score === "number" &&
+        Number.isFinite(match.score),
+    ) &&
+    (response.mode !== "typesafe" ||
+      (validRecommendationIntent(response.intent) &&
+        typeof response.confidence === "number" &&
+        Number.isFinite(response.confidence) &&
+        response.confidence >= 0 &&
+        response.confidence <= 1))
+  );
+}
 
 export function VPNQuiz() {
   const t = useTranslations("quiz");
   const locale = useLocale() as Locale;
-  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<Partial<QuizAnswers>>({});
   const [showResult, setShowResult] = useState(false);
+  const [isRefining, setIsRefining] = useState(false);
+  const [refinedMatches, setRefinedMatches] = useState<QuizMatch[] | null>(null);
+  const [recommendationMeta, setRecommendationMeta] =
+    useState<RecommendationMeta | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
 
-  const currentIdx = QUESTIONS.findIndex((q) => answers[q.id] === undefined);
+  const currentIdx = VPN_QUIZ_QUESTIONS.findIndex(
+    (q) => answers[q.id] === undefined,
+  );
   const allAnswered = currentIdx === -1;
 
-  function select(questionId: string, optionIdx: number) {
+  function select(questionId: QuizQuestionId, optionIdx: number) {
     setAnswers((prev) => ({ ...prev, [questionId]: optionIdx }));
+    setRefinedMatches(null);
+    setRecommendationMeta(null);
   }
 
   function reset() {
     setAnswers({});
     setShowResult(false);
+    setIsRefining(false);
+    setRefinedMatches(null);
+    setRecommendationMeta(null);
   }
 
-  const scores = QUESTIONS.reduce<Record<string, number>>((acc, q) => {
-    const optionIdx = answers[q.id];
-    if (optionIdx === undefined) return acc;
-    const pts = q.optionsPoints[optionIdx];
-    for (const [slug, p] of Object.entries(pts)) {
-      acc[slug] = (acc[slug] ?? 0) + (p ?? 0);
-    }
-    return acc;
-  }, {});
-
-  const matches = Object.entries(scores)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 3);
+  const deterministicMatches = rankQuizAnswers(answers);
+  const matches = refinedMatches ?? deterministicMatches;
   const topMatchSlug = matches[0]?.[0];
+
+  async function showRecommendation() {
+    if (!isCompleteQuizAnswers(answers)) return;
+
+    setIsRefining(true);
+    setRefinedMatches(null);
+    setRecommendationMeta(null);
+
+    try {
+      const response = await fetch("/api/vpn-recommendation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers }),
+      });
+      const payload = (await response.json()) as unknown;
+
+      if (response.ok && validRecommendation(payload)) {
+        setRefinedMatches(
+          payload.matches.map(({ slug, score }) => [slug, score] as const),
+        );
+        if (
+          payload.mode === "typesafe" &&
+          payload.intent &&
+          payload.confidence !== undefined
+        ) {
+          setRecommendationMeta({
+            intent: payload.intent,
+            confidence: payload.confidence,
+          });
+        }
+      }
+    } catch {
+      // The local scoring model remains the reliable fallback.
+    } finally {
+      setIsRefining(false);
+      setShowResult(true);
+    }
+  }
 
   useEffect(() => {
     if (!showResult || !topMatchSlug) return;
     window.gtag?.("event", "quiz_complete", {
       top_match: topMatchSlug,
       answer_count: Object.keys(answers).length,
+      recommendation_mode: recommendationMeta ? "typesafe" : "deterministic",
       locale: document.documentElement.lang || undefined,
     });
-  }, [answers, showResult, topMatchSlug]);
+  }, [answers, recommendationMeta, showResult, topMatchSlug]);
 
   // The result replaces the quiz in the DOM, so keyboard and mobile users
   // should be taken directly to the new content instead of being left at the
@@ -175,6 +202,14 @@ export function VPNQuiz() {
               <Badge variant="success" className="mt-2">
                 {t("result.matchBadge")}
               </Badge>
+              {recommendationMeta ? (
+                <p className="mt-2 text-xs text-ink-muted">
+                  {t("result.aiSignal", {
+                    intent: t(`result.intentLabels.${recommendationMeta.intent}`),
+                    confidence: Math.round(recommendationMeta.confidence * 100),
+                  })}
+                </p>
+              ) : null}
             </div>
           </div>
 
@@ -259,7 +294,7 @@ export function VPNQuiz() {
 
   return (
     <div className="mt-8 space-y-6">
-      {QUESTIONS.map((q, qIdx) => {
+      {VPN_QUIZ_QUESTIONS.map((q, qIdx) => {
         const isAnswered = answers[q.id] !== undefined;
         const isActive = qIdx === currentIdx || isAnswered;
         if (!isActive) return null;
@@ -281,6 +316,7 @@ export function VPNQuiz() {
                   <button
                     key={idx}
                     type="button"
+                    disabled={isRefining}
                     aria-pressed={isSelected}
                     onClick={() => select(q.id, idx)}
                     className={`text-left rounded-lg border px-4 py-3 text-sm transition-all flex items-center gap-3 ${
@@ -308,23 +344,29 @@ export function VPNQuiz() {
       })}
 
       {allAnswered ? (
-        <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center pt-2">
           <Button
             variant="primary"
             size="lg"
-            onClick={() => setShowResult(true)}
+            disabled={isRefining}
+            aria-busy={isRefining}
+            onClick={showRecommendation}
           >
-            <Sparkles className="size-4" /> {t("showResult")}
+            <Sparkles className="size-4" />
+            {isRefining ? t("analyzing") : t("showResult")}
           </Button>
-          <Button variant="ghost" onClick={reset}>
+          <Button variant="ghost" disabled={isRefining} onClick={reset}>
             <RotateCcw className="size-4" /> {t("reset")}
           </Button>
+          <p className="basis-full text-center text-xs text-ink-muted">
+            {t("analysisDisclosure")}
+          </p>
         </div>
       ) : (
         <p className="text-center text-xs text-ink-muted">
           {t("progress", {
             current: Math.max(currentIdx, 0) + 1,
-            total: QUESTIONS.length,
+            total: VPN_QUIZ_QUESTIONS.length,
           })}
         </p>
       )}
