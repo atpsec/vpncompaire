@@ -105,7 +105,7 @@ function researchMarkdown(): string {
     pathname: "/research",
     sections: [
       "## How to use this desk\n\nStart with the evidence ledger for claim-level records, then use the transparency index to compare how clearly providers document privacy, security, audits, incidents, ownership and pricing.",
-      `## Research surfaces\n\n- [Evidence ledger](${siteConfig.url}/research/evidence-ledger): working records with source type, date, scope and limitations.\n- [Transparency index](${siteConfig.url}/research/transparency-index): documentation signals without treating them as a laboratory score.\n- [Sources and limitations](${siteConfig.url}/methodology): how to read the site's information and limits.`,
+      `## Research surfaces\n\n- [Evidence ledger](${siteConfig.url}/research/evidence-ledger): working records with source type, date, scope and limitations.\n- [Transparency index](${siteConfig.url}/research/transparency-index): documentation signals without treating them as a laboratory score.\n- [AI Citation Watch](${siteConfig.url}/research/ai-citation-watch): fixed questions and evaluation rules for measuring independent AI citation visibility.\n- [Sources and limitations](${siteConfig.url}/methodology): how to read the site's information and limits.`,
       "## Evidence limits\n\nA provider statement is not independent proof. An audit has a scope and date. Pricing, policies, server lists and platform support can change. The site keeps those limits visible rather than converting incomplete evidence into certainty.",
     ],
   });
