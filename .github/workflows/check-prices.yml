@@ -40,16 +40,43 @@ jobs:
         run: node scripts/check-research-freshness.mjs
         continue-on-error: true
 
+      - name: Restore monitored source snapshots
+        id: source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .runtime/research-sources
+          key: research-source-snapshots-${{ hashFiles('data/research/monitored-sources.json') }}
+
+      - name: Monitor research sources
+        id: source-diff
+        run: |
+          if [ "${{ steps.source-cache.outputs.cache-hit }}" = "true" ]; then
+            node scripts/research-source-diff.mjs --strict
+          else
+            node scripts/research-source-diff.mjs --update
+          fi
+        continue-on-error: true
+
+      - name: Save monitored source snapshots
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .runtime/research-sources
+          key: research-source-snapshots-${{ hashFiles('data/research/monitored-sources.json') }}
+
       - name: Combine audit reports
         if: always()
         run: |
-          touch .pricing-report.md .link-health-report.md
+          touch .pricing-report.md .link-health-report.md .research-change-report.md
           {
             cat .pricing-report.md
             printf '\n---\n\n'
             cat .link-health-report.md
             printf '\n---\n\n'
             cat .research-freshness-report.md
+            printf '\n---\n\n'
+            cat .research-change-report.md
           } > .site-health-report.md
 
       - name: Upload report
@@ -61,11 +88,12 @@ jobs:
             .pricing-report.md
             .link-health-report.md
             .research-freshness-report.md
+            .research-change-report.md
             .site-health-report.md
           retention-days: 30
 
       - name: Open issue on confirmed drift, broken links or content regression
-        if: steps.pricing.outcome == 'failure' || steps.links.outcome == 'failure' || steps.content.outcome == 'failure' || steps.freshness.outcome == 'failure'
+        if: steps.pricing.outcome == 'failure' || steps.links.outcome == 'failure' || steps.content.outcome == 'failure' || steps.freshness.outcome == 'failure' || steps.source-diff.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
