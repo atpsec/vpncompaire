@@ -2,6 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const researchEdition = JSON.parse(
+  fs.readFileSync(path.join(root, "data", "research", "canonical.json"), "utf8"),
+).edition;
 const checks = [
   [
     "Transparency Index page",
@@ -21,7 +24,7 @@ const checks = [
   [
     "Methodology freshness date",
     path.join(root, "src", "app", "[locale]", "metodoloji", "page.tsx"),
-    ["2026-08-31"],
+    ["researchEdition"],
   ],
   [
     "Provider quality gate",
@@ -41,6 +44,9 @@ const checks = [
 ];
 
 const failures = [];
+if (!/^\d{4}-\d{2}-\d{2}$/.test(researchEdition)) {
+  failures.push(`Canonical research edition is invalid: ${researchEdition}`);
+}
 for (const [label, file, needles] of checks) {
   if (!fs.existsSync(file)) {
     failures.push(`${label}: missing ${path.relative(root, file)}`);
