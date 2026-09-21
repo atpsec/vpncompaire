@@ -8,6 +8,7 @@ import { CitationSummary } from "@/components/seo/citation-summary";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates, type Locale } from "@/lib/site";
 import { GoogleAdsense } from "@/components/analytics/google-adsense";
+import { researchEdition } from "@/data/research";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -116,7 +117,7 @@ export default async function Page({ params }: Props) {
   const locale = (rawLocale === "en" || rawLocale === "de" ? rawLocale : "tr") as Locale;
   setRequestLocale(locale);
   const t = copy[locale];
-  const date = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date("2026-08-31"));
+  const date = new Intl.DateTimeFormat(locale === "tr" ? "tr-TR" : locale === "de" ? "de-DE" : "en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date(researchEdition()));
 
   return (
     <>

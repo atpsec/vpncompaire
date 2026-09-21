@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { EvidenceTable } from "@/components/research/evidence-table";
 import { breadcrumbSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
-import { getResearchSource, getResearchSources, getAllResearchEvidence } from "@/data/research";
+import { getResearchSource, getResearchSources, getAllResearchEvidence, researchEdition } from "@/data/research";
 
 type Props = { params: Promise<{ locale: string; id: string }> };
 
@@ -32,7 +32,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Research", path: "/research" }, { name: "Sources", path: "/research/sources" }, { name: source.title, path: `/research/sources/${id}` }], "en")} />
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: source.title, description: source.notes ?? source.title, url: absoluteUrl(`/research/sources/${id}`), dateModified: source.lastChecked ?? "2026-09-19", mainEntity: { "@type": "CreativeWork", name: source.title, url: source.url, publisher: { "@type": "Organization", name: source.publisher } } }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", name: source.title, description: source.notes ?? source.title, url: absoluteUrl(`/research/sources/${id}`), dateModified: source.lastChecked ?? researchEdition(), mainEntity: { "@type": "CreativeWork", name: source.title, url: source.url, publisher: { "@type": "Organization", name: source.publisher } } }} />
       <Container size="lg" className="py-12 sm:py-16 lg:py-20">
         <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">Home</Link> › <Link href="/research" className="hover:text-ink">Research</Link> › <Link href="/research/sources" className="hover:text-ink">Sources</Link> › <span className="text-ink-strong">{source.title}</span></p>
         <header className="mt-6 max-w-4xl"><span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700"><LibraryBig className="size-3.5" aria-hidden="true" /> Source record</span><h1 className="mt-5 text-4xl font-bold tracking-tight text-ink-strong sm:text-5xl">{source.title}</h1><p className="mt-4 text-lg text-ink-muted">Published by {source.publisher} · {source.type}</p><a href={source.url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 font-semibold text-brand-700 hover:underline">Open original source <ExternalLink className="size-4" /></a></header>

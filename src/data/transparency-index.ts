@@ -1,6 +1,7 @@
 import { providerEvidenceRecords, type EvidenceState } from "./provider-evidence";
+import { researchEdition } from "./research";
 
-export const TRANSPARENCY_INDEX_EDITION = "2026-08-31";
+export const TRANSPARENCY_INDEX_EDITION = researchEdition();
 export const TRANSPARENCY_INDEX_DIMENSIONS = [
   {
     key: "detailedProfile",

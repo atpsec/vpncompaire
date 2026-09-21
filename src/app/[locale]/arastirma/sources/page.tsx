@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbSchema, datasetSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
-import { getResearchSources } from "@/data/research";
+import { getResearchSources, researchEdition } from "@/data/research";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -25,7 +25,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Research", path: "/research" }, { name: "Sources", path: "/research/sources" }], "en")} />
-      <JsonLd data={datasetSchema({ name: title, description, url: "/research/sources", creator: "/about", dateModified: "2026-09-19", distributionUrl: "/api/research/sources", measurementTechnique: "Registry of configured public source records; source presence is not equivalent to claim verification." })} />
+      <JsonLd data={datasetSchema({ name: title, description, url: "/research/sources", creator: "/about", dateModified: researchEdition(), distributionUrl: "/api/research/sources", measurementTechnique: "Registry of configured public source records; source presence is not equivalent to claim verification." })} />
       <Container size="lg" className="py-12 sm:py-16 lg:py-20">
         <p className="text-sm text-ink-muted"><Link href="/" className="hover:text-ink">Home</Link> › <Link href="/research" className="hover:text-ink">Research</Link> › <span className="text-ink-strong">Sources</span></p>
         <header className="mt-6 max-w-4xl"><span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-700"><LibraryBig className="size-3.5" aria-hidden="true" /> Source registry</span><h1 className="mt-5 text-4xl font-bold tracking-tight text-ink-strong sm:text-5xl">VPN research source registry</h1><p className="mt-5 text-lg leading-relaxed text-ink-muted">Every configured source has a title, publisher, type, original URL and review state. A source link is not automatically proof of every claim attached to it.</p></header>
