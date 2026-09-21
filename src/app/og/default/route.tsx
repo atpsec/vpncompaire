@@ -13,20 +13,20 @@ const CONTENT: Record<
   tr: {
     title: "Bağımsız VPN karşılaştırmaları",
     subtitle:
-      "Resmi kaynaklar · Bağımsız denetim kayıtları · Şeffaf metodoloji.",
-    signals: ["Kaynak temelli profiller", "Denetim kayıtları", "Şeffaf metodoloji"],
+      "Resmi kaynaklar · Bağımsız denetim kayıtları · Açık sınırlamalar.",
+    signals: ["Bilgilendirme profilleri", "Denetim kayıtları", "Açık sınırlamalar"],
   },
   en: {
     title: "Independent VPN comparisons",
     subtitle:
-      "Official sources · Independent audit records · Transparent methodology.",
-    signals: ["Source-based profiles", "Audit records", "Transparent methodology"],
+      "Official sources · Independent audit records · Clear limitations.",
+    signals: ["Information profiles", "Audit records", "Clear limitations"],
   },
   de: {
     title: "Unabhängige VPN-Vergleiche",
     subtitle:
-      "Offizielle Quellen · Unabhängige Prüfberichte · Transparente Methodik.",
-    signals: ["Quellenbasierte Profile", "Prüfberichte", "Transparente Methodik"],
+      "Offizielle Quellen · Unabhängige Prüfberichte · Klare Grenzen.",
+    signals: ["Informationsprofile", "Prüfberichte", "Klare Grenzen"],
   },
 };
 

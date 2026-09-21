@@ -26,9 +26,21 @@ export const siteConfig = {
     en: "A source-based guide comparing VPN providers through privacy policies, independent audit records, security features and current pricing sources.",
   },
   author: {
-    // Institutional byline: the project has no named editorial staff.
+    // Institutional byline: the individual publishing lead is disclosed on /about.
     name: "VPN Advisor",
     url: "/about",
+  },
+  editorialLead: {
+    name: "Ahmet Tepe",
+    url: "/about",
+    role: "Cybersecurity practitioner and publishing lead",
+    knowsAbout: [
+      "Security awareness and phishing simulations",
+      "OSINT research",
+      "Vulnerability management",
+      "DevSecOps and CI/CD security checks",
+      "VPN privacy and network security",
+    ],
   },
   social: {
     twitter: "",

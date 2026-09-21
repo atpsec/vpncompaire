@@ -36,7 +36,7 @@ export type DeviceContent = {
 
 const COMMON_RELATED = [
   { label: "Tüm VPN'leri karşılaştır", href: "/vpn-reviews" },
-  { label: "Karşılaştırma metodolojisi ve kaynaklar", href: "/methodology" },
+  { label: "Kaynaklar ve sınırlar", href: "/methodology" },
 ];
 
 export const devices: DeviceContent[] = [

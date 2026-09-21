@@ -90,6 +90,15 @@ export type Product = {
 };
 
 const VERIFIED = "2026-08-22";
+const PRICING_FRESHNESS_DAYS = 14;
+
+function currentPricingDate(value: string): string {
+  if (!value) return "";
+  const checked = Date.parse(`${value}T00:00:00Z`);
+  if (!Number.isFinite(checked)) return "";
+  const age = Date.now() - checked;
+  return age >= 0 && age <= PRICING_FRESHNESS_DAYS * 24 * 60 * 60 * 1000 ? value : "";
+}
 
 const L = (tr: string, en: string): LocText => ({ tr, en });
 
@@ -114,8 +123,8 @@ export const rawProducts: RawProduct[] = [
         "Per provider reports, audited by Deloitte for no-logs for the sixth time in 2025",
       ),
       L(
-        "Sağlayıcı verisine göre 6,400+ sunucu, 110+ ülke",
-        "Per provider data, 6,400+ servers across 110+ countries",
+        "Sağlayıcı verisine göre 7,800+ sunucu, 225 konum",
+        "Per provider data, 7,800+ servers across 225 locations",
       ),
       L(
         "Sağlayıcının belgelerinde başlıca streaming platformu desteği belirtiliyor; uyumluluk zamanla değişebilir",
@@ -142,7 +151,7 @@ export const rawProducts: RawProduct[] = [
         "Deloitte no-logs (6 kez, son: 2025)",
         "Deloitte no-logs (6 times, latest: 2025)",
       ),
-      servers: L("6,400+ sunucu · 110+ ülke", "6,400+ servers · 110+ countries"),
+      servers: L("7,800+ sunucu · 225 konum", "7,800+ servers · 225 locations"),
       devices: L("10 cihaz", "10 devices"),
       jurisdiction: L("Panama", "Panama"),
       moneyBackDays: 30,
@@ -225,7 +234,7 @@ export const rawProducts: RawProduct[] = [
     ],
     highlights: {
       audits: L("Cure53 + Deloitte denetimleri", "Cure53 + Deloitte audits"),
-      servers: L("3,200+ sunucu · 100+ ülke", "3,200+ servers · 100+ countries"),
+      servers: L("4,500+ sunucu · 100+ ülke", "4,500+ servers · 100+ countries"),
       devices: L("Sınırsız", "Unlimited"),
       jurisdiction: L("Hollanda", "Netherlands"),
       moneyBackDays: 30,
@@ -309,7 +318,7 @@ export const rawProducts: RawProduct[] = [
     ],
     highlights: {
       audits: L("KPMG + Cure53 denetimleri", "KPMG + Cure53 audits"),
-      servers: L("3,000+ sunucu · 105 ülke", "3,000+ servers · 105 countries"),
+      servers: L("113 ülke · 214 sunucu konumu", "113 countries · 214 server locations"),
       devices: L("8 cihaz", "8 devices"),
       jurisdiction: L("İngiliz Virjin Adaları", "British Virgin Islands"),
       moneyBackDays: 30,
@@ -396,7 +405,7 @@ export const rawProducts: RawProduct[] = [
         "Yıllık Securitum no-logs denetimi",
         "Annual Securitum no-logs audit",
       ),
-      servers: L("5,400+ sunucu · 110+ ülke", "5,400+ servers · 110+ countries"),
+      servers: L("20,000+ sunucu · 140+ ülke", "20,000+ servers · 140+ countries"),
       devices: L("10 cihaz", "10 devices"),
       jurisdiction: L("İsviçre", "Switzerland"),
       openSource: true,
@@ -452,8 +461,8 @@ export const rawProducts: RawProduct[] = [
         "Public court documents from past US federal cases (2016, 2018) reported that the provider could not produce user data",
       ),
       L(
-        "Sağlayıcı verisine göre 35,000+ sunucu",
-        "Per provider, 35,000+ servers",
+        "Sağlayıcı sayfasına göre 91 ülkede 10-Gbps ağ",
+        "Per provider page, a 10-Gbps network across 91 countries",
       ),
       L(
         "Sağlayıcının açıkladığına göre tüm istemciler açık kaynak",
@@ -477,7 +486,7 @@ export const rawProducts: RawProduct[] = [
         "Federal davalarda no-logs uygulaması raporlandı",
         "No-logs enforcement reported in federal cases",
       ),
-      servers: L("35,000+ sunucu · 91 ülke", "35,000+ servers · 91 countries"),
+      servers: L("91 ülke · 10-Gbps ağ", "91 countries · 10-Gbps network"),
       devices: L("Sınırsız", "Unlimited"),
       jurisdiction: L("ABD", "United States"),
       openSource: true,
@@ -558,7 +567,7 @@ export const rawProducts: RawProduct[] = [
       ),
     ],
     highlights: {
-      servers: L("11,500+ sunucu · 100 ülke", "11,500+ servers · 100 countries"),
+      servers: L("8,000+ sunucu · 100 ülke", "8,000+ servers · 100 countries"),
       devices: L("7 cihaz", "7 devices"),
       jurisdiction: L("Romanya", "Romania"),
       moneyBackDays: 45,
@@ -978,7 +987,10 @@ function resolveProduct(p: RawProduct, locale: Locale): Product {
     },
     hasAffiliate: p.hasAffiliate,
     pricingUrl: p.pricingUrl,
-    pricingVerifiedAt: p.pricingVerifiedAt,
+    // A stale campaign price is worse than an explicit official-site check.
+    // Keep the source date in the research ledger, but suppress the commercial
+    // price card once it passes the short freshness window.
+    pricingVerifiedAt: currentPricingDate(p.pricingVerifiedAt),
     plans: p.plans.map((plan) => ({
       name: pick(plan.name, locale) as string,
       durationMonths: plan.durationMonths,

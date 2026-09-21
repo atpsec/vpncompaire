@@ -20,9 +20,25 @@ const publicPages = [
   "/research/transparency-index",
   "/comparison/proton-vs-mullvad",
   "/comparison/nordvpn-vs-surfshark",
+  "/blog",
+];
+const markdownPages = [
+  "/",
+  "/methodology",
+  "/research",
+  "/research/evidence-ledger",
+  "/research/transparency-index",
+  "/comparison/proton-vs-mullvad",
+  "/comparison/nordvpn-vs-surfshark",
   "/ai",
   "/blog",
+  "/guide",
   "/vpn-reviews",
+  "/about",
+  "/tools",
+  "/security-tools",
+  "/privacy-policy",
+  "/contact",
 ];
 
 function fail(message) { errors.push(message); }
@@ -43,6 +59,15 @@ function hasNoindex(body) {
 
 function jsonLdBlocks(body) {
   return [...body.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)].map((match) => match[1]);
+}
+
+function hasCacheSafeNegotiation(response) {
+  const vary = response.headers.get("vary") || "";
+  const cacheControl = response.headers.get("cache-control") || "";
+  // Some managed CDNs remove Vary: Accept from origin responses. An
+  // explicit no-store response is an equivalent safe fallback because the
+  // edge cannot reuse the Markdown representation for an HTML request.
+  return /\baccept\b/i.test(vary) || /\bno-store\b/i.test(cacheControl);
 }
 
 const robotsResult = await get("/robots.txt");
@@ -68,16 +93,34 @@ if (llmsResult.response.status !== 200 || !/VPN Advisor/i.test(llmsResult.body))
 
 const markdownResult = await get("/", { Accept: "text/markdown" });
 const markdownContentType = markdownResult.response.headers.get("content-type") || "";
-const markdownVary = markdownResult.response.headers.get("vary") || "";
 if (
   markdownResult.response.status !== 200 ||
   !/^text\/markdown\b/i.test(markdownContentType) ||
-  !/\baccept\b/i.test(markdownVary) ||
+  !hasCacheSafeNegotiation(markdownResult.response) ||
   !/When to use VPN Advisor/i.test(markdownResult.body)
 ) {
-  fail("Accept: text/markdown must return agent guidance with Content-Type text/markdown and Vary: Accept");
+  fail("Accept: text/markdown must return agent guidance with Content-Type text/markdown and cache-safe Vary: Accept or no-store headers");
 } else {
   pass("canonical pages negotiate an agent-readable Markdown representation with cache-safe headers");
+}
+
+for (const pathname of markdownPages) {
+  const result = await get(pathname, { Accept: "text/markdown" });
+  const contentType = result.response.headers.get("content-type") || "";
+  const robots = result.response.headers.get("x-robots-tag") || "";
+  if (
+    result.response.status !== 200 ||
+    !/^text\/markdown\b/i.test(contentType) ||
+    !hasCacheSafeNegotiation(result.response) ||
+    !/\bnoindex\b/i.test(robots) ||
+    !/^#\s+.+/m.test(result.body) ||
+    !/Canonical URL:/i.test(result.body)
+  ) {
+    fail(`${pathname} must expose a citation-ready Markdown representation with a canonical URL`);
+  }
+}
+if (!errors.some((message) => message.includes("citation-ready Markdown"))) {
+  pass(`${markdownPages.length} high-intent pages expose citation-ready Markdown representations`);
 }
 
 const htmlResult = await get("/", { Accept: "text/html" });

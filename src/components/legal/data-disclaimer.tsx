@@ -12,7 +12,7 @@ const copy = {
   tr: {
     checked: "Veri kontrol tarihi:",
     body: "Fiyatlar ve sağlayıcı özellikleri zamanla değişebilir. Bu sayfadaki bilgiler resmi sağlayıcı kaynakları ve uygun olduğunda bağımsız doğrulamalar temel alınarak derlenir; laboratuvar testi veya kullanıcı puanı değildir.",
-    methodology: "Metodoloji",
+    methodology: "Kaynaklar ve sınırlar",
     disclosure: "Reklam açıklaması",
     editorial: "Yayın sorumluluğu:",
     about: "VPN Advisor hakkında",
@@ -20,7 +20,7 @@ const copy = {
   en: {
     checked: "Data checked:",
     body: "Pricing and provider features can change. Information on this page is compiled from official provider sources and, where available, independent verification; it is not a laboratory test or user rating.",
-    methodology: "Methodology",
+    methodology: "Sources and limitations",
     disclosure: "Advertising disclosure",
     editorial: "Publishing responsibility:",
     about: "About VPN Advisor",
@@ -28,7 +28,7 @@ const copy = {
   de: {
     checked: "Daten geprüft:",
     body: "Preise und Anbietermerkmale können sich ändern. Die Informationen auf dieser Seite werden aus offiziellen Anbieterquellen und, wenn verfügbar, unabhängiger Verifikation zusammengestellt; sie sind kein Labortest und keine Nutzerbewertung.",
-    methodology: "Methodik",
+    methodology: "Quellen und Grenzen",
     disclosure: "Werbehinweis",
     editorial: "Veröffentlichungsverantwortung:",
     about: "Über VPN Advisor",

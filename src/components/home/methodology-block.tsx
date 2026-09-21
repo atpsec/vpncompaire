@@ -6,24 +6,24 @@ import type { Locale } from "@/lib/site";
 
 const copy = {
   tr: {
-    badge: "Şeffaf karşılaştırma",
-    title: "Kaynağı gösteren metodoloji",
-    body: "Laboratuvar testi iddiası yerine doğrulanabilir bilgi kullanıyoruz. Sağlayıcıları aynı alanlarda karşılaştırıyor, resmi belge ile bağımsız doğrulamayı birbirinden ayırıyoruz.",
-    cta: "Karşılaştırma metodolojisini oku",
+    badge: "Bilgi sınırları açık",
+    title: "Kaynakları ve sınırları görün",
+    body: "Bu site kamuya açık belgeleri ve bağımsız kayıtları bilgi amacıyla düzenler. Laboratuvar testi yapmadığımızı, verilerin eksik veya eski olabileceğini açıkça belirtiriz.",
+    cta: "Kaynakları ve sınırları oku",
     criteria: ["Gizlilik politikası", "Bağımsız denetimler", "Protokoller ve güvenlik", "Cihaz desteği", "Fiyat ve yenileme", "Yargı yetkisi ve şeffaflık"],
   },
   en: {
-    badge: "Transparent comparison",
-    title: "A methodology that shows its sources",
-    body: "We use verifiable information instead of claiming laboratory tests we did not perform. Providers are compared using consistent fields, while provider claims and independent verification are kept distinct.",
-    cta: "Read the comparison methodology",
+    badge: "Clear information limits",
+    title: "See the sources and the limits",
+    body: "This site organizes public documents and independent records for information. We state clearly that we do not run laboratory tests and that provider information can be incomplete or outdated.",
+    cta: "Read sources and limitations",
     criteria: ["Privacy policy", "Independent audits", "Protocols and security", "Device support", "Pricing and renewal", "Jurisdiction and transparency"],
   },
   de: {
-    badge: "Transparenter Vergleich",
-    title: "Eine Methodik mit nachvollziehbaren Quellen",
-    body: "Wir nutzen überprüfbare Informationen statt nicht durchgeführte Labortests zu behaupten. Anbieter werden anhand einheitlicher Felder verglichen; Anbieterangaben und unabhängige Verifikation bleiben getrennt.",
-    cta: "Vergleichsmethodik lesen",
+    badge: "Klare Informationsgrenzen",
+    title: "Quellen und Grenzen sichtbar",
+    body: "Diese Website ordnet öffentliche Dokumente und unabhängige Nachweise zu Informationszwecken. Wir sagen ausdrücklich, dass wir keine Labortests durchführen und Anbieterangaben unvollständig oder veraltet sein können.",
+    cta: "Quellen und Grenzen lesen",
     criteria: ["Datenschutzrichtlinie", "Unabhängige Audits", "Protokolle und Sicherheit", "Geräteunterstützung", "Preis und Verlängerung", "Rechtsraum und Transparenz"],
   },
 } as const;

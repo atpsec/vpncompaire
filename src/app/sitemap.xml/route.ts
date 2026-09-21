@@ -1,6 +1,15 @@
 import { getIndexableBlogPosts } from "@/lib/blog";
+import { getDetailedProviderProducts } from "@/data/provider-catalog";
 import { CONTENT_REGISTRY } from "@/lib/i18n-paths";
 import { siteConfig } from "@/lib/site";
+import {
+  getResearchProviders,
+  getResearchSources,
+  getQuestionEvidence,
+  getResearchChanges,
+  RESEARCH_QUESTIONS,
+  researchEdition,
+} from "@/data/research";
 
 export const revalidate = 3600;
 
@@ -13,15 +22,31 @@ const CURRENT_EDITORIAL_RELEASE = "2026-09-17";
 // metadata deliberately says noindex. Keeping them out of the sitemap avoids
 // the Search Console "submitted URL marked noindex" warning.
 const NON_INDEXABLE_GUIDE_SLUGS = new Set(["is-vpn-legal-in-turkey"]);
+const COMPARISON_SLUGS = [
+  "nordvpn-vs-surfshark",
+  "expressvpn-vs-nordvpn",
+  "proton-vs-mullvad",
+  "opera-vpn-vs-proton-vpn",
+] as const;
 
 const staticEntries = [
   ["/", 1, "daily", CURRENT_EDITORIAL_RELEASE],
   ["/guide", 0.85, "weekly", CURRENT_EDITORIAL_RELEASE],
   ["/blog", 0.85, "daily", CURRENT_EDITORIAL_RELEASE],
+  ["/comparison", 0.88, "weekly", CURRENT_EDITORIAL_RELEASE],
+  ["/vpn-reviews", 0.86, "weekly", CURRENT_EDITORIAL_RELEASE],
+  ["/best-vpn", 0.78, "weekly", CURRENT_EDITORIAL_RELEASE],
+  ["/tools", 0.7, "monthly", CURRENT_EDITORIAL_RELEASE],
+  ["/ai", 0.72, "weekly", CURRENT_EDITORIAL_RELEASE],
   ["/methodology", 0.75, "monthly", "2026-08-31"],
   ["/research", 0.9, "weekly", "2026-08-31"],
   ["/research/evidence-ledger", 0.85, "weekly", CURRENT_EDITORIAL_RELEASE],
   ["/research/transparency-index", 0.88, "monthly", CURRENT_EDITORIAL_RELEASE],
+  ["/research/providers", 0.86, "weekly", researchEdition()],
+  ["/research/questions", 0.86, "weekly", researchEdition()],
+  ["/research/sources", 0.72, "monthly", researchEdition()],
+  // The change log is intentionally omitted while it has no published
+  // entries; an empty indexable page is not a useful search destination.
   ["/about", 0.5, "monthly", "2026-08-31"],
 ] as const;
 
@@ -73,8 +98,33 @@ export async function GET() {
     );
   }
 
+  for (const product of getDetailedProviderProducts("en")) {
+    add(`/reviews/${product.slug}`, 0.76, "monthly", product.pricingVerifiedAt || CURRENT_EDITORIAL_RELEASE);
+  }
+
+  for (const slug of COMPARISON_SLUGS) {
+    add(`/comparison/${slug}`, 0.78, "monthly", CURRENT_EDITORIAL_RELEASE);
+  }
+
   for (const post of posts) {
     add(`/blog/${post.slug}`, 0.7, "monthly", post.updatedAt);
+  }
+
+  for (const provider of getResearchProviders()) {
+    add(`/research/providers/${provider.slug}`, 0.82, "monthly", provider.updatedAt);
+  }
+
+  for (const question of RESEARCH_QUESTIONS) {
+    if (!getQuestionEvidence(question).some((item) => item.value !== null)) continue;
+    add(`/research/questions/${question.slug}`, 0.8, "monthly", researchEdition());
+  }
+
+  if (getResearchChanges().some((change) => change.status === "published")) {
+    add("/research/changes", 0.7, "weekly", researchEdition());
+  }
+
+  for (const source of getResearchSources()) {
+    add(`/research/sources/${source.id}`, 0.55, "monthly", source.lastChecked ?? researchEdition());
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Array.from(

@@ -124,13 +124,35 @@ const hasClearCommissionLanguage =
   englishMessages.includes("we may earn a commission") &&
   englishMessages.includes("This does not change our comparison criteria");
 
+const trustLanguageSurfaces = [
+  "messages/en.json",
+  "src/app/[locale]/metodoloji/page.tsx",
+  "src/app/[locale]/hakkimizda/page.tsx",
+  "src/app/[locale]/arastirma/page.tsx",
+  "src/app/agent-markdown/[[...slug]]/route.ts",
+  "src/app/llms.txt/route.ts",
+];
+const overclaimingTrustPatterns = [
+  /transparent methodology/i,
+  /source-based comparison methodology/i,
+  /methodology requires/i,
+  /higher score.*methodology/i,
+];
+const overclaimingTrustMatches = trustLanguageSurfaces.flatMap((relativePath) => {
+  const source = fs.readFileSync(path.join(root, relativePath), "utf8");
+  return overclaimingTrustPatterns
+    .filter((pattern) => pattern.test(source))
+    .map((pattern) => `${relativePath}: ${pattern}`);
+});
+
 if (
   missingReferences.length > 0 ||
   missingPublishableFiles.length > 0 ||
   publishableWithoutReferences.length > 0 ||
   riskyMatches.length > 0 ||
   missingInlineDisclosure.length > 0 ||
-  !hasClearCommissionLanguage
+  !hasClearCommissionLanguage ||
+  overclaimingTrustMatches.length > 0
 ) {
   if (missingReferences.length > 0) {
     console.error("Indexable articles missing at least two primary references:");
@@ -158,6 +180,10 @@ if (
   }
   if (!hasClearCommissionLanguage) {
     console.error("English affiliate notice must clearly state commission and editorial independence.");
+  }
+  if (overclaimingTrustMatches.length > 0) {
+    console.error("Unsupported trust or methodology language detected:");
+    for (const match of overclaimingTrustMatches) console.error(`- ${match}`);
   }
   process.exit(1);
 }

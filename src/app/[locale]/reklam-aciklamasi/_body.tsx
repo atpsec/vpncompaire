@@ -14,7 +14,7 @@ export function EnBody() {
       sourcesH: "What sources support the content?", sources: ["Provider technical documentation, privacy policies, terms and pricing pages.", "Independent security and no-logs audits.", "Standards and platform documentation from bodies such as NIST, IETF, Apple, Google and Microsoft.", "Credible secondary sources when additional context is useful."],
       adsH: "AdSense, cookies and user experience", adsP: "Google AdSense may use cookies and similar technologies. Analytics and consent-dependent storage are managed through the site's consent system. Ads should not outweigh the page's content or be positioned to encourage accidental clicks.",
       guaranteeH: "Purchasing and freshness", guaranteeP: "Prices, promotions, server information and features can change. Before purchasing, verify current pricing, renewal terms and service conditions on the provider's official website.",
-      sourceLink: "Read the source-based methodology", legal: "Legal notice", reminder: "Reminder", reminderBody: "This site is informational and does not provide security, legal or financial advice.",
+      sourceLink: "Read sources and limitations", legal: "Legal notice", reminder: "Reminder", reminderBody: "This site is informational and does not provide security, legal or financial advice.",
     };
 
   return (

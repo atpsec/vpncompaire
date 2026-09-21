@@ -1,5 +1,4 @@
 import { Geist } from "next/font/google";
-import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { buildRootMetadata, rootViewport } from "@/lib/root-metadata";
@@ -29,7 +28,6 @@ export default function VpnTestLayout({
       <body className="min-h-screen bg-background text-foreground font-sans">
         {children}
         <GoogleAnalytics locale="en" />
-        <GoogleAdsense />
       </body>
     </html>
   );

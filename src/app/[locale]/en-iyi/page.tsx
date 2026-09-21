@@ -29,7 +29,6 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    robots: { index: false, follow: true },
     alternates: localizedAlternates("/best-vpn", locale),
     openGraph: {
       title: t("metaTitle"),

@@ -212,7 +212,7 @@ function RelatedLinksEn() {
           href="/methodology"
           className="inline-flex items-center gap-1 rounded-full border border-border bg-surface-base px-3 py-1 text-sm hover:border-brand-300"
         >
-          Our methodology
+          Sources and limitations
         </Link>
       </div>
     </section>

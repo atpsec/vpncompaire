@@ -19,6 +19,7 @@ import { providerEvidenceRecords, type EvidenceItem } from "@/data/provider-evid
 import { getArchivedProduct } from "@/data/products-current";
 import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
+import { CopyButton } from "@/components/tools/CopyButton";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { isDetailedProviderSlug } from "@/data/provider-catalog";
 
@@ -58,9 +59,9 @@ const labels = {
     yes: "Evet",
     no: "Hayır",
     compare: "Diğer VPN sağlayıcılarıyla karşılaştır",
-    methodology: "Kaynak temelli metodolojimizi inceleyin",
+    methodology: "Kaynakları ve sınırları inceleyin",
     sources: "Gösterilen fiyatın birincil kaynağı",
-    sourcesIntro: "Bu bağlantı, profilde gösterilen fiyatı kontrol etmek için kullanılan sağlayıcı sayfasıdır. Diğer iddialar metodolojide sağlayıcı beyanı veya bağımsız rapor olarak etiketlenir.",
+    sourcesIntro: "Bu bağlantı, profilde gösterilen fiyatı kontrol etmek için kullanılan sağlayıcı sayfasıdır. Diğer iddialar, sayfada mevcutsa sağlayıcı beyanı veya bağımsız kayıt olarak açıklanır.",
     pricingSource: "Sağlayıcının fiyat sayfasını aç",
     evidenceTitle: "Kanıt kapsamı",
     evidencePricing: "Fiyat kaydı",
@@ -71,6 +72,8 @@ const labels = {
     evidenceProviderReported: "Sağlayıcı beyanı",
     evidenceNeedsCheck: "Tarih veya kaynak kontrolü gerekli",
     evidenceLedger: "Kanıt defterinde ayrıntıyı gör",
+    copyProfileLink: "Profil bağlantısını kopyala",
+    profileLinkCopied: "Bağlantı kopyalandı",
   },
   en: {
     profile: "VPN provider profile",
@@ -100,9 +103,9 @@ const labels = {
     yes: "Yes",
     no: "No",
     compare: "Compare with other VPN providers",
-    methodology: "Read our source-based methodology",
+    methodology: "Read sources and limitations",
     sources: "Primary source for displayed pricing",
-    sourcesIntro: "This is the provider page used to check the price shown on this profile. Other claims are labeled as provider-published or independently reported in the methodology.",
+    sourcesIntro: "This is the provider page used to check the price shown on this profile. Other claims may be identified as provider-published or independently reported where the page has that source context.",
     pricingSource: "Open the provider pricing page",
     evidenceTitle: "Evidence coverage",
     evidencePricing: "Pricing record",
@@ -113,6 +116,8 @@ const labels = {
     evidenceProviderReported: "Provider-reported",
     evidenceNeedsCheck: "Date or source check needed",
     evidenceLedger: "See details in evidence ledger",
+    copyProfileLink: "Copy profile link",
+    profileLinkCopied: "Profile link copied",
   },
   de: {
     profile: "VPN-Anbieterprofil",
@@ -142,9 +147,9 @@ const labels = {
     yes: "Ja",
     no: "Nein",
     compare: "Mit anderen VPN-Anbietern vergleichen",
-    methodology: "Quellenbasierte Methodik lesen",
+    methodology: "Quellen und Grenzen lesen",
     sources: "Primärquelle für den angezeigten Preis",
-    sourcesIntro: "Dies ist die Anbieter-Seite, auf der der angezeigte Preis geprüft wurde. Andere Angaben werden in der Methodik als Anbieterangaben oder unabhängige Berichte gekennzeichnet.",
+    sourcesIntro: "Dies ist die Anbieter-Seite, auf der der angezeigte Preis geprüft wurde. Andere Angaben können als Anbieterangabe oder unabhängiger Nachweis gekennzeichnet sein, wenn die Seite diese Quellenangabe enthält.",
     pricingSource: "Preisseite des Anbieters öffnen",
     evidenceTitle: "Evidenzabdeckung",
     evidencePricing: "Preisdatensatz",
@@ -155,6 +160,8 @@ const labels = {
     evidenceProviderReported: "Anbieterangabe",
     evidenceNeedsCheck: "Datums- oder Quellenprüfung erforderlich",
     evidenceLedger: "Details im Evidenzregister",
+    copyProfileLink: "Profil-Link kopieren",
+    profileLinkCopied: "Profil-Link kopiert",
   },
 } as const;
 
@@ -193,7 +200,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : bilingualAlternates(`/reviews/${product.slug}`, locale, "en"),
     // Provider pages remain useful for readers, but their current structured
     // format does not yet provide enough original editorial depth for search.
-    robots: { index: false, follow: true },
     openGraph: {
       title,
       description: product.summary,
@@ -258,6 +264,15 @@ function ProviderView({ product, locale, providerSchema, isArchived, isReference
             <Badge variant="brand">{isArchived ? t.archived : t.profile}</Badge>
             <h1 className="mt-3 text-4xl sm:text-5xl font-bold tracking-tight text-ink-strong">{product.brand}</h1>
             <p className="mt-4 text-lg text-ink-muted">{product.summary}</p>
+            {!isArchived ? (
+              <div className="mt-4">
+                <CopyButton
+                  value={absoluteUrl(`/reviews/${product.slug}`, locale)}
+                  copyLabel={t.copyProfileLink}
+                  copiedLabel={t.profileLinkCopied}
+                />
+              </div>
+            ) : null}
           </div>
         </header>
 
@@ -360,6 +375,16 @@ function EvidenceStat({ label, item, t }: { label: string; item: EvidenceItem; t
     <div className="rounded-lg border border-border bg-surface-base p-3">
       <dt className="text-xs font-semibold uppercase tracking-wide text-ink-muted">{label}</dt>
       <dd className="mt-1 text-sm font-semibold text-ink-strong">{status}</dd>
+      {item.sourceUrl && item.sourceLabel ? (
+        <a
+          href={item.sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-700 hover:underline"
+        >
+          {item.sourceLabel} <ExternalLink className="size-3" aria-hidden="true" />
+        </a>
+      ) : null}
     </div>
   );
 }

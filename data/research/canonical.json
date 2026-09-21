@@ -1,0 +1,173 @@
+{
+  "edition": "2026-09-21",
+  "providers": [
+    {
+      "id": "provider-nordvpn",
+      "slug": "nordvpn",
+      "name": "NordVPN",
+      "website": "https://nordvpn.com",
+      "summary": "A source record for NordVPN's publicly documented privacy, network, device and pricing information.",
+      "affiliate": true,
+      "lastVerified": "2026-08-22",
+      "facts": {
+        "jurisdiction": { "value": "Panama", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "nordvpn-no-logs", "checkedAt": "2026-09-21", "notes": "Provider page states that NordVPN operates out of Panama; this remains a provider claim, not a legal opinion." },
+        "no_logs_policy": { "value": "Provider reports a no-logs policy", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "nordvpn-no-logs", "checkedAt": "2026-09-21", "notes": "Provider page describes the policy and its claimed assurance history; this is kept separate from independent report scope." },
+        "independent_no_logs_audit": { "value": "NordVPN's Trust Center says its no-logs claims were independently verified in 2018 and four more times afterward", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "nordvpn-trust", "checkedAt": "2026-09-20", "notes": "The page gives a verification history but does not expose each report's scope, exclusions or exact publication dates in this record." },
+        "independent_security_audit": { "value": "NordVPN's Trust Center describes recurring external assessments and app-security testing", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "nordvpn-trust", "checkedAt": "2026-09-20", "notes": "Separate from the no-logs field; the named report scope and audit dates are not extracted here." },
+        "transparency_reports": { "value": "Quarterly transparency reports are described on the Trust Center", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "nordvpn-trust", "checkedAt": "2026-09-20", "notes": "The source describes report frequency; individual report dates and request totals are not yet represented as separate records." },
+        "server_network": { "value": "7,800+ servers · 225 locations", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "nordvpn-trust", "checkedAt": "2026-09-21", "notes": "Current Trust Center display; locations are not treated as a country count." },
+        "simultaneous_devices": { "value": "10 devices", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "pricing_reference": { "value": null, "status": "unknown", "confidence": "unknown", "claimType": "editorial_observation", "sourceId": "nordvpn-pricing", "checkedAt": "2026-09-21", "notes": "The official page currently serves localized PLN plans and renewal terms; a USD-normalized value is intentionally not inferred." },
+        "refund_period": { "value": "30 days", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "nordvpn-pricing", "checkedAt": "2026-09-21", "notes": "The current localized pricing page shows a 30-day money-back guarantee; eligibility and offer conditions still apply." }
+      }
+    },
+    {
+      "id": "provider-proton-vpn",
+      "slug": "proton-vpn",
+      "name": "Proton VPN",
+      "website": "https://protonvpn.com",
+      "summary": "A source record for Proton VPN's publicly documented privacy, open-source, free-plan and pricing information.",
+      "affiliate": true,
+      "lastVerified": null,
+      "facts": {
+        "jurisdiction": { "value": "Switzerland", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "proton-about", "checkedAt": "2026-09-21", "notes": "Proton's About page identifies Proton AG as a Swiss corporation; this is a provider-published corporate statement." },
+        "no_logs_policy": { "value": "Provider reports a no-logs policy", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "proton-no-logs-audit", "checkedAt": "2026-09-20", "notes": "The provider publishes a no-logs audit record; audit scope remains separate from the policy wording." },
+        "independent_no_logs_audit": { "value": "Proton VPN describes a fifth consecutive annual Securitum audit of its VPN infrastructure and no-logs policy, with a 2026 report linked", "status": "partially_verified", "confidence": "high", "claimType": "provider_claim", "sourceId": "proton-no-logs-audit", "checkedAt": "2026-09-20", "publishedAt": "2026-06-16", "notes": "The provider publishes the audit and describes infrastructure, configuration, procedures and staff interviews; this record still does not reproduce the full report." },
+        "independent_security_audit": { "value": "Proton describes independent security audits of its open-source apps and publishes audit reports", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "proton-app-audits", "checkedAt": "2026-09-20", "notes": "App-security audits and server-side no-logs audits remain separate evidence streams." },
+        "transparency_reports": { "value": "Proton VPN transparency report updated July 14, 2026; 2026 through June lists 47 orders and 47 denied", "status": "partially_verified", "confidence": "high", "claimType": "provider_claim", "sourceId": "proton-transparency", "checkedAt": "2026-09-20", "publishedAt": "2026-07-14", "notes": "The figures are provider-published transparency data, not an independent audit." },
+        "server_network": { "value": "20,000+ servers · 140+ countries", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "proton-features", "checkedAt": "2026-09-21", "notes": "Current provider feature page display; counts can change and are not independently measured here." },
+        "simultaneous_devices": { "value": "10 devices", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "open_source_apps": { "value": "Provider says clients are open source", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "proton-app-audits", "checkedAt": "2026-09-20", "notes": "Provider page links platform repositories and audit reports; repository contents are not independently reviewed in this record." },
+        "free_plan": { "value": "Free plan described in the existing profile", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "pricing_reference": { "value": null, "status": "unknown", "confidence": "unknown", "claimType": "editorial_observation", "sourceId": "proton-pricing", "checkedAt": "2026-09-21", "notes": "The official page is dynamic and did not expose a stable normalized amount in the audit response; the legacy profile price was retired." },
+        "refund_period": { "value": "30 days", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "proton-pricing", "checkedAt": "2026-09-21", "notes": "The current pricing page shows a 30-day money-back guarantee; plan and account conditions apply." }
+      }
+    },
+    {
+      "id": "provider-surfshark",
+      "slug": "surfshark",
+      "name": "Surfshark",
+      "website": "https://surfshark.com",
+      "summary": "A source record for Surfshark's publicly documented device, network, audit and pricing information.",
+      "affiliate": true,
+      "lastVerified": "2026-08-22",
+      "facts": {
+        "jurisdiction": { "value": "Netherlands", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-no-logs", "checkedAt": "2026-09-21", "notes": "Provider page states that Surfshark is based in the Netherlands; this is not a legal assessment." },
+        "no_logs_policy": { "value": "Provider reports a no-logs policy", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-no-logs", "checkedAt": "2026-09-21", "notes": "Provider page describes the policy and Deloitte assurance; report scope remains separate." },
+        "independent_no_logs_audit": { "value": "Surfshark's Trust Center lists Deloitte no-logs assurance reports from 2023 and 2025", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-trust", "checkedAt": "2026-09-20", "notes": "The source identifies the report years; the full report scope and exclusions are not extracted here." },
+        "independent_security_audit": { "value": "Surfshark's Trust Center lists a 2026 Cure53 infrastructure and Dausos audit plus 2025 SecuRing infrastructure and application assessments", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-trust", "checkedAt": "2026-09-20", "notes": "Separate from no-logs assurance; the source describes scope at a high level and links the full reports." },
+        "transparency_reports": { "value": "Quarterly transparency reports are described on the Trust Center", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-trust", "checkedAt": "2026-09-20", "notes": "Individual report periods and request counts are not yet represented as separate records." },
+        "server_network": { "value": "4,500+ servers · 100+ countries", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-no-logs", "checkedAt": "2026-09-21", "notes": "Current provider feature page display; counts can change and are not independently measured here." },
+        "simultaneous_devices": { "value": "Unlimited", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "pricing_reference": { "value": "€2.49/month Starter on the displayed 24-month offer, plus 3 extra months; renewal depends on plan", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-pricing", "checkedAt": "2026-09-21", "notes": "Current localized EUR display; do not treat it as a USD-equivalent or universal price." },
+        "refund_period": { "value": "30 days", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "surfshark-pricing", "checkedAt": "2026-09-21", "notes": "The current pricing page shows a 30-day money-back guarantee." }
+      }
+    },
+    {
+      "id": "provider-mullvad",
+      "slug": "mullvad",
+      "name": "Mullvad",
+      "website": "https://mullvad.net",
+      "summary": "A source record for Mullvad's publicly documented jurisdiction, open-source, audit and pricing information.",
+      "affiliate": false,
+      "lastVerified": null,
+      "facts": {
+        "jurisdiction": { "value": "Sweden", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "no_logs_policy": { "value": "Provider reports a no-logging policy", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "mullvad-no-logging", "checkedAt": "2026-09-21", "notes": "Mullvad's current policy states that it does not keep activity logs; operational and payment data exceptions remain documented on the same page." },
+        "independent_no_logs_audit": { "value": null, "status": "unknown", "confidence": "unknown", "claimType": "editorial_observation", "notes": "The current audit archive lists app, infrastructure and account/payment security audits; no distinct no-logs audit record is extracted." },
+        "independent_security_audit": { "value": "Mullvad's audit archive lists 2026 Android, GotaTun and account/payment security assessments, plus a 2024 Cure53 infrastructure audit", "status": "partially_verified", "confidence": "high", "claimType": "provider_claim", "sourceId": "mullvad-audits", "checkedAt": "2026-09-20", "notes": "The archive identifies target and publication date for each entry; individual report findings are not collapsed into a security certification." },
+        "server_network": { "value": "700+ servers · 49 countries", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "simultaneous_devices": { "value": "5 devices", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "open_source_apps": { "value": "Provider says clients are open source", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim", "notes": "A field-specific repository link still needs to be attached." },
+        "pricing_reference": { "value": null, "status": "unknown", "confidence": "unknown", "claimType": "editorial_observation", "sourceId": "mullvad-pricing", "checkedAt": "2026-09-21", "notes": "The account creation page requires interactive plan/locale context; no stable amount was extracted." },
+        "refund_period": { "value": null, "status": "unknown", "confidence": "unknown", "claimType": "editorial_observation", "sourceId": "mullvad-pricing", "checkedAt": "2026-09-21", "notes": "The checked account page did not expose a refund term; no value is inferred." }
+      }
+    },
+    {
+      "id": "provider-expressvpn",
+      "slug": "expressvpn",
+      "name": "ExpressVPN",
+      "website": "https://www.expressvpn.com",
+      "summary": "A source record for ExpressVPN's publicly documented TrustedServer, jurisdiction, device and pricing information.",
+      "affiliate": true,
+      "lastVerified": "2026-08-22",
+      "facts": {
+        "jurisdiction": { "value": "British Virgin Islands", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "expressvpn-privacy", "checkedAt": "2026-09-21", "notes": "ExpressVPN's privacy policy identifies the BVI registered place of business; this is a provider-published corporate statement." },
+        "no_logs_policy": { "value": "Provider reports a no-logs policy", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "expressvpn-privacy", "checkedAt": "2026-09-21", "notes": "Privacy policy describes the no-activity and no-connection-log claims; the independent audit record remains separate." },
+        "independent_no_logs_audit": { "value": "ExpressVPN's Trust Center lists a KPMG privacy-policy audit in December 2023 and a KPMG no-logs audit in September 2022", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "expressvpn-trust", "checkedAt": "2026-09-20", "notes": "The provider page lists audit targets and months; full report scope and exclusions are not extracted here." },
+        "independent_security_audit": { "value": "ExpressVPN's Trust Center lists 2026 Cure53 product audits, 2025 KPMG privacy commitments, and multiple protocol/app audits", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "expressvpn-trust", "checkedAt": "2026-09-20", "notes": "Separate from no-logs evidence; the page includes audits of products, apps, protocols and privacy commitments with different scopes." },
+        "transparency_reports": { "value": "Biannual transparency reports are described on the Trust Center", "status": "partially_verified", "confidence": "medium", "claimType": "provider_claim", "sourceId": "expressvpn-trust", "checkedAt": "2026-09-20", "notes": "The page lists request totals by reporting period; the full series is not yet normalized in the canonical dataset." },
+        "server_network": { "value": "113 countries · 214 server locations", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "expressvpn-press", "checkedAt": "2026-09-21", "notes": "Current provider press-room display; it reports countries and locations rather than a server-count total." },
+        "simultaneous_devices": { "value": "8 devices", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "ram_only_servers": { "value": "TrustedServer RAM-only architecture described by the provider", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim", "sourceId": "expressvpn-trust" },
+        "pricing_reference": { "value": "€2.49/month Basic on the displayed 2-year plan plus 4 months; renews at €79.95 annually", "status": "provider_claim_only", "confidence": "high", "claimType": "provider_claim", "sourceId": "expressvpn-pricing", "checkedAt": "2026-09-21", "notes": "Current localized EUR display for new users; taxes and plan eligibility apply." },
+        "refund_period": { "value": "30 days for new users", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "expressvpn-pricing", "checkedAt": "2026-09-21", "notes": "The current pricing page limits the guarantee wording to new users." }
+      }
+    },
+    {
+      "id": "provider-cyberghost",
+      "slug": "cyberghost",
+      "name": "CyberGhost",
+      "website": "https://www.cyberghostvpn.com",
+      "summary": "A source record for CyberGhost's publicly documented jurisdiction, network, refund and pricing information.",
+      "affiliate": true,
+      "lastVerified": "2026-08-22",
+      "facts": {
+        "jurisdiction": { "value": "Romania", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "cyberghost-privacy", "checkedAt": "2026-09-21", "notes": "Privacy policy identifies CyberGhost S.R.L. as registered in Romania; this is a provider-published corporate statement." },
+        "no_logs_policy": { "value": "Provider reports a no-logs policy", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "cyberghost-privacy", "checkedAt": "2026-09-21", "notes": "Privacy policy describes traffic and connection-log exclusions; support/debug data can have separate handling." },
+        "server_network": { "value": "8,000+ servers · 100 countries", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "cyberghost-no-logs", "checkedAt": "2026-09-21", "notes": "Current provider feature page display; counts can change and are not independently measured here." },
+        "simultaneous_devices": { "value": "7 devices", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "pricing_reference": { "value": "R$9.99/month on the displayed 2-year plus 3-month offer in the fetched locale; renewal and currency vary by region", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "cyberghost-pricing", "checkedAt": "2026-09-21", "notes": "Current localized BRL display; do not compare numerically with USD entries." },
+        "refund_period": { "value": "45 days on long-term plans; 14 days on the monthly plan", "status": "provider_claim_only", "confidence": "high", "claimType": "provider_claim", "sourceId": "cyberghost-pricing", "checkedAt": "2026-09-21", "notes": "The current page shows different money-back periods by plan duration." }
+      }
+    },
+    {
+      "id": "provider-pia",
+      "slug": "pia",
+      "name": "Private Internet Access",
+      "website": "https://www.privateinternetaccess.com",
+      "summary": "A source record for Private Internet Access's publicly documented jurisdiction, open-source, protocol, device and pricing information.",
+      "affiliate": true,
+      "lastVerified": "2026-08-22",
+      "facts": {
+        "jurisdiction": { "value": "United States", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim", "sourceId": "pia-no-logs", "checkedAt": "2026-09-21", "notes": "PIA's provider page states that it is headquartered in Denver, Colorado; this is a provider-published corporate statement." },
+        "no_logs_policy": { "value": "Provider reports a no-logs policy; court and audit context is provider-reported", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "pia-no-logs", "checkedAt": "2026-09-21", "notes": "Current provider page describes no-logs exclusions, court history and Deloitte audit claims; this record does not treat them as a blanket guarantee." },
+        "server_network": { "value": "91 countries · 10-Gbps server network", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "pia-no-logs", "checkedAt": "2026-09-21", "notes": "Current provider page gives country and network-capacity information but no stable server-count total." },
+        "simultaneous_devices": { "value": "Unlimited", "status": "provider_claim_only", "confidence": "low", "claimType": "provider_claim" },
+        "open_source_apps": { "value": "Provider says clients are open source", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "pia-open-source", "checkedAt": "2026-09-21", "notes": "Provider feature page links reviewable app source code; repository contents are not independently reviewed in this record." },
+        "protocols": { "value": "OpenVPN and WireGuard are described by the provider", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "pia-open-source", "checkedAt": "2026-09-21" },
+        "wireguard": { "value": "Supported according to the provider's current feature page", "status": "provider_claim_only", "confidence": "medium", "claimType": "provider_claim", "sourceId": "pia-open-source", "checkedAt": "2026-09-21" },
+        "pricing_reference": { "value": "$47.88 for the first year with annual renewal at $47.88; monthly service reference $11.95", "status": "provider_claim_only", "confidence": "high", "claimType": "provider_claim", "sourceId": "pia-pricing", "checkedAt": "2026-09-21", "notes": "Current USD display; the page states that discounts and third-party app-store terms may differ." },
+        "refund_period": { "value": "30 days for new subscribers", "status": "provider_claim_only", "confidence": "high", "claimType": "provider_claim", "sourceId": "pia-pricing", "checkedAt": "2026-09-21", "notes": "The current page excludes third-party app-store refund handling from this statement." }
+      }
+    }
+  ],
+  "sources": [
+    { "id": "nordvpn-pricing", "title": "NordVPN pricing", "publisher": "NordVPN", "type": "official_documentation", "providerId": "provider-nordvpn", "url": "https://nordvpn.com/tr/pricing/", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current localized page checked for PLN plan offers, renewal terms and 30-day guarantee; no USD normalization is asserted." },
+    { "id": "nordvpn-trust", "title": "NordVPN Trust Center", "publisher": "NordVPN", "type": "official_documentation", "providerId": "provider-nordvpn", "url": "https://nordvpn.com/trust/", "firstChecked": "2026-09-20", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Trust Center reviewed for audit history, app-security testing, transparency-report frequency and current network locations; named report scopes remain separate work." },
+    { "id": "nordvpn-no-logs", "title": "NordVPN no-logs and jurisdiction page", "publisher": "NordVPN", "type": "official_documentation", "providerId": "provider-nordvpn", "url": "https://nordvpn.com/features/no-log-vpn/", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Provider page checked for the published Panama jurisdiction and no-logs wording; provider claims remain distinct from independent report scope." },
+    { "id": "proton-pricing", "title": "Proton VPN pricing", "publisher": "Proton VPN", "type": "official_documentation", "providerId": "provider-proton-vpn", "url": "https://protonvpn.com/pricing", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current page checked for the 30-day money-back statement; dynamic pricing did not expose a stable normalized amount." },
+    { "id": "proton-about", "title": "Proton VPN About page", "publisher": "Proton VPN", "type": "official_documentation", "providerId": "provider-proton-vpn", "url": "https://protonvpn.com/about", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Provider page checked for Proton AG's Swiss corporate identity; this is not an independent corporate-registry review." },
+    { "id": "proton-features", "title": "Proton VPN features and network", "publisher": "Proton VPN", "type": "official_documentation", "providerId": "provider-proton-vpn", "url": "https://protonvpn.com/features", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Provider feature page checked for current server/country display and open-source/audit statements; counts can change." },
+    { "id": "proton-transparency", "title": "Proton VPN transparency report", "publisher": "Proton VPN", "type": "transparency_report", "providerId": "provider-proton-vpn", "url": "https://protonvpn.com/blog/transparency-report", "firstChecked": "2026-09-20", "lastChecked": "2026-09-20", "status": "source_checked", "notes": "Provider report updated July 14, 2026; the canonical record captures the 2026-through-June totals while preserving the provider-published status." },
+    { "id": "proton-no-logs-audit", "title": "Proton VPN no-logs audit", "publisher": "Proton VPN", "type": "independent_audit", "providerId": "provider-proton-vpn", "url": "https://protonvpn.com/blog/no-logs-audit", "firstChecked": "2026-09-20", "lastChecked": "2026-09-20", "status": "source_checked", "notes": "Provider page updated June 16, 2026 and links the 2026 Securitum no-logs report; scope is summarized in the linked evidence record." },
+    { "id": "proton-app-audits", "title": "Proton VPN app security audits", "publisher": "Proton VPN", "type": "independent_audit", "providerId": "provider-proton-vpn", "url": "https://protonvpn.com/blog/open-source", "firstChecked": "2026-09-20", "lastChecked": "2026-09-20", "status": "source_checked", "notes": "Provider page describes independent app audits and links the latest reports; app security evidence is kept separate from no-logs infrastructure evidence." },
+    { "id": "surfshark-pricing", "title": "Surfshark pricing", "publisher": "Surfshark", "type": "official_documentation", "providerId": "provider-surfshark", "url": "https://surfshark.com/pricing", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current localized page checked for the displayed EUR Starter offer, renewal caveat and 30-day guarantee." },
+    { "id": "surfshark-trust", "title": "Surfshark Trust Center", "publisher": "Surfshark", "type": "official_documentation", "providerId": "provider-surfshark", "url": "https://surfshark.com/trust-center", "firstChecked": "2026-09-20", "lastChecked": "2026-09-20", "status": "source_checked", "notes": "Trust Center reviewed for 2023/2025 Deloitte no-logs assurance and 2026/2025 security assessment listings." },
+    { "id": "surfshark-no-logs", "title": "Surfshark no-logs feature page", "publisher": "Surfshark", "type": "official_documentation", "providerId": "provider-surfshark", "url": "https://surfshark.com/features/no-logs", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Provider page checked for the Netherlands jurisdiction, no-logs wording and current network display; provider claims remain distinct from audit scope." },
+    { "id": "mullvad-pricing", "title": "Mullvad account and pricing", "publisher": "Mullvad", "type": "official_documentation", "providerId": "provider-mullvad", "url": "https://mullvad.net/en/account/create", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current account page checked; no stable public pricing or refund value was exposed for publication." },
+    { "id": "mullvad-audits", "title": "Mullvad security audits archive", "publisher": "Mullvad", "type": "independent_audit", "providerId": "provider-mullvad", "url": "https://mullvad.net/en/blog/tag/audits", "firstChecked": "2026-09-20", "lastChecked": "2026-09-20", "status": "source_checked", "notes": "Audit archive reviewed for 2026 app, GotaTun and account/payment entries and the 2024 Cure53 infrastructure audit." },
+    { "id": "mullvad-no-logging", "title": "Mullvad no-logging policy", "publisher": "Mullvad", "type": "official_documentation", "providerId": "provider-mullvad", "url": "https://mullvad.net/no/help/no-logging-data-policy", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current policy checked for activity-log exclusions and documented operational/payment data handling." },
+    { "id": "expressvpn-pricing", "title": "ExpressVPN order and pricing", "publisher": "ExpressVPN", "type": "official_documentation", "providerId": "provider-expressvpn", "url": "https://www.expressvpn.com/order", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current localized page checked for the EUR Basic offer, annual renewal amount and 30-day new-user guarantee." },
+    { "id": "expressvpn-trust", "title": "ExpressVPN Trust Center", "publisher": "ExpressVPN", "type": "official_documentation", "providerId": "provider-expressvpn", "url": "https://www.expressvpn.com/trust", "firstChecked": "2026-09-20", "lastChecked": "2026-09-20", "status": "source_checked", "notes": "Trust Center reviewed for 2026 product audits, KPMG privacy/no-logs audits and biannual transparency reporting." },
+    { "id": "expressvpn-privacy", "title": "ExpressVPN privacy policy", "publisher": "ExpressVPN", "type": "official_documentation", "providerId": "provider-expressvpn", "url": "https://www.expressvpn.com/privacy-policy", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current policy checked for BVI corporate identity and activity/connection-log wording; this is provider documentation." },
+    { "id": "expressvpn-press", "title": "ExpressVPN press room", "publisher": "ExpressVPN", "type": "official_documentation", "providerId": "provider-expressvpn", "url": "https://www.expressvpn.com/press", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current press facts checked for country and server-location display; no stable server-count total is asserted." },
+    { "id": "cyberghost-pricing", "title": "CyberGhost pricing", "publisher": "CyberGhost", "type": "official_documentation", "providerId": "provider-cyberghost", "url": "https://www.cyberghostvpn.com/buy", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current localized page checked for the BRL long-term offer, renewal terms and separate 45-day/14-day refund windows." },
+    { "id": "cyberghost-privacy", "title": "CyberGhost privacy policy", "publisher": "CyberGhost", "type": "official_documentation", "providerId": "provider-cyberghost", "url": "https://www.cyberghostvpn.com/privacypolicy", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current policy checked for Romanian corporate registration and traffic/connection-log wording; support/debug data can have separate handling." },
+    { "id": "cyberghost-no-logs", "title": "CyberGhost no-logs feature page", "publisher": "CyberGhost", "type": "official_documentation", "providerId": "provider-cyberghost", "url": "https://www.cyberghostvpn.com/features/no-logs-vpn", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current provider page checked for network display and no-logs wording; counts can change and are not independently measured here." },
+    { "id": "pia-pricing", "title": "Private Internet Access pricing", "publisher": "Private Internet Access", "type": "official_documentation", "providerId": "provider-pia", "url": "https://www.privateinternetaccess.com/buy-vpn-online", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current USD page checked for annual and monthly references, annual renewal and 30-day new-subscriber refund caveat." },
+    { "id": "pia-no-logs", "title": "Private Internet Access no-logs page", "publisher": "Private Internet Access", "type": "official_documentation", "providerId": "provider-pia", "url": "https://www.privateinternetaccess.com/vpn-features/no-logs-vpn", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current provider page checked for no-logs, jurisdiction, country/network display and refund caveat; provider claims remain distinct from court/audit source scope." },
+    { "id": "pia-open-source", "title": "Private Internet Access open-source VPN page", "publisher": "Private Internet Access", "type": "official_documentation", "providerId": "provider-pia", "url": "https://www.privateinternetaccess.com/vpn-features/open-source-vpn", "firstChecked": "2026-09-21", "lastChecked": "2026-09-21", "status": "source_checked", "notes": "Current provider page checked for reviewable app source and open-source protocol statements; repository contents are not independently reviewed here." }
+  ],
+  "changes": []
+}

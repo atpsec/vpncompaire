@@ -95,6 +95,12 @@ export function WebRtcLeakTester({ labels }: { labels: Labels }) {
     setResults(detected);
     setCheckedAt(new Date().toISOString());
     setStatus("done");
+    window.gtag?.("event", "tool_completed", {
+      tool: "webrtc-leak-test",
+      result_state: detected.some((item) => item.type === "public") ? "public_signal" : "no_public_signal",
+      public_signal_count: detected.filter((item) => item.type === "public").length,
+      locale: document.documentElement.lang || undefined,
+    });
   };
 
   const publicIps = results.filter((r) => r.type === "public");

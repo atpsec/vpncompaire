@@ -60,6 +60,39 @@ const auditSources: Record<string, { label: string; url: string }> = {
   },
 };
 
+const profileSources: Record<string, { label: string; url: string; checkedAt: string }> = {
+  nordvpn: {
+    label: "NordVPN Trust Center",
+    url: "https://nordvpn.com/trust/",
+    checkedAt: "2026-09-21",
+  },
+  "proton-vpn": {
+    label: "Proton VPN features",
+    url: "https://protonvpn.com/features",
+    checkedAt: "2026-09-21",
+  },
+  surfshark: {
+    label: "Surfshark no-logs page",
+    url: "https://surfshark.com/features/no-logs",
+    checkedAt: "2026-09-21",
+  },
+  expressvpn: {
+    label: "ExpressVPN press room",
+    url: "https://www.expressvpn.com/press",
+    checkedAt: "2026-09-21",
+  },
+  cyberghost: {
+    label: "CyberGhost no-logs page",
+    url: "https://www.cyberghostvpn.com/features/no-logs-vpn",
+    checkedAt: "2026-09-21",
+  },
+  pia: {
+    label: "PIA no-logs page",
+    url: "https://www.privateinternetaccess.com/vpn-features/no-logs-vpn",
+    checkedAt: "2026-09-21",
+  },
+};
+
 function hasValue(value: string | undefined): value is string {
   return Boolean(value?.trim());
 }
@@ -110,6 +143,17 @@ function profileFieldsEvidence(product: Product): EvidenceItem {
       sourceLabel: null,
       checkedAt: null,
       note: "No structured jurisdiction, network or device field is recorded.",
+    };
+  }
+
+  const source = profileSources[product.slug];
+  if (source) {
+    return {
+      state: "source-linked",
+      sourceUrl: source.url,
+      sourceLabel: source.label,
+      checkedAt: source.checkedAt,
+      note: `${fieldCount} structured profile field${fieldCount === 1 ? "" : "s"} is linked to a provider page checked on ${source.checkedAt}; the page remains a provider claim and does not replace independent testing.`,
     };
   }
 

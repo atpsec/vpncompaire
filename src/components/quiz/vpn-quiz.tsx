@@ -12,8 +12,10 @@ import { VPNLogo } from "@/components/brand/vpn-logo";
 import { getProduct } from "@/data/products";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
 import { AffiliateNotice } from "@/components/legal/affiliate-notice";
+import { CopyButton } from "@/components/tools/CopyButton";
 import type { Locale } from "@/lib/site";
 import {
+  describeQuizAnswers,
   isCompleteQuizAnswers,
   rankQuizAnswers,
   VPN_QUIZ_QUESTIONS,
@@ -178,6 +180,21 @@ export function VPNQuiz() {
     if (!product) return null;
     const bestPlan =
       product.plans.find((pl) => pl.isBestValue) ?? product.plans[0];
+    const completedAnswers = isCompleteQuizAnswers(answers) ? answers : null;
+    const answerDescriptions = completedAnswers
+      ? describeQuizAnswers(completedAnswers)
+      : null;
+    const nextMatch = matches[1] ? getProduct(matches[1][0], locale) : null;
+    const decisionReport = [
+      `${product.brand} — ${product.positioning}`,
+      product.summary,
+      answerDescriptions
+        ? `${t("result.decisionSignals")}: ${Object.values(answerDescriptions).join(" · ")}`
+        : null,
+      `${t("result.ctaReview")}: /reviews/${product.slug}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     return (
       <div
@@ -219,6 +236,40 @@ export function VPNQuiz() {
             {t("result.disclaimer")}
           </p>
 
+          <div className="mt-6 rounded-xl border border-brand-200/80 bg-white/75 p-4 dark:border-brand-800/70 dark:bg-surface-subtle/70">
+            <h3 className="text-sm font-bold text-ink-strong">
+              {t("result.decisionTitle")}
+            </h3>
+            <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+              {t("result.decisionSubtitle")}
+            </p>
+            {answerDescriptions ? (
+              <div className="mt-3 flex flex-wrap gap-2" aria-label={t("result.decisionSignals")}>
+                {Object.values(answerDescriptions).map((description) => (
+                  <span
+                    key={description}
+                    className="rounded-full border border-brand-200 bg-brand-50 px-2.5 py-1 text-xs text-brand-800 dark:border-brand-800 dark:bg-brand-950/40 dark:text-brand-200"
+                  >
+                    {description}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+            <ul className="mt-3 grid gap-2 text-sm text-ink">
+              {product.pros.slice(0, 3).map((pro) => (
+                <li key={pro} className="flex items-start gap-2">
+                  <Check className="mt-0.5 size-4 shrink-0 text-success-600" aria-hidden="true" />
+                  <span>{pro}</span>
+                </li>
+              ))}
+            </ul>
+            {nextMatch ? (
+              <p className="mt-3 border-t border-border/70 pt-3 text-xs leading-relaxed text-ink-muted">
+                {t("result.decisionAlternative", { brand: nextMatch.brand })}
+              </p>
+            ) : null}
+          </div>
+
           <div className="mt-6 flex items-baseline gap-2 text-ink-strong">
             <span className="text-sm text-ink-muted">
               {t("result.monthlyLabel")}
@@ -252,6 +303,11 @@ export function VPNQuiz() {
             <Button variant="ghost" onClick={reset}>
               <RotateCcw className="size-4" /> {t("result.ctaReset")}
             </Button>
+            <CopyButton
+              value={decisionReport}
+              copyLabel={t("result.copyLink")}
+              copiedLabel={t("result.linkCopied")}
+            />
           </div>
           <AffiliateNotice className="mt-4" variant="surface" />
         </Card>

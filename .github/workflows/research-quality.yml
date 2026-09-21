@@ -1,0 +1,52 @@
+name: Research data quality
+
+on:
+  push:
+    paths:
+      - "data/research/**"
+      - "scripts/validate-research.mjs"
+      - "scripts/test-research.mjs"
+      - "scripts/check-research-freshness.mjs"
+      - "src/data/research.ts"
+      - "package.json"
+      - ".github/workflows/research-quality.yml"
+  pull_request:
+    paths:
+      - "data/research/**"
+      - "scripts/validate-research.mjs"
+      - "scripts/test-research.mjs"
+      - "scripts/check-research-freshness.mjs"
+      - "src/data/research.ts"
+      - "package.json"
+      - ".github/workflows/research-quality.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate canonical research data
+        run: npm run validate:research
+
+      - name: Run research behavior tests
+        run: npm run test:research
+
+      - name: Check research freshness
+        run: npm run research:freshness
+
+      - name: Upload freshness report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-freshness-report
+          path: .research-freshness-report.md
+          if-no-files-found: ignore

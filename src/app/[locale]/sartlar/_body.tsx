@@ -30,8 +30,8 @@ export function EnBody() {
         <h2>1. Service description</h2>
         <p>
           {siteConfig.name} (&quot;the site&quot;) is an informational website
-          that organizes public VPN provider information using a transparent,
-          source-based methodology. The site offers reference content,
+          that organizes public VPN provider information and explains its
+          sources and limits. The site offers reference content,
           comparisons and guides about VPN providers.
         </p>
 

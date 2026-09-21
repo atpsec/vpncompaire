@@ -19,7 +19,7 @@
     "tools": "Tools",
     "snapshot": "Live snapshot",
     "snapshotAria": "Open your privacy snapshot",
-    "methodology": "Source methodology",
+    "methodology": "Sources and limitations",
     "research": "Research",
     "about": "About",
     "search": "Search",
@@ -57,8 +57,8 @@
       "h1": "Compare VPN providers by privacy, audits and price",
       "subtitle": "VPN provider profiles compared through official sources for privacy, streaming, travel and everyday security.",
       "ctaPrimary": "View VPN comparisons",
-      "ctaSecondary": "Our source approach",
-      "methodologyTag": "Source-based methodology",
+      "ctaSecondary": "Sources and limitations",
+      "methodologyTag": "Sources and clear limitations",
       "trust": {
         "tested": "VPN profiles",
         "audits": "independent audits reviewed",
@@ -71,7 +71,7 @@
       "subtitle": "Organised around independent audits, verifiable feature sources and transparent pricing analysis.",
       "extendedKicker": "Additional provider profiles",
       "extendedTitle": "Extended review pool",
-      "extendedSubtitle": "Additional provider profiles using the same information fields."
+      "extendedSubtitle": "Additional provider profiles using selected public information fields."
     },
     "useCase": {
       "title": "Find a VPN by use case",
@@ -88,8 +88,8 @@
     },
     "methodology": {
       "title": "How we classify sources",
-      "body": "Each provider profile explains privacy policy and jurisdiction, independent audits, protocols, device support, pricing transparency and use-case notes using official and verifiable sources. VPN Advisor does not run provider laboratory tests for these fields.",
-      "cta": "Read the full methodology"
+      "body": "Provider profiles organize public information about privacy, jurisdiction, audits, protocols, devices and pricing when the relevant source is available. VPN Advisor does not run provider laboratory tests and does not claim every field is independently verified.",
+      "cta": "Read sources and limitations"
     },
     "guides": {
       "title": "Latest guides",
@@ -104,10 +104,10 @@
       "toolsTitle": "Check your connection",
       "toolsDescription": "Use live diagnostic tools for your current connection.",
       "sourceNote": "Provider information is explained through official, verifiable sources.",
-      "selectionKicker": "Transparent selection",
+      "selectionKicker": "Information scope",
       "selectionTitle": "Which source fields do we compare?",
-      "selectionBody": "Every profile uses the same core fields and is built from providers' official documents and verifiable sources.",
-      "selectionLink": "Read the methodology",
+      "selectionBody": "Profiles commonly discuss provider documents, independent records and current terms. Coverage and source dates can differ by page.",
+      "selectionLink": "Read sources and limitations",
       "sourcesTitle": "Official sources",
       "sourcesDescription": "Policy and feature documentation.",
       "privacyTitle": "Privacy framework",
@@ -151,7 +151,7 @@
     }
   },
   "footer": {
-    "tagline": "Source-based VPN provider profiles. Transparent methodology and visible verification dates.",
+    "tagline": "Informational VPN provider profiles. Sources, dates and limitations are shown where available.",
     "sections": {
       "site": "Site",
       "tools": "Tools",
@@ -160,7 +160,7 @@
     },
     "links": {
       "about": "About",
-      "methodology": "Methodology",
+      "methodology": "Sources and limitations",
       "contact": "Contact",
       "disclosure": "Advertising disclosure",
       "privacy": "Privacy policy",
@@ -187,7 +187,7 @@
     },
     "copyright": "All rights reserved.",
     "disclosureTitle": "Advertising and affiliate disclosure",
-    "madeWith": "Source-based information project · Not a testing laboratory"
+    "madeWith": "Informational project · Not a testing laboratory"
   },
   "newsletter": {
     "title": "Subscribe to our newsletter",
@@ -205,40 +205,40 @@
     "accept": "OK"
   },
   "methodology": {
-    "metaTitle": "VPN Comparison Methodology — Sources and Criteria",
-    "metaDescription": "VPN Advisor's source-based comparison approach: official documentation, independent audits, pricing, privacy, freshness and limitations.",
-    "badge": "Transparent methodology",
-    "h1": "Our VPN Information and Comparison Methodology",
-    "intro": "Provider profiles on this site use the same source framework across five information areas. Ad revenue does not change how evidence is classified — this page explains our sources, uncertainty and the limits of not running provider performance tests.",
+    "metaTitle": "VPN Sources and Limitations",
+    "metaDescription": "How VPN Advisor presents public VPN information, source types and the clear limits of this informational website.",
+    "badge": "Sources and limitations",
+    "h1": "How VPN Advisor presents information",
+    "intro": "VPN Advisor is not a testing laboratory, certification body or professional newsroom. This page explains the source types that may appear on the site, how information is labelled and what readers should verify themselves.",
     "lastUpdated": "Last updated",
     "lastUpdatedDate": "August 31, 2026",
     "toc": {
       "title": "On this page",
       "independence": "1. Independence statement",
-      "tests": "2. Source and information framework",
-      "scoring": "3. Information labels",
-      "freshness": "4. Freshness policy",
-      "transparency": "5. Transparency and limitations"
+      "tests": "2. Source types",
+      "scoring": "3. Information fields",
+      "freshness": "4. Freshness and corrections",
+      "transparency": "5. Clear limits and revenue"
     },
     "independence": {
       "title": "1. Independence and Revenue Disclosure",
-      "intro": "To earn your trust we openly disclose our revenue model. Primary revenue comes from Google AdSense ads and, where programs exist, VPN affiliate links. Commission does not change source classification or comparison fields.",
+      "intro": "We disclose the site's revenue model plainly. Revenue may come from Google AdSense ads and, where programs exist, VPN affiliate links. A commercial relationship should not be treated as evidence that a provider or claim is better.",
       "withAffiliateTitle": "Our revenue model",
-      "withAffiliateBody": "Revenue comes from Google AdSense and some provider affiliate programs. Affiliate commission does not change source classification, comparison fields or discovery order; providers without affiliate programs (e.g. Mullvad) remain listed.",
+      "withAffiliateBody": "Revenue may come from Google AdSense and some provider affiliate programs. Affiliate commission does not turn a provider claim into independent proof. Providers without affiliate programs can still appear.",
       "withoutAffiliateTitle": "Equal treatment",
-      "withoutAffiliateBody": "All providers, including Mullvad, are described using the same information fields. Ad revenue does not change source classification or which documented facts are shown.",
+      "withoutAffiliateBody": "A provider's commercial relationship is not a guarantee of coverage, accuracy or priority. Pages should be read with their visible sources, dates and limits.",
       "pledgeTitle": "Our publishing pledge",
       "pledgeItems": {
         "0": "We do not buy subscriptions to run laboratory or field tests, and we do not accept free or sponsored accounts as a basis for editorial trust claims.",
-        "1": "No provider has pre-publication review, edit or veto rights over our content.",
-        "2": "Source classifications and correction notes are published under the VPN Advisor name; providers do not approve them.",
-        "3": "A provider's commercial relationship does not move it higher in discovery or change the information fields shown."
+        "1": "Provider or advertiser relationships do not give a provider pre-publication approval rights.",
+        "2": "Corrections can be reported through the contact page with a supporting source.",
+        "3": "A commercial relationship is not evidence of quality, security or suitability."
       },
       "linkText": "See the Advertising Disclosure page for full details."
     },
     "tests": {
       "title": "2. Source and information framework",
-      "intro": "Every provider profile is classified across the same information areas using official documents, independent audits and standards. These are reading and verification criteria, not a testing protocol.",
+      "intro": "Some provider pages use these information areas to organize public documentation and independent records. They are reading categories, not a testing protocol or a promise that every field has been independently verified.",
       "speed": {
         "title": "a) How to read performance information",
         "summary": "We do not publish a fixed editorial speed result; we explain how protocol, route, device, ISP and server load can change outcomes.",
@@ -259,7 +259,7 @@
       },
       "security": {
         "title": "b) Security and leak information",
-        "summary": "We explain provider-documented protections and the limits of one-time diagnostics readers can run on their own device.",
+        "summary": "Where available, pages distinguish provider-documented protections from one-time diagnostics readers can run on their own device.",
         "toolsLabel": "Tools used",
         "tools": "ipleak.net, dnsleaktest.com (extended test), browserleaks.com (WebRTC + canvas), test-ipv6.com, Wireshark (TCP-level packet inspection).",
         "checksLabel": "Checks performed",
@@ -271,7 +271,7 @@
           "4": "Kill switch: describe the provider's documented behavior and direct readers to test their own device; VPN Advisor does not run a kill-switch lab test."
         },
         "configLabel": "Configuration review",
-        "config": "We check whether the provider uses its own DNS, whether the default protocol is modern (WireGuard / OpenVPN UDP), the cipher (AES-256-GCM or ChaCha20) and certificate validation."
+        "config": "Provider documentation may describe DNS, protocol, cipher and certificate-validation choices. These descriptions are not a VPN Advisor configuration audit."
       },
       "streaming": {
         "title": "c) Streaming compatibility information",
@@ -290,27 +290,27 @@
       },
       "privacy": {
         "title": "d) Privacy and no-logs verification",
-        "summary": "Evidence-based verification that goes beyond marketing claims.",
+        "summary": "Where available, pages distinguish provider marketing claims from independent reports and explain what the cited record actually covers.",
         "auditsLabel": "Independent audit review",
         "audits": "No-logs and application-security reports published by PwC, Deloitte, KPMG, Cure53, Securitum and Assured AB are summarised with their scope, date and limitations. They are not converted into a VPN Advisor score.",
         "jurisdictionLabel": "Jurisdiction information",
         "jurisdiction": "We record the provider's documented corporate jurisdiction, relevant legal context and ownership signals without declaring one jurisdiction universally safe or unsafe.",
         "policyLabel": "Policy review",
-        "policy": "The privacy policy and terms are read end to end. Existence of a transparency report and a warrant canary is checked.",
+        "policy": "Pages may summarize privacy policies, terms, transparency reports and warrant canaries when those documents are available. Readers should open the current source for the full wording.",
         "infraLabel": "Infrastructure verification",
-        "infra": "Claims of RAM-only servers (no disks, everything wiped on reboot) are validated against provider documentation and independent reports."
+        "infra": "Claims such as RAM-only servers are reported as provider documentation or independent evidence when a cited record is available; they are not treated as a site-wide technical audit."
       },
       "usability": {
         "title": "e) Usability, support and quality",
-        "summary": "Documented app, platform and support information that readers can weigh for their own setup.",
+        "summary": "App, platform and support information from provider documentation can help readers assess their own setup; it is not a usability test by VPN Advisor.",
         "appsLabel": "Apps",
-        "apps": "Windows, macOS, iOS, Android and Linux availability is taken from official app and support documentation; VPN Advisor does not publish installation-time or interface test results.",
+        "apps": "Windows, macOS, iOS, Android and Linux availability may be summarized from official app and support documentation; VPN Advisor does not publish installation-time or interface test results.",
         "dailyLabel": "Daily use",
         "daily": "We do not conduct 14-day daily-use studies. Readers can evaluate stability, battery use and workflow fit on their own device and network.",
         "supportLabel": "Support information",
-        "support": "Officially documented support channels and stated availability are recorded when available; VPN Advisor does not run response-time or agent-quality tests.",
+        "support": "Officially documented support channels may be listed when available; VPN Advisor does not run response-time or agent-quality tests.",
         "refundLabel": "Refund terms",
-        "refund": "We summarise provider-published refund terms and direct readers to verify the current conditions; VPN Advisor does not perform refund transactions."
+        "refund": "Provider-published refund terms may be summarized; readers should verify current conditions and VPN Advisor does not perform refund transactions."
       }
     },
     "scoring": {
@@ -356,12 +356,12 @@
     },
     "freshness": {
       "title": "4. Freshness Policy",
-      "intro": "The VPN market changes quickly. An independent audit may be strong evidence today and require a fresh scope check later. We therefore show source and pricing check dates clearly.",
+      "intro": "The VPN market changes quickly. An independent audit may have a clear scope and date but still require a fresh check later. Dates are shown where the underlying record provides them.",
       "items": {
-        "0": "Each profile's sources and pricing are rechecked when new documents or material changes appear.",
-        "1": "Each review page shows the relevant source and pricing-check date clearly.",
-        "2": "If a breach, ownership change, new audit or critical feature appears, the relevant content is reassessed.",
-        "3": "Pricing is tracked with a separate verification date; no blanket refresh interval is promised because providers can change terms at any time."
+        "0": "A displayed source or pricing date is a timestamp for that record, not a guarantee that the page is currently complete.",
+        "1": "Provider pricing, policies, audits and platform rules can change without notice.",
+        "2": "When a material change or error is identified, the relevant page should be reviewed and corrected.",
+        "3": "No blanket refresh interval is promised; readers should check the provider's current official terms before acting."
       }
     },
     "transparency": {
@@ -378,11 +378,11 @@
         "0": "Performance depends on ISP, route, server load and device; we do not publish fixed laboratory results.",
         "1": "Streaming success rates change over time — platforms continuously update their VPN detection.",
         "2": "We do not run provider field or laboratory tests; reader tools show signals from the current connection only.",
-        "3": "We state explicitly that no independent certification body audits us; publishing our methodology openly is our strongest quality safeguard.",
+        "3": "No independent certification body audits VPN Advisor. This page describes our scope and limits; it is not a quality certification.",
         "4": "Users should make the final call based on their own priorities (privacy vs speed vs streaming)."
       },
       "contactTitle": "Feedback",
-      "contactBody": "If you have a question or suggestion about the methodology, reach out via the contact page. If you find a serious error we verify it, update the affected page and publish a change note."
+      "contactBody": "If you find an outdated or incorrect claim, send the URL and supporting source through the contact page. We can review the report, but do not promise a fixed response or update schedule."
     },
     "editorial": {
       "title": "Publishing independence",
@@ -581,6 +581,10 @@
     "result": {
       "kicker": "Source profile matching your answers",
       "matchBadge": "Profile matched to your priorities",
+      "decisionTitle": "Why this profile matched",
+      "decisionSubtitle": "These signals connect your answers to the provider profile. Use them as a transparent starting point, then verify current terms on the official site.",
+      "decisionSignals": "Your decision signals",
+      "decisionAlternative": "If your priorities change, {brand} is the next profile worth comparing.",
       "aiSignal": "TypeSafe preference signal: {intent} · {confidence}% confidence",
       "intentLabels": {
         "privacy": "privacy",
@@ -594,6 +598,8 @@
       "ctaDeal": "View {brand} on its official site",
       "ctaReview": "Read profile",
       "ctaReset": "Start over",
+      "copyLink": "Copy recommendation",
+      "linkCopied": "Recommendation copied",
       "altsHeading": "Other matching profiles",
       "altMatch": "{positioning} · alternative information profile",
       "altLink": "Review →"
@@ -627,6 +633,19 @@
       "explanation": "How it's calculated: the highlighted plan price applies for its initial term, then the listed monthly-plan price is used for the remaining months. Renewal prices and terms vary, so verify them on the provider's official site.",
       "cheapestKicker": "Best value for {years} years",
       "cheapestSummary": "Total ${total} — effective monthly ${monthly}",
+      "renewalGuardTitle": "Keep an eye on your renewal",
+      "renewalGuardBody": "Save a provider and renewal date on this device so the introductory price does not hide the next bill.",
+      "renewalProviderLabel": "Provider",
+      "renewalDateLabel": "Renewal date",
+      "renewalDateHint": "Use the date shown in your provider account or confirmation email.",
+      "renewalSave": "Save plan",
+      "renewalSaved": "Tracking {brand} renewal on {date}.",
+      "renewalDays": "{days} days remaining.",
+      "renewalOverdue": "Renewal date passed {days} days ago.",
+      "renewalRate": "Estimated renewal rate: ${monthly}/month.",
+      "renewalReview": "Open the provider profile",
+      "renewalClear": "Clear plan",
+      "renewalPrivacy": "Stored only in this browser. VPN Advisor does not receive or sync this reminder.",
       "table": {
         "vpn": "VPN",
         "initial": "First term",
@@ -676,7 +695,7 @@
     "relatedLinks": {
       "whatIsVpn": "What is a VPN?",
       "checklist": "Security checklist",
-      "methodology": "Our methodology"
+      "methodology": "Sources and limitations"
     },
     "search": {
       "placeholder": "Search terms… (Ctrl+K)",
@@ -761,7 +780,7 @@
     "quickLinksTitle": "Quick links",
     "quickLinks": {
       "aboutSuffix": "— who we are and how we work",
-      "methodologySuffix": "— how we classify VPN information",
+      "methodologySuffix": "— how to read sources and limits",
       "disclosureSuffix": "— our advertising and revenue disclosure",
       "privacySuffix": "— our personal-data practices"
     },
@@ -787,7 +806,7 @@
     "principles": {
       "transparent": {
         "title": "Transparent source model",
-        "body": "Every provider is organized against the same information areas. Source types, dates and limitations are made visible."
+        "body": "Provider pages may cover similar information areas, but source depth, dates and limitations can differ by page."
       },
       "independence": {
         "title": "Publishing independence",
@@ -800,7 +819,7 @@
     },
     "howWeTest": {
       "h2": "How do we classify information?",
-      "body": "Every provider profile is organised around the same six information areas: privacy policy and jurisdiction, independent audits, protocols and network details, device support, pricing transparency and use-case context. We do not run provider field or laboratory tests. See our <methodology>methodology page</methodology> for the details."
+      "body": "Provider profiles commonly discuss privacy policy and jurisdiction, independent audits, protocols and network details, device support, pricing and use-case context. Coverage and source dates can differ by page; we do not run provider field or laboratory tests. See our <methodology>sources and limitations page</methodology> for the details."
     },
     "revenue": {
       "h2": "Our revenue model",
@@ -825,7 +844,7 @@
       "cta": "Go to the contact page →"
     },
     "footerLinks": {
-      "methodology": "Methodology",
+      "methodology": "Sources and limitations",
       "disclosure": "Advertising disclosure",
       "privacy": "Privacy policy"
     }
@@ -992,7 +1011,7 @@
       "freeVsPaidTitle": "Free vs paid VPN"
     },
     "methodology": {
-      "badge": "Transparent methodology",
+      "badge": "Sources and limitations",
       "criteria": {
         "privacy": "Privacy policy and jurisdiction",
         "audits": "Independent audits",
@@ -1097,10 +1116,10 @@
   "og": {
     "alt": "VPN Advisor — Independent VPN comparisons",
     "h1": "Independent VPN comparisons",
-    "subtitle": "Source-based publishing project · Transparent methodology · Independent source records.",
+      "subtitle": "Informational publishing project · Sources and limits · Independent records where available.",
     "trust1": "VPN provider profiles",
     "trust2": "Independent audits",
-    "trust3": "Transparent methodology"
+      "trust3": "Clear limitations"
   },
   "blog": {
     "metaTitle": "Blog — VPN Guides and Tips",
@@ -1362,6 +1381,8 @@
       "checkupCompareAction": "See comparison",
       "checkupSaved": "Baseline saved in this tab",
       "checkupDuration": "About 1 minute",
+      "checkupCopyAction": "Copy privacy summary",
+      "checkupCopied": "Summary copied",
       "faqTitle": "Frequently asked questions",
       "faq": {
         "items": [

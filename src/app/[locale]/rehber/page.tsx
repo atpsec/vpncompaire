@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
+import { DecisionFramework } from "@/components/content/decision-framework";
 import { breadcrumbSchema } from "@/lib/seo";
 import { sectionHubAlternates } from "@/lib/site";
 import {
@@ -183,6 +184,8 @@ export default async function Page({ params }: Props) {
             </Link>
           ))}
         </div>
+
+        <DecisionFramework locale={appLocale} variant="guide" />
       </Container>
     </>
   );

@@ -12,7 +12,6 @@ import { Link } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { JsonLd } from "@/components/seo/json-ld";
-import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { breadcrumbSchema, datasetSchema } from "@/lib/seo";
 import { absoluteUrl, localizedAlternates } from "@/lib/site";
 import {
@@ -20,6 +19,7 @@ import {
   type EvidenceItem,
   type EvidenceState,
 } from "@/data/provider-evidence";
+import { GoogleAdsense } from "@/components/analytics/google-adsense";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -200,7 +200,7 @@ export default async function Page({ params }: Props) {
         </section>
 
         <p className="mt-12 text-sm leading-relaxed text-ink-muted">
-          Read the <Link href="/methodology" className="font-semibold text-brand-700 hover:underline">source-based methodology</Link> for the hierarchy of evidence and the limits of provider profiles. Pricing and features can change; verify the official source before purchase.
+          Read <Link href="/methodology" className="font-semibold text-brand-700 hover:underline">sources and limitations</Link> for how to interpret provider records. Pricing and features can change; verify the official source before purchase.
         </p>
       </Container>
     </>

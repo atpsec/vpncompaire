@@ -54,7 +54,7 @@ export function Hero() {
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild variant="primary" size="md">
-              <Link href="/vpn-reviews">
+              <Link href="/comparison">
                 {copy.primaryCta}
                 <ArrowRight className="size-4" />
               </Link>

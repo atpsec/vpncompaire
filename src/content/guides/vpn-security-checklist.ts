@@ -121,7 +121,7 @@ const tr: VpnSecurityChecklistContent = {
       href: "/guide/ucretsiz-vs-ucretli-vpn",
       text: "Ücretsiz vs Ücretli VPN",
     },
-    { href: "/methodology", text: "Kaynak-temelli metodoloji" },
+    { href: "/methodology", text: "Kaynaklar ve sınırlar" },
   ],
 };
 
@@ -226,7 +226,7 @@ const en: VpnSecurityChecklistContent = {
       href: "/guide/free-vs-paid-vpn",
       text: "Free vs paid VPN",
     },
-    { href: "/methodology", text: "Source-based methodology" },
+    { href: "/methodology", text: "Sources and limitations" },
   ],
 };
 
@@ -331,7 +331,7 @@ const de: VpnSecurityChecklistContent = {
       href: "/ratgeber/kostenloses-vs-kostenpflichtiges-vpn",
       text: "Kostenlos vs. kostenpflichtig",
     },
-    { href: "/methodology", text: "Quellenbasierte Methodik" },
+    { href: "/methodology", text: "Quellen und Grenzen" },
   ],
 };
 

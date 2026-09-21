@@ -177,7 +177,7 @@ export default async function Page({ params }: Props) {
             <h2 id="next-heading" className="mt-2 text-2xl font-bold tracking-tight text-ink-strong">Read the evidence behind the count</h2>
           </div>
           <NextStep icon={<FileSearch className="size-5" aria-hidden="true" />} title="Open the ledger" body="Inspect source states, check dates, provider-reported fields and gaps for every record." href="/research/evidence-ledger" label="Open evidence ledger" />
-          <NextStep icon={<ShieldAlert className="size-5" aria-hidden="true" />} title="Understand the limits" body="See how we separate provider claims, independent records and one-time browser diagnostics." href="/methodology" label="Read methodology" />
+          <NextStep icon={<ShieldAlert className="size-5" aria-hidden="true" />} title="Understand the limits" body="See how provider claims, independent records and one-time browser diagnostics should be interpreted." href="/methodology" label="Read sources and limitations" />
           <NextStep icon={<CheckCircle2 className="size-5" aria-hidden="true" />} title="Suggest a correction" body="If a source has changed, send the exact provider URL so the next edition can be checked." href="/contact" label="Contact VPN Advisor" />
         </section>
       </Container>

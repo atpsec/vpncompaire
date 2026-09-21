@@ -205,6 +205,12 @@ export function EmailSecurityChecker({ labels }: { labels: Labels }) {
     if (response.ok) {
       setResult(response.data);
       setStatus("done");
+      window.gtag?.("event", "tool_completed", {
+        tool: "email-security-check",
+        result_state: response.data.risk,
+        finding_count: response.data.findings.length,
+        locale: document.documentElement.lang || undefined,
+      });
     } else {
       setRateLimited(response.rateLimited);
       setInvalidEmail(response.invalidEmail);

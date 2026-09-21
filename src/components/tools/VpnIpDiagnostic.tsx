@@ -123,6 +123,11 @@ export function VpnIpDiagnostic({ labels }: { labels: Labels }) {
     if (response.ok) {
       setResult(response.data);
       setStatus("done");
+      window.gtag?.("event", "tool_completed", {
+        tool: "vpn-ip-diagnostic",
+        result_state: response.data.detected === true ? "detected" : response.data.detected === false ? "not_detected" : "unknown",
+        locale: document.documentElement.lang || undefined,
+      });
     } else {
       setRateLimited(response.rateLimited);
       setStatus("error");
@@ -138,6 +143,11 @@ export function VpnIpDiagnostic({ labels }: { labels: Labels }) {
       if (response.ok) {
         setResult(response.data);
         setStatus("done");
+        window.gtag?.("event", "tool_completed", {
+          tool: "vpn-ip-diagnostic",
+          result_state: response.data.detected === true ? "detected" : response.data.detected === false ? "not_detected" : "unknown",
+          locale: document.documentElement.lang || undefined,
+        });
       } else {
         setRateLimited(response.rateLimited);
         setStatus("error");

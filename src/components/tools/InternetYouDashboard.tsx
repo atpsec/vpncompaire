@@ -44,6 +44,7 @@ import { Link } from "@/i18n/routing";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { CopyButton } from "@/components/tools/CopyButton";
 
 export type InternetYouServerSnapshot = {
   ip: string | null;
@@ -164,6 +165,8 @@ type Copy = {
   checkupWebrtcAction: string;
   checkupCompareAction: string;
   checkupSaved: string;
+  checkupCopyAction: string;
+  checkupCopied: string;
 };
 
 type BrandIconName =
@@ -404,6 +407,17 @@ export function InternetYouDashboard({
     currentIpVersion: serverSnapshot.currentIpVersion,
     location,
   };
+  const checkupReport = [
+    copy.checkupTitle,
+    `${copy.publicIp}: ${currentConnection.ip ?? copy.unknown}`,
+    `${copy.ipv4}: ${currentConnection.ipv4 ?? copy.unknown}`,
+    `${copy.ipv6}: ${currentConnection.ipv6 ?? copy.unknown}`,
+    `${copy.approxLocation}: ${currentConnection.location}`,
+    browser ? `${copy.browser}: ${browser.browser.name}` : `${copy.browser}: ${copy.unknown}`,
+    browser ? `${copy.operatingSystem}: ${browser.operatingSystem.name}` : `${copy.operatingSystem}: ${copy.unknown}`,
+    browser ? `${copy.device}: ${browser.device.name}` : `${copy.device}: ${copy.unknown}`,
+    baseline ? `${copy.baselineLabel}: ${baseline.ip ?? copy.unknown}` : `${copy.baselineLabel}: ${copy.comparisonEmpty}`,
+  ].join("\n");
   const visibleSignalCount = browser
     ? [
         serverSnapshot.ip,
@@ -484,6 +498,7 @@ export function InternetYouDashboard({
             <PrivacyCheckup
               copy={copy}
               baseline={baseline}
+              report={checkupReport}
               onSaveSnapshot={() => setBaseline(currentConnection)}
             />
           </div>
@@ -664,10 +679,12 @@ type CheckupId = "vpn" | "dns" | "webrtc";
 function PrivacyCheckup({
   copy,
   baseline,
+  report,
   onSaveSnapshot,
 }: {
   copy: Copy;
   baseline: ConnectionSnapshot | null;
+  report: string;
   onSaveSnapshot: () => void;
 }) {
   const [selected, setSelected] = useState<CheckupId>("vpn");
@@ -755,6 +772,13 @@ function PrivacyCheckup({
             </Button>
           )}
         </div>
+      </div>
+      <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
+        <CopyButton
+          value={report}
+          copyLabel={copy.checkupCopyAction}
+          copiedLabel={copy.checkupCopied}
+        />
       </div>
     </section>
   );

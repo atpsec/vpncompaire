@@ -11,7 +11,6 @@ import { MethodologyBlock } from "@/components/home/methodology-block";
 import { FAQSection } from "@/components/home/faq-section";
 import { HomeBlogColumns } from "@/components/home/home-blog-columns";
 import { AiEditorialBlock } from "@/components/home/ai-editorial-block";
-import { GoogleAdsense } from "@/components/analytics/google-adsense";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   organizationSchema,
@@ -22,6 +21,8 @@ import {
 import { homeFaqs } from "@/data/home-faqs";
 import { getDetailedProviderProducts } from "@/data/provider-catalog";
 import type { Locale } from "@/lib/site";
+import { GoogleAdsense } from "@/components/analytics/google-adsense";
+import { DataDisclaimer } from "@/components/legal/data-disclaimer";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -51,6 +52,7 @@ export default async function HomePage({ params }: Props) {
       <ComparisonBlock />
       <MethodologyBlock />
       <FAQSection locale={locale} />
+      <DataDisclaimer />
     </>
   );
 }

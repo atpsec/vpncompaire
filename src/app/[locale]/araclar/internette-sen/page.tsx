@@ -186,6 +186,8 @@ export default async function Page({ params }: Props) {
     checkupWebrtcAction: t("checkupWebrtcAction"),
     checkupCompareAction: t("checkupCompareAction"),
     checkupSaved: t("checkupSaved"),
+    checkupCopyAction: t("checkupCopyAction"),
+    checkupCopied: t("checkupCopied"),
   };
 
   const webAppSchema = {

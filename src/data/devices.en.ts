@@ -2,7 +2,7 @@ import type { DeviceContent } from "./devices";
 
 const COMMON_RELATED = [
   { label: "Compare all VPNs", href: "/vpn-reviews" },
-  { label: "Comparison methodology and sources", href: "/methodology" },
+  { label: "Sources and limitations", href: "/methodology" },
 ];
 
 const DIFFICULTY = {

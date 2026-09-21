@@ -20,34 +20,18 @@ import {
 // /, /blog, /en, /en/blog, /de, /de/blog.
 const intlMiddleware = createMiddleware(routing);
 
-// Keep catalogue, utility and commercial surfaces available to readers while
-// the editorial depth is being rebuilt. These routes are the most likely to
-// look repetitive when a crawler evaluates the site as a whole, so they should
-// not be presented as indexable search content for now.
+// Keep genuinely thin/private surfaces out of search. Editorial provider
+// profiles, comparisons, guides and public diagnostic landing pages are
+// indexable when their route metadata permits it. A broad prefix deny-list
+// previously hid the site's most useful search destinations and also made the
+// HTTP robots header disagree with the page metadata.
 const NOINDEX_PREFIXES = [
-  "/reviews",
-  "/vpn-reviews",
-  "/comparison",
-  "/karsilastir",
-  "/best-vpn",
-  "/en-iyi-vpn",
-  "/en-iyi",
-  "/ai",
-  "/tools",
-  "/araclar",
+  "/research/blog-readership",
+  "/arastirma/blog-readership",
   "/vpn-test",
   "/calculator",
   "/hesaplayici",
   "/quiz",
-  "/sana-uygun-vpn",
-  "/server-map",
-  "/sunucu-haritasi",
-  "/security-tools",
-  "/guvenlik-araclari",
-  "/glossary",
-  "/sozluk",
-  "/research/blog-readership",
-  "/arastirma/blog-readership",
 ] as const;
 
 function shouldNoIndex(pathname: string): boolean {
@@ -109,37 +93,8 @@ export default async function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
-  // Yerelleştirilmiş slug'ları (örn. /en/guide/what-is-a-vpn, /de/vergleich) iç
-  // Türkçe-slug route'una rewrite et. URL değişmez; doğru locale içeriği
-  // [locale] segmentinden gelir. (bkz. src/lib/i18n-paths.ts)
-  // next-intl middleware'i bypass edildiği için locale header'ı
-  // (X-NEXT-INTL-LOCALE) elle kurulur; next-intl request yapılandırması bunu
-  // okurken <html lang> doğrudan [locale] route parametresinden üretilir.
-  const rewriteTarget = resolveInternalRewrite(pathname);
-  if (rewriteTarget) {
-    const url = request.nextUrl.clone();
-    url.pathname = rewriteTarget;
-    // rewriteTarget yalnızca en/de prefix'li üretilir (bkz. i18n-paths.ts).
-    const locale = rewriteTarget.split("/")[1];
-    const headers = new Headers(request.headers);
-    headers.set("X-NEXT-INTL-LOCALE", locale);
-    const rewritten = NextResponse.rewrite(url, { request: { headers } });
-    appendVaryAccept(rewritten.headers);
-    return markNoIndex(rewritten, pathname);
-  }
-
-  const englishRewriteTarget = resolveEnglishPublicRewrite(pathname);
-  if (englishRewriteTarget) {
-    const url = request.nextUrl.clone();
-    url.pathname = englishRewriteTarget;
-    const headers = new Headers(request.headers);
-    headers.set("X-NEXT-INTL-LOCALE", "en");
-    const rewritten = NextResponse.rewrite(url, { request: { headers } });
-    appendVaryAccept(rewritten.headers);
-    return markNoIndex(rewritten, pathname);
-  }
-
-  // Apply rate limiting to sensitive routes
+  // Apply rate limiting before content negotiation so Markdown article
+  // representations receive the same protection as their HTML pages.
   const shouldRateLimit = pathname.includes("/blog/");
 
   if (shouldRateLimit) {
@@ -181,6 +136,17 @@ export default async function proxy(request: NextRequest) {
       url.pathname = `/agent-markdown${pathname}`;
       const rewritten = NextResponse.rewrite(url);
       appendVaryAccept(rewritten.headers);
+      // Hostinger's edge currently drops `Vary: Accept` while preserving the
+      // public document cache rule. Do not let an agent Markdown response be
+      // cached and then served to a browser request for the same URL.
+      rewritten.headers.set(
+        "Cache-Control",
+        "private, no-store, no-cache, must-revalidate, max-age=0",
+      );
+      // The Markdown response is a machine-readable alternate representation,
+      // not a second search landing page. Keep it available to agents while
+      // preventing duplicate-content indexing.
+      rewritten.headers.set("X-Robots-Tag", "noindex, follow, noarchive");
       return markNoIndex(rewritten, pathname);
     }
 
@@ -196,6 +162,36 @@ export default async function proxy(request: NextRequest) {
         },
       );
     }
+  }
+
+  // Yerelleştirilmiş slug'ları (örn. /en/guide/what-is-a-vpn, /de/vergleich) iç
+  // Türkçe-slug route'una rewrite et. URL değişmez; doğru locale içeriği
+  // [locale] segmentinden gelir. (bkz. src/lib/i18n-paths.ts)
+  // next-intl middleware'i bypass edildiği için locale header'ı
+  // (X-NEXT-INTL-LOCALE) elle kurulur; next-intl request yapılandırması bunu
+  // okurken <html lang> doğrudan [locale] route parametresinden üretilir.
+  const rewriteTarget = resolveInternalRewrite(pathname);
+  if (rewriteTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = rewriteTarget;
+    // rewriteTarget yalnızca en/de prefix'li üretilir (bkz. i18n-paths.ts).
+    const locale = rewriteTarget.split("/")[1];
+    const headers = new Headers(request.headers);
+    headers.set("X-NEXT-INTL-LOCALE", locale);
+    const rewritten = NextResponse.rewrite(url, { request: { headers } });
+    appendVaryAccept(rewritten.headers);
+    return markNoIndex(rewritten, pathname);
+  }
+
+  const englishRewriteTarget = resolveEnglishPublicRewrite(pathname);
+  if (englishRewriteTarget) {
+    const url = request.nextUrl.clone();
+    url.pathname = englishRewriteTarget;
+    const headers = new Headers(request.headers);
+    headers.set("X-NEXT-INTL-LOCALE", "en");
+    const rewritten = NextResponse.rewrite(url, { request: { headers } });
+    appendVaryAccept(rewritten.headers);
+    return markNoIndex(rewritten, pathname);
   }
 
   // Public locale URLs are explicit now:

@@ -84,6 +84,18 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // The root page is rewritten through the locale segment. Keep the
+        // browser HTML and an explicit text/markdown request in separate edge
+        // cache variants so a warmed HTML response cannot mask the agent view.
+        source: "/",
+        headers: [
+          {
+            key: "Vary",
+            value: "Accept, Accept-Encoding, RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch",
+          },
+        ],
+      },
+      {
         source: "/:path*",
         headers: [
           ...securityHeaders,

@@ -31,6 +31,8 @@ export function ComparePicker() {
     ];
   }, [locale]);
   const [selected, setSelected] = useState<string[]>(() => all.slice(0, 2).map((p) => p.slug));
+  const [query, setQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const toggle = (slug: string) => {
     const action = selected.includes(slug) ? "remove" : "add";
@@ -40,18 +42,33 @@ export function ComparePicker() {
       selected_count: selected.length,
       locale: document.documentElement.lang || undefined,
     });
-    setSelected((prev) => {
-      if (prev.includes(slug)) {
-        if (prev.length <= MIN) return prev;
-        return prev.filter((s) => s !== slug);
-      }
-      if (prev.length >= MAX) return prev;
-      return [...prev, slug];
-    });
+    const nextSelected = selected.includes(slug)
+      ? selected.length <= MIN
+        ? selected
+        : selected.filter((s) => s !== slug)
+      : selected.length >= MAX
+        ? selected
+        : [...selected, slug];
+    if (nextSelected !== selected && nextSelected.length >= MIN) {
+      window.gtag?.("event", "compare_completed", {
+        surface: "homepage-picker",
+        providers: nextSelected.join(","),
+        selected_count: nextSelected.length,
+        locale: document.documentElement.lang || undefined,
+      });
+    }
+    setSelected(nextSelected);
   };
 
   const clear = () => setSelected(all.slice(0, 2).map((p) => p.slug));
   const compared = useMemo(() => selected.map((slug) => all.find((p) => p.slug === slug)).filter((p): p is Product => Boolean(p)), [selected, all]);
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    const matches = normalized
+      ? all.filter((p) => `${p.brand} ${p.positioning}`.toLowerCase().includes(normalized))
+      : all;
+    return showAll ? matches : matches.slice(0, 8);
+  }, [all, query, showAll]);
 
   const h2 = locale === "tr" ? "VPN özelliklerini kendiniz karşılaştırın" : locale === "de" ? "VPN-Merkmale selbst vergleichen" : "Compare VPN features yourself";
   const intro = locale === "tr" ? "2-4 sağlayıcı seçin; denetim, sunucu/ağ bilgisi, cihaz desteği, yargı yetkisi ve fiyatı aynı tabloda görün." : locale === "de" ? "Wählen Sie 2-4 Anbieter und vergleichen Sie Audit-, Netzwerk-, Geräte-, Rechtsraum- und Preisinformationen in derselben Ansicht." : "Choose 2-4 providers and compare audit, network, device, jurisdiction and pricing information in the same view.";
@@ -63,13 +80,23 @@ export function ComparePicker() {
 
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4"><p className="text-sm text-ink-muted">{t("selectedLabel")} <span className="font-semibold text-ink-strong tabular-nums">{selected.length}</span><span className="text-ink-faint"> {t("ofMax", { max: MAX })}</span></p>{selected.length > MIN && <button type="button" onClick={clear} className="text-xs text-ink-muted hover:text-ink underline-offset-2 hover:underline">{t("reset")}</button>}</div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-2 mb-8">
-          {all.map((p) => {
+        <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <label htmlFor="vpn-compare-search" className="sr-only">{locale === "tr" ? "Sağlayıcı ara" : locale === "de" ? "Anbieter suchen" : "Search providers"}</label>
+          <input id="vpn-compare-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={locale === "tr" ? "Sağlayıcı ara…" : locale === "de" ? "Anbieter suchen…" : "Search providers…"} className="w-full rounded-lg border border-border bg-surface-base px-3 py-2 text-sm text-ink-strong outline-none ring-brand-200 placeholder:text-ink-faint focus:ring-2 sm:max-w-xs" />
+          <button type="button" onClick={() => setShowAll((value) => !value)} className="self-start text-xs font-semibold text-brand-700 hover:underline sm:self-auto">
+            {showAll ? (locale === "tr" ? "Daha az göster" : locale === "de" ? "Weniger anzeigen" : "Show fewer") : (locale === "tr" ? `Tümünü göster (${all.length})` : locale === "de" ? `Alle anzeigen (${all.length})` : `Show all (${all.length})`)}
+          </button>
+        </div>
+
+        <ul className="grid grid-cols-2 gap-2 mb-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {filtered.map((p) => {
             const isSelected = selected.includes(p.slug);
             const isDisabled = !isSelected && selected.length >= MAX;
             return <li key={p.slug}><button type="button" onClick={() => toggle(p.slug)} disabled={isDisabled} aria-pressed={isSelected} className={cn("w-full flex flex-col items-center gap-2 rounded-xl border bg-surface-base p-3 transition-all text-center", isSelected ? "border-brand-500 ring-2 ring-brand-200 shadow-sm" : "border-border hover:border-brand-300", isDisabled && "opacity-40 cursor-not-allowed hover:border-border")}><span className="relative"><VPNLogo slug={p.slug} size={44} />{isSelected && <span className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-brand-600 text-white shadow ring-2 ring-white"><Check className="size-3" strokeWidth={3} /></span>}</span><span className="text-xs font-semibold text-ink-strong line-clamp-1">{p.brand}</span></button></li>;
           })}
         </ul>
+
+        {filtered.length === 0 && <p className="mb-8 rounded-lg border border-dashed border-border p-4 text-sm text-ink-muted">{locale === "tr" ? "Bu aramayla eşleşen sağlayıcı yok." : locale === "de" ? "Keine Anbieter gefunden." : "No providers match this search."}</p>}
 
         <CompareTable products={compared} locale={locale} />
       </Container>

@@ -203,6 +203,30 @@ export function articleSchema(post: {
   };
 }
 
+export function editorialLeadSchema(locale: Locale = "en"): JsonLdObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteConfig.url}/about#editorial-lead`,
+    name: siteConfig.editorialLead.name,
+    url: absoluteUrl(siteConfig.editorialLead.url, locale),
+    jobTitle: siteConfig.editorialLead.role,
+    description:
+      "Cybersecurity practitioner and publishing lead for VPN Advisor, with documented experience in security awareness, phishing simulations, OSINT, vulnerability scanning and security documentation.",
+    knowsAbout: siteConfig.editorialLead.knowsAbout,
+    worksFor: {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${absoluteUrl("/about", locale)}#page`,
+    },
+  };
+}
+
 /**
  * Emits a Product only when the profile has a current, visible price. This
  * editorial site intentionally does not add ratings or reviews it cannot

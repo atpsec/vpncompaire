@@ -1,0 +1,14 @@
+[
+  { "sourceId": "nordvpn-pricing", "url": "https://nordvpn.com/tr/pricing/" },
+  { "sourceId": "nordvpn-trust", "url": "https://nordvpn.com/trust/" },
+  { "sourceId": "proton-pricing", "url": "https://protonvpn.com/pricing" },
+  { "sourceId": "proton-transparency", "url": "https://protonvpn.com/blog/transparency-report" },
+  { "sourceId": "surfshark-pricing", "url": "https://surfshark.com/pricing" },
+  { "sourceId": "surfshark-trust", "url": "https://surfshark.com/trust-center" },
+  { "sourceId": "mullvad-pricing", "url": "https://mullvad.net/en/account/create" },
+  { "sourceId": "mullvad-audits", "url": "https://mullvad.net/en/blog/tag/audits" },
+  { "sourceId": "expressvpn-pricing", "url": "https://www.expressvpn.com/order" },
+  { "sourceId": "expressvpn-trust", "url": "https://www.expressvpn.com/trust" },
+  { "sourceId": "cyberghost-pricing", "url": "https://www.cyberghostvpn.com/buy" },
+  { "sourceId": "pia-pricing", "url": "https://www.privateinternetaccess.com/buy-vpn-online" }
+]

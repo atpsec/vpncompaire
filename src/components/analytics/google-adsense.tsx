@@ -1,16 +1,13 @@
 "use client";
 
-import Script from "next/script";
 import { publicAnalytics } from "@/lib/public-analytics";
 
 const ADSENSE_ID_PATTERN = /^ca-pub-\d{16}$/;
 
 /**
- * Only page-level monetized surfaces render this component. It intentionally
- * has no pathname check: a client component in a statically rendered root
- * layout can be evaluated with the wrong pathname and leak a preload link into
- * excluded pages. Keeping the allowlist at the page boundary makes the HTML,
- * AdSense audit and Google crawler view agree.
+ * Only page-level monetized surfaces use this component. The allowlist lives
+ * in scripts/audit-adsense.mjs; excluded pages must not load the script.
+ * This keeps the commercial ad inventory guard explicit and reviewable.
  */
 export function GoogleAdsense() {
   const id = publicAnalytics.adsenseClientId;
@@ -20,10 +17,10 @@ export function GoogleAdsense() {
   }
 
   return (
-    <Script
+    <script
       id="google-adsense"
-      strategy="afterInteractive"
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${id}`}
+      async
       crossOrigin="anonymous"
     />
   );

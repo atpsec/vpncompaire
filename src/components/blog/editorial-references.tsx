@@ -62,7 +62,7 @@ export function EditorialReferences({
       </ul>
 
       <p className="mt-5 border-t border-border pt-4 text-xs leading-relaxed text-ink-muted">
-        Read our <Link href="/methodology" className="font-semibold text-brand-700 hover:underline">source methodology</Link>. If a source has changed or a claim needs correction, use the <Link href="/contact" className="font-semibold text-brand-700 hover:underline">contact page</Link>.
+        Read <Link href="/methodology" className="font-semibold text-brand-700 hover:underline">sources and limitations</Link>. If a source has changed or a claim needs correction, use the <Link href="/contact" className="font-semibold text-brand-700 hover:underline">contact page</Link>.
       </p>
     </Card>
   );

@@ -46,7 +46,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t.title,
     description: t.description,
     alternates: sectionHubAlternates("comparison", locale),
-    robots: { index: false, follow: true },
   };
 }
 

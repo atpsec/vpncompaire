@@ -13,6 +13,7 @@ import type { Product } from "@/data/products";
 import type { Locale } from "@/lib/site";
 import { formatProductPrice } from "@/lib/product-price";
 import { providerOutboundHref, providerOutboundRel } from "@/lib/affiliate-public";
+import { ComparisonLens } from "@/components/comparison/comparison-lens";
 
 const labels = {
   tr: {
@@ -33,17 +34,23 @@ const labels = {
     tableTitle: "Özellikleri yan yana karşılaştırın",
     strengths: "Belgelenen öne çıkan noktalar",
     considerations: "Dikkat edilmesi gerekenler",
-    methodology: "Metodolojiyi inceleyin",
+    methodology: "Kaynakları ve sınırları inceleyin",
+    lensTitle: "Karşılaştırma odağı",
+    lensAll: "Tüm alanlar",
+    lensPrivacy: "Gizlilik",
+    lensValue: "Değer",
+    lensSetup: "Kurulum ve cihazlar",
+    checked: "Fiyat kontrol tarihi",
   },
   en: {
     badge: "Source-based comparison",
     note: "This comparison does not declare an editorial score, winner or laboratory result. It places public, verifiable provider information side by side using the same fields.",
-    price: "Starting price", jurisdiction: "Jurisdiction", audits: "Independent audit", servers: "Server / network information", devices: "Device support", openSource: "Open source", refund: "Refund period", yes: "Yes", no: "No", days: "days", official: "Official site", profile: "Provider profile", tableTitle: "Compare features side by side", strengths: "Documented notable points", considerations: "Points to consider", methodology: "Read the methodology",
+    price: "Starting price", jurisdiction: "Jurisdiction", audits: "Independent audit", servers: "Server / network information", devices: "Device support", openSource: "Open source", refund: "Refund period", yes: "Yes", no: "No", days: "days", official: "Official site", profile: "Provider profile", tableTitle: "Compare features side by side", strengths: "Documented notable points", considerations: "Points to consider", methodology: "Read sources and limitations", lensTitle: "Comparison focus", lensAll: "All fields", lensPrivacy: "Privacy", lensValue: "Value", lensSetup: "Setup and devices", checked: "Price check date",
   },
   de: {
     badge: "Quellenbasierter Vergleich",
     note: "Dieser Vergleich erklärt keine redaktionelle Punktzahl, keinen Sieger und kein Laborergebnis. Öffentliche, überprüfbare Anbieterinformationen werden anhand derselben Felder gegenübergestellt.",
-    price: "Preis ab", jurisdiction: "Rechtsraum", audits: "Unabhängiges Audit", servers: "Server- / Netzwerkinformation", devices: "Geräteunterstützung", openSource: "Open Source", refund: "Erstattungsfrist", yes: "Ja", no: "Nein", days: "Tage", official: "Offizielle Website", profile: "Anbieterprofil", tableTitle: "Funktionen direkt vergleichen", strengths: "Dokumentierte Merkmale", considerations: "Zu beachtende Punkte", methodology: "Methodik lesen",
+    price: "Preis ab", jurisdiction: "Rechtsraum", audits: "Unabhängiges Audit", servers: "Server- / Netzwerkinformation", devices: "Geräteunterstützung", openSource: "Open Source", refund: "Erstattungsfrist", yes: "Ja", no: "Nein", days: "Tage", official: "Offizielle Website", profile: "Anbieterprofil", tableTitle: "Funktionen direkt vergleichen", strengths: "Dokumentierte Merkmale", considerations: "Zu beachtende Punkte", methodology: "Quellen und Grenzen lesen", lensTitle: "Vergleichsfokus", lensAll: "Alle Felder", lensPrivacy: "Datenschutz", lensValue: "Preis-Leistung", lensSetup: "Setup und Geräte", checked: "Preis geprüft am",
   },
 } as const;
 
@@ -72,13 +79,14 @@ export function FactualComparison({ locale, title, description, left, right }: P
     return `${product.brand}: price ${price}; jurisdiction ${jurisdiction}; audit field ${audit}.`;
   };
   const rows = [
-    [t.price, left.pricingVerifiedAt ? formatProductPrice(left.priceFromUsd, left.priceCurrency, locale) : t.official, right.pricingVerifiedAt ? formatProductPrice(right.priceFromUsd, right.priceCurrency, locale) : t.official],
-    [t.jurisdiction, left.highlights.jurisdiction ?? "—", right.highlights.jurisdiction ?? "—"],
-    [t.audits, left.highlights.audits ?? "—", right.highlights.audits ?? "—"],
-    [t.servers, left.highlights.servers ?? "—", right.highlights.servers ?? "—"],
-    [t.devices, left.highlights.devices ?? "—", right.highlights.devices ?? "—"],
-    [t.openSource, left.highlights.openSource === undefined ? "—" : left.highlights.openSource ? t.yes : t.no, right.highlights.openSource === undefined ? "—" : right.highlights.openSource ? t.yes : t.no],
-    [t.refund, left.highlights.moneyBackDays ? `${left.highlights.moneyBackDays} ${t.days}` : "—", right.highlights.moneyBackDays ? `${right.highlights.moneyBackDays} ${t.days}` : "—"],
+    { key: "price", label: t.price, left: left.pricingVerifiedAt ? formatProductPrice(left.priceFromUsd, left.priceCurrency, locale) : t.official, right: right.pricingVerifiedAt ? formatProductPrice(right.priceFromUsd, right.priceCurrency, locale) : t.official },
+    { key: "checked", label: t.checked, left: left.pricingVerifiedAt || "—", right: right.pricingVerifiedAt || "—" },
+    { key: "jurisdiction", label: t.jurisdiction, left: left.highlights.jurisdiction ?? "—", right: right.highlights.jurisdiction ?? "—" },
+    { key: "audits", label: t.audits, left: left.highlights.audits ?? "—", right: right.highlights.audits ?? "—" },
+    { key: "servers", label: t.servers, left: left.highlights.servers ?? "—", right: right.highlights.servers ?? "—" },
+    { key: "devices", label: t.devices, left: left.highlights.devices ?? "—", right: right.highlights.devices ?? "—" },
+    { key: "openSource", label: t.openSource, left: left.highlights.openSource === undefined ? "—" : left.highlights.openSource ? t.yes : t.no, right: right.highlights.openSource === undefined ? "—" : right.highlights.openSource ? t.yes : t.no },
+    { key: "refund", label: t.refund, left: left.highlights.moneyBackDays ? `${left.highlights.moneyBackDays} ${t.days}` : "—", right: right.highlights.moneyBackDays ? `${right.highlights.moneyBackDays} ${t.days}` : "—" },
   ];
 
   return (
@@ -132,9 +140,18 @@ export function FactualComparison({ locale, title, description, left, right }: P
 
       <section className="mt-12">
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink-strong">{t.tableTitle}</h2>
-        <div className="mt-6 overflow-hidden rounded-xl border border-border">
-          <table className="w-full text-sm"><thead className="bg-surface-subtle"><tr><th className="px-4 py-3 text-left"></th><th className="px-4 py-3 text-left text-ink-strong">{left.brand}</th><th className="px-4 py-3 text-left text-ink-strong">{right.brand}</th></tr></thead><tbody className="divide-y divide-border bg-surface-base">{rows.map(([label, a, b]) => <tr key={label}><th className="px-4 py-3 text-left text-ink-muted font-medium">{label}</th><td className="px-4 py-3 text-ink">{a}</td><td className="px-4 py-3 text-ink">{b}</td></tr>)}</tbody></table>
-        </div>
+        <ComparisonLens
+          rows={rows}
+          leftName={left.brand}
+          rightName={right.brand}
+          copy={{
+            title: t.lensTitle,
+            all: t.lensAll,
+            privacy: t.lensPrivacy,
+            value: t.lensValue,
+            setup: t.lensSetup,
+          }}
+        />
       </section>
 
       <section className="mt-12 grid sm:grid-cols-2 gap-6">
