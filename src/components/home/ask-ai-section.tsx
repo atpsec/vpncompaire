@@ -189,7 +189,7 @@ export function AskAiSection() {
           <p className="mt-3 text-sm text-ink-subtle">{t("disclaimer")}</p>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {TOOLS.map((tool) => {
             const name = t(`tools.${tool.id}.name` as never);
             const description = t(`tools.${tool.id}.description` as never);
