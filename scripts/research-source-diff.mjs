@@ -32,15 +32,15 @@ for (const item of config) {
     const body = normalize(await response.text());
     const previous = await fs.readFile(snapshotPath, "utf8").catch(() => null);
     const changed = previous !== null && previous !== body;
-    const status = previous === null
-      ? "baseline_missing"
-      : response.ok === false
-        ? "http_error_review_required"
+    const status = response.ok === false
+      ? "http_error_review_required"
+      : previous === null
+        ? "baseline_missing"
         : changed
           ? "changed_review_required"
           : "unchanged";
     report.push({ sourceId: item.sourceId, url: item.url, httpStatus: response.status, status, fetchedAt: new Date().toISOString(), previousLength: previous?.length ?? null, currentLength: body.length });
-    if (updateSnapshots || previous === null) await fs.writeFile(snapshotPath, body, "utf8");
+    if (response.ok && (updateSnapshots || previous === null)) await fs.writeFile(snapshotPath, body, "utf8");
   } catch (error) {
     report.push({ sourceId: item.sourceId, url: item.url, status: "fetch_failed_review_required", error: error instanceof Error ? error.message : String(error) });
   }
