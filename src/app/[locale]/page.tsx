@@ -11,6 +11,7 @@ import { MethodologyBlock } from "@/components/home/methodology-block";
 import { FAQSection } from "@/components/home/faq-section";
 import { HomeBlogColumns } from "@/components/home/home-blog-columns";
 import { AiEditorialBlock } from "@/components/home/ai-editorial-block";
+import { AskAiSection } from "@/components/home/ask-ai-section";
 import { JsonLd } from "@/components/seo/json-ld";
 import {
   organizationSchema,
@@ -47,6 +48,7 @@ export default async function HomePage({ params }: Props) {
       <IpSecurityBanner />
       <HomeBlogColumns locale={locale} />
       <AiEditorialBlock />
+      <AskAiSection />
       <TopVPNList />
       <UseCaseGrid />
       <ComparisonBlock />

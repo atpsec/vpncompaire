@@ -115,6 +115,40 @@
       "valueTitle": "Price and devices",
       "valueDescription": "Plans, terms and supported platforms."
     },
+    "askAi": {
+      "kicker": "Independent AI second opinion",
+      "title": "Ask an AI about VPN Advisor",
+      "subtitle": "Take our public methodology to a separate AI assistant and ask it to inspect the evidence for itself.",
+      "disclaimer": "These links are independent directions. The listed AI services do not sponsor, certify or endorse VPN Advisor, and their answers can be incomplete or outdated.",
+      "action": "Copy the question and open",
+      "copied": "Question copied",
+      "copyFailed": "Select the question below and copy it manually.",
+      "fallbackLabel": "Question to copy",
+      "footerNote": "A new tab opens for the selected service; VPN Advisor does not send your question through an API.",
+      "prompt": "https://vpnadvisor.net/ adresini incele. VPN Advisor’ın ne yaptığını, VPN sağlayıcılarını hangi ölçütlerle karşılaştırdığını, bilgilerini hangi kaynaklarla doğruladığını ve güncelleme yaklaşımını açıkla. Kaynak bağlantılarını ver. Güncel olmayan veya doğrulanamayan bilgileri kesin gerçek gibi sunma.",
+      "tools": {
+        "chatgpt": {
+          "name": "ChatGPT",
+          "description": "A general-purpose assistant for a structured, source-aware review."
+        },
+        "claude": {
+          "name": "Claude",
+          "description": "A careful assistant for reading methodology, limits and cited evidence."
+        },
+        "gemini": {
+          "name": "Gemini",
+          "description": "Ask for a fresh explanation of the site and the sources behind its comparisons."
+        },
+        "perplexity": {
+          "name": "Perplexity",
+          "description": "Useful for a web-grounded answer with links that you can inspect yourself."
+        },
+        "grok": {
+          "name": "Grok",
+          "description": "Request an independent reading of the site, its criteria and its update signals."
+        }
+      }
+    },
     "faq": {
       "title": "Frequently asked questions"
     },
