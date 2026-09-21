@@ -148,7 +148,7 @@ export default async function Page({ params }: Props) {
           <ResearchCard
             icon={<BookOpenCheck className="size-5" aria-hidden="true" />}
             title="Citation-ready output"
-            body="The ledger provides a stable, citable URL and a visible change path. Downloadable datasets and a data dictionary will follow once field-level citations are complete."
+            body="The ledger provides a stable, citable URL and a visible change path. Machine-readable provider, question and source records are available through the public research APIs; a data dictionary and versioned download bundle are next."
           />
         </section>
 
