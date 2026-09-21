@@ -45,6 +45,7 @@ const staticEntries = [
   ["/research/providers", 0.86, "weekly", researchEdition()],
   ["/research/questions", 0.86, "weekly", researchEdition()],
   ["/research/sources", 0.72, "monthly", researchEdition()],
+  ["/research/ai-citation-watch", 0.78, "monthly", "2026-09-21"],
   // The change log is intentionally omitted while it has no published
   // entries; an empty indexable page is not a useful search destination.
   ["/about", 0.5, "monthly", "2026-08-31"],

@@ -130,6 +130,7 @@ If a claim cannot be verified, it should be labelled as a provider statement, a 
 - Canonical provider evidence profiles: ${siteConfig.url}/research/providers
 - Citation-friendly research questions: ${siteConfig.url}/research/questions
 - Public source registry: ${siteConfig.url}/research/sources
+- AI Citation Watch protocol: ${siteConfig.url}/research/ai-citation-watch
 - Reviewed change log: ${siteConfig.url}/research/changes
 - Provider evidence API: ${siteConfig.url}/api/research/providers
 - Question evidence API: ${siteConfig.url}/api/research/questions/{slug}

@@ -238,6 +238,7 @@ export default async function Page({ params }: Props) {
           <ResearchLinkCard title="Provider evidence profiles" body="Field-level records for the initial seven-provider set." href="/research/providers" />
           <ResearchLinkCard title="Research questions" body="Concise answers generated from canonical fields, with caveats and sources." href="/research/questions" />
           <ResearchLinkCard title="Source registry and changes" body="Original URLs, check states and a reviewable change-log foundation." href="/research/sources" />
+          <ResearchLinkCard title="AI Citation Watch" body="A fixed benchmark for measuring whether independent AI answers can discover and cite the source desk." href="/research/ai-citation-watch" />
         </section>
 
         <section className="mt-16 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
