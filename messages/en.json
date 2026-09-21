@@ -146,6 +146,18 @@
         "grok": {
           "name": "Grok",
           "description": "Request an independent reading of the site, its criteria and its update signals."
+        },
+        "copilot": {
+          "name": "Microsoft Copilot",
+          "description": "A practical second opinion for readers already using Microsoft services."
+        },
+        "deepseek": {
+          "name": "DeepSeek",
+          "description": "Ask for a separate, technical reading of the methodology and its evidence."
+        },
+        "metaAi": {
+          "name": "Meta AI",
+          "description": "Get another independent explanation of the site and its comparison criteria."
         }
       }
     },

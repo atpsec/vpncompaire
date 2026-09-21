@@ -5,8 +5,10 @@ import { useState } from "react";
 import { ArrowUpRight, Check, Copy, ExternalLink } from "lucide-react";
 import type { SimpleIcon } from "simple-icons";
 import {
-  siAnthropic,
+  siClaude,
+  siDeepseek,
   siGooglegemini,
+  siMeta,
   siPerplexity,
 } from "simple-icons";
 import { useTranslations } from "next-intl";
@@ -15,7 +17,15 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type ToolId = "chatgpt" | "claude" | "gemini" | "perplexity" | "grok";
+type ToolId =
+  | "chatgpt"
+  | "claude"
+  | "gemini"
+  | "perplexity"
+  | "grok"
+  | "copilot"
+  | "deepseek"
+  | "metaAi";
 
 type Tool = {
   id: ToolId;
@@ -34,7 +44,7 @@ const TOOLS: Tool[] = [
   {
     id: "claude",
     href: "https://claude.ai/new",
-    icon: siAnthropic,
+    icon: siClaude,
   },
   {
     id: "gemini",
@@ -51,6 +61,21 @@ const TOOLS: Tool[] = [
     id: "grok",
     href: "https://grok.com/",
     icon: { src: "/ai-logos/grok.svg" },
+  },
+  {
+    id: "copilot",
+    href: "https://copilot.microsoft.com/",
+    icon: { src: "/ai-logos/copilot.svg" },
+  },
+  {
+    id: "deepseek",
+    href: "https://chat.deepseek.com/",
+    icon: siDeepseek,
+  },
+  {
+    id: "metaAi",
+    href: "https://www.meta.ai/",
+    icon: siMeta,
   },
 ];
 
@@ -164,7 +189,7 @@ export function AskAiSection() {
           <p className="mt-3 text-sm text-ink-subtle">{t("disclaimer")}</p>
         </div>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
           {TOOLS.map((tool) => {
             const name = t(`tools.${tool.id}.name` as never);
             const description = t(`tools.${tool.id}.description` as never);
