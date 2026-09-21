@@ -72,6 +72,7 @@ const labels = {
     evidenceProviderReported: "Sağlayıcı beyanı",
     evidenceNeedsCheck: "Tarih veya kaynak kontrolü gerekli",
     evidenceLedger: "Kanıt defterinde ayrıntıyı gör",
+    evidenceProfile: "Alan bazlı kaynak kaydını aç",
     copyProfileLink: "Profil bağlantısını kopyala",
     profileLinkCopied: "Bağlantı kopyalandı",
   },
@@ -116,6 +117,7 @@ const labels = {
     evidenceProviderReported: "Provider-reported",
     evidenceNeedsCheck: "Date or source check needed",
     evidenceLedger: "See details in evidence ledger",
+    evidenceProfile: "Open the field-level source record",
     copyProfileLink: "Copy profile link",
     profileLinkCopied: "Profile link copied",
   },
@@ -160,6 +162,7 @@ const labels = {
     evidenceProviderReported: "Anbieterangabe",
     evidenceNeedsCheck: "Datums- oder Quellenprüfung erforderlich",
     evidenceLedger: "Details im Evidenzregister",
+    evidenceProfile: "Feldbezogenen Quellenbestand öffnen",
     copyProfileLink: "Profil-Link kopieren",
     profileLinkCopied: "Profil-Link kopiert",
   },
@@ -305,9 +308,14 @@ function ProviderView({ product, locale, providerSchema, isArchived, isReference
                 <h2 className="text-sm font-semibold text-ink-strong">{t.evidenceTitle}</h2>
                 <p className="mt-1 text-sm leading-relaxed text-ink-muted">{t.intro}</p>
               </div>
-              <Link href={`/research/evidence-ledger#provider-${product.slug}`} className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline">
-                {t.evidenceLedger} <ArrowRight className="size-4" />
-              </Link>
+              <div className="flex shrink-0 flex-wrap gap-x-4 gap-y-2">
+                <Link href={`/research/providers/${product.slug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline">
+                  {t.evidenceProfile} <ArrowRight className="size-4" />
+                </Link>
+                <Link href={`/research/evidence-ledger#provider-${product.slug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:underline">
+                  {t.evidenceLedger} <ArrowRight className="size-4" />
+                </Link>
+              </div>
             </div>
             <dl className="mt-4 grid gap-3 sm:grid-cols-3">
               <EvidenceStat label={t.evidencePricing} item={evidence.primarySource} t={t} />
